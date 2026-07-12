@@ -272,13 +272,13 @@ function MemoryTypesPanel() {
     <div>
       <SectionHead
         title="Three layers of agent memory"
-        desc={<>Sean calls working memory "Context RAM" — everything the LLM can see right now. His framework: <strong>"An LLM knows everything about humanity and nothing about you or the software you run."</strong> Memory is how you bridge that gap. Three pillars: Procedural (SKILL.md), Semantic (vector DB), Episodic (dated log).</>}
+        desc={<>Mahesh calls working memory "Context RAM" — everything the LLM can see right now. His framework: <strong>"An LLM knows everything about humanity and nothing about you or the software you run."</strong> Memory is how you bridge that gap. Three pillars: Procedural (SKILL.md), Semantic (vector DB), Episodic (dated log).</>}
       />
 
       <MemoryArchDiagram />
 
       <div style={{ background: 'var(--bg-code)', borderTopWidth: 1, borderTopStyle: 'solid', borderTopColor: 'var(--border)', borderRightWidth: 1, borderRightStyle: 'solid', borderRightColor: 'var(--border)', borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', borderLeftWidth: 3, borderLeftStyle: 'solid', borderLeftColor: 'var(--bg-accent-strong)', borderRadius: 'var(--radius-md)', padding: '14px 16px', marginBottom: 16 }}>
-        <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-accent)', marginBottom: 6, fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>SEAN'S THREE PILLARS</p>
+        <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-accent)', marginBottom: 6, fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>MAHESH'S THREE PILLARS</p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 6 }}>
           <strong>Procedural Memory (SKILL.md)</strong> — "How to do things." Stored as markdown files: deployment procedures, coding patterns, tool usage instructions. Claude Code's CLAUDE.md is exactly this. The agent reads them before acting.
         </p>
@@ -315,13 +315,13 @@ function MemoryTypesPanel() {
         <br /><br />
         <Pill type="amber">Episodic memory</Pill> Past interactions and events. "Last Tuesday we debugged a CORS issue." "The user asked about rate limiting yesterday." Retrieved by temporal or semantic similarity.
         <br /><br />
-        <Pill type="amber">Procedural memory</Pill> Sean's framework: SKILL.md files. "When deploying, run tests first, then build, then push." Hermes Agent stores these as skills.md — explicit step-by-step instructions the agent reads before acting. Claude Code's CLAUDE.md is the same pattern. Not learned automatically — curated by the developer.
+        <Pill type="amber">Procedural memory</Pill> Mahesh's framework: SKILL.md files. "When deploying, run tests first, then build, then push." Hermes Agent stores these as skills.md — explicit step-by-step instructions the agent reads before acting. Claude Code's CLAUDE.md is the same pattern. Not learned automatically — curated by the developer.
         <br /><br />
         All three types ultimately live in a vector store (for semantic retrieval) or a structured database (for exact lookups). The taxonomy matters for how you write and retrieve — not for where you store.
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "An LLM knows everything about humanity and nothing about you" — Sean's framing. Memory bridges that gap. In the interview, don't just say "working, short-term, long-term." Use Sean's pillars: Procedural (SKILL.md — how to do things), Semantic (vector DB — facts), Episodic (dated log — what happened). Then explain the consolidation gate: "you don't search the giant episodic log every time — a cheaper model periodically distills episodes into semantic facts. That's why ChatGPT memory stays short but somehow always up to date."
+        "An LLM knows everything about humanity and nothing about you" — Mahesh's framing. Memory bridges that gap. In the interview, don't just say "working, short-term, long-term." Use Mahesh's pillars: Procedural (SKILL.md — how to do things), Semantic (vector DB — facts), Episodic (dated log — what happened). Then explain the consolidation gate: "you don't search the giant episodic log every time — a cheaper model periodically distills episodes into semantic facts. That's why ChatGPT memory stays short but somehow always up to date."
       </Insight></FadeIn>
     </div>
   );
@@ -414,8 +414,8 @@ function RetrievalPanel() {
         <strong>This is the Generative Agents paper pattern</strong> (Stanford, 2023). It's what makes memory feel intelligent rather than mechanical.
       </Decision></FadeIn>
 
-      <FadeIn delay={240}><Decision question="Sean's consolidation gate — the missing piece">
-        Most memory systems have a write path (save everything) but no compression path. Sean's key insight: the <strong>consolidation gate</strong>.
+      <FadeIn delay={240}><Decision question="Mahesh's consolidation gate — the missing piece">
+        Most memory systems have a write path (save everything) but no compression path. Mahesh's key insight: the <strong>consolidation gate</strong>.
         <br /><br />
         <strong>Pattern:</strong> Don't search the raw episodic log on every query. Periodically (every N conversations, or on a schedule), run a cheaper model that distills episodes into semantic facts:
         <br /><br />
@@ -480,7 +480,7 @@ function ProductionPanel() {
           <span style={styles.sysVal}>Sub-agents calling Claude Code CLI — the harness spawns specialized sub-agents that each get their own context window but share the memory layer. Memory is the coordination mechanism, not message passing.</span>
         </div>
         <div style={styles.systemDetail}>
-          <span style={styles.sysLabel}>Sean's take</span>
+          <span style={styles.sysLabel}>Mahesh's take</span>
           <span style={styles.sysVal}>"Memory is the moat." Features are copyable. Prompts are copyable. But an agent that has learned your codebase, your preferences, your workflows over 6 months of interaction — that's a switching cost. The memory layer is what makes an agent irreplaceable.</span>
         </div>
       </div>
@@ -498,7 +498,7 @@ function ProductionPanel() {
       </div>
 
       <FadeIn><Insight>
-        "Memory is the moat" — Sean's thesis from the Hermes Agent analysis. Features are copyable. Prompts are copyable. But 6 months of learned preferences, workflows, and project context? That's a switching cost. Sean's Top 8 advice #7: "Give your agent a single memory layer" — even a simple key-value store of user facts beats no memory. Then his advice #8 follows naturally: "If Claude can learn codebases, your agent has no excuse." Start with procedural memory (SKILL.md), add semantic memory (facts), then episodic (history). Memory is the product.
+        "Memory is the moat" — Mahesh's thesis from the Hermes Agent analysis. Features are copyable. Prompts are copyable. But 6 months of learned preferences, workflows, and project context? That's a switching cost. Mahesh's Top 8 advice #7: "Give your agent a single memory layer" — even a simple key-value store of user facts beats no memory. Then his advice #8 follows naturally: "If Claude can learn codebases, your agent has no excuse." Start with procedural memory (SKILL.md), add semantic memory (facts), then episodic (history). Memory is the product.
       </Insight></FadeIn>
     </div>
   );
@@ -540,7 +540,7 @@ function InterviewPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "The 10M user question is where the interview shifts from AI to systems. But start with Sean's framing: 'An LLM knows everything about humanity and nothing about you.' At 10M users, that's 10M knowledge gaps to fill. Partition by user_id, decay unused memories, hard-delete for GDPR, keep retrieval under 50ms. Use the consolidation gate to keep per-user memory compact. These are distributed systems problems wearing an AI costume — and that's exactly why companies want staff+ engineers on agent teams, not just ML researchers."
+        "The 10M user question is where the interview shifts from AI to systems. But start with Mahesh's framing: 'An LLM knows everything about humanity and nothing about you.' At 10M users, that's 10M knowledge gaps to fill. Partition by user_id, decay unused memories, hard-delete for GDPR, keep retrieval under 50ms. Use the consolidation gate to keep per-user memory compact. These are distributed systems problems wearing an AI costume — and that's exactly why companies want staff+ engineers on agent teams, not just ML researchers."
       </Insight></FadeIn>
     </div>
   );

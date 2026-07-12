@@ -294,15 +294,15 @@ function LoopPanel() {
     <div>
       <SectionHead
         title="The agent loop: observe → think → act → evaluate"
-        desc={<>Sean's metaphor: <strong>"A harness is what keeps the horse on course."</strong> The LLM is the horse — powerful but directionless without structure. The harness is the loop that constrains, observes, and corrects. Every agent runs the same cycle. The quality difference is in the harness engineering — termination conditions, memory injection, and the evaluation gate.</>}
+        desc={<>Mahesh's metaphor: <strong>"A harness is what keeps the horse on course."</strong> The LLM is the horse — powerful but directionless without structure. The harness is the loop that constrains, observes, and corrects. Every agent runs the same cycle. The quality difference is in the harness engineering — termination conditions, memory injection, and the evaluation gate.</>}
       />
 
       <AgentLoopDiagram />
 
       <div style={{ background: 'var(--bg-code)', borderTopWidth: 1, borderTopStyle: 'solid', borderTopColor: 'var(--border)', borderRightWidth: 1, borderRightStyle: 'solid', borderRightColor: 'var(--border)', borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', borderLeftWidth: 3, borderLeftStyle: 'solid', borderLeftColor: 'var(--bg-accent-strong)', borderRadius: 'var(--radius-md)', padding: '14px 16px', marginBottom: 16 }}>
-        <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-accent)', marginBottom: 6, fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>SEAN'S HARNESS COMPONENTS</p>
+        <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-accent)', marginBottom: 6, fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>MAHESH'S HARNESS COMPONENTS</p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 6 }}>
-          The harness isn't just a loop — it's the complete runtime that wraps the LLM. Sean breaks it into layers:
+          The harness isn't just a loop — it's the complete runtime that wraps the LLM. Mahesh breaks it into layers:
         </p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 4 }}>
           <strong>1. Memory System</strong> — Procedural (SKILL.md), Semantic (vector DB), Episodic (conversation log). Injected into context at the Observe step.
@@ -314,7 +314,7 @@ function LoopPanel() {
           <strong>3. Evaluation Gate</strong> — "Ship the fix or fix the bug." After each iteration, the harness checks: did this action move us closer to the goal? If not, inject corrective context and re-run.
         </p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 4 }}>
-          <strong>4. Observability Layer</strong> — Traces, metrics, cost tracking. Sean specifically calls out Langfuse and LangSmith for LLM-specific tracing.
+          <strong>4. Observability Layer</strong> — Traces, metrics, cost tracking. Mahesh specifically calls out Langfuse and LangSmith for LLM-specific tracing.
         </p>
       </div>
 
@@ -333,7 +333,7 @@ function LoopPanel() {
         <br /><br />
         The observe step is the most underrated part of the loop. Bad context assembly = bad reasoning, regardless of how good the LLM is.
         <br /><br />
-        <strong>Sean's memory injection pattern:</strong> The Observe step is where memory meets the loop. Load procedural memory (SKILL.md — how to do this task) into the system prompt. Retrieve semantic memory (relevant facts) via RAG. Append recent episodic memory (what happened in this session). This is the "Context RAM" — the working memory that the LLM reasons over.
+        <strong>Mahesh's memory injection pattern:</strong> The Observe step is where memory meets the loop. Load procedural memory (SKILL.md — how to do this task) into the system prompt. Retrieve semantic memory (relevant facts) via RAG. Append recent episodic memory (what happened in this session). This is the "Context RAM" — the working memory that the LLM reasons over.
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="Think — the LLM inference step">
@@ -359,11 +359,11 @@ function LoopPanel() {
         <br /><br />
         <strong>Convergence detection:</strong> If the last 3 iterations produced the same tool call with the same args, the agent is stuck. Break the loop and escalate.
         <br /><br />
-        <strong>Sean's "gate" pattern:</strong> "Ship the fix or fix the bug." The evaluation step isn't just "are we done?" — it's "did this iteration actually help?" Track a progress signal: did the test pass? Did the error count decrease? Did the user's question get closer to answered? If 3 iterations show no progress, the gate triggers escalation.
+        <strong>Mahesh's "gate" pattern:</strong> "Ship the fix or fix the bug." The evaluation step isn't just "are we done?" — it's "did this iteration actually help?" Track a progress signal: did the test pass? Did the error count decrease? Did the user's question get closer to answered? If 3 iterations show no progress, the gate triggers escalation.
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "A harness is what keeps the horse on course" — Sean's metaphor. The LLM is the horse — powerful, fast, but it will wander without constraint. The harness is the termination conditions, the cost caps, the convergence detection. Staff+ candidates immediately ask: 'What's the gate? What triggers escalation? What's the cost cap?' The harness engineering — not the LLM choice — is what makes agents production-safe. Sean's rule: if you can't explain the harness, you haven't built an agent — you've built a demo.
+        "A harness is what keeps the horse on course" — Mahesh's metaphor. The LLM is the horse — powerful, fast, but it will wander without constraint. The harness is the termination conditions, the cost caps, the convergence detection. Staff+ candidates immediately ask: 'What's the gate? What triggers escalation? What's the cost cap?' The harness engineering — not the LLM choice — is what makes agents production-safe. Mahesh's rule: if you can't explain the harness, you haven't built an agent — you've built a demo.
       </Insight></FadeIn>
     </div>
   );
@@ -406,9 +406,9 @@ function TracingPanel() {
       <FadeIn><CodeBlock filename="agent-tracer.js" code={TRACING_CODE} output={TRACING_OUTPUT} /></FadeIn>
 
       <FadeIn delay={80}><Decision question="Tracing tools — what do teams actually use?">
-        <Pill type="green">LangSmith</Pill> Purpose-built for LLM tracing. Sean demonstrates this in his harness video — visualizes the full agent loop as a tree of spans. Best DX for debugging "why did the agent pick that tool?" Integrates with LangChain but also works standalone.
+        <Pill type="green">LangSmith</Pill> Purpose-built for LLM tracing. Mahesh demonstrates this in his harness video — visualizes the full agent loop as a tree of spans. Best DX for debugging "why did the agent pick that tool?" Integrates with LangChain but also works standalone.
         <br /><br />
-        <Pill type="green">Langfuse</Pill> Open-source alternative Sean also covers. Self-hostable. Traces, evals, and prompt management in one tool. Good for teams that want full control over their observability data. Growing fast in the agent community.
+        <Pill type="green">Langfuse</Pill> Open-source alternative Mahesh also covers. Self-hostable. Traces, evals, and prompt management in one tool. Good for teams that want full control over their observability data. Growing fast in the agent community.
         <br /><br />
         <Pill type="green">Braintrust</Pill> Focused on evals + tracing. Strong on A/B testing prompt changes. Good for teams that want to combine tracing and evaluation in one tool.
         <br /><br />
@@ -428,7 +428,7 @@ function TracingPanel() {
         <br /><br />
         <strong>5. Tool error rate</strong> — % of tool calls that fail. Rising error rate = external API degradation. Alert threshold: {'>'} 5%.
         <br /><br />
-        <strong>Sean's eval pattern — LLM-as-judge:</strong> Use a stronger model to evaluate a weaker model's outputs. Create a rubric: "Rate this response on correctness (1-5), completeness (1-5), and helpfulness (1-5)." Run this on a sample of production queries. The judge model's scores correlate 80-90% with human evaluators — good enough for automated regression detection, cheap enough to run on every deploy.
+        <strong>Mahesh's eval pattern — LLM-as-judge:</strong> Use a stronger model to evaluate a weaker model's outputs. Create a rubric: "Rate this response on correctness (1-5), completeness (1-5), and helpfulness (1-5)." Run this on a sample of production queries. The judge model's scores correlate 80-90% with human evaluators — good enough for automated regression detection, cheap enough to run on every deploy.
       </Decision></FadeIn>
 
       <FadeIn><Insight>
@@ -520,7 +520,7 @@ function SelfImprovePanel() {
         <br /><br />
         This isn't ML. It's product iteration powered by data. And it works better than fine-tuning for most use cases.
         <br /><br />
-        <strong>Sean's real-world example — Claude Code hooks:</strong> Claude Code lets you define hooks — shell commands that run before or after tool calls. A pre-commit hook that runs linting, a post-edit hook that runs tests. This is harness-level self-improvement: the agent's behavior adapts not through prompt changes but through environmental feedback. The harness constrains the horse — hooks are the guardrails on the track.
+        <strong>Mahesh's real-world example — Claude Code hooks:</strong> Claude Code lets you define hooks — shell commands that run before or after tool calls. A pre-commit hook that runs linting, a post-edit hook that runs tests. This is harness-level self-improvement: the agent's behavior adapts not through prompt changes but through environmental feedback. The harness constrains the horse — hooks are the guardrails on the track.
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="Few-shot example curation">
@@ -605,7 +605,7 @@ function ProdOpsPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "Production ops for agents is the topic that separates senior from staff. Sean's Top 8 advice #5: 'Write workflows as explicit natural-language specs' — your agent's behavior should be documented as clearly as an API contract. Advice #6: 'Add human-in-the-loop correction loops' — not as a fallback, but as a deliberate quality signal. Anyone can build an agent. Running one with canary deployments, cost caps, and an incident response plan — that's what companies pay 2Cr+ for."
+        "Production ops for agents is the topic that separates senior from staff. Mahesh's Top 8 advice #5: 'Write workflows as explicit natural-language specs' — your agent's behavior should be documented as clearly as an API contract. Advice #6: 'Add human-in-the-loop correction loops' — not as a fallback, but as a deliberate quality signal. Anyone can build an agent. Running one with canary deployments, cost caps, and an incident response plan — that's what companies pay 2Cr+ for."
       </Insight></FadeIn>
     </div>
   );

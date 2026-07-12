@@ -284,13 +284,13 @@ function PatternsPanel() {
     <div>
       <SectionHead
         title="Multi-agent patterns"
-        desc={<>Sean maps the evolution: <strong>Single Agent {'>'} Sequential Agents {'>'} Agent Teams {'>'} Agent Swarm.</strong> Each level adds capability and complexity. The key insight: Teams "fear being wrong" (they narrow and verify), while Swarms "fear missing something" (they explore in parallel). Pick based on your failure mode.</>}
+        desc={<>Mahesh maps the evolution: <strong>Single Agent {'>'} Sequential Agents {'>'} Agent Teams {'>'} Agent Swarm.</strong> Each level adds capability and complexity. The key insight: Teams "fear being wrong" (they narrow and verify), while Swarms "fear missing something" (they explore in parallel). Pick based on your failure mode.</>}
       />
 
       <MultiAgentDiagram />
 
       <div style={{ background: 'var(--bg-code)', borderTopWidth: 1, borderTopStyle: 'solid', borderTopColor: 'var(--border)', borderRightWidth: 1, borderRightStyle: 'solid', borderRightColor: 'var(--border)', borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', borderLeftWidth: 3, borderLeftStyle: 'solid', borderLeftColor: 'var(--bg-accent-strong)', borderRadius: 'var(--radius-md)', padding: '14px 16px', marginBottom: 16 }}>
-        <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-accent)', marginBottom: 6, fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>SEAN'S EVOLUTION FRAMEWORK</p>
+        <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-accent)', marginBottom: 6, fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>MAHESH'S EVOLUTION FRAMEWORK</p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 6 }}>
           <strong>Level 1: Single Agent</strong> — One LLM with tools. Handles 80% of use cases. ChatGPT, basic Claude conversations.
         </p>
@@ -304,7 +304,7 @@ function PatternsPanel() {
           <strong>Level 4: Agent Swarm</strong> — A goal agent auto-spawns workers, a synthesizer clusters findings. "Fears missing something" — explores in parallel. Kimi's Deep Research is here.
         </p>
         <p style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.6, marginTop: 8, fontStyle: 'italic' }}>
-          Sean's warning: "Multi-agent systems can burn tokens fast unless you constrain agent count + tool usage." Most teams should stay at Level 2-3.
+          Mahesh's warning: "Multi-agent systems can burn tokens fast unless you constrain agent count + tool usage." Most teams should stay at Level 2-3.
         </p>
       </div>
 
@@ -347,11 +347,11 @@ function PatternsPanel() {
         <br /><br />
         <strong>Cons:</strong> Extremely hard to debug. Emergent behavior is unpredictable. Coordination overhead grows quadratically with agent count. Race conditions.
         <br /><br />
-        <strong>Sean's distinction:</strong> Swarms "fear missing something" — they explore every angle in parallel, then a synthesizer clusters the findings. Contrast with Teams, which "fear being wrong" — they narrow, verify, then respond with confidence. Deep Research (OpenAI, Kimi) uses the swarm pattern because breadth matters more than precision. Coding agents use teams because correctness matters more than coverage. Match the pattern to your failure mode.
+        <strong>Mahesh's distinction:</strong> Swarms "fear missing something" — they explore every angle in parallel, then a synthesizer clusters the findings. Contrast with Teams, which "fear being wrong" — they narrow, verify, then respond with confidence. Deep Research (OpenAI, Kimi) uses the swarm pattern because breadth matters more than precision. Coding agents use teams because correctness matters more than coverage. Match the pattern to your failure mode.
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "In the interview, use Sean's evolution framework: Single {'>'} Sequential {'>'} Teams {'>'} Swarm. Start by saying 'this is a Level 1 problem — single agent with good tools.' If the interviewer pushes, upgrade: 'At this scale, I'd move to Level 3 — Agent Teams with a supervisor, because we fear being wrong more than we fear missing something.' That framing — Teams vs Swarms as different fear modes — is the staff+ signal. It shows you reason about system design tradeoffs, not just memorize patterns."
+        "In the interview, use Mahesh's evolution framework: Single {'>'} Sequential {'>'} Teams {'>'} Swarm. Start by saying 'this is a Level 1 problem — single agent with good tools.' If the interviewer pushes, upgrade: 'At this scale, I'd move to Level 3 — Agent Teams with a supervisor, because we fear being wrong more than we fear missing something.' That framing — Teams vs Swarms as different fear modes — is the staff+ signal. It shows you reason about system design tradeoffs, not just memorize patterns."
       </Insight></FadeIn>
     </div>
   );
@@ -428,7 +428,7 @@ function ArchPanel() {
         </div>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Key insight</span>
-          <span style={styles.sysVal}>Sean's analysis: subagents protect the main context window. Instead of the main agent reading 50 files, a search subagent does it and returns just the answer. This is Level 3 (Teams) — predefined roles, supervisor delegates. The Hermes Agent takes this further: sub-agents calling Claude Code CLI, with shared memory as the coordination layer.</span>
+          <span style={styles.sysVal}>Mahesh's analysis: subagents protect the main context window. Instead of the main agent reading 50 files, a search subagent does it and returns just the answer. This is Level 3 (Teams) — predefined roles, supervisor delegates. The Hermes Agent takes this further: sub-agents calling Claude Code CLI, with shared memory as the coordination layer.</span>
         </div>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Coordination</span>
@@ -459,7 +459,7 @@ function ArchPanel() {
           <span style={styles.sysVal}>Swarms "fear missing something." Multiple agents searching the same topic from different angles find information that a single exhaustive search misses. The cost: 10-50x more tokens than a single agent. Worth it when comprehensiveness matters more than speed.</span>
         </div>
         <div style={styles.systemDetail}>
-          <span style={styles.sysLabel}>Sean's take</span>
+          <span style={styles.sysLabel}>Mahesh's take</span>
           <span style={styles.sysVal}>Deep Research narrows and verifies (fears being wrong). Swarms explore in parallel (fear missing something). Teams execute with control. The architecture follows the failure mode you're optimizing against.</span>
         </div>
       </div>
@@ -526,7 +526,7 @@ function WhenToUsePanel() {
         <br /><br />
         <strong>Rule of thumb:</strong> Multi-agent costs 3-10x more per query. Only worth it when the quality improvement justifies the cost — code generation (saves developer hours), content creation (saves editor hours), compliance review (avoids legal risk).
         <br /><br />
-        <strong>Sean's token warning:</strong> "Multi-agent systems can burn tokens fast unless you constrain agent count + tool usage." Set hard limits: max 5 sub-agents per query, max 3 tool calls per sub-agent, total cost cap per query. Without these constraints, a swarm exploring a broad question can easily hit $10-50 per query.
+        <strong>Mahesh's token warning:</strong> "Multi-agent systems can burn tokens fast unless you constrain agent count + tool usage." Set hard limits: max 5 sub-agents per query, max 3 tool calls per sub-agent, total cost cap per query. Without these constraints, a swarm exploring a broad question can easily hit $10-50 per query.
       </Decision></FadeIn>
 
       <FadeIn><Insight>
@@ -566,11 +566,11 @@ function AntiPatternsPanel() {
 
       <div style={styles.anti}>
         <p style={styles.strike}>"We need a swarm of autonomous agents."</p>
-        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />Sean's framework: Swarms are Level 4 — only when you "fear missing something" more than you fear cost or complexity. Deep Research uses swarms because comprehensiveness justifies the 10-50x token cost. Your customer support bot does not. Start at Level 1 (single agent), upgrade only when you can name the specific failure mode that requires it.</p>
+        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />Mahesh's framework: Swarms are Level 4 — only when you "fear missing something" more than you fear cost or complexity. Deep Research uses swarms because comprehensiveness justifies the 10-50x token cost. Your customer support bot does not. Start at Level 1 (single agent), upgrade only when you can name the specific failure mode that requires it.</p>
       </div>
 
       <FadeIn><Insight>
-        "Use Sean's evolution levels as your interview framework. Level 1: 'This is a single-agent problem — one LLM with 5 focused tools.' Level 2: 'If we need pipeline processing, chain agents sequentially.' Level 3: 'For quality-critical tasks, a supervisor with specialist teams — they fear being wrong, so they verify.' Level 4: 'Only for exhaustive research where we fear missing something.' Starting at Level 4 and working down is the interview anti-pattern. Starting at Level 1 and articulating exactly when to upgrade — that's staff+ reasoning."
+        "Use Mahesh's evolution levels as your interview framework. Level 1: 'This is a single-agent problem — one LLM with 5 focused tools.' Level 2: 'If we need pipeline processing, chain agents sequentially.' Level 3: 'For quality-critical tasks, a supervisor with specialist teams — they fear being wrong, so they verify.' Level 4: 'Only for exhaustive research where we fear missing something.' Starting at Level 4 and working down is the interview anti-pattern. Starting at Level 1 and articulating exactly when to upgrade — that's staff+ reasoning."
       </Insight></FadeIn>
     </div>
   );
