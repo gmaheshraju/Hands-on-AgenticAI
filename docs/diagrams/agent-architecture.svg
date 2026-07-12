@@ -1,147 +1,134 @@
-<svg viewBox="0 0 820 440" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+<svg viewBox="0 0 820 380" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+
+  <!-- Background -->
+  <rect x="0" y="0" width="820" height="380" rx="12" fill="#fafafa" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Arrow markers -->
   <defs>
-    <marker id="arrow1" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="10" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 3 L 0 6 z" fill="#e07a3a"/>
+    <marker id="arrow" viewBox="0 0 6 4" refX="5" refY="2" markerWidth="6" markerHeight="4" orient="auto-start-reverse">
+      <path d="M0,0 L6,2 L0,4 Z" fill="#d1d5db"/>
     </marker>
-    <marker id="arrow1g" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="10" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 3 L 0 6 z" fill="#888"/>
+    <marker id="arrow-orange" viewBox="0 0 6 4" refX="5" refY="2" markerWidth="6" markerHeight="4" orient="auto-start-reverse">
+      <path d="M0,0 L6,2 L0,4 Z" fill="#d4622b"/>
     </marker>
   </defs>
 
-  <!-- Section: Input Layer -->
-  <rect x="10" y="10" width="130" height="420" rx="10" fill="#1a1a2e" opacity="0.3" stroke="#3b82f6" stroke-width="1"/>
-  <text x="75" y="32" fill="#3b82f6" font-size="11" font-weight="bold" text-anchor="middle">INPUT</text>
+  <!-- Column dividers -->
+  <line x1="164" y1="30" x2="164" y2="350" stroke="#e5e7eb" stroke-dasharray="4,4" stroke-width="1"/>
+  <line x1="394" y1="30" x2="394" y2="350" stroke="#e5e7eb" stroke-dasharray="4,4" stroke-width="1"/>
+  <line x1="554" y1="30" x2="554" y2="350" stroke="#e5e7eb" stroke-dasharray="4,4" stroke-width="1"/>
+  <line x1="714" y1="30" x2="714" y2="350" stroke="#e5e7eb" stroke-dasharray="4,4" stroke-width="1"/>
 
-  <rect x="25" y="50" width="100" height="50" rx="8" fill="#1a1a2e" stroke="#3b82f6" stroke-width="1.5"/>
-  <text x="75" y="72" fill="#e0e0e0" font-size="11" text-anchor="middle">User Query</text>
-  <text x="75" y="88" fill="#888" font-size="9" text-anchor="middle">NL / API call</text>
+  <!-- ==================== COLUMN 1: INPUT ==================== -->
+  <text x="90" y="52" font-size="10" fill="#6b7280" letter-spacing="0.05em" text-anchor="middle" font-weight="600">INPUT</text>
 
-  <rect x="25" y="120" width="100" height="50" rx="8" fill="#1a1a2e" stroke="#3b82f6" stroke-width="1.5"/>
-  <text x="75" y="142" fill="#e0e0e0" font-size="11" text-anchor="middle">API Gateway</text>
-  <text x="75" y="158" fill="#888" font-size="9" text-anchor="middle">Auth + Rate Limit</text>
+  <!-- User icon -->
+  <circle cx="90" cy="140" r="12" fill="none" stroke="#6b7280" stroke-width="1.5"/>
+  <line x1="90" y1="152" x2="90" y2="175" stroke="#6b7280" stroke-width="1.5"/>
+  <line x1="75" y1="163" x2="105" y2="163" stroke="#6b7280" stroke-width="1.5"/>
+  <line x1="90" y1="175" x2="78" y2="195" stroke="#6b7280" stroke-width="1.5"/>
+  <line x1="90" y1="175" x2="102" y2="195" stroke="#6b7280" stroke-width="1.5"/>
 
-  <!-- Arrow: Input to Orchestration -->
-  <line x1="135" y1="145" x2="160" y2="145" stroke="#e07a3a" stroke-width="2" marker-end="url(#arrow1)"/>
+  <!-- Query pill -->
+  <rect x="55" y="215" width="70" height="28" rx="10" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="90" y="233" font-size="11" fill="#1f2937" text-anchor="middle">Query</text>
 
-  <!-- Section: Orchestration -->
-  <rect x="155" y="10" width="200" height="420" rx="10" fill="#1a1a2e" opacity="0.3" stroke="#e07a3a" stroke-width="1"/>
-  <text x="255" y="32" fill="#e07a3a" font-size="11" font-weight="bold" text-anchor="middle">ORCHESTRATION</text>
+  <!-- ==================== COLUMN 2: ORCHESTRATE ==================== -->
+  <text x="280" y="52" font-size="10" fill="#6b7280" letter-spacing="0.05em" text-anchor="middle" font-weight="600">ORCHESTRATE</text>
 
-  <rect x="170" y="50" width="170" height="40" rx="8" fill="#e07a3a" stroke="#e07a3a" stroke-width="1.5"/>
-  <text x="255" y="75" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">Router / Orchestrator</text>
+  <!-- Hero circle -->
+  <circle cx="280" cy="195" r="70" fill="none" stroke="#d4622b" stroke-width="1.5"/>
 
-  <!-- ReAct Loop -->
-  <rect x="170" y="110" width="170" height="180" rx="8" fill="#1a1a2e" stroke="#e07a3a" stroke-width="1.5" stroke-dasharray="4,2"/>
-  <text x="255" y="130" fill="#e07a3a" font-size="10" font-weight="bold" text-anchor="middle">ReAct Loop</text>
+  <!-- Center label -->
+  <text x="280" y="199" font-size="11" fill="#d4622b" font-weight="600" text-anchor="middle">ReAct</text>
 
-  <rect x="185" y="140" width="140" height="30" rx="6" fill="#2d2d4e" stroke="#4ecdc4" stroke-width="1"/>
-  <text x="255" y="160" fill="#4ecdc4" font-size="10" text-anchor="middle">OBSERVE</text>
+  <!-- Observe — top (12 o'clock) -->
+  <rect x="247" y="112" width="66" height="24" rx="10" fill="#fff" stroke="#d4622b" stroke-width="1"/>
+  <text x="280" y="128" font-size="10" fill="#1f2937" text-anchor="middle">Observe</text>
 
-  <path d="M 255 170 L 255 180" stroke="#888" stroke-width="1.5" marker-end="url(#arrow1g)"/>
+  <!-- Think — right (3 o'clock) -->
+  <rect x="338" y="183" width="52" height="24" rx="10" fill="#fff" stroke="#d4622b" stroke-width="1"/>
+  <text x="364" y="199" font-size="10" fill="#1f2937" text-anchor="middle">Think</text>
 
-  <rect x="185" y="185" width="140" height="30" rx="6" fill="#2d2d4e" stroke="#8b5cf6" stroke-width="1"/>
-  <text x="255" y="205" fill="#8b5cf6" font-size="10" text-anchor="middle">THINK (LLM Inference)</text>
+  <!-- Act — bottom (6 o'clock) -->
+  <rect x="260" y="254" width="40" height="24" rx="10" fill="#fff" stroke="#d4622b" stroke-width="1"/>
+  <text x="280" y="270" font-size="10" fill="#1f2937" text-anchor="middle">Act</text>
 
-  <path d="M 255 215 L 255 225" stroke="#888" stroke-width="1.5" marker-end="url(#arrow1g)"/>
+  <!-- Evaluate — left (9 o'clock) -->
+  <rect x="190" y="183" width="66" height="24" rx="10" fill="#fff" stroke="#d4622b" stroke-width="1"/>
+  <text x="223" y="199" font-size="10" fill="#1f2937" text-anchor="middle">Evaluate</text>
 
-  <rect x="185" y="230" width="140" height="30" rx="6" fill="#2d2d4e" stroke="#e07a3a" stroke-width="1"/>
-  <text x="255" y="250" fill="#e07a3a" font-size="10" text-anchor="middle">ACT (Tool Dispatch)</text>
+  <!-- Connection dots -->
+  <circle cx="280" cy="125" r="2" fill="#d4622b"/>
+  <circle cx="350" cy="195" r="2" fill="#d4622b"/>
+  <circle cx="280" cy="265" r="2" fill="#d4622b"/>
+  <circle cx="210" cy="195" r="2" fill="#d4622b"/>
 
-  <path d="M 255 260 L 255 270" stroke="#888" stroke-width="1.5" marker-end="url(#arrow1g)"/>
+  <!-- Clockwise curved arrows: Observe → Think -->
+  <path d="M313,130 C335,135 345,160 348,183" fill="none" stroke="#d4622b" stroke-width="1" marker-end="url(#arrow-orange)"/>
 
-  <rect x="185" y="275" width="140" height="30" rx="6" fill="#2d2d4e" stroke="#3b82f6" stroke-width="1"/>
-  <text x="255" y="295" fill="#3b82f6" font-size="10" text-anchor="middle">EVALUATE</text>
+  <!-- Think → Act -->
+  <path d="M348,207 C345,235 335,255 313,265" fill="none" stroke="#d4622b" stroke-width="1" marker-end="url(#arrow-orange)"/>
 
-  <!-- Loop arrow back -->
-  <path d="M 170 290 L 160 290 L 160 145 L 170 145" stroke="#888" stroke-width="1" stroke-dasharray="3,2" fill="none" marker-end="url(#arrow1g)"/>
+  <!-- Act → Evaluate -->
+  <path d="M260,268 C240,265 225,245 218,207" fill="none" stroke="#d4622b" stroke-width="1" marker-end="url(#arrow-orange)"/>
 
-  <!-- Termination -->
-  <rect x="170" y="320" width="170" height="40" rx="8" fill="#1a1a2e" stroke="#4ecdc4" stroke-width="1.5"/>
-  <text x="255" y="345" fill="#4ecdc4" font-size="10" text-anchor="middle">Termination / Max Iters</text>
+  <!-- Evaluate → Observe -->
+  <path d="M218,183 C225,155 240,135 260,125" fill="none" stroke="#d4622b" stroke-width="1" marker-end="url(#arrow-orange)"/>
 
-  <!-- Section: Retrieval -->
-  <rect x="370" y="10" width="160" height="200" rx="10" fill="#1a1a2e" opacity="0.3" stroke="#4ecdc4" stroke-width="1"/>
-  <text x="450" y="32" fill="#4ecdc4" font-size="11" font-weight="bold" text-anchor="middle">RETRIEVAL (RAG)</text>
+  <!-- ==================== COLUMN 3: RETRIEVE ==================== -->
+  <text x="480" y="52" font-size="10" fill="#6b7280" letter-spacing="0.05em" text-anchor="middle" font-weight="600">RETRIEVE</text>
 
-  <rect x="385" y="50" width="130" height="35" rx="8" fill="#1a1a2e" stroke="#4ecdc4" stroke-width="1.5"/>
-  <text x="450" y="72" fill="#e0e0e0" font-size="10" text-anchor="middle">Vector DB</text>
+  <!-- Vector DB pill -->
+  <rect x="435" y="150" width="90" height="28" rx="12" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="480" y="168" font-size="10" fill="#1f2937" text-anchor="middle">Vector DB</text>
 
-  <rect x="385" y="95" width="130" height="35" rx="8" fill="#1a1a2e" stroke="#4ecdc4" stroke-width="1.5"/>
-  <text x="450" y="117" fill="#e0e0e0" font-size="10" text-anchor="middle">Document Store</text>
+  <!-- Documents pill -->
+  <rect x="435" y="194" width="90" height="28" rx="12" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="480" y="212" font-size="10" fill="#1f2937" text-anchor="middle">Documents</text>
 
-  <rect x="385" y="140" width="130" height="35" rx="8" fill="#1a1a2e" stroke="#4ecdc4" stroke-width="1.5"/>
-  <text x="450" y="162" fill="#e0e0e0" font-size="10" text-anchor="middle">Embeddings Model</text>
+  <!-- Embeddings pill -->
+  <rect x="435" y="238" width="90" height="28" rx="12" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="480" y="256" font-size="10" fill="#1f2937" text-anchor="middle">Embeddings</text>
 
-  <!-- Arrow: Orchestrator to Retrieval -->
-  <line x1="340" y1="70" x2="380" y2="70" stroke="#e07a3a" stroke-width="2" marker-end="url(#arrow1)"/>
+  <!-- ==================== COLUMN 4: GENERATE ==================== -->
+  <text x="634" y="52" font-size="10" fill="#6b7280" letter-spacing="0.05em" text-anchor="middle" font-weight="600">GENERATE</text>
 
-  <!-- Section: Tools -->
-  <rect x="370" y="220" width="160" height="200" rx="10" fill="#1a1a2e" opacity="0.3" stroke="#8b5cf6" stroke-width="1"/>
-  <text x="450" y="242" fill="#8b5cf6" font-size="11" font-weight="bold" text-anchor="middle">TOOLS</text>
+  <!-- LLM box -->
+  <rect x="598" y="170" width="72" height="34" rx="8" fill="#f3f4f6" stroke="#d4622b" stroke-width="1"/>
+  <text x="634" y="192" font-size="13" fill="#1f2937" font-weight="600" text-anchor="middle">LLM</text>
 
-  <rect x="385" y="255" width="130" height="35" rx="8" fill="#1a1a2e" stroke="#8b5cf6" stroke-width="1.5"/>
-  <text x="450" y="277" fill="#e0e0e0" font-size="10" text-anchor="middle">Function Calling</text>
+  <!-- Guardrails pill -->
+  <rect x="594" y="222" width="80" height="24" rx="10" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="634" y="238" font-size="9" fill="#6b7280" text-anchor="middle">Guardrails</text>
 
-  <rect x="385" y="300" width="130" height="35" rx="8" fill="#1a1a2e" stroke="#8b5cf6" stroke-width="1.5"/>
-  <text x="450" y="322" fill="#e0e0e0" font-size="10" text-anchor="middle">API Integrations</text>
+  <!-- Format pill -->
+  <rect x="604" y="258" width="60" height="24" rx="10" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="634" y="274" font-size="9" fill="#6b7280" text-anchor="middle">Format</text>
 
-  <rect x="385" y="345" width="130" height="35" rx="8" fill="#1a1a2e" stroke="#8b5cf6" stroke-width="1.5"/>
-  <text x="450" y="367" fill="#e0e0e0" font-size="10" text-anchor="middle">Code Execution</text>
+  <!-- ==================== COLUMN 5: OUTPUT ==================== -->
+  <text x="764" y="52" font-size="10" fill="#6b7280" letter-spacing="0.05em" text-anchor="middle" font-weight="600">OUTPUT</text>
 
-  <!-- Arrow: Orchestrator to Tools -->
-  <line x1="340" y1="250" x2="380" y2="310" stroke="#e07a3a" stroke-width="2" marker-end="url(#arrow1)"/>
+  <!-- Response pill -->
+  <rect x="726" y="175" width="76" height="28" rx="10" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="764" y="193" font-size="10" fill="#1f2937" text-anchor="middle">Response</text>
 
-  <!-- Section: Generation -->
-  <rect x="550" y="10" width="140" height="200" rx="10" fill="#1a1a2e" opacity="0.3" stroke="#8b5cf6" stroke-width="1"/>
-  <text x="620" y="32" fill="#8b5cf6" font-size="11" font-weight="bold" text-anchor="middle">GENERATION</text>
+  <!-- Citations pill -->
+  <rect x="730" y="219" width="68" height="24" rx="10" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="764" y="235" font-size="9" fill="#6b7280" text-anchor="middle">Citations</text>
 
-  <rect x="565" y="50" width="110" height="35" rx="8" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1.5"/>
-  <text x="620" y="72" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">LLM</text>
+  <!-- ==================== CONNECTIONS ==================== -->
 
-  <rect x="565" y="95" width="110" height="35" rx="8" fill="#1a1a2e" stroke="#8b5cf6" stroke-width="1.5"/>
-  <text x="620" y="117" fill="#e0e0e0" font-size="10" text-anchor="middle">Guardrails</text>
+  <!-- INPUT → ORCHESTRATE (Query → Observe) -->
+  <path d="M125,229 C150,229 170,180 200,150 C220,130 240,125 247,124" fill="none" stroke="#d1d5db" stroke-width="1" marker-end="url(#arrow)"/>
 
-  <rect x="565" y="140" width="110" height="35" rx="8" fill="#1a1a2e" stroke="#8b5cf6" stroke-width="1.5"/>
-  <text x="620" y="162" fill="#e0e0e0" font-size="10" text-anchor="middle">Formatting</text>
+  <!-- ORCHESTRATE (Act) → RETRIEVE -->
+  <path d="M300,266 C340,266 390,220 435,195" fill="none" stroke="#d1d5db" stroke-width="1" marker-end="url(#arrow)"/>
 
-  <!-- Arrow: Retrieval to Generation -->
-  <line x1="520" y1="70" x2="560" y2="70" stroke="#e07a3a" stroke-width="2" marker-end="url(#arrow1)"/>
+  <!-- RETRIEVE → GENERATE -->
+  <path d="M525,208 C550,200 570,192 598,189" fill="none" stroke="#d1d5db" stroke-width="1" marker-end="url(#arrow)"/>
 
-  <!-- Section: Output -->
-  <rect x="710" y="30" width="100" height="170" rx="10" fill="#1a1a2e" opacity="0.3" stroke="#4ecdc4" stroke-width="1"/>
-  <text x="760" y="52" fill="#4ecdc4" font-size="11" font-weight="bold" text-anchor="middle">OUTPUT</text>
+  <!-- GENERATE → OUTPUT -->
+  <path d="M670,189 C690,189 710,189 726,189" fill="none" stroke="#d1d5db" stroke-width="1" marker-end="url(#arrow)"/>
 
-  <rect x="720" y="65" width="80" height="40" rx="8" fill="#4ecdc4" stroke="#4ecdc4" stroke-width="1.5"/>
-  <text x="760" y="90" fill="#1a1a2e" font-size="10" font-weight="bold" text-anchor="middle">Response</text>
-
-  <rect x="720" y="115" width="80" height="30" rx="8" fill="#1a1a2e" stroke="#4ecdc4" stroke-width="1.5"/>
-  <text x="760" y="135" fill="#e0e0e0" font-size="9" text-anchor="middle">Citations</text>
-
-  <rect x="720" y="155" width="80" height="30" rx="8" fill="#1a1a2e" stroke="#4ecdc4" stroke-width="1.5"/>
-  <text x="760" y="175" fill="#e0e0e0" font-size="9" text-anchor="middle">Artifacts</text>
-
-  <!-- Arrow: Generation to Output -->
-  <line x1="680" y1="85" x2="715" y2="85" stroke="#e07a3a" stroke-width="2" marker-end="url(#arrow1)"/>
-
-  <!-- Section: Observability (bottom bar) -->
-  <rect x="550" y="230" width="260" height="190" rx="10" fill="#1a1a2e" opacity="0.3" stroke="#888" stroke-width="1"/>
-  <text x="680" y="252" fill="#888" font-size="11" font-weight="bold" text-anchor="middle">OBSERVABILITY</text>
-
-  <rect x="565" y="265" width="110" height="30" rx="8" fill="#1a1a2e" stroke="#888" stroke-width="1"/>
-  <text x="620" y="285" fill="#e0e0e0" font-size="10" text-anchor="middle">Tracing</text>
-
-  <rect x="690" y="265" width="110" height="30" rx="8" fill="#1a1a2e" stroke="#888" stroke-width="1"/>
-  <text x="745" y="285" fill="#e0e0e0" font-size="10" text-anchor="middle">Metrics</text>
-
-  <rect x="565" y="305" width="110" height="30" rx="8" fill="#1a1a2e" stroke="#888" stroke-width="1"/>
-  <text x="620" y="325" fill="#e0e0e0" font-size="10" text-anchor="middle">Cost Tracking</text>
-
-  <rect x="690" y="305" width="110" height="30" rx="8" fill="#1a1a2e" stroke="#888" stroke-width="1"/>
-  <text x="745" y="325" fill="#e0e0e0" font-size="10" text-anchor="middle">Evals</text>
-
-  <rect x="565" y="345" width="235" height="30" rx="8" fill="#1a1a2e" stroke="#888" stroke-width="1"/>
-  <text x="682" y="365" fill="#e0e0e0" font-size="10" text-anchor="middle">Langfuse / LangSmith / Braintrust</text>
-
-  <!-- Dashed lines from orchestrator to observability -->
-  <line x1="340" y1="345" x2="560" y2="360" stroke="#888" stroke-width="1" stroke-dasharray="4,3"/>
 </svg>
