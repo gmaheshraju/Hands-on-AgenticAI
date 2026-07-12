@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "interview-prep",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--port", "5174"],
+      "cwd": "/Users/maheshguntumadugu/Documents/gemini-cli/buildProjects/interview-prep-app",
+      "port": 5174
+    }
+  ]
+}
