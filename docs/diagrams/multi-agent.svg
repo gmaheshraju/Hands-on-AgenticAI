@@ -1,0 +1,168 @@
+<svg viewBox="0 0 820 480" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="ma-arrow" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="10" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3 L 0 6 z" fill="#e07a3a"/>
+    </marker>
+    <marker id="ma-arrowg" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="10" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3 L 0 6 z" fill="#888"/>
+    </marker>
+    <marker id="ma-arrowp" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="10" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3 L 0 6 z" fill="#8b5cf6"/>
+    </marker>
+    <marker id="ma-arrowt" viewBox="0 0 10 6" refX="10" refY="3" markerWidth="10" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 3 L 0 6 z" fill="#4ecdc4"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="410" y="24" fill="#e0e0e0" font-size="16" font-weight="bold" text-anchor="middle">Multi-Agent Systems — Evolution Levels</text>
+  <line x1="150" y1="34" x2="670" y2="34" stroke="#888" stroke-width="0.5"/>
+
+  <!-- Level 1: Single Agent + Tools -->
+  <rect x="10" y="45" width="800" height="85" rx="10" fill="#1a1a2e" opacity="0.3" stroke="#3b82f6" stroke-width="1.5"/>
+  <rect x="20" y="50" width="85" height="22" rx="4" fill="#3b82f6"/>
+  <text x="62" y="65" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">LEVEL 1</text>
+  <text x="120" y="65" fill="#3b82f6" font-size="11" font-weight="bold">Single Agent + Tools</text>
+  <text x="350" y="65" fill="#888" font-size="9">— One LLM, multiple tool calls</text>
+
+  <rect x="50" y="80" width="100" height="38" rx="8" fill="#3b82f6" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="100" y="103" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">Agent</text>
+
+  <line x1="155" y1="99" x2="195" y2="82" stroke="#888" stroke-width="1.5" marker-end="url(#ma-arrowg)"/>
+  <line x1="155" y1="99" x2="195" y2="99" stroke="#888" stroke-width="1.5" marker-end="url(#ma-arrowg)"/>
+  <line x1="155" y1="99" x2="195" y2="116" stroke="#888" stroke-width="1.5" marker-end="url(#ma-arrowg)"/>
+
+  <rect x="200" y="70" width="80" height="25" rx="6" fill="#1a1a2e" stroke="#888" stroke-width="1"/>
+  <text x="240" y="87" fill="#e0e0e0" font-size="9" text-anchor="middle">Search</text>
+
+  <rect x="200" y="100" width="80" height="25" rx="6" fill="#1a1a2e" stroke="#888" stroke-width="1"/>
+  <text x="240" y="117" fill="#e0e0e0" font-size="9" text-anchor="middle">Code Exec</text>
+
+  <rect x="290" y="70" width="80" height="25" rx="6" fill="#1a1a2e" stroke="#888" stroke-width="1"/>
+  <text x="330" y="87" fill="#e0e0e0" font-size="9" text-anchor="middle">Database</text>
+
+  <rect x="290" y="100" width="80" height="25" rx="6" fill="#1a1a2e" stroke="#888" stroke-width="1"/>
+  <text x="330" y="117" fill="#e0e0e0" font-size="9" text-anchor="middle">API Call</text>
+
+  <!-- Use case tag -->
+  <rect x="580" y="80" width="220" height="38" rx="8" fill="#1a1a2e" stroke="#3b82f6" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="690" y="97" fill="#3b82f6" font-size="9" text-anchor="middle">ChatGPT, Claude, basic assistants</text>
+  <text x="690" y="110" fill="#888" font-size="8" text-anchor="middle">Good for: well-defined single tasks</text>
+
+  <!-- Level 2: Sequential Pipeline -->
+  <rect x="10" y="140" width="800" height="85" rx="10" fill="#1a1a2e" opacity="0.3" stroke="#4ecdc4" stroke-width="1.5"/>
+  <rect x="20" y="145" width="85" height="22" rx="4" fill="#4ecdc4"/>
+  <text x="62" y="160" fill="#1a1a2e" font-size="10" font-weight="bold" text-anchor="middle">LEVEL 2</text>
+  <text x="120" y="160" fill="#4ecdc4" font-size="11" font-weight="bold">Sequential Pipeline</text>
+  <text x="310" y="160" fill="#888" font-size="9">— Chain of specialized agents</text>
+
+  <rect x="50" y="175" width="120" height="38" rx="8" fill="#4ecdc4" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="110" y="191" fill="#1a1a2e" font-size="9" font-weight="bold" text-anchor="middle">Agent A</text>
+  <text x="110" y="204" fill="#1a1a2e" font-size="8" text-anchor="middle">Research</text>
+
+  <line x1="175" y1="194" x2="205" y2="194" stroke="#e07a3a" stroke-width="2" marker-end="url(#ma-arrow)"/>
+
+  <rect x="210" y="175" width="120" height="38" rx="8" fill="#4ecdc4" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="270" y="191" fill="#1a1a2e" font-size="9" font-weight="bold" text-anchor="middle">Agent B</text>
+  <text x="270" y="204" fill="#1a1a2e" font-size="8" text-anchor="middle">Draft</text>
+
+  <line x1="335" y1="194" x2="365" y2="194" stroke="#e07a3a" stroke-width="2" marker-end="url(#ma-arrow)"/>
+
+  <rect x="370" y="175" width="120" height="38" rx="8" fill="#4ecdc4" stroke="#4ecdc4" stroke-width="1.5"/>
+  <text x="430" y="191" fill="#1a1a2e" font-size="9" font-weight="bold" text-anchor="middle">Agent C</text>
+  <text x="430" y="204" fill="#1a1a2e" font-size="8" text-anchor="middle">Review / Edit</text>
+
+  <!-- Use case tag -->
+  <rect x="580" y="175" width="220" height="38" rx="8" fill="#1a1a2e" stroke="#4ecdc4" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="690" y="192" fill="#4ecdc4" font-size="9" text-anchor="middle">Content pipelines, ETL, CI/CD</text>
+  <text x="690" y="205" fill="#888" font-size="8" text-anchor="middle">Good for: deterministic workflows</text>
+
+  <!-- Level 3: Agent Teams (Supervisor) -->
+  <rect x="10" y="235" width="800" height="110" rx="10" fill="#1a1a2e" opacity="0.3" stroke="#8b5cf6" stroke-width="1.5"/>
+  <rect x="20" y="240" width="85" height="22" rx="4" fill="#8b5cf6"/>
+  <text x="62" y="255" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">LEVEL 3</text>
+  <text x="120" y="255" fill="#8b5cf6" font-size="11" font-weight="bold">Agent Teams</text>
+  <text x="245" y="255" fill="#888" font-size="9">— Supervisor delegates to specialists</text>
+
+  <!-- Supervisor -->
+  <rect x="200" y="270" width="140" height="38" rx="8" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="270" y="286" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">Supervisor</text>
+  <text x="270" y="300" fill="rgba(255,255,255,0.8)" font-size="8" text-anchor="middle">"Fear being wrong"</text>
+
+  <!-- Specialists -->
+  <line x1="270" y1="310" x2="120" y2="318" stroke="#8b5cf6" stroke-width="1.5" marker-end="url(#ma-arrowp)"/>
+  <line x1="270" y1="310" x2="270" y2="318" stroke="#8b5cf6" stroke-width="1.5" marker-end="url(#ma-arrowp)"/>
+  <line x1="270" y1="310" x2="420" y2="318" stroke="#8b5cf6" stroke-width="1.5" marker-end="url(#ma-arrowp)"/>
+
+  <rect x="55" y="320" width="130" height="18" rx="6" fill="#1a1a2e" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="120" y="333" fill="#e0e0e0" font-size="9" text-anchor="middle">Coder</text>
+
+  <rect x="205" y="320" width="130" height="18" rx="6" fill="#1a1a2e" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="270" y="333" fill="#e0e0e0" font-size="9" text-anchor="middle">Researcher</text>
+
+  <rect x="355" y="320" width="130" height="18" rx="6" fill="#1a1a2e" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="420" y="333" fill="#e0e0e0" font-size="9" text-anchor="middle">Reviewer</text>
+
+  <!-- Use case tag -->
+  <rect x="580" y="275" width="220" height="55" rx="8" fill="#1a1a2e" stroke="#8b5cf6" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="690" y="292" fill="#8b5cf6" font-size="9" text-anchor="middle">Claude Code, Devin, SWE-bench</text>
+  <text x="690" y="305" fill="#888" font-size="8" text-anchor="middle">Good for: complex tasks needing</text>
+  <text x="690" y="318" fill="#888" font-size="8" text-anchor="middle">correctness + multiple perspectives</text>
+
+  <!-- Level 4: Agent Swarm -->
+  <rect x="10" y="355" width="800" height="120" rx="10" fill="#1a1a2e" opacity="0.3" stroke="#e07a3a" stroke-width="1.5"/>
+  <rect x="20" y="360" width="85" height="22" rx="4" fill="#e07a3a"/>
+  <text x="62" y="375" fill="#fff" font-size="10" font-weight="bold" text-anchor="middle">LEVEL 4</text>
+  <text x="120" y="375" fill="#e07a3a" font-size="11" font-weight="bold">Agent Swarm</text>
+  <text x="260" y="375" fill="#888" font-size="9">— Parallel exploration, emergent coordination</text>
+
+  <!-- Swarm nodes -->
+  <circle cx="80" cy="420" r="18" fill="#1a1a2e" stroke="#e07a3a" stroke-width="1.5"/>
+  <text x="80" y="424" fill="#e0e0e0" font-size="9" text-anchor="middle">A1</text>
+
+  <circle cx="150" cy="400" r="18" fill="#1a1a2e" stroke="#e07a3a" stroke-width="1.5"/>
+  <text x="150" y="404" fill="#e0e0e0" font-size="9" text-anchor="middle">A2</text>
+
+  <circle cx="150" cy="445" r="18" fill="#1a1a2e" stroke="#e07a3a" stroke-width="1.5"/>
+  <text x="150" y="449" fill="#e0e0e0" font-size="9" text-anchor="middle">A3</text>
+
+  <circle cx="230" cy="420" r="18" fill="#1a1a2e" stroke="#e07a3a" stroke-width="1.5"/>
+  <text x="230" y="424" fill="#e0e0e0" font-size="9" text-anchor="middle">A4</text>
+
+  <circle cx="300" cy="400" r="18" fill="#1a1a2e" stroke="#e07a3a" stroke-width="1.5"/>
+  <text x="300" y="404" fill="#e0e0e0" font-size="9" text-anchor="middle">A5</text>
+
+  <circle cx="300" cy="445" r="18" fill="#1a1a2e" stroke="#e07a3a" stroke-width="1.5"/>
+  <text x="300" y="449" fill="#e0e0e0" font-size="9" text-anchor="middle">A6</text>
+
+  <!-- Mesh connections -->
+  <line x1="96" y1="414" x2="132" y2="404" stroke="#e07a3a" stroke-width="1" opacity="0.5"/>
+  <line x1="96" y1="426" x2="132" y2="440" stroke="#e07a3a" stroke-width="1" opacity="0.5"/>
+  <line x1="166" y1="400" x2="212" y2="414" stroke="#e07a3a" stroke-width="1" opacity="0.5"/>
+  <line x1="166" y1="445" x2="212" y2="426" stroke="#e07a3a" stroke-width="1" opacity="0.5"/>
+  <line x1="248" y1="414" x2="282" y2="404" stroke="#e07a3a" stroke-width="1" opacity="0.5"/>
+  <line x1="248" y1="426" x2="282" y2="440" stroke="#e07a3a" stroke-width="1" opacity="0.5"/>
+  <line x1="150" y1="418" x2="150" y2="427" stroke="#e07a3a" stroke-width="1" opacity="0.5"/>
+  <line x1="300" y1="418" x2="300" y2="427" stroke="#e07a3a" stroke-width="1" opacity="0.5"/>
+
+  <!-- Convergence -->
+  <line x1="320" y1="420" x2="370" y2="420" stroke="#e07a3a" stroke-width="2" marker-end="url(#ma-arrow)"/>
+
+  <rect x="375" y="405" width="120" height="35" rx="8" fill="#e07a3a" stroke="#e07a3a" stroke-width="1.5"/>
+  <text x="435" y="420" fill="#fff" font-size="9" font-weight="bold" text-anchor="middle">Convergence</text>
+  <text x="435" y="433" fill="rgba(255,255,255,0.8)" font-size="8" text-anchor="middle">Vote / Merge / Best</text>
+
+  <!-- Motto -->
+  <rect x="375" y="450" width="120" height="18" rx="6" fill="none" stroke="#e07a3a" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="435" y="462" fill="#e07a3a" font-size="8" font-weight="bold" text-anchor="middle">"Fear missing something"</text>
+
+  <!-- Use case tag -->
+  <rect x="580" y="395" width="220" height="55" rx="8" fill="#1a1a2e" stroke="#e07a3a" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="690" y="412" fill="#e07a3a" font-size="9" text-anchor="middle">Deep research, red-teaming</text>
+  <text x="690" y="425" fill="#888" font-size="8" text-anchor="middle">Good for: broad search space,</text>
+  <text x="690" y="438" fill="#888" font-size="8" text-anchor="middle">creative exploration, coverage</text>
+
+  <!-- Evolution arrow on right side -->
+  <line x1="815" y1="90" x2="815" y2="430" stroke="#888" stroke-width="1.5" marker-end="url(#ma-arrowg)"/>
+  <text x="812" y="260" fill="#888" font-size="9" text-anchor="end" transform="rotate(-90 812 260)">Increasing Complexity &amp; Autonomy</text>
+</svg>

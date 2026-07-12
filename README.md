@@ -2,7 +2,7 @@
 
 **Decision frameworks and architectural patterns for staff, principal, and CTO-level system design interviews.**
 
-Built by [Mahesh Guntumadugu](https://curiousengineers.in) — battle-tested patterns from 60+ real interviews at Uber, Google, Amazon and 100+ mock system design rounds.
+Built by Mahesh Guntumadugu — battle-tested design and architectural patterns that signal staff, principal, and CTO-level thinking.
 
 > Not theory. Not slides. Interactive decision trees with the exact reasoning chains that signal senior+ thinking.
 
@@ -31,49 +31,59 @@ Each framework is a **decision tree** — the structured thinking process that i
 | 13 | **Concurrency** | Locks, optimistic concurrency, actor model, async patterns |
 | 14 | **Distributed Systems** | CAP theorem, consensus, vector clocks, CRDTs |
 
-### AI Engineering Playbook (5 deep dives)
+---
+
+## AI Engineering Playbook
 
 Production architecture patterns for building AI agents, RAG pipelines, and LLM systems.
 
-| # | Topic | What You'll Learn |
-|---|-------|-------------------|
-| 01 | **AI Agent System Design** | ReAct loops, tool dispatch, RAG pipelines, eval harnesses |
-| 02 | **Agent Memory Architecture** | Procedural/semantic/episodic memory, consolidation gates, context management |
-| 03 | **Agent Harness & Loop Engineering** | Orchestration loops, tracing, convergence detection, cost caps |
-| 04 | **Multi-Agent Systems** | Teams vs swarms, supervisor patterns, delegation, coordination |
-| 05 | **RAG Pipeline Deep Dive** | Chunking, embeddings, hybrid search, RRF scoring, reranking |
+### 01 — AI Agent System Design
+
+ReAct loops, tool dispatch, RAG pipelines, evaluation harnesses — the full architecture of a production AI agent.
+
+<p align="center">
+  <img src="docs/diagrams/agent-architecture.svg" alt="AI Agent System Design Architecture" width="100%">
+</p>
 
 ---
 
-## Architecture
+### 02 — Agent Memory Architecture
 
-```
-┌─────────────────────────────────────────────────────┐
-│                   React 19 + Vite                    │
-├─────────────────────────────────────────────────────┤
-│                                                     │
-│  ┌──────────┐  ┌──────────────┐  ┌──────────────┐  │
-│  │   Home   │  │  14 Framework│  │  5 AI Engg   │  │
-│  │   Page   │  │    Pages     │  │  Blog Posts   │  │
-│  └──────────┘  └──────────────┘  └──────────────┘  │
-│        │              │                │            │
-│  ┌─────┴──────────────┴────────────────┴──────┐     │
-│  │          Shared Components                  │     │
-│  │  Decision · Insight · CodeBlock · TabNav   │     │
-│  │  PageTransition · TabTransition · FadeIn   │     │
-│  └────────────────────────────────────────────┘     │
-│                                                     │
-│  ┌────────────────────────────────────────────┐     │
-│  │           Design System (CSS)              │     │
-│  │  Fluid typography · Responsive grid        │     │
-│  │  Dark/Light theme · Page transitions       │     │
-│  │  Micro-interactions · prefers-reduced-motion│     │
-│  └────────────────────────────────────────────┘     │
-│                                                     │
-├─────────────────────────────────────────────────────┤
-│  Cloudflare Pages · SPA routing · Global CDN        │
-└─────────────────────────────────────────────────────┘
-```
+Procedural, semantic, and episodic memory — how agents remember across turns, sessions, and users. The consolidation gate that distills episodes into lasting facts.
+
+<p align="center">
+  <img src="docs/diagrams/agent-memory.svg" alt="Agent Memory Architecture" width="100%">
+</p>
+
+---
+
+### 03 — Agent Harness & Loop Engineering
+
+The orchestration loop: Observe → Think → Act → Evaluate. With termination gates, convergence detection, cost caps, and the tracing layer that makes agents observable.
+
+<p align="center">
+  <img src="docs/diagrams/agent-harness.svg" alt="Agent Harness Loop Architecture" width="100%">
+</p>
+
+---
+
+### 04 — Multi-Agent Systems
+
+The evolution from single agent to swarm — teams vs swarms, supervisor patterns, and when each level is appropriate.
+
+<p align="center">
+  <img src="docs/diagrams/multi-agent.svg" alt="Multi-Agent Systems Architecture" width="100%">
+</p>
+
+---
+
+### 05 — RAG Pipeline Deep Dive
+
+End-to-end retrieval augmented generation — chunking, embeddings, hybrid search, RRF scoring, reranking, and the eval metrics that catch silent quality degradation.
+
+<p align="center">
+  <img src="docs/diagrams/rag-pipeline.svg" alt="RAG Pipeline Architecture" width="100%">
+</p>
 
 ---
 
@@ -126,4 +136,4 @@ MIT
 
 ---
 
-**Built by Mahesh Guntumadugu** — [curiousengineers.in](https://curiousengineers.in)
+**Built by Mahesh Guntumadugu**
