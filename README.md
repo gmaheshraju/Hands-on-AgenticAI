@@ -42,7 +42,7 @@ Production architecture patterns for building AI agents, RAG pipelines, and LLM 
 ReAct loops, tool dispatch, RAG pipelines, evaluation harnesses — the full architecture of a production AI agent.
 
 <p align="center">
-  <img src="docs/diagrams/agent-architecture.svg" alt="AI Agent System Design Architecture" width="100%">
+  <img src="docs/diagrams/agent-architecture.png" alt="AI Agent System Design Architecture" width="100%">
 </p>
 
 ---
@@ -52,7 +52,7 @@ ReAct loops, tool dispatch, RAG pipelines, evaluation harnesses — the full arc
 Procedural, semantic, and episodic memory — how agents remember across turns, sessions, and users. The consolidation gate that distills episodes into lasting facts.
 
 <p align="center">
-  <img src="docs/diagrams/agent-memory.svg" alt="Agent Memory Architecture" width="100%">
+  <img src="docs/diagrams/agent-memory.png" alt="Agent Memory Architecture" width="100%">
 </p>
 
 ---
@@ -62,7 +62,7 @@ Procedural, semantic, and episodic memory — how agents remember across turns, 
 The orchestration loop: Observe → Think → Act → Evaluate. With termination gates, convergence detection, cost caps, and the tracing layer that makes agents observable.
 
 <p align="center">
-  <img src="docs/diagrams/agent-harness.svg" alt="Agent Harness Loop Architecture" width="100%">
+  <img src="docs/diagrams/agent-harness.png" alt="Agent Harness Loop Architecture" width="100%">
 </p>
 
 ---
@@ -72,7 +72,7 @@ The orchestration loop: Observe → Think → Act → Evaluate. With termination
 The evolution from single agent to swarm — teams vs swarms, supervisor patterns, and when each level is appropriate.
 
 <p align="center">
-  <img src="docs/diagrams/multi-agent.svg" alt="Multi-Agent Systems Architecture" width="100%">
+  <img src="docs/diagrams/multi-agent.png" alt="Multi-Agent Systems Architecture" width="100%">
 </p>
 
 ---
@@ -82,7 +82,7 @@ The evolution from single agent to swarm — teams vs swarms, supervisor pattern
 End-to-end retrieval augmented generation — chunking, embeddings, hybrid search, RRF scoring, reranking, and the eval metrics that catch silent quality degradation.
 
 <p align="center">
-  <img src="docs/diagrams/rag-pipeline.svg" alt="RAG Pipeline Architecture" width="100%">
+  <img src="docs/diagrams/rag-pipeline.png" alt="RAG Pipeline Architecture" width="100%">
 </p>
 
 ---
