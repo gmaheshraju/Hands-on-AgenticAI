@@ -42,6 +42,30 @@ const posts = [
     tags: ['Chunking', 'Embeddings', 'Hybrid Search', 'Reranking'],
     ready: true,
   },
+  {
+    slug: 'llm-ops',
+    number: '06',
+    title: 'LLMOps — Production LLM Infrastructure',
+    subtitle: 'Model serving, cost routing, token budgeting, latency SLOs — the infrastructure that turns an LLM prototype into a system that handles 10M requests/day.',
+    tags: ['Model Serving', 'Cost Routing', 'Latency', 'Caching', 'Monitoring'],
+    ready: true,
+  },
+  {
+    slug: 'ai-guardrails',
+    number: '07',
+    title: 'AI Guardrails & Safety',
+    subtitle: 'Prompt injection defense, PII filtering, output validation, content moderation — the security layer that separates a demo from production.',
+    tags: ['Prompt Injection', 'PII', 'Content Moderation', 'Defense in Depth'],
+    ready: true,
+  },
+  {
+    slug: 'evaluation-engineering',
+    number: '08',
+    title: 'Evaluation Engineering',
+    subtitle: 'LLM-as-judge, golden datasets, regression testing, human-in-the-loop — how to know if your AI system actually works, and catch when it silently breaks.',
+    tags: ['LLM-as-Judge', 'Golden Datasets', 'Regression', 'SLOs', 'HITL'],
+    ready: true,
+  },
 ];
 
 export default function Blog() {
