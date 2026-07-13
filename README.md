@@ -87,6 +87,36 @@ End-to-end retrieval augmented generation — chunking, embeddings, hybrid searc
 
 ---
 
+### 06 — LLMOps — Production LLM Infrastructure
+
+Model serving, cost routing (Haiku→Sonnet→Opus), token budgeting, latency SLOs — the infrastructure that turns an LLM prototype into a system that handles 10M requests/day.
+
+<p align="center">
+  <img src="docs/diagrams/llm-ops.png" alt="LLMOps Model Routing Architecture" width="100%">
+</p>
+
+---
+
+### 07 — AI Guardrails & Safety
+
+Prompt injection defense (direct/indirect/tool-result), PII tokenization, output validation, content moderation — the security layer that separates a demo from production.
+
+<p align="center">
+  <img src="docs/diagrams/ai-guardrails.png" alt="AI Guardrails Defense in Depth Architecture" width="100%">
+</p>
+
+---
+
+### 08 — Evaluation Engineering
+
+LLM-as-judge with rubrics, golden datasets, regression testing, human-in-the-loop — how to know if your AI system actually works, and catch when it silently breaks.
+
+<p align="center">
+  <img src="docs/diagrams/eval-engineering.png" alt="Eval Pipeline Architecture" width="100%">
+</p>
+
+---
+
 ## Tech Stack
 
 - **React 19** — latest React with automatic batching
