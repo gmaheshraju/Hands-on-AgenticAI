@@ -22,6 +22,9 @@ import AgentMemory from './pages/blog/AgentMemory';
 import AgentHarness from './pages/blog/AgentHarness';
 import MultiAgentSystems from './pages/blog/MultiAgentSystems';
 import RagDeepDive from './pages/blog/RagDeepDive';
+import LlmOps from './pages/blog/LlmOps';
+import AiGuardrails from './pages/blog/AiGuardrails';
+import EvalEngineering from './pages/blog/EvalEngineering';
 
 export default function App() {
   return (
@@ -49,6 +52,9 @@ export default function App() {
         <Route path="/blog/agent-harness-loop-engineering" element={<AgentHarness />} />
         <Route path="/blog/multi-agent-systems" element={<MultiAgentSystems />} />
         <Route path="/blog/rag-pipeline-deep-dive" element={<RagDeepDive />} />
+        <Route path="/blog/llm-ops" element={<LlmOps />} />
+        <Route path="/blog/ai-guardrails" element={<AiGuardrails />} />
+        <Route path="/blog/evaluation-engineering" element={<EvalEngineering />} />
       </Routes>
       </PageTransition>
     </Layout>
