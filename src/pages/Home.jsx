@@ -129,13 +129,6 @@ export default function Home() {
           Decision frameworks battle-tested design and architectural patterns
           that signal staff, principal, and CTO-level thinking.
         </p>
-        <FadeIn delay={100}>
-          <div className="home-stats">
-            <Stat number="60+" label="Real interviews" />
-            <Stat number="100+" label="Mock designs" />
-            <Stat number="14" label="Frameworks" />
-          </div>
-        </FadeIn>
       </section>
 
       <section style={{ marginBottom: '3.5rem' }}>
