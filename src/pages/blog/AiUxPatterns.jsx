@@ -570,7 +570,7 @@ function StreamingPanel() {
       />
 
       <FadeIn><Decision question="When to stream vs buffer the LLM response?">
-        <Pill type="green">Stream always for conversational UI</Pill> User sees tokens appear in real-time. Perceived wait drops from 4s to 200ms (time to first token). This is the ChatGPT/Claude pattern. OpenAI reports that streaming reduced perceived latency complaints by 78% despite zero change to actual generation time.
+        <Pill type="green">Stream always for conversational UI</Pill> User sees tokens appear in real-time. Perceived wait drops from 4s to 200ms (time to first token). This is the ChatGPT/Claude pattern. Streaming dramatically reduces perceived latency complaints despite zero change to actual generation time — users judge responsiveness by when they see the first token, not when the last one arrives.
         <br /><br />
         <Pill type="amber">Buffer for structured output</Pill> If you need to validate, format, or filter the response before showing it — content moderation, JSON schema validation, tool call parsing — buffer until validation passes. Showing the user a half-formed JSON blob or a response that gets yanked back after moderation is worse than a 2-second wait.
         <br /><br />
@@ -600,7 +600,7 @@ function StreamingPanel() {
       </FadeIn>
 
       <FadeIn delay={80}><Insight>
-        The single most impactful UX improvement for AI products is not a better model — it is streaming. OpenAI went from a 15-second buffered response in early GPT-4 to streaming, and support tickets about &quot;slow AI&quot; dropped 80%. The engineering cost is 1-2 days: swap your fetch call for an SSE reader, add a state machine, and render tokens incrementally. Do this before you spend a single dollar on model latency optimization. TTFT under 500ms plus streaming equals &quot;instant&quot; in user perception, regardless of total generation time.
+        The single most impactful UX improvement for AI products is not a better model — it is streaming. Early GPT-4 shipped with buffered 15-second responses; once streaming was added, the perceived experience transformed overnight despite identical generation speed. The engineering cost is 1-2 days: swap your fetch call for an SSE reader, add a state machine, and render tokens incrementally. Do this before you spend a single dollar on model latency optimization. TTFT under 500ms plus streaming equals &quot;instant&quot; in user perception, regardless of total generation time.
       </Insight></FadeIn>
     </div>
   );
@@ -647,7 +647,7 @@ function ConfidencePanel() {
       </FadeIn>
 
       <FadeIn delay={80}><Insight>
-        Most AI products fail at the edges of confidence. They are great when confident and terrible when uncertain — either silent (showing nothing) or overconfident (showing wrong answers as facts). The staff+ answer: design the uncertainty UX FIRST. If your product is trustworthy when it is wrong, users will trust it when it is right. Google&apos;s research shows that a single confidently wrong answer destroys trust that takes 5-7 correct answers to rebuild. The asymmetry is extreme: trust is lost 5x faster than it is gained.
+        Most AI products fail at the edges of confidence. They are great when confident and terrible when uncertain — either silent (showing nothing) or overconfident (showing wrong answers as facts). The staff+ answer: design the uncertainty UX FIRST. If your product is trustworthy when it is wrong, users will trust it when it is right. Trust research consistently shows that a single confidently wrong answer destroys trust far faster than correct answers rebuild it — the asymmetry is severe, and it is the core reason why abstaining when uncertain is always better than guessing.
       </Insight></FadeIn>
 
       <FadeIn delay={160}><Insight type="warn" tag="Calibration gotcha">
@@ -686,7 +686,7 @@ function HumanInTheLoopPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={160}><Decision question="Context handoff quality -- the trust moment?">
-        <Pill type="red">Bad handoff</Pill> &quot;Transferring you to an agent.&quot; User has to re-explain everything from scratch. 67% of users rate this as the most frustrating customer service experience (Salesforce State of Service report). The conversation history is lost. Trust in the AI system drops permanently.
+        <Pill type="red">Bad handoff</Pill> &quot;Transferring you to an agent.&quot; User has to re-explain everything from scratch. Re-explaining the same issue is consistently rated as the most frustrating customer service experience in industry surveys. The conversation history is lost. Trust in the AI system drops permanently.
         <br /><br />
         <Pill type="amber">Good handoff</Pill> &quot;I am connecting you with a specialist. I have shared our conversation so they have full context.&quot; Transfer the conversation history, user intent, and what the AI already tried. The human agent sees the full thread. User does not repeat themselves.
         <br /><br />
@@ -698,7 +698,7 @@ function HumanInTheLoopPanel() {
       </FadeIn>
 
       <FadeIn delay={80}><Insight>
-        The best AI UX pattern is the one users never notice. When the AI knows the answer, it responds instantly. When it does not, it seamlessly hands off to a human without the user feeling &quot;downgraded.&quot; The worst pattern: a modal that says &quot;AI could not help. Would you like to talk to a human?&quot; That is admitting failure. Instead: &quot;Let me get someone who specializes in billing to help with this specific issue.&quot; Reframe the handoff as expertise routing, not AI failure. Intercom reported that this reframing alone increased handoff acceptance from 34% to 71%.
+        The best AI UX pattern is the one users never notice. When the AI knows the answer, it responds instantly. When it does not, it seamlessly hands off to a human without the user feeling &quot;downgraded.&quot; The worst pattern: a modal that says &quot;AI could not help. Would you like to talk to a human?&quot; That is admitting failure. Instead: &quot;Let me get someone who specializes in billing to help with this specific issue.&quot; Reframe the handoff as expertise routing, not AI failure. This framing shift — from &quot;I failed&quot; to &quot;I am connecting you with the right expert&quot; — dramatically increases handoff acceptance rates.
       </Insight></FadeIn>
 
       <FadeIn delay={160}><Insight type="warn" tag="Anti-pattern">
@@ -745,7 +745,7 @@ function ErrorStatesPanel() {
         <br /><br />
         <Pill type="amber">Phase 3 (2-5s): contextual progress message</Pill> &quot;Searching your order history...&quot; or &quot;Analyzing the document...&quot; Tell the user what is happening. Map tool calls to human-readable descriptions. This is where most AI-assisted search products live — Perplexity shows &quot;Reading 5 sources...&quot;
         <br /><br />
-        <Pill type="red">Phase 4 (5s+): step progress with cancel option</Pill> &quot;Checked 3 of 5 sources...&quot; plus a cancel button. Never a spinner with no context at this duration. A dead spinner for more than 5 seconds is the #1 trust killer in AI UX. Stripe reports that users who see a contextless spinner for 8+ seconds are 3x more likely to abandon permanently than users who see a progress message.
+        <Pill type="red">Phase 4 (5s+): step progress with cancel option</Pill> &quot;Checked 3 of 5 sources...&quot; plus a cancel button. Never a spinner with no context at this duration. A dead spinner for more than 5 seconds is the #1 trust killer in AI UX. Users who see a contextless spinner at this duration are far more likely to abandon permanently than users who see a progress message — the difference between &quot;it is working&quot; and &quot;it is broken&quot; is entirely in the feedback.
       </Decision></FadeIn>
 
       <FadeIn>
@@ -770,7 +770,7 @@ function TrustPatternsPanel() {
       <FadeIn><Decision question="Transparency patterns -- how to show the AI's work?">
         <Pill type="green">Source attribution</Pill> &quot;I found this in your order history&quot; plus an expandable source panel. Users trust verifiable answers. Perplexity built a $3B company primarily on this UX innovation — same underlying models as everyone else, but every statement is traceable to a source. Implementation: RAG chunks become footnotes. Each footnote expands to show the source title, a snippet, and a link.
         <br /><br />
-        <Pill type="green">Explain limitations upfront</Pill> &quot;I can help with billing and orders. For technical support, I will connect you with our engineering team.&quot; Setting expectations upfront reduces disappointment. Klarna&apos;s AI assistant prominently states what it can and cannot do, which reduced &quot;wrong channel&quot; escalations by 45%.
+        <Pill type="green">Explain limitations upfront</Pill> &quot;I can help with billing and orders. For technical support, I will connect you with our engineering team.&quot; Setting expectations upfront reduces disappointment. Klarna&apos;s AI assistant prominently states what it can and cannot do — setting scope upfront significantly reduces &quot;wrong channel&quot; escalations.
         <br /><br />
         <Pill type="amber">Version/freshness awareness</Pill> &quot;I have information updated as of [date].&quot; For knowledge-base products, tell users how fresh the data is. A 6-month-old answer about API pricing is likely wrong. Show a &quot;stale data&quot; warning when sources are older than your domain&apos;s freshness threshold (e.g., 30 days for support docs, 1 day for pricing).
         <br /><br />
@@ -784,11 +784,11 @@ function TrustPatternsPanel() {
         <br /><br />
         <Pill type="amber">Cross-session with full control</Pill> &quot;I remember you prefer dark roast. Change preferences?&quot; Users can see, edit, and delete everything the AI knows about them. This requires a &quot;memory management&quot; UI: a settings page listing all stored preferences with edit/delete buttons. Non-trivial engineering cost (~2-3 weeks for a solid implementation) but high user satisfaction when done right.
         <br /><br />
-        <Pill type="red">Silent profiling</Pill> Silently building a user profile and personalizing without disclosure. Even if it makes the product objectively better, it destroys trust when discovered. The Cambridge Analytica effect: users who discover silent profiling churn at 4x the normal rate and are 6x more likely to leave negative reviews.
+        <Pill type="red">Silent profiling</Pill> Silently building a user profile and personalizing without disclosure. Even if it makes the product objectively better, it destroys trust when discovered. The Cambridge Analytica effect is the cautionary tale: users who discover they were profiled without consent react with disproportionate anger — churn spikes, reviews tank, and the brand damage outlasts the product benefit by years.
       </Decision></FadeIn>
 
       <FadeIn delay={160}><Decision question="When should the AI say 'I don't know'?">
-        <Pill type="green">No relevant sources found</Pill> Always say &quot;I do not know&quot; instead of guessing. Users respect honesty. A study by Microsoft Research found that users rated AI systems that admitted uncertainty 23% more trustworthy than systems that always attempted an answer — even when the always-answer system was right more often overall.
+        <Pill type="green">No relevant sources found</Pill> Always say &quot;I do not know&quot; instead of guessing. Users respect honesty. Research consistently shows that users rate AI systems that admit uncertainty as more trustworthy than systems that always attempt an answer — even when the always-answer system is right more often overall. Honesty about limitations builds more trust than accuracy alone.
         <br /><br />
         <Pill type="green">Medical, legal, or financial advice</Pill> Always add a disclaimer. &quot;I can share general information, but please consult a professional for advice specific to your situation.&quot; This is not just UX — it is legal liability protection. AI companies that provide unlicensed financial or medical advice face regulatory action in India (SEBI, MCI guidelines).
         <br /><br />

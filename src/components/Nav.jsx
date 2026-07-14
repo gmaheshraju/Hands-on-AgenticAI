@@ -3,8 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 
 const links = [
-  { to: '/', label: 'Home' },
-  { to: '/blog', label: 'AI Engineering' },
+  { to: '/home', label: 'Home' },
+  { to: '/', label: 'AI Engineering' },
 ];
 
 export default function Nav() {
@@ -31,9 +31,10 @@ export default function Nav() {
               key={l.to}
               to={l.to}
               className={`nav__link${
-                pathname === l.to || (l.to !== '/' && pathname.startsWith(l.to))
-                  ? ' nav__link--active'
-                  : ''
+                l.to === '/'
+                  ? (pathname === '/' || pathname.startsWith('/blog') ? ' nav__link--active' : '')
+                  : (pathname === l.to || pathname.startsWith(l.to + '/')
+                    ? ' nav__link--active' : '')
               }`}
             >
               {l.label}

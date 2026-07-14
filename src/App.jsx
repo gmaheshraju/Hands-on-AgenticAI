@@ -36,7 +36,8 @@ export default function App() {
     <Layout>
       <PageTransition>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Blog />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/database-selection" element={<DatabaseSelection />} />
         <Route path="/rate-limiter" element={<RateLimiter />} />
         <Route path="/caching" element={<Caching />} />
