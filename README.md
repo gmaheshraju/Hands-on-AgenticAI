@@ -163,6 +163,24 @@ Bias detection, fairness metrics, red-teaming, model cards, EU AI Act — the go
 
 ---
 
+### 14 — Forward Deployed Engineering
+
+The Palantir-pioneered FDE model — embedded engineers, Echo/Delta teams, demo-driven development, and the "gravel road to paved highway" playbook reshaping how AI companies deliver value.
+
+<p align="center">
+  <img src="docs/diagrams/forward-deployed-engineering.png" alt="FDE Operating Model" width="100%">
+</p>
+
+<p align="center">
+  <img src="docs/diagrams/forward-deployed-echo-delta.png" alt="Echo and Delta Team Model" width="100%">
+</p>
+
+<p align="center">
+  <img src="docs/diagrams/forward-deployed-vs-saas.png" alt="FDE vs SaaS Comparison" width="100%">
+</p>
+
+---
+
 ## Tech Stack
 
 - **React 19** — latest React with automatic batching
