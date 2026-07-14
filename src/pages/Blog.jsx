@@ -106,6 +106,14 @@ const posts = [
     tags: ['Bias', 'Fairness', 'Red-teaming', 'EU AI Act', 'Governance'],
     ready: true,
   },
+  {
+    slug: 'forward-deployed-engineering',
+    number: '14',
+    title: 'Forward Deployed Engineering',
+    subtitle: 'The Palantir-pioneered model reshaping AI delivery — embedded engineers, Echo/Delta teams, demo-driven development, and the gravel-to-highway playbook.',
+    tags: ['FDE', 'Palantir', 'AI Delivery', 'Echo/Delta', 'Go-to-Market'],
+    ready: true,
+  },
 ];
 
 export default function Blog() {
@@ -119,11 +127,6 @@ export default function Blog() {
         </h1>
         <p style={styles.tagline}>
           Production architecture patterns for AI agents, RAG pipelines, and LLM systems — with real-world architecture diagrams and decision frameworks.
-        </p>
-        <p style={styles.vision}>
-          System design + AI agents is the 2Cr+ intersection. The engineers who can architect
-          RAG pipelines, agent memory systems, and evaluation harnesses are building the future —
-          whether as staff engineers or solopreneurs shipping products.
         </p>
       </section>
 
