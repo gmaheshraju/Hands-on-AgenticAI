@@ -110,8 +110,8 @@ const posts = [
     slug: 'forward-deployed-engineering',
     number: '14',
     title: 'Forward Deployed Engineering',
-    subtitle: 'The Palantir-pioneered model reshaping AI delivery — embedded engineers, Echo/Delta teams, demo-driven development, and the gravel-to-highway playbook.',
-    tags: ['FDE', 'Palantir', 'AI Delivery', 'Echo/Delta', 'Go-to-Market'],
+    subtitle: 'The Palantir-pioneered model reshaping AI delivery — embedded engineers, Echo/Anthropic teams, demo-driven development, and the gravel-to-highway playbook.',
+    tags: ['FDE', 'Palantir', 'AI Delivery', 'Echo/Anthropic', 'Go-to-Market'],
     ready: true,
   },
 ];
