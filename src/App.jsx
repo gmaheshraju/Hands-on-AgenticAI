@@ -26,6 +26,10 @@ import LlmOps from './pages/blog/LlmOps';
 import AiGuardrails from './pages/blog/AiGuardrails';
 import EvalEngineering from './pages/blog/EvalEngineering';
 import FineTuningVsRag from './pages/blog/FineTuningVsRag';
+import ToolUseFunctionCalling from './pages/blog/ToolUseFunctionCalling';
+import CostLatencyEngineering from './pages/blog/CostLatencyEngineering';
+import AiUxPatterns from './pages/blog/AiUxPatterns';
+import ResponsibleAi from './pages/blog/ResponsibleAi';
 
 export default function App() {
   return (
@@ -57,6 +61,10 @@ export default function App() {
         <Route path="/blog/ai-guardrails" element={<AiGuardrails />} />
         <Route path="/blog/evaluation-engineering" element={<EvalEngineering />} />
         <Route path="/blog/fine-tuning-vs-rag" element={<FineTuningVsRag />} />
+        <Route path="/blog/tool-use-function-calling" element={<ToolUseFunctionCalling />} />
+        <Route path="/blog/cost-latency-engineering" element={<CostLatencyEngineering />} />
+        <Route path="/blog/ai-ux-patterns" element={<AiUxPatterns />} />
+        <Route path="/blog/responsible-ai" element={<ResponsibleAi />} />
       </Routes>
       </PageTransition>
     </Layout>
