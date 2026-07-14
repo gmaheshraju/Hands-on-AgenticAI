@@ -304,7 +304,7 @@ function Tab2() {
         <Pill type="amber">Factual errors</Pill>
         <p>Does it confidently state false information? Particularly dangerous in medical, legal, and financial
         domains. Test with questions that have definitive answers and check confidence calibration. A model
-        that says "I'm not sure" is safer than one that halluccinates authoritatively.</p>
+        that says "I'm not sure" is safer than one that hallucinates authoritatively.</p>
       </Decision>
 
       <Decision question="How to structure a red-team exercise">

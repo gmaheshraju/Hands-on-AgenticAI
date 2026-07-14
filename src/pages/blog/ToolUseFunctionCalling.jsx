@@ -42,11 +42,11 @@ const TOOL_SCHEMA_CODE = `const tools = [
   },
 ];`;
 
-const TOOL_SCHEMA_OUTPUT = `Tool count: 2 | Total schema tokens: ~180 | Model accuracy at this count: 95%+
+const TOOL_SCHEMA_OUTPUT = `Tool count: 2 | Total schema tokens: ~180
 
-At 8-15 tools: ~90% accuracy
-At 20+ tools: drops to ~75%
-At 40+ tools: model starts ignoring tools entirely`;
+Keep tool count low. Accuracy degrades as you add more tools —
+models start confusing similar tools or ignoring some entirely.
+Sweet spot: 8-15 tools per agent. Beyond 20, test heavily.`;
 
 const DISPATCH_CODE = `async function dispatchTool(toolCall, context) {
   const { name, arguments: args } = toolCall;
@@ -305,7 +305,7 @@ function SchemaDesignPanel() {
         <br /><br />
         <Pill type="red">Coarse-grained: one function, multiple actions</Pill> user_management(action, params). Fewer tools to choose from, but the model has to reason about the action parameter PLUS the params structure. Error rates jump to 30%+ because the model confuses action types or passes wrong params for the action.
         <br /><br />
-        <Pill type="green">Sweet spot: 8-15 tools per agent</Pill> Below 8, you are probably combining too many concerns. Above 15, model accuracy drops ~10-15% per 5 additional tools (empirically measured across GPT-4, Claude 3.5, Gemini 1.5). At 40+ tools, models start ignoring tools entirely and hallucinate answers instead.
+        <Pill type="green">Sweet spot: 8-15 tools per agent</Pill> Below 8, you are probably combining too many concerns. Above 15, accuracy degrades noticeably — models confuse similar tools and pick wrong ones more often. At 40+ tools, models tend to ignore tools entirely and hallucinate answers instead. Test your specific tool set; the degradation depends heavily on how distinct your tool names and descriptions are.
       </Decision></FadeIn>
 
       <FadeIn delay={200}><CodeBlock filename="tool-schema.js" code={TOOL_SCHEMA_CODE} output={TOOL_SCHEMA_OUTPUT} /></FadeIn>
@@ -323,7 +323,7 @@ function SchemaDesignPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={500}><Insight tag="Production number">
-        In production systems processing 10K+ tool calls/day, the #1 cause of tool call failures is not schema mismatch — it is description ambiguity. Two tools with overlapping descriptions (e.g., "get user info" vs "fetch user profile") cause the model to pick randomly. Rename one to make intent crystal clear. We measured a 23% accuracy improvement just by rewriting 4 tool descriptions.
+        In production systems processing 10K+ tool calls/day, the #1 cause of tool call failures is not schema mismatch — it is description ambiguity. Two tools with overlapping descriptions (e.g., "get user info" vs "fetch user profile") cause the model to pick randomly. Rename one to make intent crystal clear. Rewriting vague descriptions into specific, unambiguous ones is often the single highest-ROI fix for tool call accuracy.
       </Insight></FadeIn>
     </div>
   );
