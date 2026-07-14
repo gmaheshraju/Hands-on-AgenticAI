@@ -127,6 +127,42 @@ The decision framework every AI architect needs — when to prompt engineer, whe
 
 ---
 
+### 10 — Tool Use & Function Calling Patterns
+
+Schema design, tool dispatch, error recovery, permission models, and sandboxing — the engineering of reliable tool use in production agents.
+
+<p align="center">
+  <img src="docs/diagrams/tool-use-function-calling.png" alt="Tool Permission Flow" width="100%">
+</p>
+
+---
+
+### 11 — Cost & Latency Engineering
+
+Your agent costs $2 per conversation. Your boss wants $0.15. Model routing, semantic caching, prompt compression, and the metrics that matter.
+
+<p align="center">
+  <img src="docs/diagrams/cost-latency-engineering.png" alt="Cost Waterfall Chart" width="100%">
+</p>
+
+---
+
+### 12 — AI UX Patterns
+
+Streaming, confidence indicators, human-in-the-loop flows, error states — the product engineering that makes AI feel trustworthy.
+
+---
+
+### 13 — Responsible AI & Governance
+
+Bias detection, fairness metrics, red-teaming, model cards, EU AI Act — the governance that lets you ship AI without legal landmines.
+
+<p align="center">
+  <img src="docs/diagrams/responsible-ai.png" alt="Governance Lifecycle" width="100%">
+</p>
+
+---
+
 ## Tech Stack
 
 - **React 19** — latest React with automatic batching

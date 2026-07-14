@@ -74,6 +74,38 @@ const posts = [
     tags: ['Fine-tuning', 'RAG', 'Prompt Engineering', 'LoRA', 'Cost Routing'],
     ready: true,
   },
+  {
+    slug: 'tool-use-function-calling',
+    number: '10',
+    title: 'Tool Use & Function Calling Patterns',
+    subtitle: 'The engineering of reliable tool dispatch — schema design, validation, retry logic, permission models, and sandboxing.',
+    tags: ['Tool Use', 'Function Calling', 'Sandboxing', 'Permissions', 'Error Recovery'],
+    ready: true,
+  },
+  {
+    slug: 'cost-latency-engineering',
+    number: '11',
+    title: 'Cost & Latency Engineering',
+    subtitle: 'Your agent costs $2 per conversation. Your boss wants $0.15. Model routing, semantic caching, prompt compression, and the metrics that matter.',
+    tags: ['Model Routing', 'Caching', 'Token Budgets', 'Latency', 'Cost Optimization'],
+    ready: true,
+  },
+  {
+    slug: 'ai-ux-patterns',
+    number: '12',
+    title: 'AI UX Patterns',
+    subtitle: 'Streaming, confidence indicators, human-in-the-loop flows, error states — the product engineering that makes AI feel trustworthy.',
+    tags: ['Streaming', 'Confidence', 'HITL', 'Trust', 'Error Recovery'],
+    ready: true,
+  },
+  {
+    slug: 'responsible-ai',
+    number: '13',
+    title: 'Responsible AI & Governance',
+    subtitle: 'Bias detection, fairness metrics, red-teaming, model cards, EU AI Act — the governance that lets you ship AI without legal landmines.',
+    tags: ['Bias', 'Fairness', 'Red-teaming', 'EU AI Act', 'Governance'],
+    ready: true,
+  },
 ];
 
 export default function Blog() {
