@@ -25,6 +25,7 @@ import RagDeepDive from './pages/blog/RagDeepDive';
 import LlmOps from './pages/blog/LlmOps';
 import AiGuardrails from './pages/blog/AiGuardrails';
 import EvalEngineering from './pages/blog/EvalEngineering';
+import FineTuningVsRag from './pages/blog/FineTuningVsRag';
 
 export default function App() {
   return (
@@ -55,6 +56,7 @@ export default function App() {
         <Route path="/blog/llm-ops" element={<LlmOps />} />
         <Route path="/blog/ai-guardrails" element={<AiGuardrails />} />
         <Route path="/blog/evaluation-engineering" element={<EvalEngineering />} />
+        <Route path="/blog/fine-tuning-vs-rag" element={<FineTuningVsRag />} />
       </Routes>
       </PageTransition>
     </Layout>
