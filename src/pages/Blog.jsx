@@ -66,6 +66,14 @@ const posts = [
     tags: ['LLM-as-Judge', 'Golden Datasets', 'Regression', 'SLOs', 'HITL'],
     ready: true,
   },
+  {
+    slug: 'fine-tuning-vs-rag',
+    number: '09',
+    title: 'Fine-tuning vs Prompting vs RAG',
+    subtitle: 'The decision framework every AI architect needs — when to prompt engineer, when to retrieve, when to fine-tune, and when to combine them.',
+    tags: ['Fine-tuning', 'RAG', 'Prompt Engineering', 'LoRA', 'Cost Routing'],
+    ready: true,
+  },
 ];
 
 export default function Blog() {

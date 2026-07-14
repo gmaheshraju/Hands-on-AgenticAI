@@ -117,6 +117,16 @@ LLM-as-judge with rubrics, golden datasets, regression testing, human-in-the-loo
 
 ---
 
+### 09 — Fine-tuning vs Prompting vs RAG
+
+The decision framework every AI architect needs — when to prompt engineer, when to retrieve, when to fine-tune, and when to combine them.
+
+<p align="center">
+  <img src="docs/diagrams/fine-tuning-vs-rag.png" alt="Fine-tuning vs RAG Decision Tree" width="100%">
+</p>
+
+---
+
 ## Tech Stack
 
 - **React 19** — latest React with automatic batching
@@ -156,7 +166,7 @@ Connected to **Cloudflare Pages** with auto-deploy:
 
 - Build command: `npm run build`
 - Output directory: `dist`
-- SPA routing handled by `public/_redirects`
+- SPA routing handled natively by Cloudflare Pages
 
 ---
 
