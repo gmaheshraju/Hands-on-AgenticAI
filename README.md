@@ -165,14 +165,14 @@ Bias detection, fairness metrics, red-teaming, model cards, EU AI Act — the go
 
 ### 14 — Forward Deployed Engineering
 
-The Palantir-pioneered FDE model — embedded engineers, Echo/Delta teams, demo-driven development, and the "gravel road to paved highway" playbook reshaping how AI companies deliver value.
+The Palantir-pioneered FDE model — embedded engineers, Echo/Anthropic teams, demo-driven development, and the "gravel road to paved highway" playbook reshaping how AI companies deliver value.
 
 <p align="center">
   <img src="docs/diagrams/forward-deployed-engineering.png" alt="FDE Operating Model" width="100%">
 </p>
 
 <p align="center">
-  <img src="docs/diagrams/forward-deployed-echo-delta.png" alt="Echo and Delta Team Model" width="100%">
+  <img src="docs/diagrams/forward-deployed-echo-delta.png" alt="Echo and Anthropic Team Model" width="100%">
 </p>
 
 <p align="center">
