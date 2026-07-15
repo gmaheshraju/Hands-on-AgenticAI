@@ -1,0 +1,87 @@
+{
+  "id": "customer-onboarding",
+  "name": "Customer Onboarding Pipeline",
+  "description": "Verify email, run credit check, get approval, send welcome email",
+  "nodes": [
+    {
+      "id": "verify-email",
+      "type": "tool",
+      "config": {
+        "tool": "verifyEmail",
+        "params": {},
+        "outputKey": "emailVerification"
+      }
+    },
+    {
+      "id": "credit-check",
+      "type": "tool",
+      "config": {
+        "tool": "creditCheck",
+        "params": {},
+        "outputKey": "creditResult"
+      }
+    },
+    {
+      "id": "check-credit-score",
+      "type": "condition",
+      "config": {
+        "field": "creditResult.approved",
+        "operator": "eq",
+        "value": true,
+        "branches": {
+          "true": "manager-approval",
+          "false": "rejection-email"
+        }
+      }
+    },
+    {
+      "id": "manager-approval",
+      "type": "approval",
+      "config": {
+        "approver": "account-manager",
+        "message": "New customer application — credit check passed. Review and approve.",
+        "autoComment": "Customer meets all onboarding criteria"
+      }
+    },
+    {
+      "id": "rejection-email",
+      "type": "tool",
+      "config": {
+        "tool": "sendEmail",
+        "params": {
+          "subject": "Application Update — Additional Information Required"
+        },
+        "outputKey": "rejectionNotification"
+      }
+    },
+    {
+      "id": "compose-welcome",
+      "type": "llm",
+      "config": {
+        "prompt": "Draft a warm welcome email for a new customer. Customer email: {{email}}, credit rating: {{creditResult.rating}}.",
+        "model": "gpt-4",
+        "temperature": 0.6,
+        "outputKey": "welcomeContent"
+      }
+    },
+    {
+      "id": "send-welcome",
+      "type": "tool",
+      "config": {
+        "tool": "sendEmail",
+        "params": {
+          "subject": "Welcome aboard!"
+        },
+        "outputKey": "welcomeEmail"
+      }
+    }
+  ],
+  "edges": [
+    { "from": "verify-email", "to": "credit-check" },
+    { "from": "credit-check", "to": "check-credit-score" },
+    { "from": "check-credit-score", "to": "manager-approval", "conditionBranch": "true" },
+    { "from": "check-credit-score", "to": "rejection-email", "conditionBranch": "false" },
+    { "from": "manager-approval", "to": "compose-welcome" },
+    { "from": "compose-welcome", "to": "send-welcome" }
+  ]
+}

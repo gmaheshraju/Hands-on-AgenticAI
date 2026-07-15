@@ -1,0 +1,15 @@
+{
+  "name": "real-time-voice-agent",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Real-time voice agent with interruption handling",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "demo": "node src/demo.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "ws": "^8.16.0"
+  }
+}

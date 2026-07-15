@@ -1,0 +1,95 @@
+{
+  "id": "incident-response",
+  "name": "Incident Response Pipeline",
+  "description": "Detect incident, classify severity via LLM, route to appropriate team, notify",
+  "nodes": [
+    {
+      "id": "detect",
+      "type": "tool",
+      "config": {
+        "tool": "detectIncident",
+        "params": {
+          "source": "prometheus",
+          "metric": "error_rate"
+        },
+        "outputKey": "incident"
+      }
+    },
+    {
+      "id": "classify-severity",
+      "type": "llm",
+      "config": {
+        "prompt": "Classify the severity of this incident. Incident: {{incident.description}}. Current value: {{incident.currentValue}}, threshold: {{incident.threshold}}. Return severity as CRITICAL, HIGH, MEDIUM, or LOW.",
+        "model": "gpt-4",
+        "temperature": 0.1,
+        "outputKey": "classificationResult"
+      }
+    },
+    {
+      "id": "parallel-response",
+      "type": "parallel",
+      "config": {
+        "tasks": [
+          {
+            "id": "route",
+            "type": "tool",
+            "config": {
+              "tool": "routeToTeam",
+              "params": {}
+            }
+          },
+          {
+            "id": "incident-summary",
+            "type": "transform",
+            "config": {
+              "operation": "compose",
+              "params": {
+                "mapping": {
+                  "incidentId": "incident.incidentId",
+                  "severity": "severity",
+                  "description": "incident.description",
+                  "detectedAt": "incident.detectedAt"
+                }
+              },
+              "outputKey": "summary"
+            }
+          }
+        ],
+        "outputKey": "responseActions"
+      }
+    },
+    {
+      "id": "notify",
+      "type": "tool",
+      "config": {
+        "tool": "notifyTeam",
+        "params": {},
+        "outputKey": "notification"
+      }
+    },
+    {
+      "id": "create-report",
+      "type": "transform",
+      "config": {
+        "operation": "compose",
+        "params": {
+          "mapping": {
+            "incidentId": "incident.incidentId",
+            "severity": "severity",
+            "classification": "classificationResult",
+            "team": "notification.team",
+            "channel": "notification.channel",
+            "notifiedAt": "notification.notifiedAt"
+          }
+        },
+        "outputKey": "incidentReport"
+      }
+    }
+  ],
+  "edges": [
+    { "from": "detect", "to": "classify-severity" },
+    { "from": "classify-severity", "to": "parallel-response" },
+    { "from": "parallel-response", "to": "notify" },
+    { "from": "notify", "to": "create-report" }
+  ]
+}

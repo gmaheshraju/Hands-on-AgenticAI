@@ -1,0 +1,16 @@
+{
+  "name": "agent-observability-dashboard",
+  "version": "1.0.0",
+  "description": "Agent Observability Dashboard — traces, cost tracking, quality scores, drift detection, and live dashboard",
+  "type": "module",
+  "main": "src/demo.js",
+  "scripts": {
+    "start": "node src/demo.js",
+    "dashboard": "node src/dashboard.js",
+    "simulate": "node src/simulator.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0",
+    "express": "^4.21.0"
+  }
+}

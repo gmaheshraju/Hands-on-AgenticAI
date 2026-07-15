@@ -1,0 +1,77 @@
+{
+  "id": "content-pipeline",
+  "name": "Content Publishing Pipeline",
+  "description": "Research a topic, write an article, get editorial review, then publish",
+  "nodes": [
+    {
+      "id": "research",
+      "type": "llm",
+      "config": {
+        "prompt": "Research the following topic thoroughly and provide key findings, statistics, and expert opinions: {{topic}}",
+        "model": "gpt-4",
+        "temperature": 0.3,
+        "outputKey": "researchFindings"
+      }
+    },
+    {
+      "id": "write",
+      "type": "llm",
+      "config": {
+        "prompt": "Write a comprehensive article about {{topic}} using these research findings: {{researchFindings}}. Target audience: {{audience}}. Tone: {{tone}}.",
+        "model": "gpt-4",
+        "temperature": 0.7,
+        "outputKey": "draftArticle"
+      }
+    },
+    {
+      "id": "review",
+      "type": "llm",
+      "config": {
+        "prompt": "Review and edit the following article for clarity, accuracy, and engagement. Article: {{draftArticle}}",
+        "model": "gpt-4",
+        "temperature": 0.2,
+        "outputKey": "editorialReview"
+      }
+    },
+    {
+      "id": "editorial-approval",
+      "type": "approval",
+      "config": {
+        "approver": "editor-in-chief",
+        "message": "Please review the article and editorial feedback before publishing",
+        "autoComment": "Content meets editorial standards"
+      }
+    },
+    {
+      "id": "format-for-publish",
+      "type": "transform",
+      "config": {
+        "operation": "compose",
+        "params": {
+          "mapping": {
+            "title": "topic",
+            "content": "draftArticle",
+            "review": "editorialReview",
+            "approvedBy": "approval.approver"
+          }
+        },
+        "outputKey": "finalContent"
+      }
+    },
+    {
+      "id": "publish",
+      "type": "tool",
+      "config": {
+        "tool": "publishContent",
+        "params": {}
+      }
+    }
+  ],
+  "edges": [
+    { "from": "research", "to": "write" },
+    { "from": "write", "to": "review" },
+    { "from": "review", "to": "editorial-approval" },
+    { "from": "editorial-approval", "to": "format-for-publish" },
+    { "from": "format-for-publish", "to": "publish" }
+  ]
+}
