@@ -171,6 +171,13 @@ export default function RagDeepDive() {
       {tab === 2 && <HybridSearchPanel />}
       {tab === 3 && <RerankingPanel />}
       {tab === 4 && <PitfallsPanel />}
+
+      <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
+        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
+        <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Codebase Q&A with Hybrid RAG</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and staff+ interview angles.</p>
+        <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/05-rag-pipeline.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
+      </div></FadeIn>
     </div>
   );
 }
@@ -534,7 +541,7 @@ function PitfallsPanel() {
       <FadeIn><Insight>
         "Mahesh's Top 8 advice #8: 'Add continuous evals.' The production pitfalls are invisible without them — stale embeddings, lost-in-the-middle, domain vocabulary gaps all look like 'the agent works' from the outside. You need precision@k, groundedness, and answer correctness running on every change. Mahesh's rule: 'Evals + Memory are the moats of AI products.' The eval pipeline IS the product quality. Without it, you're flying blind — and in an interview, describing these failure modes with specific metrics shifts you from 'has read about RAG' to 'has operated a RAG pipeline at scale.'"
       </Insight></FadeIn>
-    </div>
+        </div>
   );
 }
 

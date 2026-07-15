@@ -153,6 +153,13 @@ export default function MultiAgentSystems() {
       {tab === 2 && <ArchPanel />}
       {tab === 3 && <WhenToUsePanel />}
       {tab === 4 && <AntiPatternsPanel />}
+
+      <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
+        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
+        <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Multi-Agent Content Pipeline</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and staff+ interview angles.</p>
+        <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/04-multi-agent-systems.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
+      </div></FadeIn>
     </div>
   );
 }
@@ -572,7 +579,7 @@ function AntiPatternsPanel() {
       <FadeIn><Insight>
         "Use Mahesh's evolution levels as your interview framework. Level 1: 'This is a single-agent problem — one LLM with 5 focused tools.' Level 2: 'If we need pipeline processing, chain agents sequentially.' Level 3: 'For quality-critical tasks, a supervisor with specialist teams — they fear being wrong, so they verify.' Level 4: 'Only for exhaustive research where we fear missing something.' Starting at Level 4 and working down is the interview anti-pattern. Starting at Level 1 and articulating exactly when to upgrade — that's staff+ reasoning."
       </Insight></FadeIn>
-    </div>
+        </div>
   );
 }
 

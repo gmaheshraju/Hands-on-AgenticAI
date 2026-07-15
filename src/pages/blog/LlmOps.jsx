@@ -362,6 +362,13 @@ export default function LlmOps() {
       {tab === 2 && <LatencyReliabilityPanel />}
       {tab === 3 && <MonitoringPanel />}
       {tab === 4 && <AntiPatternsPanel />}
+
+      <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
+        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
+        <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Model Router with Cost Dashboard</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and staff+ interview angles.</p>
+        <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/06-llmops.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
+      </div></FadeIn>
     </div>
   );
 }
@@ -826,7 +833,7 @@ function AntiPatternsPanel() {
       <FadeIn><Insight>
         In a staff+ interview, describing anti-patterns with specific dollar amounts and incident timelines is worth more than describing the correct architecture. "We had a recursive agent loop that cost $42K over a weekend, which led us to implement per-request cost caps, daily budget limits with automatic model downgrading, and a Slack alert that fires when hourly spend exceeds 2x the rolling average" tells the interviewer you've been in the trenches, not just read the blog posts. The fix is obvious — the story of how you learned it the hard way is what separates operators from theorists.
       </Insight></FadeIn>
-    </div>
+        </div>
   );
 }
 
