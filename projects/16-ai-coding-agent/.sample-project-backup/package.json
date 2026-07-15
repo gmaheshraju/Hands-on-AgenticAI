@@ -1,0 +1,10 @@
+{
+  "name": "sample-api",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A simple Express-like API with a bug — used as the demo target for the AI Coding Agent",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "node --test tests/*.test.js"
+  }
+}

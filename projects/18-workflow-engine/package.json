@@ -1,0 +1,13 @@
+{
+  "name": "agentic-workflow-engine",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "DAG-based agentic workflow engine with LLM calls, tool execution, human approval gates, and parallel fan-out",
+  "main": "src/demo.js",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "test": "node --test src/**/*.test.js"
+  },
+  "keywords": ["workflow", "dag", "agentic", "llm", "orchestration"],
+  "license": "MIT"
+}

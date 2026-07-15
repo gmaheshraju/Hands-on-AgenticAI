@@ -1,0 +1,15 @@
+{
+  "name": "ai-coding-agent",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "AI Coding Agent — takes a GitHub issue, explores the codebase, plans a fix, writes code, runs tests with self-correction, and generates a PR description",
+  "main": "src/agent.js",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "start": "node src/agent.js",
+    "test": "node --test src/**/*.test.js"
+  },
+  "dependencies": {
+    "diff": "^7.0.0"
+  }
+}

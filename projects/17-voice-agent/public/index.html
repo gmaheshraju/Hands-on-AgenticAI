@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-Time Voice Agent</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Connection indicator -->
+  <div class="connection-status">
+    <div class="connection-dot" id="conn-dot"></div>
+    <span id="conn-text">Connecting...</span>
+  </div>
+
+  <div class="header">
+    <h1>Real-Time Voice Agent</h1>
+    <p>WebSocket + Web Audio API with interruption handling</p>
+  </div>
+
+  <div class="container">
+
+    <!-- State machine display -->
+    <div class="state-machine">
+      <div class="state-machine-label">State Machine</div>
+      <div class="state-row">
+        <span class="state-pill active" data-state="IDLE">IDLE</span>
+        <span class="state-arrow">&rarr;</span>
+        <span class="state-pill" data-state="LISTENING">LISTENING</span>
+        <span class="state-arrow">&rarr;</span>
+        <span class="state-pill" data-state="PROCESSING">PROCESSING</span>
+        <span class="state-arrow">&rarr;</span>
+        <span class="state-pill" data-state="SPEAKING">SPEAKING</span>
+        <span class="state-arrow">&rarr;</span>
+        <span class="state-pill" data-state="INTERRUPTED">INTERRUPTED</span>
+      </div>
+      <div class="state-meta">
+        <span id="meta-state">Current: <strong>IDLE</strong></span>
+        <span id="meta-interrupts">Interruptions: <strong>0</strong></span>
+      </div>
+    </div>
+
+    <!-- Waveform visualizer -->
+    <div class="visualizer-section">
+      <canvas id="waveform"></canvas>
+      <div class="controls">
+        <button class="btn btn-primary" id="btn-start">Start Conversation</button>
+        <button class="btn btn-danger" id="btn-stop" disabled>End Conversation</button>
+        <button class="btn btn-green" id="btn-mic" disabled>Start Mic</button>
+        <button class="btn btn-yellow" id="btn-interrupt" disabled>Interrupt</button>
+      </div>
+    </div>
+
+    <!-- Simulate voice (no microphone needed) -->
+    <div class="simulate-section">
+      <label>Simulate Voice (no microphone needed)</label>
+      <div class="simulate-row">
+        <input type="text" id="sim-input" placeholder="Type what you'd say..." disabled>
+        <button class="btn btn-primary" id="btn-sim-send" disabled>Send</button>
+      </div>
+      <div class="quick-phrases">
+        <button class="quick-phrase" data-text="Hello!">Hello!</button>
+        <button class="quick-phrase" data-text="Tell me a joke">Joke</button>
+        <button class="quick-phrase" data-text="What can you help me with?">Help</button>
+        <button class="quick-phrase" data-text="Tell me about the state machine">States</button>
+        <button class="quick-phrase" data-text="What time is it?">Time</button>
+        <button class="quick-phrase" data-text="Goodbye!">Bye</button>
+      </div>
+    </div>
+
+    <!-- Transcript -->
+    <div class="transcript-section">
+      <div class="section-label">Conversation Transcript</div>
+      <div id="transcript">
+        <div class="transcript-empty">Press "Start Conversation" to begin.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="voice.js"></script>
+</body>
+</html>

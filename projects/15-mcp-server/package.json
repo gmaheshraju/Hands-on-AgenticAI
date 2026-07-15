@@ -1,0 +1,17 @@
+{
+  "name": "15-mcp-server",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "MCP Server + Client — Model Context Protocol with SQLite database tools and resources",
+  "scripts": {
+    "server": "node src/server.js",
+    "client": "node src/client.js",
+    "agent": "node src/agent.js",
+    "demo": "node src/demo.js",
+    "seed": "node src/database.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "better-sqlite3": "^11.8.2"
+  }
+}

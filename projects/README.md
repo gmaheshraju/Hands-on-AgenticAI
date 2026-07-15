@@ -1,6 +1,6 @@
 # Capstone Projects
 
-14 production-grade projects — one per topic. Not toy demos. Real problems, real APIs, real evaluation criteria.
+20 production-grade projects — one per topic. Not toy demos. Real problems, real APIs, real evaluation criteria.
 
 Each project is designed to produce a portfolio piece you can walk through in a staff/principal-level interview. The "Staff+ Interview Angle" section gives you the opening line.
 
@@ -22,6 +22,12 @@ Each project is designed to produce a portfolio piece you can walk through in a 
 | 12 | [Production Chat UI](12-ai-ux.md) | Streaming + confidence indicators + HITL approval + error states |
 | 13 | [Bias Audit Pipeline](13-responsible-ai.md) | Counterfactual testing + model card generator (EU AI Act) |
 | 14 | [FDE Onboarding Toolkit](14-forward-deployed-engineering.md) | Customer data connector + domain adaptation + eval set builder |
+| 15 | [MCP Server](15-mcp-server/) | Model Context Protocol server with tools, resources, and SQLite |
+| 16 | [AI Coding Agent](16-ai-coding-agent/) | Mini Claude Code — issue → fix → test → self-correct → PR |
+| 17 | [Voice Agent](17-voice-agent/) | Real-time voice pipeline with WebSocket streaming + turn management |
+| 18 | [Workflow Engine](18-workflow-engine/) | DAG execution engine with 6 node types + conditional branching |
+| 19 | [Agent Observability](19-agent-observability/) | Traces, cost tracking, quality scoring, drift detection + dashboard |
+| 20 | [AI CLI Tool](20-ai-cli-tool/) | Zero-dependency CLI with commit/review/explain + token budget tracking |
 
 ## How to Use
 
@@ -38,3 +44,6 @@ Projects build on each other:
 - **Any agent → 12**: Wrap any backend agent in the production chat UI
 - **Any system → 07**: Test any LLM system against the injection test suite
 - **Any model → 13**: Audit any model for bias before shipping
+- **15 → 01/10**: MCP server pattern connects tools to any agent project
+- **16 → 03/05**: Coding agent uses harness + RAG patterns from earlier projects
+- **19 → 06/11**: Observability dashboard feeds into LLMOps and cost optimization

@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Observability Dashboard</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #1a1a2e;
+    --card: #16213e;
+    --accent: #0f3460;
+    --highlight: #e94560;
+    --text: #e0e0e0;
+    --text-dim: #8899aa;
+    --border: #253554;
+    --success: #2a9d8f;
+    --warning: #e9c46a;
+    --danger: #e94560;
+    --chart-colors: #e94560, #0f3460, #533483, #00b4d8, #e9c46a, #2a9d8f, #f4845f;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  a { color: var(--highlight); text-decoration: none; }
+
+  /* Header */
+  .header { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; background: var(--card); border-bottom: 1px solid var(--border); }
+  .header h1 { font-size: 20px; font-weight: 600; }
+  .header-right { display: flex; align-items: center; gap: 16px; }
+  .refresh-toggle { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-dim); cursor: pointer; }
+  .refresh-toggle input { accent-color: var(--highlight); }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); display: inline-block; }
+  .status-dot.off { background: var(--text-dim); }
+  .last-updated { font-size: 12px; color: var(--text-dim); }
+
+  /* Filters */
+  .filter-bar { display: flex; gap: 12px; padding: 12px 24px; background: var(--card); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .filter-bar select { background: var(--accent); color: var(--text); border: 1px solid var(--border); border-radius: 6px; padding: 6px 12px; font-size: 13px; cursor: pointer; outline: none; }
+  .filter-bar select:hover { border-color: var(--highlight); }
+  .filter-bar label { font-size: 12px; color: var(--text-dim); display: flex; flex-direction: column; gap: 4px; }
+
+  /* KPI Cards */
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 20px 24px; }
+  .kpi-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .kpi-card .kpi-label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .kpi-card .kpi-value { font-size: 28px; font-weight: 700; }
+  .kpi-card .kpi-sub { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+  .kpi-card .kpi-change { font-size: 12px; margin-top: 4px; }
+  .kpi-card .kpi-change.up { color: var(--success); }
+  .kpi-card .kpi-change.down { color: var(--danger); }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 0; padding: 0 24px; background: var(--card); border-bottom: 1px solid var(--border); }
+  .tab-btn { padding: 12px 20px; font-size: 14px; color: var(--text-dim); cursor: pointer; border: none; background: none; border-bottom: 2px solid transparent; transition: all 0.2s; }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--highlight); border-bottom-color: var(--highlight); }
+  .tab-content { display: none; padding: 20px 24px; }
+  .tab-content.active { display: block; }
+
+  /* Chart containers */
+  .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .chart-box { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .chart-box h3 { font-size: 14px; margin-bottom: 12px; color: var(--text-dim); }
+  .chart-box canvas { width: 100%; height: 250px; display: block; }
+
+  /* Tables */
+  .data-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  .data-table th, .data-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .data-table th { color: var(--text-dim); text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; font-weight: 600; }
+  .data-table tr:hover { background: rgba(15, 52, 96, 0.3); }
+  .data-table tr.clickable { cursor: pointer; }
+
+  /* Badges */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .badge-ok { background: rgba(42, 157, 143, 0.2); color: var(--success); }
+  .badge-error { background: rgba(233, 69, 96, 0.2); color: var(--danger); }
+  .badge-warning { background: rgba(233, 196, 106, 0.2); color: var(--warning); }
+  .badge-critical { background: rgba(233, 69, 96, 0.3); color: var(--danger); }
+
+  /* Progress bars */
+  .progress-bar { height: 8px; background: var(--accent); border-radius: 4px; overflow: hidden; margin-top: 6px; }
+  .progress-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+  .progress-fill.green { background: var(--success); }
+  .progress-fill.yellow { background: var(--warning); }
+  .progress-fill.red { background: var(--danger); }
+
+  /* Alerts */
+  .alert-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: flex-start; }
+  .alert-card .alert-left { flex: 1; }
+  .alert-card .alert-metric { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .alert-card .alert-detail { font-size: 13px; color: var(--text-dim); }
+  .alert-card .alert-zscore { font-size: 12px; margin-top: 4px; }
+  .btn { padding: 6px 14px; border-radius: 6px; border: none; font-size: 12px; cursor: pointer; font-weight: 600; }
+  .btn-resolve { background: var(--accent); color: var(--text); }
+  .btn-resolve:hover { background: var(--highlight); }
+
+  /* Trace viewer */
+  .trace-detail { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-top: 16px; }
+  .span-row { display: grid; grid-template-columns: 250px 80px 1fr 80px 80px 60px; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(37, 53, 84, 0.5); font-size: 13px; gap: 8px; }
+  .span-row:last-child { border-bottom: none; }
+  .span-name { display: flex; align-items: center; gap: 4px; }
+  .span-indent { display: inline-block; }
+  .waterfall-container { height: 16px; position: relative; background: rgba(15, 52, 96, 0.3); border-radius: 3px; }
+  .waterfall-bar { position: absolute; height: 100%; border-radius: 3px; min-width: 2px; }
+  .waterfall-bar.ok { background: var(--success); }
+  .waterfall-bar.error { background: var(--danger); }
+  .tool-calls { margin-top: 4px; padding-left: 24px; font-size: 11px; color: var(--text-dim); }
+  .tool-call-item { padding: 2px 0; }
+
+  /* Quality alert */
+  .quality-alert { background: rgba(233, 69, 96, 0.1); border: 1px solid var(--danger); border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; }
+
+  /* Budget rows */
+  .budget-row { margin-bottom: 16px; }
+  .budget-row .budget-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px; }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .chart-grid { grid-template-columns: 1fr; }
+    .span-row { grid-template-columns: 180px 60px 1fr 60px 60px 50px; font-size: 12px; }
+  }
+  @media (max-width: 600px) {
+    .kpi-row { grid-template-columns: 1fr; }
+    .filter-bar { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Agent Observability Dashboard</h1>
+  <div class="header-right">
+    <span class="last-updated" id="lastUpdated">Last updated: --</span>
+    <label class="refresh-toggle">
+      <span class="status-dot" id="statusDot"></span>
+      <input type="checkbox" id="autoRefresh" checked> Auto-refresh (10s)
+    </label>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <label>Time Range
+    <select id="filterTimeRange">
+      <option value="1h">Last 1 hour</option>
+      <option value="6h">Last 6 hours</option>
+      <option value="24h" selected>Last 24 hours</option>
+      <option value="7d">Last 7 days</option>
+      <option value="30d">Last 30 days</option>
+    </select>
+  </label>
+  <label>Agent
+    <select id="filterAgent"><option value="">All Agents</option></select>
+  </label>
+  <label>Model
+    <select id="filterModel"><option value="">All Models</option></select>
+  </label>
+</div>
+
+<div class="kpi-row">
+  <div class="kpi-card">
+    <div class="kpi-label">Requests Today</div>
+    <div class="kpi-value" id="kpiRequests">--</div>
+    <div class="kpi-change" id="kpiRequestsChange"></div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">Avg Latency</div>
+    <div class="kpi-value" id="kpiLatency">--</div>
+    <div class="kpi-sub" id="kpiLatencySub"></div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">Cost Today</div>
+    <div class="kpi-value" id="kpiCost">--</div>
+    <div class="kpi-change" id="kpiCostChange"></div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">Quality Score</div>
+    <div class="kpi-value" id="kpiQuality">--</div>
+    <div class="kpi-sub" id="kpiQualitySub"></div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" data-tab="overview">Overview</button>
+  <button class="tab-btn" data-tab="costs">Costs</button>
+  <button class="tab-btn" data-tab="quality">Quality</button>
+  <button class="tab-btn" data-tab="drift">Drift</button>
+  <button class="tab-btn" data-tab="traces">Traces</button>
+</div>
+
+<!-- Overview Tab -->
+<div class="tab-content active" id="tab-overview">
+  <div class="chart-grid">
+    <div class="chart-box"><h3>Requests Over Time</h3><canvas id="chartRequests"></canvas></div>
+    <div class="chart-box"><h3>Latency Trend (P50)</h3><canvas id="chartLatency"></canvas></div>
+    <div class="chart-box"><h3>Cost by Model</h3><canvas id="chartCostModel"></canvas></div>
+    <div class="chart-box"><h3>Token Usage Over Time</h3><canvas id="chartTokens"></canvas></div>
+  </div>
+</div>
+
+<!-- Costs Tab -->
+<div class="tab-content" id="tab-costs">
+  <div class="chart-grid">
+    <div class="chart-box"><h3>Daily Cost Trend</h3><canvas id="chartDailyCost"></canvas></div>
+    <div class="chart-box"><h3>Cost by Agent</h3><canvas id="chartCostAgent"></canvas></div>
+  </div>
+  <div class="chart-box" style="margin-top:16px">
+    <h3>Cost Breakdown</h3>
+    <div style="overflow-x:auto">
+      <table class="data-table" id="costTable">
+        <thead><tr><th>Agent</th><th>Model</th><th>Total Cost</th><th>Avg Cost/Req</th><th>Total Tokens</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="chart-box" style="margin-top:16px">
+    <h3>Budget Status</h3>
+    <div id="budgetBars"></div>
+  </div>
+</div>
+
+<!-- Quality Tab -->
+<div class="tab-content" id="tab-quality">
+  <div id="qualityAlert"></div>
+  <div class="chart-grid">
+    <div class="chart-box"><h3>Quality Trend (7-day rolling)</h3><canvas id="chartQualityTrend"></canvas></div>
+    <div class="chart-box"><h3>Score Distribution</h3><canvas id="chartScoreDist"></canvas></div>
+  </div>
+  <div class="chart-box" style="margin-top:16px">
+    <h3>Recent Quality Scores</h3>
+    <div style="overflow-x:auto">
+      <table class="data-table" id="qualityTable">
+        <thead><tr><th>Timestamp</th><th>Agent</th><th>Model</th><th>Score</th><th>Criteria</th><th>Feedback</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Drift Tab -->
+<div class="tab-content" id="tab-drift">
+  <h3 style="margin-bottom:12px">Active Alerts</h3>
+  <div id="driftAlerts"></div>
+  <div class="chart-box" style="margin-top:16px">
+    <h3>Drift Metrics: Baseline vs Current</h3>
+    <canvas id="chartDrift"></canvas>
+  </div>
+</div>
+
+<!-- Traces Tab -->
+<div class="tab-content" id="tab-traces">
+  <div class="chart-box">
+    <h3>Traces</h3>
+    <div style="overflow-x:auto">
+      <table class="data-table" id="traceTable">
+        <thead><tr><th>Trace ID</th><th>Agent</th><th>Model</th><th>Status</th><th>Latency</th><th>Tokens</th><th>Cost</th><th>Timestamp</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+  <div id="traceDetail"></div>
+</div>
+
+<script>
+// ── Formatting helpers ──
+function formatCost(dollars) {
+  if (dollars == null) return '--';
+  return '$' + Number(dollars).toFixed(4);
+}
+function formatLatency(ms) {
+  if (ms == null) return '--';
+  return ms >= 1000 ? (ms / 1000).toFixed(1) + 's' : Math.round(ms) + 'ms';
+}
+function formatTokens(n) {
+  if (n == null) return '--';
+  if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+  if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
+  return String(n);
+}
+function timeAgo(ts) {
+  const diff = Date.now() - new Date(ts).getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 1) return 'just now';
+  if (mins < 60) return mins + ' min ago';
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs + ' hour' + (hrs > 1 ? 's' : '') + ' ago';
+  const days = Math.floor(hrs / 24);
+  return days + ' day' + (days > 1 ? 's' : '') + ' ago';
+}
+function truncateId(uuid) {
+  return uuid ? uuid.substring(0, 8) : '--';
+}
+
+// ── Chart Colors ──
+const COLORS = ['#e94560', '#0f3460', '#533483', '#00b4d8', '#e9c46a', '#2a9d8f', '#f4845f'];
+
+// ── MiniChart: Canvas 2D chart renderer ──
+class MiniChart {
+  constructor(canvas, type, options = {}) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.type = type; // 'bar', 'line', 'area', 'pie', 'horizontalBar'
+    this.options = Object.assign({
+      padding: { top: 30, right: 20, bottom: 40, left: 55 },
+      gridLines: true,
+      legend: true,
+      tooltips: true,
+      animate: false,
+    }, options);
+    this.labels = [];
+    this.datasets = [];
+    this._tooltip = null;
+    this._setupResize();
+    if (this.options.tooltips) this._setupTooltip();
+  }
+
+  _setupResize() {
+    const ro = new ResizeObserver(() => this._resize());
+    ro.observe(this.canvas.parentElement);
+    this._resize();
+  }
+
+  _resize() {
+    const rect = this.canvas.parentElement.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    const w = rect.width - 32;
+    const h = 250;
+    this.canvas.width = w * dpr;
+    this.canvas.height = h * dpr;
+    this.canvas.style.width = w + 'px';
+    this.canvas.style.height = h + 'px';
+    this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    this.w = w;
+    this.h = h;
+    if (this.datasets.length) this.render();
+  }
+
+  setData(labels, datasets) {
+    this.labels = labels;
+    this.datasets = datasets;
+    this.render();
+  }
+
+  render() {
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.w, this.h);
+    if (!this.datasets.length || !this.labels.length) return;
+
+    if (this.type === 'pie') { this._renderPie(); return; }
+
+    const p = this.options.padding;
+    const chartW = this.w - p.left - p.right;
+    const chartH = this.h - p.top - p.bottom;
+
+    // Compute value range
+    let allVals = [];
+    this.datasets.forEach(d => allVals.push(...d.data));
+    let minVal = Math.min(0, ...allVals);
+    let maxVal = Math.max(...allVals) * 1.1 || 1;
+    if (maxVal === minVal) maxVal = minVal + 1;
+
+    // Grid & axes
+    ctx.strokeStyle = 'rgba(136,153,170,0.15)';
+    ctx.lineWidth = 1;
+    ctx.fillStyle = '#8899aa';
+    ctx.font = '11px -apple-system, sans-serif';
+    ctx.textAlign = 'right';
+    const ySteps = 5;
+    for (let i = 0; i <= ySteps; i++) {
+      const y = p.top + (chartH / ySteps) * i;
+      const val = maxVal - ((maxVal - minVal) / ySteps) * i;
+      if (this.options.gridLines) {
+        ctx.beginPath(); ctx.moveTo(p.left, y); ctx.lineTo(p.left + chartW, y); ctx.stroke();
+      }
+      ctx.fillText(this._formatAxisVal(val), p.left - 8, y + 4);
+    }
+
+    // X labels
+    ctx.textAlign = 'center';
+    const maxLabels = Math.min(this.labels.length, Math.floor(chartW / 50));
+    const step = Math.max(1, Math.ceil(this.labels.length / maxLabels));
+    for (let i = 0; i < this.labels.length; i += step) {
+      const x = p.left + (chartW / (this.labels.length - (this.type === 'bar' ? 0 : 1) || 1)) * (i + (this.type === 'bar' ? 0.5 : 0));
+      ctx.fillText(this.labels[i], x, this.h - p.bottom + 20);
+    }
+
+    // Render data
+    const valToY = (v) => p.top + chartH - ((v - minVal) / (maxVal - minVal)) * chartH;
+    const barW = (chartW / this.labels.length) * 0.6 / this.datasets.length;
+
+    this.datasets.forEach((ds, di) => {
+      ctx.strokeStyle = ds.color || COLORS[di % COLORS.length];
+      ctx.fillStyle = ds.color || COLORS[di % COLORS.length];
+      ctx.lineWidth = 2;
+
+      if (this.type === 'bar') {
+        const groupW = chartW / this.labels.length;
+        const totalBars = this.datasets.length;
+        const bw = groupW * 0.6 / totalBars;
+        ds.data.forEach((v, i) => {
+          const x = p.left + groupW * i + groupW * 0.2 + bw * di;
+          const y = valToY(v);
+          const h = valToY(minVal) - y;
+          ctx.globalAlpha = 0.85;
+          ctx.fillRect(x, y, bw, h);
+          ctx.globalAlpha = 1;
+        });
+      } else if (this.type === 'line' || this.type === 'area') {
+        ctx.beginPath();
+        const xStep = chartW / (this.labels.length - 1 || 1);
+        ds.data.forEach((v, i) => {
+          const x = p.left + xStep * i;
+          const y = valToY(v);
+          i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+
+        if (this.type === 'area') {
+          const xStep2 = chartW / (this.labels.length - 1 || 1);
+          ctx.lineTo(p.left + xStep2 * (ds.data.length - 1), valToY(minVal));
+          ctx.lineTo(p.left, valToY(minVal));
+          ctx.closePath();
+          ctx.globalAlpha = 0.15;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        }
+
+        // Draw dots
+        ds.data.forEach((v, i) => {
+          const x = p.left + xStep * i;
+          const y = valToY(v);
+          ctx.beginPath(); ctx.arc(x, y, 3, 0, Math.PI * 2); ctx.fill();
+        });
+      } else if (this.type === 'horizontalBar') {
+        this._renderHorizontalBar();
+        return;
+      }
+    });
+
+    // Legend
+    if (this.options.legend && this.datasets.length > 1) {
+      ctx.font = '11px -apple-system, sans-serif';
+      ctx.textAlign = 'left';
+      let lx = p.left;
+      this.datasets.forEach((ds, di) => {
+        ctx.fillStyle = ds.color || COLORS[di % COLORS.length];
+        ctx.fillRect(lx, 6, 12, 12);
+        ctx.fillStyle = '#8899aa';
+        ctx.fillText(ds.label || '', lx + 16, 16);
+        lx += ctx.measureText(ds.label || '').width + 32;
+      });
+    }
+
+    // Store chart geometry for tooltips
+    this._chartGeometry = { p, chartW, chartH, minVal, maxVal, valToY };
+  }
+
+  _renderHorizontalBar() {
+    const ctx = this.ctx;
+    const p = { top: 10, right: 20, bottom: 10, left: 120 };
+    const chartW = this.w - p.left - p.right;
+    const chartH = this.h - p.top - p.bottom;
+    const ds = this.datasets[0];
+    if (!ds) return;
+    const maxVal = Math.max(...ds.data) * 1.1 || 1;
+    const barH = Math.min(30, chartH / this.labels.length * 0.7);
+    const gap = chartH / this.labels.length;
+
+    ctx.font = '12px -apple-system, sans-serif';
+    ctx.textAlign = 'right';
+
+    this.labels.forEach((label, i) => {
+      const y = p.top + gap * i + (gap - barH) / 2;
+      const w = (ds.data[i] / maxVal) * chartW;
+      ctx.fillStyle = ds.color || COLORS[i % COLORS.length];
+      ctx.globalAlpha = 0.85;
+      ctx.fillRect(p.left, y, w, barH);
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = '#8899aa';
+      ctx.fillText(label, p.left - 8, y + barH / 2 + 4);
+      ctx.fillStyle = '#e0e0e0';
+      ctx.textAlign = 'left';
+      ctx.fillText(this._formatAxisVal(ds.data[i]), p.left + w + 6, y + barH / 2 + 4);
+      ctx.textAlign = 'right';
+    });
+  }
+
+  _renderPie() {
+    const ctx = this.ctx;
+    const ds = this.datasets[0];
+    if (!ds) return;
+    const total = ds.data.reduce((a, b) => a + b, 0) || 1;
+    const cx = this.w / 2;
+    const cy = this.h / 2;
+    const r = Math.min(cx, cy) - 40;
+    let startAngle = -Math.PI / 2;
+
+    this.labels.forEach((label, i) => {
+      const sliceAngle = (ds.data[i] / total) * Math.PI * 2;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, r, startAngle, startAngle + sliceAngle);
+      ctx.closePath();
+      ctx.fillStyle = COLORS[i % COLORS.length];
+      ctx.globalAlpha = 0.85;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+
+      // Label
+      const midAngle = startAngle + sliceAngle / 2;
+      const lx = cx + Math.cos(midAngle) * (r * 0.65);
+      const ly = cy + Math.sin(midAngle) * (r * 0.65);
+      const pct = ((ds.data[i] / total) * 100).toFixed(0);
+      if (parseFloat(pct) > 4) {
+        ctx.fillStyle = '#fff';
+        ctx.font = '11px -apple-system, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(pct + '%', lx, ly + 4);
+      }
+      startAngle += sliceAngle;
+    });
+
+    // Legend below
+    ctx.font = '11px -apple-system, sans-serif';
+    ctx.textAlign = 'left';
+    let lx = 10, ly = this.h - 16;
+    this.labels.forEach((label, i) => {
+      ctx.fillStyle = COLORS[i % COLORS.length];
+      ctx.fillRect(lx, ly - 8, 10, 10);
+      ctx.fillStyle = '#8899aa';
+      ctx.fillText(label, lx + 14, ly);
+      lx += ctx.measureText(label).width + 30;
+      if (lx > this.w - 60) { lx = 10; ly -= 18; }
+    });
+  }
+
+  _formatAxisVal(v) {
+    if (Math.abs(v) >= 1000000) return (v / 1000000).toFixed(1) + 'M';
+    if (Math.abs(v) >= 1000) return (v / 1000).toFixed(1) + 'K';
+    return v % 1 === 0 ? String(v) : v.toFixed(1);
+  }
+
+  _setupTooltip() {
+    let tooltipEl = document.createElement('div');
+    tooltipEl.style.cssText = 'position:fixed;background:#16213e;border:1px solid #253554;border-radius:6px;padding:6px 10px;font-size:12px;color:#e0e0e0;pointer-events:none;z-index:999;display:none;white-space:nowrap;';
+    document.body.appendChild(tooltipEl);
+
+    this.canvas.addEventListener('mousemove', (e) => {
+      if (!this._chartGeometry || this.type === 'pie') { tooltipEl.style.display = 'none'; return; }
+      const rect = this.canvas.getBoundingClientRect();
+      const mx = e.clientX - rect.left;
+      const my = e.clientY - rect.top;
+      const { p, chartW, chartH } = this._chartGeometry;
+
+      if (mx < p.left || mx > p.left + chartW || my < p.top || my > p.top + chartH) {
+        tooltipEl.style.display = 'none'; return;
+      }
+
+      const xStep = chartW / (this.labels.length || 1);
+      const idx = Math.min(Math.floor((mx - p.left) / xStep), this.labels.length - 1);
+      if (idx < 0) { tooltipEl.style.display = 'none'; return; }
+
+      let html = '<strong>' + this.labels[idx] + '</strong><br>';
+      this.datasets.forEach((ds, di) => {
+        const color = ds.color || COLORS[di % COLORS.length];
+        html += '<span style="color:' + color + '">' + (ds.label || 'Value') + ': ' + this._formatAxisVal(ds.data[idx]) + '</span><br>';
+      });
+      tooltipEl.innerHTML = html;
+      tooltipEl.style.display = 'block';
+      tooltipEl.style.left = (e.clientX + 12) + 'px';
+      tooltipEl.style.top = (e.clientY - 10) + 'px';
+    });
+
+    this.canvas.addEventListener('mouseleave', () => { tooltipEl.style.display = 'none'; });
+  }
+}
+
+// ── API calls ──
+const API = '';
+
+async function fetchStats() {
+  try { return (await fetch(API + '/api/stats')).json(); }
+  catch(e) { console.warn('fetchStats failed', e); return null; }
+}
+async function fetchTraces(params = {}) {
+  const qs = new URLSearchParams(params).toString();
+  try { return (await fetch(API + '/api/traces' + (qs ? '?' + qs : ''))).json(); }
+  catch(e) { return { traces: [] }; }
+}
+async function fetchTrace(id) {
+  try { return (await fetch(API + '/api/traces/' + id)).json(); }
+  catch(e) { return null; }
+}
+async function fetchCosts(params = {}) {
+  const qs = new URLSearchParams(params).toString();
+  try { return (await fetch(API + '/api/costs' + (qs ? '?' + qs : ''))).json(); }
+  catch(e) { return { daily: [], breakdown: [], budgets: [] }; }
+}
+async function fetchCostAttribution(by = 'agent') {
+  try {
+    const raw = await (await fetch(API + '/api/costs/attribution?by=' + by)).json();
+    const items = raw.attribution || [];
+    return { labels: items.map(i => i.name), values: items.map(i => i.cost), items };
+  }
+  catch(e) { return { labels: [], values: [], items: [] }; }
+}
+async function fetchQuality(params = {}) {
+  const qs = new URLSearchParams(params).toString();
+  try { return (await fetch(API + '/api/quality' + (qs ? '?' + qs : ''))).json(); }
+  catch(e) { return { trend: [], distribution: [], recent: [], rollingAvg: null }; }
+}
+async function fetchDriftAlerts() {
+  try { return (await fetch(API + '/api/drift/alerts')).json(); }
+  catch(e) { return { alerts: [], metrics: {} }; }
+}
+async function fetchTimeseries(metric, params = {}) {
+  // Map frontend metric names to API metric names
+  const metricMap = { requests: 'latency', latency_p50: 'latency', tokens: 'tokens', cost: 'cost', quality: 'quality' };
+  const apiMetric = metricMap[metric] || metric;
+  const qs = new URLSearchParams({ metric: apiMetric, ...params }).toString();
+  try {
+    const raw = await (await fetch(API + '/api/metrics/timeseries?' + qs)).json();
+    const ts = raw.timeseries || [];
+    const labels = ts.map(r => {
+      const d = new Date(r.bucket);
+      return d.getMonth()+1 + '/' + d.getDate() + ' ' + String(d.getHours()).padStart(2,'0') + ':00';
+    });
+    let values;
+    if (metric === 'requests') {
+      values = ts.map(r => r.count);
+    } else {
+      values = ts.map(r => r.value);
+    }
+    return { labels, values, datasets: [{ label: metric, data: values }] };
+  }
+  catch(e) { console.warn('fetchTimeseries failed', metric, e); return { labels: [], values: [], datasets: [] }; }
+}
+async function fetchAgents() {
+  try { return (await fetch(API + '/api/agents')).json(); }
+  catch(e) { return []; }
+}
+async function fetchModels() {
+  try { return (await fetch(API + '/api/models')).json(); }
+  catch(e) { return []; }
+}
+
+// ── State ──
+let currentTab = 'overview';
+let autoRefreshEnabled = true;
+let refreshInterval = null;
+let charts = {};
+
+// ── Tab handling ──
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    const tab = btn.dataset.tab;
+    document.getElementById('tab-' + tab).classList.add('active');
+    currentTab = tab;
+    loadTab(tab);
+  });
+});
+
+// ── Auto-refresh ──
+const autoRefreshCheckbox = document.getElementById('autoRefresh');
+const statusDot = document.getElementById('statusDot');
+
+autoRefreshCheckbox.addEventListener('change', () => {
+  autoRefreshEnabled = autoRefreshCheckbox.checked;
+  statusDot.className = 'status-dot' + (autoRefreshEnabled ? '' : ' off');
+  if (autoRefreshEnabled) startAutoRefresh();
+  else stopAutoRefresh();
+});
+
+function startAutoRefresh() {
+  stopAutoRefresh();
+  refreshInterval = setInterval(refreshKPIs, 10000);
+}
+function stopAutoRefresh() {
+  if (refreshInterval) clearInterval(refreshInterval);
+  refreshInterval = null;
+}
+
+// ── Filter params ──
+function getFilterParams() {
+  return {
+    timeRange: document.getElementById('filterTimeRange').value,
+    agent: document.getElementById('filterAgent').value,
+    model: document.getElementById('filterModel').value,
+  };
+}
+
+document.getElementById('filterTimeRange').addEventListener('change', () => loadTab(currentTab));
+document.getElementById('filterAgent').addEventListener('change', () => loadTab(currentTab));
+document.getElementById('filterModel').addEventListener('change', () => loadTab(currentTab));
+
+// ── Load filter options ──
+async function loadFilterOptions() {
+  const [agents, models] = await Promise.all([fetchAgents(), fetchModels()]);
+  const agentSel = document.getElementById('filterAgent');
+  const modelSel = document.getElementById('filterModel');
+  (agents || []).forEach(a => {
+    const opt = document.createElement('option');
+    opt.value = a; opt.textContent = a;
+    agentSel.appendChild(opt);
+  });
+  (models || []).forEach(m => {
+    const opt = document.createElement('option');
+    opt.value = m; opt.textContent = m;
+    modelSel.appendChild(opt);
+  });
+}
+
+// ── KPI refresh ──
+async function refreshKPIs() {
+  const stats = await fetchStats();
+  if (!stats) return;
+  document.getElementById('kpiRequests').textContent = stats.requestsToday != null ? stats.requestsToday.toLocaleString() : '--';
+  document.getElementById('kpiLatency').textContent = formatLatency(stats.avgLatency);
+  document.getElementById('kpiLatencySub').textContent = '';
+  document.getElementById('kpiCost').textContent = '$' + (stats.costToday != null ? stats.costToday.toFixed(2) : '--');
+  document.getElementById('kpiQuality').textContent = stats.avgQuality != null ? stats.avgQuality.toFixed(2) : '--';
+  document.getElementById('kpiQualitySub').textContent = stats.qualityTrend || '';
+
+  if (stats.requestsChange != null) {
+    const el = document.getElementById('kpiRequestsChange');
+    el.textContent = (stats.requestsChange >= 0 ? '+' : '') + stats.requestsChange + '% vs yesterday';
+    el.className = 'kpi-change ' + (stats.requestsChange >= 0 ? 'up' : 'down');
+  }
+  if (stats.costChange != null) {
+    const el = document.getElementById('kpiCostChange');
+    el.textContent = (stats.costChange >= 0 ? '+' : '') + stats.costChange + '% vs yesterday';
+    el.className = 'kpi-change ' + (stats.costChange <= 0 ? 'up' : 'down');
+  }
+  document.getElementById('lastUpdated').textContent = 'Last updated: ' + new Date().toLocaleTimeString();
+}
+
+// ── Tab loaders ──
+async function loadTab(tab) {
+  const params = getFilterParams();
+  switch (tab) {
+    case 'overview': await loadOverview(params); break;
+    case 'costs': await loadCosts(params); break;
+    case 'quality': await loadQuality(params); break;
+    case 'drift': await loadDrift(params); break;
+    case 'traces': await loadTraces(params); break;
+  }
+}
+
+async function loadOverview(params) {
+  const [reqTs, latTs, costModel, tokenTs] = await Promise.all([
+    fetchTimeseries('requests', params),
+    fetchTimeseries('latency_p50', params),
+    fetchCostAttribution('model'),
+    fetchTimeseries('tokens', params),
+  ]);
+
+  if (!charts.requests) charts.requests = new MiniChart(document.getElementById('chartRequests'), 'bar');
+  charts.requests.setData(reqTs.labels || [], [{ label: 'Requests', data: reqTs.values || (reqTs.datasets && reqTs.datasets[0]?.data) || [], color: COLORS[0] }]);
+
+  if (!charts.latency) charts.latency = new MiniChart(document.getElementById('chartLatency'), 'line');
+  charts.latency.setData(latTs.labels || [], [{ label: 'P50 Latency (ms)', data: latTs.values || (latTs.datasets && latTs.datasets[0]?.data) || [], color: COLORS[3] }]);
+
+  if (!charts.costModel) charts.costModel = new MiniChart(document.getElementById('chartCostModel'), 'horizontalBar');
+  charts.costModel.setData(costModel.labels || [], [{ label: 'Cost', data: costModel.values || [], color: COLORS[1] }]);
+
+  if (!charts.tokens) charts.tokens = new MiniChart(document.getElementById('chartTokens'), 'area');
+  const tds = tokenTs.datasets || [{ label: 'Tokens', data: tokenTs.values || [] }];
+  charts.tokens.setData(tokenTs.labels || [], tds.map((d, i) => ({ label: d.label || 'Tokens', data: d.data || [], color: COLORS[i + 4] })));
+}
+
+async function loadCosts(params) {
+  const [costData, attrData] = await Promise.all([
+    fetchCosts(params),
+    fetchCostAttribution('agent'),
+  ]);
+
+  // Daily cost chart
+  if (!charts.dailyCost) charts.dailyCost = new MiniChart(document.getElementById('chartDailyCost'), 'bar');
+  const daily = costData.daily || [];
+  charts.dailyCost.setData(daily.map(d => d.date || d.label), [{ label: 'Daily Cost ($)', data: daily.map(d => d.cost || d.value || 0), color: COLORS[0] }]);
+
+  // Cost by agent pie
+  if (!charts.costAgent) charts.costAgent = new MiniChart(document.getElementById('chartCostAgent'), 'pie');
+  charts.costAgent.setData(attrData.labels || [], [{ data: attrData.values || [] }]);
+
+  // Cost table
+  const tbody = document.querySelector('#costTable tbody');
+  tbody.innerHTML = '';
+  (costData.breakdown || []).forEach(row => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + (row.agent || '--') + '</td><td>' + (row.model || '--') + '</td><td>' + formatCost(row.totalCost) + '</td><td>' + formatCost(row.avgCost) + '</td><td>' + formatTokens(row.totalTokens) + '</td>';
+    tbody.appendChild(tr);
+  });
+
+  // Budget bars
+  const budgetDiv = document.getElementById('budgetBars');
+  budgetDiv.innerHTML = '';
+  (costData.budgets || []).forEach(b => {
+    const pct = Math.min(100, ((b.used / b.limit) * 100));
+    const cls = pct < 60 ? 'green' : pct < 80 ? 'yellow' : 'red';
+    budgetDiv.innerHTML += '<div class="budget-row"><div class="budget-label"><span>' + b.name + '</span><span>' + formatCost(b.used) + ' / ' + formatCost(b.limit) + ' (' + pct.toFixed(0) + '%)</span></div><div class="progress-bar"><div class="progress-fill ' + cls + '" style="width:' + pct + '%"></div></div></div>';
+  });
+}
+
+async function loadQuality(params) {
+  const data = await fetchQuality(params);
+
+  // Alert
+  const alertDiv = document.getElementById('qualityAlert');
+  if (data.rollingAvg != null && data.rollingAvg < 3.0) {
+    alertDiv.innerHTML = '<div class="quality-alert">Quality Alert: Rolling 7-day average is <strong>' + data.rollingAvg.toFixed(2) + '</strong>, below threshold of 3.0. Review recent low-scoring interactions.</div>';
+  } else {
+    alertDiv.innerHTML = '';
+  }
+
+  // Trend chart
+  if (!charts.qualityTrend) charts.qualityTrend = new MiniChart(document.getElementById('chartQualityTrend'), 'line');
+  const trend = data.trend || [];
+  charts.qualityTrend.setData(trend.map(t => t.date || t.label), [{ label: '7-day Avg', data: trend.map(t => t.value || t.avg || 0), color: COLORS[5] }]);
+
+  // Distribution histogram
+  if (!charts.scoreDist) charts.scoreDist = new MiniChart(document.getElementById('chartScoreDist'), 'bar');
+  const dist = data.distribution || [];
+  charts.scoreDist.setData(dist.map(d => 'Score ' + d.score), [{ label: 'Count', data: dist.map(d => d.count), color: COLORS[2] }]);
+
+  // Quality table
+  const tbody = document.querySelector('#qualityTable tbody');
+  tbody.innerHTML = '';
+  (data.recent || []).forEach(row => {
+    const tr = document.createElement('tr');
+    const scoreCls = row.score >= 4 ? 'badge-ok' : row.score <= 2 ? 'badge-error' : 'badge-warning';
+    tr.innerHTML = '<td>' + timeAgo(row.timestamp) + '</td><td>' + (row.agent || '--') + '</td><td>' + (row.model || '--') + '</td><td><span class="badge ' + scoreCls + '">' + row.score + '</span></td><td>' + (row.criteria || '--') + '</td><td>' + (row.feedback || '--') + '</td>';
+    tbody.appendChild(tr);
+  });
+}
+
+async function loadDrift(params) {
+  const data = await fetchDriftAlerts();
+  const alertsDiv = document.getElementById('driftAlerts');
+  alertsDiv.innerHTML = '';
+
+  (data.alerts || []).forEach(alert => {
+    const sevCls = alert.severity === 'critical' ? 'badge-critical' : 'badge-warning';
+    const card = document.createElement('div');
+    card.className = 'alert-card';
+    card.innerHTML = '<div class="alert-left"><div class="alert-metric"><span class="badge ' + sevCls + '">' + (alert.severity || 'warning').toUpperCase() + '</span> ' + (alert.metric || 'Unknown') + '</div><div class="alert-detail">Agent: ' + (alert.agent || '--') + '</div><div class="alert-zscore">Z-score: ' + (alert.zScore != null ? alert.zScore.toFixed(2) : '--') + '</div><div class="alert-detail" style="margin-top:4px">' + (alert.message || '') + '</div></div><button class="btn btn-resolve" data-id="' + (alert.id || '') + '">Resolve</button>';
+    alertsDiv.appendChild(card);
+  });
+
+  // Resolve buttons
+  alertsDiv.querySelectorAll('.btn-resolve').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      const id = e.target.dataset.id;
+      try {
+        await fetch(API + '/api/drift/alerts/' + id + '/resolve', { method: 'POST' });
+        loadDrift(params);
+      } catch (err) { console.warn('resolve failed', err); }
+    });
+  });
+
+  // Drift chart: baseline vs current
+  if (!charts.drift) charts.drift = new MiniChart(document.getElementById('chartDrift'), 'line');
+  const metrics = data.metrics || {};
+  if (metrics.labels) {
+    const ds = [];
+    if (metrics.baseline) ds.push({ label: 'Baseline', data: metrics.baseline, color: COLORS[5] });
+    if (metrics.current) ds.push({ label: 'Current', data: metrics.current, color: COLORS[0] });
+    charts.drift.setData(metrics.labels, ds);
+  }
+}
+
+async function loadTraces(params) {
+  const data = await fetchTraces(params);
+  const tbody = document.querySelector('#traceTable tbody');
+  tbody.innerHTML = '';
+
+  (data.traces || []).forEach(trace => {
+    const tr = document.createElement('tr');
+    tr.className = 'clickable';
+    const statusCls = trace.status === 'error' ? 'badge-error' : 'badge-ok';
+    tr.innerHTML = '<td><code>' + truncateId(trace.id) + '</code></td><td>' + (trace.agent || '--') + '</td><td>' + (trace.model || '--') + '</td><td><span class="badge ' + statusCls + '">' + (trace.status || '--') + '</span></td><td>' + formatLatency(trace.latencyMs) + '</td><td>' + formatTokens(trace.totalTokens) + '</td><td>' + formatCost(trace.costCents) + '</td><td>' + timeAgo(trace.timestamp) + '</td>';
+    tr.addEventListener('click', () => loadTraceDetail(trace.id));
+    tbody.appendChild(tr);
+  });
+}
+
+async function loadTraceDetail(traceId) {
+  const data = await fetchTrace(traceId);
+  if (!data) return;
+  const detailDiv = document.getElementById('traceDetail');
+
+  const traceStart = new Date(data.startTime || data.timestamp).getTime();
+  const traceDuration = data.durationMs || data.latencyMs || 1;
+
+  let html = '<div class="trace-detail"><h3 style="margin-bottom:12px">Trace: <code>' + truncateId(traceId) + '</code> &mdash; ' + formatLatency(traceDuration) + ' total</h3>';
+
+  // Header row
+  html += '<div class="span-row" style="font-weight:600;color:var(--text-dim);font-size:11px;text-transform:uppercase;letter-spacing:0.5px">';
+  html += '<div>Span</div><div>Latency</div><div>Waterfall</div><div>Tokens</div><div>Cost</div><div>Status</div></div>';
+
+  function renderSpan(span, depth) {
+    const spanStart = new Date(span.startTime || traceStart).getTime();
+    const offsetPct = Math.max(0, ((spanStart - traceStart) / traceDuration) * 100);
+    const widthPct = Math.max(1, ((span.durationMs || 0) / traceDuration) * 100);
+    const statusCls = span.status === 'error' ? 'error' : 'ok';
+    const badgeCls = span.status === 'error' ? 'badge-error' : 'badge-ok';
+    const indent = depth * 20;
+
+    html += '<div class="span-row">';
+    html += '<div class="span-name"><span class="span-indent" style="width:' + indent + 'px"></span>';
+    if (depth > 0) html += '<span style="color:var(--text-dim);margin-right:4px">' + '&#x251C;&#x2500; '.repeat(1) + '</span>';
+    html += (span.name || 'span') + (span.model ? ' <span style="color:var(--text-dim);font-size:11px">(' + span.model + ')</span>' : '') + '</div>';
+    html += '<div>' + formatLatency(span.durationMs) + '</div>';
+    html += '<div><div class="waterfall-container"><div class="waterfall-bar ' + statusCls + '" style="left:' + offsetPct + '%;width:' + widthPct + '%"></div></div></div>';
+    html += '<div>' + formatTokens(span.tokens) + '</div>';
+    html += '<div>' + formatCost(span.costCents) + '</div>';
+    html += '<div><span class="badge ' + badgeCls + '">' + (span.status || 'ok') + '</span></div>';
+    html += '</div>';
+
+    // Tool calls
+    if (span.toolCalls && span.toolCalls.length) {
+      html += '<div class="tool-calls">';
+      span.toolCalls.forEach(tc => {
+        html += '<div class="tool-call-item">&#x2514; Tool: <strong>' + (tc.name || tc.tool || '--') + '</strong>';
+        if (tc.durationMs) html += ' (' + formatLatency(tc.durationMs) + ')';
+        if (tc.status === 'error') html += ' <span class="badge badge-error">error</span>';
+        html += '</div>';
+      });
+      html += '</div>';
+    }
+
+    // Children
+    if (span.children) {
+      span.children.forEach(child => renderSpan(child, depth + 1));
+    }
+  }
+
+  const spans = data.spans || data.children || [];
+  if (Array.isArray(spans)) {
+    spans.forEach(span => renderSpan(span, 0));
+  }
+
+  html += '</div>';
+  detailDiv.innerHTML = html;
+  detailDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── Init ──
+async function init() {
+  await Promise.all([loadFilterOptions(), refreshKPIs()]);
+  loadTab('overview');
+  if (autoRefreshEnabled) startAutoRefresh();
+}
+
+init();
+</script>
+</body>
+</html>
