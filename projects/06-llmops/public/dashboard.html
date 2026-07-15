@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Model Router — Cost Dashboard</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --border: #2a2d3a;
+    --text: #e4e4e7;
+    --text-muted: #8b8d97;
+    --accent: #6366f1;
+    --green: #22c55e;
+    --red: #ef4444;
+    --yellow: #eab308;
+    --blue: #3b82f6;
+    --cyan: #06b6d4;
+    --purple: #a855f7;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace;
+    background: var(--bg);
+    color: var(--text);
+    padding: 24px;
+    line-height: 1.5;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+    color: var(--text);
+  }
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 24px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .card-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .card-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .card-sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .green  { color: var(--green); }
+  .red    { color: var(--red); }
+  .yellow { color: var(--yellow); }
+  .blue   { color: var(--blue); }
+  .purple { color: var(--purple); }
+  .cyan   { color: var(--cyan); }
+
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 28px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  th {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  tr:hover td {
+    background: rgba(99, 102, 241, 0.06);
+  }
+
+  .bar-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .bar {
+    height: 8px;
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+
+  .tier-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .tier-simple  { background: rgba(34,197,94,0.15);  color: var(--green); }
+  .tier-medium  { background: rgba(234,179,8,0.15);   color: var(--yellow); }
+  .tier-complex { background: rgba(239,68,68,0.15);   color: var(--red); }
+
+  .escalated-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    background: rgba(239,68,68,0.15);
+    color: var(--red);
+  }
+
+  .chart-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+  }
+  .chart-label {
+    width: 160px;
+    text-align: right;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+  .chart-bar-wrap {
+    flex: 1;
+    height: 22px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .chart-bar {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 800px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+
+  .loading {
+    text-align: center;
+    padding: 60px;
+    color: var(--text-muted);
+  }
+
+  .refresh-btn {
+    float: right;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  .refresh-btn:hover { opacity: 0.85; }
+</style>
+</head>
+<body>
+
+<div style="display:flex; justify-content:space-between; align-items:flex-start;">
+  <div>
+    <h1>Model Router — Cost Dashboard</h1>
+    <div class="subtitle">Real-time cost, latency, and routing metrics</div>
+  </div>
+  <button class="refresh-btn" onclick="loadData()">Refresh</button>
+</div>
+
+<div id="app" class="loading">Loading metrics...</div>
+
+<script>
+const MODEL_COLORS = {
+  'claude-3-haiku':    '#22c55e',
+  'gpt-4o-mini':       '#06b6d4',
+  'claude-3.5-sonnet': '#eab308',
+  'gpt-4o':            '#3b82f6',
+  'claude-3-opus':     '#ef4444',
+};
+
+function getColor(model) {
+  return MODEL_COLORS[model] || '#6366f1';
+}
+
+function fmt$(v) {
+  if (v < 0.01) return '$' + v.toFixed(6);
+  if (v < 1)    return '$' + v.toFixed(4);
+  return '$' + v.toFixed(2);
+}
+
+function tierBadge(tier) {
+  return '<span class="tier-badge tier-' + tier + '">' + tier + '</span>';
+}
+
+async function loadData() {
+  try {
+    const resp = await fetch('/api/metrics');
+    const d = await resp.json();
+    render(d);
+  } catch (err) {
+    document.getElementById('app').innerHTML =
+      '<div class="loading">Failed to load metrics. Run <code>npm run demo</code> first, then <code>npm run dashboard</code>.</div>';
+  }
+}
+
+function render(d) {
+  const savings = d.savings || {};
+  const esc = d.escalation || {};
+
+  // Find max cost for bar scaling
+  const maxCost = Math.max(...(d.cost_by_model || []).map(r => r.total_cost), 0.0001);
+  const maxLatency = Math.max(...(d.latency_by_model || []).map(r => r.avg_latency_ms), 1);
+
+  let html = '';
+
+  // ── KPI Cards ───────────────────────────────────────────────────────
+  html += '<div class="grid">';
+
+  html += '<div class="card">';
+  html += '  <div class="card-label">Cost Today</div>';
+  html += '  <div class="card-value blue">' + fmt$(d.cost_today || 0) + '</div>';
+  html += '  <div class="card-sub">Week: ' + fmt$(d.cost_week || 0) + ' &middot; Month: ' + fmt$(d.cost_month || 0) + '</div>';
+  html += '</div>';
+
+  html += '<div class="card">';
+  html += '  <div class="card-label">Savings vs Frontier</div>';
+  html += '  <div class="card-value green">' + (savings.savings_pct || 0) + '%</div>';
+  html += '  <div class="card-sub">Saved ' + fmt$(savings.savings_usd || 0) + ' across ' + (savings.total_requests || 0) + ' requests</div>';
+  html += '</div>';
+
+  html += '<div class="card">';
+  html += '  <div class="card-label">Escalation Rate</div>';
+  html += '  <div class="card-value yellow">' + (esc.escalation_pct || 0) + '%</div>';
+  html += '  <div class="card-sub">' + (esc.escalated_count || 0) + ' of ' + (esc.total || 0) + ' requests escalated</div>';
+  html += '</div>';
+
+  html += '<div class="card">';
+  html += '  <div class="card-label">Total Requests</div>';
+  html += '  <div class="card-value purple">' + (esc.total || 0) + '</div>';
+  html += '  <div class="card-sub">Across ' + (d.cost_by_model || []).length + ' models</div>';
+  html += '</div>';
+
+  html += '</div>'; // .grid
+
+  // ── Two-column: Cost + Latency bars ─────────────────────────────────
+  html += '<div class="two-col">';
+
+  // Cost by model
+  html += '<div class="card">';
+  html += '<div class="card-label" style="margin-bottom:14px">Cost by Model</div>';
+  for (const row of (d.cost_by_model || [])) {
+    const pct = Math.max((row.total_cost / maxCost) * 100, 2);
+    html += '<div class="chart-row">';
+    html += '  <div class="chart-label">' + row.model + '</div>';
+    html += '  <div class="chart-bar-wrap">';
+    html += '    <div class="chart-bar" style="width:' + pct + '%;background:' + getColor(row.model) + '">' + fmt$(row.total_cost) + '</div>';
+    html += '  </div>';
+    html += '</div>';
+  }
+  html += '</div>';
+
+  // Latency by model
+  html += '<div class="card">';
+  html += '<div class="card-label" style="margin-bottom:14px">Avg Latency by Model</div>';
+  for (const row of (d.latency_by_model || [])) {
+    const pct = Math.max((row.avg_latency_ms / maxLatency) * 100, 2);
+    html += '<div class="chart-row">';
+    html += '  <div class="chart-label">' + row.model + '</div>';
+    html += '  <div class="chart-bar-wrap">';
+    html += '    <div class="chart-bar" style="width:' + pct + '%;background:' + getColor(row.model) + '">' + row.avg_latency_ms + 'ms</div>';
+    html += '  </div>';
+    html += '</div>';
+  }
+  html += '</div>';
+
+  html += '</div>'; // .two-col
+
+  // ── Tier Distribution ───────────────────────────────────────────────
+  html += '<div class="section-title">Tier Distribution</div>';
+  html += '<div class="grid">';
+  for (const row of (d.tier_distribution || [])) {
+    const colors = { simple: 'green', medium: 'yellow', complex: 'red' };
+    html += '<div class="card">';
+    html += '  <div class="card-label">' + row.tier + '</div>';
+    html += '  <div class="card-value ' + (colors[row.tier] || '') + '">' + row.count + '</div>';
+    html += '  <div class="card-sub">' + row.pct + '% of traffic</div>';
+    html += '</div>';
+  }
+  html += '</div>';
+
+  // ── Top Expensive Requests ──────────────────────────────────────────
+  html += '<div class="section-title">Top 10 Most Expensive Requests</div>';
+  html += '<div class="card" style="overflow-x:auto">';
+  html += '<table>';
+  html += '<tr><th>#</th><th>Query</th><th>Model</th><th>Cost</th><th>Tokens</th><th>Latency</th><th>Escalated</th></tr>';
+  for (const row of (d.top_expensive || [])) {
+    html += '<tr>';
+    html += '<td>' + row.id + '</td>';
+    html += '<td>' + (row.query_preview || '').slice(0, 80) + '</td>';
+    html += '<td style="color:' + getColor(row.model) + '">' + row.model + '</td>';
+    html += '<td>' + fmt$(row.cost_usd) + '</td>';
+    html += '<td>' + (row.tokens_in + row.tokens_out) + '</td>';
+    html += '<td>' + row.latency_ms + 'ms</td>';
+    html += '<td>' + (row.escalated ? '<span class="escalated-badge">ESC</span>' : '-') + '</td>';
+    html += '</tr>';
+  }
+  html += '</table>';
+  html += '</div>';
+
+  // ── Recent Requests ─────────────────────────────────────────────────
+  html += '<div class="section-title">Recent Requests</div>';
+  html += '<div class="card" style="overflow-x:auto">';
+  html += '<table>';
+  html += '<tr><th>#</th><th>Time</th><th>Query</th><th>Tier</th><th>Score</th><th>Model</th><th>Cost</th><th>Latency</th></tr>';
+  for (const row of (d.recent_requests || [])) {
+    html += '<tr>';
+    html += '<td>' + row.id + '</td>';
+    html += '<td style="color:var(--text-muted);font-size:0.8rem">' + (row.timestamp || '').slice(11, 19) + '</td>';
+    html += '<td>' + (row.query_preview || '').slice(0, 60) + '</td>';
+    html += '<td>' + tierBadge(row.tier) + '</td>';
+    html += '<td>' + (row.complexity || 0).toFixed(2) + '</td>';
+    html += '<td style="color:' + getColor(row.model) + '">' + row.model + '</td>';
+    html += '<td>' + fmt$(row.cost_usd) + '</td>';
+    html += '<td>' + row.latency_ms + 'ms</td>';
+    html += '</tr>';
+  }
+  html += '</table>';
+  html += '</div>';
+
+  // ── Requests per Hour ───────────────────────────────────────────────
+  if ((d.requests_per_hour || []).length > 0) {
+    html += '<div class="section-title">Requests per Hour</div>';
+    html += '<div class="card">';
+    const maxHour = Math.max(...d.requests_per_hour.map(r => r.count), 1);
+    for (const row of d.requests_per_hour) {
+      const pct = Math.max((row.count / maxHour) * 100, 2);
+      html += '<div class="chart-row">';
+      html += '  <div class="chart-label">' + row.hour + '</div>';
+      html += '  <div class="chart-bar-wrap">';
+      html += '    <div class="chart-bar" style="width:' + pct + '%;background:var(--accent)">' + row.count + ' reqs / ' + fmt$(row.cost) + '</div>';
+      html += '  </div>';
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+
+  document.getElementById('app').innerHTML = html;
+}
+
+// Auto-refresh every 10 seconds
+loadData();
+setInterval(loadData, 10000);
+</script>
+</body>
+</html>

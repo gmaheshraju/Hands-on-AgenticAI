@@ -1,0 +1,12 @@
+{
+  "name": "03-agent-harness",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Research Agent with Observable Harness — iteration cap, cost cap, convergence detection, JSONL tracing",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "research": "node src/demo.js"
+  },
+  "keywords": ["agent", "harness", "tracing", "research"],
+  "license": "MIT"
+}

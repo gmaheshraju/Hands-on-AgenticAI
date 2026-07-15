@@ -1,0 +1,80 @@
+TERMS OF SERVICE
+
+Effective Date: January 1, 2025
+
+These Terms of Service ("Terms") govern your access to and use of the document analysis
+platform ("Service") provided by LegalTech Solutions Inc. ("Company").
+
+1. ACCEPTANCE OF TERMS
+By accessing or using the Service, you agree to be bound by these Terms and our Privacy
+Policy. If you do not agree, you must not use the Service. If you are using the Service
+on behalf of an organization, you represent that you have the authority to bind that
+organization to these Terms.
+
+2. SERVICE DESCRIPTION
+The Service provides AI-powered document analysis, including:
+(a) Contract review and clause extraction;
+(b) Document summarization and key term identification;
+(c) Compliance checking against regulatory frameworks;
+(d) Risk assessment and anomaly detection;
+(e) Custom reporting and analytics dashboards.
+
+3. USER ACCOUNTS
+(a) Registration: Users must provide accurate and complete registration information;
+(b) Security: Users are responsible for maintaining the confidentiality of their credentials;
+(c) Unauthorized Use: Users must immediately notify the Company of any unauthorized use;
+(d) Account Types: The Service offers Individual, Team, and Enterprise subscription tiers.
+
+4. SUBSCRIPTION AND PAYMENT
+(a) Fees: Subscription fees are set forth in the applicable Order Form or pricing page;
+(b) Billing Cycle: Subscriptions are billed monthly or annually, as selected by the user;
+(c) Cancellation: Users may cancel their subscription at any time; cancellation takes
+effect at the end of the current billing period;
+(d) Refunds: No refunds for partial billing periods except as required by applicable law.
+
+5. ACCEPTABLE USE POLICY
+Users shall not:
+(a) Upload malicious software, viruses, or harmful code to the Service;
+(b) Attempt to reverse engineer, decompile, or disassemble the Service;
+(c) Use the Service to process information in violation of applicable laws;
+(d) Share login credentials or allow unauthorized access;
+(e) Use the Service to generate legal advice (the Service provides analysis, not legal counsel);
+(f) Exceed rate limits or attempt to circumvent usage restrictions.
+
+6. INTELLECTUAL PROPERTY
+(a) Company IP: The Service, including all software, algorithms, models, and documentation,
+is the exclusive property of the Company;
+(b) User Content: Users retain ownership of all documents and data uploaded to the Service;
+(c) License Grant: Users grant the Company a limited, non-exclusive license to process
+uploaded content solely for the purpose of providing the Service;
+(d) Feedback: Any feedback provided by users may be used by the Company without obligation.
+
+7. LIMITATION OF LIABILITY
+(a) THE SERVICE IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND;
+(b) THE COMPANY SHALL NOT BE LIABLE FOR INDIRECT, INCIDENTAL, CONSEQUENTIAL, OR
+PUNITIVE DAMAGES;
+(c) THE COMPANY'S TOTAL LIABILITY SHALL NOT EXCEED THE FEES PAID BY THE USER IN
+THE TWELVE (12) MONTHS PRECEDING THE CLAIM;
+(d) THE SERVICE DOES NOT CONSTITUTE LEGAL ADVICE AND SHALL NOT BE RELIED UPON
+AS A SUBSTITUTE FOR PROFESSIONAL LEGAL COUNSEL.
+
+8. INDEMNIFICATION
+Users shall indemnify and hold harmless the Company from any claims arising from:
+(a) User's violation of these Terms;
+(b) User's use of the Service;
+(c) Content uploaded by the User that infringes third-party rights.
+
+9. DISPUTE RESOLUTION
+(a) Informal Resolution: The parties shall attempt to resolve disputes informally for
+30 days before initiating formal proceedings;
+(b) Arbitration: Unresolved disputes shall be submitted to binding arbitration under
+the rules of the American Arbitration Association;
+(c) Class Action Waiver: Users agree to resolve disputes individually and waive the
+right to participate in class action lawsuits.
+
+10. GOVERNING LAW
+These Terms shall be governed by the laws of the State of Delaware.
+
+11. MODIFICATIONS
+The Company reserves the right to modify these Terms at any time. Material changes will
+be communicated via email or in-Service notification at least 30 days prior to taking effect.

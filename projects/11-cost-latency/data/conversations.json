@@ -1,0 +1,532 @@
+[
+  {
+    "id": 1,
+    "messages": [
+      {"role": "user", "content": "How do I upgrade my plan from Starter to Pro?"},
+      {"role": "assistant", "content": "You can upgrade by going to Settings > Billing > Change Plan and selecting the Pro tier. The change takes effect immediately and you'll be charged a prorated amount for the remainder of your billing cycle."}
+    ],
+    "category": "billing",
+    "complexity": "simple"
+  },
+  {
+    "id": 2,
+    "messages": [
+      {"role": "user", "content": "What's the price difference between Starter and Pro plans?"},
+      {"role": "assistant", "content": "The Starter plan is $29/month and the Pro plan is $79/month. Pro includes unlimited projects, priority support, advanced analytics, and API access. You can also save 20% by switching to annual billing."}
+    ],
+    "category": "billing",
+    "complexity": "simple"
+  },
+  {
+    "id": 3,
+    "messages": [
+      {"role": "user", "content": "How can I change my plan to Pro?"},
+      {"role": "assistant", "content": "Navigate to Settings > Billing > Change Plan, then select Pro. You'll be charged the prorated difference immediately, and all Pro features will be available right away."}
+    ],
+    "category": "billing",
+    "complexity": "simple"
+  },
+  {
+    "id": 4,
+    "messages": [
+      {"role": "user", "content": "Can I get a refund for the current billing period?"},
+      {"role": "assistant", "content": "We offer a full refund within 14 days of purchase for first-time subscribers. After that, you can cancel anytime and continue using the service until the end of your current billing period. No partial refunds are issued after the 14-day window."}
+    ],
+    "category": "billing",
+    "complexity": "simple"
+  },
+  {
+    "id": 5,
+    "messages": [
+      {"role": "user", "content": "Where can I download my invoices?"},
+      {"role": "assistant", "content": "Go to Settings > Billing > Invoice History. You can download PDF invoices for any past billing period. If you need a custom invoice with specific details like a tax ID or company address, click 'Edit Billing Info' first."}
+    ],
+    "category": "billing",
+    "complexity": "simple"
+  },
+  {
+    "id": 6,
+    "messages": [
+      {"role": "user", "content": "How do I reset my password?"},
+      {"role": "assistant", "content": "Click 'Forgot Password' on the login page, enter your email address, and we'll send you a reset link. The link expires after 24 hours. If you don't see the email, check your spam folder."}
+    ],
+    "category": "account",
+    "complexity": "simple"
+  },
+  {
+    "id": 7,
+    "messages": [
+      {"role": "user", "content": "I forgot my password. How do I get back into my account?"},
+      {"role": "assistant", "content": "On the login page, click 'Forgot Password' and enter your registered email. You'll receive a password reset link within a few minutes. The link is valid for 24 hours."}
+    ],
+    "category": "account",
+    "complexity": "simple"
+  },
+  {
+    "id": 8,
+    "messages": [
+      {"role": "user", "content": "How do I add a new team member?"},
+      {"role": "assistant", "content": "Go to Settings > Team > Invite Member. Enter their email address and select a role (Viewer, Editor, or Admin). They'll receive an invitation email and can join your workspace once they accept."}
+    ],
+    "category": "account",
+    "complexity": "simple"
+  },
+  {
+    "id": 9,
+    "messages": [
+      {"role": "user", "content": "What file formats does the import feature support?"},
+      {"role": "assistant", "content": "We support CSV, JSON, XML, and Excel (.xlsx) files for data import. Maximum file size is 50MB per upload. For larger datasets, you can use our API for batch imports."}
+    ],
+    "category": "product",
+    "complexity": "simple"
+  },
+  {
+    "id": 10,
+    "messages": [
+      {"role": "user", "content": "What formats can I import data in?"},
+      {"role": "assistant", "content": "You can import data in CSV, JSON, XML, and Excel (.xlsx) formats. Each file can be up to 50MB. For files larger than that, we recommend using the bulk import API endpoint."}
+    ],
+    "category": "product",
+    "complexity": "simple"
+  },
+  {
+    "id": 11,
+    "messages": [
+      {"role": "user", "content": "Is there a mobile app available?"},
+      {"role": "assistant", "content": "Yes, we have native apps for both iOS and Android. You can download them from the App Store or Google Play. The mobile app supports most features including dashboards, notifications, and basic project management. Advanced admin features are available only on desktop."}
+    ],
+    "category": "product",
+    "complexity": "simple"
+  },
+  {
+    "id": 12,
+    "messages": [
+      {"role": "user", "content": "Do you offer SSO integration?"},
+      {"role": "assistant", "content": "Yes, SSO is available on the Enterprise plan. We support SAML 2.0 and integrate with major identity providers including Okta, Azure AD, and Google Workspace. Contact our sales team to set it up."}
+    ],
+    "category": "product",
+    "complexity": "simple"
+  },
+  {
+    "id": 13,
+    "messages": [
+      {"role": "user", "content": "What are your support hours?"},
+      {"role": "assistant", "content": "Our support team is available Monday through Friday, 9 AM to 6 PM EST for Starter plans. Pro plans include extended hours until 9 PM EST. Enterprise customers have 24/7 support with a dedicated account manager."}
+    ],
+    "category": "general",
+    "complexity": "simple"
+  },
+  {
+    "id": 14,
+    "messages": [
+      {"role": "user", "content": "Where is my data stored?"},
+      {"role": "assistant", "content": "All data is stored in AWS data centers in the US-East region by default. Enterprise customers can choose from US, EU, or APAC regions. We use AES-256 encryption at rest and TLS 1.3 in transit. Full details are in our Security Whitepaper at docs.example.com/security."}
+    ],
+    "category": "general",
+    "complexity": "simple"
+  },
+  {
+    "id": 15,
+    "messages": [
+      {"role": "user", "content": "Can I export all my data?"},
+      {"role": "assistant", "content": "Yes, go to Settings > Data > Export. You can export your entire workspace as a ZIP file containing JSON files for each project. The export includes all records, attachments, and configuration. Large exports may take a few minutes to generate."}
+    ],
+    "category": "product",
+    "complexity": "simple"
+  },
+  {
+    "id": 16,
+    "messages": [
+      {"role": "user", "content": "How do I delete my account?"},
+      {"role": "assistant", "content": "Go to Settings > Account > Delete Account. You'll need to confirm by typing your email address. Please note this action is irreversible and all your data will be permanently deleted after a 30-day grace period."}
+    ],
+    "category": "account",
+    "complexity": "simple"
+  },
+  {
+    "id": 17,
+    "messages": [
+      {"role": "user", "content": "What's the API rate limit?"},
+      {"role": "assistant", "content": "Starter plans have a rate limit of 100 requests per minute. Pro plans allow 1,000 requests per minute. Enterprise plans have custom limits. If you hit the limit, you'll receive a 429 status code with a Retry-After header."}
+    ],
+    "category": "technical",
+    "complexity": "simple"
+  },
+  {
+    "id": 18,
+    "messages": [
+      {"role": "user", "content": "Do you have a status page?"},
+      {"role": "assistant", "content": "Yes, you can check our system status at status.example.com. You can also subscribe to email or SMS notifications for incident updates. We aim for 99.9% uptime and post all incidents publicly."}
+    ],
+    "category": "general",
+    "complexity": "simple"
+  },
+  {
+    "id": 19,
+    "messages": [
+      {"role": "user", "content": "How do I enable two-factor authentication?"},
+      {"role": "assistant", "content": "Go to Settings > Security > Two-Factor Authentication and click Enable. You can use an authenticator app like Google Authenticator or Authy. Scan the QR code and enter the 6-digit code to confirm. We also provide backup codes for account recovery."}
+    ],
+    "category": "account",
+    "complexity": "simple"
+  },
+  {
+    "id": 20,
+    "messages": [
+      {"role": "user", "content": "How do I set up 2FA on my account?"},
+      {"role": "assistant", "content": "Navigate to Settings > Security > Two-Factor Authentication. Click Enable, then scan the QR code with an authenticator app such as Google Authenticator or Authy. Enter the verification code to complete setup. Save the backup codes somewhere secure."}
+    ],
+    "category": "account",
+    "complexity": "simple"
+  },
+  {
+    "id": 21,
+    "messages": [
+      {"role": "user", "content": "I was charged twice for my subscription this month. Can you look into it?"},
+      {"role": "assistant", "content": "I'm sorry about that. Let me check your billing history. Can you provide the email address associated with your account?"},
+      {"role": "user", "content": "Sure, it's john.smith@company.com"},
+      {"role": "assistant", "content": "I can see two charges on your account: one on July 1st for your regular monthly renewal ($79), and another on July 3rd ($79) which appears to be a duplicate. I've initiated a refund for the duplicate charge. It should appear on your statement within 5-7 business days. I've also flagged this to our billing team to prevent it from happening again."}
+    ],
+    "category": "billing",
+    "complexity": "medium"
+  },
+  {
+    "id": 22,
+    "messages": [
+      {"role": "user", "content": "I need to switch from monthly to annual billing. Will I lose any data?"},
+      {"role": "assistant", "content": "No, switching billing frequency won't affect your data or features at all. When you switch to annual billing, you'll receive a 20% discount. Would you like me to walk you through the process?"},
+      {"role": "user", "content": "Yes please, and how does the prorating work?"},
+      {"role": "assistant", "content": "Go to Settings > Billing > Change Billing Cycle. Select 'Annual.' The system will calculate a credit for the unused portion of your current monthly period and apply it to the annual price. For example, if you're 10 days into a $79/month cycle, you'd get about $56 credited toward the $758/year annual price ($79 x 12 x 0.8). The annual subscription starts immediately."}
+    ],
+    "category": "billing",
+    "complexity": "medium"
+  },
+  {
+    "id": 23,
+    "messages": [
+      {"role": "user", "content": "My webhook isn't firing. I set it up yesterday for the project.updated event."},
+      {"role": "assistant", "content": "Let's troubleshoot this. First, can you check Settings > Integrations > Webhooks and confirm the webhook URL and the events you've subscribed to?"},
+      {"role": "user", "content": "The URL is https://myapp.com/hooks/updates and I selected project.updated. Status shows 'Active'."},
+      {"role": "assistant", "content": "The configuration looks correct. A few things to check: (1) Make sure your endpoint returns a 200 status within 10 seconds, or we'll mark it as failed. (2) Check the 'Recent Deliveries' tab in the webhook settings to see if there are any failed attempts with error details. (3) Verify your server isn't blocking our IP range (listed at docs.example.com/webhooks#ip-allowlist). If deliveries show as successful on our end but you're not receiving them, the issue may be on your server side."}
+    ],
+    "category": "technical",
+    "complexity": "medium"
+  },
+  {
+    "id": 24,
+    "messages": [
+      {"role": "user", "content": "I'm trying to use the API to create a project but I keep getting a 403 error."},
+      {"role": "assistant", "content": "A 403 error typically means your API key doesn't have the required permissions. Can you check which scopes are assigned to your API key under Settings > API > Keys?"},
+      {"role": "user", "content": "It shows read:projects and read:users. Do I need more?"},
+      {"role": "assistant", "content": "Yes, to create projects via the API you need the write:projects scope. Go to Settings > API > Keys, click on your key, and add the write:projects scope. You'll need to regenerate the key after changing scopes. Make sure to update the key in your application code after regenerating."},
+      {"role": "user", "content": "Got it, that worked. Thanks!"},
+      {"role": "assistant", "content": "You're welcome! For future reference, our API docs at docs.example.com/api list the required scopes for each endpoint. Let me know if you need anything else."}
+    ],
+    "category": "technical",
+    "complexity": "medium"
+  },
+  {
+    "id": 25,
+    "messages": [
+      {"role": "user", "content": "How do I set up the Slack integration to get notifications about task updates?"},
+      {"role": "assistant", "content": "Go to Settings > Integrations > Slack and click 'Connect to Slack.' You'll be redirected to Slack to authorize the connection. Once connected, you can choose which workspace channel to post to."},
+      {"role": "user", "content": "I connected it, but how do I filter which notifications go to Slack? I don't want everything."},
+      {"role": "assistant", "content": "After connecting, go back to Settings > Integrations > Slack > Notification Rules. You can create rules based on event type (task created, updated, completed), project, priority level, or assignee. For example, you could set it to only notify on high-priority task completions in your 'Production' project. You can also set quiet hours to suppress notifications during off-hours."}
+    ],
+    "category": "product",
+    "complexity": "medium"
+  },
+  {
+    "id": 26,
+    "messages": [
+      {"role": "user", "content": "I accidentally deleted a project. Can it be recovered?"},
+      {"role": "assistant", "content": "Yes, deleted projects are kept in the trash for 30 days. Go to Settings > Trash, find your project, and click 'Restore.' All data including tasks, files, and comments will be restored to their original state."},
+      {"role": "user", "content": "What if it's been more than 30 days?"},
+      {"role": "assistant", "content": "After 30 days, projects are permanently deleted from our systems and cannot be recovered through the UI. However, if you contact us within 60 days, our engineering team may be able to restore it from backups on a case-by-case basis. This is only available on Pro and Enterprise plans. I'd recommend setting up automated exports as a backup strategy going forward."}
+    ],
+    "category": "product",
+    "complexity": "medium"
+  },
+  {
+    "id": 27,
+    "messages": [
+      {"role": "user", "content": "We need to transfer ownership of our workspace to a different team member. How does that work?"},
+      {"role": "assistant", "content": "The current owner can transfer ownership by going to Settings > Team > Transfer Ownership. The new owner must already be an Admin in the workspace. Can you confirm the email of the person you want to transfer to?"},
+      {"role": "user", "content": "It's sarah@company.com. She's currently an Editor though."},
+      {"role": "assistant", "content": "You'll need to promote her to Admin first. Go to Settings > Team, find her name, click the role dropdown and change it to Admin. Once she's an Admin, go to Settings > Team > Transfer Ownership and select her. She'll receive a confirmation email and must accept within 7 days. The current owner will be demoted to Admin after the transfer completes."}
+    ],
+    "category": "account",
+    "complexity": "medium"
+  },
+  {
+    "id": 28,
+    "messages": [
+      {"role": "user", "content": "Our team wants to use custom fields on tasks. Is that possible?"},
+      {"role": "assistant", "content": "Yes, custom fields are available on Pro and Enterprise plans. You can create them at Settings > Project Settings > Custom Fields. We support text, number, date, dropdown, checkbox, and user-reference field types."},
+      {"role": "user", "content": "Can we make them required for certain task types?"},
+      {"role": "assistant", "content": "Absolutely. When creating or editing a custom field, toggle 'Required' and then specify which task types it applies to. You can also set default values and validation rules. For example, you could require a 'Priority Score' number field (1-10) on all Bug-type tasks. Tasks can't be saved without filling in required custom fields."}
+    ],
+    "category": "product",
+    "complexity": "medium"
+  },
+  {
+    "id": 29,
+    "messages": [
+      {"role": "user", "content": "I need to bulk-update the status of about 200 tasks. The UI is too slow for this. Is there a faster way?"},
+      {"role": "assistant", "content": "You have two good options. First, you can use the bulk select feature in the task list: click the checkbox at the top to select all visible tasks, then use the 'Bulk Actions' dropdown to change their status. You can filter the list first to target specific tasks."},
+      {"role": "user", "content": "I tried that but it only selects 50 at a time. I need to update 200."},
+      {"role": "assistant", "content": "For 200+ tasks, the API would be the fastest approach. Use the PATCH /api/v2/tasks/bulk endpoint with a JSON body containing the task IDs and the new status. Here's the format: {\"task_ids\": [\"id1\", \"id2\"], \"updates\": {\"status\": \"completed\"}}. You can send up to 500 task IDs per request. If you need help identifying the task IDs, use GET /api/v2/tasks with filters like ?status=in_progress&project_id=xyz."}
+    ],
+    "category": "technical",
+    "complexity": "medium"
+  },
+  {
+    "id": 30,
+    "messages": [
+      {"role": "user", "content": "Can I set up automated workflows? Like when a task is moved to 'Review' it automatically assigns it to our QA lead?"},
+      {"role": "assistant", "content": "Yes, you can create automation rules under Project Settings > Automations > New Rule. Set the trigger to 'Task status changes to Review' and the action to 'Assign to [QA lead].' You can also add conditions like 'only for tasks tagged as Bug.'"},
+      {"role": "user", "content": "Great. Can I chain multiple actions on one trigger?"},
+      {"role": "assistant", "content": "Yes, each rule supports multiple actions. For example, on a single 'status changed to Review' trigger, you could: (1) assign to QA lead, (2) add a 'needs-review' label, (3) post a notification to Slack, and (4) set a due date to 2 business days from now. Actions execute in the order you define them. Pro plans allow up to 25 automation rules per project; Enterprise is unlimited."}
+    ],
+    "category": "product",
+    "complexity": "medium"
+  },
+  {
+    "id": 31,
+    "messages": [
+      {"role": "user", "content": "Our dashboard is loading really slowly. It takes about 15 seconds to render."},
+      {"role": "assistant", "content": "That's slower than expected. A few questions to help diagnose: How many widgets do you have on the dashboard? Are any of them using large date ranges or complex filters?"},
+      {"role": "user", "content": "We have about 12 widgets. Some are charting data over the past year. One is a table showing all 5,000 open tasks."},
+      {"role": "assistant", "content": "That's likely the issue. A few optimizations: (1) For charts, reduce the date range to 90 days or use the 'sampled' data mode which aggregates by week instead of by day. (2) For the task table, add a filter to limit it to your top-priority tasks or recent items, and enable pagination (Settings > Display > Paginate tables). (3) Consider splitting into 2-3 focused dashboards instead of one large one. As a quick test, try removing the 5,000-task table widget to see if that resolves the slowness."}
+    ],
+    "category": "technical",
+    "complexity": "medium"
+  },
+  {
+    "id": 32,
+    "messages": [
+      {"role": "user", "content": "I'm trying to import a CSV file but it fails with 'Invalid format' error."},
+      {"role": "assistant", "content": "This usually happens due to encoding or delimiter issues. Can you confirm: is your file saved as UTF-8 encoding, and is it using commas as delimiters (not semicolons or tabs)?"},
+      {"role": "user", "content": "I think it might be semicolons. The file was exported from a European version of Excel."},
+      {"role": "assistant", "content": "That's a common issue. European Excel versions often use semicolons as delimiters. You have two options: (1) In the import dialog, click 'Advanced Settings' and change the delimiter from 'Comma' to 'Semicolon.' (2) Open the file in a text editor, do a find-and-replace to change semicolons to commas, and save as UTF-8. Option 1 is quicker and we recommend that approach."}
+    ],
+    "category": "technical",
+    "complexity": "medium"
+  },
+  {
+    "id": 33,
+    "messages": [
+      {"role": "user", "content": "We want to create a guest account for our client so they can view project progress without editing anything."},
+      {"role": "assistant", "content": "You can invite external guests with limited access. Go to Settings > Team > Invite Guest. Enter their email and select which projects they can access. Guests get read-only access by default."},
+      {"role": "user", "content": "Can they leave comments though? Read-only might be too restrictive."},
+      {"role": "assistant", "content": "Yes, you can enable commenting for guests. When setting up the guest invite, choose the 'Commenter' role instead of 'Viewer.' This lets them view all shared projects, add comments on tasks, and participate in discussions, but they can't create, edit, or delete tasks, change settings, or access billing info. Guest seats don't count against your plan's user limit on Pro and Enterprise plans."}
+    ],
+    "category": "account",
+    "complexity": "medium"
+  },
+  {
+    "id": 34,
+    "messages": [
+      {"role": "user", "content": "Is there a way to get notified when a task is overdue? Our team keeps missing deadlines."},
+      {"role": "assistant", "content": "Yes, there are several options. The simplest is enabling overdue notifications: go to Settings > Notifications > Overdue Tasks, and turn on email and in-app alerts. You can set them to trigger at due date, 1 day before, and 1 day after."},
+      {"role": "user", "content": "Can we also send these to our team's Slack channel?"},
+      {"role": "assistant", "content": "If you have the Slack integration connected, go to Settings > Integrations > Slack > Notification Rules and add a rule with the trigger 'Task becomes overdue.' Select your team's channel as the destination. You can also set up a daily digest that posts a summary of all overdue tasks to Slack at a time you choose, like 9 AM on weekdays. This tends to be more effective than individual notifications since it reduces noise."}
+    ],
+    "category": "product",
+    "complexity": "medium"
+  },
+  {
+    "id": 35,
+    "messages": [
+      {"role": "user", "content": "My payment method was declined and now my account is showing as 'Suspended.' I've updated my card. How do I reactivate?"},
+      {"role": "assistant", "content": "Once you've updated your payment method, go to Settings > Billing and click 'Retry Payment.' The system will attempt to charge your new card for the outstanding balance. If successful, your account will be reactivated immediately."},
+      {"role": "user", "content": "I don't see a 'Retry Payment' button. The billing page just shows 'Account Suspended.'"},
+      {"role": "assistant", "content": "In some cases, the retry button only appears after the new payment method is fully verified. Try logging out and back in first. If you still don't see it, I can trigger a manual retry from our side. Can you confirm the last four digits of the new card you added?"},
+      {"role": "user", "content": "Last four are 4829."},
+      {"role": "assistant", "content": "I can see the card ending in 4829 on your account. I've triggered a manual payment retry. The charge of $79.00 should process within a few minutes. Once it goes through, your account will automatically reactivate and all your data will be intact, nothing is deleted during suspension. You'll receive a confirmation email. Let me know if you don't see it within 15 minutes."}
+    ],
+    "category": "billing",
+    "complexity": "medium"
+  },
+  {
+    "id": 36,
+    "messages": [
+      {"role": "user", "content": "How do I use the reporting API to pull weekly task completion metrics?"},
+      {"role": "assistant", "content": "You can use the GET /api/v2/reports/tasks endpoint with query parameters for the date range and grouping. For weekly metrics, use ?start_date=2026-07-01&end_date=2026-07-14&group_by=week&metrics=completed,created."},
+      {"role": "user", "content": "What if I want to break it down by team member?"},
+      {"role": "assistant", "content": "Add &breakdown=assignee to the query. This returns the metrics nested by each team member. You can also add &project_id=xyz to scope it to a specific project. The response includes both raw counts and percentage changes from the previous period. For scheduled reports, consider setting up a webhook on the report.generated event rather than polling the API."}
+    ],
+    "category": "technical",
+    "complexity": "medium"
+  },
+  {
+    "id": 37,
+    "messages": [
+      {"role": "user", "content": "We have an on-prem deployment and our instance is running out of disk space. What can we safely clean up?"},
+      {"role": "assistant", "content": "For on-prem instances, there are several areas you can reclaim space from. First, can you check your current disk usage with the admin command: ./admin-cli storage-report?"},
+      {"role": "user", "content": "Attachments are using 45GB, database is 12GB, logs are 28GB, and temp files are 8GB."},
+      {"role": "assistant", "content": "Here's a safe cleanup plan in priority order: (1) Temp files (8GB): run ./admin-cli cleanup-temp --older-than 7d. These are safe to remove entirely. (2) Logs (28GB): run ./admin-cli rotate-logs --retain 30d to keep only the last 30 days. Set up log rotation in config.yml to prevent future buildup. (3) Attachments (45GB): you can't bulk-delete these without user impact, but you can enable compression with ./admin-cli enable-attachment-compression which typically saves 40-60% on new uploads. For existing files, run ./admin-cli compress-attachments --dry-run first to see the savings. (4) Database (12GB): run ./admin-cli db-vacuum to reclaim space from deleted records. That should free up about 36GB immediately from items 1 and 2."},
+      {"role": "user", "content": "Can I automate the log rotation going forward?"},
+      {"role": "assistant", "content": "Yes, add these lines to your config.yml: log_rotation: enabled: true, max_age: 30d, max_size: 5GB, compress: true. This will automatically rotate and compress logs. After editing config.yml, restart the service with ./admin-cli restart. Also consider enabling the monitoring webhook at admin > alerts to get notified when disk usage exceeds 80%."}
+    ],
+    "category": "technical",
+    "complexity": "complex"
+  },
+  {
+    "id": 38,
+    "messages": [
+      {"role": "user", "content": "I can't log in. I get 'Account locked due to suspicious activity.' I haven't done anything unusual."},
+      {"role": "assistant", "content": "Account locks can be triggered by multiple failed login attempts, login from a new geographic location, or our automated security systems detecting unusual patterns. Let me check your account. Can you provide your email address?"},
+      {"role": "user", "content": "It's mike.t@techcorp.com. I was traveling last week, could that be it?"},
+      {"role": "assistant", "content": "That's very likely the cause. I can see login attempts from three different countries over the past week, which triggered our geo-anomaly detection. I've verified the activity matches your travel pattern. I'll unlock your account now. Before you log in, I'd recommend these steps: (1) You'll be prompted to verify your identity via the email on file. (2) Review the recent activity log at Settings > Security > Login History after you're in. (3) If you travel frequently, you can whitelist countries at Settings > Security > Trusted Locations to prevent future lockouts."},
+      {"role": "user", "content": "Thanks. Can you also tell me if anyone else tried to access my account?"},
+      {"role": "assistant", "content": "I've reviewed the login history and all attempts came from IP addresses consistent with your devices and travel pattern. There are no signs of unauthorized access. However, I do notice you don't have two-factor authentication enabled. I strongly recommend enabling it at Settings > Security > 2FA, especially since you travel frequently. This adds a second layer of protection regardless of where you log in from."}
+    ],
+    "category": "account",
+    "complexity": "complex"
+  },
+  {
+    "id": 39,
+    "messages": [
+      {"role": "user", "content": "We're seeing intermittent 502 errors when calling your API. It happens maybe 10% of the time. Our retry logic handles it, but we'd like to understand the root cause."},
+      {"role": "assistant", "content": "502 errors from our API typically indicate a timeout between our load balancer and application servers. A few things I'd like to understand: which endpoints are affected, what's the average response time for successful requests, and are the errors clustered at specific times?"},
+      {"role": "user", "content": "It's mostly the POST /api/v2/tasks/search endpoint. Successful requests take about 2-3 seconds. The errors happen throughout the day but are worse between 2-4 PM EST."},
+      {"role": "assistant", "content": "The /tasks/search endpoint can be resource-intensive, and 2-3 seconds is on the high side. The 2-4 PM pattern aligns with our peak traffic period. Let me check a few things. Can you share a sample request body so I can see the query complexity?"},
+      {"role": "user", "content": "Sure: {\"filters\": {\"project_id\": \"proj_123\", \"status\": [\"open\", \"in_progress\"], \"created_after\": \"2025-01-01\"}, \"include\": [\"subtasks\", \"comments\", \"attachments\"], \"sort\": \"updated_at\", \"limit\": 500}"},
+      {"role": "assistant", "content": "I see several optimization opportunities: (1) The 'include' array with subtasks, comments, AND attachments causes three additional joins per result. If you don't need all of those in every request, remove the ones you don't need. (2) Limit of 500 is very high. Consider paginating with limit=50 and using cursor-based pagination (we return a 'next_cursor' field). (3) The created_after date of 2025-01-01 spans 18 months of data. If possible, narrow that range. (4) Add an index hint by including \"hint\": \"idx_project_status_updated\" in your request. Try removing the attachments include and reducing the limit to 100 first, that alone should bring response times under 500ms and eliminate the 502s. I've also flagged your account to our infrastructure team for monitoring during peak hours."}
+    ],
+    "category": "technical",
+    "complexity": "complex"
+  },
+  {
+    "id": 40,
+    "messages": [
+      {"role": "user", "content": "We're evaluating your Enterprise plan but need to understand your compliance certifications before we can proceed. We're in healthcare."},
+      {"role": "assistant", "content": "We understand compliance is critical for healthcare organizations. We currently hold SOC 2 Type II, ISO 27001, and GDPR certifications. For healthcare specifically, can you tell me more about your use case? Are you storing any PHI (Protected Health Information) in our platform?"},
+      {"role": "user", "content": "We wouldn't store PHI directly, but task descriptions might reference patient case numbers and some internal medical terminology. We need HIPAA compliance and a BAA."},
+      {"role": "assistant", "content": "Good news: we are HIPAA compliant on the Enterprise plan and can execute a Business Associate Agreement (BAA). With the BAA in place, incidental references to case numbers in task descriptions are covered. Here's what the Enterprise healthcare setup includes: (1) Dedicated infrastructure with data isolation, (2) Enhanced audit logging with 7-year retention, (3) IP allowlisting, (4) Custom data retention policies, (5) Annual penetration test reports shared with you. I'll connect you with our compliance team to start the BAA process. They'll also provide our HIPAA compliance documentation and can schedule a security review call with your IT team."},
+      {"role": "user", "content": "That sounds good. What about data residency? We need everything in the US."},
+      {"role": "assistant", "content": "US data residency is the default for our Enterprise healthcare customers. All data, including backups and logs, stays in our US-East and US-West AWS regions. We do not replicate to any non-US regions. This is documented in our Data Processing Agreement which accompanies the BAA. Our compliance team will include both documents in the package. Shall I have them reach out to you directly? I'll need a contact email and your preferred timeline for the evaluation."}
+    ],
+    "category": "general",
+    "complexity": "complex"
+  },
+  {
+    "id": 41,
+    "messages": [
+      {"role": "user", "content": "Our SAML SSO integration with Okta stopped working this morning. Users can't log in and are getting 'Invalid SAML Response' errors."},
+      {"role": "assistant", "content": "This is urgent, let's troubleshoot immediately. The most common causes are an expired signing certificate, a changed Okta configuration, or a metadata mismatch. First, when was the last time SSO was working correctly?"},
+      {"role": "user", "content": "It was working fine yesterday evening. We didn't make any changes on our end."},
+      {"role": "assistant", "content": "Let me check our side. I can see that our SAML certificate was auto-rotated at 2 AM today as part of a scheduled security update. Your Okta configuration likely still has the old certificate fingerprint. Here's how to fix it: (1) Go to our Settings > Security > SSO and click 'Download Metadata XML.' (2) In your Okta admin console, go to Applications > [our app] > Sign On tab. (3) Click 'Edit' and upload the new metadata XML, or manually update the X.509 certificate. (4) Save and test with a single user before rolling out."},
+      {"role": "user", "content": "We updated the cert but users are still getting errors. The error now says 'Audience mismatch.'"},
+      {"role": "assistant", "content": "An 'Audience mismatch' error means the Entity ID in Okta doesn't match what we expect. This sometimes happens when re-uploading metadata. In Okta, check the 'Audience URI (SP Entity ID)' field. It should be exactly: https://app.example.com/saml/metadata (no trailing slash). Also verify the ACS URL is: https://app.example.com/saml/acs. These are case-sensitive. If those are correct, check that the Name ID format is set to 'EmailAddress' and the Application username is set to 'Email.' Clear the Okta cache by toggling the app off and back on, then test again."},
+      {"role": "user", "content": "The Entity ID had a trailing slash. Removed it and SSO is working again. Thanks for the quick help."},
+      {"role": "assistant", "content": "Glad it's resolved. I've added a note to our certificate rotation process to send advance notifications to SSO customers in the future. To prevent similar issues: (1) Enable our SSO health check alerts at Settings > Security > SSO > Monitoring, which will notify your admin if the SSO handshake fails. (2) Keep a local admin account (non-SSO) as a backup login method. (3) Our next cert rotation is scheduled for January, we'll send a 7-day advance notice to your admin email going forward."}
+    ],
+    "category": "technical",
+    "complexity": "complex"
+  },
+  {
+    "id": 42,
+    "messages": [
+      {"role": "user", "content": "We're migrating from a competitor's product and need to move about 50,000 tasks with their full history, attachments, and comments. What's the best approach?"},
+      {"role": "assistant", "content": "For a migration of that size, I'd recommend using our Migration API rather than the standard import. We also have pre-built migration connectors for several popular tools. Which product are you migrating from?"},
+      {"role": "user", "content": "We're coming from Asana. We have about 15 projects, 50,000 tasks, and roughly 200GB of attachments."},
+      {"role": "assistant", "content": "Great, we have a dedicated Asana migration connector. Here's the recommended approach: (1) Use our migration tool at Settings > Import > Migrate from Asana. It handles task mapping, user matching, custom fields, and comment history automatically. (2) For 200GB of attachments, the migration runs in the background and typically processes about 10GB per hour on Enterprise plans. (3) Before starting, run the 'Dry Run' option which generates a migration report showing how your Asana structure will map to our system, including any fields that need manual mapping."},
+      {"role": "user", "content": "What about our Asana custom fields and automation rules? Will those transfer?"},
+      {"role": "assistant", "content": "Custom fields transfer automatically with type matching (text to text, dropdown to dropdown, etc.). The migration report from the dry run will flag any fields that can't be auto-mapped, and you can create manual mappings for those. Automation rules unfortunately cannot be automatically migrated since every platform implements them differently. However, the dry run report will list all your Asana rules, and I can help you recreate the critical ones in our automation builder after migration. I'd suggest migrating in phases: (1) Run the dry run and review the report. (2) Migrate one small project first as a test. (3) Migrate the remaining projects. (4) Verify data integrity with our post-migration audit tool. (5) Set up automation rules. Want me to schedule a migration planning call with our onboarding team?"}
+    ],
+    "category": "product",
+    "complexity": "complex"
+  },
+  {
+    "id": 43,
+    "messages": [
+      {"role": "user", "content": "I think there's a security vulnerability in your product. When I share a project with a guest user, they can see tasks from other projects in the search results."},
+      {"role": "assistant", "content": "Thank you for reporting this. We take security issues very seriously. I want to understand the exact scenario. When a guest user performs a global search, are they seeing full task details from unshared projects, or just task titles?"},
+      {"role": "user", "content": "They can see task titles and the first line of the description. They can't click into the tasks though, it shows 'Access Denied' when they try."},
+      {"role": "assistant", "content": "Thank you for the detailed description. This is a search index visibility issue where the search results are not properly filtering by the user's project access permissions, even though the access control on the actual task view is working correctly. I've escalated this to our security team as a P1 issue. In the meantime, I'd recommend the following temporary mitigations: (1) If you have sensitive data in task titles, consider restricting guest access until this is patched. (2) You can disable global search for guest users at Settings > Security > Guest Permissions > uncheck 'Global Search.' This limits guests to searching within their assigned projects only."},
+      {"role": "user", "content": "How long until this is fixed? And do you have a bug bounty program?"},
+      {"role": "assistant", "content": "Our security team has already begun working on the fix. Based on the severity, we expect to deploy a patch within 48 hours. We'll send you a notification when it's live. Yes, we do have a bug bounty program. Since you reported a valid access control issue, you're eligible for a reward. Please submit the details at security.example.com/bounty with your account email. Bounties for access control issues typically range from $500 to $2,000 depending on severity. We'll also credit you in our security acknowledgements page (with your permission). Thank you again for responsible disclosure."}
+    ],
+    "category": "general",
+    "complexity": "complex"
+  },
+  {
+    "id": 44,
+    "messages": [
+      {"role": "user", "content": "We just got our bill and it's significantly higher than expected. We went from $790/month to $2,370. Can you explain the jump?"},
+      {"role": "assistant", "content": "Let me review your billing details. Can you provide your workspace ID or the account owner's email?"},
+      {"role": "user", "content": "The owner email is admin@bigcorp.com"},
+      {"role": "assistant", "content": "I can see your account. The increase is due to two factors: (1) Your team grew from 10 to 25 users during the billing period. Each additional Pro seat is $79/month, adding $1,185. (2) You enabled the Advanced Analytics add-on on July 2nd, which is $395/month. Would you like a detailed breakdown?"},
+      {"role": "user", "content": "We didn't authorize 25 seats. We only have 15 active employees. Who are these extra users?"},
+      {"role": "assistant", "content": "Let me pull up the user list. I can see 15 active employees, 8 guest users, and 2 deactivated accounts. The issue is that your plan is configured to count guest users as paid seats. On your current Pro plan, guests are free only if you have the 'Guest Pass' add-on. Without it, each guest counts as a billable seat. Here are your options: (1) Add the Guest Pass add-on ($99/month flat) which makes all guest seats free, saving you $633/month at current guest count. (2) Convert the 8 guests to use our free 'External Viewer' links instead of guest accounts, which removes them from billing entirely. (3) I can apply a one-time credit for the difference this month since the billing impact wasn't clearly communicated when guests were invited. Which approach would you prefer?"}
+    ],
+    "category": "billing",
+    "complexity": "complex"
+  },
+  {
+    "id": 45,
+    "messages": [
+      {"role": "user", "content": "Our automated CI/CD pipeline creates tasks via your API, but we're hitting rate limits during deployments when it creates 50+ tasks in rapid succession. We need a higher limit."},
+      {"role": "assistant", "content": "I understand the challenge with CI/CD pipelines. Your Pro plan has a 1,000 requests/minute limit, but the task creation endpoint has a lower sub-limit of 30 creates per minute to prevent abuse. Let me suggest some approaches before we discuss limit increases."},
+      {"role": "user", "content": "What kind of approaches? We need all 50 tasks created quickly after each deployment."},
+      {"role": "assistant", "content": "The most efficient solution is to use our batch endpoint: POST /api/v2/tasks/batch. This accepts up to 100 task objects in a single request and counts as only one API call. Your 50 tasks would be created in a single request instead of 50. The response includes the created task IDs and any validation errors per item. Additionally, you can use the async mode by adding ?async=true, which queues the creation and returns immediately with a batch ID. You can then poll GET /api/v2/batches/{id} to check completion status."},
+      {"role": "user", "content": "The batch endpoint would work, but we also need to attach files to some of the tasks. Can we do that in the batch request?"},
+      {"role": "assistant", "content": "File attachments can't be included directly in the batch create request, but you can handle it efficiently with a two-step process: (1) Create all tasks via the batch endpoint to get their IDs. (2) Use the batch attachment endpoint POST /api/v2/attachments/batch to upload files and link them to task IDs. This endpoint accepts multipart form data with up to 20 files per request, each tagged with the target task ID. For your CI/CD pipeline, this means 1 request for task creation + 3 requests for attachments (assuming worst case of 50 tasks with files, batched at 20 per request) = 4 total API calls instead of 100+. I'd also recommend adding retry logic with exponential backoff for the 429 responses, using the Retry-After header value."}
+    ],
+    "category": "technical",
+    "complexity": "complex"
+  },
+  {
+    "id": 46,
+    "messages": [
+      {"role": "user", "content": "Does the Pro plan include API access?"},
+      {"role": "assistant", "content": "Yes, the Pro plan includes full API access with a rate limit of 1,000 requests per minute. You can generate API keys at Settings > API > Keys. The API documentation is available at docs.example.com/api."}
+    ],
+    "category": "product",
+    "complexity": "simple"
+  },
+  {
+    "id": 47,
+    "messages": [
+      {"role": "user", "content": "Can I change the email address on my account?"},
+      {"role": "assistant", "content": "Yes, go to Settings > Account > Profile and click on your email address to edit it. You'll receive a verification email at the new address. Click the verification link within 24 hours to confirm the change. Your old email will remain active until the new one is verified."}
+    ],
+    "category": "account",
+    "complexity": "simple"
+  },
+  {
+    "id": 48,
+    "messages": [
+      {"role": "user", "content": "We need to set up a sandbox environment for our developers to test the API without affecting production data. How do we do that?"},
+      {"role": "assistant", "content": "You can create a sandbox environment under Settings > API > Environments > Create Sandbox. The sandbox is a fully isolated copy of your workspace with dummy data. It has its own API keys and a separate base URL (sandbox-api.example.com). Changes in the sandbox never affect your production workspace."},
+      {"role": "user", "content": "Can we seed the sandbox with a copy of our production data?"},
+      {"role": "assistant", "content": "Yes, when creating the sandbox you can choose 'Clone from Production' which copies your project structure, custom fields, and automation rules. For privacy, it replaces all user names and task descriptions with randomized data. You can also import a specific dataset via CSV or use our seed API endpoint to programmatically create test data. The sandbox resets every 30 days automatically, or you can manually reset it anytime. Each Pro workspace gets one sandbox; Enterprise gets unlimited sandboxes."}
+    ],
+    "category": "technical",
+    "complexity": "medium"
+  },
+  {
+    "id": 49,
+    "messages": [
+      {"role": "user", "content": "How long do you retain deleted data?"},
+      {"role": "assistant", "content": "Deleted items are kept in the trash for 30 days, during which they can be restored. After 30 days, data is permanently deleted from our production systems. Backups containing deleted data are retained for an additional 60 days (90 days total) for disaster recovery purposes only. Enterprise customers can configure custom retention periods."}
+    ],
+    "category": "general",
+    "complexity": "simple"
+  },
+  {
+    "id": 50,
+    "messages": [
+      {"role": "user", "content": "Our team is having trouble with conflicting edits. Two people edited the same task description at the same time and one person's changes were lost."},
+      {"role": "assistant", "content": "Our platform uses a last-write-wins model for task descriptions by default, which can cause the issue you described. There are a few ways to handle this. First, can you tell me whether this is a frequent problem for your team, and are the conflicts mainly on task descriptions or other fields too?"},
+      {"role": "user", "content": "It happens a few times a week, mostly on task descriptions and comments that people edit after posting. We have a 20-person team working on the same projects."},
+      {"role": "assistant", "content": "For a 20-person team, I'd recommend enabling real-time collaboration mode. Go to Project Settings > Collaboration > Enable Real-Time Editing. This switches task descriptions and comments to a Google Docs-style collaborative editing model where multiple people can edit simultaneously and see each other's cursors. Changes merge automatically without conflicts."},
+      {"role": "user", "content": "That sounds great but we also use the API to update task descriptions from our scripts. Will that conflict with real-time editing?"},
+      {"role": "assistant", "content": "Good question. API updates work slightly differently with real-time mode enabled. API writes use operational transforms to merge with any ongoing edits, so they won't overwrite someone who's actively editing. However, if your scripts do full-replace updates (PUT with the entire description), I'd recommend switching to patch-style updates using PATCH with only the changed sections. Alternatively, you can add the header X-Conflict-Strategy: merge to your API requests, which tells our system to merge the API update with any concurrent edits instead of replacing. If your scripts need to make authoritative updates that should always win, use X-Conflict-Strategy: overwrite, but this will discard any unsaved edits from users currently editing that field."}
+    ],
+    "category": "technical",
+    "complexity": "complex"
+  }
+]

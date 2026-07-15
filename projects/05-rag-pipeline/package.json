@@ -1,0 +1,12 @@
+{
+  "name": "codebase-qa-hybrid-rag",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Codebase Q&A with Hybrid RAG — BM25 + Vector + RRF + LLM Re-ranking",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "test": "node --test src/*.test.js"
+  },
+  "keywords": ["rag", "bm25", "vector-search", "rrf", "hybrid-search"],
+  "license": "MIT"
+}

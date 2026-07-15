@@ -1,0 +1,50 @@
+INTELLECTUAL PROPERTY ASSIGNMENT AGREEMENT
+
+This Intellectual Property Assignment Agreement ("Agreement") is entered into by and
+between the Assignor and the Assignee identified below.
+
+1. DEFINITIONS
+(a) "Assigned IP" means all inventions, discoveries, improvements, designs, works of
+authorship, trade secrets, know-how, software, source code, algorithms, databases,
+trademarks, and other intellectual property created by the Assignor during the Assignment
+Period, whether or not patentable or copyrightable.
+(b) "Assignment Period" means the period from January 1, 2024 through the termination
+of Assignor's engagement with Assignee.
+
+2. ASSIGNMENT OF RIGHTS
+Assignor hereby irrevocably assigns, transfers, and conveys to Assignee all right, title,
+and interest in and to the Assigned IP, including:
+(a) All patent rights, including the right to file and prosecute patent applications worldwide;
+(b) All copyrights, including the right to reproduce, distribute, and create derivative works;
+(c) All trade secret rights;
+(d) All trademark rights associated with the Assigned IP;
+(e) All rights to sue for past, present, and future infringement.
+
+3. MORAL RIGHTS WAIVER
+To the extent permitted by applicable law, Assignor hereby waives all moral rights
+(droit moral) in the Assigned IP, including the right of attribution and the right
+of integrity.
+
+4. FURTHER ASSURANCES
+Assignor agrees to execute all documents and take all actions reasonably requested by
+Assignee to perfect the assignment of the Assigned IP, including executing patent
+applications, copyright registrations, and assignment recordations.
+
+5. PRIOR INVENTIONS
+Assignor has listed on Exhibit A all inventions, discoveries, and works of authorship
+conceived or created by Assignor prior to the Assignment Period ("Prior Inventions").
+Prior Inventions are excluded from the Assigned IP.
+
+6. REPRESENTATIONS AND WARRANTIES
+Assignor represents and warrants that:
+(a) The Assigned IP is original to the Assignor and does not infringe any third-party
+intellectual property rights;
+(b) Assignor has not previously assigned, licensed, or encumbered the Assigned IP;
+(c) Assignor has the legal right and authority to make this assignment.
+
+7. CONSIDERATION
+In consideration for this assignment, Assignee shall pay Assignor the sum of $25,000,
+which Assignor acknowledges as adequate consideration.
+
+8. GOVERNING LAW
+This Agreement shall be governed by the laws of the State of California.

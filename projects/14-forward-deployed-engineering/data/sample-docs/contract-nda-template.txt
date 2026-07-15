@@ -1,0 +1,45 @@
+MUTUAL NON-DISCLOSURE AGREEMENT
+
+This Mutual Non-Disclosure Agreement ("Agreement") is entered into as of the Effective Date
+by and between the undersigned parties ("Disclosing Party" and "Receiving Party").
+
+1. DEFINITION OF CONFIDENTIAL INFORMATION
+"Confidential Information" means any and all non-public information, including but not limited
+to trade secrets, proprietary data, business plans, financial information, customer lists,
+technical specifications, source code, algorithms, and any information designated as
+confidential by either party.
+
+2. OBLIGATIONS OF RECEIVING PARTY
+The Receiving Party agrees to:
+(a) Hold the Confidential Information in strict confidence;
+(b) Not disclose Confidential Information to any third party without prior written consent;
+(c) Use the Confidential Information solely for the Purpose described herein;
+(d) Apply reasonable security measures to protect Confidential Information from unauthorized access.
+
+3. EXCLUSIONS FROM CONFIDENTIAL INFORMATION
+Confidential Information does not include information that:
+(a) Is or becomes publicly available through no fault of the Receiving Party;
+(b) Was rightfully in the Receiving Party's possession before disclosure;
+(c) Is independently developed by the Receiving Party without use of Confidential Information;
+(d) Is rightfully obtained from a third party without restriction on disclosure.
+
+4. TERM AND TERMINATION
+This Agreement shall remain in effect for a period of two (2) years from the Effective Date.
+The obligations of confidentiality shall survive termination for an additional period of three (3)
+years following termination.
+
+5. REMEDIES
+The parties acknowledge that any breach of this Agreement may cause irreparable harm, and
+the non-breaching party shall be entitled to seek injunctive relief in addition to any other
+remedies available at law or in equity.
+
+6. GOVERNING LAW
+This Agreement shall be governed by and construed in accordance with the laws of the
+State of Delaware, without regard to its conflict of laws principles.
+
+7. ENTIRE AGREEMENT
+This Agreement constitutes the entire agreement between the parties with respect to the
+subject matter hereof and supersedes all prior negotiations, representations, warranties,
+commitments, offers, contracts, and writings.
+
+IN WITNESS WHEREOF, the parties have executed this Agreement as of the Effective Date.

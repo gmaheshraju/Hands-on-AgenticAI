@@ -1,0 +1,14 @@
+{
+  "name": "rag-eval-harness",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Evaluation harness for RAG systems with LLM-as-judge scoring, regression detection, and CI integration",
+  "scripts": {
+    "eval": "node src/runner.js",
+    "demo": "node src/demo.js",
+    "eval:ci": "node src/runner.js --ci"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.0"
+  }
+}

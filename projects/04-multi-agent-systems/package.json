@@ -1,0 +1,13 @@
+{
+  "name": "multi-agent-content-pipeline",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Multi-agent content pipeline with Researcher, Writer, Editor, and Fact-Checker agents orchestrated by a Supervisor",
+  "main": "src/demo.js",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "start": "node src/demo.js"
+  },
+  "keywords": ["multi-agent", "llm", "pipeline", "content-generation"],
+  "license": "MIT"
+}

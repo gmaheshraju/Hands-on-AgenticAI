@@ -1,0 +1,14 @@
+{
+  "name": "prompt-injection-test-suite",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Prompt injection test suite and defense layer for LLM applications",
+  "main": "src/demo.js",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "test": "node src/runner.js",
+    "score": "node src/scorer.js"
+  },
+  "keywords": ["prompt-injection", "llm-security", "guardrails"],
+  "license": "MIT"
+}

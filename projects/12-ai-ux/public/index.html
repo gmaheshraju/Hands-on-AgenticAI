@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Assistant</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app" role="main">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <div class="header-logo" aria-hidden="true">AI</div>
+        <div>
+          <h1>AI Assistant</h1>
+          <div class="header-status" id="connectionStatus">Connected</div>
+        </div>
+      </div>
+      <button class="btn-new-chat" id="newChatBtn" aria-label="Start a new conversation">
+        New Chat
+      </button>
+    </header>
+
+    <!-- Messages -->
+    <div class="messages" id="messages" role="log" aria-live="polite" aria-label="Chat messages">
+      <!-- Welcome message rendered by JS -->
+    </div>
+
+    <!-- Stop button -->
+    <button class="stop-btn" id="stopBtn" aria-label="Stop generating response">
+      <span class="stop-icon" aria-hidden="true"></span>
+      Stop generating
+    </button>
+
+    <!-- Input -->
+    <div class="input-area">
+      <div class="input-wrapper">
+        <textarea
+          id="chatInput"
+          rows="1"
+          placeholder="Type a message..."
+          aria-label="Chat message input"
+        ></textarea>
+        <button class="send-btn" id="sendBtn" aria-label="Send message">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+      <div class="input-hint">Press Enter to send, Shift+Enter for new line</div>
+    </div>
+  </div>
+
+  <script src="chat.js"></script>
+</body>
+</html>

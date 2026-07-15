@@ -1,0 +1,14 @@
+{
+  "name": "model-router-cost-dashboard",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "LLM Model Router with Cost Dashboard — routes queries to cheap/mid/expensive models based on complexity",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "dashboard": "node src/dashboard.js",
+    "start": "node src/dashboard.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0"
+  }
+}

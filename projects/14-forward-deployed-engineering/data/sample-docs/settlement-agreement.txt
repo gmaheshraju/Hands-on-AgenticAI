@@ -1,0 +1,67 @@
+SETTLEMENT AGREEMENT AND MUTUAL RELEASE
+
+This Settlement Agreement and Mutual Release ("Agreement") is entered into by and between
+DataFlow Corp. ("Plaintiff") and CloudSync Technologies Inc. ("Defendant"), collectively
+referred to as the "Parties."
+
+RECITALS
+WHEREAS, Plaintiff filed a complaint against Defendant in the United States District Court
+for the Northern District of California, Case No. 3:24-cv-01234 ("Litigation"), alleging
+patent infringement, trade secret misappropriation, and unfair business practices;
+
+WHEREAS, Defendant denied all allegations and asserted counterclaims for declaratory
+judgment of non-infringement and patent invalidity;
+
+WHEREAS, the Parties wish to resolve all disputes between them without further litigation
+and without admission of liability by either Party;
+
+NOW, THEREFORE, in consideration of the mutual promises and covenants set forth herein,
+the Parties agree as follows:
+
+1. SETTLEMENT PAYMENT
+Defendant shall pay Plaintiff the total sum of $3,750,000 ("Settlement Amount") as follows:
+(a) $2,000,000 within thirty (30) days of execution of this Agreement;
+(b) $1,000,000 within ninety (90) days of execution;
+(c) $750,000 within one hundred eighty (180) days of execution.
+Late payments shall accrue interest at a rate of 8% per annum.
+
+2. LICENSE GRANT
+(a) Plaintiff hereby grants Defendant a non-exclusive, worldwide, perpetual license
+to use U.S. Patent Nos. 10,123,456 and 10,789,012 in connection with Defendant's
+cloud synchronization products;
+(b) The license is non-transferable and non-sublicensable;
+(c) The license does not extend to any future patents owned by Plaintiff.
+
+3. MUTUAL RELEASE
+(a) Plaintiff Release: Plaintiff hereby releases and discharges Defendant from any and
+all claims, demands, causes of action, and liabilities arising from or related to the
+Litigation, whether known or unknown;
+(b) Defendant Release: Defendant hereby releases and discharges Plaintiff from any and
+all counterclaims, demands, causes of action, and liabilities arising from or related
+to the Litigation, whether known or unknown;
+(c) California Civil Code Section 1542 Waiver: Each Party expressly waives the
+provisions of Section 1542, which provides that "a general release does not extend to
+claims that the creditor or releasing party does not know or suspect to exist."
+
+4. DISMISSAL OF LITIGATION
+Within five (5) business days of receipt of the initial payment, the Parties shall file
+a stipulation of dismissal with prejudice of all claims and counterclaims in the Litigation.
+
+5. CONFIDENTIALITY
+The terms of this Agreement, including the Settlement Amount, shall be kept strictly
+confidential by both Parties. Neither Party shall disclose the terms to any third party
+except as required by law, regulation, or court order, or to their respective legal
+counsel, accountants, and insurers.
+
+6. NON-DISPARAGEMENT
+Neither Party shall make any public statement disparaging the other Party, its products,
+services, or personnel.
+
+7. REPRESENTATIONS AND WARRANTIES
+Each Party represents and warrants that:
+(a) It has the authority to enter into this Agreement;
+(b) This Agreement has been duly authorized and executed;
+(c) No other person or entity has any interest in the claims released herein.
+
+8. GOVERNING LAW
+This Agreement shall be governed by the laws of the State of California.
