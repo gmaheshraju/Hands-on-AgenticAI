@@ -1,0 +1,17 @@
+{
+  "name": "customer-onboarding-toolkit",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "FDE Customer Onboarding Toolkit — connect data, adapt domain, build evals, track pilot",
+  "main": "src/demo.js",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "dashboard": "node src/dashboard.js",
+    "checklist": "node src/checklist.js",
+    "eval": "node src/evalBuilder.js",
+    "start": "node src/dashboard.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

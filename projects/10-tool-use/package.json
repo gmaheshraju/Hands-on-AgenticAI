@@ -1,0 +1,13 @@
+{
+  "name": "sql-analytics-agent",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "SQL Analytics Agent with Permission Tiers — text-to-SQL with code-enforced access controls",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "setup": "node src/database.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0"
+  }
+}

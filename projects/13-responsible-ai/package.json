@@ -1,0 +1,14 @@
+{
+  "name": "bias-audit-pipeline",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Bias Audit Pipeline + Model Card Generator for AI Resume Screening Systems",
+  "main": "src/demo.js",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "test": "node --test src/__tests__/*.test.js",
+    "audit": "node src/demo.js --full"
+  },
+  "keywords": ["bias-audit", "fairness", "model-card", "responsible-ai", "eu-ai-act"],
+  "license": "MIT"
+}

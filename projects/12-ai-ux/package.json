@@ -1,0 +1,14 @@
+{
+  "name": "production-chat-ui",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Production Chat UI with Trust Signals — streaming, HITL, confidence, citations, error states",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "demo": "node src/demo.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

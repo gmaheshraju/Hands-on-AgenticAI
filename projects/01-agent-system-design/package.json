@@ -1,0 +1,13 @@
+{
+  "name": "pr-review-agent",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A ReAct-pattern PR review agent that reads GitHub PRs and produces structured code review findings",
+  "main": "src/demo.js",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "review": "node src/review.js"
+  },
+  "keywords": ["agent", "react-loop", "code-review", "github"],
+  "license": "MIT"
+}

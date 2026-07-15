@@ -1,0 +1,57 @@
+COMMERCIAL LEASE AGREEMENT
+
+This Commercial Lease Agreement ("Lease") is entered into between Blackstone Property
+Holdings LLC ("Landlord") and TechStart Inc. ("Tenant").
+
+1. PREMISES
+Landlord hereby leases to Tenant the premises located at 450 Market Street, Suite 800,
+San Francisco, CA 94105, comprising approximately 5,200 square feet of office space
+("Premises").
+
+2. LEASE TERM
+(a) Initial Term: The Lease shall commence on January 1, 2025 and expire on
+December 31, 2029 ("Initial Term"), for a total of five (5) years.
+(b) Renewal Option: Tenant shall have the option to renew the Lease for one (1)
+additional term of three (3) years by providing written notice at least 180 days prior
+to the expiration of the Initial Term.
+
+3. RENT
+(a) Base Rent: Tenant shall pay monthly base rent of $28,600, payable on the first
+business day of each month.
+(b) Annual Escalation: Base rent shall increase by 3% on each anniversary of the
+Commencement Date.
+(c) Security Deposit: Tenant shall provide a security deposit equal to two (2) months'
+base rent ($57,200) upon execution of this Lease.
+(d) Triple Net (NNN): In addition to base rent, Tenant shall pay its proportionate share
+of property taxes, insurance, and common area maintenance (CAM) charges.
+
+4. PERMITTED USE
+The Premises shall be used exclusively for general office purposes, including but not
+limited to software development, administrative functions, and client meetings. Tenant
+shall not use the Premises for any unlawful purpose or in violation of any applicable
+zoning ordinances.
+
+5. TENANT IMPROVEMENTS
+Landlord shall provide a tenant improvement allowance of $45 per square foot ($234,000
+total) for initial build-out of the Premises. Any improvements exceeding this allowance
+shall be at Tenant's expense. All improvements shall become the property of Landlord
+upon termination of the Lease.
+
+6. MAINTENANCE AND REPAIRS
+Tenant shall maintain the Premises in good condition and repair. Landlord shall be
+responsible for structural repairs, roof maintenance, and exterior upkeep. HVAC
+maintenance shall be the responsibility of the Tenant.
+
+7. INDEMNIFICATION
+Tenant shall indemnify and hold harmless Landlord from any claims, damages, or
+liabilities arising from Tenant's use of the Premises, except to the extent caused by
+Landlord's negligence or willful misconduct.
+
+8. DEFAULT AND REMEDIES
+(a) Tenant Default: Failure to pay rent within ten (10) days of the due date or breach
+of any material term shall constitute a default.
+(b) Landlord Remedies: Upon default, Landlord may terminate the Lease and recover
+possession, accelerate remaining rent, or pursue any other remedies available at law.
+
+9. GOVERNING LAW
+This Lease shall be governed by the laws of the State of California.

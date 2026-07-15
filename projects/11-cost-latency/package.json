@@ -1,0 +1,16 @@
+{
+  "name": "cost-latency-optimizer",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "LLM agent cost optimization toolkit — from $2 to $0.15 per conversation",
+  "scripts": {
+    "baseline": "node src/baseline.js",
+    "compress": "node src/promptCompression.js",
+    "cache": "node src/semanticCache.js",
+    "route": "node src/modelRouter.js",
+    "terminate": "node src/earlyTermination.js",
+    "benchmark": "node src/benchmark.js",
+    "demo": "node src/demo.js"
+  },
+  "dependencies": {}
+}

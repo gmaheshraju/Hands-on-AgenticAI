@@ -1,0 +1,312 @@
+{
+  "timestamp": "2026-07-15T06:22:55.756Z",
+  "version": "1.0.0",
+  "aggregate": {
+    "faithfulness": 5,
+    "relevance": 5,
+    "completeness": 1.5,
+    "composite": 3.949999999999998
+  },
+  "questions": [
+    {
+      "id": "q01",
+      "question": "What is TechCorp's refund policy for software subscriptions?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 3,
+        "composite": 4.4
+      }
+    },
+    {
+      "id": "q02",
+      "question": "How do I reset my TechCorp account password?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    },
+    {
+      "id": "q03",
+      "question": "What databases does TechCorp Analytics support?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 2,
+        "composite": 4.1
+      }
+    },
+    {
+      "id": "q04",
+      "question": "What is the maximum file upload size in TechCorp Drive?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    },
+    {
+      "id": "q05",
+      "question": "How does TechCorp handle GDPR data deletion requests?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    },
+    {
+      "id": "q06",
+      "question": "Why might a TechCorp API request return a 429 error and how should I handle it?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 3,
+        "composite": 4.4
+      }
+    },
+    {
+      "id": "q07",
+      "question": "What is the difference between TechCorp Workspaces and Projects?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 2,
+        "composite": 4.1
+      }
+    },
+    {
+      "id": "q08",
+      "question": "How do I migrate from TechCorp API v2 to v3?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    },
+    {
+      "id": "q09",
+      "question": "What happens when a TechCorp webhook delivery fails?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    },
+    {
+      "id": "q10",
+      "question": "Can I use TechCorp SSO with both SAML and OIDC?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    },
+    {
+      "id": "q11",
+      "question": "How does TechCorp's data encryption work at rest and in transit?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    },
+    {
+      "id": "q12",
+      "question": "A user reports they can see data from another workspace. What should I check?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    },
+    {
+      "id": "q13",
+      "question": "What are TechCorp's SLA guarantees?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    },
+    {
+      "id": "q14",
+      "question": "How do I set up TechCorp CI/CD integration with GitHub Actions?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 4,
+        "composite": 4.7
+      }
+    },
+    {
+      "id": "q15",
+      "question": "What is the recommended approach for handling large file processing in TechCorp?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    },
+    {
+      "id": "q16",
+      "question": "How does TechCorp's role-based access control work?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    },
+    {
+      "id": "q17",
+      "question": "What monitoring and alerting capabilities does TechCorp provide?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 2,
+        "composite": 4.1
+      }
+    },
+    {
+      "id": "q18",
+      "question": "If I delete a workspace, can I recover the data?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 3,
+        "composite": 4.4
+      }
+    },
+    {
+      "id": "q19",
+      "question": "How do TechCorp's audit logs work and what do they capture?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    },
+    {
+      "id": "q20",
+      "question": "A deployment failed midway. Some services are on v2.1 and others on v2.0. How should I resolve this?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    },
+    {
+      "id": "q21",
+      "question": "What compliance certifications does TechCorp hold?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 2,
+        "composite": 4.1
+      }
+    },
+    {
+      "id": "q22",
+      "question": "How should I design a multi-region setup for TechCorp to minimize latency for global users?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    },
+    {
+      "id": "q23",
+      "question": "What are the differences between TechCorp's three API authentication methods?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    },
+    {
+      "id": "q24",
+      "question": "How do I troubleshoot slow TechCorp API response times?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 2,
+        "composite": 4.1
+      }
+    },
+    {
+      "id": "q25",
+      "question": "Can TechCorp integrate with my existing LDAP directory for user provisioning?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 2,
+        "composite": 4.1
+      }
+    },
+    {
+      "id": "q26",
+      "question": "What happens to in-flight API requests during a TechCorp platform update?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    },
+    {
+      "id": "q27",
+      "question": "How do I estimate my monthly TechCorp bill based on usage?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    },
+    {
+      "id": "q28",
+      "question": "What is TechCorp's disaster recovery strategy and what are the RPO/RTO targets?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    },
+    {
+      "id": "q29",
+      "question": "How do I configure TechCorp to work behind a corporate proxy with SSL inspection?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    },
+    {
+      "id": "q30",
+      "question": "Our TechCorp Analytics dashboard is showing data from 2 hours ago instead of real-time. Why and how to fix it?",
+      "scores": {
+        "faithfulness": 5,
+        "relevance": 5,
+        "completeness": 1,
+        "composite": 3.8
+      }
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+INTERNAL COMPLIANCE MEMORANDUM
+
+TO: All Partners and Associates
+FROM: Chief Compliance Officer
+DATE: March 1, 2025
+RE: Updated Client Data Handling Procedures — GDPR and CCPA Compliance
+
+This memorandum outlines updated procedures for handling client data in accordance
+with the General Data Protection Regulation (GDPR) and the California Consumer
+Privacy Act (CCPA).
+
+1. SCOPE
+These procedures apply to all attorneys, paralegals, and staff who access, process,
+or store client personal data in any form, including electronic records, paper files,
+and verbal communications.
+
+2. DATA CLASSIFICATION
+All client data must be classified into the following categories:
+(a) Privileged Communications: Attorney-client privileged materials, including legal
+opinions, strategy memoranda, and litigation hold notices;
+(b) Sensitive Personal Data: Social Security numbers, financial account information,
+health records, and biometric data — requires enhanced security controls;
+(c) Standard Personal Data: Names, addresses, contact information, and employment
+information — standard security controls apply;
+(d) Public Information: Information that is publicly available through court filings,
+regulatory databases, or public records.
+
+3. DATA MINIMIZATION
+(a) Collect only the minimum personal data necessary for the legal matter;
+(b) Do not retain client data beyond the applicable retention period (see Section 6);
+(c) Redact unnecessary personal identifiers in working documents;
+(d) Use anonymization or pseudonymization where feasible for internal analysis.
+
+4. CROSS-BORDER DATA TRANSFERS
+(a) All transfers of personal data outside the European Economic Area (EEA) must be
+subject to Standard Contractual Clauses (SCCs) or an approved transfer mechanism;
+(b) Before transferring data, conduct a Transfer Impact Assessment (TIA) to evaluate
+the legal framework of the recipient country;
+(c) Maintain records of all cross-border transfers in the firm's data transfer register.
+
+5. DATA SUBJECT ACCESS REQUESTS (DSAR)
+(a) All DSARs must be forwarded to the Compliance Office within 24 hours of receipt;
+(b) The firm must respond to DSARs within 30 days (GDPR) or 45 days (CCPA);
+(c) Before disclosing any data, verify the identity of the requestor;
+(d) Exemptions: The firm may withhold data protected by attorney-client privilege
+or work product doctrine.
+
+6. RETENTION AND DESTRUCTION
+(a) Active Matter Files: Retained for the duration of the legal engagement;
+(b) Closed Matter Files: Retained for seven (7) years from matter closure;
+(c) Financial Records: Retained for ten (10) years per regulatory requirements;
+(d) Destruction: Use certified shredding for physical documents and DOD 5220.22-M
+compliant wiping for electronic media.
+
+7. BREACH NOTIFICATION
+(a) Report any suspected data breach to the Compliance Office immediately;
+(b) The Compliance Office will assess the breach within 24 hours;
+(c) GDPR breaches must be reported to the relevant supervisory authority within 72 hours;
+(d) CCPA breaches requiring notification to affected individuals must be reported
+without unreasonable delay.
+
+8. TRAINING REQUIREMENTS
+All personnel must complete the following training:
+(a) Annual data protection training (mandatory);
+(b) Specialized training for personnel handling sensitive personal data;
+(c) Refresher training within 30 days of any significant regulatory update.
+
+9. PENALTIES
+Non-compliance with these procedures may result in:
+(a) Disciplinary action, up to and including termination;
+(b) Personal liability for violations of GDPR (fines up to 4% of global revenue)
+or CCPA (statutory damages of $100-$750 per consumer per incident);
+(c) Referral to the relevant bar association for ethical violations.
+
+For questions, contact the Compliance Office at compliance@acmelegal.com.

@@ -1,0 +1,64 @@
+AGREEMENT AND PLAN OF MERGER
+
+This Agreement and Plan of Merger ("Merger Agreement") is entered into by and between
+Apex Technologies Inc. ("Acquiror") and NovaSoft Solutions LLC ("Target Company").
+
+1. THE MERGER
+(a) Structure: Target Company shall merge with and into a wholly-owned subsidiary
+of Acquiror ("Merger Sub"), with Merger Sub surviving the merger as a wholly-owned
+subsidiary of Acquiror (the "Surviving Entity").
+(b) Effective Time: The Merger shall become effective upon the filing of the Certificate
+of Merger with the Secretary of State of Delaware ("Effective Time").
+
+2. MERGER CONSIDERATION
+(a) Purchase Price: The aggregate merger consideration shall be $42,000,000 ("Purchase
+Price"), consisting of:
+  (i) $30,000,000 in cash payable at Closing;
+  (ii) $8,000,000 in Acquiror common stock, valued at the 20-day VWAP prior to Closing;
+  (iii) $4,000,000 in an escrow account for indemnification obligations.
+(b) Working Capital Adjustment: The Purchase Price shall be adjusted based on the
+difference between actual working capital at Closing and a target working capital of
+$3,500,000.
+(c) Earnout: Additional consideration of up to $6,000,000 payable over 24 months based
+on achievement of specified revenue milestones.
+
+3. REPRESENTATIONS AND WARRANTIES OF TARGET COMPANY
+Target Company represents and warrants that:
+(a) Organization: Target Company is duly organized and in good standing under Delaware law;
+(b) Authority: Target Company has the requisite power to execute this Agreement;
+(c) Financial Statements: The financial statements delivered to Acquiror fairly present
+the financial condition of Target Company in accordance with GAAP;
+(d) Material Contracts: All material contracts have been disclosed to Acquiror;
+(e) Intellectual Property: Target Company owns or has valid licenses to all intellectual
+property used in its business;
+(f) No Litigation: There is no pending or threatened litigation that could have a Material
+Adverse Effect.
+
+4. COVENANTS
+(a) Conduct of Business: Between signing and Closing, Target Company shall conduct its
+business in the ordinary course consistent with past practice;
+(b) No-Shop: Target Company shall not solicit, encourage, or enter into discussions with
+any third party regarding an alternative acquisition proposal;
+(c) Access: Target Company shall provide Acquiror reasonable access to its books, records,
+and personnel for due diligence purposes.
+
+5. CONDITIONS TO CLOSING
+(a) Regulatory Approvals: Receipt of all required regulatory approvals, including
+Hart-Scott-Rodino antitrust clearance;
+(b) Material Adverse Effect: No Material Adverse Effect shall have occurred between
+signing and Closing;
+(c) Third-Party Consents: Receipt of all required third-party consents.
+
+6. INDEMNIFICATION
+(a) Target Company shall indemnify Acquiror for breaches of representations, warranties,
+and covenants, subject to a deductible of $500,000 and a cap of $8,000,000;
+(b) The escrow fund shall serve as the primary source of indemnification payments.
+
+7. TERMINATION
+This Agreement may be terminated:
+(a) By mutual written consent;
+(b) By either party if the Closing has not occurred within 120 days of the date hereof;
+(c) By Acquiror if a Material Adverse Effect occurs.
+
+8. GOVERNING LAW
+This Agreement shall be governed by the laws of the State of Delaware.

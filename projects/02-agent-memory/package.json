@@ -1,0 +1,16 @@
+{
+  "name": "personal-crm-agent",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Personal CRM with cross-session memory — episodic, semantic, and procedural memory layers backed by SQLite",
+  "main": "src/demo.js",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "chat": "node src/cli.js",
+    "test": "node src/demo.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0",
+    "readline": "*"
+  }
+}
