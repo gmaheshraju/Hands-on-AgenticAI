@@ -31,6 +31,7 @@ import CostLatencyEngineering from './pages/blog/CostLatencyEngineering';
 import AiUxPatterns from './pages/blog/AiUxPatterns';
 import ResponsibleAi from './pages/blog/ResponsibleAi';
 import ForwardDeployedEngineering from './pages/blog/ForwardDeployedEngineering';
+import ContextEngineering from './pages/blog/ContextEngineering';
 
 export default function App() {
   return (
@@ -68,6 +69,7 @@ export default function App() {
         <Route path="/blog/ai-ux-patterns" element={<AiUxPatterns />} />
         <Route path="/blog/responsible-ai" element={<ResponsibleAi />} />
         <Route path="/blog/forward-deployed-engineering" element={<ForwardDeployedEngineering />} />
+        <Route path="/blog/context-engineering" element={<ContextEngineering />} />
       </Routes>
       </PageTransition>
     </Layout>

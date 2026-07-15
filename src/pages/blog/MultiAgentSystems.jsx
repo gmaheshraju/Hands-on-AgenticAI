@@ -357,6 +357,22 @@ function PatternsPanel() {
         <strong>Mahesh's distinction:</strong> Swarms "fear missing something" — they explore every angle in parallel, then a synthesizer clusters the findings. Contrast with Teams, which "fear being wrong" — they narrow, verify, then respond with confidence. Deep Research (OpenAI, Kimi) uses the swarm pattern because breadth matters more than precision. Coding agents use teams because correctness matters more than coverage. Match the pattern to your failure mode.
       </Decision></FadeIn>
 
+      <FadeIn delay={320}><Decision question="5. How do you coordinate 5-10 agents running in parallel without them stepping on each other?">
+        This is the real production question. Fan-out is easy to draw on a whiteboard. Making it work when 8 agents are hitting shared state, competing for the same resources, and occasionally failing — that's engineering.
+        <br /><br />
+        <strong>Capability cards:</strong> Each agent publishes a structured card: skills it can handle, cost per call, latency estimate, max concurrency, and who it escalates to on failure. The coordinator never hardcodes routing — it discovers agents at runtime. Add a new agent type without touching the coordinator.
+        <br /><br />
+        <strong>Load-aware routing:</strong> When 3 agents all have the "code" skill, don't round-robin. Track current load per agent, route to the one with the lowest queue depth. This prevents hot-spotting — one agent drowning while others idle.
+        <br /><br />
+        <strong>Wave-based execution:</strong> Group tasks by priority level. Priority 1 tasks (design) complete before priority 2 tasks (implement) start. But within a wave, all tasks run concurrently via <code>Promise.allSettled</code>. This gives you parallelism without data dependency bugs.
+        <br /><br />
+        <strong>Escalation chains:</strong> Junior-dev fails at "code" task → retry with another agent → all retries exhausted → follow the <code>escalatesTo</code> pointer in the capability card to senior-dev. The chain is declared in data, not hardcoded in the coordinator.
+        <br /><br />
+        <strong>Message bus as audit trail:</strong> Every lifecycle event (TASK_REQUEST, TASK_RESULT, TASK_FAILED, ESCALATION) flows through a typed pub/sub bus. Replay the bus history to debug any coordination issue — you get distributed tracing for free.
+        <br /><br />
+        <Pill type="green">See Project 21</Pill> The <Link to="/projects" style={{ color: 'var(--text-accent)' }}>Multi-Agent Coordinator</Link> implements all five patterns: capability registry, load-aware routing, wave-based parallelism, escalation chains, and a message bus — in ~400 lines of JavaScript.
+      </Decision></FadeIn>
+
       <FadeIn><Insight>
         "In the interview, use Mahesh's evolution framework: Single {'>'} Sequential {'>'} Teams {'>'} Swarm. Start by saying 'this is a Level 1 problem — single agent with good tools.' If the interviewer pushes, upgrade: 'At this scale, I'd move to Level 3 — Agent Teams with a supervisor, because we fear being wrong more than we fear missing something.' That framing — Teams vs Swarms as different fear modes — is the staff+ signal. It shows you reason about system design tradeoffs, not just memorize patterns."
       </Insight></FadeIn>

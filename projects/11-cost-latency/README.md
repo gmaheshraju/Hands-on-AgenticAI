@@ -23,6 +23,52 @@ node src/earlyTermination.js    # Optimization 4: stop generation early
 ## Architecture
 
 ```
+                    Conversation Query
+                           │
+                           ▼
+                ┌──────────────────────┐
+                │ 1. Prompt Compressor │  System prompt: 400 → 150 tokens
+                │    History summarize │  Keep last 2 exchanges in full
+                └──────────┬───────────┘
+                           │
+                           ▼
+                ┌──────────────────────┐    ┌──────────────┐
+                │ 2. Semantic Cache    │───▶│  Cache HIT   │──▶ Response (zero LLM cost)
+                │    Trigram + cosine  │    └──────────────┘
+                │    similarity ≥ 0.85 │
+                └──────────┬───────────┘
+                           │ miss
+                           ▼
+                ┌──────────────────────┐
+                │ 3. Model Router      │
+                │    Classify complexity│
+                │    ┌─────┬─────┬────┐│
+                │    │simpl│ mid │comp││
+                │    └──┬──┴──┬──┴──┬─┘│
+                └───────│─────│─────│──┘
+                        ▼     ▼     ▼
+                     Haiku  Mid  Frontier
+                    (cheap)      (full)
+                        │     │     │
+                        ▼     ▼     ▼
+                ┌──────────────────────┐
+                │ 4. Early Termination │  Detect "complete enough" response
+                │    Truncate at next  │  sentence boundary
+                └──────────┬───────────┘
+                           │
+                           ▼
+                      Response
+
+          ┌────────────────────────────────────┐
+          │ Cost Tracker (all stages)          │
+          │ Tokens in/out, model tier, cache   │
+          │ hit rate, latency, quality score   │
+          └────────────────────────────────────┘
+```
+
+### File Structure
+
+```
 data/conversations.json    50 sample customer support conversations
 src/baseline.js            Token counting, cost calculation, simulated LLM calls
 src/promptCompression.js   System prompt audit + conversation history summarizer

@@ -125,6 +125,105 @@ When no API key is configured, aidev uses heuristic analysis:
 ## Architecture
 
 ```
+                              ┌──────────────────────────────────┐
+                              │        bin/aidev.js              │
+                              │    process.argv → switch/case    │
+                              │   (commit|review|explain|config  │
+                              │    status|demo|help|--version)   │
+                              └──────────┬───────────────────────┘
+                                         │
+              ┌──────────────────────────┬┴──────────────────────────┐
+              │                          │                           │
+              ▼                          ▼                           ▼
+┌─────────────────────┐  ┌──────────────────────┐  ┌──────────────────────┐
+│  commands/commit.js  │  │  commands/review.js  │  │ commands/explain.js  │
+│                      │  │                      │  │                      │
+│ 1. isGitRepo()       │  │ 1. isGitRepo()       │  │ 1. fs.readFileSync() │
+│ 2. getStagedDiff()   │  │ 2. getDiffForReview() │  │ 2. Size guard 500KB │
+│ 3. checkBudget()     │  │ 3. checkBudget()     │  │ 3. checkBudget()     │
+│ 4. generateCommit    │  │ 4. reviewCode()      │  │ 4. explainFile()     │
+│    Message()         │  │ 5. Group by severity │  │ 5. Show summary,     │
+│ 5. Interactive loop: │  │    (critical/warn/   │  │    functions, deps,  │
+│    accept/edit/      │  │     info)            │  │    complexity        │
+│    regenerate/quit   │  │ 6. Exit code 1 if    │  │                      │
+│ 6. git.commit(msg)   │  │    critical found    │  │                      │
+│    ──────────────    │  │    ──────────────    │  │                      │
+│    --yes auto-accept │  │    --json CI output  │  │    --json output     │
+└──────────┬───────────┘  └──────────┬───────────┘  └──────────┬───────────┘
+           │                         │                          │
+           └─────────────────────────┼──────────────────────────┘
+                                     │
+                                     ▼
+┌────────────────────────────────────────────────────────────────────────────┐
+│                          src/llm.js                                       │
+│                                                                           │
+│  isDemoMode()?─── YES ──▶ Mock Heuristics                                │
+│       │                  ┌──────────────────────────────────────────────┐ │
+│       │                  │ mockCommitMessage(): parse diff, detect type │ │
+│       NO                 │ mockReview(): regex patterns (eval, secrets) │ │
+│       │                  │ mockExplain(): extract functions, imports    │ │
+│       ▼                  └──────────────────────────────────────────────┘ │
+│  callLLM(config, messages)                                                │
+│       │                                                                   │
+│       ├── provider=openai ────▶ callOpenAI()                             │
+│       │                        POST api.openai.com/v1/chat/completions   │
+│       │                                                                   │
+│       └── provider=anthropic ─▶ callAnthropic()                          │
+│                                 POST api.anthropic.com/v1/messages       │
+│                                 (converts OpenAI msg format → Anthropic) │
+│                                                                           │
+│  After each call: recordUsage(model, tokens, command)                    │
+│  Input truncated to 8-12K chars via truncate()                           │
+│  Token estimation: ~4 chars/token via estimateTokens()                   │
+└────────────────────────────────────────────────────────────────────────────┘
+           │                         │                          │
+           ▼                         ▼                          ▼
+┌─────────────────┐  ┌───────────────────────┐  ┌──────────────────────────┐
+│   src/git.js    │  │    src/budget.js      │  │     src/config.js        │
+│                 │  │                       │  │                          │
+│ isGitRepo()     │  │ checkBudget()         │  │ loadConfig()             │
+│ getStagedDiff() │  │   ▶ overBudget?       │  │   ~/.aidev.json          │
+│ getUnstagedDiff │  │     fallback to mock  │  │   DEFAULTS + stored      │
+│ getBranchDiff() │  │ recordUsage()         │  │                          │
+│ getDiffForReview│  │   ▶ per-op tracking   │  │ isDemoMode()             │
+│ commit(msg)     │  │   ▶ 30-day rolling    │  │   !api_key || mock       │
+│ readFileContent │  │ calculateCost()       │  │                          │
+│ getStagedFiles()│  │   ▶ model pricing     │  │ getModelPricing()        │
+│ getDiffFiles()  │  │   ~/.aidev-usage.json │  │   6 models: gpt-4o-mini, │
+│ getRecentCommits│  │ formatCost()          │  │   gpt-4o, gpt-4-turbo,  │
+│ getCurrentBranch│  │ formatTokens()        │  │   claude-3-haiku/sonnet/ │
+│                 │  │ getTodayUsage()       │  │   opus, claude-sonnet-4, │
+│ execSync +      │  │                       │  │   claude-opus-4          │
+│ execFileSync    │  │                       │  │                          │
+│ (no shell for   │  │                       │  │ saveConfig()             │
+│  user input)    │  │                       │  │                          │
+└─────────────────┘  └───────────────────────┘  └──────────────────────────┘
+                              │
+                              ▼
+                   ┌─────────────────────┐
+                   │     src/ui.js       │
+                   │                     │
+                   │ color() — ANSI codes│
+                   │ heading(), box()    │
+                   │ prompt() — readline │
+                   │ status/statusDone() │
+                   │ costLine()          │
+                   │ severityBadge()     │
+                   │ setColor(false)     │
+                   │   for --no-color    │
+                   │   and --json        │
+                   └─────────────────────┘
+```
+
+**Key data flows:**
+
+- **Budget gate**: Every command calls `checkBudget()` before the LLM call. If `overBudget`, the provider is silently switched to `mock` (graceful degradation -- no crash, no error).
+- **Git safety**: `git.js` uses `execFileSync` (no shell) for any command that takes user input (branch names, commit messages) to prevent command injection. `execSync` is only used for fixed commands.
+- **Dual output**: All commands support `--json` for CI pipelines (disables color, structured JSON to stdout, exit code signals severity).
+
+### File Map
+
+```
 bin/aidev.js          CLI entry point, command routing (process.argv)
 src/
   commands/

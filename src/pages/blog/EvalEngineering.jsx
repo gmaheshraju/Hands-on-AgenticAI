@@ -835,6 +835,10 @@ function MetricsPanel() {
       <FadeIn delay={300}><Insight tag="Staff+ signal">
         The eval system is a product, not a one-time project. Dedicate 15-20% of your AI engineering bandwidth to eval infrastructure &mdash; improving rubrics, growing the golden dataset, calibrating judges, building dashboards. Teams that treat evals as a checkbox end up with a false sense of security. Teams that treat evals as a living system catch regressions the same day they're introduced.
       </Insight></FadeIn>
+
+      <FadeIn delay={350}><Insight tag="2026 hiring signal">
+        The eval gap is becoming THE hiring signal. Anyone can get an agent to write code &mdash; cursor tab, Claude Code, Copilot, Codex. Knowing whether that code is correct? Building the test harnesses, rubrics, guardrails, monitoring pipelines that catch silent regressions before users do? That's the scarce skill. In 2026 interviews, "I built an eval harness that caught a 12% faithfulness drop on deploy day" beats "I built an agent" every single time. The person who can evaluate AI output is more valuable than the person who can generate it.
+      </Insight></FadeIn>
         </div>
   );
 }

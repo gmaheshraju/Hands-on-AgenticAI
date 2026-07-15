@@ -1,0 +1,10 @@
+{
+  "name": "22-context-engineering",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Context window optimizer — budget, prioritize, and assemble LLM context from heterogeneous sources",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "test": "node --test src/tests/*.test.js"
+  }
+}

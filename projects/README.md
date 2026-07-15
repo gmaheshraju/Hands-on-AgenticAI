@@ -1,6 +1,6 @@
 # Capstone Projects
 
-20 production-grade projects — one per topic. Not toy demos. Real problems, real APIs, real evaluation criteria.
+23 production-grade projects — one per topic. Not toy demos. Real problems, real APIs, real evaluation criteria.
 
 Each project is designed to produce a portfolio piece you can walk through in a staff/principal-level interview. The "Staff+ Interview Angle" section gives you the opening line.
 
@@ -28,6 +28,9 @@ Each project is designed to produce a portfolio piece you can walk through in a 
 | 18 | [Workflow Engine](18-workflow-engine/) | DAG execution engine with 6 node types + conditional branching |
 | 19 | [Agent Observability](19-agent-observability/) | Traces, cost tracking, quality scoring, drift detection + dashboard |
 | 20 | [AI CLI Tool](20-ai-cli-tool/) | Zero-dependency CLI with commit/review/explain + token budget tracking |
+| 21 | [Multi-Agent Coordinator](21-multi-agent-coordinator/) | Dynamic delegation with capability cards, message bus, escalation chains |
+| 22 | [Context Window Optimizer](22-context-engineering/) | Token budgeting, source prioritization, assembly strategies for LLM context |
+| 23 | [Long-Running Agent](23-long-running-agent/) | Durable execution with checkpoint/resume, crash recovery, budget enforcement |
 
 ## How to Use
 
@@ -47,3 +50,6 @@ Projects build on each other:
 - **15 → 01/10**: MCP server pattern connects tools to any agent project
 - **16 → 03/05**: Coding agent uses harness + RAG patterns from earlier projects
 - **19 → 06/11**: Observability dashboard feeds into LLMOps and cost optimization
+- **21 → 04/18**: Multi-agent coordinator builds on multi-agent patterns and workflow engine
+- **22 → 02/05/11**: Context engineering integrates memory, RAG, and cost optimization into one pipeline
+- **23 → 03/18/19**: Long-running agent uses harness patterns, workflow execution, and observability
