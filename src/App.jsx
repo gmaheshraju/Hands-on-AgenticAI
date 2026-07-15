@@ -32,6 +32,7 @@ import AiUxPatterns from './pages/blog/AiUxPatterns';
 import ResponsibleAi from './pages/blog/ResponsibleAi';
 import ForwardDeployedEngineering from './pages/blog/ForwardDeployedEngineering';
 import ContextEngineering from './pages/blog/ContextEngineering';
+import SoloDeveloperAdvantage from './pages/blog/SoloDeveloperAdvantage';
 
 export default function App() {
   return (
@@ -70,6 +71,7 @@ export default function App() {
         <Route path="/blog/responsible-ai" element={<ResponsibleAi />} />
         <Route path="/blog/forward-deployed-engineering" element={<ForwardDeployedEngineering />} />
         <Route path="/blog/context-engineering" element={<ContextEngineering />} />
+        <Route path="/blog/solo-developer-advantage" element={<SoloDeveloperAdvantage />} />
       </Routes>
       </PageTransition>
     </Layout>
