@@ -1,0 +1,10 @@
+{
+  "name": "23-long-running-agent",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Durable agent execution — checkpoint/resume, crash recovery, progress streaming",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "test": "node --test src/tests/*.test.js"
+  }
+}

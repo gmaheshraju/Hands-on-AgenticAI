@@ -1,0 +1,10 @@
+{
+  "name": "21-multi-agent-coordinator",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Multi-agent coordinator with capability cards, dynamic delegation, and escalation",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "test": "node --test src/tests/*.test.js"
+  }
+}

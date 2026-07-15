@@ -114,6 +114,14 @@ const posts = [
     tags: ['FDE', 'Palantir', 'AI Delivery', 'Echo/Anthropic', 'Go-to-Market'],
     ready: true,
   },
+  {
+    slug: 'context-engineering',
+    number: '15',
+    title: 'Context Engineering',
+    subtitle: 'The discipline replacing prompt engineering — what goes into the context window, in what order, with what token budget, and why getting it wrong silently kills performance.',
+    tags: ['Token Budget', 'Source Priority', 'Assembly', 'Caching', 'Lost in the Middle'],
+    ready: true,
+  },
 ];
 
 export default function Blog() {

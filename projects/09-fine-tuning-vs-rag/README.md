@@ -28,6 +28,37 @@ Classify incoming support tickets into four categories: `billing`, `technical`, 
 - **Pros**: Highest accuracy, lowest inference latency, shortest prompts.
 - **Cons**: Training cost, retraining needed when categories change, data curation effort.
 
+## Architecture
+
+```
+                        Support Ticket
+                             |
+            ┌────────────────┼────────────────┐
+            v                v                v
+   ┌─────────────┐  ┌──────────────┐  ┌──────────────┐
+   │  Prompting  │  │     RAG      │  │ Fine-Tuning  │
+   │             │  │              │  │              │
+   │ Zero-shot / │  │ TF-IDF index │  │ JSONL prep   │
+   │ Few-shot    │  │ Top-5 retriv │  │ Train model  │
+   │ examples    │  │ + LLM class. │  │ Inference    │
+   └──────┬──────┘  └──────┬───────┘  └──────┬───────┘
+          |                |                  |
+          v                v                  v
+   ┌──────────────────────────────────────────────┐
+   │              Evaluation Harness              │
+   │  30 held-out tickets, same test set for all  │
+   │                                              │
+   │  Metrics: accuracy, F1, latency, cost/query  │
+   └──────────────────┬───────────────────────────┘
+                      |
+                      v
+            ┌──────────────────┐
+            │  COMPARISON.md   │
+            │  Side-by-side    │
+            │  recommendation  │
+            └──────────────────┘
+```
+
 ## Quick Start
 
 ```bash
