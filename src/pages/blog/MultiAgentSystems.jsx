@@ -127,6 +127,62 @@ Merging 5 findings, deduplicating by file:line...
     foundBy: ["perf"], confidence: "medium" },
 ]`;
 
+const CONTEXT_HANDOFF_CODE = `// The #1 reason multi-agent systems produce incoherent output:
+// sub-agents make decisions WITHOUT seeing each other's context.
+// (Cognition's "Don't Build Multi-Agents" critique, 2025.)
+
+// ❌ ANTI-PATTERN: parallel sub-agents, only the task string handed off.
+async function buildFeatureBad(spec) {
+  const [ui, api] = await Promise.all([
+    subAgent('Build a UI for: ' + spec),   // picks green buttons, REST
+    subAgent('Build an API for: ' + spec),  // picks GraphQL, snake_case
+  ]);
+  return merge(ui, api);  // two agents, two incompatible worldviews
+}
+
+// ✅ FIX 1 — Full-trajectory handoff (Anthropic's multi-agent research pattern).
+// The supervisor passes the ENTIRE decision history, not just the sub-task.
+// Sub-agents inherit shared decisions, so their choices stay compatible.
+async function buildFeatureGood(spec) {
+  const decisions = await supervisor(
+    'Decide the shared contract before delegating: API style, ' +
+    'naming convention, auth model, error format.',
+    spec
+  );
+  // decisions = { apiStyle: 'REST', naming: 'camelCase', auth: 'JWT', ... }
+
+  const context = { spec, decisions };  // <- the shared ground truth
+  const api = await subAgent('Build the API.', context);       // sequential:
+  const ui  = await subAgent('Build the UI.', { ...context, api }); // UI sees the API it must call
+  return merge(ui, api);
+}
+
+// ✅ FIX 2 — When you MUST parallelize, compress the trajectory, don't drop it.
+// A verbatim history blows the context window; a lossy summary loses the
+// binding decisions. Pass a structured digest of just the load-bearing facts.
+function contextDigest(trajectory) {
+  return {
+    goal: trajectory.goal,
+    decisions: trajectory.decisions,        // every binding choice, verbatim
+    constraints: trajectory.constraints,    // never summarize these away
+    summary: trajectory.chatter.slice(-2),  // recent prose can be lossy
+  };
+}`;
+
+const CONTEXT_HANDOFF_OUTPUT = `> await buildFeatureBad("user profile page")
+[ui-agent]  chose: green buttons, REST client, camelCase
+[api-agent] chose: GraphQL schema, snake_case fields
+[merge] ✗ UI calls /api/users (REST) but API only speaks GraphQL
+        ✗ UI reads user.firstName, API returns user.first_name
+   → 2 agents, 2 worldviews, 0 working features
+
+> await buildFeatureGood("user profile page")
+[supervisor] shared contract: { apiStyle: REST, naming: camelCase, auth: JWT }
+[api-agent]  built REST /api/users, camelCase  (inherited contract)
+[ui-agent]   built client against /api/users, reads user.firstName
+[merge] ✓ UI and API agree — same contract, same worldview
+   → coherent by construction, not by luck`;
+
 const TABS = ['Patterns', 'Coordination', 'Architecture', 'When to Use', 'Anti-patterns'];
 
 export default function MultiAgentSystems() {
@@ -425,6 +481,18 @@ function CoordinationPanel() {
         <br /><br />
         <strong>Always surface failures.</strong> "3 of 4 checks completed" is more trustworthy than silently skipping the failed one.
       </Decision></FadeIn>
+
+      <FadeIn delay={240}><Decision question="Why do multi-agent systems produce incoherent output — and how do you fix it?">
+        <Pill type="red">Top 2026 interview question</Pill> This is the critique behind Cognition's widely-cited "Don't Build Multi-Agents" (2025): the failure mode isn't parallelism, it's <strong>dispersed decision-making</strong>. When you fan out sub-agents and hand each one only its sub-task, they make binding decisions in isolation — one picks REST, another picks GraphQL — and the merge step inherits two incompatible worldviews.
+        <br /><br />
+        <strong>The root cause:</strong> context, not coordination. Each agent acted rationally given what it saw. Nobody was wrong; they just never shared the ground truth that would have made their choices compatible.
+        <br /><br />
+        <strong>Fix 1 — decide the shared contract first, then delegate.</strong> The supervisor resolves the load-bearing decisions (API style, naming, auth, error format) up front and passes them into every sub-agent's context. Sub-agents inherit the contract, so coherence is guaranteed by construction, not by luck. This is why sequential often beats parallel: the UI agent can see the API the API agent built.
+        <br /><br />
+        <strong>Fix 2 — full-trajectory handoff (Anthropic's multi-agent research pattern).</strong> When you must parallelize, don't hand off just the task string. Pass a structured digest of the trajectory: every binding decision verbatim, constraints never summarized away, and only the recent prose compressed. The mistake is lossy summarization that drops exactly the decisions that bind the agents together.
+      </Decision></FadeIn>
+
+      <FadeIn><CodeBlock filename="context-handoff.js" code={CONTEXT_HANDOFF_CODE} output={CONTEXT_HANDOFF_OUTPUT} /></FadeIn>
 
       <FadeIn><Insight>
         "This is where your distributed systems experience shines. Multi-agent coordination IS microservice orchestration — shared state, conflict resolution, circuit breakers, graceful degradation. The interviewer is testing whether you can apply systems patterns to a new domain, not whether you've memorized agent frameworks."
