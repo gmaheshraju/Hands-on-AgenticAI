@@ -148,6 +148,13 @@ export default function AgentMemory() {
       {tab === 2 && <RetrievalPanel />}
       {tab === 3 && <ProductionPanel />}
       {tab === 4 && <InterviewPanel />}
+
+      <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
+        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
+        <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Personal CRM with Cross-Session Memory</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and staff+ interview angles.</p>
+        <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/02-agent-memory.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
+      </div></FadeIn>
     </div>
   );
 }
@@ -542,7 +549,7 @@ function InterviewPanel() {
       <FadeIn><Insight>
         "The 10M user question is where the interview shifts from AI to systems. But start with Mahesh's framing: 'An LLM knows everything about humanity and nothing about you.' At 10M users, that's 10M knowledge gaps to fill. Partition by user_id, decay unused memories, hard-delete for GDPR, keep retrieval under 50ms. Use the consolidation gate to keep per-user memory compact. These are distributed systems problems wearing an AI costume — and that's exactly why companies want staff+ engineers on agent teams, not just ML researchers."
       </Insight></FadeIn>
-    </div>
+        </div>
   );
 }
 

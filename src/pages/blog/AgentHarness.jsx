@@ -186,6 +186,13 @@ export default function AgentHarness() {
       {tab === 2 && <ErrorPanel />}
       {tab === 3 && <SelfImprovePanel />}
       {tab === 4 && <ProdOpsPanel />}
+
+      <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
+        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
+        <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Research Agent with Observable Harness</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and staff+ interview angles.</p>
+        <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/03-agent-harness.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
+      </div></FadeIn>
     </div>
   );
 }
@@ -607,7 +614,7 @@ function ProdOpsPanel() {
       <FadeIn><Insight>
         "Production ops for agents is the topic that separates senior from staff. Mahesh's Top 8 advice #5: 'Write workflows as explicit natural-language specs' — your agent's behavior should be documented as clearly as an API contract. Advice #6: 'Add human-in-the-loop correction loops' — not as a fallback, but as a deliberate quality signal. Anyone can build an agent. Running one with canary deployments, cost caps, and an incident response plan — that's what companies pay 2Cr+ for."
       </Insight></FadeIn>
-    </div>
+        </div>
   );
 }
 

@@ -270,6 +270,13 @@ export default function ToolUseFunctionCalling() {
       {tab === 2 && <ErrorRecoveryPanel />}
       {tab === 3 && <PermissionsPanel />}
       {tab === 4 && <AntiPatternsPanel />}
+
+      <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
+        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
+        <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>SQL Analytics Agent with Permission Tiers</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and staff+ interview angles.</p>
+        <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/10-tool-use.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
+      </div></FadeIn>
     </div>
   );
 }
@@ -584,7 +591,7 @@ function AntiPatternsPanel() {
       <FadeIn delay={500}><Insight tag="Interview tip">
         When the interviewer asks "how do you make tool calling reliable?" — do NOT start with retry logic. Start with schema design (right tool granularity, good descriptions), then dispatch (validation, timeouts, structured errors), then error recovery (retry only transient, circuit breaker, escape hatch), then security (permission tiers, provenance tracking, sandboxing). This shows you think about the problem in layers, from prevention to detection to recovery. That is the staff+ signal.
       </Insight></FadeIn>
-    </div>
+        </div>
   );
 }
 

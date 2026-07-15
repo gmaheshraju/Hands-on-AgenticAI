@@ -548,6 +548,13 @@ export default function AiUxPatterns() {
       {tab === 2 && <HumanInTheLoopPanel />}
       {tab === 3 && <ErrorStatesPanel />}
       {tab === 4 && <TrustPatternsPanel />}
+
+      <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
+        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
+        <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Production Chat UI with Trust Signals</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and staff+ interview angles.</p>
+        <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/12-ai-ux.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
+      </div></FadeIn>
     </div>
   );
 }
@@ -808,7 +815,7 @@ function TrustPatternsPanel() {
       <FadeIn delay={160}><Insight tag="Interview framing">
         When asked about AI UX in a staff+ interview, structure your answer around the trust equation. &quot;The technical challenge of AI UX is not rendering tokens — it is building calibrated trust. Users should trust the system exactly as much as it deserves to be trusted: highly when it is confident and grounded, cautiously when it is uncertain, and not at all when it does not know. Every UX pattern — streaming, confidence bands, source attribution, error recovery — exists to calibrate that trust signal. The product that gets this right wins, regardless of which underlying model it uses.&quot;
       </Insight></FadeIn>
-    </div>
+        </div>
   );
 }
 
