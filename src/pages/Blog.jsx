@@ -122,6 +122,14 @@ const posts = [
     tags: ['Token Budget', 'Source Priority', 'Assembly', 'Caching', 'Lost in the Middle'],
     ready: true,
   },
+  {
+    slug: 'solo-developer-advantage',
+    number: '16',
+    title: 'The Solo Developer Advantage',
+    subtitle: 'Why one developer with AI beats a team of twenty — and how engineers from anywhere in the world are building products that compete with giants.',
+    tags: ['Solo Dev', 'AI Leverage', 'New Moats', 'Revenue/Employee', 'Career Strategy'],
+    ready: true,
+  },
 ];
 
 export default function Blog() {
