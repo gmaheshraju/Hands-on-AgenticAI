@@ -1,0 +1,10 @@
+{
+  "name": "llm-gateway",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Production LLM Gateway — routing, rate limiting, PII redaction, cost tracking, circuit breaker, audit log",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "test": "node --test src/tests/*.test.js"
+  }
+}

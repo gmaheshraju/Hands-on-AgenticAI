@@ -1,0 +1,10 @@
+{
+  "name": "agent-executor",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Zero-trust agent executor with IAM-style policies, sandboxed execution, and audit trail",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "test": "node --test src/tests/"
+  }
+}

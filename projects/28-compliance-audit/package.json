@@ -1,0 +1,12 @@
+{
+  "name": "compliance-audit-harness",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Compliance-ready audit harness with tamper-evident logging, decision replay, and multi-regulation compliance checking",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "test": "node --test src/tests/compliance.test.js"
+  },
+  "keywords": ["compliance", "audit", "eu-ai-act", "soc2", "gdpr", "hash-chain"],
+  "license": "MIT"
+}
