@@ -1,0 +1,10 @@
+{
+  "name": "cost-attribution",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Cost-per-outcome tracking, waste detection, ROI reporting per agent",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "test": "node --test src/tests/"
+  }
+}

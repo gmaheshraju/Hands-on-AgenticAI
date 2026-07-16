@@ -1,0 +1,12 @@
+{
+  "name": "self-healing-agent-mesh",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Self-healing agent mesh with automatic failover, work redistribution, and circuit breakers",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "test": "node --test src/tests/mesh.test.js"
+  },
+  "keywords": ["distributed-systems", "agent-mesh", "self-healing", "circuit-breaker"],
+  "license": "MIT"
+}

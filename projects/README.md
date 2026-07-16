@@ -1,6 +1,6 @@
 # Capstone Projects
 
-23 production-grade projects — one per topic. Not toy demos. Real problems, real APIs, real evaluation criteria.
+29 production-grade projects — one per topic. Not toy demos. Real problems, real APIs, real evaluation criteria.
 
 Each project is designed to produce a portfolio piece you can walk through in a staff/principal-level interview. The "Staff+ Interview Angle" section gives you the opening line.
 
@@ -31,6 +31,12 @@ Each project is designed to produce a portfolio piece you can walk through in a 
 | 21 | [Multi-Agent Coordinator](21-multi-agent-coordinator/) | Dynamic delegation with capability cards, message bus, escalation chains |
 | 22 | [Context Window Optimizer](22-context-engineering/) | Token budgeting, source prioritization, assembly strategies for LLM context |
 | 23 | [Long-Running Agent](23-long-running-agent/) | Durable execution with checkpoint/resume, crash recovery, budget enforcement |
+| 24 | [LLM Gateway](24-llm-gateway/) | Production gateway with PII redaction, rate limiting, circuit breaker, cost tracking |
+| 25 | [Zero-Trust Agent Executor](25-agent-executor/) | IAM-style policies for agent actions, sandboxed execution, audit trail |
+| 26 | [Agent CI/CD Pipeline](26-agent-cicd/) | Eval suite on PR, faithfulness/safety/cost scoring, auto-promote/block |
+| 27 | [Cost Attribution Engine](27-cost-attribution/) | Cost-per-outcome tracking, waste detection, ROI reporting per agent |
+| 28 | [Compliance Audit Harness](28-compliance-audit/) | Every agent decision logged and replayable, EU AI Act ready, SOC2 traceable |
+| 29 | [Self-Healing Agent Mesh](29-agent-mesh/) | Multi-agent failover, work redistribution, degraded mode fallback |
 
 ## How to Use
 

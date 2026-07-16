@@ -1,0 +1,10 @@
+{
+  "name": "agent-cicd",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Agent CI/CD pipeline — eval suite on PR, quality scoring, baseline comparison, auto-promote/block",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "test": "node --test src/tests/"
+  }
+}
