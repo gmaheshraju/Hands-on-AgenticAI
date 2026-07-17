@@ -302,7 +302,7 @@ function Tab3() {
       />
 
       <Insight tag="Architecture signal">
-        The interview question behind caching: &quot;How do you handle cache invalidation for AI responses?&quot; The answer: TTL-based expiry (1-4 hours for most support use cases), plus event-driven invalidation when the underlying data changes (product update, policy change). Tag cached responses with the source document version. When the source updates, invalidate all cache entries derived from it. This is the same pattern as CDN cache invalidation -- the hard part is tracking provenance, not the cache itself.
+        The critical design question behind caching: &quot;How do you handle cache invalidation for AI responses?&quot; The answer: TTL-based expiry (1-4 hours for most support use cases), plus event-driven invalidation when the underlying data changes (product update, policy change). Tag cached responses with the source document version. When the source updates, invalidate all cache entries derived from it. This is the same pattern as CDN cache invalidation -- the hard part is tracking provenance, not the cache itself.
       </Insight>
     </FadeIn>
   );
@@ -340,8 +340,8 @@ function Tab4() {
         The biggest latency win is not technical -- it is UX. Show a typing indicator immediately (0ms perceived wait). Stream the first token within 200ms. Show intermediate results: &quot;Found 3 relevant documents, generating answer...&quot; Users tolerate 5 seconds of active progress but abandon after 2 seconds of silence. The perception of speed matters more than actual speed. A staff engineer optimizes both, but knows which one the user actually feels.
       </Insight>
 
-      <Insight tag="Staff+ interview answer">
-        When asked &quot;How would you reduce latency for our AI agent?&quot; -- the senior answer is &quot;use a faster model.&quot; The staff answer is: &quot;I would instrument TTFT, generation time, tool execution, and RAG retrieval separately. Then I would stream everything, parallelize RAG with model warm-up, pre-fetch predictable tool results, and set P95 latency budgets per component. The model choice is one lever among five, and usually not the most impactful one.&quot;
+      <Insight tag="Senior engineering perspective">
+        When asked &quot;How would you reduce latency for our AI agent?&quot; -- the junior answer is &quot;use a faster model.&quot; The production answer is: &quot;I would instrument TTFT, generation time, tool execution, and RAG retrieval separately. Then I would stream everything, parallelize RAG with model warm-up, pre-fetch predictable tool results, and set P95 latency budgets per component. The model choice is one lever among five, and usually not the most impactful one.&quot;
       </Insight>
     </FadeIn>
   );
@@ -376,7 +376,7 @@ function Tab5() {
       />
 
       <Insight>
-        The interview answer that separates staff from senior: &quot;I would instrument every request from day one, build a cost dashboard before building features, and set circuit breakers on spend before we go to production. The architecture decision is not which model to use -- it is building the observability that lets you optimize continuously. Week 1 you are guessing. Week 4 your data tells you exactly where the money goes. The team that ships a cost dashboard in sprint 1 spends 60% less by month 3 than the team that adds observability after launch.&quot;
+        The perspective that separates senior from mid-level: &quot;I would instrument every request from day one, build a cost dashboard before building features, and set circuit breakers on spend before we go to production. The architecture decision is not which model to use -- it is building the observability that lets you optimize continuously. Week 1 you are guessing. Week 4 your data tells you exactly where the money goes. The team that ships a cost dashboard in sprint 1 spends 60% less by month 3 than the team that adds observability after launch.&quot;
       </Insight>
 
       <Insight type="warn" tag="Common mistake">
@@ -418,7 +418,7 @@ export default function CostLatencyEngineering() {
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Optimize an Agent from $2 to $0.15</p>
-        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and staff+ interview angles.</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and deep dive exercises.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/11-cost-latency.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
       </div></FadeIn>
         </div>

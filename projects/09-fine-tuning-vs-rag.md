@@ -72,6 +72,3 @@ The same customer support Q&A feature, built three ways, evaluated against the s
 - Fine-tuning API (OpenAI fine-tuning, together.ai, fireworks.ai)
 - LLM-as-judge for evaluation
 
-## Staff+ Interview Angle
-
-"I built the same Q&A system three ways and compared them on 50 test questions. Prompting scored well on simple factual questions but failed on multi-article synthesis. RAG handled synthesis well but retrieval precision was the bottleneck. Fine-tuning had the lowest latency but couldn't answer questions about articles added after training. My recommendation was RAG for most teams — it balances quality, cost, and maintainability. Fine-tuning only makes sense when you have stable knowledge and need sub-100ms latency."

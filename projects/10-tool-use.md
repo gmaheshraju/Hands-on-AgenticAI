@@ -81,6 +81,3 @@ Write 20 test questions ranging from simple ("how many users?") to complex ("mon
 - Any LLM API
 - SQL parser for permission enforcement (better-sqlite3 in Node, or sqlparse in Python)
 
-## Staff+ Interview Angle
-
-"I built a text-to-SQL agent with three permission tiers enforced in code, not just prompts. The permission layer parses every generated SQL statement and rejects anything that isn't a SELECT on an allowed table. The most interesting challenge was error recovery — the LLM generates wrong column names about 20% of the time on first attempt, but with the error message fed back, it self-corrects in one retry over 90% of the time. The lesson: invest in retry loops, not perfect prompts."

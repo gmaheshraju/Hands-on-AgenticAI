@@ -421,7 +421,7 @@ function AntiPatternsPanel() {
         Weak deployment answers describe a process — "we deploy on Tuesdays after QA
         signs off." Strong answers describe a system — automated pipelines, progressive
         rollouts, SLO-gated promotion, instant rollback, and flag-based release
-        decoupling. The maturity signal interviewers look for: deployment is so safe
+        decoupling. The maturity signal in a team: deployment is so safe
         and routine that any engineer can deploy any time without fear. If deploying
         requires courage, your deployment system has failed.
       </Insight>

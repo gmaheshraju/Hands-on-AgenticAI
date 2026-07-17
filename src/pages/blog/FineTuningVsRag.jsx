@@ -204,7 +204,7 @@ export default function FineTuningVsRag() {
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Same Problem Three Ways</p>
-        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and staff+ interview angles.</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and deep dive exercises.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/09-fine-tuning-vs-rag.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
       </div></FadeIn>
         </div>
@@ -350,7 +350,7 @@ function DecisionTreePanel() {
       </FadeIn>
 
       <Insight>
-        The interviewer is testing whether you'll jump to fine-tuning because it sounds impressive,
+        The real question is whether you'll jump to fine-tuning because it sounds impressive,
         or whether you'll start with the cheapest option that works. The right answer is almost always:
         start with prompt engineering, add RAG if you need external knowledge, fine-tune only if the
         first two can't get the behavior right. Each step up costs 10x more in engineering time.
@@ -618,7 +618,7 @@ function CombiningPanel() {
         Each step up is a 5-10x jump in total cost of ownership. Justify each escalation with data.
       </Insight>
 
-      <Decision question="The iteration pattern — the answer that wins interviews">
+      <Decision question="The iteration pattern — the approach that demonstrates mastery">
         <p><Pill type="green">Week 1</Pill> Ship with prompt engineering. Build a golden eval dataset
           of 50-100 examples. Measure accuracy, latency, and cost. This is your baseline. If accuracy
           is above your threshold, stop here. You're done.</p>
@@ -635,11 +635,11 @@ function CombiningPanel() {
       </Decision>
 
       <Insight>
-        In the interview, walk through this exact iteration pattern. Start with: &quot;I'd first
+        In a design review, walk through this exact iteration pattern. Start with: &quot;I'd first
         establish a baseline with prompt engineering, measure accuracy on a golden dataset, and only
         escalate to RAG or fine-tuning when I can point to specific failure modes that cheaper
         approaches can't fix.&quot; This signals that you optimize for engineering velocity, not
-        technical complexity. The staff+ engineer builds the simplest thing that works, not the most
+        technical complexity. The senior engineer builds the simplest thing that works, not the most
         sophisticated thing they can.
       </Insight>
     </FadeIn>

@@ -436,7 +436,7 @@ export default function EvalEngineering() {
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>RAG Eval Harness</p>
-        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and staff+ interview angles.</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and deep dive exercises.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/08-eval-engineering.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
       </div></FadeIn>
     </div>
@@ -836,8 +836,8 @@ function MetricsPanel() {
         The eval system is a product, not a one-time project. Dedicate 15-20% of your AI engineering bandwidth to eval infrastructure &mdash; improving rubrics, growing the golden dataset, calibrating judges, building dashboards. Teams that treat evals as a checkbox end up with a false sense of security. Teams that treat evals as a living system catch regressions the same day they're introduced.
       </Insight></FadeIn>
 
-      <FadeIn delay={350}><Insight tag="2026 hiring signal">
-        The eval gap is becoming THE hiring signal. Anyone can get an agent to write code &mdash; cursor tab, Claude Code, Copilot, Codex. Knowing whether that code is correct? Building the test harnesses, rubrics, guardrails, monitoring pipelines that catch silent regressions before users do? That's the scarce skill. In 2026 interviews, "I built an eval harness that caught a 12% faithfulness drop on deploy day" beats "I built an agent" every single time. The person who can evaluate AI output is more valuable than the person who can generate it.
+      <FadeIn delay={350}><Insight tag="2026 engineering signal">
+        The eval gap is becoming THE differentiator. Anyone can get an agent to write code &mdash; cursor tab, Claude Code, Copilot, Codex. Knowing whether that code is correct? Building the test harnesses, rubrics, guardrails, monitoring pipelines that catch silent regressions before users do? That's the scarce skill. In 2026, "I built an eval harness that caught a 12% faithfulness drop on deploy day" beats "I built an agent" every single time. The person who can evaluate AI output is more valuable than the person who can generate it.
       </Insight></FadeIn>
         </div>
   );

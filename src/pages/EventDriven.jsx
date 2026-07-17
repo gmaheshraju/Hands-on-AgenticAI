@@ -90,12 +90,12 @@ function PatternsPanel() {
         impossible at scale and almost never actually required.
         {'\n\n'}
         The trap: a single partition with all traffic gives you global ordering but kills
-        throughput. If the interviewer pushes on global ordering, the staff answer is
+        throughput. If someone challenges you on global ordering, the practitioner's answer is
         "we probably don't actually need it — let me identify the entity that needs
         causal ordering and partition by that."
       </Decision>
 
-      <Decision question="At-least-once vs exactly-once — what do you actually tell the interviewer?">
+      <Decision question="At-least-once vs exactly-once — what's the real-world answer?">
         <Pill type="green">at-least-once</Pill> is what every production system
         actually uses. The consumer commits the offset after processing, so a crash
         before commit means reprocessing. This is fine if your consumer is idempotent.
@@ -482,7 +482,7 @@ function CDCStreamingPanel() {
 function AntiPatternsPanel() {
   return (
     <div>
-      <h2 className="page-section-title">What not to say in a staff+ interview</h2>
+      <h2 className="page-section-title">Common misconceptions</h2>
       <p className="page-body">
         These answers sound reasonable but reveal shallow understanding. The fix is
         showing the tradeoff you considered, not just the technology you chose.
@@ -506,7 +506,7 @@ function AntiPatternsPanel() {
         answer treats it as a tradeoff. The pattern: name what you're gaining (decoupling,
         replay, fan-out), what you're paying (eventual consistency, debugging complexity,
         infrastructure cost), and why the gain justifies the cost for this specific problem.
-        If you can't name the cost, the interviewer assumes you don't know it exists.
+        If you can't name the cost, experienced engineers will assume you don't know it exists.
       </Insight>
     </div>
   );

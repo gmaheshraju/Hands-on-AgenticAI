@@ -67,6 +67,3 @@ Index a real open-source repo you know well (at least 100 files). Write 10 quest
 - Any LLM for re-ranking and answer generation
 - Tree-sitter or regex for code-aware chunking
 
-## Staff+ Interview Angle
-
-"I built a codebase Q&A system with hybrid RAG. Pure vector search had about 60% precision on my test set — it missed exact function names and config keys. Adding BM25 keyword search with RRF fusion brought precision to around 85%. The LLM re-ranker pushed it higher but added 2 seconds of latency per query, so I made it configurable. The biggest lesson: chunking strategy matters more than embedding model choice."

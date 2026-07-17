@@ -52,6 +52,3 @@ A good agent finds 2-3 real issues per PR at under $0.50 per review.
 - Any LLM API (Claude, GPT-4, etc.)
 - No frameworks — build the ReAct loop yourself
 
-## Staff+ Interview Angle
-
-"I built a code review agent that reads real GitHub PRs. The interesting design decisions were: how to prioritize which files to review when a PR touches 50 files, how to give the agent codebase context without blowing the context window, and how to structure findings so they're actionable, not generic."

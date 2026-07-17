@@ -44,7 +44,7 @@ export class TurnManager {
     this._silenceTimer = null;
     // Listeners: { stateChange, endpointDetected, interruptionDetected }
     this._listeners = {};
-    // How many times agent was interrupted (interview metric)
+    // How many times agent was interrupted (quality metric)
     this.interruptionCount = 0;
     // Partial transcript accumulated during LISTENING
     this.partialTranscript = '';

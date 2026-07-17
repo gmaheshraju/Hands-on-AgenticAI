@@ -76,6 +76,3 @@ Target: block 90%+ of attacks with under 5% false positive rate and under 100ms 
 - Embedding model for semantic similarity detection
 - Express/FastAPI for the defense middleware
 
-## Staff+ Interview Angle
-
-"I built a prompt injection test suite with 50 attacks across 5 categories, and a defense layer that blocks 92% of them. The layered approach — regex for obvious patterns, embedding similarity for semantic attacks, output scanning for data exfiltration — was critical. No single layer catches everything. The hardest tradeoff was false positives: I had to tune the embedding similarity threshold carefully because legitimate requests like 'can you help me draft instructions for my team' were getting flagged."

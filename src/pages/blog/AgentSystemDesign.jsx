@@ -141,7 +141,7 @@ export default function AgentSystemDesign() {
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>PR Review Agent</p>
-        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and staff+ interview angles.</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and deep dive into production patterns.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/01-agent-system-design.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
       </div></FadeIn>
     </div>
@@ -487,7 +487,7 @@ function ArchitecturePanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "The interviewer doesn't want to hear that you'd use LangChain. They want to hear you reason about the tradeoffs: why ReAct over plan-and-execute, why you'd cap iterations at 5, why you need both input and output guards. The framework choice is the last sentence — the architecture reasoning is the whole interview."
+        "What matters is not that you'd use LangChain. Senior engineers look for reasoning about the tradeoffs: why ReAct over plan-and-execute, why you'd cap iterations at 5, why you need both input and output guards. The framework choice is the last sentence — the architecture reasoning demonstrates depth."
       </Insight></FadeIn>
     </div>
   );
@@ -577,7 +577,7 @@ function FunctionCallingPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "The interview signal is in how you handle the unhappy path. Anyone can describe the happy path — LLM picks tool, tool returns data, LLM answers. Staff+ thinking is: what happens when the tool times out? What if it returns stale data? What if the LLM picks the wrong tool? You need retry logic, circuit breakers, and graceful degradation — the same patterns you'd use in any distributed system."
+        "The maturity signal is in how you handle the unhappy path. Anyone can describe the happy path — LLM picks tool, tool returns data, LLM answers. Senior engineering perspective: what happens when the tool times out? What if it returns stale data? What if the LLM picks the wrong tool? You need retry logic, circuit breakers, and graceful degradation — the same patterns you'd use in any distributed system."
       </Insight></FadeIn>
     </div>
   );
@@ -643,7 +643,7 @@ function RealSystemsPanel() {
     <div>
       <SectionHead
         title="Real production agent architectures"
-        desc="How actual companies architect their AI agents — from customer support to code generation. These are the examples that demonstrate staff+ thinking in interviews."
+        desc="How actual companies architect their AI agents — from customer support to code generation. These are the examples that demonstrate staff+ thinking in practice."
       />
 
       <div style={styles.systemCard}>
@@ -711,7 +711,7 @@ function RealSystemsPanel() {
       </div>
 
       <FadeIn><Insight>
-        "When the interviewer asks you to design a customer support agent, don't just describe the RAG pipeline. Talk about the confidence threshold — it's the most important product decision. Then talk about the escalation path, the feedback loop (human corrections improve the system), and the hard-coded guardrails. That's what separates an engineer who's built one from someone who's read about one."
+        "When asked to design a customer support agent, don't just describe the RAG pipeline. Talk about the confidence threshold — it's the most important product decision. Then talk about the escalation path, the feedback loop (human corrections improve the system), and the hard-coded guardrails. That's what separates an engineer who's built one from someone who's read about one."
       </Insight></FadeIn>
     </div>
   );
@@ -721,8 +721,8 @@ function AntiPatternsPanel() {
   return (
     <div>
       <SectionHead
-        title="Anti-patterns that tank interviews"
-        desc="The most common mistakes when discussing AI agent architecture in system design interviews."
+        title="Anti-patterns that reveal shallow thinking"
+        desc="The most common mistakes when discussing AI agent architecture in design reviews."
       />
 
       <div style={styles.anti}>

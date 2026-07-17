@@ -274,7 +274,7 @@ export default function ToolUseFunctionCalling() {
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>SQL Analytics Agent with Permission Tiers</p>
-        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and staff+ interview angles.</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and deep dive exercises.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/10-tool-use.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
       </div></FadeIn>
     </div>
@@ -537,7 +537,7 @@ function PermissionsPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={300}><Insight>
-        In the interview, the security question is a trap. If you say "we validate inputs" and stop there, you have missed the point. The real answer is defense in depth: input validation + output sanitization + permission tiers + rate limits + audit trail + human-in-the-loop for destructive actions + network allowlists + process isolation. Each layer catches what the previous one missed. A single layer gives you 90% protection. Six layers give you 99.99%. That last 9.99% is where production incidents live.
+        In practice, the security question is a trap. If you say "we validate inputs" and stop there, you have missed the point. The real answer is defense in depth: input validation + output sanitization + permission tiers + rate limits + audit trail + human-in-the-loop for destructive actions + network allowlists + process isolation. Each layer catches what the previous one missed. A single layer gives you 90% protection. Six layers give you 99.99%. That last 9.99% is where production incidents live.
       </Insight></FadeIn>
     </div>
   );
@@ -588,8 +588,8 @@ function AntiPatternsPanel() {
         The single most impactful pattern you can add to any tool-calling agent: dry_run mode. Before actually cancelling an order, the tool returns "This would cancel order #456 ($89.99, placed yesterday, 3 items). Proceed?" The model shows this to the user. The user confirms. Then the tool executes for real. This one pattern catches hallucinated IDs, wrong orders, prompt injection attacks, and user mistakes — all at once. Cost: one extra round-trip. Benefit: zero accidental mutations. Every production agent should have this.
       </Insight></FadeIn>
 
-      <FadeIn delay={500}><Insight tag="Interview tip">
-        When the interviewer asks "how do you make tool calling reliable?" — do NOT start with retry logic. Start with schema design (right tool granularity, good descriptions), then dispatch (validation, timeouts, structured errors), then error recovery (retry only transient, circuit breaker, escape hatch), then security (permission tiers, provenance tracking, sandboxing). This shows you think about the problem in layers, from prevention to detection to recovery. That is the staff+ signal.
+      <FadeIn delay={500}><Insight tag="Production insight">
+        When someone asks "how do you make tool calling reliable?" -- do NOT start with retry logic. Start with schema design (right tool granularity, good descriptions), then dispatch (validation, timeouts, structured errors), then error recovery (retry only transient, circuit breaker, escape hatch), then security (permission tiers, provenance tracking, sandboxing). Thinking about the problem in layers, from prevention to detection to recovery, is the engineering maturity signal.
       </Insight></FadeIn>
         </div>
   );

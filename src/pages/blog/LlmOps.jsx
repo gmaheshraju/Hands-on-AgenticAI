@@ -366,7 +366,7 @@ export default function LlmOps() {
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Model Router with Cost Dashboard</p>
-        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and staff+ interview angles.</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and deep dive exercises.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/06-llmops.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
       </div></FadeIn>
     </div>
@@ -528,7 +528,7 @@ function ModelServingPanel() {
       <FadeIn><CodeBlock filename="model-router.js" code={MODEL_ROUTER_CODE} output={MODEL_ROUTER_OUTPUT} /></FadeIn>
 
       <FadeIn><Insight>
-        The staff+ signal isn't knowing that model routing exists. It's knowing the exact cost crossover points and being able to do the math live: "We're at 200K requests/day, average 1500 tokens in + 400 tokens out. On Sonnet that's $900/day. With routing, 65% go to Haiku, that drops to $180/day. The classifier cost is $12/day. Net savings: 80%." Interviewers want you to pull out real numbers, not say "it depends on the use case."
+        The maturity signal isn't knowing that model routing exists. It's knowing the exact cost crossover points and being able to do the math live: "We're at 200K requests/day, average 1500 tokens in + 400 tokens out. On Sonnet that's $900/day. With routing, 65% go to Haiku, that drops to $180/day. The classifier cost is $12/day. Net savings: 80%." In a design review, pull out real numbers, not "it depends on the use case."
       </Insight></FadeIn>
     </div>
   );
@@ -606,7 +606,7 @@ function CostEngineeringPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight tag="Cost reality check">
-        Run this math in every LLMOps interview: "At 1M requests/day, 2000 tokens in + 500 tokens out average, Sonnet costs $6,000/day input + $7,500/day output = $13,500/day = $405K/month. With routing (65% Haiku, 30% Sonnet, 5% Opus) + caching (40% hit rate), it drops to ~$45K/month. That's a 9x reduction from one architectural decision." Pull out the calculator. The numbers win the argument.
+        Run this math in every LLMOps design review: "At 1M requests/day, 2000 tokens in + 500 tokens out average, Sonnet costs $6,000/day input + $7,500/day output = $13,500/day = $405K/month. With routing (65% Haiku, 30% Sonnet, 5% Opus) + caching (40% hit rate), it drops to ~$45K/month. That's a 9x reduction from one architectural decision." Pull out the calculator. The numbers win the argument.
       </Insight></FadeIn>
     </div>
   );
@@ -831,7 +831,7 @@ function AntiPatternsPanel() {
       </FadeIn>
 
       <FadeIn><Insight>
-        In a staff+ interview, describing anti-patterns with specific dollar amounts and incident timelines is worth more than describing the correct architecture. "We had a recursive agent loop that cost $42K over a weekend, which led us to implement per-request cost caps, daily budget limits with automatic model downgrading, and a Slack alert that fires when hourly spend exceeds 2x the rolling average" tells the interviewer you've been in the trenches, not just read the blog posts. The fix is obvious — the story of how you learned it the hard way is what separates operators from theorists.
+        In practice, describing anti-patterns with specific dollar amounts and incident timelines is worth more than describing the correct architecture. "We had a recursive agent loop that cost $42K over a weekend, which led us to implement per-request cost caps, daily budget limits with automatic model downgrading, and a Slack alert that fires when hourly spend exceeds 2x the rolling average" tells people you've been in the trenches, not just read the blog posts. The fix is obvious — the story of how you learned it the hard way is what separates operators from theorists.
       </Insight></FadeIn>
         </div>
   );

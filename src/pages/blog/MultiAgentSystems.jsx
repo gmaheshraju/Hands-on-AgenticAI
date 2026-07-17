@@ -213,7 +213,7 @@ export default function MultiAgentSystems() {
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Multi-Agent Content Pipeline</p>
-        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and staff+ interview angles.</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and deep dive into production patterns.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/04-multi-agent-systems.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
       </div></FadeIn>
     </div>
@@ -430,7 +430,7 @@ function PatternsPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "In the interview, use Mahesh's evolution framework: Single {'>'} Sequential {'>'} Teams {'>'} Swarm. Start by saying 'this is a Level 1 problem — single agent with good tools.' If the interviewer pushes, upgrade: 'At this scale, I'd move to Level 3 — Agent Teams with a supervisor, because we fear being wrong more than we fear missing something.' That framing — Teams vs Swarms as different fear modes — is the staff+ signal. It shows you reason about system design tradeoffs, not just memorize patterns."
+        "In practice, use Mahesh's evolution framework: Single {'>'} Sequential {'>'} Teams {'>'} Swarm. Start by saying 'this is a Level 1 problem — single agent with good tools.' If the problem demands more, upgrade: 'At this scale, I'd move to Level 3 — Agent Teams with a supervisor, because we fear being wrong more than we fear missing something.' That framing — Teams vs Swarms as different fear modes — is the maturity signal. It shows you reason about system design tradeoffs, not just memorize patterns."
       </Insight></FadeIn>
     </div>
   );
@@ -483,7 +483,7 @@ function CoordinationPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={240}><Decision question="Why do multi-agent systems produce incoherent output — and how do you fix it?">
-        <Pill type="red">Top 2026 interview question</Pill> This is the critique behind Cognition's widely-cited "Don't Build Multi-Agents" (2025): the failure mode isn't parallelism, it's <strong>dispersed decision-making</strong>. When you fan out sub-agents and hand each one only its sub-task, they make binding decisions in isolation — one picks REST, another picks GraphQL — and the merge step inherits two incompatible worldviews.
+        <Pill type="red">Critical design question</Pill> This is the critique behind Cognition's widely-cited "Don't Build Multi-Agents" (2025): the failure mode isn't parallelism, it's <strong>dispersed decision-making</strong>. When you fan out sub-agents and hand each one only its sub-task, they make binding decisions in isolation — one picks REST, another picks GraphQL — and the merge step inherits two incompatible worldviews.
         <br /><br />
         <strong>The root cause:</strong> context, not coordination. Each agent acted rationally given what it saw. Nobody was wrong; they just never shared the ground truth that would have made their choices compatible.
         <br /><br />
@@ -495,7 +495,7 @@ function CoordinationPanel() {
       <FadeIn><CodeBlock filename="context-handoff.js" code={CONTEXT_HANDOFF_CODE} output={CONTEXT_HANDOFF_OUTPUT} /></FadeIn>
 
       <FadeIn><Insight>
-        "This is where your distributed systems experience shines. Multi-agent coordination IS microservice orchestration — shared state, conflict resolution, circuit breakers, graceful degradation. The interviewer is testing whether you can apply systems patterns to a new domain, not whether you've memorized agent frameworks."
+        "This is where your distributed systems experience shines. Multi-agent coordination IS microservice orchestration — shared state, conflict resolution, circuit breakers, graceful degradation. What matters is whether you can apply systems patterns to a new domain, not whether you've memorized agent frameworks."
       </Insight></FadeIn>
     </div>
   );
@@ -621,7 +621,7 @@ function WhenToUsePanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "The staff+ move is recommending single-agent first and articulating exactly when you'd graduate to multi-agent. Anyone can draw a fancy multi-agent diagram. The interview signal is saying: 'For this use case, a single agent with good tool selection handles 90% of queries. I'd add a specialist subagent only for the 10% that overflow the context window — and here's how I'd detect that overflow condition.'"
+        "The staff+ move is recommending single-agent first and articulating exactly when you'd graduate to multi-agent. Anyone can draw a fancy multi-agent diagram. The engineering signal is saying: 'For this use case, a single agent with good tool selection handles 90% of queries. I'd add a specialist subagent only for the 10% that overflow the context window — and here's how I'd detect that overflow condition.'"
       </Insight></FadeIn>
     </div>
   );
@@ -661,7 +661,7 @@ function AntiPatternsPanel() {
       </div>
 
       <FadeIn><Insight>
-        "Use Mahesh's evolution levels as your interview framework. Level 1: 'This is a single-agent problem — one LLM with 5 focused tools.' Level 2: 'If we need pipeline processing, chain agents sequentially.' Level 3: 'For quality-critical tasks, a supervisor with specialist teams — they fear being wrong, so they verify.' Level 4: 'Only for exhaustive research where we fear missing something.' Starting at Level 4 and working down is the interview anti-pattern. Starting at Level 1 and articulating exactly when to upgrade — that's staff+ reasoning."
+        "Use Mahesh's evolution levels as your design framework. Level 1: 'This is a single-agent problem — one LLM with 5 focused tools.' Level 2: 'If we need pipeline processing, chain agents sequentially.' Level 3: 'For quality-critical tasks, a supervisor with specialist teams — they fear being wrong, so they verify.' Level 4: 'Only for exhaustive research where we fear missing something.' Starting at Level 4 and working down is a common pitfall. Starting at Level 1 and articulating exactly when to upgrade — that shows mastery."
       </Insight></FadeIn>
         </div>
   );

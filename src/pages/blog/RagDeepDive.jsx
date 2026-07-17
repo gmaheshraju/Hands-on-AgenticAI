@@ -175,7 +175,7 @@ export default function RagDeepDive() {
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Codebase Q&A with Hybrid RAG</p>
-        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and staff+ interview angles.</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and production patterns for deep dive.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/05-rag-pipeline.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
       </div></FadeIn>
     </div>
@@ -308,7 +308,7 @@ function ChunkingPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "Mahesh's advice #1: 'Smart defaults over infinite customization.' Chunking is the perfect example — don't build a settings panel with 15 chunking strategies. Pick recursive splitting at 512 tokens with 20% overlap as the default. Then validate by manually checking 50 retrievals. The staff+ answer in interviews starts with: 'The first question is how we chunk. If the answer spans two chunks, no amount of search quality saves us.' Then describe your validation process — that's what separates builders from readers."
+        "Mahesh's advice #1: 'Smart defaults over infinite customization.' Chunking is the perfect example — don't build a settings panel with 15 chunking strategies. Pick recursive splitting at 512 tokens with 20% overlap as the default. Then validate by manually checking 50 retrievals. The senior engineering perspective starts with: 'The first question is how we chunk. If the answer spans two chunks, no amount of search quality saves us.' Then describe your validation process — that's what separates builders from readers."
       </Insight></FadeIn>
     </div>
   );
@@ -357,7 +357,7 @@ function EmbeddingsPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "The interview trap is fixating on the embedding model choice. Mahesh's advice #3 applies here: go vertical-first. Don't build a 'universal RAG platform' — build one that works perfectly for your specific document type. An e-Commerce product catalog needs different chunking, metadata, and retrieval strategies than a legal document corpus. The real engineering challenge is the pipeline: batch ingestion, incremental updates, model versioning. Mention the migration cost explicitly — 'choosing an embedding model is a one-way door because migration means re-embedding our entire corpus' — and the interviewer knows you've done this for real."
+        "The common pitfall is fixating on the embedding model choice. Mahesh's advice #3 applies here: go vertical-first. Don't build a 'universal RAG platform' — build one that works perfectly for your specific document type. An e-Commerce product catalog needs different chunking, metadata, and retrieval strategies than a legal document corpus. The real engineering challenge is the pipeline: batch ingestion, incremental updates, model versioning. Mention the migration cost explicitly — 'choosing an embedding model is a one-way door because migration means re-embedding our entire corpus' — and senior engineers know you've done this for real."
       </Insight></FadeIn>
     </div>
   );
@@ -471,7 +471,7 @@ function RerankingPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "Reranking is the answer to 'how would you improve retrieval quality?' in the interview. Retrieve 20 with hybrid search, rerank to 5 with a cross-encoder. The 15-30% improvement costs 50-150ms and pennies per query. Knowing this pattern — and the specific latency numbers — signals that you've tuned a production RAG pipeline, not just read about one."
+        "Reranking is the answer to 'how would you improve retrieval quality?' in a design review. Retrieve 20 with hybrid search, rerank to 5 with a cross-encoder. The 15-30% improvement costs 50-150ms and pennies per query. Knowing this pattern — and the specific latency numbers — demonstrates depth with production RAG pipelines, not just theoretical knowledge."
       </Insight></FadeIn>
     </div>
   );
@@ -539,7 +539,7 @@ function PitfallsPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "Mahesh's Top 8 advice #8: 'Add continuous evals.' The production pitfalls are invisible without them — stale embeddings, lost-in-the-middle, domain vocabulary gaps all look like 'the agent works' from the outside. You need precision@k, groundedness, and answer correctness running on every change. Mahesh's rule: 'Evals + Memory are the moats of AI products.' The eval pipeline IS the product quality. Without it, you're flying blind — and in an interview, describing these failure modes with specific metrics shifts you from 'has read about RAG' to 'has operated a RAG pipeline at scale.'"
+        "Mahesh's Top 8 advice #8: 'Add continuous evals.' The production pitfalls are invisible without them — stale embeddings, lost-in-the-middle, domain vocabulary gaps all look like 'the agent works' from the outside. You need precision@k, groundedness, and answer correctness running on every change. Mahesh's rule: 'Evals + Memory are the moats of AI products.' The eval pipeline IS the product quality. Without it, you're flying blind — and in practice, understanding these failure modes with specific metrics shifts you from 'has read about RAG' to 'has operated a RAG pipeline at scale.'"
       </Insight></FadeIn>
         </div>
   );

@@ -64,6 +64,3 @@ A web-based chat interface that connects to any LLM-powered agent and demonstrat
 - Any LLM API with streaming support
 - localStorage for message persistence
 
-## Staff+ Interview Angle
-
-"I built a production chat UI with four trust-building patterns: streaming with stop-generation, inline source citations, human-in-the-loop approval for risky actions, and specific error states. The HITL flow was the hardest — the agent needs to pause mid-execution, serialize its state, wait for approval, then resume. I implemented it as a state machine: RUNNING → AWAITING_APPROVAL → APPROVED/REJECTED → RUNNING. The biggest UX insight: showing what the agent is doing ('Searching knowledge base...') during the thinking phase reduced perceived latency dramatically, even though actual latency didn't change."

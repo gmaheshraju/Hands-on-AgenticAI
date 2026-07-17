@@ -389,9 +389,8 @@ function AntiPatternsPanel() {
       <h2 className="page-section-title">Common auth mistakes that reveal junior thinking</h2>
       <p className="page-body">
         Auth anti-patterns are dangerous because they often work in development and staging,
-        then fail silently in production — until a breach. An interviewer presenting an auth
-        design problem is testing whether you've been burned by these mistakes or are about
-        to be.
+        then fail silently in production — until a breach. The real test is whether you've
+        been burned by these mistakes or are about to be.
       </p>
 
       {/* Anti-pattern 1 */}
@@ -497,9 +496,9 @@ function AntiPatternsPanel() {
         </p>
       </div>
 
-      <Insight type="warn" tag="Interview trap">
-        When an interviewer asks about auth, they're not testing whether you know OAuth2
-        grant types — they're testing whether you understand the security implications of
+      <Insight type="warn" tag="Common pitfall">
+        When evaluating an auth design, the question isn't whether you know OAuth2
+        grant types — it's whether you understand the security implications of
         every design choice. The strongest signal is when you proactively mention threat
         models: "If this token is stolen, here's the blast radius, and here's how we
         bound it." Every auth decision should have a corresponding "what happens when

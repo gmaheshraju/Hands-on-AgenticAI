@@ -80,6 +80,3 @@ Produce a table showing the cumulative impact:
 - Redis or in-memory cache (Map) for the cache layer
 - Multiple LLM providers/tiers for routing
 
-## Staff+ Interview Angle
-
-"I took an agent from $2 to $0.18 per conversation through four optimizations. Prompt compression saved 35% of tokens. Semantic caching hit on 25% of requests in a real conversation set. Model routing sent 60% of requests to a cheap model. The surprising finding: early termination saved more tokens than I expected — the model was generating 150+ tokens for questions that only needed 30. The key lesson is measuring quality at each step — prompt compression looked great on cost but broke one category of questions that I caught through regression testing."
