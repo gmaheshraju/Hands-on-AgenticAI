@@ -269,6 +269,13 @@ function Tab2() {
       <Insight>
         The cascading pattern is underrated. Start with Haiku for everything. Only escalate when the cheap model's response fails a quality check. At 100K requests/month, this saves $10K+ because most requests are simple. The real engineering challenge is building a reliable quality scorer -- not the routing logic itself. A 200ms classifier that is 90% accurate saves you more money than a perfect classifier that adds 2 seconds of latency.
       </Insight>
+
+      <Decision question="Reasoning tokens -- the 2026 cost line item nobody budgeted for">
+        <p><Pill type="red">The hidden multiplier</Pill> Extended-thinking models (Claude with thinking, OpenAI o-series, Gemini thinking) emit a burst of internal reasoning tokens before the visible answer. You pay for every one at the output rate, and a &quot;hard&quot; request can spend 2,000-10,000 thinking tokens on a 200-token answer. Your per-request cost is now dominated by tokens the user never sees.</p>
+        <p><Pill type="amber">Budget the thinking, don&apos;t just enable it</Pill> Treat reasoning effort as a routing dimension, not an on/off switch. Most APIs expose a thinking budget (a token cap or an effort level). Set it per request class: off for extraction and formatting, low for routine synthesis, high only for the 5% of genuinely novel or high-stakes tasks. A flat &quot;always think hard&quot; default is the reasoning-era equivalent of routing everything to Opus.</p>
+        <p><Pill type="red">Latency compounds too</Pill> Thinking tokens are generated serially before the first visible token, so TTFT balloons from ~1s to 5-20s. For an interactive chat surface this is fatal -- stream a &quot;thinking...&quot; affordance or push the reasoning call to a background job. Reserve deep reasoning for asynchronous workloads (agents, batch analysis) where a human is not watching a cursor blink.</p>
+        <p><Pill type="green">The interview-grade answer</Pill> &quot;I route on two axes: model tier and reasoning budget. Cheap model + no thinking handles the bulk; I only spend reasoning tokens when a quality check or complexity classifier says the task earns it, and I cap the budget so a pathological input can&apos;t run up a 10K-token bill. I track thinking tokens as a separate metric because they are invisible in the response but very visible on the invoice.&quot;</p>
+      </Decision>
     </FadeIn>
   );
 }
