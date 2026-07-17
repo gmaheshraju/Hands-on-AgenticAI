@@ -13,39 +13,47 @@ No dependencies required — runs on Node.js 18+ with zero npm packages.
 ## Architecture
 
 ```
-Query: "How does the rate limiter work?"
-  |
-  v
-+------------------+
-| 1. CHUNK         |  Code-aware splitting (functions, classes, doc sections)
-+------------------+
-  |
-  v
-+------------------+
-| 2. INDEX         |  BM25 inverted index + Vector embeddings (parallel)
-+------------------+
-  |
-  v
-+------------------+     +------------------+
-| 3a. BM25 Search  |     | 3b. Vector Search|  Run in parallel
-| (keyword match)  |     | (semantic match) |
-+--------+---------+     +--------+---------+
-         |                        |
-         v                        v
-+------------------------------------------+
-| 4. RRF Fusion                            |  Reciprocal Rank Fusion
-| Score = 1/(k + rank_bm25) + 1/(k + rank_vec)
-+------------------------------------------+
-  |
-  v
-+------------------+
-| 5. RE-RANK       |  LLM scores each candidate 0-10 for relevance
-+------------------+
-  |
-  v
-+------------------+
-| 6. GENERATE      |  LLM produces answer with source citations
-+------------------+
+  ┌──────────────────────────────────────────────────────────┐
+  │                    SOURCE FILES                          │
+  └────────────────────────┬─────────────────────────────────┘
+                           ▼
+  ┌──────────────────────────────────────────────────────────┐
+  │  chunker.js ── Code-Aware Chunking                      │
+  │  Split by function/class/section boundaries              │
+  └────────────────────────┬─────────────────────────────────┘
+                           ▼
+          ┌────────────────┴────────────────┐
+          ▼                                 ▼
+  ┌───────────────────┐           ┌───────────────────┐
+  │  bm25.js          │           │  vectorSearch.js   │
+  │  Inverted Index   │           │  Sparse Embeddings │
+  │  TF-IDF + length  │           │  Cosine Similarity │
+  │  normalization    │           │                    │
+  └────────┬──────────┘           └────────┬──────────┘
+           │        QUERY                  │
+           ▼        ─────                  ▼
+  ┌───────────────────┐           ┌───────────────────┐
+  │  BM25 Search      │           │  Vector Search     │
+  │  top-K keywords   │           │  top-K semantic    │
+  └────────┬──────────┘           └────────┬──────────┘
+           │                               │
+           └───────────┬───────────────────┘
+                       ▼
+  ┌──────────────────────────────────────────────────────────┐
+  │  fusion.js ── Reciprocal Rank Fusion (RRF)              │
+  │  score = 1/(k + rank_bm25) + 1/(k + rank_vec)          │
+  │  Rank-based merge → immune to score-scale differences   │
+  └────────────────────────┬─────────────────────────────────┘
+                           ▼
+  ┌──────────────────────────────────────────────────────────┐
+  │  reranker.js ── LLM Re-Ranking                          │
+  │  Score each candidate 0-10 for query relevance          │
+  └────────────────────────┬─────────────────────────────────┘
+                           ▼
+  ┌──────────────────────────────────────────────────────────┐
+  │  pipeline.js ── Answer Generation                       │
+  │  LLM produces answer with file:line source citations    │
+  └──────────────────────────────────────────────────────────┘
 ```
 
 ## Key Files

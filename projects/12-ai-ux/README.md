@@ -2,6 +2,35 @@
 
 A chat interface demonstrating seven UX patterns that build user trust in AI systems: streaming responses, confidence indicators, source citations, human-in-the-loop approval, specific error states, thinking indicators, and persistent message history.
 
+```
+┌─────────────────────────┐         ┌─────────────────────────────┐
+│  Browser (vanilla JS)   │         │   Express Server (SSE)      │
+│                         │         │                             │
+│  ┌───────────────────┐  │  GET    │  ┌───────────────────────┐  │
+│  │ EventSource       │──┼────────▸│  │ /api/chat/stream      │  │
+│  │ (SSE client)      │◂─┼────────┤│  │  ├ thinking events     │  │
+│  └───────────────────┘  │  SSE    │  │  ├ token + confidence  │  │
+│           │              │ stream  │  │  ├ citation refs       │  │
+│           ▼              │         │  │  └ error (typed)       │  │
+│  ┌───────────────────┐  │         │  └───────────┬───────────┘  │
+│  │ Confidence badges │  │         │              │              │
+│  │ Citation tooltips │  │         │              ▼              │
+│  │ Error cards       │  │         │  ┌───────────────────────┐  │
+│  │ localStorage      │  │         │  │ Mock Agent (agent.js) │  │
+│  └───────────────────┘  │         │  │  ├ scenario matcher    │  │
+│           │              │         │  │  ├ tokenizer           │  │
+│           ▼              │         │  │  └ HITL continuations  │  │
+│  ┌───────────────────┐  │  POST   │  └───────────────────────┘  │
+│  │ HITL Approval UI  │──┼────────▸│                             │
+│  │  ├ Approve        │  │ /api/   │  ┌───────────────────────┐  │
+│  │  ├ Reject         │  │ hitl/   │  │ pendingApprovals Map  │  │
+│  │  └ Edit + Approve │  │ resolve │  │  Promise awaits user  │  │
+│  └───────────────────┘  │         │  │  then resumes stream  │  │
+│                         │  POST   │  └───────────────────────┘  │
+│  [Stop] button ─────────┼────────▸│  /api/chat/stop             │
+└─────────────────────────┘         └─────────────────────────────┘
+```
+
 ## Quick Start
 
 ```bash
