@@ -5,26 +5,48 @@ A multi-agent system that produces a technical blog post through four specialize
 ## Architecture
 
 ```
-                    +------------+
-                    | Supervisor |
-                    +-----+------+
-                          |
-          +---------+-----+-----+-----------+
-          |         |           |           |
-     Researcher   Writer     Editor    Fact-Checker
-     (search,     (generate  (review,  (verify claims
-      fetch)       draft)    accept/   against sources)
-                             reject)
+  Topic
+    │
+    ▼
+  ┌──────────────────────────────────────────────────────────────┐
+  │  Supervisor                               supervisor.js     │
+  │  orchestrate, retry (max 2), cost tracking ($2 budget)      │
+  └──────┬───────────────────────────────────────────────────────┘
+         │ RESEARCH_REQUEST
+         ▼
+  ┌──────────────────────┐
+  │  Researcher          │  web_search, fetch_url
+  │  → structured notes  │  { key_claim, source_url, confidence }
+  └──────┬───────────────┘
+         │ RESEARCH_COMPLETE
+         ▼
+  ┌──────────────────────┐    REVISION_REQ     ┌────────────────┐
+  │  Writer              │◂────────────────────┤  Supervisor    │
+  │  → blog post draft   │   (feedback from    │  (retry gate)  │
+  └──────┬───────────────┘    rejected review)  └───────▲────────┘
+         │ DRAFT_COMPLETE                               │
+         ▼                                              │
+  ┌──────────────────────┐                              │
+  │  Editor              │  score 7+/10 → ACCEPT        │
+  │  accept / reject     │  score <7   → REJECT ────────┘
+  └──────┬───────────────┘         REVIEW_COMPLETE
+         │ ACCEPT
+         ▼
+  ┌──────────────────────┐
+  │  Fact-Checker        │  verify claims vs. sources
+  │  → PASS / FAIL       │
+  └──────┬───────────────┘
+         │ FACT_CHECK_COMPLETE
+         ▼
+  ┌──────────────────────┐
+  │  Supervisor          │  assemble final report + cost breakdown
+  │  → FINAL output      │
+  └──────────────────────┘
+         │
+    ─────┼───────────────────────────────────
+    Message Bus (messageBus.js)
+    pub/sub by agent name, full ordered log
 ```
-
-**Pipeline flow:**
-
-1. **Researcher** decomposes the topic, searches sources, produces structured notes
-2. **Writer** takes research notes and produces a blog post draft
-3. **Editor** reviews the draft — ACCEPT or REJECT with feedback
-4. If rejected, the **Supervisor** sends feedback back to the Writer (up to 2 retries)
-5. Once accepted, **Fact-Checker** verifies every technical claim against sources
-6. Supervisor assembles the final report
 
 ## Message Bus
 

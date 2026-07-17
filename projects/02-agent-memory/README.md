@@ -15,28 +15,41 @@ npm run chat     # Interactive CLI session
 ### Three Memory Layers
 
 ```
-User Input
-    |
-    v
-+-- Episodic Memory (raw logs) --------+
-|   "met Priya at KubeCon, she leads   |
-|    platform eng at Stripe"           |
-+---------------------------------------+
-    |
-    | (consolidation gate: every 5 episodes)
-    v
-+-- Semantic Memory (distilled facts) --+
-|   Priya -> company: Stripe           |
-|   Priya -> role: platform eng        |
-|   Priya -> met_at: KubeCon           |
-|   Priya -> interested_in: observability |
-+---------------------------------------+
-    |
-    v
-+-- Procedural Memory (patterns) -------+
-|   call_prep: pull facts + recent      |
-|   interactions + interests + threads  |
-+---------------------------------------+
+  User Input
+      │
+      ▼
+  ┌──────────────────────────────────────────────────────────┐
+  │  Episodic Memory (SQLite + FTS5)                         │
+  │  raw_input, raw_output, context, consolidated flag       │
+  └──────────────┬───────────────────────────────────────────┘
+                 │
+                 │  consolidation gate (every 5 episodes OR urgent pattern)
+                 ▼
+  ┌──────────────────────────────────────────────────────────┐
+  │  Consolidation Engine         consolidation.js           │
+  │  ├─ extract facts (subject ─ predicate ─ object)         │
+  │  ├─ conflict resolution (same subj+pred → update)        │
+  │  ├─ extract procedural patterns (call_prep, intro)       │
+  │  └─ mark stale facts (6+ months without reinforcement)   │
+  └────────┬───────────────────────────────┬─────────────────┘
+           ▼                               ▼
+  ┌─────────────────────────┐   ┌─────────────────────────┐
+  │  Semantic Memory        │   │  Procedural Memory      │
+  │  subject → predicate:   │   │  trigger_pattern →      │
+  │    object (+ confidence │   │    action_template      │
+  │    + staleness flag)    │   │    (use_count ranked)   │
+  └────────┬────────────────┘   └────────┬────────────────┘
+           │                             │
+           └──────────┬──────────────────┘
+                      ▼
+  ┌──────────────────────────────────────────────────────────┐
+  │  Retrieval Pipeline                  retrieval.js        │
+  │  ├─ FTS keyword search (episodic + semantic)             │
+  │  ├─ direct subject lookup (exact match)                  │
+  │  ├─ procedural trigger matching                          │
+  │  ├─ score: relevance × 0.6 + recency × 0.4 − staleness │
+  │  └─ deduplicate, sort, top-K                             │
+  └──────────────────────────────────────────────────────────┘
 ```
 
 ### Key Components

@@ -2,6 +2,40 @@
 
 A mini version of Claude Code/Devin — takes a GitHub issue, reads the codebase, plans a fix, applies it, runs tests, self-corrects on failure, and generates a PR description.
 
+```
+┌─────────────┐     ┌──────────────┐     ┌──────────────┐
+│ GitHub Issue │────▸│ Issue Parser │────▸│ Repo Explorer│
+└─────────────┘     └──────────────┘     └──────┬───────┘
+  issueParser.js      title, labels,            │ listFiles
+                      errors, files             │ readFile
+                                                │ searchCode
+                                                ▼
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│  PR Output   │◂────│  Test Runner │◂────│   Planner    │
+└──────────────┘     └──────┬───────┘     └──────────────┘
+  prGenerator.js       testRunner.js        planner.js
+  title, body,              │               rootCause,
+  labels                    │               steps[]
+                            ▼
+                   ┌────────────────┐
+                   │     Coder      │
+                   │   coder.js     │
+                   │ generate diffs │
+                   │  apply patches │
+                   └────────┬───────┘
+                            │
+               ┌────────────▼────────────┐
+               │   Self-Correction Loop  │
+               │                         │
+               │  run tests ──▸ pass? ───▸ done
+               │      ▲           │      │
+               │      │          fail     │
+               │      │           │      │
+               │  apply fix ◂─ analyze   │
+               │      (max 3 retries)    │
+               └─────────────────────────┘
+```
+
 ## Quick Start
 
 ```bash
