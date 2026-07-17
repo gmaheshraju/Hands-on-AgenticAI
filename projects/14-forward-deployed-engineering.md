@@ -87,6 +87,3 @@ An automated checklist that verifies readiness:
 - SQLite for tracking pilot metrics
 - Simple HTML dashboard or CLI-based reporting
 
-## Staff+ Interview Angle
-
-"I built a reusable FDE onboarding toolkit that compresses customer setup from weeks to days. The domain adaptation pipeline was the highest-value piece — it extracts domain vocabulary from the customer's documents, generates few-shot examples, and builds a customized system prompt automatically. Before adaptation, the model got 40% of domain-specific questions right. After, it hit 85% — that's the difference between a failed pilot and a signed contract. The toolkit is designed for reuse: same framework, different data connector and domain vocabulary per customer."

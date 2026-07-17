@@ -178,17 +178,25 @@ async function main() {
 
   // Final summary
   console.log();
-  console.log('  INTERVIEW TALKING POINTS');
+  console.log('  KEY TAKEAWAYS');
   console.log('  ' + '-'.repeat(50));
-  console.log(`  "I built a prompt injection test suite with ${scores.overall.totalAttacks} attacks`);
-  console.log(`   across 5 categories, and a defense layer that blocks`);
-  console.log(`   ${scores.overall.strictDetectionRate}% of them with a ${scores.falsePositives.falsePositiveRate}% false positive rate.`);
+  console.log(`  "I built a prompt injection test suite with ${scores.bySource.training.total} training attacks`);
+  console.log(`   across 5 categories that the defense regexes were tuned against —`);
+  console.log(`   those hit ${scores.bySource.training.detectionRate}% detection, but that number is meaningless on its`);
+  console.log(`   own, since it's tested against the same data the regexes were built`);
+  console.log(`   from. So I also built a ${scores.bySource.heldOut.total}-attack HELD-OUT set of paraphrases the`);
+  console.log(`   patterns never saw — direct override, role hijacking, extraction,`);
+  console.log(`   encoding, and indirect injection, reworded. Held-out detection is`);
+  console.log(`   the honest number: ${scores.bySource.heldOut.detectionRate}%, with a ${scores.falsePositives.falsePositiveRate}% false positive rate on`);
+  console.log(`   legitimate queries.`);
+  console.log(`   Training: ${scores.bySource.training.detectionRate}%, Held-out: ${scores.bySource.heldOut.detectionRate}%.`);
   console.log(`   The layered approach — regex for obvious patterns, Unicode`);
   console.log(`   normalization for encoding attacks, canary tokens for leak`);
-  console.log(`   detection — was critical. No single layer catches everything.`);
+  console.log(`   detection — was critical. No single layer catches everything, and`);
+  console.log(`   the held-out gap shows regex-only detection has a real generalization`);
+  console.log(`   ceiling — semantic/LLM-based classification is the next layer needed.`);
   if (scores.weakestCategory) {
-    console.log(`   The weakest category was ${scores.weakestCategory} — these require`);
-    console.log(`   semantic understanding that pure regex can't provide."`);
+    console.log(`   The weakest category overall was ${scores.weakestCategory}."`);
   }
   console.log();
 }

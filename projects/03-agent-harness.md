@@ -64,6 +64,3 @@ Run the agent on 3 different research questions. For each:
 - Any LLM API
 - File-based trace output (JSONL)
 
-## Staff+ Interview Angle
-
-"I built a research agent with three termination conditions: iteration cap, cost cap, and convergence detection. The convergence detector tracks how many new facts each iteration adds — when three consecutive iterations add nothing new, the agent concludes. The trace log made debugging possible: I could see exactly where the agent wasted tokens on irrelevant searches."

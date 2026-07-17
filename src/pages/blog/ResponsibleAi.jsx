@@ -259,7 +259,7 @@ function Tab1() {
       <CodeBlock code={FAIRNESS_AUDIT_CODE} filename="fairness-audit.js" output={FAIRNESS_AUDIT_OUTPUT} />
 
       <Insight tag="Staff+ signal">
-        In a staff+ interview, never say "we need to remove bias." Bias is a feature of data, not a bug
+        In practice, never say "we need to remove bias." Bias is a feature of data, not a bug
         to remove. The correct framing: "We need to measure disparities across protected attributes, set
         acceptable thresholds, and build monitoring that alerts us when those thresholds are exceeded."
         Bias detection is an ongoing process, not a one-time fix. The 4/5ths rule from US employment law
@@ -470,7 +470,7 @@ function Tab4() {
       </Decision>
 
       <Insight tag="Staff+ signal">
-        The staff+ interview answer on regulation: "I wouldn't wait for laws to tell me what to do. I'd
+        The senior engineering perspective on regulation: "I wouldn't wait for laws to tell me what to do. I'd
         build the monitoring, documentation, and fairness measurement infrastructure now because (a) it's
         the right thing to do, (b) it's cheaper to build proactively than retrofit reactively — GDPR
         early adopters spent 40% less than late scramblers, and (c) regulations are converging across
@@ -579,7 +579,7 @@ export default function ResponsibleAi() {
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Bias Audit Pipeline + Model Card Generator</p>
-        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and staff+ interview angles.</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and deep dive exercises.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/13-responsible-ai.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
       </div></FadeIn>
         </div>

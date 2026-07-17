@@ -48,7 +48,7 @@ export function detectLanguage(filePath) {
  * these, we end the previous chunk and begin a new one.
  *
  * Why regex instead of tree-sitter?
- * - Zero native dependencies (important for a demo / interview setting)
+ * - Zero native dependencies (easy to deploy anywhere)
  * - Covers the 90% case: top-level functions, classes, exported consts
  * - For production you would swap in tree-sitter for precise AST boundaries
  */

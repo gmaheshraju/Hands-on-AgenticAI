@@ -198,7 +198,7 @@ function ProfilesPanel({ expandedDb, setExpandedDb }) {
 function AntiPatternsPanel() {
   return (
     <div>
-      <h2 className="page-section-title">What not to say in a staff+ interview</h2>
+      <h2 className="page-section-title">Common misconceptions</h2>
       <p className="page-body">These are the answers that get you passed over. The fix isn't more knowledge — it's showing engineering judgment.</p>
       {ANTIS.map((ap, i) => (
         <div key={i} style={styles.anti}>

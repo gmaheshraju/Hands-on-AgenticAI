@@ -212,7 +212,7 @@ function TransactionsPanel() {
         in theory. In practice, 3PC is rarely used because: (1) it requires three round-trips
         instead of two, (2) it doesn't work correctly with network partitions (a partitioned
         participant might abort while others commit), and (3) the failure modes it solves are
-        rare enough that the performance cost isn't worth it. It's good interview knowledge but
+        rare enough that the performance cost isn't worth it. It's good to understand conceptually but
         not a practical recommendation.
       </Decision>
 
@@ -348,7 +348,7 @@ function IdempotencyPanel() {
 function AntiPatternsPanel() {
   return (
     <div>
-      <h2 className="page-section-title">Bad vs. good answers in interviews</h2>
+      <h2 className="page-section-title">Anti-patterns vs. production-tested approaches</h2>
       <p className="page-body">
         The difference between a senior and a staff+ answer isn't more buzzwords — it's
         demonstrating that you understand the tradeoffs, have opinions about defaults,
@@ -454,8 +454,8 @@ function AntiPatternsPanel() {
         "The staff+ differentiator in distributed systems questions isn't knowing the
         theorems — it's showing that you understand the tradeoff space well enough to make
         a defensible choice for a specific system. Don't recite CAP. Say what your system
-        needs, what you're choosing, and what the cost of that choice is. The interviewer
-        wants to hear judgment, not definitions."
+        needs, what you're choosing, and what the cost of that choice is. What matters is
+        judgment, not definitions."
       </Insight>
     </div>
   );

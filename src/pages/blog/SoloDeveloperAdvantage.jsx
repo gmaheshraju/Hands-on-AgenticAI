@@ -9,7 +9,7 @@ const tabs = [
   { key: 'playbook', label: 'The Playbook' },
   { key: 'moats', label: 'New Moats' },
   { key: 'examples', label: 'Patterns That Win' },
-  { key: 'interview', label: 'Interview Angle' },
+  { key: 'applied', label: 'Applied Patterns' },
 ];
 
 export default function SoloDeveloperAdvantage() {
@@ -42,7 +42,7 @@ export default function SoloDeveloperAdvantage() {
         {active === 'playbook' && <Playbook />}
         {active === 'moats' && <NewMoats />}
         {active === 'examples' && <Patterns />}
-        {active === 'interview' && <InterviewAngle />}
+        {active === 'applied' && <AppliedPatterns />}
       </section>
     </article>
   );
@@ -374,7 +374,7 @@ function Patterns() {
             <li>A solo "agency" doing SEO audits — AI crawls and analyzes, you deliver the strategy</li>
             <li>A one-person data analytics consultancy — AI processes the data, you interpret and present</li>
             <li>A freelance security auditor — AI scans for vulnerabilities, you prioritize and write the report</li>
-            <li>A solo recruiter — AI screens 500 resumes, you interview the top 20</li>
+            <li>A solo recruiter — AI screens 500 resumes, you evaluate the top 20</li>
           </ul>
         </div>
       </FadeIn>
@@ -429,20 +429,20 @@ function Patterns() {
   );
 }
 
-/* ─── Tab: Interview Angle ─── */
-function InterviewAngle() {
+/* ─── Tab: Applied Patterns ─── */
+function AppliedPatterns() {
   return (
     <>
       <FadeIn delay={0}>
-        <h2 style={styles.h2}>Staff+ Interview Angle</h2>
+        <h2 style={styles.h2}>Applied Patterns</h2>
         <p style={styles.p}>
-          This isn't just a trend piece — it's a <strong>career strategy</strong>. Here's how to use the solo developer
-          thesis in staff/principal-level interviews.
+          This isn't just a trend piece — it's a <strong>career strategy</strong>. Here's how to apply the solo developer
+          thesis in practice as a senior engineer.
         </p>
       </FadeIn>
 
       <FadeIn delay={60}>
-        <Decision question="Why does this matter in an interview at a big company?">
+        <Decision question="Why does this matter at a big company?">
           Because every company is trying to figure out how to do more with fewer people. When you demonstrate that you've
           built production systems solo with AI assistance — handling architecture, implementation, testing, deployment,
           monitoring, and iteration — you're showing exactly the leverage that companies want from their senior engineers.
@@ -454,7 +454,7 @@ function InterviewAngle() {
       </FadeIn>
 
       <FadeIn delay={120}>
-        <h3 style={styles.h3}>The Killer Opening Lines</h3>
+        <h3 style={styles.h3}>Perspectives That Show Depth</h3>
         <div style={styles.angleGrid}>
           {[
             {
@@ -480,9 +480,9 @@ function InterviewAngle() {
 
       <FadeIn delay={180}>
         <Insight tag="the meta-point">
-          The interview prep app you're reading right now was built by a solo developer with AI. 15 blog posts, 23 production-grade
+          The engineering playbook you're reading right now was built by a solo developer with AI. 15 blog posts, 23 production-grade
           projects with real tests, architecture diagrams, interactive UI — shipped in weeks, not months. That's not a talking point.
-          That's proof. When an interviewer asks "can one person really build all this?" you point at this and say "I already did."
+          That's proof. When someone asks "can one person really build all this?" you point at this and say "I already did."
         </Insight>
       </FadeIn>
 

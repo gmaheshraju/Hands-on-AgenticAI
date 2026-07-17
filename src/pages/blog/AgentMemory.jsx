@@ -121,7 +121,7 @@ Extracted facts:
 Consolidated 14 episodes → 4 facts
 All 14 episodes marked as consolidated.`;
 
-const TABS = ['Memory Types', 'Context Windows', 'Retrieval Patterns', 'Production Systems', 'Interview Angles'];
+const TABS = ['Memory Types', 'Context Windows', 'Retrieval Patterns', 'Production Systems', 'Deep Dive'];
 
 export default function AgentMemory() {
   const [tab, setTab] = useState(0);
@@ -147,12 +147,12 @@ export default function AgentMemory() {
       {tab === 1 && <ContextWindowPanel />}
       {tab === 2 && <RetrievalPanel />}
       {tab === 3 && <ProductionPanel />}
-      {tab === 4 && <InterviewPanel />}
+      {tab === 4 && <DeepDivePanel />}
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Personal CRM with Cross-Session Memory</p>
-        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and staff+ interview angles.</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and production patterns.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/02-agent-memory.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
       </div></FadeIn>
     </div>
@@ -328,7 +328,7 @@ function MemoryTypesPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "An LLM knows everything about humanity and nothing about you" — Mahesh's framing. Memory bridges that gap. In the interview, don't just say "working, short-term, long-term." Use Mahesh's pillars: Procedural (SKILL.md — how to do things), Semantic (vector DB — facts), Episodic (dated log — what happened). Then explain the consolidation gate: "you don't search the giant episodic log every time — a cheaper model periodically distills episodes into semantic facts. That's why ChatGPT memory stays short but somehow always up to date."
+        "An LLM knows everything about humanity and nothing about you" — Mahesh's framing. Memory bridges that gap. In practice, don't just say "working, short-term, long-term." Use Mahesh's pillars: Procedural (SKILL.md — how to do things), Semantic (vector DB — facts), Episodic (dated log — what happened). Then explain the consolidation gate: "you don't search the giant episodic log every time — a cheaper model periodically distills episodes into semantic facts. That's why ChatGPT memory stays short but somehow always up to date."
       </Insight></FadeIn>
     </div>
   );
@@ -381,7 +381,7 @@ function ContextWindowPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "Context window management is the systems engineering of AI. It's resource allocation under constraints — exactly like memory management in an OS or connection pooling in a database. The interviewer wants to hear you reason about budgets, compression tradeoffs, and the 'lost in the middle' problem. That shows you've built something real, not just read the API docs."
+        "Context window management is the systems engineering of AI. It's resource allocation under constraints — exactly like memory management in an OS or connection pooling in a database. What matters is reasoning about budgets, compression tradeoffs, and the 'lost in the middle' problem. That demonstrates depth — you've built something real, not just read the API docs."
       </Insight></FadeIn>
     </div>
   );
@@ -438,7 +438,7 @@ function RetrievalPanel() {
       <FadeIn><CodeBlock filename="consolidation-gate.js" code={CONSOLIDATION_GATE_CODE} output={CONSOLIDATION_OUTPUT} /></FadeIn>
 
       <FadeIn><Insight>
-        "The retrieval scoring formula is the interview signal. Anyone can say 'use a vector database.' But explaining that you'd combine semantic similarity, recency decay, and importance weighting — and that you'd tune the weights based on the use case — that's staff+ thinking. It shows you understand that retrieval is a ranking problem, not a search problem."
+        "The retrieval scoring formula is the maturity signal. Anyone can say 'use a vector database.' But explaining that you'd combine semantic similarity, recency decay, and importance weighting — and that you'd tune the weights based on the use case — that shows mastery. It shows you understand that retrieval is a ranking problem, not a search problem."
       </Insight></FadeIn>
     </div>
   );
@@ -511,12 +511,12 @@ function ProductionPanel() {
   );
 }
 
-function InterviewPanel() {
+function DeepDivePanel() {
   return (
     <div>
       <SectionHead
-        title="Interview angles & traps"
-        desc="How memory architecture questions show up in system design interviews — and the common traps that distinguish mid-level from staff+ answers."
+        title="Deep dive — common pitfalls"
+        desc="How memory architecture questions show up in design reviews — and the common pitfalls that distinguish surface-level understanding from senior engineering perspective."
       />
 
       <div style={styles.anti}>
@@ -547,7 +547,7 @@ function InterviewPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "The 10M user question is where the interview shifts from AI to systems. But start with Mahesh's framing: 'An LLM knows everything about humanity and nothing about you.' At 10M users, that's 10M knowledge gaps to fill. Partition by user_id, decay unused memories, hard-delete for GDPR, keep retrieval under 50ms. Use the consolidation gate to keep per-user memory compact. These are distributed systems problems wearing an AI costume — and that's exactly why companies want staff+ engineers on agent teams, not just ML researchers."
+        "The 10M user question is where the design shifts from AI to systems. Start with Mahesh's framing: 'An LLM knows everything about humanity and nothing about you.' At 10M users, that's 10M knowledge gaps to fill. Partition by user_id, decay unused memories, hard-delete for GDPR, keep retrieval under 50ms. Use the consolidation gate to keep per-user memory compact. These are distributed systems problems wearing an AI costume — and that's exactly why teams need senior engineers on agent projects, not just ML researchers."
       </Insight></FadeIn>
 
       <FadeIn delay={80}><Decision question="Memory poisoning — how do you stop a long-term memory store from becoming an injection vector?">
@@ -567,7 +567,7 @@ function InterviewPanel() {
         <br /><br />
         (4) <strong>Scope high-privilege actions to the live turn.</strong> Anything that moves money or changes permissions must be authorized <em>in the current conversation by the user</em> — memory can inform the action but can never be its sole authorization. Prohibited-action rules live in code, above the memory layer, so no stored fact can dissolve them.
         <br /><br />
-        The staff+ signal is naming the trust boundary explicitly: <strong>memory sits inside the trust boundary but is written from outside it.</strong> Everything else follows from taking that sentence seriously.
+        The engineering signal is naming the trust boundary explicitly: <strong>memory sits inside the trust boundary but is written from outside it.</strong> Everything else follows from taking that sentence seriously.
       </Decision></FadeIn>
         </div>
   );

@@ -190,7 +190,7 @@ export default function AgentHarness() {
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Research Agent with Observable Harness</p>
-        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and staff+ interview angles.</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and deep-dive production patterns.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/03-agent-harness.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
       </div></FadeIn>
     </div>
@@ -439,7 +439,7 @@ function TracingPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "Observability is the answer to 'how do you maintain this in production?' Every interviewer asks it. The answer isn't 'we monitor it' — it's specific: 'We trace every iteration with token counts and latency breakdown. We alert on cost per query exceeding $0.50 and iterations exceeding 8. We review the p95 latency weekly and optimize the slowest tool calls.' Specificity is credibility."
+        "Observability is the answer to 'how do you maintain this in production?' Every design review surfaces it. The answer isn't 'we monitor it' — it's specific: 'We trace every iteration with token counts and latency breakdown. We alert on cost per query exceeding $0.50 and iterations exceeding 8. We review the p95 latency weekly and optimize the slowest tool calls.' Specificity is credibility."
       </Insight></FadeIn>
     </div>
   );
@@ -504,7 +504,7 @@ function ErrorPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "Error recovery is where the 'systems engineer building AI' beats the 'ML engineer building a product.' The patterns are identical to what you'd use in a distributed system — retries with backoff, fallback chains, circuit breakers, graceful degradation. The interviewer isn't testing AI knowledge here — they're testing whether you build resilient systems."
+        "Error recovery is where the 'systems engineer building AI' beats the 'ML engineer building a product.' The patterns are identical to what you'd use in a distributed system — retries with backoff, fallback chains, circuit breakers, graceful degradation. What matters here isn't AI knowledge — it's whether you build resilient systems."
       </Insight></FadeIn>
     </div>
   );
@@ -559,7 +559,7 @@ function SelfImprovePanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "Self-improvement without retraining is the most underrated topic in agent engineering. Fine-tuning is expensive, slow, and often unnecessary. Prompt optimization + few-shot curation + eval regression testing gets you 80% of the benefit at 5% of the cost. In the interview, this shows you think about the full lifecycle — not just building the agent, but operating and improving it."
+        "Self-improvement without retraining is the most underrated topic in agent engineering. Fine-tuning is expensive, slow, and often unnecessary. Prompt optimization + few-shot curation + eval regression testing gets you 80% of the benefit at 5% of the cost. In practice, this demonstrates depth across the full lifecycle — not just building the agent, but operating and improving it."
       </Insight></FadeIn>
     </div>
   );

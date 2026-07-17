@@ -81,6 +81,3 @@ Two tools:
 - Statistical libraries (scipy for Python, simple-statistics for Node)
 - Markdown/JSON for model card output
 
-## Staff+ Interview Angle
-
-"I built a bias audit pipeline for an AI resume screener using counterfactual testing — 50 matched resume pairs per demographic attribute, differing only on names and pronouns. The pipeline found a statistically significant gender gap in screening scores: resumes with male names scored 0.3 points higher on average. The model card generator produces EU AI Act-compliant documentation automatically from the audit results. The hardest part was proxy discrimination — the model didn't mention gender but rated candidates from historically women's colleges lower, which required testing beyond simple name swaps."

@@ -4,7 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import FadeIn from '../../components/FadeIn';
 
-const TABS = ['The FDE Model', 'Team Structure', 'FDE vs SaaS', 'The AI Playbook', 'Interview Prep'];
+const TABS = ['The FDE Model', 'Team Structure', 'FDE vs SaaS', 'The AI Playbook', 'In Practice'];
 
 export default function ForwardDeployedEngineering() {
   const [tab, setTab] = useState(0);
@@ -30,12 +30,12 @@ export default function ForwardDeployedEngineering() {
       {tab === 1 && <TeamStructurePanel />}
       {tab === 2 && <FDEVsSaaSPanel />}
       {tab === 3 && <AIPlaybookPanel />}
-      {tab === 4 && <InterviewPrepPanel />}
+      {tab === 4 && <AppliedPatternsPanel />}
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Customer Onboarding Toolkit</p>
-        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and staff+ interview angles.</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and deep dive exercises.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/14-forward-deployed-engineering.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
       </div></FadeIn>
     </div>
@@ -227,7 +227,7 @@ function TeamStructurePanel() {
 
       <FadeIn>
         <Insight tag="Staff+ signal">
-          In interviews, reference this model when discussing how to structure customer-engineering teams. The Echo/Anthropic split is a concrete alternative to &ldquo;we assign a solutions engineer.&rdquo; It shows you understand that domain discovery and rapid engineering are different skills that work best as separate, paired roles.
+          Reference this model when discussing how to structure customer-engineering teams. The Echo/Anthropic split is a concrete alternative to &ldquo;we assign a solutions engineer.&rdquo; It shows you understand that domain discovery and rapid engineering are different skills that work best as separate, paired roles.
         </Insight>
       </FadeIn>
 
@@ -347,7 +347,7 @@ function AIPlaybookPanel() {
 
       <FadeIn>
         <Insight tag="Staff+ signal">
-          In system design interviews for AI companies, always address the deployment model. &ldquo;How does this AI system actually get into the customer&rsquo;s hands?&rdquo; is a question most candidates skip. Bringing up FDE as a deployment strategy &mdash; especially for enterprise AI &mdash; signals that you think beyond the model architecture.
+          In any system design for AI companies, always address the deployment model. &ldquo;How does this AI system actually get into the customer&rsquo;s hands?&rdquo; is a question most engineers skip. Bringing up FDE as a deployment strategy &mdash; especially for enterprise AI &mdash; signals that you think beyond the model architecture.
         </Insight>
       </FadeIn>
 
@@ -384,13 +384,13 @@ function AIPlaybookPanel() {
   );
 }
 
-/* ─── Tab 5: Interview Prep ─── */
-function InterviewPrepPanel() {
+/* ─── Tab 5: In Practice ─── */
+function AppliedPatternsPanel() {
   return (
     <div>
       <SectionHead
-        title="FDE interview questions and frameworks"
-        desc="How to use FDE knowledge in staff+, principal, and CTO-level interviews. These concepts show up in system design, organizational design, and go-to-market discussions."
+        title="FDE design questions and frameworks"
+        desc="How to apply FDE knowledge in system design, organizational design, and go-to-market decisions. These concepts show up in every enterprise AI architecture conversation."
       />
 
       <FadeIn><Decision question="System design: 'Design an AI system for enterprise document processing'">
@@ -429,7 +429,7 @@ function InterviewPrepPanel() {
         </Insight>
       </FadeIn>
 
-      <FadeIn><Decision question="Key vocabulary to use in interviews">
+      <FadeIn><Decision question="Key vocabulary to use in design discussions">
         <Pill type="green">&ldquo;Gravel road to paved highway&rdquo;</Pill> The progression from custom FDE solutions to productized features. Shows you understand the full lifecycle.
         <br /><br />
         <Pill type="green">&ldquo;Product leverage&rdquo;</Pill> How much more value each FDE delivers as the platform matures. The metric that proves the model is working.
@@ -443,7 +443,7 @@ function InterviewPrepPanel() {
 
       <FadeIn>
         <Insight type="warn" tag="Don&rsquo;t oversell">
-          FDE is not a silver bullet. It&rsquo;s expensive, hard to hire for, and creates organizational complexity. Use it when the market demands it (new domains, complex AI, enterprise) &mdash; not because it sounds sophisticated. In interviews, showing when NOT to use FDE is as important as knowing when to use it.
+          FDE is not a silver bullet. It&rsquo;s expensive, hard to hire for, and creates organizational complexity. Use it when the market demands it (new domains, complex AI, enterprise) &mdash; not because it sounds sophisticated. In practice, showing when NOT to use FDE is as important as knowing when to use it.
         </Insight>
       </FadeIn>
         </div>

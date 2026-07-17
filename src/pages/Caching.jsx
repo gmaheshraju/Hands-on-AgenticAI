@@ -201,7 +201,7 @@ function FailuresPanel() {
   return (
     <div>
       <h2 className="page-section-title">Cache failure modes — what goes wrong</h2>
-      <p className="page-body">Interviewers love asking "what happens when your cache fails?" These three scenarios are the ones that take down production systems.</p>
+      <p className="page-body">The critical question is "what happens when your cache fails?" These three scenarios are the ones that take down production systems.</p>
 
       <Decision question="Cache stampede (thundering herd)">
         <Pill type="red">P0 risk</Pill> A hot key expires. Hundreds of concurrent requests all miss the cache simultaneously and all hit the DB at once. The DB buckles under the sudden load. Solutions: (1) Cache lock — only one thread fetches from DB, others wait. (2) Stale-while-revalidate — serve the expired value while one thread refreshes. (3) Refresh-ahead — refresh before expiry. (4) Jittered TTLs — add randomness to TTLs so keys don't expire at the same time.
@@ -230,7 +230,7 @@ function WherePanel() {
       <p className="page-body">Different layers of the stack have different caching tradeoffs. Most production systems use multiple layers simultaneously.</p>
 
       <Decision question="Browser / client cache">
-        HTTP Cache-Control headers (max-age, s-maxage, stale-while-revalidate, ETag/If-None-Match). Zero latency, zero server cost. Good for: static assets, API responses that don't change often. Bad for: personalized data, frequently changing data. Often overlooked in system design interviews — mentioning it shows breadth.
+        HTTP Cache-Control headers (max-age, s-maxage, stale-while-revalidate, ETag/If-None-Match). Zero latency, zero server cost. Good for: static assets, API responses that don't change often. Bad for: personalized data, frequently changing data. Often overlooked in system design — worth considering for its simplicity.
       </Decision>
       <Decision question="CDN / edge cache">
         Cloudflare, CloudFront, Fastly. Content cached at PoPs geographically close to users. Good for: static content, public API responses, media. Bad for: personalized responses (Cache-Control: private). Purge/invalidation latency is typically 1-5 seconds globally. CDN cache invalidation is its own design challenge at scale.

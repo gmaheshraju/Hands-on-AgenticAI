@@ -653,11 +653,11 @@ function AntiPatternsPanel() {
         </p>
       </Decision>
 
-      <Insight tag="Interviewer perspective">
-        "When a candidate lists resilience patterns like a textbook, I know
+      <Insight tag="Senior engineering perspective">
+        "When someone lists resilience patterns like a textbook, I know
         they've studied. When they tell me about the time their retry policy
         caused a cascading failure that took down production for 4 hours, I
-        know they've built. Staff+ engineers have scars. Show your scars."
+        know they've built. Senior engineers have scars. Show your scars."
       </Insight>
     </>
   );

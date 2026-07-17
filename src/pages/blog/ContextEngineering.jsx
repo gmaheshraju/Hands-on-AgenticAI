@@ -160,7 +160,7 @@ Final context layout (78,200 tokens):
   │  refund flow example                                       │
   └─────────────────────────────────── effective: 78,200/108K ─┘`;
 
-const TABS = ['Context Budget', 'Source Priority', 'Assembly Patterns', 'Production Patterns', 'Interview Angles'];
+const TABS = ['Context Budget', 'Source Priority', 'Assembly Patterns', 'Production Patterns', 'Deep Dive'];
 
 export default function ContextEngineering() {
   const [tab, setTab] = useState(0);
@@ -192,7 +192,7 @@ export default function ContextEngineering() {
       {tab === 1 && <SourcePriorityPanel />}
       {tab === 2 && <AssemblyPatternsPanel />}
       {tab === 3 && <ProductionPatternsPanel />}
-      {tab === 4 && <InterviewAnglesPanel />}
+      {tab === 4 && <DeepDivePanel />}
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
@@ -574,12 +574,12 @@ function ProductionPatternsPanel() {
   );
 }
 
-function InterviewAnglesPanel() {
+function DeepDivePanel() {
   return (
     <div>
       <SectionHead
-        title="Context engineering as a 2027 interview topic"
-        desc="Context engineering is the new frontier of AI engineering interviews. Here's how to frame your knowledge for staff+ conversations."
+        title="Context engineering as a critical production discipline"
+        desc="Context engineering is the new frontier of AI systems design. Here's how to frame your knowledge for senior engineering discussions."
       />
 
       <FadeIn><Decision question="Why context engineering is replacing prompt engineering">
@@ -593,7 +593,7 @@ function InterviewAnglesPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="The staff+ question: 'Walk me through the context pipeline for an agent with RAG, tools, memory, and multi-turn conversation'">
-        This is THE context engineering interview question. Walk through the full pipeline:
+        This is THE critical context engineering design question. Walk through the full pipeline:
         <br /><br />
         <strong>1. Budget allocation:</strong> 128K window → 108K effective. Fixed reserves for system prompt (3K). Dynamic allocation across conversation (30%), RAG (35%), tools (20%), examples (10%), reserve (5%).
         <br /><br />
@@ -612,8 +612,8 @@ function InterviewAnglesPanel() {
         Context engineering is to 2027 what prompt engineering was to 2024. Prompt engineering got you a junior role. Context engineering — understanding token budgets, source prioritization, assembly strategies, caching, and compression — that's the staff+ skill. It's the difference between "I can write a good prompt" and "I can architect an information pipeline that makes an agent reliably intelligent."
       </Insight></FadeIn>
 
-      <FadeIn delay={240}><Decision question="Common interview mistakes">
-        <Pill type="amber">1. Treating context window as unlimited</Pill> "Just dump everything in the 128K window." This tells the interviewer you've never built a production system. Performance degrades long before you hit the token limit.
+      <FadeIn delay={240}><Decision question="Common pitfalls in context pipeline design">
+        <Pill type="amber">1. Treating context window as unlimited</Pill> "Just dump everything in the 128K window." This reveals shallow thinking — you've never built a production system. Performance degrades long before you hit the token limit.
         <br /><br />
         <Pill type="amber">2. Not knowing about "lost in the middle"</Pill> If you can't explain why position in the context matters, you haven't read the research. This is foundational.
         <br /><br />

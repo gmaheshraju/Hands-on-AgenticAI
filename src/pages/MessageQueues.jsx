@@ -270,7 +270,7 @@ function AntiPatternsPanel() {
       ))}
 
       <Insight type="warn" tag="The meta-pattern">
-        Queue interviews test two things: (1) do you understand delivery semantics (at-least-once vs exactly-once, ordering, idempotency), and (2) can you pick the right queue for the job. Kafka for a 50 msg/s job queue is over-engineering. SQS for a 1M msg/s event stream is under-engineering. The technology follows from the requirements.
+        Queue design comes down to two things: (1) do you understand delivery semantics (at-least-once vs exactly-once, ordering, idempotency), and (2) can you pick the right queue for the job. Kafka for a 50 msg/s job queue is over-engineering. SQS for a 1M msg/s event stream is under-engineering. The technology follows from the requirements.
       </Insight>
     </div>
   );

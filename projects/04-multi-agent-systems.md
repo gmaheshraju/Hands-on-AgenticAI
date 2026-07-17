@@ -60,6 +60,3 @@ Run the pipeline on 3 different technical topics. For each:
 - Any LLM API (use the same model for all agents, or route different agents to different models)
 - Structured JSON for inter-agent communication
 
-## Staff+ Interview Angle
-
-"I built a 4-agent content pipeline: researcher, writer, editor, fact-checker. The most interesting finding was that agent handoff quality depends almost entirely on the output schema of the upstream agent. When the researcher returned structured notes with source URLs and key claims, the writer produced dramatically better drafts than when it got freeform text. Inter-agent contracts matter more than individual agent quality."

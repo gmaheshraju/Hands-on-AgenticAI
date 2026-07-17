@@ -284,7 +284,7 @@ function DesignProblemPanel() {
       <p className="page-body">
         Design an order management system with explicit states: CREATED,
         PAYMENT_PENDING, CONFIRMED, PICKING, SHIPPED, DELIVERED — with cancellation
-        possible from multiple states. This is the canonical state machine interview
+        possible from multiple states. This is the canonical state machine design
         problem.
       </p>
 
@@ -461,7 +461,7 @@ function OrderStateDiagram() {
 function AntiPatternsPanel() {
   return (
     <div>
-      <h2 className="page-section-title">What not to say in a staff+ interview</h2>
+      <h2 className="page-section-title">Common misconceptions</h2>
       <p className="page-body">
         These answers reveal that you've read about state machines but never built one
         that survived production traffic, concurrent users, and the PM changing

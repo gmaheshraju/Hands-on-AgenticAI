@@ -66,6 +66,3 @@ A complete evaluation pipeline for any RAG-based Q&A system.
 - SQLite or JSON files for storing eval results across runs
 - The RAG system under test (use your Capstone 05 system, or mock one)
 
-## Staff+ Interview Angle
-
-"I built an eval harness with three dimensions: retrieval quality, answer correctness, and faithfulness. The LLM-as-judge approach worked but needed calibration — out of the box, it rated everything 4 or 5 out of 5. I fixed it by adding concrete failure examples to the rubric prompt and requiring one-line justifications for each score. The regression detection caught a subtle bug where a prompt template change improved average scores but caused 3 specific questions to hallucinate."

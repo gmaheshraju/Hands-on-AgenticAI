@@ -51,6 +51,3 @@ Populate the system with 50+ entries about different people. Then:
 - Any embedding model (OpenAI `text-embedding-3-small`, Voyage, etc.)
 - Any LLM for consolidation and chat
 
-## Staff+ Interview Angle
-
-"I built a personal CRM with three memory types. The hardest problem was consolidation — turning messy conversation logs into clean facts without losing context. I solved it with a periodic consolidation gate that diffs new episodes against existing semantic memory, and only writes when it finds genuinely new information."

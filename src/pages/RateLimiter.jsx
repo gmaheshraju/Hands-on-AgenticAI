@@ -120,7 +120,7 @@ function AlgorithmsPanel() {
   return (
     <div>
       <h2 className="page-section-title">Five algorithms — know when each fits</h2>
-      <p className="page-body">Don't memorize implementations. Understand the tradeoff: burst tolerance vs precision vs memory vs latency. That's what interviewers test.</p>
+      <p className="page-body">Don't memorize implementations. Understand the tradeoff: burst tolerance vs precision vs memory vs latency. That's what matters in practice.</p>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         {algos.map((algo, i) => {
@@ -290,7 +290,7 @@ function DistributedPanel() {
   return (
     <div>
       <h2 className="page-section-title">Distributed rate limiting — the hard part</h2>
-      <p className="page-body">Single-node rate limiting is trivial. The interview question is really about coordination across multiple servers. This is where most candidates struggle.</p>
+      <p className="page-body">Single-node rate limiting is trivial. The real challenge is coordination across multiple servers. This is where engineers often miss the complexity.</p>
 
       <Decision question="Why not just rate-limit per server?">
         If you have N servers and a limit of 100/s, each server allows 100/N per second. This breaks when traffic isn't evenly distributed — sticky sessions, hot users, and autoscaling all cause skew. In practice, per-server limits either over-restrict (wasting capacity) or under-restrict (allowing abuse).
@@ -431,7 +431,7 @@ function AntiPatternsPanel() {
       ))}
 
       <Insight type="warn" tag="The meta-pattern">
-        Rate limiting interviews test systems thinking, not algorithm knowledge. The algorithm is 10% of the answer. The other 90% is: what are you protecting, where does the limiter live, what do you key on, what happens when it fails, and what does the client see. Candidates who jump to "token bucket" without answering these questions get passed over.
+        Rate limiting is a systems thinking problem, not an algorithm problem. The algorithm is 10% of the answer. The other 90% is: what are you protecting, where does the limiter live, what do you key on, what happens when it fails, and what does the client see. Engineers who jump to "token bucket" without answering these questions are missing the point.
       </Insight>
     </div>
   );

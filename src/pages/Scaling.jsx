@@ -205,7 +205,7 @@ function NumbersPanel() {
       </div>
 
       <Insight>
-        "When an interviewer says '1 million users,' I immediately translate that to QPS. 1M users ≠ 1M QPS. If 10% are daily active, that's 100K DAU. If each does 20 actions per day, that's 2M actions/day ≈ 23 QPS average. Even with a 10x peak-to-average ratio, that's 230 QPS peak — a single Postgres instance handles that trivially."
+        "When someone says '1 million users,' I immediately translate that to QPS. 1M users ≠ 1M QPS. If 10% are daily active, that's 100K DAU. If each does 20 actions per day, that's 2M actions/day ≈ 23 QPS average. Even with a 10x peak-to-average ratio, that's 230 QPS peak — a single Postgres instance handles that trivially."
       </Insight>
     </div>
   );
@@ -228,7 +228,7 @@ function AntiPatternsPanel() {
   return (
     <div>
       <h2 className="page-section-title">What not to say</h2>
-      <p className="page-body">Over-engineering is the most common failure mode in system design interviews. Interviewers at the staff+ level are looking for proportional responses, not maximum complexity.</p>
+      <p className="page-body">Over-engineering is the most common failure mode in system design. What separates senior engineers is proportional responses, not maximum complexity.</p>
 
       {antis.map((ap, i) => (
         <div key={i} style={styles.anti}>
@@ -244,7 +244,7 @@ function AntiPatternsPanel() {
       ))}
 
       <Insight type="warn" tag="The meta-pattern">
-        The strongest scaling answer in an interview starts with "at this scale, we don't need that yet." It shows engineering judgment — you know the tools exist and you know they're not needed. Complexity is a cost, not a feature. The best architecture is the simplest one that meets the requirements with headroom for the next 10x, not the next 1000x.
+        The strongest engineering stance starts with "at this scale, we don't need that yet." It shows engineering judgment — you know the tools exist and you know they're not needed. Complexity is a cost, not a feature. The best architecture is the simplest one that meets the requirements with headroom for the next 10x, not the next 1000x.
       </Insight>
     </div>
   );

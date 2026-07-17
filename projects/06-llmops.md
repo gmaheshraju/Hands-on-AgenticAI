@@ -67,6 +67,3 @@ Run 100 diverse requests through the router (mix of simple, medium, complex). Co
 - SQLite for cost/metrics storage
 - Simple HTML + vanilla JS for the dashboard (no framework needed)
 
-## Staff+ Interview Angle
-
-"I built a model router that reduced our LLM costs by 70%. The key insight was that the classifier itself must be nearly free — I used a local model via Ollama for classification, which costs nothing. The hardest part was the fallback heuristic: detecting when a cheap model gives a bad answer without calling an expensive model to check. I settled on three signals: response length below threshold, presence of hedging phrases, and format validation failures."
