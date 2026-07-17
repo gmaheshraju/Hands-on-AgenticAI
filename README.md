@@ -1,10 +1,10 @@
 # Agentic Engineering
 
-**Decision frameworks and architectural patterns for staff, principal, and CTO-level system design interviews.**
+**Decision frameworks and architectural patterns for production systems at scale.**
 
-Built by Mahesh Guntumadugu — battle-tested design and architectural patterns that signal staff, principal, and CTO-level thinking.
+Built by Mahesh Guntumadugu — battle-tested design and architectural patterns from real-world production systems.
 
-> Not theory. Not slides. Interactive decision trees with the exact reasoning chains that signal senior+ thinking.
+> Not theory. Not slides. Interactive decision trees with the exact reasoning chains behind production architecture decisions.
 
 ---
 
@@ -12,7 +12,7 @@ Built by Mahesh Guntumadugu — battle-tested design and architectural patterns 
 
 ### System Design Frameworks (14)
 
-Each framework is a **decision tree** — the structured thinking process that interviewers look for at staff+ level.
+Each framework is a **decision tree** — the structured thinking process behind production architecture choices.
 
 | # | Framework | Key Decisions |
 |---|-----------|--------------|

@@ -57,6 +57,3 @@ Issue → Parser → Explorer → Planner → Coder → Test Runner → PR Gener
 
 The test runner handles both Node.js v23 spec reporter (`✔`/`✗`) and TAP format (`ok`/`not ok`).
 
-## Staff+ Interview Angle
-
-"I built a coding agent that takes a GitHub issue and produces a fix — the full loop from issue parsing through code generation, testing, self-correction, and PR creation. The self-correction loop was the hardest part: when tests fail, the agent parses the error output, identifies the failure pattern (expected 404 got 500 → missing null check), generates a targeted fix, and retries. In the demo, the agent fixes a null reference bug in 3 steps: identify the unguarded `.find()` call, insert a null check with 404 response, and verify with tests. The key insight: invest in error parsing, not perfect code generation — the retry loop catches what the first attempt misses."

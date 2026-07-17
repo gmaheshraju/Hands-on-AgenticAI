@@ -133,6 +133,3 @@ The comparison table showing cumulative impact at each stage:
 
 Run `node src/demo.js` to see the actual numbers.
 
-## Interview Angle
-
-"I took an agent from $2 to $0.18 per conversation through four optimizations. Prompt compression saved 62% of system prompt tokens. Semantic caching hit on ~20% of queries. Model routing sent 60% of requests to a cheap model. Early termination saved 35% of output tokens. Key lesson: optimizations compound multiplicatively not additively, and you must measure quality at each step to catch regressions."

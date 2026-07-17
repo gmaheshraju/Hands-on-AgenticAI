@@ -82,10 +82,3 @@ JSON findings can be posted as PR comments, fed into dashboards, or used to bloc
 **Why deduplication?**
 "Missing error handling" in 4 files is one finding with `groupedFiles`, not four findings. This matches how a human reviewer thinks.
 
-## Interview Talking Points
-
-- The ReAct loop is the core pattern for tool-using agents. Understanding observation→thought→action is more valuable than knowing any framework.
-- Iteration caps and stall detection are production concerns that separate toy demos from real systems.
-- The tool layer is a clean abstraction boundary — swap GitHub for GitLab by changing tool implementations, not the agent logic.
-- Structured schemas let findings flow into CI/CD pipelines, not just chat windows.
-- Token tracking enables cost budgets per review — essential when running on every PR in a busy repo.

@@ -91,13 +91,3 @@ src/
     └── cicd.test.js    # 22 tests across 4 suites
 ```
 
-## Interview Angles
-
-**"How do you prevent AI regressions in production?"**
-→ Eval suite runs on every PR. Baseline comparison catches score degradation. Quality gates block deployment if safety drops below threshold or accuracy regresses more than 5%.
-
-**"How do you measure agent quality?"**
-→ Multi-dimensional: faithfulness (does it answer correctly?), safety (does it leak PII?), cost (token efficiency), latency. Each dimension has pluggable scorers and independent thresholds.
-
-**"What's the promotion workflow?"**
-→ Four stages: run evals, compare to baseline, check quality gates, decide. Block on violations, warn on soft limits, auto-promote when everything passes. Baseline auto-updates on promotion so the bar keeps rising.

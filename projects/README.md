@@ -2,7 +2,7 @@
 
 29 production-grade projects — one per topic. Not toy demos. Real problems, real APIs, real evaluation criteria.
 
-Each project is designed to produce a portfolio piece you can walk through in a staff/principal-level interview. The "Staff+ Interview Angle" section gives you the opening line.
+Each project solves a real infrastructure problem end-to-end. No frameworks, no toy demos — pure Node.js with full test suites.
 
 ## The Projects
 
@@ -42,8 +42,7 @@ Each project is designed to produce a portfolio piece you can walk through in a 
 
 1. Pick a project that maps to your target role
 2. Build it end-to-end — the evaluation criteria tell you when you're done
-3. Write up the "Staff+ Interview Angle" in your own words
-4. Put it on GitHub with a clear README
+3. Put it on GitHub with a clear README
 
 ## Cross-References
 

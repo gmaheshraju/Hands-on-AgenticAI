@@ -102,38 +102,3 @@ node src/demo.js
 node --test src/tests/compliance.test.js
 ```
 
-## Interview Angles
-
-### System Design
-- **Tamper-evident logging**: How SHA-256 hash chains make retroactive modification
-  detectable without a centralized authority. Trade-offs vs. Merkle trees vs. blockchain.
-- **Append-only data structures**: Why immutability matters for audit trails and how
-  `Object.freeze()` + private fields enforce it at the application layer.
-- **Multi-regulation architecture**: Designing a pluggable rule engine that maps
-  diverse regulatory requirements to a uniform check/evidence/remediation interface.
-
-### Security
-- **Cryptographic integrity**: Hash chain verification catches both accidental
-  corruption and deliberate tampering. Discuss: what if an attacker replays the
-  entire chain from a modified entry?
-- **Data redaction at ingestion**: Sensitive fields are stripped before storage,
-  not at read time — the raw values never reach the audit log.
-- **Evidence preservation**: Each compliance check captures evidence at check time,
-  creating a forensic record even if the underlying data later changes.
-
-### AI/ML Governance
-- **Decision explainability**: EU AI Act Article 13 requires transparency. Every
-  decision must carry a rationale. The framework detects missing explanations.
-- **Deterministic replay**: Can you prove an AI system would make the same decision
-  given the same inputs? Replay + drift detection answers this.
-- **Human oversight**: High-risk decisions require human review flags. The system
-  enforces this and reports violations.
-- **Non-discrimination**: Automated detection of protected attributes in decision inputs.
-
-### Production Patterns
-- **Pluggable compliance rules**: New regulations added without modifying existing code.
-  Each rule is self-contained with its own check logic, severity, and remediation.
-- **Risk aggregation**: Individual rule failures roll up into severity-weighted risk
-  assessments (critical > high > medium) for executive reporting.
-- **Audit export**: Structured export format for integration with GRC platforms
-  (ServiceNow, Drata, Vanta).

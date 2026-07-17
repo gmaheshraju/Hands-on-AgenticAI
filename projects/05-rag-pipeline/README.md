@@ -91,16 +91,6 @@ RRF_score(doc) = SUM over rankers of: 1 / (k + rank)
 
 **Used in production by:** Elasticsearch, Azure AI Search, Pinecone, Weaviate.
 
-## Interview Talking Points
-
-1. "Pure vector search had ~60% precision — it missed exact function names. Adding BM25 with RRF brought it to ~85%."
-
-2. "The LLM re-ranker adds 1-3 seconds but improves precision by another 10-15%. I made it configurable so developers can choose speed vs accuracy."
-
-3. "Chunking strategy matters more than embedding model choice. Splitting a function in the middle means neither half makes sense to the model."
-
-4. "The biggest failure mode is hallucination — the model confidently describes code that doesn't exist. I force it to cite specific files and line numbers, and refuse when the context doesn't contain the answer."
-
 ## Extending to Production
 
 To use real embeddings and LLM:

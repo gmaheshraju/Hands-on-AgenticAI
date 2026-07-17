@@ -134,16 +134,3 @@ src/
     └── gateway.test.js  # 41 tests across 7 suites
 ```
 
-## Interview Angles
-
-**"How would you handle PII in LLM requests?"**
-→ Scan before the data leaves your network. Regex + validation (Luhn for CC). Log that PII was found without logging the PII itself.
-
-**"How do you manage costs across teams?"**
-→ Per-team budgets with alert thresholds. Route by complexity — 80% of requests don't need the premium model. Detect waste patterns (opus for "summarize this in one line").
-
-**"What happens when a provider goes down?"**
-→ Circuit breaker opens after N failures, stops sending traffic. After recovery time, half-open state probes with limited requests. Automatic failover to alternative providers in the same tier.
-
-**"How do you handle rate limiting for multiple teams?"**
-→ Token bucket per team with configurable limits. Separate request count and token count buckets. Burst multiplier allows short spikes without blocking.

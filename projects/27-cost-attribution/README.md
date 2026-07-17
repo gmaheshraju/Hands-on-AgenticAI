@@ -91,13 +91,3 @@ src/
     └── cost.test.js    # 20 tests across 5 suites
 ```
 
-## Interview Angles
-
-**"How do you track AI costs across teams?"**
-→ Every LLM call records agent, team, task type, model, tokens, and outcome. Attribution engine slices by any dimension. Budget alerts fire at 50/80/95/100%. Executive summary shows cost per success, not just total spend.
-
-**"Where do you find waste in AI spend?"**
-→ Six patterns: premium models for simple tasks (biggest — 85% savings), duplicate requests (cache), excessive retries (early-exit), low cache hit rate, high failure agents, idle agents. Each pattern has a dollar-value estimate.
-
-**"How do you justify AI spend to leadership?"**
-→ ROI per agent: a PR reviewer costs $0.02/review but saves $5.00 of engineer time — that's 250x ROI. Cost per successful outcome, not cost per API call. Show waste reduction opportunities as a percentage of total spend.

@@ -84,16 +84,6 @@ node src/demo.js
 4. **Degraded Mode** — Mesh throttles rather than fails when majority of nodes are down
 5. **Automatic Recovery** — Nodes re-enter the mesh after proving health via probes
 
-## Interview Angles
-
-- **Distributed Systems**: How do you detect and handle node failures in a mesh?
-- **Circuit Breaker Pattern**: Why three states? What happens during half-open?
-- **Cascading Failures**: How do you prevent redistribution from overloading surviving nodes?
-- **Routing Strategies**: Trade-offs between round-robin, least-loaded, affinity
-- **Degraded Mode**: Why reduce throughput instead of failing completely?
-- **Event-Driven Architecture**: How EventEmitter decouples monitoring from recovery
-- **Consistency vs Availability**: This mesh favors availability (work still flows in degraded mode)
-
 ## Demo Scenarios
 
 1. **Normal Routing** — Work routed by capability and load across healthy nodes

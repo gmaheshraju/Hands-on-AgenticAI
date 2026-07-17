@@ -43,10 +43,3 @@ npm run dashboard   # Start dashboard at http://localhost:3000
 3. **SQLite with WAL mode** — Handles concurrent reads (dashboard) and writes (router) without blocking.
 4. **Mock models for demo** — Swap `mockModelCall` for real API calls in production. The router is model-agnostic.
 
-## Interview Talking Points
-
-- The classifier must be nearly free — if it costs $0.01 per call, you've eaten your savings
-- Fallback detection without an expensive LLM: response length, hedging phrases, format validation
-- 80/20 rule: ~40% of traffic is simple, routed to a model 60x cheaper than frontier
-- Cost tracking requires handling streaming (token counts arrive after response)
-- Configuration-driven: add a new model to `MODEL_CONFIG` without code changes
