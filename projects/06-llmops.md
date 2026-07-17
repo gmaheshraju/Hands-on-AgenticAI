@@ -1,4 +1,4 @@
-# Capstone 06: Model Router with Cost Dashboard
+# Project 06: Model Router with Cost Dashboard
 
 ## The Problem
 

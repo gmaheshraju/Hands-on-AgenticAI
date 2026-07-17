@@ -364,7 +364,7 @@ export default function LlmOps() {
       {tab === 4 && <AntiPatternsPanel />}
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
-        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
+        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Hands-On Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Model Router with Cost Dashboard</p>
         <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and deep dive exercises.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/06-llmops.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
@@ -665,7 +665,7 @@ function LatencyReliabilityPanel() {
       <FadeIn><CodeBlock filename="resilient-llm-client.js" code={RESILIENT_CLIENT_CODE} output={RESILIENT_CLIENT_OUTPUT} /></FadeIn>
 
       <FadeIn><Insight>
-        The staff+ answer to "how do you handle LLM reliability?" isn't "we retry." It's: "We have a three-layer defense. Layer 1: retries with exponential backoff for transient errors. Layer 2: circuit breakers that skip a model after 3 consecutive failures, so we don't add 30 seconds of retry latency to every request during an outage. Layer 3: response cache as the last resort — stale data beats no data. We monitor which layer caught the failure. If Layer 3 activates more than 0.1% of the time, that's an incident."
+        The production answer to "how do you handle LLM reliability?" isn't "we retry." It's: "We have a three-layer defense. Layer 1: retries with exponential backoff for transient errors. Layer 2: circuit breakers that skip a model after 3 consecutive failures, so we don't add 30 seconds of retry latency to every request during an outage. Layer 3: response cache as the last resort — stale data beats no data. We monitor which layer caught the failure. If Layer 3 activates more than 0.1% of the time, that's an incident."
       </Insight></FadeIn>
 
       <FadeIn delay={80}><Insight type="warn" tag="Latency trap">

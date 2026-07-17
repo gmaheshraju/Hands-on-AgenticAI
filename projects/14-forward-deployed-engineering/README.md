@@ -1,4 +1,4 @@
-# Capstone 14: FDE Customer Onboarding Toolkit
+# Project 14: FDE Customer Onboarding Toolkit
 
 A reusable toolkit for Forward Deployed Engineers to onboard enterprise customers onto an AI document analysis platform. Compresses customer setup from weeks to days.
 

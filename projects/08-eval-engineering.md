@@ -1,4 +1,4 @@
-# Capstone 08: Eval Harness for a RAG System
+# Project 08: Eval Harness for a RAG System
 
 ## The Problem
 
@@ -64,5 +64,5 @@ A complete evaluation pipeline for any RAG-based Q&A system.
 - Node.js or Python
 - Any LLM API for the judge
 - SQLite or JSON files for storing eval results across runs
-- The RAG system under test (use your Capstone 05 system, or mock one)
+- The RAG system under test (use your Project 05 system, or mock one)
 

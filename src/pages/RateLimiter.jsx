@@ -39,7 +39,7 @@ function WhyPanel() {
   return (
     <div>
       <h2 className="page-section-title">Start with "what are you protecting?"</h2>
-      <p className="page-body">Most candidates jump to "token bucket." Staff engineers ask why you need a rate limiter at all — the answer shapes every subsequent decision.</p>
+      <p className="page-body">Most engineers jump to "token bucket." Staff engineers ask why you need a rate limiter at all — the answer shapes every subsequent decision.</p>
 
       <Decision question="Protecting backend services from overload?">
         You need server-side rate limiting. The goal is stability, not fairness. Shed load aggressively — a 429 is cheaper than a cascading failure. This is the most common use case.
@@ -374,7 +374,7 @@ function RealSystemsPanel() {
   return (
     <div>
       <h2 className="page-section-title">How real systems do it</h2>
-      <p className="page-body">Citing a real system's approach — with the specific algorithm, limits, and headers — is the strongest staff+ signal. It proves you've read the docs, not just the textbooks.</p>
+      <p className="page-body">Citing a real system's approach — with the specific algorithm, limits, and headers — is the strongest engineering signal. It proves you've read the docs, not just the textbooks.</p>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         {systems.map((sys, i) => {

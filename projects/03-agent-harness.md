@@ -1,4 +1,4 @@
-# Capstone 03: Research Agent with Observable Harness
+# Project 03: Research Agent with Observable Harness
 
 ## The Problem
 

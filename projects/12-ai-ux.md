@@ -1,8 +1,8 @@
-# Capstone 12: Production Chat UI with Trust Signals
+# Project 12: Production Chat UI with Trust Signals
 
 ## The Problem
 
-You've built an AI agent (any of the previous capstones). It works in the terminal. Now your product team says: "Make it usable by non-engineers." That means a chat UI with streaming, confidence indicators, source citations, human-in-the-loop approval for risky actions, and graceful error states. Not a wrapper around a text box — a product that builds trust.
+You've built an AI agent (any of the previous projects). It works in the terminal. Now your product team says: "Make it usable by non-engineers." That means a chat UI with streaming, confidence indicators, source citations, human-in-the-loop approval for risky actions, and graceful error states. Not a wrapper around a text box — a product that builds trust.
 
 ## What You Build
 

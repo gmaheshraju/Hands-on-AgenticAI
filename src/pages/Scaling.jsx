@@ -15,7 +15,7 @@ export default function Scaling() {
       <h1 className="page-title">Scaling Playbook</h1>
       <p className="page-subtitle">
         Scaling is a progression, not a choice. Each step adds complexity and
-        solves a specific bottleneck. The staff+ signal is knowing when to move
+        solves a specific bottleneck. The key differentiator is knowing when to move
         to the next step — and when it's too early.
       </p>
 
@@ -102,7 +102,7 @@ function ProgressionPanel() {
   return (
     <div>
       <h2 className="page-section-title">The scaling progression</h2>
-      <p className="page-body">Each step is a 10x improvement. The staff+ signal is knowing which step you're at and when to move — not jumping to step 5 from step 1.</p>
+      <p className="page-body">Each step is a 10x improvement. The key differentiator is knowing which step you're at and when to move — not jumping to step 5 from step 1.</p>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         {steps.map(s => (

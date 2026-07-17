@@ -117,7 +117,7 @@ function ProtocolPanel() {
         This isn't a "which is best" question — it's a "which is best for this
         boundary." Most mature systems use multiple protocols: REST for public APIs,
         gRPC for internal service-to-service, and GraphQL for client-facing aggregation
-        layers. The staff+ answer names the boundary and justifies the choice.
+        layers. The right answer names the boundary and justifies the choice.
       </p>
 
       <Decision question="When does REST win?">

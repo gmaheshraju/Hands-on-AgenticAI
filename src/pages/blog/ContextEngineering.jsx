@@ -195,7 +195,7 @@ export default function ContextEngineering() {
       {tab === 4 && <DeepDivePanel />}
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
-        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
+        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Hands-On Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Context Window Optimizer</p>
         <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Design a context assembly pipeline with token budgeting, source prioritization, prompt caching, and compression — then measure its impact with evals.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/22-context-engineering.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
@@ -455,7 +455,7 @@ function SourcePriorityPanel() {
         <strong>What to preserve:</strong> Always keep the first user message (establishes intent) and the last 3-5 turns (current thread of conversation). Everything in between can be summarized.
       </Decision></FadeIn>
 
-      <FadeIn delay={240}><Insight tag="Staff+ signal">
+      <FadeIn delay={240}><Insight tag="Key insight">
         The key insight: context engineering is about signal-to-noise ratio. A 4K context window with perfectly relevant content outperforms a 128K window stuffed with everything. Your job is to maximize the information density of every token in the window.
       </Insight></FadeIn>
 
@@ -592,7 +592,7 @@ function DeepDivePanel() {
         Prompt engineering is a subset of context engineering. The system prompt is one source among many.
       </Decision></FadeIn>
 
-      <FadeIn delay={80}><Decision question="The staff+ question: 'Walk me through the context pipeline for an agent with RAG, tools, memory, and multi-turn conversation'">
+      <FadeIn delay={80}><Decision question="The critical question: 'Walk me through the context pipeline for an agent with RAG, tools, memory, and multi-turn conversation'">
         This is THE critical context engineering design question. Walk through the full pipeline:
         <br /><br />
         <strong>1. Budget allocation:</strong> 128K window → 108K effective. Fixed reserves for system prompt (3K). Dynamic allocation across conversation (30%), RAG (35%), tools (20%), examples (10%), reserve (5%).
@@ -609,7 +609,7 @@ function DeepDivePanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={160}><Insight>
-        Context engineering is to 2027 what prompt engineering was to 2024. Prompt engineering got you a junior role. Context engineering — understanding token budgets, source prioritization, assembly strategies, caching, and compression — that's the staff+ skill. It's the difference between "I can write a good prompt" and "I can architect an information pipeline that makes an agent reliably intelligent."
+        Context engineering is to 2027 what prompt engineering was to 2024. Prompt engineering got you a junior role. Context engineering — understanding token budgets, source prioritization, assembly strategies, caching, and compression — that's the senior-level skill. It's the difference between "I can write a good prompt" and "I can architect an information pipeline that makes an agent reliably intelligent."
       </Insight></FadeIn>
 
       <FadeIn delay={240}><Decision question="Common pitfalls in context pipeline design">
@@ -617,7 +617,7 @@ function DeepDivePanel() {
         <br /><br />
         <Pill type="amber">2. Not knowing about "lost in the middle"</Pill> If you can't explain why position in the context matters, you haven't read the research. This is foundational.
         <br /><br />
-        <Pill type="amber">3. Ignoring tool result accumulation</Pill> Most candidates forget that tool calls add tokens. An agent that makes 10 tool calls has 10-20K tokens of tool context competing with everything else.
+        <Pill type="amber">3. Ignoring tool result accumulation</Pill> Most engineers forget that tool calls add tokens. An agent that makes 10 tool calls has 10-20K tokens of tool context competing with everything else.
         <br /><br />
         <Pill type="amber">4. No strategy for multi-turn growth</Pill> "Keep all conversation history" doesn't scale past turn 15. You need a compaction strategy.
         <br /><br />

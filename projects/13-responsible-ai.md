@@ -1,4 +1,4 @@
-# Capstone 13: Bias Audit Pipeline + Model Card Generator
+# Project 13: Bias Audit Pipeline + Model Card Generator
 
 ## The Problem
 

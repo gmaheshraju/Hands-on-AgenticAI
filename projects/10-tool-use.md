@@ -1,4 +1,4 @@
-# Capstone 10: SQL Analytics Agent with Permission Tiers
+# Project 10: SQL Analytics Agent with Permission Tiers
 
 ## The Problem
 

@@ -1,4 +1,4 @@
-# Capstone 12: Production Chat UI with Trust Signals
+# Project 12: Production Chat UI with Trust Signals
 
 A production-grade chat interface demonstrating seven UX patterns that build user trust in AI systems: streaming responses, confidence indicators, source citations, human-in-the-loop approval, specific error states, thinking indicators, and persistent message history.
 

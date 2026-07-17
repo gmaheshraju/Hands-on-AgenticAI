@@ -1,4 +1,4 @@
-# Capstone 02: Personal CRM Agent with Cross-Session Memory
+# Project 02: Personal CRM Agent with Cross-Session Memory
 
 ## The Problem
 

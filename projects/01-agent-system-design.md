@@ -1,4 +1,4 @@
-# Capstone 01: PR Review Agent
+# Project 01: PR Review Agent
 
 ## The Problem
 
