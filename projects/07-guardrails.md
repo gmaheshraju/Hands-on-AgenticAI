@@ -52,14 +52,6 @@ Two components:
 
 4. **Logging** — Every blocked request gets logged with the attack type, confidence score, and the original input (for false positive analysis).
 
-## What Makes This Not a Toy
-
-- You'll discover that regex catches only the obvious attacks — "ignore previous instructions" has infinite rephrases
-- Embedding-based detection is better but slower — you need to balance latency vs. security
-- False positives are the real enemy: blocking legitimate requests makes the product unusable
-- The sandwich defense isn't bulletproof — test it and see where it fails
-- You'll learn that defense-in-depth (layered defenses) works better than any single technique
-
 ## Evaluation Criteria
 
 - Attack suite: run all 50+ attacks against a baseline (no defense) and report the success rate

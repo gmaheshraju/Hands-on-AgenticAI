@@ -49,14 +49,6 @@ The same customer support Q&A feature, built three ways, evaluated against the s
      | Fine-tuned  |           |            |         | High       | High        |
      ```
 
-## What Makes This Not a Toy
-
-- You'll discover that prompting works surprisingly well for the simple questions — the gap shows up on edge cases and questions requiring synthesis across multiple articles
-- RAG retrieval quality is the bottleneck, not generation quality
-- Fine-tuning is expensive to set up and hard to update when articles change — you'll feel the maintenance cost
-- The comparison forces you to think about total cost of ownership, not just per-query cost
-- Real-world decision: most teams should start with RAG and only fine-tune when they have evidence it's needed
-
 ## Evaluation Criteria
 
 - Did you use the same test set across all approaches? (methodological rigor)

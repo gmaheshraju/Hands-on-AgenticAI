@@ -28,13 +28,6 @@ A CLI agent that takes a GitHub PR URL and produces a structured code review.
 
 5. **Deduplication** — If the agent finds the same issue in multiple places, group them ("this pattern appears in 4 files").
 
-## What Makes This Not a Toy
-
-- You're hitting real GitHub APIs with real rate limits
-- Large PRs have 50+ files — the agent must prioritize what to review (can't read everything)
-- The agent needs codebase context — understanding a change requires knowing what surrounds it
-- Structured output means downstream tooling can post comments to the PR automatically
-
 ## Evaluation Criteria
 
 Run your agent on 5 real open-source PRs (pick repos you know). For each:

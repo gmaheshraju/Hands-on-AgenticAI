@@ -43,14 +43,6 @@ A complete evaluation pipeline for any RAG-based Q&A system.
 
 5. **CI integration** — The eval runs as a script that exits with code 1 if regressions are detected. Include a sample GitHub Actions workflow file.
 
-## What Makes This Not a Toy
-
-- Building the golden dataset is the hardest part — and the most valuable. Most teams skip it
-- LLM-as-judge has its own failure modes: it's lenient, inconsistent, and expensive. You'll need to calibrate it against human judgments
-- Faithfulness checking requires decomposing the answer into individual claims — this is non-trivial
-- Regression detection across runs requires versioned storage — you're building a lightweight experiment tracker
-- Running this in CI means it needs to be fast (under 5 minutes) and cheap (under $2 per run)
-
 ## Evaluation Criteria
 
 - Golden dataset quality: are the ground truth answers accurate and comprehensive?

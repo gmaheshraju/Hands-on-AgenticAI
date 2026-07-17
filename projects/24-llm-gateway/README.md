@@ -1,10 +1,6 @@
-# P24: LLM Gateway — Production-Grade Model Routing & Governance
+# P24: LLM Gateway — Model Routing & Governance
 
 A complete LLM gateway that sits between your application and model providers, handling routing, rate limiting, PII redaction, cost tracking, circuit breaking, and audit logging. No frameworks, no dependencies — pure Node.js.
-
-## Why This Exists
-
-Every company running LLMs in production eventually builds this. The alternative is scattered API calls with no visibility into costs, no PII protection, no failover, and no audit trail. This project implements the core infrastructure that platform teams build at companies like Stripe, Anthropic, and OpenAI.
 
 ## Architecture
 

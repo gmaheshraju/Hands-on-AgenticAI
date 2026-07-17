@@ -29,13 +29,6 @@ A CLI chat agent that maintains a persistent knowledge graph of people and inter
 
 5. **Decay** — Memories older than 6 months without reinforcement get flagged as "stale" and ranked lower.
 
-## What Makes This Not a Toy
-
-- Memory conflicts: "Priya moved from Stripe to Datadog" — the agent must update, not duplicate
-- Retrieval precision matters: "who knows about Kafka?" should find people who mentioned Kafka in passing, not just people named Kafka
-- The consolidation gate is the hard part — distilling 10 messy conversations into clean facts without losing nuance
-- Scale: after 500 entries, naive retrieval breaks. You need hybrid search + re-ranking
-
 ## Evaluation Criteria
 
 Populate the system with 50+ entries about different people. Then:

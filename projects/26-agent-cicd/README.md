@@ -2,10 +2,6 @@
 
 A CI/CD pipeline purpose-built for AI agents. Run eval suites on every PR, compare against baselines, enforce quality gates, and auto-promote or block deployments. No frameworks, no dependencies — pure Node.js.
 
-## Why This Exists
-
-Traditional CI/CD checks syntax and tests. Agent CI/CD checks behavior — did the agent get dumber? Did it start leaking PII? Did costs spike? This project implements the quality gates that prevent regressions from reaching production.
-
 ## Architecture
 
 ```

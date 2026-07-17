@@ -43,14 +43,6 @@ App → Router Proxy (localhost:3000) → Claude Haiku / Sonnet / Opus
 
 5. **Configuration** — Model tiers, cost thresholds, and escalation rules in a YAML/JSON config file. No code changes to add a new model.
 
-## What Makes This Not a Toy
-
-- The classifier must be fast and cheap — if it takes 500ms and costs $0.01, you've eaten your savings
-- Fallback logic is where things get subtle: how do you detect a bad response without an expensive LLM call?
-- Real cost tracking requires handling streaming responses (you get token counts after the response finishes)
-- The dashboard needs to handle concurrent requests without blocking
-- You'll discover the 80/20 rule: most traffic is simple, but the complex tail is where quality matters
-
 ## Evaluation Criteria
 
 Run 100 diverse requests through the router (mix of simple, medium, complex). Compare:

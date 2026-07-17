@@ -1,6 +1,6 @@
 # P29 — Self-Healing Agent Mesh
 
-A production-grade self-healing agent mesh that demonstrates distributed systems
+A self-healing agent mesh that demonstrates distributed systems
 patterns: health monitoring, automatic failover, work redistribution, circuit
 breaking, and degraded-mode operation.
 

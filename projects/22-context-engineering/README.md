@@ -1,6 +1,6 @@
 # Project 22: Context Window Optimizer
 
-A production-grade context engineering system that takes heterogeneous sources (system prompts, RAG chunks, memory entries, tool results, conversation history, few-shot examples) and assembles the best possible context window within a token budget.
+A context engineering system that takes heterogeneous sources (system prompts, RAG chunks, memory entries, tool results, conversation history, few-shot examples) and assembles the best possible context window within a token budget.
 
 ## Quick Start
 

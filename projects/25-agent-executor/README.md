@@ -1,10 +1,6 @@
 # P25: Zero-Trust Agent Executor — IAM for AI Agents
 
-A production-grade execution framework that applies zero-trust security principles to AI agent actions. IAM-style policies, sandboxed execution, human-in-the-loop approvals, and complete audit trails. No frameworks, no dependencies — pure Node.js.
-
-## Why This Exists
-
-Agents that can read databases, call APIs, and deploy code need the same security model as human users — maybe stricter. This project implements the permission layer that sits between an agent's intent and the system's resources. The same patterns AWS IAM, Kubernetes RBAC, and enterprise access control use, applied to AI agents.
+An execution framework that applies zero-trust security principles to AI agent actions. IAM-style policies, sandboxed execution, human-in-the-loop approvals, and complete audit trails. 
 
 ## Architecture
 
