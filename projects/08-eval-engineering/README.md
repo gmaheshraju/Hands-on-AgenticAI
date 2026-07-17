@@ -87,6 +87,3 @@ The 30-question dataset covers a fictional company (TechCorp) knowledge base wit
 
 Building the golden dataset is the hardest and most valuable part of eval engineering.
 
-## Staff+ Interview Angle
-
-"I built an eval harness with three dimensions: faithfulness, relevance, and completeness. The LLM-as-judge approach worked but needed calibration — out of the box, it rated everything 4 or 5 out of 5. I fixed it by adding concrete failure examples to the rubric prompt and requiring one-line justifications for each score. The regression detection caught a subtle bug where a prompt template change improved average scores but caused 3 specific questions to hallucinate."

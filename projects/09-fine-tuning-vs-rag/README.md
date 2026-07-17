@@ -117,6 +117,3 @@ The main deliverable is `COMPARISON.md` — a markdown comparison table showing:
 3. **Fine-tuning has the highest accuracy** but the maintenance cost is real.
 4. **Start simple, graduate when data justifies it** — most teams should begin with few-shot, build RAG when volume grows, and fine-tune only with evidence it's needed.
 
-## Staff+ Interview Angle
-
-"I built the same classification system three ways and compared them on 30 held-out test tickets. Zero-shot prompting hit 80% accuracy — surprisingly good for zero effort. Few-shot jumped to 90% with just 8 curated examples. RAG reached 93% by retrieving similar past tickets as context. Fine-tuning scored 97% with the lowest latency but required training data curation and retraining when categories change. My recommendation: start with few-shot, graduate to RAG when you have enough labeled data, and only fine-tune when you need sub-200ms latency at scale."

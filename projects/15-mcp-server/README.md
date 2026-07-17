@@ -122,39 +122,6 @@ npm run client
 npm run agent
 ```
 
-## Interview Angles
-
-### "Explain MCP to me"
-
-> MCP is a JSON-RPC 2.0 protocol for connecting AI models to tools and data. The server declares capabilities (tools with JSON Schema parameters, resources with URIs), and the client discovers and calls them. Transport-agnostic — works over stdio, SSE, or WebSocket. Think of it as an API standard specifically designed for AI-tool interaction, with built-in discovery, typed parameters, and structured responses.
-
-### "How does it compare to function calling / tool use?"
-
-> Function calling is the LLM-side concept — the model generates a tool call in its response. MCP is the infrastructure-side concept — how the client discovers what tools exist and actually executes them. They work together: the LLM uses function calling to decide WHICH tool to call, MCP handles HOW to call it.
-
-### "Why not just use REST APIs?"
-
-> You could, but MCP gives you:
-> 1. **Discovery** — client auto-discovers tools, no hardcoded endpoints
-> 2. **Typed parameters** — JSON Schema validation built in
-> 3. **Structured responses** — content types (text, image, resource)
-> 4. **Bidirectional** — server can send notifications to client
-> 5. **Transport flexibility** — stdio for local, SSE/WS for remote
-> 6. **Standard** — one protocol for all AI tools, not per-API integration
-
-### "What's the security model?"
-
-> MCP servers run locally (stdio) or behind auth (SSE). The client controls which servers to connect to. Tools can enforce read-only access (like our query tool blocking non-SELECT SQL). Resources are explicitly declared. The protocol itself doesn't handle auth — that's transport-layer (API keys, OAuth for SSE endpoints).
-
-### "How would you deploy this in production?"
-
-> 1. Switch from stdio to SSE/WebSocket transport for remote access
-> 2. Add authentication middleware
-> 3. Rate limiting on tool calls
-> 4. Connection pooling for the database
-> 5. Logging/monitoring of all tool invocations
-> 6. Capability negotiation (different tools for different clients)
-
 ## Project Structure
 
 ```

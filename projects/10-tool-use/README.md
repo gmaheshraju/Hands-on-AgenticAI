@@ -109,6 +109,3 @@ async function realLLM(messages) {
 const agent = createAgent({ llm: realLLM, db, schemaContext, allowedTables });
 ```
 
-## Interview Angle
-
-> "I built a text-to-SQL agent with three permission tiers enforced in code, not just prompts. The permission layer parses every generated SQL statement and rejects anything that isn't a SELECT on an allowed table. It blocks semicolon injection, metadata probes, deeply nested subqueries, and UNION-based data exfiltration — all before the query touches the database. The most interesting part was error recovery: the LLM generates wrong column names about 20% of the time on first attempt, but feeding the error message back lets it self-correct in one retry over 90% of the time. The lesson: invest in retry loops, not perfect prompts."

@@ -46,7 +46,7 @@ export default function Layout({ children }) {
         <div className="footer__inner">
           <span className="footer__mark">MG</span>
           <p className="footer__text">
-            Built by Mahesh Guntumadugu — decision frameworks from 60+ real interviews and 100+ mock system designs.
+            Built by Mahesh Guntumadugu — decision frameworks from real-world production systems.
           </p>
         </div>
       </footer>

@@ -247,12 +247,3 @@ src/
 - **Structured output**: `--json` flag on every command for machine consumption
 - **Cost awareness**: Every LLM call shows model, tokens, and cost
 
-## Interview Talking Points
-
-1. **CLI Design**: How to build production CLIs without frameworks — argument parsing, exit codes, stdin/stdout, colored output
-2. **LLM Integration**: Prompt engineering for structured output, token estimation, cost tracking
-3. **Graceful Degradation**: Demo mode, budget fallback, offline heuristics
-4. **Developer UX**: Interactive prompts, conventional commits, CI-friendly JSON output
-5. **Budget Management**: Cross-session state, daily limits, per-operation tracking
-6. **Security**: API keys in config files (not CLI args), no secrets in git
-7. **Testing Strategy**: Mock LLM for deterministic tests, real git operations for integration tests

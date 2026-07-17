@@ -15,21 +15,6 @@ Browser (Web Audio API)          WebSocket           Node.js Server
                                                     └─────────────────────┘
 ```
 
-## State Machine (the interview piece)
-
-```
-IDLE ──> LISTENING ──> PROCESSING ──> SPEAKING ──> LISTENING (normal)
-                                         │
-                                         ▼
-                                    INTERRUPTED ──> LISTENING (interruption)
-```
-
-- **IDLE** — No active conversation
-- **LISTENING** — Capturing user audio, running voice activity detection + endpointing
-- **PROCESSING** — User finished speaking (silence threshold met), generating response
-- **SPEAKING** — Agent TTS streaming to user
-- **INTERRUPTED** — User spoke during agent speech; TTS cancelled immediately, transitions back to LISTENING
-
 ## Quick Start
 
 ```bash
@@ -61,7 +46,7 @@ No microphone or API keys needed. Use the "Simulate Voice" input or quick-phrase
 3. Response → MockTTS (sine wave audio chunks)
 4. Audio streamed back via WebSocket → browser playback
 
-## Key Interview Topics
+## Key Concepts
 
 - **Interruption handling**: VAD during SPEAKING state triggers immediate TTS cancellation
 - **Endpointing**: Silence threshold (1500ms default) determines when user finished speaking

@@ -28,14 +28,22 @@ A multi-agent system that produces a technical blog post through four specialize
 
 ## Message Bus
 
-All inter-agent communication flows through a shared message bus. Every message is logged with sender, receiver, type, and timestamp for full observability.
+Agents do not call each other's functions directly. Each agent (and the
+supervisor) registers a handler with `bus.subscribe(channel, handler)`,
+keyed by its own name. The supervisor only ever *publishes* — the bus
+routes each message to whichever agent subscribed to `msg.to`, and that
+agent's handler runs, does its work, and publishes the next message in
+the chain. Every message is logged with sender, receiver, type, and
+timestamp for full observability, regardless of which channel it went to.
 
-Message types:
-- `RESEARCH_NOTES` — Researcher to Supervisor
-- `DRAFT` — Writer to Supervisor
-- `EDIT_REVIEW` — Editor to Supervisor
+Message types (and the subscriber they wake up):
+- `RESEARCH_REQUEST` — Supervisor to Researcher (kicks off the pipeline)
+- `RESEARCH_COMPLETE` — Researcher to Writer
+- `DRAFT_COMPLETE` — Writer to Editor
+- `REVIEW_COMPLETE` — Editor to Supervisor (carries the accept/reject verdict)
 - `REVISION_REQ` — Supervisor to Writer (retry with feedback)
-- `FACT_CHECK` — Fact-Checker to Supervisor
+- `FACT_CHECK_REQUEST` — Supervisor to Fact-Checker
+- `FACT_CHECK_COMPLETE` — Fact-Checker to Supervisor
 - `FINAL` — Supervisor to output
 
 ## Running the Demo
@@ -79,8 +87,9 @@ src/
 
 4. **Cost tracking per agent** — Each agent reports token usage. The supervisor tracks cumulative cost and aborts if it exceeds the $2.00 budget.
 
-5. **Retry with feedback** — When the editor rejects, the supervisor extracts the major issues and sends them as revision feedback to the writer. The writer's system prompt includes instructions for handling revision requests.
+5. **Retry with feedback** — When the editor rejects, the supervisor extracts the major issues and sends them as revision feedback to the writer over the bus (`REVISION_REQ`). The writer's system prompt includes instructions for handling revision requests.
 
-## Interview Angle
+6. **Pub/sub, not direct calls** — Agents never call each other's functions. Each agent (and the supervisor) calls `bus.subscribe(channelName, handler)` once at pipeline start. The supervisor only ever `bus.publish()`s; the bus looks up `msg.to` and invokes whichever handler(s) subscribed to that channel. This means the bus is load-bearing — remove a `subscribe` call and that stage of the pipeline goes silent, rather than the bus being a passive log sink beside direct calls.
 
-"I built a 4-agent content pipeline: researcher, writer, editor, fact-checker. The most interesting finding was that agent handoff quality depends almost entirely on the output schema of the upstream agent. When the researcher returned structured notes with source URLs and key claims, the writer produced dramatically better drafts than when it got freeform text. Inter-agent contracts matter more than individual agent quality."
+7. **Content-derived editor scoring** — The editor's ACCEPT/REJECT verdict is computed from the draft itself: word count vs. the 800-1200 target, number of code blocks, number of section headers, presence of concrete before/after benchmark numbers, and whether the draft has both an intro and a takeaways/conclusion section. A draft scoring 7+/10 is accepted; anything lower is rejected with the specific issues that dragged the score down. There is no dependency on which attempt number it is.
+

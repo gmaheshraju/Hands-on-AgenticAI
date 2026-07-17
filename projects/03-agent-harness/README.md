@@ -90,6 +90,3 @@ Each iteration writes one JSON line:
 }
 ```
 
-## Interview Angle
-
-"I built a research agent with three termination conditions: iteration cap, cost cap, and convergence detection. The convergence detector tracks how many new facts each iteration adds — when three consecutive iterations add nothing new, the agent concludes. The JSONL trace log made debugging possible: I could see exactly where the agent wasted tokens on irrelevant searches, and the cost accumulator let me set budgets per research task."

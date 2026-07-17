@@ -136,13 +136,3 @@ src/
     └── executor.test.js # 38 tests across 6 suites
 ```
 
-## Interview Angles
-
-**"How do you secure agent actions in production?"**
-→ Zero-trust: every action goes through schema validation, policy check, optional human approval, and sandbox enforcement. Trust levels gate what each agent can do. Full audit trail for compliance.
-
-**"How do you handle the tension between agent autonomy and safety?"**
-→ Trust levels + conditional policies. A data-analyst agent reads freely but can't write. An elevated agent writes but can't deploy. Critical actions always require human approval. The sandbox auto-suspends agents that accumulate violations.
-
-**"How would you build an approval workflow for AI actions?"**
-→ Three tiers: auto-approve (low risk, configured rules), human approval (queued with timeout), and escalation chain (lead → manager → CTO). Expired requests are auto-denied. Full history for audit.

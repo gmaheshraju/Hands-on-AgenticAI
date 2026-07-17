@@ -119,6 +119,3 @@ The model card covers all transparency requirements for high-risk AI systems:
 | Art. 14 | Human oversight | Oversight requirements and conditions |
 | Art. 15 | Accuracy & robustness | Bias audit metrics and evaluation methodology |
 
-## Interview Angle
-
-> "I built a bias audit pipeline for an AI resume screener using counterfactual testing — 50 matched resume pairs per demographic attribute, differing only on names and pronouns. The pipeline detected statistically significant gender bias: male names scored 0.8 points higher on average (Welch's t-test, p < 0.001, Cohen's d = 0.9). I implemented chi-squared and t-tests from scratch to understand the math, not just call a library. The model card generator produces EU AI Act-compliant documentation covering all Article 13 transparency requirements. The hardest part was intersectional analysis — individual attribute tests can miss compound discrimination at specific intersections."

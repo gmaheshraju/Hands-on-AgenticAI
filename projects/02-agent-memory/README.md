@@ -89,14 +89,6 @@ The system uses subject+predicate as a composite key. Same subject+predicate = u
 | List facts | `facts` |
 | Help | `help` |
 
-## Interview Talking Points
-
-**The hard problem**: Consolidation — turning messy conversation logs into clean, non-redundant facts. The consolidation gate diffs new episodes against existing semantic memory and only writes genuinely new information. Conflict resolution uses subject+predicate as a natural key to detect when facts should be updated vs. created.
-
-**Retrieval at scale**: Hybrid search combining SQLite FTS5 for keyword matching with direct fact lookup and procedural pattern matching. Results are re-ranked by a weighted combination of relevance, recency (exponential decay), confidence score, and staleness penalty.
-
-**Memory decay**: Facts that aren't reinforced within 6 months get flagged as stale and ranked lower in retrieval. This prevents outdated information from dominating results.
-
 ## Files
 
 ```
