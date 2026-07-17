@@ -211,7 +211,7 @@ export default function MultiAgentSystems() {
       {tab === 4 && <AntiPatternsPanel />}
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
-        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
+        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Hands-On Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Multi-Agent Content Pipeline</p>
         <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and deep dive into production patterns.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/04-multi-agent-systems.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
@@ -621,7 +621,7 @@ function WhenToUsePanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "The staff+ move is recommending single-agent first and articulating exactly when you'd graduate to multi-agent. Anyone can draw a fancy multi-agent diagram. The engineering signal is saying: 'For this use case, a single agent with good tool selection handles 90% of queries. I'd add a specialist subagent only for the 10% that overflow the context window — and here's how I'd detect that overflow condition.'"
+        "The right move is recommending single-agent first and articulating exactly when you'd graduate to multi-agent. Anyone can draw a fancy multi-agent diagram. The engineering signal is saying: 'For this use case, a single agent with good tool selection handles 90% of queries. I'd add a specialist subagent only for the 10% that overflow the context window — and here's how I'd detect that overflow condition.'"
       </Insight></FadeIn>
     </div>
   );

@@ -1,4 +1,4 @@
-# Capstone Projects
+# Projects
 
 29 production-grade projects — one per topic. Not toy demos. Real problems, real APIs, real evaluation criteria.
 

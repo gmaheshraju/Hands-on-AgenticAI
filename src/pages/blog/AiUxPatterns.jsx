@@ -550,7 +550,7 @@ export default function AiUxPatterns() {
       {tab === 4 && <TrustPatternsPanel />}
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
-        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
+        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Hands-On Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Production Chat UI with Trust Signals</p>
         <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and deep dive into production patterns.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/12-ai-ux.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
@@ -583,7 +583,7 @@ function StreamingPanel() {
         <br /><br />
         <Pill type="green">Hybrid: stream text, buffer tool results</Pill> &quot;Let me look that up for you...&quot; (streamed) then a loading spinner while the tool executes, then &quot;Found 3 matching orders&quot; (buffered after tool completes). The user sees progress at every stage. This is how Claude, ChatGPT, and Copilot all handle tool use.
         <br /><br />
-        <strong>Staff+ signal:</strong> Know the difference between Server-Sent Events (SSE) and WebSockets for streaming. SSE is unidirectional, simpler, works through CDNs, and is what OpenAI/Anthropic APIs use. WebSockets are bidirectional — overkill for streaming LLM responses but needed if the user can interrupt/cancel mid-stream.
+        <strong>Key distinction:</strong> Know the difference between Server-Sent Events (SSE) and WebSockets for streaming. SSE is unidirectional, simpler, works through CDNs, and is what OpenAI/Anthropic APIs use. WebSockets are bidirectional — overkill for streaming LLM responses but needed if the user can interrupt/cancel mid-stream.
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="How to handle streaming UX states?">
@@ -654,7 +654,7 @@ function ConfidencePanel() {
       </FadeIn>
 
       <FadeIn delay={80}><Insight>
-        Most AI products fail at the edges of confidence. They are great when confident and terrible when uncertain — either silent (showing nothing) or overconfident (showing wrong answers as facts). The staff+ answer: design the uncertainty UX FIRST. If your product is trustworthy when it is wrong, users will trust it when it is right. Trust research consistently shows that a single confidently wrong answer destroys trust far faster than correct answers rebuild it — the asymmetry is severe, and it is the core reason why abstaining when uncertain is always better than guessing.
+        Most AI products fail at the edges of confidence. They are great when confident and terrible when uncertain — either silent (showing nothing) or overconfident (showing wrong answers as facts). The right approach: design the uncertainty UX FIRST. If your product is trustworthy when it is wrong, users will trust it when it is right. Trust research consistently shows that a single confidently wrong answer destroys trust far faster than correct answers rebuild it — the asymmetry is severe, and it is the core reason why abstaining when uncertain is always better than guessing.
       </Insight></FadeIn>
 
       <FadeIn delay={160}><Insight type="warn" tag="Calibration gotcha">

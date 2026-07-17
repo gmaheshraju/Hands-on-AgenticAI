@@ -23,7 +23,7 @@ export default function EventDriven() {
       <h1 className="page-title">Event-Driven Architecture</h1>
       <p className="page-subtitle">
         Events decouple producers from consumers, but they don't decouple you from
-        thinking about ordering, idempotency, and failure modes. The staff+ signal
+        thinking about ordering, idempotency, and failure modes. The key differentiator
         is knowing when events help and when they make things worse.
       </p>
 
@@ -48,7 +48,7 @@ function PatternsPanel() {
     <div>
       <h2 className="page-section-title">Three models, three tradeoffs</h2>
       <p className="page-body">
-        Most candidates say "pub/sub" and stop. Staff engineers name the messaging
+        Most engineers say "pub/sub" and stop. Staff engineers name the messaging
         model, the ordering guarantee, and the failure mode in the same breath.
         The model you pick determines what breaks first.
       </p>
@@ -77,7 +77,7 @@ function PatternsPanel() {
         id, time, datacontenttype, data. The discipline is: new fields are always optional,
         never rename or remove fields, version the event type (order.placed.v2), and
         consumers must ignore unknown fields. The moment you break backward compatibility,
-        you need a new topic or a dual-write migration — both are expensive. Staff+ move:
+        you need a new topic or a dual-write migration — both are expensive. The better approach:
         mention that schema evolution is a contract problem, not a technical one. You need
         a schema review process the same way you need an API review process.
       </Decision>
@@ -206,7 +206,7 @@ function EventSourcingPanel() {
         state machines (insurance claims, order fulfillment).
         {'\n\n'}
         It's overkill for: user profiles, content management, settings, catalogs —
-        anything where you only care about current state. The staff+ signal is saying
+        anything where you only care about current state. The key differentiator is saying
         "I'd use event sourcing for the payment ledger because the audit trail has
         regulatory value, but the user profile is straightforward CRUD — I'd use
         a regular Postgres table there."
@@ -227,7 +227,7 @@ function EventSourcingPanel() {
         Mention that this is essentially a data migration for your event store.
       </Decision>
 
-      <Insight tag="The staff+ filter">
+      <Insight tag="The decision filter">
         "Event sourcing is seductive because it promises a complete history. But I've
         seen teams adopt it for a CRUD app and spend 6 months building projection
         infrastructure instead of shipping features. The question I always ask: does
@@ -321,7 +321,7 @@ function SagasPanel() {
         gateways, third-party APIs). And 2PC doesn't compose — you can't nest 2PC
         transactions easily.
         {'\n\n'}
-        Staff+ answer: "2PC is for database-level atomicity within a trusted boundary.
+        The right answer: "2PC is for database-level atomicity within a trusted boundary.
         For cross-service business operations, I'd use sagas with compensations because
         the services have different availability characteristics and I can't hold locks
         across them."
@@ -458,7 +458,7 @@ function CDCStreamingPanel() {
         ID as a deduplication key in the database. Store the offset in the same
         transaction as the business write.
         {'\n\n'}
-        The honest staff+ answer: "Exactly-once within Kafka is achievable with
+        The production answer: "Exactly-once within Kafka is achievable with
         transactional APIs. Exactly-once to external systems requires idempotent sinks.
         I'd rather design for idempotency everywhere than depend on exactly-once
         guarantees that break at system boundaries."

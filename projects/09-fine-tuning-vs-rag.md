@@ -1,4 +1,4 @@
-# Capstone 09: Three Approaches, One Problem — Customer Support Q&A
+# Project 09: Three Approaches, One Problem — Customer Support Q&A
 
 ## The Problem
 
@@ -39,7 +39,7 @@ The same customer support Q&A feature, built three ways, evaluated against the s
 
 5. **Head-to-head evaluation:**
    - Run all 50 test questions through all 3 approaches
-   - Use LLM-as-judge (from Capstone 08) to score each answer on correctness and completeness
+   - Use LLM-as-judge (from Project 08) to score each answer on correctness and completeness
    - Produce a comparison table:
      ```
      | Approach     | Avg Score | Cost/Query | Latency | Setup Cost | Maintenance |

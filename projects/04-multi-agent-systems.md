@@ -1,4 +1,4 @@
-# Capstone 04: Multi-Agent Content Pipeline
+# Project 04: Multi-Agent Content Pipeline
 
 ## The Problem
 

@@ -126,7 +126,7 @@ function CircuitBreakersPanel() {
         </p>
       </Decision>
 
-      <Insight tag="Staff+ signal">
+      <Insight tag="Key insight">
         "A circuit breaker is an admission that you can't control your
         dependencies, but you can control how you fail. The senior move is
         designing the fallback before you design the happy path -- because
@@ -246,7 +246,7 @@ function RetriesPanel() {
           caps the pre-trip amplification.
         </p>
         <p className="page-body">
-          The staff+ answer: <strong>only retry at the edge.</strong> The
+          The right answer: <strong>only retry at the edge.</strong> The
           service closest to the user retries. Internal services between
           layers should fail fast and propagate errors up. If every layer
           retries independently, you get multiplicative amplification. If
@@ -529,7 +529,7 @@ function AntiPatternsPanel() {
     <>
       <h2 className="page-section-title">Bad vs Good: What Separates Senior from Staff</h2>
       <p className="page-body">
-        The difference between a senior answer and a staff+ answer on
+        The difference between a senior answer and a production-grade answer on
         resilience isn't knowing the patterns -- it's knowing when each
         pattern becomes the problem.
       </p>

@@ -12,7 +12,7 @@ export default function Insight({ type = 'staff', tag, children }) {
         className="insight__tag"
         style={{ color: isWarn ? 'var(--text-warning)' : 'var(--text-accent)' }}
       >
-        {tag || (isWarn ? 'Warning' : 'Staff+ signal')}
+        {tag || (isWarn ? 'Warning' : 'Key insight')}
       </p>
       <p className="insight__text">{children}</p>
     </div>

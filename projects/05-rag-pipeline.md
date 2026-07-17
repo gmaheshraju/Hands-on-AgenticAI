@@ -1,4 +1,4 @@
-# Capstone 05: Codebase Q&A with Hybrid RAG
+# Project 05: Codebase Q&A with Hybrid RAG
 
 ## The Problem
 

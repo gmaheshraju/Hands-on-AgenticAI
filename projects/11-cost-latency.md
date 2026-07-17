@@ -1,8 +1,8 @@
-# Capstone 11: Optimize an Existing Agent from $2 to $0.15 Per Conversation
+# Project 11: Optimize an Existing Agent from $2 to $0.15 Per Conversation
 
 ## The Problem
 
-You have a working customer support agent (build one, or use any of the previous capstones). It costs $2 per conversation and takes 8 seconds average response time. Your product manager says: "Get it under $0.15 and under 2 seconds, without noticeable quality loss." This is the optimization problem every AI product team faces.
+You have a working customer support agent (build one, or use any of the previous projects). It costs $2 per conversation and takes 8 seconds average response time. Your product manager says: "Get it under $0.15 and under 2 seconds, without noticeable quality loss." This is the optimization problem every AI product team faces.
 
 ## What You Build
 
@@ -15,7 +15,7 @@ Take an existing agent and apply four optimization techniques, measuring the imp
 Before optimizing, measure your starting point across 50 representative conversations:
 - Average cost per conversation (tokens * price)
 - Average latency (time to first token, total response time)
-- Quality score (use your eval harness from Capstone 08, or a simple LLM-as-judge)
+- Quality score (use your eval harness from Project 08, or a simple LLM-as-judge)
 
 ### Optimization 1: Prompt Compression
 
@@ -33,7 +33,7 @@ Before optimizing, measure your starting point across 50 representative conversa
 
 ### Optimization 3: Model Routing
 
-1. Implement the complexity classifier from Capstone 06 (or a simpler version).
+1. Implement the complexity classifier from Project 06 (or a simpler version).
 2. Route simple questions to a cheap model, complex ones to the frontier model.
 3. Measure: cost breakdown by model tier, quality impact per tier, escalation rate.
 
@@ -75,7 +75,7 @@ Produce a table showing the cumulative impact:
 
 ## Stack
 
-- The agent from a previous capstone (or any LLM-powered application)
+- The agent from a previous project (or any LLM-powered application)
 - Embedding model for semantic caching
 - Redis or in-memory cache (Map) for the cache layer
 - Multiple LLM providers/tiers for routing

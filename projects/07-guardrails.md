@@ -1,4 +1,4 @@
-# Capstone 07: Prompt Injection Test Suite + Defense Layer
+# Project 07: Prompt Injection Test Suite + Defense Layer
 
 ## The Problem
 

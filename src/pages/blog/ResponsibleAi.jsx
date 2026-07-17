@@ -258,7 +258,7 @@ function Tab1() {
 
       <CodeBlock code={FAIRNESS_AUDIT_CODE} filename="fairness-audit.js" output={FAIRNESS_AUDIT_OUTPUT} />
 
-      <Insight tag="Staff+ signal">
+      <Insight tag="Key insight">
         In practice, never say "we need to remove bias." Bias is a feature of data, not a bug
         to remove. The correct framing: "We need to measure disparities across protected attributes, set
         acceptable thresholds, and build monitoring that alerts us when those thresholds are exceeded."
@@ -393,7 +393,7 @@ function Tab3() {
 
       <CodeBlock code={MODEL_CARD_CODE} filename="model-card-generator.js" output={MODEL_CARD_OUTPUT} />
 
-      <Insight tag="Staff+ signal">
+      <Insight tag="Key insight">
         Model cards aren't bureaucracy — they're insurance. When a user complains about a biased output,
         or a regulator asks about your AI system, the model card is your evidence that you knew the
         limitations, measured the risks, and implemented mitigations. Without it, you're liable. With it,
@@ -469,7 +469,7 @@ function Tab4() {
         labeling and deepfakes (2024) signals the regulatory intent. Build the infrastructure now.</p>
       </Decision>
 
-      <Insight tag="Staff+ signal">
+      <Insight tag="Key insight">
         The senior engineering perspective on regulation: "I wouldn't wait for laws to tell me what to do. I'd
         build the monitoring, documentation, and fairness measurement infrastructure now because (a) it's
         the right thing to do, (b) it's cheaper to build proactively than retrofit reactively — GDPR
@@ -540,7 +540,7 @@ function Tab5() {
 
       <GovernanceLifecycleSVG />
 
-      <Insight tag="Staff+ signal">
+      <Insight tag="Key insight">
         Governance is not compliance theater. The real test: if something goes wrong at 2am, can your team
         (a) detect it within minutes via automated monitoring, (b) disable the AI feature within 5 minutes
         via a pre-tested kill switch, (c) explain what happened to leadership by morning with root cause
@@ -577,7 +577,7 @@ export default function ResponsibleAi() {
       {tab === 4 && <Tab5 />}
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
-        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
+        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Hands-On Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Bias Audit Pipeline + Model Card Generator</p>
         <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and deep dive exercises.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/13-responsible-ai.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>

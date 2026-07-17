@@ -350,7 +350,7 @@ function AntiPatternsPanel() {
     <div>
       <h2 className="page-section-title">Anti-patterns vs. production-tested approaches</h2>
       <p className="page-body">
-        The difference between a senior and a staff+ answer isn't more buzzwords — it's
+        The difference between a senior and a production-grade answer isn't more buzzwords — it's
         demonstrating that you understand the tradeoffs, have opinions about defaults,
         and can articulate what you're giving up with each choice.
       </p>
@@ -451,7 +451,7 @@ function AntiPatternsPanel() {
       </div>
 
       <Insight>
-        "The staff+ differentiator in distributed systems questions isn't knowing the
+        "The key differentiator in distributed systems questions isn't knowing the
         theorems — it's showing that you understand the tradeoff space well enough to make
         a defensible choice for a specific system. Don't recite CAP. Say what your system
         needs, what you're choosing, and what the cost of that choice is. What matters is

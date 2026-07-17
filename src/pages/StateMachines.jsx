@@ -219,7 +219,7 @@ function DistributedStatePanel() {
         the TTL expires, another process acquires the lock, and now two processes think
         they hold it. ZooKeeper uses ephemeral nodes with session heartbeats — if the
         holder dies, the session expires and the lock releases. More reliable, but
-        operationally heavier. The staff+ answer: if the lock protects an operation
+        operationally heavier. The right answer: if the lock protects an operation
         that must be mutually exclusive for correctness (not just efficiency), you
         need fencing tokens regardless of which lock service you use.
       </Decision>

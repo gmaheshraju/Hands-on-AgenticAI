@@ -56,7 +56,7 @@ export default function DatabaseSelection() {
       <p className="page-eyebrow">Framework 01</p>
       <h1 className="page-title">Database Selection</h1>
       <p className="page-subtitle">
-        The 6-question decision tree that signals staff+ thinking. Start from the
+        The 6-question decision tree that reflects deep systems understanding. Start from the
         top — each question narrows the field before you ever name a technology.
       </p>
 
@@ -81,7 +81,7 @@ function ScalePanel() {
   return (
     <div>
       <h2 className="page-section-title">Calibrate scale before choosing</h2>
-      <p className="page-body">Most candidates jump to DynamoDB or Cassandra for problems that Postgres handles trivially. Naming a distributed system for a small-scale problem signals inexperience.</p>
+      <p className="page-body">Most engineers jump to DynamoDB or Cassandra for problems that Postgres handles trivially. Naming a distributed system for a small-scale problem signals inexperience.</p>
       <Decision question="How much data? How many QPS?">
         <Pill type="green">small</Pill> Under 10M rows, under 1K QPS — single Postgres handles everything. The database choice barely matters. Say this out loud.
       </Decision>
@@ -116,7 +116,7 @@ function JoinsPanel() {
   return (
     <div>
       <h2 className="page-section-title">The join question</h2>
-      <p className="page-body">This is the single biggest fork in the decision tree that most candidates miss. It separates relational from document/KV thinking.</p>
+      <p className="page-body">This is the single biggest fork in the decision tree that most engineers miss. It separates relational from document/KV thinking.</p>
       <Decision question="Do you need joins across entities?">Strong signal toward relational (Postgres, MySQL). Joins in application code at scale is a well-known anti-pattern — it multiplies latency and breaks under load.</Decision>
       <Decision question="Is each entity self-contained?">If "fetch one document by ID" gives you everything you need (user profile, product listing), document stores (MongoDB, DynamoDB) work naturally.</Decision>
       <Decision question="Mixed — some joins, some self-contained?">Use relational for the core transactional model. Denormalize into a document store or cache for the read-heavy, self-contained access patterns.</Decision>
@@ -143,7 +143,7 @@ function WritesPanel() {
   return (
     <div>
       <h2 className="page-section-title">Write patterns — where most designs silently break</h2>
-      <p className="page-body">Candidates obsess over reads. Staff engineers know that bad write patterns cause outages. Name the write shape before the read shape.</p>
+      <p className="page-body">Engineers obsess over reads. Staff engineers know that bad write patterns cause outages. Name the write shape before the read shape.</p>
       <Decision question="Append-only — logs, events, analytics">LSM-based stores (Cassandra, RocksDB), Kafka for streaming, S3 for cold storage. Append-only is the easiest write pattern to scale.</Decision>
       <Decision question="Frequent updates to the same row — counters, status">Hot rows cause lock contention. Solutions: write-behind with Redis, sharded counters, or CRDT-based merging. Name the specific contention risk.</Decision>
       <Decision question="High write fan-out — social feeds, notifications">Fan-out-on-write vs fan-out-on-read is a design decision, not a database decision. Name the tradeoff: write amplification vs read latency.</Decision>
@@ -158,7 +158,7 @@ function ProfilesPanel({ expandedDb, setExpandedDb }) {
   return (
     <div>
       <h2 className="page-section-title">Database profiles</h2>
-      <p className="page-body">Click any card to see the staff-level nuance — when it shines, when it breaks, and the operational cost most candidates ignore.</p>
+      <p className="page-body">Click any card to see the staff-level nuance — when it shines, when it breaks, and the operational cost most engineers overlook.</p>
       <div style={styles.dbGrid}>
         {DBS.map((db, i) => {
           const ex = expandedDb === i;
@@ -179,7 +179,7 @@ function ProfilesPanel({ expandedDb, setExpandedDb }) {
               <p style={styles.dbTldr}>{db.tldr}</p>
               {ex && (
                 <div style={styles.dbDetail}>
-                  {[['Shines', db.shines], ['Breaks', db.breaks], ['Ops cost', db.ops], ['Staff take', db.take]].map(([label, val]) => (
+                  {[['Shines', db.shines], ['Breaks', db.breaks], ['Ops cost', db.ops], ['Expert take', db.take]].map(([label, val]) => (
                     <div key={label} style={styles.dbRow}>
                       <span style={styles.dbLabel}>{label}</span>
                       <span style={styles.dbVal}>{val}</span>

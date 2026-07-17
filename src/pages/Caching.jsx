@@ -115,7 +115,7 @@ function PatternsPanel() {
   return (
     <div>
       <h2 className="page-section-title">Five caching patterns — know the tradeoffs</h2>
-      <p className="page-body">Cache-aside is the default. Name why you'd deviate from it — that's the staff+ signal.</p>
+      <p className="page-body">Cache-aside is the default. Name why you'd deviate from it — that's the differentiator.</p>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         {patterns.map((p, i) => {
@@ -281,7 +281,7 @@ function RealSystemsPanel() {
   return (
     <div>
       <h2 className="page-section-title">How real systems cache</h2>
-      <p className="page-body">Citing specific systems with named technologies and published papers is the strongest staff+ signal. It proves engineering depth, not textbook knowledge.</p>
+      <p className="page-body">Citing specific systems with named technologies and published papers is the strongest engineering signal. It proves engineering depth, not textbook knowledge.</p>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         {systems.map((sys, i) => {

@@ -86,7 +86,7 @@ const frameworks = [
     to: '/auth',
     number: '11',
     title: 'Auth Architecture',
-    subtitle: 'AuthN vs AuthZ, OAuth2/OIDC, JWT design, RBAC/ABAC/ReBAC — the security layer most candidates handwave past.',
+    subtitle: 'AuthN vs AuthZ, OAuth2/OIDC, JWT design, RBAC/ABAC/ReBAC — the security layer most engineers handwave past.',
     tags: ['OAuth2', 'JWT', 'RBAC', 'Zero trust', 'Zanzibar'],
     ready: true,
   },
@@ -126,8 +126,8 @@ export default function Home() {
           <em>Playbook</em>
         </h1>
         <p className="home-hero__tagline">
-          Decision frameworks battle-tested design and architectural patterns
-          that signal staff, principal, and CTO-level thinking.
+          Battle-tested decision frameworks and architectural patterns
+          for building production systems at scale.
         </p>
       </section>
 

@@ -434,7 +434,7 @@ export default function EvalEngineering() {
       {tab === 4 && <MetricsPanel />}
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
-        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
+        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Hands-On Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>RAG Eval Harness</p>
         <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and deep dive exercises.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/08-eval-engineering.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
@@ -647,7 +647,7 @@ function JudgePanel() {
         <Pill type="amber">Limitations</Pill> LLM judges have blind spots: they struggle with domain-specific correctness (medical, legal), they exhibit position bias in A/B comparisons, and they can be "fooled" by confident-sounding wrong answers. Always calibrate against human judgment on a sample.
       </Decision></FadeIn>
 
-      <FadeIn delay={100}><Insight tag="Staff+ signal">
+      <FadeIn delay={100}><Insight tag="Key insight">
         The rubric IS the eval. A prompt that says "rate this answer 1-5" gives noise. A rubric with concrete examples for each score level &mdash; "5 means every claim is directly supported by context, 1 means major claims are fabricated" &mdash; gives signal. Spend 80% of your eval engineering time on rubric design.
       </Insight></FadeIn>
 
@@ -700,7 +700,7 @@ function RegressionPanel() {
         <Pill type="red">Auto-generated test cases only</Pill> Using an LLM to generate your golden dataset creates a circular evaluation &mdash; the LLM tests what another LLM thinks is important, not what your users actually ask. Always seed with real production queries.
       </Decision></FadeIn>
 
-      <FadeIn delay={100}><Insight tag="Staff+ signal">
+      <FadeIn delay={100}><Insight tag="Key insight">
         The golden dataset should be version-controlled alongside your prompts. When someone changes a prompt, the PR should include updated golden dataset results showing no regression. This is the AI equivalent of "tests must pass before merge." Make it a CI gate, not a suggestion.
       </Insight></FadeIn>
 
@@ -759,7 +759,7 @@ function HITLPanel() {
         <Pill type="amber">Dual annotation on a subset</Pill> Have two annotators label the same 20% of cases. Use agreement on this overlap to monitor quality. If agreement drops, retrain annotators before they corrupt more data.
       </Decision></FadeIn>
 
-      <FadeIn delay={150}><Insight tag="Staff+ signal">
+      <FadeIn delay={150}><Insight tag="Key insight">
         Active learning saves 60-70% of annotation budget. Instead of reviewing random samples, review cases where the LLM judge had low confidence, where multiple judges disagreed, or where the model's answer was borderline pass/fail. You get more information per dollar from uncertain cases than from cases the system already handles well.
       </Insight></FadeIn>
 
@@ -832,7 +832,7 @@ function MetricsPanel() {
         <Pill type="red">A/B test without automated evals</Pill> If you're A/B testing based on user thumbs-up/down alone, you need 10K+ data points per variant because the signal is so noisy. Automated eval scores give you significance in 1/10th the traffic.
       </Decision></FadeIn>
 
-      <FadeIn delay={300}><Insight tag="Staff+ signal">
+      <FadeIn delay={300}><Insight tag="Key insight">
         The eval system is a product, not a one-time project. Dedicate 15-20% of your AI engineering bandwidth to eval infrastructure &mdash; improving rubrics, growing the golden dataset, calibrating judges, building dashboards. Teams that treat evals as a checkbox end up with a false sense of security. Teams that treat evals as a living system catch regressions the same day they're introduced.
       </Insight></FadeIn>
 

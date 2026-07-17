@@ -1,4 +1,4 @@
-# Capstone 14: Customer Onboarding Toolkit for an AI Product
+# Project 14: Customer Onboarding Toolkit for an AI Product
 
 ## The Problem
 
@@ -38,7 +38,7 @@ A script that takes the customer's documents and adapts the AI system:
 A tool that helps the FDE quickly build a golden evaluation set from customer data:
 - **Auto-generate candidate questions** — Given a document, use an LLM to generate 5 questions that the document should answer
 - **Human review interface** — A simple CLI that shows each question + suggested answer and lets the FDE accept, edit, or reject
-- **Export** — Save the reviewed eval set as JSON, ready to feed into the eval harness (Capstone 08)
+- **Export** — Save the reviewed eval set as JSON, ready to feed into the eval harness (Project 08)
 
 Target: build a 30-question eval set in under 1 hour of FDE time.
 

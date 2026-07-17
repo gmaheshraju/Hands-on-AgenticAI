@@ -33,7 +33,7 @@ export default function ForwardDeployedEngineering() {
       {tab === 4 && <AppliedPatternsPanel />}
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
-        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Capstone Project</p>
+        <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Hands-On Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Customer Onboarding Toolkit</p>
         <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Production-grade project brief with architecture requirements, evaluation criteria, and deep dive exercises.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/14-forward-deployed-engineering.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
@@ -226,7 +226,7 @@ function TeamStructurePanel() {
       </Decision></FadeIn>
 
       <FadeIn>
-        <Insight tag="Staff+ signal">
+        <Insight tag="Key insight">
           Reference this model when discussing how to structure customer-engineering teams. The Echo/Anthropic split is a concrete alternative to &ldquo;we assign a solutions engineer.&rdquo; It shows you understand that domain discovery and rapid engineering are different skills that work best as separate, paired roles.
         </Insight>
       </FadeIn>
@@ -304,7 +304,7 @@ function FDEVsSaaSPanel() {
       </Decision></FadeIn>
 
       <FadeIn>
-        <Insight tag="Staff+ signal">
+        <Insight tag="Key insight">
           The key metric in the FDE model: &ldquo;product leverage.&rdquo; Track how much more value each FDE can deliver as the platform matures. Early on, an FDE builds everything from scratch. As the platform absorbs patterns, the same FDE delivers dramatically more by configuring instead of coding. If leverage isn&rsquo;t growing, you&rsquo;re stuck on gravel.
         </Insight>
       </FadeIn>
@@ -346,7 +346,7 @@ function AIPlaybookPanel() {
       </Decision></FadeIn>
 
       <FadeIn>
-        <Insight tag="Staff+ signal">
+        <Insight tag="Key insight">
           In any system design for AI companies, always address the deployment model. &ldquo;How does this AI system actually get into the customer&rsquo;s hands?&rdquo; is a question most engineers skip. Bringing up FDE as a deployment strategy &mdash; especially for enterprise AI &mdash; signals that you think beyond the model architecture.
         </Insight>
       </FadeIn>
@@ -402,8 +402,8 @@ function AppliedPatternsPanel() {
       </Decision></FadeIn>
 
       <FadeIn>
-        <Insight tag="Staff+ signal">
-          Most candidates design the system architecture but ignore deployment. FDE knowledge lets you address the full lifecycle: how does this AI system actually get to customers, integrate with their data, and improve over time? This is the gap between senior and staff-level thinking.
+        <Insight tag="Key insight">
+          Most engineers design the system architecture but ignore deployment. FDE knowledge lets you address the full lifecycle: how does this AI system actually get to customers, integrate with their data, and improve over time? This is the gap between senior and staff-level thinking.
         </Insight>
       </FadeIn>
 
