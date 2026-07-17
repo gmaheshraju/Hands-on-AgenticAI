@@ -57,14 +57,6 @@ Execution time: 45ms | Rows scanned: 12,847
 
 6. **Output formatting** — Results as formatted tables for tabular data, single values for scalar queries, with the actual SQL shown for transparency.
 
-## What Makes This Not a Toy
-
-- SQL injection through the LLM: a user could ask "show me all users; DROP TABLE users" — the agent might generate valid destructive SQL
-- Permission enforcement must be in code, not just in the prompt — prompts are not security boundaries
-- Real databases have ambiguous schemas: is revenue in the `orders` table or the `invoices` table? The agent must handle ambiguity
-- Error recovery is where agents prove their value: a bad SQL query with a good retry loop beats a perfect query generator that gives up on errors
-- Query cost estimation prevents accidental full-table scans on large datasets
-
 ## Evaluation Criteria
 
 Write 20 test questions ranging from simple ("how many users?") to complex ("month-over-month revenue growth by product category"). For each:

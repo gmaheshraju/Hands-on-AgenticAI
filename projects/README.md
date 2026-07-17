@@ -1,8 +1,6 @@
 # Projects
 
-29 production-grade projects — one per topic. Not toy demos. Real problems, real APIs, real evaluation criteria.
-
-Each project solves a real infrastructure problem end-to-end. No frameworks, no toy demos — pure Node.js with full test suites.
+29 projects covering AI infrastructure, distributed systems, and agent architecture. Pure Node.js with full test suites.
 
 ## The Projects
 

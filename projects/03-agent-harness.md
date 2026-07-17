@@ -40,14 +40,6 @@ A research agent with a fully instrumented harness. The agent takes a research q
 
 5. **Report structure** — Not a blob of text. Sections with headers, each claim linked to a source URL. A summary table comparing the options on key dimensions.
 
-## What Makes This Not a Toy
-
-- Web search results are noisy — the agent must judge which results are worth reading
-- URLs return messy HTML — you need real text extraction (Readability, Cheerio, etc.)
-- Convergence detection is hard: how do you know when you've "learned enough"?
-- Cost tracking across nested LLM calls requires careful instrumentation
-- The trace log is what makes this production-grade — without it, you can't debug or improve the agent
-
 ## Evaluation Criteria
 
 Run the agent on 3 different research questions. For each:

@@ -1,6 +1,6 @@
 # Project 23: Long-Running Agent — Durable Execution Engine
 
-A production-grade durable execution engine for long-running agent tasks. Demonstrates checkpoint/resume, crash recovery, budget enforcement, and progress streaming — the hard problems that separate toy agent demos from production systems.
+A durable execution engine for long-running agent tasks. Demonstrates checkpoint/resume, crash recovery, budget enforcement, and progress streaming.
 
 ## Quick Start
 

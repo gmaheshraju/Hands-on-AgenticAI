@@ -37,13 +37,6 @@ A pipeline of 4 specialized agents that collaborate to produce a technical blog 
 
 5. **Cost tracking** — Track tokens and cost per agent. The researcher should use most of the budget (it's doing the hard work). If total cost exceeds $2, abort.
 
-## What Makes This Not a Toy
-
-- Agent handoff is where things break: the writer gets research notes that are too vague, the editor doesn't understand the writer's intent, the verifier can't match claims to sources
-- Each agent needs a different personality: the researcher is thorough, the writer is concise, the editor is critical, the verifier is skeptical
-- The supervisor's retry logic matters: when the writer produces a bad draft, what feedback do you give?
-- You'll discover that 4 sequential LLM calls are slow — this is where you learn why people reach for parallelism (and when it's appropriate)
-
 ## Evaluation Criteria
 
 Run the pipeline on 3 different technical topics. For each:

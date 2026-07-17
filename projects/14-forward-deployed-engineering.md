@@ -63,14 +63,6 @@ An automated checklist that verifies readiness:
 - [ ] Customer stakeholder demo scheduled
 - [ ] Feedback loop configured
 
-## What Makes This Not a Toy
-
-- Real customer documents are messy: scanned PDFs with no OCR, Word files with embedded images, documents in the wrong format
-- Domain adaptation is where FDE value lives — a generic AI fails on legal jargon, medical abbreviations, or internal acronyms
-- The eval set builder must be fast because FDE time is expensive — the human review loop must be frictionless
-- The deployment checklist is what separates "I set it up" from "I verified it works end-to-end"
-- This toolkit is reusable across customers — build it for one, use it for ten
-
 ## Evaluation Criteria
 
 - Connector: can you ingest 50+ documents from at least 2 different sources?

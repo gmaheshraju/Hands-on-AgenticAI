@@ -57,14 +57,6 @@ Produce a table showing the cumulative impact:
 | + Early Termination   |           |         |         | X% avg tokens saved      |
 ```
 
-## What Makes This Not a Toy
-
-- Each optimization has a quality cost — the question is whether it's noticeable
-- Semantic caching sounds simple but the similarity threshold is critical: too low = stale answers, too high = no cache hits
-- Prompt compression can silently break edge cases — you need evals to catch this
-- These optimizations compound: 40% + 30% + 25% savings doesn't equal 95% — measure the actual compound effect
-- The real deliverable is the comparison table with real numbers, not the code
-
 ## Evaluation Criteria
 
 - Did each optimization produce measurable cost savings?

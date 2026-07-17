@@ -380,7 +380,7 @@ function ErrorRecoveryPanel() {
     <div>
       <SectionHead
         title="Error recovery patterns"
-        desc="Tools fail. APIs time out. Rate limits hit. The difference between a toy demo and a production agent is what happens next."
+        desc="Tools fail. APIs time out. Rate limits hit. Graceful recovery under these conditions is what keeps agents running in production."
       />
 
       <FadeIn><Decision question="Retry strategy — what to retry and what to surface?">

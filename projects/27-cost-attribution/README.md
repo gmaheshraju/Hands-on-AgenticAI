@@ -2,10 +2,6 @@
 
 Track cost-per-outcome across agents, detect waste patterns, enforce budgets, and calculate ROI per agent. The CFO dashboard for AI spend. No frameworks, no dependencies — pure Node.js.
 
-## Why This Exists
-
-"How much does your AI cost?" is the wrong question. The right question: "What does each successful outcome cost, and where are you burning money for nothing?" This project builds the financial controls that turn AI spend from a black box into a P&L line item.
-
 ## Architecture
 
 ```

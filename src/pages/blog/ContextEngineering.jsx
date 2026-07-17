@@ -522,7 +522,7 @@ function ProductionPatternsPanel() {
     <div>
       <SectionHead
         title="Production context engineering — where theory meets reality"
-        desc="In production, your context pipeline handles thousands of requests per minute, each with different source combinations and budget pressures. These patterns separate toy demos from real systems."
+        desc="In production, your context pipeline handles thousands of requests per minute, each with different source combinations and budget pressures. These patterns handle that scale reliably."
       />
 
       <FadeIn><Decision question="Context caching (prompt caching)">

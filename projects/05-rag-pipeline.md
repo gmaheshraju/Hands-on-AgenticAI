@@ -42,14 +42,6 @@ Sources:
 
 5. **Answer generation** — Feed the top 5 chunks as context to the LLM. The answer must cite specific files and line numbers. If the context doesn't contain the answer, say so — don't hallucinate.
 
-## What Makes This Not a Toy
-
-- Real codebases have 10,000+ files — you can't embed everything. You need to filter (skip node_modules, binaries, generated code)
-- Code chunking is hard: a 500-line function shouldn't be split in the middle
-- Keyword search catches exact matches that embeddings miss (function names, config keys, error messages)
-- The LLM re-ranker is expensive but dramatically improves relevance vs. pure vector similarity
-- Hallucination is the #1 failure mode: the model confidently describes code that doesn't exist
-
 ## Evaluation Criteria
 
 Index a real open-source repo you know well (at least 100 files). Write 10 questions you know the answer to. For each:

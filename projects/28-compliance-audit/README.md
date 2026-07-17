@@ -1,6 +1,6 @@
 # P28: Compliance-Ready Audit Harness
 
-A production-grade compliance audit system with tamper-evident event logging,
+A compliance audit system with tamper-evident event logging,
 deterministic decision replay, and multi-regulation compliance checking
 (EU AI Act, SOC2, GDPR).
 

@@ -480,9 +480,7 @@ function AppliedPatterns() {
 
       <FadeIn delay={180}>
         <Insight tag="the meta-point">
-          The engineering playbook you're reading right now was built by a solo developer with AI. 15 blog posts, 23 production-grade
-          projects with real tests, architecture diagrams, interactive UI — shipped in weeks, not months. That's not a talking point.
-          That's proof. When someone asks "can one person really build all this?" you point at this and say "I already did."
+          This entire playbook — 15 deep dives, 29 projects with full test suites, architecture diagrams, interactive UI — was built by one engineer with AI. Shipped in weeks, not months. The leverage is real.
         </Insight>
       </FadeIn>
 

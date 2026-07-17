@@ -39,14 +39,6 @@ A web-based chat interface that connects to any LLM-powered agent and demonstrat
 
 7. **Message history** — Persist conversation in localStorage. Allow "new conversation" to reset context.
 
-## What Makes This Not a Toy
-
-- Streaming SSE is tricky: you need to handle partial JSON, network disconnects, and backpressure
-- HITL requires the agent to pause mid-execution and resume after approval — this breaks the simple request-response model
-- Error states must be specific and actionable, not generic error messages
-- Thinking indicators require the backend to send progress events during tool execution, not just the final response
-- Mobile responsiveness: chat UIs that only work on desktop are not products
-
 ## Evaluation Criteria
 
 - Streaming: does the response appear token-by-token? Can you stop generation mid-response?

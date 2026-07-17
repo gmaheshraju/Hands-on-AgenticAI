@@ -58,14 +58,6 @@ Two tools:
 
 3. **Output format** — Generate both markdown (for GitHub) and a structured JSON file (for programmatic consumption).
 
-## What Makes This Not a Toy
-
-- Name-based testing is a real technique used by researchers to detect bias in NLP systems — it works because LLMs encode demographic associations from training data
-- Statistical significance matters: a 2% difference on 10 samples means nothing, on 500 samples it might mean everything
-- Proxy discrimination is harder to detect than direct discrimination — the model might never mention gender but consistently rate candidates from women's colleges lower
-- Model cards are required by the EU AI Act for high-risk AI systems — this isn't optional for companies operating in Europe
-- The resume screening domain is where real harm happens: Amazon famously scrapped their AI recruiting tool after discovering gender bias
-
 ## Evaluation Criteria
 
 - Dataset: do the matched pairs isolate demographic attributes cleanly?
