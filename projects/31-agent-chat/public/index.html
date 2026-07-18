@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Chat — Streaming + Branching + Reconnection</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <aside id="sidebar">
+      <div class="sidebar-header">
+        <h1 class="logo">Agent Chat</h1>
+        <button id="new-chat-btn" title="New chat">+</button>
+      </div>
+      <div class="provider-selector">
+        <label>Provider</label>
+        <select id="provider-select">
+          <option value="ollama">Ollama (Local)</option>
+          <option value="nvidia">NVIDIA (Cloud)</option>
+          <option value="gemini">Gemini (Cloud)</option>
+        </select>
+      </div>
+      <div id="thread-list" class="thread-list"></div>
+      <div id="harness-panel" class="harness-panel"></div>
+      <div class="sidebar-footer">
+        <button id="theme-toggle" title="Toggle dark mode">
+          <span class="theme-icon"></span>
+        </button>
+        <span class="build-info">Pure Node.js + SQLite</span>
+      </div>
+    </aside>
+    <main id="chat-area">
+      <div id="chat-header">
+        <span id="chat-title">New Conversation</span>
+        <span id="stream-status" class="hidden"></span>
+      </div>
+      <div id="messages" class="messages"></div>
+      <div id="input-area">
+        <textarea id="message-input" placeholder="Ask anything... (Shift+Enter for newline)" rows="1"></textarea>
+        <button id="send-btn" title="Send">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
+        </button>
+        <button id="stop-btn" class="hidden" title="Stop generation">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+        </button>
+      </div>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

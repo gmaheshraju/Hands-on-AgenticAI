@@ -1,0 +1,15 @@
+{
+  "name": "agent-chat",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Production agent chat with streaming reasoning, reconnection, and conversation branching",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0",
+    "express": "^4.21.0"
+  }
+}
