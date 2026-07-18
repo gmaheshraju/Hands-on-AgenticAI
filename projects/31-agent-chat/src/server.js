@@ -237,6 +237,24 @@ app.get('/api/runs/:id', (req, res) => {
   res.json(run);
 });
 
+// ── Feedback ────────────────────────────────────────────────────────
+
+app.post('/api/feedback', (req, res) => {
+  const { messageId, threadId, runId, rating, comment } = req.body;
+  if (!messageId || !threadId || ![1, -1].includes(rating)) {
+    return res.status(400).json({ error: 'messageId, threadId, and rating (1 or -1) required' });
+  }
+  const result = db.addFeedback({ messageId, threadId, runId: runId || null, rating, comment });
+  res.json(result);
+});
+
+app.get('/api/feedback/stats', (_req, res) => {
+  res.json({
+    overall: db.getFeedbackStats(),
+    byStrategy: db.getFeedbackByRun(),
+  });
+});
+
 // ── Config ──────────────────────────────────────────────────────────
 
 app.get('/api/config', (_req, res) => {

@@ -61,14 +61,7 @@ class AgentRun {
     const endTime = Date.now();
 
     for (const d of this._decisions) {
-      if (d.action !== 'respond' && d.toolResult !== null) {
-        d.toolResultUsed = finalAnswer.toLowerCase().includes(
-          this._extractKeyPhrase(d.toolResult)
-        );
-      }
-
       d.productive = this._assessProductivity(d, finalAnswer);
-
       d.confidenceSignals = this._extractConfidenceSignals(d.thought);
     }
 
@@ -115,10 +108,34 @@ class AgentRun {
     };
   }
 
-  _extractKeyPhrase(text) {
-    if (!text) return '';
-    const words = text.toLowerCase().split(/\s+/).filter(w => w.length > 4);
-    return words.slice(0, 3).join(' ');
+  _computeToolRelevance(toolResult, finalAnswer) {
+    if (!toolResult || !finalAnswer) return 0;
+
+    const resultNgrams = this._extractNgrams(toolResult.toLowerCase(), 2);
+    const answerNgrams = new Set(this._extractNgrams(finalAnswer.toLowerCase(), 2));
+
+    if (resultNgrams.length === 0) return 0;
+
+    let matches = 0;
+    for (const ng of resultNgrams) {
+      if (answerNgrams.has(ng)) matches++;
+    }
+
+    return Math.min(1, matches / Math.min(resultNgrams.length, 20));
+  }
+
+  _extractNgrams(text, n) {
+    const stopWords = new Set(['the', 'a', 'an', 'is', 'was', 'are', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might', 'can', 'shall', 'to', 'of', 'in', 'for', 'on', 'with', 'at', 'by', 'from', 'as', 'into', 'through', 'and', 'but', 'or', 'nor', 'not', 'so', 'yet', 'both', 'either', 'neither', 'each', 'every', 'all', 'any', 'few', 'more', 'most', 'other', 'some', 'such', 'no', 'only', 'same', 'than', 'too', 'very', 'just', 'because', 'this', 'that', 'these', 'those', 'it', 'its']);
+
+    const words = text.split(/\s+/)
+      .map(w => w.replace(/[^a-z0-9]/g, ''))
+      .filter(w => w.length > 2 && !stopWords.has(w));
+
+    const ngrams = [];
+    for (let i = 0; i <= words.length - n; i++) {
+      ngrams.push(words.slice(i, i + n).join(' '));
+    }
+    return ngrams;
   }
 
   _assessProductivity(decision, finalAnswer) {
@@ -126,14 +143,13 @@ class AgentRun {
 
     if (decision.toolError) return false;
 
-    if (decision.toolResultUsed) return true;
-
     if (!decision.toolResult || decision.toolResult.length < 10) return false;
 
-    const thoughtWords = decision.thought.toLowerCase().split(/\s+/);
-    const answerWords = finalAnswer.toLowerCase().split(/\s+/);
-    const overlap = thoughtWords.filter(w => w.length > 4 && answerWords.includes(w));
-    return overlap.length >= 2;
+    const relevance = this._computeToolRelevance(decision.toolResult, finalAnswer);
+    decision.toolRelevanceScore = Math.round(relevance * 100) / 100;
+    decision.toolResultUsed = relevance >= 0.15;
+
+    return decision.toolResultUsed;
   }
 
   _assessCoherence() {

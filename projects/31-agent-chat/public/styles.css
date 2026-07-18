@@ -1205,6 +1205,31 @@ html, body {
   background: var(--text-muted);
 }
 
+/* ── Feedback Buttons ──────────────────────────────────────── */
+
+.feedback-btn {
+  font-size: 11px;
+  padding: 2px 8px;
+  min-width: 28px;
+  opacity: 0.5;
+  transition: opacity 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+.feedback-btn:hover {
+  opacity: 1;
+}
+.feedback-active-up {
+  opacity: 1;
+  color: #22C55E;
+  background: rgba(34, 197, 94, 0.1);
+  border-color: rgba(34, 197, 94, 0.3);
+}
+.feedback-active-down {
+  opacity: 1;
+  color: #EF4444;
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
 /* ── Agent Run Viewer ──────────────────────────────────────── */
 
 .trace-link {

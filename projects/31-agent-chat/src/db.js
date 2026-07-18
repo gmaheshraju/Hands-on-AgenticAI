@@ -129,6 +129,20 @@ export class DB {
       CREATE INDEX IF NOT EXISTS idx_decisions_run ON decisions(run_id);
       CREATE INDEX IF NOT EXISTS idx_decisions_action ON decisions(action);
 
+      CREATE TABLE IF NOT EXISTS feedback (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        message_id TEXT NOT NULL REFERENCES messages(id),
+        thread_id TEXT NOT NULL REFERENCES threads(id),
+        run_id TEXT REFERENCES agent_runs(id),
+        rating INTEGER NOT NULL CHECK(rating IN (-1, 1)),
+        comment TEXT,
+        created_at TEXT DEFAULT (datetime('now'))
+      );
+
+      CREATE INDEX IF NOT EXISTS idx_feedback_message ON feedback(message_id);
+      CREATE INDEX IF NOT EXISTS idx_feedback_thread ON feedback(thread_id);
+      CREATE INDEX IF NOT EXISTS idx_feedback_run ON feedback(run_id);
+
       CREATE TABLE IF NOT EXISTS facts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         subject TEXT NOT NULL,
@@ -491,6 +505,56 @@ export class DB {
       FROM agent_runs WHERE outcome != 'running'
       GROUP BY strategy
       ORDER BY count DESC
+    `).all();
+  }
+
+  // ── Feedback ─────────────────────────────────────────────────────
+
+  addFeedback({ messageId, threadId, runId, rating, comment }) {
+    const existing = this.db.prepare(
+      'SELECT id FROM feedback WHERE message_id = ?'
+    ).get(messageId);
+
+    if (existing) {
+      this.db.prepare(
+        'UPDATE feedback SET rating = ?, comment = ?, created_at = datetime(\'now\') WHERE message_id = ?'
+      ).run(rating, comment || null, messageId);
+      return { id: existing.id, action: 'updated' };
+    }
+
+    const result = this.db.prepare(
+      'INSERT INTO feedback (message_id, thread_id, run_id, rating, comment) VALUES (?, ?, ?, ?, ?)'
+    ).run(messageId, threadId, runId || null, rating, comment || null);
+    return { id: result.lastInsertRowid, action: 'created' };
+  }
+
+  getFeedback(messageId) {
+    return this.db.prepare('SELECT * FROM feedback WHERE message_id = ?').get(messageId);
+  }
+
+  getFeedbackStats() {
+    return this.db.prepare(`
+      SELECT
+        COUNT(*) as total,
+        SUM(CASE WHEN rating = 1 THEN 1 ELSE 0 END) as positive,
+        SUM(CASE WHEN rating = -1 THEN 1 ELSE 0 END) as negative,
+        ROUND(100.0 * SUM(CASE WHEN rating = 1 THEN 1 ELSE 0 END) / NULLIF(COUNT(*), 0), 1) as satisfaction_pct
+      FROM feedback
+    `).get();
+  }
+
+  getFeedbackByRun() {
+    return this.db.prepare(`
+      SELECT
+        ar.strategy,
+        COUNT(f.id) as feedback_count,
+        SUM(CASE WHEN f.rating = 1 THEN 1 ELSE 0 END) as positive,
+        SUM(CASE WHEN f.rating = -1 THEN 1 ELSE 0 END) as negative,
+        ROUND(100.0 * SUM(CASE WHEN f.rating = 1 THEN 1 ELSE 0 END) / NULLIF(COUNT(f.id), 0), 1) as satisfaction_pct
+      FROM feedback f
+      LEFT JOIN agent_runs ar ON f.run_id = ar.id
+      GROUP BY ar.strategy
+      ORDER BY feedback_count DESC
     `).all();
   }
 
