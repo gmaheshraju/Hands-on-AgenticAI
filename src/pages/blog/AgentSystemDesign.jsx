@@ -489,6 +489,64 @@ function ArchitecturePanel() {
       <FadeIn><Insight>
         "What matters is not that you'd use LangChain. Senior engineers look for reasoning about the tradeoffs: why ReAct over plan-and-execute, why you'd cap iterations at 5, why you need both input and output guards. The framework choice is the last sentence — the architecture reasoning demonstrates depth."
       </Insight></FadeIn>
+
+      <h3 style={{ fontSize: 17, fontWeight: 600, color: 'var(--text-h)', marginTop: 40, marginBottom: 8, letterSpacing: '-0.01em' }}>The 10 harness primitives</h3>
+      <p style={{ fontSize: 13, color: 'var(--text-p)', marginBottom: 16, lineHeight: 1.7 }}>
+        The 5-layer architecture above describes how data flows through an agent. The harness primitives describe what you actually build around the model. Every production agent decomposes into these 10 layers — when something breaks, the fix lives in one of them.
+      </p>
+
+      <FadeIn><Insight>
+        "The model matters. But when you build real agent workflows, the model is only one part of the machine. Reliability gets built in the system around the model — the harness."
+      </Insight></FadeIn>
+
+      <FadeIn><div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '16px 18px', marginBottom: 16 }}>
+        <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-accent)', marginBottom: 12, fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>10 HARNESS PRIMITIVES</p>
+
+        {[
+          { n: '01', name: 'Instructions', desc: 'Who the model is, constraints, rules. System prompt, persona, behavioral boundaries.' },
+          { n: '02', name: 'Context Delivery', desc: 'What material reaches the model. Docs, code, conversation history, retrieved chunks.' },
+          { n: '03', name: 'Context Management', desc: 'What enters at a given moment. RAG retrieval, context compaction, prompt caching, window budgeting.' },
+          { n: '04', name: 'Tool Interface', desc: 'Structured actions the model can take. MCP servers, function calling schemas, tool descriptions.' },
+          { n: '05', name: 'Execution Environment', desc: 'Where tools actually run. Sandbox, container, network policy, file system permissions.' },
+          { n: '06', name: 'Durable State', desc: 'What persists across turns and sessions. Plan files, checkpoints, session summaries, memory.' },
+          { n: '07', name: 'Orchestration', desc: 'Lifecycle management. Hooks, retries, approval gates, escalation rules, iteration caps.' },
+          { n: '08', name: 'Sub-agents', desc: 'Bounded loops with narrower context and tools. Delegation with scoped authority.' },
+          { n: '09', name: 'Skills & Procedures', desc: 'Reusable workflows loaded at the right time. Parameterized routines, not one-off prompts.' },
+          { n: '10', name: 'Verification & Observability', desc: 'Tests, traces, cost tracking. How you know the agent did the right thing.' },
+        ].map(({ n, name, desc }) => (
+          <div key={n} style={{ display: 'flex', gap: 12, marginBottom: 8, fontSize: 13, lineHeight: 1.6 }}>
+            <span style={{ color: 'var(--text-accent)', fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 600, minWidth: 24, flexShrink: 0, paddingTop: 2 }}>{n}</span>
+            <div>
+              <span style={{ fontWeight: 600, color: 'var(--text-h)' }}>{name}</span>
+              <span style={{ color: 'var(--text-muted)' }}> — {desc}</span>
+            </div>
+          </div>
+        ))}
+      </div></FadeIn>
+
+      <FadeIn delay={80}><div style={{ background: 'var(--bg-code)', borderTopWidth: 1, borderTopStyle: 'solid', borderTopColor: 'var(--border)', borderRightWidth: 1, borderRightStyle: 'solid', borderRightColor: 'var(--border)', borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', borderLeftWidth: 3, borderLeftStyle: 'solid', borderLeftColor: 'var(--bg-accent-strong)', borderRadius: 'var(--radius-md)', padding: '14px 16px', marginBottom: 16 }}>
+        <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-accent)', marginBottom: 8, fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>THE POSTMORTEM LOOP</p>
+        <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 10 }}>
+          Every agent failure maps to a harness fix. The discipline is converting failures into infrastructure, not prompt patches:
+        </p>
+        {[
+          { failure: 'Context miss', fix: 'retrieval rule' },
+          { failure: 'Bad tool result', fix: 'stricter schema' },
+          { failure: 'Dangerous command', fix: 'permission gate' },
+          { failure: 'Missed edge case', fix: 'test' },
+          { failure: 'Recurring correction', fix: 'memory' },
+          { failure: 'Repeated workflow', fix: 'skill' },
+        ].map(({ failure, fix }) => (
+          <p key={failure} style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 2 }}>
+            <span style={{ color: 'var(--text-muted)' }}>{failure}</span>{' → '}
+            <span style={{ fontWeight: 600, color: 'var(--text-h)' }}>{fix}</span>
+          </p>
+        ))}
+      </div></FadeIn>
+
+      <FadeIn delay={160}><Insight warn>
+        When an agent fails, don't ask "was the model smart enough?" Ask which harness layer ran out of road.
+      </Insight></FadeIn>
     </div>
   );
 }
