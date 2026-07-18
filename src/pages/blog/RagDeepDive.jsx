@@ -538,6 +538,18 @@ function PitfallsPanel() {
         This is advice #4 too: "Examples must be carefully balanced." Your golden test set should represent the specific domain, not generic Q&A. 50 domain-specific test cases beat 500 generic ones.
       </Decision></FadeIn>
 
+      <FadeIn delay={160}><Decision question="Agentic RAG — when single-shot retrieval isn't enough">
+        Everything above describes <strong>single-shot RAG</strong>: embed the query once, retrieve once, generate once. That's the right default. But by 2026 the frontier question in RAG interviews is: "What do you do when one retrieval pass can't answer the query?" The answer is <strong>agentic RAG</strong> — the LLM controls retrieval as a tool inside a loop, rather than retrieval being a fixed preprocessing step.
+        <br /><br />
+        <Pill type="green">Query decomposition</Pill> "Compare our refund policy to our competitor's SLA terms" is really two retrievals over two sub-corpora. A planner LLM splits the query, retrieves for each sub-question independently, then synthesizes. Single-shot embeds the whole thing and retrieves a muddled average of both topics.
+        <br /><br />
+        <Pill type="green">Multi-hop retrieval</Pill> "Which engineer owns the service that logged error E_AUTH_TIMEOUT?" needs hop 1 (error → service) then hop 2 (service → owner). The output of the first retrieval becomes the query for the second. No amount of chunking or reranking fixes this — the second query literally doesn't exist until the first completes.
+        <br /><br />
+        <Pill type="amber">Self-correcting retrieval (CRAG / self-RAG)</Pill> After retrieving, a grader LLM asks "is this context sufficient and relevant?" If not, it rewrites the query, broadens to web search, or asks the user to clarify — then retrieves again. This is what turns "the retriever returned junk and the LLM hallucinated anyway" into a graceful "I couldn't find that."
+        <br /><br />
+        <strong>The cost you must name:</strong> agentic RAG multiplies latency and token spend by the number of loops — a 3-hop query is 3× the retrieval calls plus a planner and a grader call. Single-shot is ~250ms; an agentic loop is often 3-8 seconds. So the senior framing is: <em>"Default to single-shot. Add a decomposition/grading loop only for the query classes that provably need it — and route to it conditionally, not on every query."</em> Classify the query first (is it multi-part? does it reference an entity you'd have to look up?) and only pay the agentic tax when the cheap path can't answer.
+      </Decision></FadeIn>
+
       <FadeIn><Insight>
         "Mahesh's Top 8 advice #8: 'Add continuous evals.' The production pitfalls are invisible without them — stale embeddings, lost-in-the-middle, domain vocabulary gaps all look like 'the agent works' from the outside. You need precision@k, groundedness, and answer correctness running on every change. Mahesh's rule: 'Evals + Memory are the moats of AI products.' The eval pipeline IS the product quality. Without it, you're flying blind — and in practice, understanding these failure modes with specific metrics shifts you from 'has read about RAG' to 'has operated a RAG pipeline at scale.'"
       </Insight></FadeIn>
