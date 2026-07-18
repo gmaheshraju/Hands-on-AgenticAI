@@ -196,6 +196,8 @@ function renderMessage(msg) {
 
     html += `
       <div class="message-actions">
+        <button class="action-btn feedback-btn" data-msg="${msg.id}" data-thread="${msg.threadId}" data-run="${msg.harness?.traceId || ''}" data-rating="1" onclick="sendFeedback(this)">&#9650;</button>
+        <button class="action-btn feedback-btn" data-msg="${msg.id}" data-thread="${msg.threadId}" data-run="${msg.harness?.traceId || ''}" data-rating="-1" onclick="sendFeedback(this)">&#9660;</button>
         <button class="action-btn" onclick="regenerateMessage('${msg.id}')">Regenerate</button>
       </div>
     `;
@@ -779,6 +781,31 @@ function renderHarnessStats(stats) {
     ${rows}
   `;
 }
+
+// ── Feedback ────────────────────────────────────────────────────
+
+window.sendFeedback = async function(btn) {
+  const messageId = btn.dataset.msg;
+  const threadId = btn.dataset.thread;
+  const runId = btn.dataset.run || null;
+  const rating = parseInt(btn.dataset.rating, 10);
+
+  const actions = btn.closest('.message-actions');
+  const allBtns = actions.querySelectorAll('.feedback-btn');
+  allBtns.forEach(b => b.classList.remove('feedback-active-up', 'feedback-active-down'));
+
+  btn.classList.add(rating === 1 ? 'feedback-active-up' : 'feedback-active-down');
+
+  try {
+    await fetch(`${API}/feedback`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messageId, threadId, runId, rating }),
+    });
+  } catch (err) {
+    console.error('Feedback failed:', err);
+  }
+};
 
 // ── Trace Viewer ────────────────────────────────────────────────
 
