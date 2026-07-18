@@ -330,6 +330,32 @@ function MemoryTypesPanel() {
       <FadeIn><Insight>
         "An LLM knows everything about humanity and nothing about you" — Mahesh's framing. Memory bridges that gap. In practice, don't just say "working, short-term, long-term." Use Mahesh's pillars: Procedural (SKILL.md — how to do things), Semantic (vector DB — facts), Episodic (dated log — what happened). Then explain the consolidation gate: "you don't search the giant episodic log every time — a cheaper model periodically distills episodes into semantic facts. That's why ChatGPT memory stays short but somehow always up to date."
       </Insight></FadeIn>
+
+      <FadeIn delay={80}><Insight type="warn">
+        The model does not remember. The harness decides what survives. Memory is context assembly over time — storing things is the easy part.
+      </Insight></FadeIn>
+
+      <FadeIn delay={160}>
+        <div style={{ background: 'var(--bg-code)', borderTopWidth: 1, borderTopStyle: 'solid', borderTopColor: 'var(--border)', borderRightWidth: 1, borderRightStyle: 'solid', borderRightColor: 'var(--border)', borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', borderLeftWidth: 3, borderLeftStyle: 'solid', borderLeftColor: 'var(--bg-accent-strong)', borderRadius: 'var(--radius-md)', padding: '14px 16px', marginBottom: 16 }}>
+          <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-accent)', marginBottom: 10, fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>THE AGENT MEMORY STACK</p>
+
+          <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 10 }}>
+            <strong>Working Memory — "The desk."</strong> The active context the model sees RIGHT NOW. The model only ever works at the desk. A bigger context window means a bigger desk, not better memory. Everything the model reasons about must be on this desk — if it is not in the context window, it does not exist for that turn.
+          </p>
+
+          <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 10 }}>
+            <strong>Episodic Memory — What happened.</strong> Specific sessions, investigations, tool calls — records pinned to a WHEN (timestamp). Stored as logs with time + session ID. The raw audit trail. You query it when you need to know "what did we try last Tuesday" or "what broke during the deploy."
+          </p>
+
+          <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 10 }}>
+            <strong>Semantic Memory — Standing knowledge.</strong> Facts that float free of any particular session: repo paths, conventions, user preferences, architectural decisions. Not tied to a moment — tied to a domain. Risk: facts get old. A convention documented six months ago may no longer apply. Staleness is the failure mode, not absence.
+          </p>
+
+          <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 0 }}>
+            <strong>Procedural Memory — The how-to layer.</strong> Tool schemas, skill files, runbooks, deployment checklists. Often the least obvious type — people call it "tools" or "automation," but it is stored knowledge about how work should be done. A CLAUDE.md file is procedural memory. A CI pipeline definition is procedural memory. The agent reads these before acting, not during.
+          </p>
+        </div>
+      </FadeIn>
     </div>
   );
 }
@@ -568,6 +594,54 @@ function DeepDivePanel() {
         (4) <strong>Scope high-privilege actions to the live turn.</strong> Anything that moves money or changes permissions must be authorized <em>in the current conversation by the user</em> — memory can inform the action but can never be its sole authorization. Prohibited-action rules live in code, above the memory layer, so no stored fact can dissolve them.
         <br /><br />
         The engineering signal is naming the trust boundary explicitly: <strong>memory sits inside the trust boundary but is written from outside it.</strong> Everything else follows from taking that sentence seriously.
+      </Decision></FadeIn>
+
+      <FadeIn delay={160}>
+        <div style={{ background: 'var(--bg-code)', borderTopWidth: 1, borderTopStyle: 'solid', borderTopColor: 'var(--border)', borderRightWidth: 1, borderRightStyle: 'solid', borderRightColor: 'var(--border)', borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', borderLeftWidth: 3, borderLeftStyle: 'solid', borderLeftColor: 'var(--bg-accent-strong)', borderRadius: 'var(--radius-md)', padding: '14px 16px', marginBottom: 16 }}>
+          <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-accent)', marginBottom: 10, fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>FORGETTING AS HYGIENE</p>
+
+          <Insight>
+            An agent with perfect recall and no forgetting is the coworker who answers every question by reading out their entire diary.
+          </Insight>
+
+          <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 10 }}>
+            Memory systems need a garbage collector. Four forgetting strategies that separate production systems from toy demos:
+          </p>
+
+          <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 10 }}>
+            <strong>1. Temporal decay.</strong> Older memories lose priority unless explicitly pinned. A preference stated six months ago matters less than one stated yesterday — unless the system marks it as durable. Default behavior: recency wins. Override: pin important facts with a decay-exempt flag.
+          </p>
+
+          <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 10 }}>
+            <strong>2. Contradiction handling.</strong> When a new fact conflicts with an old one, the old fact must be updated — not silently coexisted with. "User prefers Python" followed by "User now prefers Rust" should produce one current fact, not two competing ones. Preserve the old fact as history (audit trail), but demote it from active retrieval.
+          </p>
+
+          <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 10 }}>
+            <strong>3. Compression.</strong> The ladder: raw sessions compress into summaries, summaries compress into facts, facts compress into procedures. Each level loses fidelity but gains density. A 50-turn debugging session becomes a 3-line summary becomes a single fact: "pgvector requires explicit index creation for HNSW." The original session stays in cold storage for audit — only the compressed form lives in active retrieval.
+          </p>
+
+          <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 0 }}>
+            <strong>4. Manual curation.</strong> Production-facing rules need human ownership. Automated consolidation handles the bulk, but high-stakes memories — deployment procedures, security policies, architectural decisions — should be curated by a human. The agent proposes, the human approves. This is not a weakness of the system; it is the system working correctly.
+          </p>
+        </div>
+      </FadeIn>
+
+      <FadeIn delay={240}><Insight type="warn">
+        Fill a million token window with stale facts and all you have done is move the mess into a bigger room. The quality of context assembly matters as much as the size of the window.
+      </Insight></FadeIn>
+
+      <FadeIn delay={320}><Decision question="The five evaluation questions for any memory system">
+        Before shipping a memory layer, run every design decision through these five questions. They expose gaps that benchmarks miss.
+        <br /><br />
+        <Pill type="green">1. What is in working memory right now?</Pill> Can you enumerate exactly what the model sees on this turn? If you cannot answer this precisely, you do not understand your own system. The context window is not a suggestion — it is the entire universe the model inhabits for that request.
+        <br /><br />
+        <Pill type="green">2. Which past sessions matter?</Pill> Not "all of them." Which specific episodes are relevant to the current task, and how does the system surface them? If the answer is "we retrieve the last 10," that is a heuristic, not a strategy.
+        <br /><br />
+        <Pill type="amber">3. Which facts are current?</Pill> Semantic memory rots. User preferences change. Codebases evolve. How does the system detect and handle stale facts? If a six-month-old convention is still being retrieved at the same priority as yesterday's correction, the memory system is actively misleading the model.
+        <br /><br />
+        <Pill type="amber">4. Which workflow applies?</Pill> Procedural memory is the most overlooked type. When the agent encounters a deployment task, does it know the deployment procedure? Is it reading a runbook, or improvising from general knowledge? The gap between "knows how" and "figures it out each time" is the gap between reliable and fragile.
+        <br /><br />
+        <Pill type="red">5. What should be forgotten?</Pill> The hardest question. If the system never forgets, it accumulates noise until retrieval degrades. If it forgets too aggressively, it loses valuable context. The answer is always a policy — temporal decay, importance thresholds, compression schedules — never "keep everything" or "delete after N days."
       </Decision></FadeIn>
         </div>
   );

@@ -372,6 +372,10 @@ function LoopPanel() {
       <FadeIn><Insight>
         "A harness is what keeps the horse on course" — Mahesh's metaphor. The LLM is the horse — powerful, fast, but it will wander without constraint. The harness is the termination conditions, the cost caps, the convergence detection. Senior engineers immediately ask: 'What's the gate? What triggers escalation? What's the cost cap?' The harness engineering — not the LLM choice — is what makes agents production-safe. Mahesh's rule: if you can't explain the harness, you haven't built an agent — you've built a demo.
       </Insight></FadeIn>
+
+      <FadeIn delay={80}><Insight>
+        A tool is a verb — a function plus a schema. A skill is a procedure — how we cut a release, how we deploy. The difference between knowing what to do and knowing how.
+      </Insight></FadeIn>
     </div>
   );
 }
@@ -558,6 +562,60 @@ function SelfImprovePanel() {
         <strong>This is CI/CD for prompts.</strong> No prompt change ships without passing evals. Period.
       </Decision></FadeIn>
 
+      <FadeIn delay={240}><Decision question="Loop Engineering — improving the harness, not the model">
+        A framework from Lilian Wang (via Carbon Layer): the practice of improving the harness rather than the model. The harness keeps improving even after you stop changing the model.
+        <br /><br />
+        <strong>The Five-Level Ladder:</strong> Each level up is a bigger, riskier change. Know where you are before climbing.
+        <br /><br />
+        <strong>Level 1: Improve the prompt</strong> — System prompt, instructions, few-shot examples. Cheapest change, lowest risk. Most teams never leave this level (and that's often fine).
+        <br /><br />
+        <strong>Level 2: Improve the context</strong> — The material fed alongside instructions. Better RAG retrieval, smarter memory injection, more relevant tool results. The model stays the same; it just gets better inputs.
+        <br /><br />
+        <strong>Level 3: Improve the workflow</strong> — The steps the agent takes. Reorder tool calls, add verification steps, parallelize independent actions. This is where you start changing the loop itself.
+        <br /><br />
+        <strong>Level 4: Improve the harness code</strong> — Termination conditions, retry logic, convergence detection, cost controls. Changes to the infrastructure that wraps the LLM. Higher risk — a bug here affects every query.
+        <br /><br />
+        <strong>Level 5: Improve the thing that does the improving</strong> — Meta-level. Automated eval pipelines, self-optimizing prompts, weakness mining loops that feed back into Levels 1-4. This is where the system starts compounding on itself.
+      </Decision></FadeIn>
+
+      <FadeIn delay={320}><Insight>
+        Your agent gets better on your schedule, not on the model provider's. Every improvement is a change you can read, test, and undo.
+      </Insight></FadeIn>
+
+      <FadeIn delay={400}><Decision question="Skill Anatomy — what makes a good skill?">
+        A skill is a packaged procedure the harness loads when a specific situation arises. Seven components make a skill reliable:
+        <br /><br />
+        <strong>Trigger:</strong> When should the harness load this skill? Be specific — "when the user asks to deploy" not "when the user mentions infrastructure."
+        <br /><br />
+        <strong>Non-trigger:</strong> When should it explicitly NOT load? Just as important. A code-review skill should not trigger on a documentation edit.
+        <br /><br />
+        <strong>Inputs:</strong> What data does the skill need? File paths, configuration, environment variables, previous results.
+        <br /><br />
+        <strong>Process:</strong> Step-by-step procedure. Not vague guidance — concrete steps. "Run lint. If lint fails, fix the issues. Run lint again. If lint passes, run tests."
+        <br /><br />
+        <strong>Preferred tools:</strong> Which tools should the agent use? A deploy skill uses Bash + file read. A research skill uses web search + web fetch. Constraining tools prevents wandering.
+        <br /><br />
+        <strong>Output format:</strong> Structured findings. "Return a JSON object with status, findings array, and summary." Structured output is parseable by the next step in the pipeline.
+        <br /><br />
+        <strong>Gotchas:</strong> Common mistakes the agent should avoid. "Do not commit without running tests." "Do not use force-push." The mistakes that are expensive enough to warrant explicit warnings.
+      </Decision></FadeIn>
+
+      <FadeIn delay={480}><Decision question="When to make a skill">
+        Not everything needs a skill. Four conditions that justify the investment:
+        <br /><br />
+        <Pill type="green">The task is repeating</Pill> If you've done it once, it's a task. If you've done it five times, it's a candidate. Skills pay off on repetition — the upfront cost of writing a good skill amortizes across every future invocation.
+        <br /><br />
+        <Pill type="green">The procedure matters</Pill> Some tasks have a right way and a wrong way. Deploys, releases, database migrations — the order of operations matters, and skipping a step has consequences. If "just figure it out" routinely leads to mistakes, the procedure needs to be encoded.
+        <br /><br />
+        <Pill type="amber">The mistakes are expensive</Pill> A wrong code review comment wastes 30 seconds. A wrong deploy takes down production for an hour. The more expensive the failure mode, the more value a skill provides. Skills are guardrails for high-stakes procedures.
+        <br /><br />
+        <Pill type="amber">The right behavior isn't obvious from the prompt</Pill> If a fresh model instance with just the system prompt would do the wrong thing, you need a skill. The skill encodes the institutional knowledge — the "how we do it here" that isn't in any documentation.
+      </Decision></FadeIn>
+
+      <FadeIn delay={560}><Insight type="warn">
+        A review sub-agent without a review skill is just a fresh model loop with a vague job. Sub-agents give more workers. Skills give those workers a shared way to work.
+      </Insight></FadeIn>
+
       <FadeIn><Insight>
         "Self-improvement without retraining is the most underrated topic in agent engineering. Fine-tuning is expensive, slow, and often unnecessary. Prompt optimization + few-shot curation + eval regression testing gets you 80% of the benefit at 5% of the cost. In practice, this demonstrates depth across the full lifecycle — not just building the agent, but operating and improving it."
       </Insight></FadeIn>
@@ -609,6 +667,20 @@ function ProdOpsPanel() {
         <strong>Safety incident:</strong> The agent said something harmful, leaked PII, or hallucinated a dangerous instruction. This is a P0 — immediate response required.
         <br /><br />
         <strong>Mitigation:</strong> Automated quality sampling (eval 1% of queries in real-time), cost anomaly detection, output safety classifier running on every response. Alert the human, don't just log it.
+      </Decision></FadeIn>
+
+      <FadeIn delay={240}><Decision question="Weakness Mining Pipeline — systematic failure-driven improvement">
+        Agents fail in production. The question is whether you learn from those failures systematically or one-off. The weakness mining pipeline turns failures into improvements:
+        <br /><br />
+        <strong>Step 1: Run the agent, let it fail.</strong> Don't try to prevent all failures upfront. Ship, observe, collect. You need real failure data — synthetic failures miss the distribution of problems users actually hit.
+        <br /><br />
+        <strong>Step 2: Group failures into clusters.</strong> Not every failure is worth investigating. Group failures that share a provable cause. "The agent misinterprets date formats" is a cluster. "The agent gave a weird answer on Tuesday" is not.
+        <br /><br />
+        <strong>Step 3: Only work on clusters, not one-off flaky slips.</strong> A single failure could be noise — model stochasticity, an unusual input, a transient API issue. Clusters are signal. If 12 out of 200 failures share the same root cause, that's worth fixing. If 1 out of 200 fails in a unique way, log it and move on.
+        <br /><br />
+        <strong>Step 4: Use held-in / held-out split to test fixes.</strong> Take your failure cluster. Split it: half for developing the fix (held-in), half for validating the fix (held-out). This prevents overfitting your prompt to specific examples.
+        <br /><br />
+        <strong>Step 5: A fix must pass a strict bar.</strong> The fix must be at least as good across both the held-in and held-out sets AND strictly better in at least one. If your fix improves the held-in set but regresses the held-out set, you've overfit — try again. No partial credit.
       </Decision></FadeIn>
 
       <FadeIn><Insight>

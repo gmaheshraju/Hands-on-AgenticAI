@@ -513,6 +513,28 @@ function AssemblyPatternsPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={320}><CodeBlock filename="context-assembler.js" code={ASSEMBLER_CODE} output={ASSEMBLER_OUTPUT} /></FadeIn>
+
+      <FadeIn delay={400}><Insight>
+        Context management is invisible when it works and looks like stupidity when it fails. A great context setup feels like a sharp agent. A bad one feels like the model got worse overnight.
+      </Insight></FadeIn>
+
+      <FadeIn delay={480}><Decision question="The four moves of context engineering (Lance Martin / LangChain)">
+        Every context pipeline reduces to four fundamental operations. You do them manually at first, then automate them as the system matures:
+        <br /><br />
+        <Pill type="green">Select</Pill> Pull only the slice this turn needs. Two sub-decisions compound here: <strong>what</strong> goes into the window (retrieval, filtering, scoring) and <strong>where</strong> it sits (the lost-in-the-middle effect means position is a second lever, not just inclusion).
+        <br /><br />
+        <Pill type="blue">Compress</Pill> Summarize running history, trim what is no longer load-bearing. The goal is to preserve the facts the agent still needs while freeing tokens for new material. Lossy by definition — the skill is knowing what to lose.
+        <br /><br />
+        <Pill type="amber">Write</Pill> Write confirmed findings to disk outside the context window so they survive compaction. Scratchpads, memory files, structured notes — anything that persists beyond the current window. Without this move, every compaction risks destroying work the agent already completed.
+        <br /><br />
+        <Pill type="green">Isolate</Pill> Split work across multiple windows (subagents), bring back only the result. A 200-file codebase search does not belong in the same window as the user conversation. Isolate the subtask, let it run in its own context, and merge the conclusion — not the raw output — back into the parent.
+        <br /><br />
+        Select and Compress manage what is in the window right now. Write and Isolate manage what is outside it. Production systems need all four.
+      </Decision></FadeIn>
+
+      <FadeIn delay={560}><Insight type="warn">
+        Modern models cache the prompt prefix. If you reshuffle context every turn, you blow the cache and pay full price — up to 90% discount lost. Freeze a stable prefix, let only the tail move.
+      </Insight></FadeIn>
     </div>
   );
 }
@@ -632,7 +654,23 @@ function DeepDivePanel() {
         </p>
       </div></FadeIn>
 
-      <FadeIn delay={400}><Insight>
+      <FadeIn delay={400}><Decision question="The four failure modes of context (Drew Brunic)">
+        Context does not just fail by being absent — it fails by being wrong, noisy, contradictory, or overwhelming. Each mode requires a different fix:
+        <br /><br />
+        <Pill type="amber">Poisoning</Pill> A wrong fact enters the context and keeps getting referenced as true. An early hallucination or a stale retrieval result becomes the foundation for all subsequent reasoning. The model treats everything in context as ground truth — one poisoned sentence can corrupt an entire chain of thought. Fix: validate facts at insertion time, version your memory, and add provenance metadata so the model can weigh source reliability.
+        <br /><br />
+        <Pill type="amber">Distraction</Pill> Context so long that the model over-focuses on window content instead of drawing on its training. When you dump 80K tokens of raw documents into the window, the model stops reasoning and starts pattern-matching against the blob. It becomes a parrot of the context instead of a thinker that uses context. Fix: compress aggressively, keep signal density high, and test with shorter context to see if quality actually improves.
+        <br /><br />
+        <Pill type="amber">Confusion</Pill> Superfluous material causes worse answers than no material at all. Adding a marginally relevant document does not help — it actively hurts. The model cannot distinguish "included because it might be useful" from "included because it is essential." Every token in the window carries implicit weight. Fix: set a minimum relevance threshold for inclusion. If a source scores below 0.7, dropping it outright beats including it.
+        <br /><br />
+        <Pill type="amber">Clash</Pill> Accumulated facts contradict each other. The January pricing document says one thing, the July update says another, and both are in context. The model has no way to know which is current. Fix: timestamp all context sources, prefer recent over old when conflicts exist, and deduplicate aggressively across retrieval results.
+      </Decision></FadeIn>
+
+      <FadeIn delay={480}><Insight type="warn">
+        When an agent underperforms, run these four diagnostics before blaming the model: (1) Did it ever have the right information, or was the answer buried in low-attention positions? (2) Did the summary throw away a key detail during compaction? (3) Did it lose work it should have parked on disk — a finding that got compacted away because nobody wrote it to a scratchpad? (4) Did one giant context drown a subtask that deserved its own window? Most "the model is bad" complaints trace back to one of these four.
+      </Insight></FadeIn>
+
+      <FadeIn delay={560}><Insight>
         The meta-insight: every other topic in this playbook feeds into context engineering. RAG (Post 05) determines what gets retrieved. Memory (Post 02) determines what gets remembered. Cost engineering (Post 11) determines the budget. Eval (Post 08) measures whether your context pipeline works. Context engineering is the integration layer — the skill that ties everything together.
       </Insight></FadeIn>
     </div>

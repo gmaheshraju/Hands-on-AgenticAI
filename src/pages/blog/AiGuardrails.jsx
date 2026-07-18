@@ -808,6 +808,66 @@ function DefenseInDepthPanel() {
       <FadeIn delay={200}><Insight type="warn" tag="The hard truth">
         Prompt injection is fundamentally unsolvable with current LLM architectures. LLMs process instructions and data in the same channel — there is no hardware-level separation like kernel mode vs user mode in operating systems. Every defense is a heuristic, not a guarantee. The engineering goal isn't "prevent all attacks" — it's "make attacks expensive, detect them quickly, limit blast radius, and have an audit trail." When someone asks "how do you prevent prompt injection?" the honest senior engineering perspective starts with "you can't prevent it completely, but here's how you make it impractical..."
       </Insight></FadeIn>
+
+      {/* ── Sandboxing Masterclass ── */}
+
+      <FadeIn delay={240}><Insight>
+        The prompt is not the boundary. The prompt is an instruction. The boundary is something that still holds when the instruction fails. Everything above — injection detection, PII filtering, content moderation — operates at the instruction layer. What follows operates at the containment layer: what happens when the model does exactly the wrong thing, confidently, and your instructions don't stop it.
+      </Insight></FadeIn>
+
+      <FadeIn delay={280}><Decision question="The five-layer sandbox stack — cheapest to most isolated">
+        <Pill type="green">Layer 1: Runtime Isolation</Pill> V8 isolates, WebAssembly. The code runs in a sandbox within the process itself. No file system access, no network, no system calls — like asking for a door in a room built without doors. Cheapest option. Good for running untrusted expressions or template evaluation. Limitation: a V8 bug or escape gives you full process access.
+        <br /><br />
+        <Pill type="green">Layer 2: OS-Level Sandbox</Pill> macOS <code>seatbelt</code> (sandbox-exec), Linux <code>bubblewrap</code>, <code>landlock</code>, <code>seccomp-bpf</code>. The kernel itself enforces the policy — the process can request file access or network, but the kernel checks the sandbox profile and denies it. No container overhead, runs at native speed. This is what Claude Code uses when running on macOS.
+        <br /><br />
+        <Pill type="amber">Layer 3: Containers</Pill> Docker with Linux namespaces + cgroups. Process sees its own filesystem, PID space, network. Strong isolation for most workloads, excellent tooling. The caveat: the container shares the host kernel. A kernel exploit escapes the container entirely. For internal tooling and CI/CD, this is usually sufficient with proper hardening.
+        <br /><br />
+        <Pill type="amber">Layer 4: User-Space Kernel</Pill> gVisor's Sentry intercepts every syscall before it reaches the host kernel. The guest application talks to Sentry, which reimplements a subset of Linux syscalls in a memory-safe language (Go). Even if the application exploits a kernel bug, it is exploiting gVisor's reimplementation, not the real kernel. Performance cost: 5-30% for syscall-heavy workloads.
+        <br /><br />
+        <Pill type="red">Layer 5: Micro VMs</Pill> Firecracker (AWS Lambda, Fly.io). Each workload gets its own guest kernel running on hardware-virtualized vCPUs and memory. Full isolation — the guest has no shared kernel surface with the host. Boot time: ~125ms. Memory overhead: ~5MB per VM. This is what you use when a container escape means a customer reads another customer's data.
+      </Decision></FadeIn>
+
+      <FadeIn delay={320}><Decision question="Blast radius as decision criterion — which layer for which use case?">
+        <Pill type="green">Local coding agent</Pill> OS-level sandbox (Layer 2). The agent reads and writes files on your machine, so it needs real filesystem access — but scoped. seatbelt or landlock restricts it to the project directory, blocks network unless explicitly allowed. No container overhead, no VM boot time, instant feedback loop.
+        <br /><br />
+        <Pill type="green">Internal automation / CI jobs</Pill> Hardened Docker (Layer 3). Non-root user, drop all capabilities except what is needed, network off unless required, read-only root filesystem, no Docker socket mount. If someone smuggles code into your CI pipeline, they get a container with no network and no escalation path.
+        <br /><br />
+        <Pill type="amber">User-submitted code execution</Pill> gVisor or micro VMs (Layer 4-5). Users will submit code that tries to read <code>/etc/shadow</code>, spawn reverse shells, and mine cryptocurrency. A Docker escape is a realistic attack vector when your attacker is actively hostile. gVisor catches kernel-level exploits; Firecracker gives you hardware isolation.
+        <br /><br />
+        <Pill type="red">Multi-tenant SaaS</Pill> Micro VMs (Layer 5). When tenant A's code runs alongside tenant B's code and a breach means regulatory liability, shared-kernel isolation is not sufficient. Firecracker gives you the isolation guarantee: even a kernel zero-day in the guest does not compromise the host or other tenants.
+      </Decision></FadeIn>
+
+      <FadeIn delay={360}><Insight type="warn" tag="Approval fatigue">
+        If everything asks for approval, the important prompts stop feeling important. When Anthropic turned on sandboxing in Claude Code, permission prompts dropped dramatically — many prompts were compensating for missing containment. The sandbox did not replace the permission system; it made the permission system effective by reducing noise. The same principle applies to any agent: if your security model is "ask the user every time," the user will start clicking yes without reading. Containment boundaries should handle the common case silently so that when a prompt does appear, it deserves attention.
+      </Insight></FadeIn>
+
+      <FadeIn delay={400}><Decision question="The three boundaries every agent system must define">
+        <Pill type="green">Boundary 1: What the model can call</Pill> The tool registry. The model should only see tools it is authorized to use. If you expose a <code>deleteDatabase</code> tool to a customer-facing agent, no amount of prompt engineering prevents eventual misuse. The tool registry is your allowlist — everything not in it is impossible, not just discouraged.
+        <br /><br />
+        <Pill type="green">Boundary 2: What those tools can access</Pill> Credentials and scoped access. A tool that calls an API should use a scoped token with minimum necessary permissions, not the developer's admin key. A file-read tool should be chrooted to a specific directory, not able to traverse to <code>/etc/passwd</code>. The tool's capability is bounded by the credentials it holds, not by the model's judgment.
+        <br /><br />
+        <Pill type="green">Boundary 3: Where execution touches the system</Pill> The sandbox. Even with a restricted tool registry and scoped credentials, what happens if the model chains tools in an unexpected way? What if it writes a script via a file-write tool and then executes it via a shell tool? The sandbox is the last boundary — it constrains the blast radius of any action the model takes, including actions you did not anticipate.
+        <br /><br />
+        <strong>These three boundaries are independent and all required.</strong> A locked-down tool registry with admin credentials is one SQL injection from disaster. Scoped credentials with no sandbox means a creative tool chain can still reach the filesystem. A sandbox with an unrestricted tool registry means you are trusting the sandbox to catch everything — and it will not.
+      </Decision></FadeIn>
+
+      <FadeIn delay={440}><Insight type="warn" tag="Anti-pattern">
+        The agent should earn access through configuration, not inherit it from your machine. Treat the Docker socket like a loaded weapon. Mounting <code>/var/run/docker.sock</code> into an agent's container gives it root-equivalent access to the host — it can spawn privileged containers, mount the host filesystem, and escalate to full control. The same applies to AWS credentials in environment variables, SSH keys in mounted volumes, and <code>.kube/config</code> files. Every credential in the agent's environment is a credential the model can use if it decides to. Strip the environment to the minimum, inject secrets through a vault with short-lived tokens, and audit what the agent actually accessed.
+      </Insight></FadeIn>
+
+      <FadeIn delay={480}><Decision question="The follow-up checklist — when someone says 'the agent runs in a sandbox'">
+        <Pill type="green">What layer?</Pill> V8 isolate, OS sandbox, Docker, gVisor, or micro VM? Each has a different threat model and escape surface. "It runs in Docker" is not the same as "it runs in Firecracker." Push for specifics.
+        <br /><br />
+        <Pill type="green">What file system access?</Pill> Read-only? Write to a temp directory? Full access to the project directory? Can it read <code>.env</code> files, <code>.git/config</code>, or SSH keys in <code>~/.ssh</code>? The filesystem boundary is often the weakest link.
+        <br /><br />
+        <Pill type="green">What network access?</Pill> No network? DNS only? Allowlisted endpoints? Full egress? If the agent can make outbound HTTP requests, it can exfiltrate data. If it can resolve DNS, it can exfiltrate data via DNS tunneling (slower, but effective).
+        <br /><br />
+        <Pill type="green">Do child processes inherit restrictions?</Pill> If the sandbox restricts the main process but the main process can spawn a child that escapes — the sandbox is theater. seccomp and seatbelt inherit to children. Docker namespaces inherit. But a poorly configured AppArmor profile might not.
+        <br /><br />
+        <Pill type="amber">What credentials are in the environment?</Pill> <code>env | grep -i key</code>, <code>env | grep -i token</code>, <code>env | grep -i secret</code>. Every environment variable the agent can read is a credential it can use. This includes cloud provider metadata endpoints (<code>169.254.169.254</code>) that return IAM credentials in cloud environments.
+        <br /><br />
+        <Pill type="red">What happens when the model confidently does the wrong thing?</Pill> Not "what if the model is malicious" — what if the model misunderstands the task and executes a plausible but destructive action with full confidence? <code>rm -rf</code> on the wrong directory, <code>DROP TABLE</code> on production, <code>git push --force</code> to main. The sandbox should make the worst-case outcome survivable, not just prevent intentional attacks.
+      </Decision></FadeIn>
         </div>
   );
 }
