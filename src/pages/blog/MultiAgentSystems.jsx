@@ -492,6 +492,16 @@ function CoordinationPanel() {
         <strong>Fix 2 — full-trajectory handoff (Anthropic's multi-agent research pattern).</strong> When you must parallelize, don't hand off just the task string. Pass a structured digest of the trajectory: every binding decision verbatim, constraints never summarized away, and only the recent prose compressed. The mistake is lossy summarization that drops exactly the decisions that bind the agents together.
       </Decision></FadeIn>
 
+      <FadeIn delay={320}><Decision question="A 20-minute multi-agent run crashes at minute 18. How do you not lose the work?">
+        <Pill type="red">2026 production reality</Pill> Once agent workflows run for tens of minutes and cost dollars per run, an in-memory <code>for</code> loop over agents is a liability: a pod restart, an OOM kill, or a rate-limit blip at minute 18 throws away 17 minutes of tool calls and tokens. The systems answer is <strong>durable execution</strong> — the same pattern Temporal, Restate, and LangGraph checkpointers bring to agents.
+        <br /><br />
+        <strong>The core idea: separate the orchestration state from the process.</strong> After every agent step, persist a checkpoint — which agents have completed, their outputs, and the shared contract — to durable storage (a DB row, an event log). The orchestrator becomes a pure function of that state: on restart, it reloads the last checkpoint and resumes at the next incomplete step instead of from the top. Crash recovery falls out for free.
+        <br /><br />
+        <strong>The hard constraint: agent steps must be idempotent, or replay double-charges you.</strong> If step 3 already placed an order or sent an email, re-running it on resume is a real-world bug, not just wasted tokens. Wrap side-effecting tool calls in an idempotency key (dedupe on a request ID) so replaying a completed step is a no-op. This is exactly the exactly-once problem from distributed messaging — agents don't get a pass on it.
+        <br /><br />
+        <strong>What to say in an interview:</strong> "I'd model the workflow as a state machine persisted after each step, make tool calls idempotent, and let the orchestrator be crash-recoverable by construction — not retry logic bolted on after the fact." That reframes reliability from a prompt problem into a distributed-systems problem, which is the level the question is testing.
+      </Decision></FadeIn>
+
       <FadeIn><CodeBlock filename="context-handoff.js" code={CONTEXT_HANDOFF_CODE} output={CONTEXT_HANDOFF_OUTPUT} /></FadeIn>
 
       <FadeIn><Insight>
