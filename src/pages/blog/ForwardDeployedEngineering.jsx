@@ -2,9 +2,57 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
+import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
 
 const TABS = ['The FDE Model', 'Team Structure', 'FDE vs SaaS', 'The AI Playbook', 'In Practice'];
+
+const LEVERAGE_CODE = `// Product leverage: is FDE #N delivering faster than FDE #1?
+// Each engagement logs effort split — hand-built vs configured on-platform.
+const engagements = [
+  { customer: 'A', weeksToValue: 14, customLoc: 9200, platformLoc: 400 },
+  { customer: 'B', weeksToValue: 11, customLoc: 6100, platformLoc: 3100 },
+  { customer: 'C', weeksToValue: 7,  customLoc: 3400, platformLoc: 7800 },
+  { customer: 'D', weeksToValue: 4,  customLoc: 1500, platformLoc: 9600 },
+];
+
+// Transition rate: share of the solution the PRODUCT now handles.
+// Rising = the gravel road is paving itself into product features.
+const withMetrics = engagements.map((e) => {
+  const total = e.customLoc + e.platformLoc;
+  return { ...e, configuredShare: e.platformLoc / total };
+});
+
+// Leverage = how much faster #N ships vs the first engagement.
+const first = withMetrics[0];
+const report = withMetrics.map((e) => ({
+  customer: e.customer,
+  weeks: e.weeksToValue,
+  configured: (e.configuredShare * 100).toFixed(0) + '%',
+  speedup: (first.weeksToValue / e.weeksToValue).toFixed(2) + 'x',
+}));
+
+console.table(report);
+
+// The one number a CFO cares about: is leverage compounding?
+const last = withMetrics[withMetrics.length - 1];
+const paving = last.configuredShare > first.configuredShare;
+const leverage = (first.weeksToValue / last.weeksToValue).toFixed(1);
+console.log(\`Latest FDE ships \${leverage}x faster than the first.\`);
+console.log(paving
+  ? 'VERDICT: healthy — custom work is hardening into product.'
+  : 'VERDICT: stuck on gravel — every account is still bespoke.');`;
+
+const LEVERAGE_OUTPUT = `┌─────────┬───────┬────────────┬─────────┐
+│ customer│ weeks │ configured │ speedup │
+├─────────┼───────┼────────────┼─────────┤
+│   A     │  14   │    4%      │  1.00x  │
+│   B     │  11   │   34%      │  1.27x  │
+│   C     │   7   │   70%      │  2.00x  │
+│   D     │   4   │   86%      │  3.50x  │
+└─────────┴───────┴────────────┴─────────┘
+Latest FDE ships 3.5x faster than the first.
+VERDICT: healthy — custom work is hardening into product.`;
 
 export default function ForwardDeployedEngineering() {
   const [tab, setTab] = useState(0);
@@ -404,6 +452,30 @@ function AppliedPatternsPanel() {
       <FadeIn>
         <Insight tag="Key insight">
           Most engineers design the system architecture but ignore deployment. FDE knowledge lets you address the full lifecycle: how does this AI system actually get to customers, integrate with their data, and improve over time? This is the gap between senior and staff-level thinking.
+        </Insight>
+      </FadeIn>
+
+      <FadeIn delay={60}>
+        <p style={{ fontSize: 14, color: 'var(--text-p)', lineHeight: 1.7, marginBottom: 4, marginTop: 24 }}>
+          &ldquo;Product leverage&rdquo; sounds abstract until you make it a number. In an interview, don&rsquo;t just name the
+          metric &mdash; show how you&rsquo;d instrument it. Log the effort split per engagement (hand-built vs configured on
+          the platform) and two signals fall out: <strong>speedup</strong> (is FDE&nbsp;#N faster than #1?) and{' '}
+          <strong>configured share</strong> (is the product absorbing the custom work?). Rising both = the gravel road is
+          paving itself.
+        </p>
+      </FadeIn>
+
+      <FadeIn delay={120}>
+        <CodeBlock filename="product-leverage.js" code={LEVERAGE_CODE} output={LEVERAGE_OUTPUT} />
+      </FadeIn>
+
+      <FadeIn delay={180}>
+        <Insight tag="Why this lands in an interview">
+          Speedup without rising configured-share is a trap: an FDE can ship faster just by cutting corners or reusing their
+          own scripts &mdash; that&rsquo;s personal skill, not <em>product</em> leverage, and it doesn&rsquo;t transfer to FDE&nbsp;#11.
+          The compounding signal is configured-share climbing across accounts, because that means the platform &mdash; not the
+          individual &mdash; is doing more of the work each time. Watching both together is what separates &ldquo;we&rsquo;re getting
+          faster&rdquo; from &ldquo;we&rsquo;re building a moat.&rdquo;
         </Insight>
       </FadeIn>
 
