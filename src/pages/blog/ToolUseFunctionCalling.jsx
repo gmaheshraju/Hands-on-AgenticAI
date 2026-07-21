@@ -370,6 +370,10 @@ function ToolDispatchPanel() {
       <FadeIn delay={400}><Insight tag="Latency budget">
         In a conversational agent, the user waits for the full loop: model inference (1-3s) + tool execution (50ms-10s) + model inference again (1-3s). Your tool execution is the only part you fully control. Budget 500ms for simple reads, 2s for API calls, 5s max for anything synchronous. Beyond 5s, make it async: return a job_id, let the model tell the user "processing, I will check back," and poll. Users abandon after 15s of silence.
       </Insight></FadeIn>
+
+      <FadeIn delay={500}><Insight tag="2026 shift: code-mode tool calling">
+        The classic loop — one JSON tool call, one model round-trip, repeat — is starting to lose ground to <strong>programmatic tool calling</strong>. Instead of emitting {`{ name, arguments }`} for each step, the model writes a short program (JS/Python in a sandbox) that calls tools as ordinary functions, loops, filters, and composes results before returning. A 6-tool workflow that used to cost 6 inference round-trips collapses into one code block that runs to completion. Anthropic's "code execution with MCP" and Cloudflare's "Code Mode" both push this pattern in 2025-2026, and the wins are real: fewer round-trips (lower latency and token cost), intermediate results that never re-enter the context window (a 50-row query gets filtered to 3 rows <em>in the sandbox</em> instead of being pasted back into the prompt), and native control flow the JSON protocol could never express. The catch: you are now running model-authored code, so the sandbox <em>is</em> the security boundary — no network by default, CPU and memory caps, and the same provenance checks you would apply to any tool argument. In interviews, framing tool use as "the model orchestrates in code, the runtime enforces the sandbox" signals you have tracked where the field moved past hand-rolled dispatch loops.
+      </Insight></FadeIn>
     </div>
   );
 }
