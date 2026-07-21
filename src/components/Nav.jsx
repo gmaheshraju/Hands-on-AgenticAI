@@ -22,7 +22,7 @@ export default function Nav() {
       <div className="nav__inner">
         <Link to="/" className="nav__brand">
           <span className="nav__monogram">M</span>
-          <span className="nav__brand-text">System Design Playbook</span>
+          <span className="nav__brand-text">AI Engineering</span>
         </Link>
 
         <div className="nav__links">
