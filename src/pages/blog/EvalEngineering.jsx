@@ -625,6 +625,24 @@ function FrameworksPanel() {
       </Insight></FadeIn>
 
       <FadeIn delay={300}><CodeBlock filename="eval-harness.js" code={EVAL_HARNESS_CODE} output={EVAL_HARNESS_OUTPUT} /></FadeIn>
+
+      <FadeIn delay={350}><Decision question="Agents: evaluate the trajectory or just the final answer?">
+        <p style={{ fontSize: 13, lineHeight: 1.7, color: 'var(--text-p)' }}>
+          Everything above assumes a single input &rarr; single output. Agents break that assumption: a research agent might make 8 tool calls, retry twice, and re-plan once before answering. Scoring only the final answer hides where and why it went wrong &mdash; and lets you pass a run that got the right answer for the wrong reasons.
+        </p>
+        <br />
+        <Pill type="green">Outcome eval (did it end correctly?)</Pill> Score the final answer against ground truth, same as any RAG eval. Necessary but insufficient. It can't tell you that the agent called a paid API 40 times to answer a question one call should have solved, or that it landed on the right answer by luck after a wrong turn. Cheap to run, and the only thing that maps directly to user-visible quality &mdash; so keep it as your headline metric.
+        <br /><br />
+        <Pill type="green">Trajectory eval (was the path sane?)</Pill> Score the sequence of steps: did it pick the right tools, in a reasonable order, with valid arguments, and stop when it had enough? Two useful flavors &mdash; <em>reference trajectory</em> (compare against a human-authored ideal path; brittle because many paths are valid) and <em>rubric-on-trace</em> (an LLM judge reads the full trace and scores efficiency, tool-choice, and recovery). The second scales; the first is worth it only for a small golden set of critical flows.
+        <br /><br />
+        <Pill type="amber">Component evals (isolate each capability)</Pill> Unit-test the pieces that trajectory eval blurs together: tool-selection accuracy (given this state, is the chosen tool correct?), argument correctness (are the parameters well-formed and grounded?), and stop-decision quality (did it halt too early or loop?). When end-to-end pass rate drops, component evals tell you <em>which</em> capability regressed instead of just that <em>something</em> did.
+        <br /><br />
+        <Pill type="red">Final-answer eval only</Pill> The default trap. Your pass rate looks fine while token cost silently triples, latency creeps past the SLO from extra tool round-trips, and a subtle tool-schema change makes the agent take a longer path to the same answer. You find out from the bill, not the eval.
+      </Decision></FadeIn>
+
+      <FadeIn delay={400}><Insight tag="Interview signal">
+        When asked "how would you evaluate an agent?", the weak answer is "check if the final output is correct." The strong answer names all three layers &mdash; outcome, trajectory, and component &mdash; and then says which one you'd reach for first: start with outcome eval because it's cheapest and maps to user value, add trajectory eval when cost or latency regresses without the answer changing, and add component evals once you need to localize <em>which</em> capability broke. Knowing the layers is table stakes; knowing the order to add them is the Staff+ signal.
+      </Insight></FadeIn>
     </div>
   );
 }
