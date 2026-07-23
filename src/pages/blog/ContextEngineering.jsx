@@ -592,6 +592,10 @@ function ProductionPatternsPanel() {
         <br /><br />
         <strong>Practical guideline:</strong> 5-8 chunks of 512 tokens with metadata is the sweet spot for most RAG systems. That's ~3K-5K tokens of retrieved context — enough for grounding without drowning the attention mechanism.
       </Decision></FadeIn>
+
+      <FadeIn delay={400}><Insight tag="Context rot — the 2026 gotcha">
+        "Lost in the middle" is about <em>position</em>. Context rot is about <em>length</em> — and it's the trap interviewers now spring with "the window is 1M tokens, why not just stuff everything in?" Chroma's 2025 <strong>Context Rot</strong> study ran 18 models (including the frontier long-context ones) on tasks as trivial as repeating a word or a single-fact lookup, and found accuracy <strong>decays as total input grows even when the relevant content sits at the top and the task never gets harder</strong>. Non-uniformly, too: add a few semantically-similar distractors and the curve falls off a cliff. The takeaway for design — the advertised window is a <em>ceiling, not a budget</em>. A 200K or 1M window does not mean 1M usable tokens; the <strong>effective window</strong> where reliability holds is often a small fraction of it. So the discipline doesn't disappear as windows grow — retrieval, compression, and aggressive pruning matter <em>more</em>, because now you can fit enough junk to quietly poison the answer without ever hitting a hard limit or throwing an error.
+      </Insight></FadeIn>
     </div>
   );
 }
