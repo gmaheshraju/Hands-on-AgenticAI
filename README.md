@@ -1,6 +1,6 @@
 # Hands-On Agentic AI Engineering — 31 Production-Grade Projects Built From Scratch
 
-**Author:** [Mahesh Guntumadugu](https://github.com/gmaheshraju) · **Topics:** AI Agents · Agentic AI · LLM Engineering · RAG · LLMOps · AI Observability · Multi-Agent Systems
+**Author:** [Mahesh Guntumadugu](https://github.com/gmaheshraju) · **Live site:** [curiousengineers.in](https://curiousengineers.in) · **Topics:** AI Agents · Agentic AI · LLM Engineering · RAG · LLMOps · AI Observability · Multi-Agent Systems
 
 > A portfolio of **31 hands-on, production-grade AI engineering projects** — real agents, real RAG pipelines, real LLM infrastructure — each built **from scratch in Node.js/Python with minimal frameworks**, tested, and hardened. Not slideware. Not notebook demos. Runnable systems that show *how* production agentic AI is actually engineered, from the ReAct loop up to observability, cost attribution, guardrails, and self-improvement.
 
@@ -24,7 +24,7 @@
 
 **Core technologies:** Node.js · Python · JavaScript · SQLite · Vector search · Server-Sent Events · React 19 · Model Context Protocol · Ollama / NVIDIA / Google Gemini LLM APIs.
 
-**Contact:** GitHub [@gmaheshraju](https://github.com/gmaheshraju) · LinkedIn `<add-your-linkedin>` · Email `<add-preferred-contact>`
+**Contact:** 🌐 [curiousengineers.in](https://curiousengineers.in) · 💼 [LinkedIn](https://www.linkedin.com/in/gmaheshraju/) · ✍️ [Medium](https://medium.com/@gmaheshraju) · 💻 [GitHub](https://github.com/gmaheshraju) · ✉️ [maheshraju1218@gmail.com](mailto:maheshraju1218@gmail.com)
 
 ---
 
