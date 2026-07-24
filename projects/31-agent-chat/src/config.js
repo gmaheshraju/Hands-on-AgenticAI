@@ -100,6 +100,18 @@ When you have enough information to answer the user's question directly (or the 
     port: 3001,
     defaultProvider: 'ollama',
     streamBufferTtlMs: 60_000,
+    jsonBodyLimit: '64kb',
+    maxMessageLength: 8_000,       // reject user messages longer than this
+    maxConcurrentStreams: 20,      // global cap on simultaneous agent runs
+    shutdownGraceMs: 10_000,       // wait for in-flight streams on SIGTERM
+  },
+
+  // ── Security ──────────────────────────────────────────────────
+  security: {
+    trustProxy: process.env.TRUST_PROXY === '1',
+    // Reads are cheap; writes spawn LLM work. Separate buckets.
+    readRateLimit: { windowMs: 60_000, max: 300 },   // 300 reads / min / IP
+    writeRateLimit: { windowMs: 60_000, max: 20 },   // 20 messages / min / IP
   },
 
   // ── Database ──────────────────────────────────────────────────

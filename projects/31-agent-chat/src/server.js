@@ -7,12 +7,23 @@ import { LLMAdapter } from './llm.js';
 import { StreamManager } from './streams.js';
 import { runAgent } from './agent.js';
 import { Guardrails } from './guardrails.js';
+import { securityHeaders, rateLimit } from './middleware.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
-app.use(express.json());
+app.disable('x-powered-by');
+app.use(securityHeaders());
+app.use(express.json({ limit: config.server.jsonBodyLimit }));
 app.use(express.static(path.join(__dirname, '..', 'public')));
+
+// Two rate-limit buckets: generous for reads, strict for writes that
+// trigger LLM work. Applied per-IP; see middleware.js.
+const readLimiter = rateLimit(config.security.readRateLimit);
+const writeLimiter = rateLimit(config.security.writeRateLimit);
+app.use('/api', (req, res, next) => {
+  return req.method === 'GET' ? readLimiter(req, res, next) : writeLimiter(req, res, next);
+});
 
 const db = new DB(config.db.path);
 const llm = new LLMAdapter({ verbose: true });
@@ -69,7 +80,17 @@ app.post('/api/threads/:id/messages', (req, res) => {
   if (!thread) return res.status(404).json({ error: 'Thread not found' });
 
   const { content, parentId } = req.body;
-  if (!content?.trim()) return res.status(400).json({ error: 'Content required' });
+  if (typeof content !== 'string' || !content.trim()) {
+    return res.status(400).json({ error: 'Content required' });
+  }
+  if (content.length > config.server.maxMessageLength) {
+    return res.status(413).json({
+      error: `Message too long (max ${config.server.maxMessageLength} characters)`,
+    });
+  }
+  if (streams.activeCount() >= config.server.maxConcurrentStreams) {
+    return res.status(503).json({ error: 'Server busy — too many active generations. Try again shortly.' });
+  }
 
   let resolvedParent;
   if (parentId === null || parentId === '__root__') {
@@ -98,6 +119,10 @@ app.post('/api/threads/:id/regenerate/:msgId', (req, res) => {
 
   const userMsg = db.getMessage(origMsg.parent_id);
   if (!userMsg) return res.status(400).json({ error: 'Parent user message not found' });
+
+  if (streams.activeCount() >= config.server.maxConcurrentStreams) {
+    return res.status(503).json({ error: 'Server busy — too many active generations. Try again shortly.' });
+  }
 
   const msgId = crypto.randomUUID();
   startAgentStream(thread, userMsg.content, userMsg.parent_id, msgId);
@@ -337,6 +362,42 @@ function formatMessage(m) {
 // ── Start ──────────────────────────────────────────────────────────
 
 const PORT = parseInt(process.env.PORT, 10) || config.server.port;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Agent Chat server running at http://localhost:${PORT}`);
 });
+
+// ── Graceful shutdown ──────────────────────────────────────────────
+// Stop accepting connections, let in-flight streams drain (bounded by
+// shutdownGraceMs), then checkpoint SQLite (WAL) and exit cleanly.
+
+let shuttingDown = false;
+function shutdown(signal) {
+  if (shuttingDown) return;
+  shuttingDown = true;
+  console.log(`\n[${signal}] Shutting down — draining ${streams.activeCount()} active stream(s)...`);
+
+  const deadline = Date.now() + config.server.shutdownGraceMs;
+  server.close(() => {
+    const finish = () => {
+      readLimiter.limiter.stop();
+      writeLimiter.limiter.stop();
+      try { db.close(); } catch { /* already closed */ }
+      console.log('[shutdown] Clean exit.');
+      process.exit(0);
+    };
+    const waitForDrain = () => {
+      if (streams.activeCount() === 0 || Date.now() >= deadline) return finish();
+      setTimeout(waitForDrain, 200);
+    };
+    waitForDrain();
+  });
+
+  // Hard cap so a stuck stream can't block exit forever.
+  setTimeout(() => {
+    console.error('[shutdown] Grace period exceeded — forcing exit.');
+    process.exit(1);
+  }, config.server.shutdownGraceMs + 2_000).unref();
+}
+
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+process.on('SIGINT', () => shutdown('SIGINT'));
