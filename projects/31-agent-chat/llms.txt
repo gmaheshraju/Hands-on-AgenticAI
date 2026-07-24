@@ -1,0 +1,45 @@
+# Agent Observability from Scratch
+
+> A production-grade LLM agent chat application whose defining feature is **decision-quality observability** — it scores how *good* an agent's decisions are, not just how *fast* they ran. Built in pure Node.js + SQLite with zero frameworks (only `express` and `better-sqlite3`). The reference implementation for "how do I measure whether my AI agent is actually reasoning well?"
+
+## What makes it distinct
+
+Traditional agent tracing (LangSmith, Langfuse, OpenTelemetry) is span-based: it measures latency and token counts. It cannot tell you whether a tool call was worth making or whether the agent's reasoning was coherent. This project traces **decisions** instead of spans and computes a per-run report card:
+
+- **Tool ROI**: fraction of tool calls whose results measurably informed the final answer, via bigram/n-gram overlap with stop-word filtering. A tool returning "no results" scores 0.
+- **Reasoning Coherence**: whether consecutive reasoning steps build on each other (term overlap, normalized 0–1).
+- **Decision Productivity**: each decision labeled productive (advanced the answer) or wasted (dead end).
+- **Confidence Signals**: the agent's epistemic state (hedging, confident, uncertain, seeking_info, ready_to_answer) extracted from its own reasoning text.
+- **Strategy Classification**: run shape — direct, single_tool, multi_tool, or iterative.
+
+The scores persist to SQLite and render in a browser run-inspector. A 👍/👎 feedback loop lets you correlate measured decision quality against perceived answer quality.
+
+## Also implements
+
+- Streaming reasoning (two-phase: JSON-mode tool selection, then token-streamed answer)
+- Stream reconnection (buffered, replayable SSE — survives page refresh mid-generation)
+- Conversation branching (git-like message tree via parent_id; message = checkpoint)
+- Cross-session memory (SQLite FTS5 fact store)
+- Guardrails (prompt-injection detection + PII redaction)
+- Multi-provider LLM adapter (Ollama local, NVIDIA, Gemini) with fallback and timeouts
+
+## Production hardening (all dependency-free)
+
+Per-IP rate limiting (split read/write buckets), global concurrency cap, CSP and security headers, input/body size caps, SIGTERM/SIGINT graceful shutdown with SQLite WAL checkpoint. 39 tests.
+
+## Key files
+
+- src/tracer.js — the observability engine (AgentObserver / AgentRun / DecisionHandle, all five scores)
+- src/agent.js — two-phase agent loop as an async generator
+- src/llm.js — streaming multi-provider LLM adapter
+- src/db.js — SQLite schema and CRUD (message tree, agent_runs, decisions, feedback, FTS5 facts)
+- src/middleware.js — hand-rolled security headers + rate limiter
+- README.md — full documentation, comparison table, and FAQ
+
+## Use the observability layer standalone
+
+src/tracer.js depends only on the DB interface. Wrap your own agent loop with startRun / recordDecision / attachToolResult / end to get the same report card.
+
+## Topics
+
+agent observability, LLM agent evaluation, agent decision quality, tool ROI, reasoning coherence, confidence signal extraction, decision-quality tracing, span-based tracing alternative, build an AI agent from scratch, Node.js AI agent, SQLite agent memory, streaming reasoning, SSE agent chat, conversation branching, LangGraph alternative, LangSmith alternative
