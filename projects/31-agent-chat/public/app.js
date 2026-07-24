@@ -831,93 +831,101 @@ function renderRunModal(run) {
   const wasted = run.wasted_decisions || 0;
   const productivityPct = totalDecisions > 0 ? Math.round((productive / totalDecisions) * 100) : 100;
 
+  const totalTokens = (run.tokens_in || 0) + (run.tokens_out || 0);
   const outcomeClass = run.outcome === 'answered' ? 'run-ok' : run.outcome === 'blocked' ? 'run-blocked' : 'run-error';
   const strategyLabel = { direct: 'Direct answer', single_tool: 'Single tool', multi_tool: 'Multi-tool', iterative: 'Iterative' }[run.strategy] || run.strategy;
+  const scoreColor = (v) => v >= 80 ? 'var(--positive)' : v >= 50 ? 'var(--accent)' : 'var(--negative)';
 
-  const scoreBar = (label, value, color) => `
-    <div class="score-row">
-      <span class="score-label">${label}</span>
-      <div class="score-bar-track">
-        <div class="score-bar-fill" style="width:${value}%;background:${color}"></div>
+  const scoreCard = (label, value, sub) => `
+    <div class="score-card">
+      <span class="score-card-label">${label}</span>
+      <span class="score-card-value" style="color:${scoreColor(value)}">${value}<span class="score-card-unit">%</span></span>
+      <div class="score-card-track">
+        <div class="score-card-fill" style="width:${value}%;background:${scoreColor(value)}"></div>
       </div>
-      <span class="score-value">${value}%</span>
+      <span class="score-card-sub">${sub}</span>
     </div>
   `;
 
   const decisionRows = (run.decisions || []).map((d, i) => {
-    const prodIcon = d.productive === true ? '&#10003;' : d.productive === false ? '&#10007;' : '&#8212;';
-    const prodClass = d.productive === true ? 'decision-productive' : d.productive === false ? 'decision-wasted' : 'decision-neutral';
+    const prodClass = d.productive === true ? 'is-productive' : d.productive === false ? 'is-wasted' : 'is-neutral';
+    const statusLabel = d.productive === true ? 'Productive' : d.productive === false ? 'Wasted' : 'Neutral';
     const signals = (d.confidenceSignals || []).map(s =>
       `<span class="signal-chip signal-${s}">${s.replace('_', ' ')}</span>`
     ).join('');
 
-    const toolInfo = d.action !== 'respond' && d.tool_result
+    const isRespond = d.action === 'respond';
+    const toolMeta = !isRespond && d.tool_result
       ? `<div class="decision-tool">
-          <span class="decision-tool-name">${escapeHtml(d.action)}</span>
-          ${d.tool_duration_ms ? `<span class="decision-tool-lat">${d.tool_duration_ms}ms</span>` : ''}
-          <span class="decision-tool-roi ${d.toolResultUsed ? 'roi-used' : 'roi-unused'}">${d.toolResultUsed ? 'Used in answer' : 'Not used'}</span>
+          <code class="decision-tool-name">${escapeHtml(d.action)}</code>
+          ${d.tool_duration_ms != null ? `<span class="decision-tool-lat">${d.tool_duration_ms}ms</span>` : ''}
+          <span class="tool-roi-badge ${d.toolResultUsed ? 'roi-used' : 'roi-unused'}">${d.toolResultUsed ? 'Used in answer' : 'Not used'}</span>
         </div>`
       : '';
 
     return `
       <div class="decision-row ${prodClass}">
-        <div class="decision-header">
-          <span class="decision-seq">${i + 1}</span>
-          <span class="decision-prod-icon ${prodClass}">${prodIcon}</span>
-          <span class="decision-action">${d.action === 'respond' ? 'Respond' : escapeHtml(d.action)}</span>
-          <span class="decision-latency">${d.latency_ms}ms</span>
-          <span class="decision-tokens">${d.tokens_in + d.tokens_out} tok</span>
+        <div class="decision-node"><span class="decision-seq">${i + 1}</span></div>
+        <div class="decision-body">
+          <div class="decision-top">
+            <span class="decision-action">${isRespond ? 'Respond' : escapeHtml(d.action)}</span>
+            <span class="decision-status ${prodClass}">${statusLabel}</span>
+            <span class="decision-metrics">${d.latency_ms}ms<span class="dot-sep">·</span>${d.tokens_in + d.tokens_out} tok</span>
+          </div>
+          ${d.thought ? `<p class="decision-thought">${escapeHtml(d.thought)}</p>` : ''}
+          ${signals ? `<div class="decision-signals">${signals}</div>` : ''}
+          ${toolMeta}
         </div>
-        <div class="decision-thought">${escapeHtml(d.thought)}</div>
-        ${signals ? `<div class="decision-signals">${signals}</div>` : ''}
-        ${toolInfo}
       </div>
     `;
   }).join('');
 
+  const dur = ((run.duration_ms || 0) / 1000).toFixed(1);
+
   overlay.innerHTML = `
     <div class="run-modal">
-      <div class="run-modal-header">
-        <h3>Agent Run</h3>
-        <button class="trace-close" onclick="this.closest('.edit-overlay').remove()">&times;</button>
+      <header class="run-modal-header">
+        <div class="run-modal-title">
+          <h3>Run Inspector</h3>
+          <span class="run-outcome-pill ${outcomeClass}">${run.outcome}</span>
+        </div>
+        <button class="trace-close" aria-label="Close" onclick="this.closest('.edit-overlay').remove()">&times;</button>
+      </header>
+
+      <div class="run-query">
+        <span class="run-query-label">Query</span>
+        <p>${escapeHtml(run.user_message)}</p>
       </div>
 
-      <div class="run-query">${escapeHtml(run.user_message)}</div>
-
-      <div class="run-report-card">
-        <div class="report-row">
-          <div class="report-metric">
-            <span class="report-metric-label">Outcome</span>
-            <span class="report-metric-value ${outcomeClass}">${run.outcome}</span>
-          </div>
-          <div class="report-metric">
-            <span class="report-metric-label">Strategy</span>
-            <span class="report-metric-value">${strategyLabel}</span>
-          </div>
-          <div class="report-metric">
-            <span class="report-metric-label">Duration</span>
-            <span class="report-metric-value">${((run.duration_ms || 0) / 1000).toFixed(1)}s</span>
-          </div>
-          <div class="report-metric">
-            <span class="report-metric-label">Tokens</span>
-            <span class="report-metric-value">${(run.tokens_in || 0) + (run.tokens_out || 0)}</span>
-          </div>
+      <div class="run-stats">
+        <div class="run-stat">
+          <span class="run-stat-label">Strategy</span>
+          <span class="run-stat-value">${strategyLabel}</span>
         </div>
-
-        <div class="report-scores">
-          ${scoreBar('Decision quality', productivityPct, productivityPct >= 80 ? '#22C55E' : productivityPct >= 50 ? '#F97316' : '#EF4444')}
-          ${scoreBar('Tool ROI', roiPct, roiPct >= 80 ? '#22C55E' : roiPct >= 50 ? '#F97316' : '#EF4444')}
-          ${scoreBar('Reasoning coherence', coherencePct, coherencePct >= 80 ? '#22C55E' : coherencePct >= 50 ? '#F97316' : '#EF4444')}
+        <div class="run-stat">
+          <span class="run-stat-label">Duration</span>
+          <span class="run-stat-value">${dur}<span class="run-stat-unit">s</span></span>
         </div>
-
-        <div class="report-summary-row">
-          <span class="report-chip productive-chip">${productive} productive</span>
-          ${wasted > 0 ? `<span class="report-chip wasted-chip">${wasted} wasted</span>` : ''}
-          ${run.provider ? `<span class="report-chip">${run.provider}</span>` : ''}
+        <div class="run-stat">
+          <span class="run-stat-label">Tokens</span>
+          <span class="run-stat-value">${totalTokens.toLocaleString()}</span>
+        </div>
+        <div class="run-stat">
+          <span class="run-stat-label">Provider</span>
+          <span class="run-stat-value run-stat-sm">${run.provider || '—'}</span>
         </div>
       </div>
 
-      <div class="decision-chain-header">Decision Chain</div>
+      <div class="score-cards">
+        ${scoreCard('Decision quality', productivityPct, `${productive}/${totalDecisions} decisions productive`)}
+        ${scoreCard('Tool ROI', roiPct, wasted > 0 ? `${wasted} tool call${wasted > 1 ? 's' : ''} wasted` : 'all tool calls used')}
+        ${scoreCard('Coherence', coherencePct, 'reasoning stays on-topic')}
+      </div>
+
+      <div class="decision-chain-header">
+        <span>Decision Chain</span>
+        <span class="dc-count">${totalDecisions} step${totalDecisions === 1 ? '' : 's'}</span>
+      </div>
       <div class="decision-chain">
         ${decisionRows || '<div class="decision-empty">No decisions recorded</div>'}
       </div>
