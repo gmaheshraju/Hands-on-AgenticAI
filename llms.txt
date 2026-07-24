@@ -1,10 +1,16 @@
 # Hands-On Agentic AI Engineering — Mahesh Guntumadugu
 
-> A portfolio of 31 hands-on, production-grade AI engineering projects by Mahesh Guntumadugu, each built from scratch (minimal frameworks) in Node.js/Python and runnable, plus an interactive React system-design playbook. Covers the full modern agentic-AI stack: AI agents, RAG, LLMOps, guardrails, evaluation, observability, and infrastructure. GitHub: https://github.com/gmaheshraju/Hands-on-AgenticAI
+> A portfolio of 31 hands-on, production-grade AI engineering projects by Mahesh Guntumadugu, each built from scratch (minimal frameworks) in Node.js/Python and runnable, plus an interactive React system-design playbook. Covers the full modern agentic-AI stack: AI agents, RAG, LLMOps, guardrails, evaluation, observability, and infrastructure. Live site: https://curiousengineers.in — GitHub: https://github.com/gmaheshraju/Hands-on-AgenticAI
 
 ## About the author
 
 Mahesh Guntumadugu — Agentic AI / LLM engineer. This repository demonstrates end-to-end ownership of the production AI-agent stack at Staff/Principal/Lead depth: designing, building, testing, and hardening real agentic systems from first principles rather than wiring together frameworks.
+
+- Website: https://curiousengineers.in
+- GitHub: https://github.com/gmaheshraju
+- LinkedIn: https://www.linkedin.com/in/gmaheshraju/
+- Medium: https://medium.com/@gmaheshraju
+- Email: maheshraju1218@gmail.com
 
 ## What the 31 projects cover
 
