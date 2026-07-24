@@ -11,7 +11,9 @@ export function securityHeaders() {
   const csp = [
     "default-src 'self'",
     "script-src 'self'",
-    "style-src 'self' 'unsafe-inline'",
+    // style-src allows the Google Fonts stylesheet; font-src allows the woff2 files it references.
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' data:",
     "connect-src 'self'",
     "base-uri 'self'",
