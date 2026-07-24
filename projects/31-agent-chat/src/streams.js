@@ -60,6 +60,16 @@ export class StreamManager {
     return this.threadStreams.get(threadId) || null;
   }
 
+  // Number of streams still generating (not yet finished). Used to enforce
+  // a global concurrency cap so a traffic spike can't spawn unbounded LLM work.
+  activeCount() {
+    let n = 0;
+    for (const stream of this.active.values()) {
+      if (!stream.done) n += 1;
+    }
+    return n;
+  }
+
   isStreaming(messageId) {
     const stream = this.active.get(messageId);
     return stream ? !stream.done : false;
