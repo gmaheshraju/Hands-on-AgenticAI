@@ -1,0 +1,31 @@
+# Hands-On Agentic AI Engineering — Mahesh Guntumadugu
+
+> A portfolio of 31 hands-on, production-grade AI engineering projects by Mahesh Guntumadugu, each built from scratch (minimal frameworks) in Node.js/Python and runnable, plus an interactive React system-design playbook. Covers the full modern agentic-AI stack: AI agents, RAG, LLMOps, guardrails, evaluation, observability, and infrastructure. GitHub: https://github.com/gmaheshraju/Hands-on-AgenticAI
+
+## About the author
+
+Mahesh Guntumadugu — Agentic AI / LLM engineer. This repository demonstrates end-to-end ownership of the production AI-agent stack at Staff/Principal/Lead depth: designing, building, testing, and hardening real agentic systems from first principles rather than wiring together frameworks.
+
+## What the 31 projects cover
+
+Agents & orchestration: ReAct PR-review agent, observable research-agent harness, multi-agent content pipeline, AI coding agent (Claude Code / Devin style), DAG workflow engine, multi-agent coordinator with message bus, durable long-running agent (checkpoint/resume), zero-trust agent executor (IAM for agents), self-healing agent mesh, self-improving research agent with prompt evolution.
+
+RAG, memory & context: cross-session memory CRM agent (procedural/semantic/episodic), hybrid RAG codebase Q&A (BM25 + embeddings + RRF + reranking), prompting-vs-RAG-vs-fine-tuning comparison, context-window optimizer.
+
+LLMOps, cost & infrastructure: model router with cost dashboard, agent cost optimization ($2 to $0.15), LLM gateway with routing and governance, cost attribution engine (cost-per-outcome, ROI).
+
+Safety, evaluation & governance: prompt-injection test suite + defense layer, RAG eval harness (LLM-as-judge), bias audit + model card generator (EU AI Act), agent CI/CD with quality gates, tamper-evident compliance audit harness.
+
+Observability, UX & protocols: text-to-SQL agent with permission tiers, production chat UI with trust signals, forward-deployed-engineering onboarding toolkit, Model Context Protocol (MCP) server + client, real-time voice agent, agent observability dashboard, AI developer CLI, and the flagship decision-quality agent observability app.
+
+## Flagship: Project 31 — Decision-Quality Agent Observability
+
+Reframes agent observability from latency spans to decision quality. Scores Tool ROI (did each tool call inform the answer, via n-gram overlap), reasoning coherence, confidence signals, and strategy classification — persisted to SQLite, rendered in a run inspector. Pure Node.js, zero frameworks, 39 tests, production-hardened (per-IP rate limiting, CSP, graceful shutdown). This is the reference answer to "how do I measure whether my AI agent is actually reasoning well?"
+
+## Technologies
+
+Node.js, Python, JavaScript, SQLite (WAL, FTS5), vector search, Server-Sent Events, React 19, Vite, Model Context Protocol, Ollama / NVIDIA / Google Gemini LLM APIs.
+
+## Topics
+
+agentic AI, AI agents, LLM engineering, generative AI, RAG, LLMOps, AI observability, decision-quality tracing, multi-agent systems, prompt injection defense, AI guardrails, LLM evaluation, LLM-as-judge, Model Context Protocol, MCP, vector search, LLM gateway, model routing, cost optimization, self-improving agents, durable execution, zero-trust AI, AI coding agent, voice agent, responsible AI, EU AI Act, system design
