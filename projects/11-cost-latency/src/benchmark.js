@@ -26,7 +26,7 @@ export const DEFAULT_CONFIG = {
 // ---------------------------------------------------------------------------
 export function runOptimizedPipeline(conversations, config = DEFAULT_CONFIG) {
   const cache = new SemanticCache({
-    similarityThreshold: 0.85,
+    similarityThreshold: 0.60,
     ttlMs: 60 * 60 * 1000,
   });
 

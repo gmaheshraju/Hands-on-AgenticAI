@@ -68,7 +68,7 @@ export function cosineSimilarity(a, b) {
 // ---------------------------------------------------------------------------
 export class SemanticCache {
   constructor({
-    similarityThreshold = 0.50, // Lower for simple embeddings; production with real embeddings uses 0.90+
+    similarityThreshold = 0.60, // Lower than production (0.90+) because we use simple n-gram embeddings
     ttlMs = 30 * 60 * 1000, // 30 minutes default
     maxSize = 1000,
     embeddingDimensions = 128,

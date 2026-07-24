@@ -10,6 +10,7 @@
 
 import { AgentHarness } from './harness.js';
 import { ResearchAgent } from './agent.js';
+import { diagnosePrimitives, printDiagnosis } from './diagnosis.js';
 import { writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -68,6 +69,9 @@ async function demoFullResearch(question) {
   }
 
   printResult(result);
+
+  // ── Postmortem + Diagnosis ──────────────────────────────────────
+  runPostmortem(harness, result);
 }
 
 // ── Demo 2: Convergence detection ───────────────────────────────────────
@@ -104,6 +108,7 @@ async function demoConvergence() {
   });
 
   printResult(result);
+  runPostmortem(harness, result);
 }
 
 // ── Demo 3: Cost cap ────────────────────────────────────────────────────
@@ -131,6 +136,43 @@ async function demoCostCap() {
   }));
 
   printResult(result);
+  runPostmortem(harness, result);
+}
+
+// ── Shared postmortem + diagnosis runner ─────────────────────────────────
+
+function runPostmortem(harness, result) {
+  const entries = harness.tracer.entries;
+
+  // Postmortem Loop
+  console.log('\n' + '='.repeat(70));
+  console.log('POSTMORTEM');
+  console.log('='.repeat(70));
+
+  const pm = harness.postmortem(result, entries);
+
+  if (pm.findings.length === 0) {
+    console.log('  No failure patterns detected.');
+  } else {
+    for (const f of pm.findings) {
+      const iterLabel = f.iteration !== null ? `iter ${f.iteration}` : 'global';
+      console.log(`\n  [${f.type}] (${iterLabel})`);
+      console.log(`    ${f.description}`);
+      console.log(`    Fix: ${f.suggestedFix}`);
+    }
+  }
+
+  if (pm.recommendations.length > 0) {
+    console.log('\n  Recommendations:');
+    for (const r of pm.recommendations) {
+      console.log(`    - ${r}`);
+    }
+  }
+  console.log('='.repeat(70));
+
+  // Primitive-Layer Diagnosis
+  const dx = diagnosePrimitives(result, entries);
+  printDiagnosis(dx);
 }
 
 // ── Helpers ──────────────────────────────────────────────────────────────

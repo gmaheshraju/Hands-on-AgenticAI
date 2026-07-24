@@ -8,6 +8,7 @@ let currentEventSource = null; // active SSE connection
 let isStreaming = false;
 let citationCounter = 0;       // tracks citation numbers within a message
 let collectedSources = [];     // sources for the current message
+let lastConfidence = null;     // tracks confidence to show badge on transition
 
 const STORAGE_KEY = "chat_history_v1";
 
@@ -58,6 +59,7 @@ function sendMessage() {
   currentMessageId = "msg_" + Date.now();
   citationCounter = 0;
   collectedSources = [];
+  lastConfidence = null;
   startStreaming(text, currentMessageId);
 }
 
@@ -242,28 +244,29 @@ function createAgentMessageWrapper() {
 }
 
 function appendToken(bubble, text, confidence) {
-  // Remove cursor temporarily
   const cursor = bubble.querySelector(".streaming-cursor");
 
   // Process text for basic markdown (bold, italic)
   let html = processMarkdown(escapeHtml(text));
 
+  // Show confidence badge only on transition into medium/low
+  const showBadge = confidence && confidence !== "high" && confidence !== lastConfidence;
+  lastConfidence = confidence;
+
   // Wrap in confidence span if applicable
   if (confidence && confidence !== "high") {
+    if (showBadge) {
+      const badge = document.createElement("span");
+      badge.className = `confidence-badge ${confidence}`;
+      badge.textContent = confidence === "low" ? "uncertain" : "approximate";
+      if (cursor) bubble.insertBefore(badge, cursor);
+      else bubble.appendChild(badge);
+    }
     const span = document.createElement("span");
     span.className = `confidence-${confidence}`;
     span.innerHTML = html;
     if (cursor) bubble.insertBefore(span, cursor);
     else bubble.appendChild(span);
-
-    // Add badge for medium/low
-    if (confidence === "low") {
-      const badge = document.createElement("span");
-      badge.className = "confidence-badge low";
-      badge.textContent = "uncertain";
-      if (cursor) bubble.insertBefore(badge, cursor);
-      else bubble.appendChild(badge);
-    }
   } else {
     const span = document.createElement("span");
     if (confidence === "high") span.className = "confidence-high";

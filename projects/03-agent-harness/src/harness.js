@@ -7,6 +7,10 @@
  *   3. Convergence     — stop when K consecutive iterations add zero new facts
  *
  * Every iteration is traced to a JSONL file via the Tracer.
+ *
+ * After a run completes, the postmortem() method analyzes trace entries and
+ * maps failure patterns to concrete fixes (the "Postmortem Loop" from
+ * Carbon Layer).
  */
 
 import { Tracer } from './tracer.js';
@@ -155,4 +159,203 @@ export class AgentHarness {
       traceFile: this.tracer.filePath,
     };
   }
+
+  /**
+   * Postmortem Loop — analyze what went wrong and map failures to fixes.
+   *
+   * Runs after a completed run() call. Inspects the stop reason and trace
+   * entries to identify failure patterns and produce actionable recommendations.
+   *
+   * Failure pattern taxonomy:
+   *   - context_miss        → agent searched but didn't find what it needed
+   *   - bad_tool_result     → tool returned data the agent couldn't use
+   *   - wasteful_action     → high-cost iteration with zero payoff
+   *   - hallucinated_tool_loop → same tool+input repeated in a tight loop
+   *   - convergence_stall   → ran out of productive moves
+   *   - cost_overrun        → budget burned before task completed
+   *   - iteration_cap       → hit the hard iteration limit
+   *   - tool_imbalance      → over-reliance on a single tool
+   *
+   * @param {object} runResult — the object returned by run()
+   * @param {object[]} traceEntries — this.tracer.entries (or a subset)
+   * @returns {{ findings: object[], recommendations: string[] }}
+   */
+  postmortem(runResult, traceEntries) {
+    const findings = [];
+    const recommendations = [];
+
+    const stopType = runResult.stopReason?.split(':')[0] ?? 'UNKNOWN';
+
+    // ── Convergence stall ───────────────────────────────────────────
+    if (stopType === 'CONVERGENCE') {
+      const staleStart = traceEntries.length - this.convergenceWindow;
+      const staleEntries = traceEntries.slice(Math.max(0, staleStart));
+      const toolsUsed = [...new Set(staleEntries.map((e) => e.tool))];
+
+      findings.push({
+        type: 'convergence_stall',
+        iteration: staleStart + 1,
+        description: `Agent produced no new facts for ${this.convergenceWindow} consecutive iterations. ` +
+          `Tools used during stall: [${toolsUsed.join(', ')}].`,
+        suggestedFix: 'Add a re-planning step that detects repeated zero-fact iterations and switches strategy — ' +
+          'try different search terms, broaden/narrow scope, or switch tools.',
+      });
+      recommendations.push('Implement adaptive planning: after 2 zero-fact iterations, force a tool or query change.');
+    }
+
+    // ── Cost overrun ────────────────────────────────────────────────
+    if (stopType === 'COST_CAP') {
+      const productiveIters = traceEntries.filter((e) => e.new_facts_added > 0).length;
+      const wastedCost = traceEntries
+        .filter((e) => e.new_facts_added === 0)
+        .reduce((sum, e) => sum + e.cost_usd, 0);
+
+      findings.push({
+        type: 'cost_overrun',
+        iteration: runResult.totalIterations,
+        description: `Hit cost cap at $${runResult.totalCost.toFixed(4)}. ` +
+          `${productiveIters}/${runResult.totalIterations} iterations were productive. ` +
+          `$${wastedCost.toFixed(4)} spent on zero-fact iterations.`,
+        suggestedFix: 'Front-load cheaper tools (search) before expensive ones (page reads). ' +
+          'Set per-iteration cost budgets. Kill unproductive tool calls earlier.',
+      });
+      recommendations.push(`Reduce waste: ${Math.round((1 - productiveIters / runResult.totalIterations) * 100)}% of spend produced no new facts.`);
+    }
+
+    // ── Iteration cap ───────────────────────────────────────────────
+    if (stopType === 'ITERATION_CAP') {
+      const factsTotal = traceEntries.reduce((sum, e) => sum + e.new_facts_added, 0);
+      const lastProductiveIter = findLastProductiveIteration(traceEntries);
+
+      findings.push({
+        type: 'iteration_cap',
+        iteration: runResult.totalIterations,
+        description: `Hit iteration cap (${this.maxIterations}). ` +
+          `Gathered ${factsTotal} facts. Last productive iteration: ${lastProductiveIter}.`,
+        suggestedFix: lastProductiveIter < runResult.totalIterations - 3
+          ? 'Agent was unproductive in its final iterations — tighten convergence window or add early-exit logic.'
+          : 'Agent was still productive when cut off — raise iteration cap or prioritize higher-value actions earlier.',
+      });
+      recommendations.push(
+        lastProductiveIter < runResult.totalIterations - 3
+          ? 'Lower convergence window — agent was spinning without progress before hitting the cap.'
+          : 'Raise iteration cap or budget more tokens for this query complexity.'
+      );
+    }
+
+    // ── Scan all entries for per-iteration issues ───────────────────
+    const toolUsageCounts = {};
+    let consecutiveSameTool = 0;
+    let prevTool = null;
+
+    for (let i = 0; i < traceEntries.length; i++) {
+      const entry = traceEntries[i];
+      const tool = entry.tool;
+
+      toolUsageCounts[tool] = (toolUsageCounts[tool] || 0) + 1;
+
+      // Detect repeated identical tool calls (potential hallucinated loop)
+      if (tool === prevTool) {
+        consecutiveSameTool++;
+        if (consecutiveSameTool >= 3) {
+          const inputs = traceEntries.slice(i - 2, i + 1).map((e) => JSON.stringify(e.tool_input));
+          const allSame = inputs.every((inp) => inp === inputs[0]);
+          if (allSame) {
+            findings.push({
+              type: 'hallucinated_tool_loop',
+              iteration: i - 1,
+              description: `Tool "${tool}" called ${consecutiveSameTool + 1}x in a row with identical inputs.`,
+              suggestedFix: 'Add deduplication: track (tool, input) pairs and block exact repeats. ' +
+                'If the agent needs to retry, force it to vary the input.',
+            });
+          }
+        }
+      } else {
+        consecutiveSameTool = 0;
+      }
+      prevTool = tool;
+
+      // Detect context miss: back-to-back searches both returning nothing
+      if (tool === 'webSearch' && i > 0 && traceEntries[i - 1].tool === 'webSearch' &&
+          entry.new_facts_added === 0 && traceEntries[i - 1].new_facts_added === 0) {
+        findings.push({
+          type: 'context_miss',
+          iteration: i + 1,
+          description: `Back-to-back searches at iterations ${i} and ${i + 1} both returned zero new facts. ` +
+            `The agent couldn't find what it needed.`,
+          suggestedFix: 'Add a retrieval rule: after a zero-result search, reformulate the query ' +
+            '(synonyms, broader scope) or switch to a different information source.',
+        });
+      }
+
+      // Detect bad tool result: tool consumed tokens but produced nothing
+      if (tool === 'readPage' && entry.new_facts_added === 0 && entry.tokens_out > 200) {
+        findings.push({
+          type: 'bad_tool_result',
+          iteration: i + 1,
+          description: `readPage at iteration ${i + 1} consumed ${entry.tokens_out} output tokens but added 0 facts. ` +
+            `The page content didn't match what the agent expected.`,
+          suggestedFix: 'Validate page content before full extraction — check for relevance markers ' +
+            'in the first 500 chars. Add a content-type check to avoid parsing error pages.',
+        });
+      }
+
+      // Detect wasteful action: high cost iteration with zero payoff
+      if (entry.new_facts_added === 0 && entry.cost_usd > 0.01) {
+        findings.push({
+          type: 'wasteful_action',
+          iteration: i + 1,
+          description: `Iteration ${i + 1} cost $${entry.cost_usd.toFixed(4)} but produced zero facts.`,
+          suggestedFix: 'Gate expensive operations behind a relevance check. ' +
+            'Consider a two-phase approach: cheap probe first, then commit to the full operation.',
+        });
+      }
+    }
+
+    // ── Tool distribution warnings ──────────────────────────────────
+    const totalCalls = traceEntries.length;
+    for (const [tool, count] of Object.entries(toolUsageCounts)) {
+      const pct = count / totalCalls;
+      if (pct > 0.6 && totalCalls > 4) {
+        findings.push({
+          type: 'tool_imbalance',
+          iteration: null,
+          description: `"${tool}" accounts for ${Math.round(pct * 100)}% of all tool calls (${count}/${totalCalls}). ` +
+            `The agent may be over-relying on one approach.`,
+          suggestedFix: 'Encourage tool diversity in the planning phase. ' +
+            'After 2 consecutive calls to the same tool, prompt the agent to consider alternatives.',
+        });
+      }
+    }
+
+    // ── Dedup findings by type+iteration ────────────────────────────
+    const seen = new Set();
+    const dedupedFindings = findings.filter((f) => {
+      const key = `${f.type}:${f.iteration}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+
+    // ── Always provide at least one recommendation ──────────────────
+    if (recommendations.length === 0 && stopType === 'AGENT_DONE') {
+      const wasteRatio = traceEntries.filter((e) => e.new_facts_added === 0).length / totalCalls;
+      if (wasteRatio > 0.3) {
+        recommendations.push(`${Math.round(wasteRatio * 100)}% of iterations produced no facts — review tool selection efficiency.`);
+      } else {
+        recommendations.push('Run completed successfully. No critical issues detected.');
+      }
+    }
+
+    return { findings: dedupedFindings, recommendations };
+  }
+}
+
+// ── Postmortem helpers ─────────────────────────────────────────────────
+
+function findLastProductiveIteration(entries) {
+  for (let i = entries.length - 1; i >= 0; i--) {
+    if (entries[i].new_facts_added > 0) return i + 1;
+  }
+  return 0;
 }

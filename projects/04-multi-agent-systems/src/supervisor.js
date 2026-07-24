@@ -9,6 +9,24 @@
  *   5. Produce a final report with each agent's contribution
  *
  * The supervisor does NOT generate content — it coordinates.
+ *
+ * Dispatch model: every agent is a *subscriber* on the message bus, keyed
+ * by its own channel name. Nothing calls another agent's function
+ * directly — the supervisor publishes a request message, the bus routes
+ * it to whichever agent subscribed to that channel, and the agent
+ * publishes its result to the *next* channel in the pipeline. The
+ * supervisor itself is just another subscriber, listening on the
+ * 'Supervisor' channel for the messages that require an orchestration
+ * decision (accept vs. retry, when to fact-check, when to finish).
+ *
+ * Flow:
+ *   Supervisor  --RESEARCH_REQUEST-->  Researcher
+ *   Researcher  --RESEARCH_COMPLETE--> Writer
+ *   Writer      --DRAFT_COMPLETE-->    Editor
+ *   Editor      --REVIEW_COMPLETE-->   Supervisor  (accept -> fact-check, reject -> revise)
+ *   Supervisor  --REVISION_REQ-->      Writer       (retry loop)
+ *   Supervisor  --FACT_CHECK_REQUEST-> FactChecker
+ *   FactChecker --FACT_CHECK_COMPLETE->Supervisor  (final assembly)
  */
 
 import { createMessageBus } from './messageBus.js';
@@ -27,7 +45,7 @@ const MAX_RETRIES = 2;  // writer gets at most 2 revision attempts
  * @param {string} topic — the blog post topic
  * @returns {object} final report
  */
-export async function runPipeline(topic) {
+export function runPipeline(topic) {
   console.log('\n====================================================');
   console.log('  MULTI-AGENT CONTENT PIPELINE');
   console.log('====================================================');
@@ -50,165 +68,232 @@ export async function runPipeline(topic) {
     final: '',
   };
 
-  // ─── STEP 1: Research ───
-  console.log('\n>> STEP 1: Research');
-  const research = await runResearcher(topic);
-  context.research_notes = research;
-  costTracker.researcher = trackCost(research.tokenUsage);
-
-  bus.publish({
-    from: 'Researcher',
-    to: 'Supervisor',
-    type: 'RESEARCH_NOTES',
-    payload: {
-      noteCount: research.notes.length,
-      sourceCount: research.sources.length,
-      subQuestions: research.sub_questions,
-    },
-  });
-
-  checkBudget(costTracker);
-
-  // ─── STEP 2: Write + Edit Loop ───
-  let accepted = false;
-  let attempt = 0;
+  let latestResearch = null;
   let currentDraft = '';
-  let revisionFeedback = null;
 
-  while (!accepted && attempt <= MAX_RETRIES) {
-    attempt++;
-    console.log(`\n>> STEP 2.${attempt}: Write (attempt ${attempt})`);
+  return new Promise((resolve, reject) => {
+    const fail = (err) => {
+      console.error('\nPIPELINE ERROR:', err.message);
+      reject(err);
+    };
 
-    // Writer produces draft
-    const writerResult = await runWriter(research, revisionFeedback, attempt);
-    currentDraft = writerResult.draft;
-    context.drafts.push({ attempt, draft: currentDraft });
-    costTracker.writer += trackCost(writerResult.tokenUsage);
+    // ─── Researcher subscribes to its own channel ───
+    bus.subscribe('Researcher', async (msg) => {
+      if (msg.type !== 'RESEARCH_REQUEST') return;
+      try {
+        console.log('\n>> STEP 1: Research');
+        const research = await runResearcher(msg.payload.topic);
+        latestResearch = research;
+        context.research_notes = research;
 
-    bus.publish({
-      from: 'Writer',
-      to: 'Supervisor',
-      type: 'DRAFT',
-      payload: { attempt, length: currentDraft.length, wordCount: currentDraft.split(/\s+/).length },
+        bus.publish({
+          from: 'Researcher',
+          to: 'Writer',
+          type: 'RESEARCH_COMPLETE',
+          payload: research,
+        });
+      } catch (err) {
+        fail(err);
+      }
     });
 
-    checkBudget(costTracker);
+    // ─── Writer subscribes to its own channel — handles both the first
+    //     RESEARCH_COMPLETE handoff and subsequent REVISION_REQ retries ───
+    bus.subscribe('Writer', async (msg) => {
+      try {
+        if (msg.type === 'RESEARCH_COMPLETE') {
+          costTracker.researcher += trackCost(msg.payload.tokenUsage);
+          checkBudget(costTracker);
 
-    // Editor reviews
-    console.log(`\n>> STEP 2.${attempt}: Edit (review ${attempt})`);
-    const editResult = await runEditor(currentDraft, attempt);
-    context.edits.push({ attempt, ...editResult });
-    costTracker.editor += trackCost(editResult.tokenUsage);
+          const attempt = 1;
+          console.log(`\n>> STEP 2.${attempt}: Write (attempt ${attempt})`);
+          const writerResult = await runWriter(msg.payload, null, attempt);
+          currentDraft = writerResult.draft;
+          context.drafts.push({ attempt, draft: currentDraft });
 
-    bus.publish({
-      from: 'Editor',
-      to: 'Supervisor',
-      type: 'EDIT_REVIEW',
-      payload: { attempt, verdict: editResult.verdict, score: editResult.score, issueCount: editResult.issues.length },
+          bus.publish({
+            from: 'Writer',
+            to: 'Editor',
+            type: 'DRAFT_COMPLETE',
+            payload: { attempt, draft: currentDraft, tokenUsage: writerResult.tokenUsage },
+          });
+        } else if (msg.type === 'REVISION_REQ') {
+          const attempt = msg.payload.attempt + 1;
+          console.log(`\n>> STEP 2.${attempt}: Write (attempt ${attempt})`);
+          const writerResult = await runWriter(latestResearch, msg.payload.feedback, attempt);
+          currentDraft = writerResult.draft;
+          context.drafts.push({ attempt, draft: currentDraft });
+
+          bus.publish({
+            from: 'Writer',
+            to: 'Editor',
+            type: 'DRAFT_COMPLETE',
+            payload: { attempt, draft: currentDraft, tokenUsage: writerResult.tokenUsage },
+          });
+        }
+      } catch (err) {
+        fail(err);
+      }
     });
 
-    checkBudget(costTracker);
+    // ─── Editor subscribes to its own channel ───
+    bus.subscribe('Editor', async (msg) => {
+      if (msg.type !== 'DRAFT_COMPLETE') return;
+      try {
+        costTracker.writer += trackCost(msg.payload.tokenUsage);
+        checkBudget(costTracker);
 
-    if (editResult.verdict === 'ACCEPT') {
-      accepted = true;
-      console.log(`\n  >> Supervisor: Draft ACCEPTED on attempt ${attempt} (score: ${editResult.score}/10)`);
-    } else if (attempt <= MAX_RETRIES) {
-      // Build revision feedback from editor's issues
-      revisionFeedback = editResult.issues
-        .filter((i) => i.severity === 'major')
-        .map((i) => `[${i.location}] ${i.comment}`)
-        .join('\n');
+        console.log(`\n>> STEP 2.${msg.payload.attempt}: Edit (review ${msg.payload.attempt})`);
+        const editResult = await runEditor(msg.payload.draft, msg.payload.attempt);
+        context.edits.push({ attempt: msg.payload.attempt, ...editResult });
 
-      console.log(`\n  >> Supervisor: Draft REJECTED (score: ${editResult.score}/10). Sending revision feedback to Writer.`);
+        bus.publish({
+          from: 'Editor',
+          to: 'Supervisor',
+          type: 'REVIEW_COMPLETE',
+          payload: { attempt: msg.payload.attempt, draft: msg.payload.draft, ...editResult },
+        });
+      } catch (err) {
+        fail(err);
+      }
+    });
 
-      bus.publish({
-        from: 'Supervisor',
-        to: 'Writer',
-        type: 'REVISION_REQ',
-        payload: { attempt, feedback: revisionFeedback },
-      });
-    } else {
-      console.log(`\n  >> Supervisor: Draft REJECTED after ${MAX_RETRIES} retries. Proceeding with best draft.`);
-    }
-  }
+    // ─── Fact-Checker subscribes to its own channel ───
+    bus.subscribe('FactChecker', async (msg) => {
+      if (msg.type !== 'FACT_CHECK_REQUEST') return;
+      try {
+        console.log('\n>> STEP 3: Fact-Check');
+        const factResult = await runFactChecker(msg.payload.draft, msg.payload.research);
+        context.fact_checks = factResult;
 
-  // ─── STEP 3: Fact-Check ───
-  console.log('\n>> STEP 3: Fact-Check');
-  const factResult = await runFactChecker(currentDraft, research);
-  context.fact_checks = factResult;
-  costTracker.factChecker = trackCost(factResult.tokenUsage);
+        bus.publish({
+          from: 'FactChecker',
+          to: 'Supervisor',
+          type: 'FACT_CHECK_COMPLETE',
+          payload: factResult,
+        });
+      } catch (err) {
+        fail(err);
+      }
+    });
 
-  bus.publish({
-    from: 'FactChecker',
-    to: 'Supervisor',
-    type: 'FACT_CHECK',
-    payload: {
-      overall: factResult.overall,
-      verified: factResult.claims.filter((c) => c.verdict === 'VERIFIED').length,
-      unverified: factResult.claims.filter((c) => c.verdict === 'UNVERIFIED').length,
-      incorrect: factResult.claims.filter((c) => c.verdict === 'INCORRECT').length,
-    },
+    // ─── Supervisor subscribes to its own channel — this is where
+    //     orchestration decisions (retry vs. accept, when to finish) live ───
+    bus.subscribe('Supervisor', (msg) => {
+      try {
+        if (msg.type === 'REVIEW_COMPLETE') {
+          costTracker.editor += trackCost(msg.payload.tokenUsage);
+          checkBudget(costTracker);
+
+          if (msg.payload.verdict === 'ACCEPT') {
+            currentDraft = msg.payload.draft;
+            console.log(`\n  >> Supervisor: Draft ACCEPTED on attempt ${msg.payload.attempt} (score: ${msg.payload.score}/10)`);
+
+            bus.publish({
+              from: 'Supervisor',
+              to: 'FactChecker',
+              type: 'FACT_CHECK_REQUEST',
+              payload: { draft: currentDraft, research: latestResearch },
+            });
+          } else if (msg.payload.attempt <= MAX_RETRIES) {
+            const feedback = msg.payload.issues
+              .filter((i) => i.severity === 'major')
+              .map((i) => `[${i.location}] ${i.comment}`)
+              .join('\n');
+
+            console.log(`\n  >> Supervisor: Draft REJECTED (score: ${msg.payload.score}/10). Sending revision feedback to Writer.`);
+
+            bus.publish({
+              from: 'Supervisor',
+              to: 'Writer',
+              type: 'REVISION_REQ',
+              payload: { attempt: msg.payload.attempt, feedback },
+            });
+          } else {
+            console.log(`\n  >> Supervisor: Draft REJECTED after ${MAX_RETRIES} retries. Proceeding with best draft.`);
+            currentDraft = msg.payload.draft;
+
+            bus.publish({
+              from: 'Supervisor',
+              to: 'FactChecker',
+              type: 'FACT_CHECK_REQUEST',
+              payload: { draft: currentDraft, research: latestResearch },
+            });
+          }
+        } else if (msg.type === 'FACT_CHECK_COMPLETE') {
+          costTracker.factChecker += trackCost(msg.payload.tokenUsage);
+          checkBudget(costTracker);
+
+          console.log('\n>> STEP 4: Final Assembly');
+          context.final = currentDraft;
+
+          const attempt = context.drafts[context.drafts.length - 1].attempt;
+          const accepted = context.edits[context.edits.length - 1].verdict === 'ACCEPT';
+
+          bus.publish({
+            from: 'Supervisor',
+            to: 'Output',
+            type: 'FINAL',
+            payload: { status: 'COMPLETE', draftAttempts: attempt, factCheckResult: msg.payload.overall },
+          });
+
+          const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+          const totalCost = Object.values(costTracker).reduce((a, b) => a + b, 0);
+
+          const report = {
+            topic,
+            status: 'COMPLETE',
+            draftAttempts: attempt,
+            editorAccepted: accepted,
+            factCheckPassed: msg.payload.overall === 'PASS',
+            costs: {
+              researcher: `$${costTracker.researcher.toFixed(4)}`,
+              writer: `$${costTracker.writer.toFixed(4)}`,
+              editor: `$${costTracker.editor.toFixed(4)}`,
+              factChecker: `$${costTracker.factChecker.toFixed(4)}`,
+              total: `$${totalCost.toFixed(4)}`,
+              withinBudget: totalCost <= MAX_BUDGET,
+            },
+            elapsed: `${elapsed}s`,
+            messageCount: bus.getLog().length,
+          };
+
+          console.log('\n====================================================');
+          console.log('  PIPELINE REPORT');
+          console.log('====================================================');
+          console.log(`  Topic:           ${report.topic}`);
+          console.log(`  Status:          ${report.status}`);
+          console.log(`  Draft Attempts:  ${report.draftAttempts}`);
+          console.log(`  Editor Accepted: ${report.editorAccepted}`);
+          console.log(`  Fact-Check:      ${report.factCheckPassed ? 'PASS' : 'FAIL'}`);
+          console.log('  ---- Cost Breakdown ----');
+          console.log(`  Researcher:      ${report.costs.researcher}`);
+          console.log(`  Writer:          ${report.costs.writer}`);
+          console.log(`  Editor:          ${report.costs.editor}`);
+          console.log(`  Fact-Checker:    ${report.costs.factChecker}`);
+          console.log(`  TOTAL:           ${report.costs.total}`);
+          console.log(`  Within Budget:   ${report.costs.withinBudget}`);
+          console.log(`  Elapsed:         ${report.elapsed}`);
+          console.log(`  Messages:        ${report.messageCount}`);
+          console.log('====================================================\n');
+
+          bus.printSummary();
+
+          resolve({ report, context, messageLog: bus.getLog() });
+        }
+      } catch (err) {
+        fail(err);
+      }
+    });
+
+    // ─── Kick off the pipeline: Supervisor publishes the first request ───
+    bus.publish({
+      from: 'Supervisor',
+      to: 'Researcher',
+      type: 'RESEARCH_REQUEST',
+      payload: { topic },
+    });
   });
-
-  checkBudget(costTracker);
-
-  // ─── STEP 4: Final Assembly ───
-  console.log('\n>> STEP 4: Final Assembly');
-  context.final = currentDraft;
-
-  bus.publish({
-    from: 'Supervisor',
-    to: 'Output',
-    type: 'FINAL',
-    payload: { status: 'COMPLETE', draftAttempts: attempt, factCheckResult: factResult.overall },
-  });
-
-  const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
-  const totalCost = Object.values(costTracker).reduce((a, b) => a + b, 0);
-
-  // ─── Report ───
-  const report = {
-    topic,
-    status: 'COMPLETE',
-    draftAttempts: attempt,
-    editorAccepted: accepted,
-    factCheckPassed: factResult.overall === 'PASS',
-    costs: {
-      researcher: `$${costTracker.researcher.toFixed(4)}`,
-      writer: `$${costTracker.writer.toFixed(4)}`,
-      editor: `$${costTracker.editor.toFixed(4)}`,
-      factChecker: `$${costTracker.factChecker.toFixed(4)}`,
-      total: `$${totalCost.toFixed(4)}`,
-      withinBudget: totalCost <= MAX_BUDGET,
-    },
-    elapsed: `${elapsed}s`,
-    messageCount: bus.getLog().length,
-  };
-
-  // Print final report
-  console.log('\n====================================================');
-  console.log('  PIPELINE REPORT');
-  console.log('====================================================');
-  console.log(`  Topic:           ${report.topic}`);
-  console.log(`  Status:          ${report.status}`);
-  console.log(`  Draft Attempts:  ${report.draftAttempts}`);
-  console.log(`  Editor Accepted: ${report.editorAccepted}`);
-  console.log(`  Fact-Check:      ${report.factCheckPassed ? 'PASS' : 'FAIL'}`);
-  console.log('  ---- Cost Breakdown ----');
-  console.log(`  Researcher:      ${report.costs.researcher}`);
-  console.log(`  Writer:          ${report.costs.writer}`);
-  console.log(`  Editor:          ${report.costs.editor}`);
-  console.log(`  Fact-Checker:    ${report.costs.factChecker}`);
-  console.log(`  TOTAL:           ${report.costs.total}`);
-  console.log(`  Within Budget:   ${report.costs.withinBudget}`);
-  console.log(`  Elapsed:         ${report.elapsed}`);
-  console.log(`  Messages:        ${report.messageCount}`);
-  console.log('====================================================\n');
-
-  // Show message bus log
-  bus.printSummary();
-
-  return { report, context, messageLog: bus.getLog() };
 }
 
 // ─── Helpers ───

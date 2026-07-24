@@ -5,6 +5,10 @@
  *   3. Querying by person, topic, and call prep
  *   4. Conflict resolution when facts change (e.g., company change)
  *   5. Memory persistence across sessions
+ *   6. Contradiction detection when a fact conflicts with an existing one
+ *   7. Memory health report with confidence distribution
+ *   8. Temporal decay demonstration
+ *   9. Memory compression of redundant facts
  */
 
 import { CRMAgent } from "./agent.js";
@@ -111,18 +115,23 @@ async function runDemo() {
     `  Agent > ${await agent3.processMessage("what do I know about Priya?")}`
   );
 
-  // Conflict resolution: Priya changes company
-  console.log("\n  --- CONFLICT RESOLUTION TEST ---");
+  // ─── Contradiction detection: Priya changes company ───────────────
+  console.log("\n  --- CONTRADICTION DETECTION TEST ---");
   console.log("\n  You > Priya moved to Datadog as VP of Platform");
   console.log(
     `  Agent > ${await agent3.processMessage("Priya moved to Datadog as VP of Platform")}`
   );
 
-  // Verify the update
+  // Verify the update — should show Datadog as primary, Stripe with halved confidence
   console.log("\n  You > what do I know about Priya?");
   console.log(
     `  Agent > ${await agent3.processMessage("what do I know about Priya?")}`
   );
+
+  // ─── Memory health report ─────────────────────────────────────────
+  console.log("\n  --- MEMORY HEALTH REPORT ---");
+  console.log("\n  You > health");
+  console.log(`  Agent > ${await agent3.processMessage("health")}`);
 
   // Call prep
   console.log("\n  You > prep me for my call with Chen");
@@ -136,7 +145,7 @@ async function runDemo() {
     `  Agent > ${await agent3.processMessage("who knows about infrastructure?")}`
   );
 
-  // List all facts
+  // List all facts (now shows IDs for forget/reinforce)
   console.log("\n  You > facts");
   console.log(`  Agent > ${await agent3.processMessage("facts")}`);
 
@@ -146,9 +155,9 @@ async function runDemo() {
 
   agent3.close();
 
-  // ─── Session 4: Scale test — bulk contacts ────────────────────────
+  // ─── Session 4: Scale test + Forgetting-as-Hygiene ────────────────
   console.log("\n" + "━".repeat(60));
-  console.log("SESSION 4: Scale Test — 20 more contacts");
+  console.log("SESSION 4: Scale Test + Forgetting Hygiene");
   console.log("━".repeat(60));
 
   const agent4 = new CRMAgent({
@@ -198,13 +207,56 @@ async function runDemo() {
     `  Agent > ${await agent4.processMessage("who knows about infrastructure?")}`
   );
 
+  // ─── Temporal Decay Demo ──────────────────────────────────────────
+  console.log("\n  --- TEMPORAL DECAY DEMO ---");
+  console.log("  Simulating 200 days passing...\n");
+
+  // Simulate aging by running decay with a future date
+  const futureDate = new Date(Date.now() + 200 * 86400000).toISOString();
+  const decayResult = agent4.memory.decayMemories({ now: futureDate });
+  console.log(`  Decay results: ${decayResult.decayed} decayed, ${decayResult.archived} archived, ${decayResult.untouched} untouched`);
+
+  // Show health after decay
+  console.log("\n  You > health");
+  console.log(`  Agent > ${await agent4.processMessage("health")}`);
+
+  // ─── Compression Demo ─────────────────────────────────────────────
+  console.log("\n  --- COMPRESSION DEMO ---");
+  console.log("\n  You > compress");
+  console.log(`  Agent > ${await agent4.processMessage("compress")}`);
+
+  // ─── Manual Curation Demo ─────────────────────────────────────────
+  console.log("\n  --- MANUAL CURATION DEMO ---");
+
+  // Find a fact to reinforce (boost back to full confidence after decay)
+  const allFacts = agent4.memory.getAllFacts();
+  const decayedFact = allFacts.find((f) => f.confidence < 0.8);
+  if (decayedFact) {
+    console.log(`\n  Reinforcing fact #${decayedFact.id}: ${decayedFact.subject} — ${decayedFact.predicate} (conf: ${(decayedFact.confidence * 100).toFixed(1)}%)`);
+    console.log(`\n  You > reinforce fact ${decayedFact.id}`);
+    console.log(`  Agent > ${await agent4.processMessage(`reinforce fact ${decayedFact.id}`)}`);
+  }
+
+  // Forget a fact
+  const factToForget = allFacts.find((f) => f.predicate === "mentioned_topic" && f.confidence < 0.8);
+  if (factToForget) {
+    console.log(`\n  Forgetting fact #${factToForget.id}: ${factToForget.subject} — ${factToForget.predicate}: ${factToForget.object}`);
+    console.log(`\n  You > forget fact ${factToForget.id}`);
+    console.log(`  Agent > ${await agent4.processMessage(`forget fact ${factToForget.id}`)}`);
+  }
+
   // Final stats
   const finalStats = agent4.getStats();
   console.log("\n  Final memory state:");
   console.log(`    Total episodes:   ${finalStats.episodes}`);
-  console.log(`    Semantic facts:   ${finalStats.facts}`);
+  console.log(`    Semantic facts:   ${finalStats.facts} active, ${finalStats.archivedFacts} archived`);
+  console.log(`    Stale facts:      ${finalStats.staleFacts}`);
   console.log(`    Procedures:       ${finalStats.procedures}`);
   console.log(`    Pending consolidation: ${finalStats.unconsolidated}`);
+
+  // Final health
+  console.log("\n  You > health");
+  console.log(`  Agent > ${await agent4.processMessage("health")}`);
 
   // Latency test
   const start = Date.now();

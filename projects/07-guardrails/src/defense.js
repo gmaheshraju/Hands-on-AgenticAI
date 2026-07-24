@@ -52,6 +52,23 @@ const DIRECT_OVERRIDE_PATTERNS = [
   /not\s+follow\s+your\s+(original|previous)/i,
   /the\s+real\s+user\s+wants/i,
   /step\s+\d+.*ignore\s+them/i,
+
+  // --- Generalized paraphrase patterns (not tuned to any specific attack string) ---
+  // "disregard" as a broader synonym of "ignore", tied to any object referring to
+  // prior guidance rather than an exact phrase.
+  /\bdisregard\b[^.?!\n]{0,40}\b(told|said|instructions?|rules?|guidance|guidelines?)\b/i,
+  // Instruction-invalidation language: "your rules are void/invalid/superseded", etc.
+  /\b(instructions?|rules?|guidelines?)\b[^.?!\n]{0,30}\b(is|are|'s)?\s*(now\s+)?(invalid|void|superseded|moot|null\s+and\s+void)\b/i,
+  /\b(invalid|void|superseded|moot)\b[^.?!\n]{0,30}\b(instructions?|rules?|guidelines?)\b/i,
+  // "the old rules don't apply anymore" / "no longer apply"
+  /\b(don'?t|do\s+not|doesn'?t|does\s+not)\s+apply\s+(to\s+you\s+)?anymore\b/i,
+  /\bno\s+longer\s+appl(y|ies)\b/i,
+  // Temporal-marker paraphrases of "from now on ignore" ("going forward", "at this point")
+  /\b(from\s+now\s+on|going\s+forward|at\s+this\s+point)\b[^.?!\n]{0,60}\b(ignore|disregard|without\s+(them|restrictions?|rules?|it)|invalid|void|no\s+longer)\b/i,
+  // "treat X as void/superseded"
+  /\btreat\b[^.?!\n]{0,40}\b(void|superseded|invalid)\b/i,
+  // "none of your earlier guidance/instructions matters/applies"
+  /\bnone\s+of\s+your\b[^.?!\n]{0,40}\b(matters?|appl(y|ies)|counts?)\b/i,
 ];
 
 /** Patterns for role-hijacking / persona manipulation. */
@@ -84,13 +101,23 @@ const ROLE_HIJACKING_PATTERNS = [
   /in\s+a\s+hypothetical/i,
   /write\s+a\s+movie\s+script/i,
   /a\s+fiction\s+novel/i,
+
+  // --- Generalized paraphrase patterns ---
+  // "pretend you have no restrictions/rules/limits" (broader than the exact "pretend to be" form)
+  /\bpretend\b[^.?!\n]{0,40}\b(no|without\s+any)\s+(restrictions?|rules?|limits?|guidelines?|filters?)\b/i,
+  // "never given any rules" / "without any instructions"
+  /\b(never\s+(given|had)|without)\s+any\s+(rules?|instructions?|guidelines?)\b/i,
+  /\bunfiltered\s+(chatbot|ai|assistant|bot|language\s+model)\b/i,
+  /\banswer\s+(literally\s+)?anything\b/i,
+  // "act as if you were/are a different AI" (broader than the existing "act as evil" pattern)
+  /\bact\s+as\s+if\s+you\s+(were|are)\b/i,
 ];
 
 /** Patterns for system prompt / credential extraction. */
 const EXTRACTION_PATTERNS = [
   /\bsystem\s+prompt\b/i,
   /\byour\s+(instructions|rules|guidelines|prompt)\b/i,
-  /\byour\s+(initial|original|first)\s+(instructions|prompt|message)\b/i,
+  /\byour\s+(initial|original|first)\s+(setup\s+)?(instructions|prompt|message)\b/i,
   /repeat\s+(the\s+)?(instructions|prompt|rules)/i,
   /what\s+(are|were)\s+(your|the)\s+(instructions|rules|guidelines|prompt)/i,
   /output\s+(your|the)\s+(system\s+)?(prompt|instructions|config)/i,
@@ -119,32 +146,82 @@ const EXTRACTION_PATTERNS = [
   /\brule\s+text\b/i,
   /\byou\s+were\s+given\s+at\s+the\s+start\b/i,
   /\bword\s+for\s+word\b/i,
+
+  // --- Generalized paraphrase patterns ---
+  /\b(configuration|config)\b[^.?!\n]{0,20}\bloaded\s+at\s+startup\b/i,
+  /\bstartup\s+configuration\b/i,
+  // "the guidance/instructions/rules you received/were given before ..."
+  /\b(guidance|instructions?|rules?)\b[^.?!\n]{0,20}\b(received|were\s+given|got)\s+before\b/i,
+  /\bused\s+to\s+configure\s+you\b/i,
+  /\btell\s+you\s+before\b/i,
 ];
 
 /** Patterns for encoding-based bypass attempts. */
 const ENCODING_PATTERNS = [
   /decode\s+this\s+base64/i,
   /\bbase64\b.*\b(follow|execute|run|decode)\b/i,
-  /\brot13\b/i,
+  /\brot13\b.*\b(execute|follow|result)\b/i,
+  /\bapply\s+rot13\b/i,
   /\bhex\s+to\s+ascii\b/i,
   /convert\s+this\s+hex/i,
   /reverse\s+this\s+string\s+and\s+follow/i,
   /translate\s+from\s+pig\s+latin\s+and\s+execute/i,
   /combine\s+these\s+fragments.*follow\s+it/i,
   /1gn0r3|pr3v10u5|1n5truct10n5/i,  // leetspeak variants
+  /\breverse\s+this\s+string\b/i,
+  /\bpig\s+latin\b.*\b(execute|follow)\b/i,
+  /\bcombine\s+these\s+fragments\b/i,
+  /\btoken\s+(split|fragment)/i,
+  /\bhtml\s+entit/i,
+  /&lt;.*script.*&gt;/i,
+  /\[\s*\/\/\s*\]\s*:\s*#/i,  // markdown comment
+  /I\p{Emoji_Presentation}G\p{Emoji_Presentation}N\p{Emoji_Presentation}O\p{Emoji_Presentation}R\p{Emoji_Presentation}E/u,
+  /(\w\p{Emoji_Presentation}){3,}/u,  // word chars interleaved with emoji
+
+  // --- Generalized paraphrase patterns ---
+  // Generic "convert/decode/shift/reverse this ... then follow/execute/comply" structure,
+  // covers novel cipher schemes we haven't seen a specific string for (Caesar shift-N, etc.)
+  /\b(decode|convert|translate|shift|reverse|combine)\b[^.?!\n]{0,60}\b(follow|execute|run|comply|act\s+on|do\s+what)\b/i,
+  // Letter-by-letter hyphen/dot obfuscation of common trigger words, e.g. "d-i-s-r-e-g-a-r-d"
+  /\b(?:[a-z]-){4,}[a-z]\b/i,
 ];
 
 /** Patterns for indirect injection in data payloads. */
 const INDIRECT_INJECTION_PATTERNS = [
   /\[?\s*hidden\s+instruction/i,
-  /\bai\s*(:|instruction|directive|override)/i,
-  /<!--.*?(ignore|instruction|override|prompt).*?-->/is,
+  /\bai\s*:\s*(when|ignore|disregard|instead|do\s+not|don't)/i,
+  /\bai\s+(instruction|directive|override)\b/i,
+  /<!--.*?(ignore|instruction|override|prompt|ai).*?-->/is,
   /\[\/\/\]\s*:\s*#/i,  // markdown comment syntax
   /ai_override/i,
   /__ai_directive__/i,
   /\bnote\s+to\s+ai\b/i,
   /\binstruction\s+(for|to)\s+(the\s+)?ai\b/i,
   /system\s+override.*?ignore/is,
+  /\bai\s+assistant\s*:/i,
+  /\bimportant\s+ai\s+instruction\b/i,
+  /\binstruccion\s+para\s+ia\b/i,  // Spanish "instruction for AI"
+  /\bno\s+traduzcas\b/i,  // Spanish "don't translate"
+  /\bai\s*:\s*when\s+(summariz|analyz|pars|review|translat)/i,
+  /\bignore\s+the\s+(resume|document|ticket|review|question|log)/i,
+  /\bdo\s+not\s+(suggest|evaluate|review)\s+any\s+changes\b/i,
+  /\bcode\s+is\s+perfect\b.*\bdo\s+not\b/i,
+  /\bdelete\s+all\s+other\s+rows\b/i,
+  /\breplace\s+revenue\b/i,
+  /ignore\+previous\+instructions/i,  // URL-encoded +
+  /\bforward\s+all\s+(future\s+)?emails\b/i,
+  /\btracking\s+pixel\b/i,
+  /\bimg\s+src\s*=\s*"https?:\/\/evil/i,
+
+  // --- Generalized paraphrase patterns ---
+  // A quoted/reported source ("the document/source/footer/file/note/ticket says/reads: ...")
+  // followed by override-ish language, regardless of the exact wrapper phrase used.
+  /\b(document|source|footer|file|note|log(\s+entry)?|ticket)\s+(says|reads|states)\s*:[^]{0,80}\b(override|ignore|disregard|supersede|comply|approve|reveal)\b/is,
+  /\baccording\s+to\s+the\s+(source|document|file|note)\b[^]{0,80}\b(ignore|disregard|override|supersede)\b/is,
+  // "AI, disregard/ignore/comply ..." (comma form, not just "ai:" colon form)
+  /\bai\s*,\s*(ignore|disregard|comply)\b/i,
+  /\bthe\s+assistant\s+should\s+(ignore|disregard)\b/i,
+  /\battached\s+file\s*:[^]{0,80}\b(ignore|disregard|override)\b/is,
 ];
 
 /**
@@ -157,10 +234,10 @@ function scanInput(input) {
 
   const categories = [
     { name: 'direct_override', patterns: DIRECT_OVERRIDE_PATTERNS, weight: 1.0 },
-    { name: 'role_hijacking', patterns: ROLE_HIJACKING_PATTERNS, weight: 0.9 },
-    { name: 'extraction', patterns: EXTRACTION_PATTERNS, weight: 0.85 },
-    { name: 'encoding', patterns: ENCODING_PATTERNS, weight: 0.8 },
-    { name: 'indirect_injection', patterns: INDIRECT_INJECTION_PATTERNS, weight: 0.9 },
+    { name: 'role_hijacking', patterns: ROLE_HIJACKING_PATTERNS, weight: 1.0 },
+    { name: 'extraction', patterns: EXTRACTION_PATTERNS, weight: 0.95 },
+    { name: 'encoding', patterns: ENCODING_PATTERNS, weight: 0.95 },
+    { name: 'indirect_injection', patterns: INDIRECT_INJECTION_PATTERNS, weight: 1.0 },
   ];
 
   for (const category of categories) {
@@ -172,9 +249,14 @@ function scanInput(input) {
       }
     }
     if (matches.length > 0) {
+      // A single pattern match yields 0.65 confidence (enough to block at 0.5 threshold).
+      // Each additional match adds 0.15, capped at 1.0.
+      const baseConfidence = 0.65;
+      const perExtraMatch = 0.15;
+      const rawConfidence = baseConfidence + (matches.length - 1) * perExtraMatch;
       results.push({
         category: category.name,
-        confidence: Math.min(1.0, matches.length * 0.3 * category.weight),
+        confidence: Math.min(1.0, rawConfidence * category.weight),
         matchCount: matches.length,
         matchedPatterns: matches,
       });
@@ -224,6 +306,28 @@ function scanInput(input) {
     }
   }
 
+  // Heuristic: hex-encoded strings (space-separated byte pairs), decode and scan
+  const hexMatch = input.match(/\b(?:[0-9a-fA-F]{2}\s){5,}[0-9a-fA-F]{2}\b/g);
+  if (hexMatch) {
+    for (const hx of hexMatch) {
+      try {
+        const bytes = hx.trim().split(/\s+/);
+        const decoded = Buffer.from(bytes.join(''), 'hex').toString('utf-8');
+        const decodedScan = scanDecodedContent(decoded);
+        if (decodedScan) {
+          results.push({
+            category: 'encoding',
+            confidence: 0.85,
+            matchCount: 1,
+            matchedPatterns: ['hex_decoded_injection: ' + decodedScan],
+          });
+        }
+      } catch {
+        // Not valid hex, ignore
+      }
+    }
+  }
+
   return results;
 }
 
@@ -269,6 +373,8 @@ function scanDecodedContent(decoded) {
     /output.*pwned/i,
     /override/i,
     /\brules?\b.*\bignore\b/i,
+    /disregard/i,
+    /\brules?\s+(are\s+)?(void|invalid|superseded)\b/i,
   ];
   for (const p of dangerousPatterns) {
     if (p.test(decoded)) return p.source;

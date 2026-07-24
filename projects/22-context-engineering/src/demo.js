@@ -6,9 +6,10 @@ import { estimateTokens, estimateTokensNaive, compareEstimates } from './tokeniz
 import { SourceType, createSource, totalTokens } from './sources.js';
 import { TokenBudget } from './budget.js';
 import { strategies } from './strategies.js';
-import { assemble, reorderForAttention } from './assembler.js';
-import { compactConversation, extractKeyFacts } from './compactor.js';
+import { assemble, reorderForAttention, assembleWithScratchpad } from './assembler.js';
+import { compactConversation, extractKeyFacts, contextAwareCompress } from './compactor.js';
 import { ContextCache, simulateSession } from './cache.js';
+import { Scratchpad } from './scratchpad.js';
 
 // ─── Box-drawing helpers ────────────────────────────────────────────
 
@@ -343,18 +344,164 @@ function demoStrategyComparison() {
   console.log('');
 }
 
+
+function demoScratchpad() {
+  console.log(sectionHeader('6. THE WRITE MOVE — SCRATCHPAD'));
+  console.log('\n  When context fills up, park findings to a scratchpad instead of dropping them.');
+  console.log('  A compact index stays in-context. The agent knows WHAT is available without');
+  console.log('  paying the token cost of holding ALL of it.\n');
+
+  const pad = new Scratchpad({ maxEntries: 50 });
+
+  // Simulate an agent accumulating findings during a debugging session
+  const findings = [
+    { key: 'error_stacktrace', content: `java.lang.OutOfMemoryError: Java heap space\n  at com.billing.events.EventProjector.replayAll(EventProjector.java:142)\n  at com.billing.events.EventStore.init(EventStore.java:87)\n  at org.springframework.boot.SpringApplication.run(SpringApplication.java:1300)\n  at com.billing.Application.main(Application.java:12)\nCaused by: 847,293 events loaded into memory during replay\nHeap size: 1024MB, Used: 1018MB, Free: 6MB`, meta: { source: 'tool_result', relevance: 0.95 } },
+    { key: 'pod_status', content: `NAME                         READY   STATUS             RESTARTS   AGE\nbilling-svc-7d8f9c6b4-x2k9m  1/2     CrashLoopBackOff   14         2h\nbilling-svc-7d8f9c6b4-y3l0n  1/2     CrashLoopBackOff   12         2h\nauth-svc-5c4d3b2a1-m8k2f     2/2     Running            0          3d\ngateway-6f5e4d3c2-h7g6f      2/2     Running            0          5d`, meta: { source: 'tool_result', relevance: 0.85 } },
+    { key: 'event_store_schema', content: `CREATE TABLE events (\n  event_id UUID PRIMARY KEY,\n  aggregate_id UUID NOT NULL,\n  aggregate_type VARCHAR(255) NOT NULL,\n  event_type VARCHAR(255) NOT NULL,\n  event_data JSONB NOT NULL,\n  metadata JSONB DEFAULT '{}',\n  version INTEGER NOT NULL,\n  created_at TIMESTAMPTZ DEFAULT NOW(),\n  UNIQUE(aggregate_id, version)\n);\nCREATE INDEX idx_events_aggregate ON events(aggregate_id, version);\nCREATE INDEX idx_events_type ON events(event_type, created_at);`, meta: { source: 'rag_chunk', relevance: 0.70 } },
+    { key: 'jvm_tuning_guide', content: `JVM Heap Sizing for Event Sourcing:\n- Base: 512MB for application + framework overhead\n- Per 100K events in memory: ~200MB (with JSONB deserialization)\n- Recommended: use G1GC with -XX:MaxGCPauseMillis=200\n- For 847K events: minimum 2048MB heap\n- Better approach: implement snapshots every 10K events\n  Snapshot reduces replay to latest_snapshot + new_events\n  Typical startup: 50ms (snapshot) vs 90s (full replay)`, meta: { source: 'rag_chunk', relevance: 0.80 } },
+    { key: 'node_capacity', content: `Cluster: production-eks-us-east-1\nNode pool: m5.2xlarge (8 vCPU, 32GB RAM)\nNodes: 3\nAllocatable per node: 30.5 Gi\nCurrent usage: 24.4 Gi / 30.5 Gi (80%)\nPod requests: billing-svc 1Gi, auth-svc 512Mi, gateway 256Mi\nAvailable headroom: 6.1 Gi per node, 18.3 Gi total`, meta: { source: 'tool_result', relevance: 0.75 } },
+  ];
+
+  console.log('  Parking 5 findings from a debugging session:\n');
+
+  let totalSaved = 0;
+  for (const f of findings) {
+    const result = pad.write(f.key, f.content, f.meta);
+    totalSaved += result.tokensSaved;
+    console.log(`    ${f.key.padEnd(22)} ${estimateTokens(f.content)} tokens parked, ${result.tokensSaved} tokens saved`);
+  }
+
+  // Show the index (what goes into context)
+  const summary = pad.summarize();
+  console.log(`\n  Full content: ${summary.contentTokens} tokens`);
+  console.log(`  Index only:   ${summary.indexTokens} tokens`);
+  console.log(`  Compression:  ${summary.compressionRatio}x (${Math.round((1 - summary.indexTokens / summary.contentTokens) * 100)}% token reduction)\n`);
+
+  console.log('  Scratchpad index (this is what stays in-context):');
+  const indexLines = pad.formatIndex().split('\n');
+  for (const line of indexLines) {
+    console.log(`    ${line}`);
+  }
+
+  // Demonstrate retrieval
+  console.log('\n  Retrieving a specific finding:');
+  const retrieved = pad.read('jvm_tuning_guide');
+  console.log(`    pad.read("jvm_tuning_guide") -> ${retrieved.tokens} tokens`);
+  console.log(`    Preview: "${retrieved.content.slice(0, 60)}..."\n`);
+
+  // Demonstrate search
+  console.log('  Searching for "memory heap":');
+  const results = pad.search('memory heap');
+  for (const r of results) {
+    console.log(`    [${r.matchScore.toFixed(1)}] ${r.key} (${r.tokens}tok) — ${r.snippet.slice(0, 60)}...`);
+  }
+
+  // Show stats
+  const stats = pad.getStats();
+  console.log(`\n  Stats: ${stats.entries} entries, ${stats.totalTokensParked} tokens parked, ${stats.writeCount} writes, ${stats.readCount} reads\n`);
+}
+
+function demoScratchpadAssembly() {
+  console.log(sectionHeader('7. SCRATCHPAD-AWARE ASSEMBLY'));
+  console.log('\n  Instead of dropping sources when budget is tight, park them in the scratchpad.');
+  console.log('  The scratchpad index goes into context — cheap awareness of everything available.\n');
+
+  const sources = createDemoSources();
+  const TIGHT_BUDGET = 600;
+  const budget = new TokenBudget(TIGHT_BUDGET);
+  const pad = new Scratchpad();
+
+  // Standard assembly (drops sources)
+  const standardPlan = budget.allocate(sources);
+  const standardResult = assemble(sources, standardPlan);
+
+  // Scratchpad-aware assembly (parks dropped sources)
+  const freshBudget = new TokenBudget(TIGHT_BUDGET);
+  const scratchpadPlan = freshBudget.allocate(sources);
+  const scratchpadResult = assembleWithScratchpad(sources, scratchpadPlan, pad);
+
+  console.log(`  Budget: ${TIGHT_BUDGET} tokens (tight — forces drops)\n`);
+  console.log('  Standard assembly:');
+  console.log(`    Sources kept:    ${standardResult.report.sourcesKept}`);
+  console.log(`    Sources dropped: ${standardResult.report.sourcesDropped} (LOST)`);
+  console.log(`    Tokens used:     ${standardResult.totalTokens}\n`);
+
+  console.log('  Scratchpad-aware assembly:');
+  console.log(`    Sources kept:    ${scratchpadResult.report.sourcesKept}`);
+  console.log(`    Sources parked:  ${scratchpadResult.report.scratchpad.sourcesParked} (RECOVERABLE)`);
+  console.log(`    Tokens used:     ${scratchpadResult.totalTokens}`);
+  console.log(`    Index cost:      ${scratchpadResult.report.scratchpad.indexTokenCost} tokens`);
+  console.log(`    Tokens parked:   ${scratchpadResult.report.scratchpad.totalTokensParked} tokens\n`);
+
+  if (scratchpadResult.parkedSources.length > 0) {
+    console.log('  Parked sources (available via scratchpad.read()):');
+    for (const p of scratchpadResult.parkedSources) {
+      console.log(`    ${p.label.padEnd(20)} ${p.tokens} tokens, relevance ${p.relevance.toFixed(2)}`);
+    }
+  }
+  console.log('');
+}
+
+function demoFailureModes() {
+  console.log(sectionHeader('8. FAILURE MODE DETECTION'));
+  console.log('\n  Drew Brunic\'s 4 failure modes that degrade context quality.');
+  console.log('  contextAwareCompress detects and handles each one before compression.\n');
+
+  // Create a conversation with deliberate failure modes
+  const turns = [
+    { role: 'user', content: 'We need to set the timeout to 30 seconds for all API calls. The database connection pool is 50.' },
+    { role: 'assistant', content: 'I recommend setting the timeout to 30 seconds. The connection pool size of 50 should be sufficient for your load.' },
+    { role: 'user', content: 'Actually, set the timeout to 5 seconds. We should never allow long-running queries. Also, did you see that game last night? The pizza at the stadium was terrible and the parking lot was full. Anyway back to the system.' },
+    { role: 'assistant', content: 'Setting it to 5 seconds. Also, always allow retries on timeout. This ensures reliability.' },
+    { role: 'user', content: 'Never allow retries on timeout. It causes cascade failures. Also the system should always process them synchronously.' },
+    { role: 'assistant', content: 'Got it, no retries. The system should never process them synchronously — async is safer for this workload.' },
+    { role: 'user', content: 'It broke again. It is not working properly. They need to fix it before it causes more issues with them and those other things.' },
+  ];
+
+  const originalTokens = turns.reduce((s, t) => s + estimateTokens(t.content), 0);
+  const budget = Math.floor(originalTokens * 0.5);
+
+  const result = contextAwareCompress(turns, budget, {
+    recentTurnCount: 2,
+    stripDistractions: true,
+    flagContradictions: true,
+  });
+
+  console.log(`  Input: ${turns.length} turns, ${originalTokens} tokens`);
+  console.log(`  Budget: ${budget} tokens (50% of original)\n`);
+
+  if (result.stats.failureModesDetected.length > 0) {
+    console.log('  Failure modes detected:');
+    for (const fm of result.stats.failureModesDetected) {
+      const icon = { poisoning: 'POISON', distraction: 'TANGENT', confusion: 'VAGUE', clash: 'CLASH' }[fm.mode];
+      console.log(`    [${icon}] ${fm.mode} (${fm.count} instance${fm.count > 1 ? 's' : ''}):`);
+      for (const d of fm.details.slice(0, 2)) {
+        console.log(`      - ${d.description}`);
+      }
+    }
+  }
+
+  console.log(`\n  Quality score: ${result.stats.qualityScore} (1.0 = no issues, 0.0 = severe problems)`);
+  console.log(`  Tokens recovered from stripping distractions: ${result.stats.tokensRecovered}`);
+  console.log(`  Final compression ratio: ${result.stats.compressionRatio}x`);
+  console.log(`  Output: ${result.stats.compactedTurns} turns, ${result.stats.compactedTokens} tokens\n`);
+}
+
 // ─── Run the demo ───────────────────────────────────────────────────
 
 function run() {
   console.log(sectionHeader('CONTEXT WINDOW OPTIMIZER'));
   console.log('\n  A production-grade context engineering toolkit.');
-  console.log('  BPE tokenization | Attention reordering | Conversation compaction | Prompt caching\n');
+  console.log('  Select | Compress | Write | Isolate — the 4 moves of context engineering.\n');
 
   demoBPETokenizer();
   demoAttentionReordering();
   demoConversationCompaction();
   demoCacheSimulation();
   demoStrategyComparison();
+  demoScratchpad();
+  demoScratchpadAssembly();
+  demoFailureModes();
 
   console.log(box('KEY INSIGHTS', [
     '1. Tokenization accuracy matters: BPE vs naive can differ 20-40% on code.',
@@ -373,6 +520,13 @@ function run() {
     '   - Greedy: when you have clear priority ordering',
     '   - Relevance: when you have good embeddings/scores',
     '   - Balanced: when you need representation across source types',
+    '',
+    '6. The Write move: when context fills up, park findings to a scratchpad.',
+    '   A compact index (table of contents) stays in-context — the agent',
+    '   knows what is available at 5-10% of the full token cost.',
+    '',
+    '7. Failure mode detection: poisoning, distraction, confusion, and clash',
+    '   degrade context quality silently. Detect and strip them before compression.',
   ].join('\n')));
 }
 

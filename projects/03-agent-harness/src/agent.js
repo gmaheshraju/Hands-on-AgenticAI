@@ -195,9 +195,10 @@ export class ResearchAgent {
 
 function guessSectionName(query) {
   const q = query.toLowerCase();
+  // Most specific matches first to avoid keyword-order ambiguity
+  if (q.includes('production') || q.includes('rag')) return 'Production RAG Features';
   if (q.includes('pricing') || q.includes('cost')) return 'Pricing';
   if (q.includes('performance') || q.includes('benchmark')) return 'Performance';
-  if (q.includes('production') || q.includes('rag')) return 'Production RAG Features';
   if (q.includes('compare') || q.includes('vs')) return 'Overview';
   return 'General Findings';
 }

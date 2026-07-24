@@ -7,8 +7,13 @@
  *   "who knows about X?"             → semantic search for expertise
  *   "what do I know about X?"        → retrieve all facts about a person/company
  *   "prep me for my call with X"     → pull person profile + recent context
- *   "stats"                          → show memory statistics
+ *   "stats"                          → memory statistics
  *   "facts"                          → list all semantic facts
+ *   "health"                         → memory health report (decay, contradictions)
+ *   "forget fact N"                  → soft-delete a fact by ID
+ *   "reinforce fact N"               → boost a fact back to full confidence
+ *   "decay"                          → run temporal decay cycle
+ *   "compress"                       → run memory compression
  */
 
 import { MemoryStore } from "./memory.js";
@@ -52,6 +57,21 @@ export class CRMAgent {
       case "facts":
         response = this.handleListFacts();
         break;
+      case "health":
+        response = this.handleHealth();
+        break;
+      case "forget_fact":
+        response = this.handleForgetFact(intent.factId);
+        break;
+      case "reinforce_fact":
+        response = this.handleReinforceFact(intent.factId);
+        break;
+      case "decay":
+        response = this.handleDecay();
+        break;
+      case "compress":
+        response = this.handleCompress();
+        break;
       case "help":
         response = this.handleHelp();
         break;
@@ -83,8 +103,29 @@ export class CRMAgent {
     if (lower === "facts" || lower === "list facts") {
       return { type: "facts" };
     }
+    if (lower === "health" || lower === "memory health") {
+      return { type: "health" };
+    }
+    if (lower === "decay" || lower === "run decay") {
+      return { type: "decay" };
+    }
+    if (lower === "compress" || lower === "run compression") {
+      return { type: "compress" };
+    }
     if (lower === "help" || lower === "?") {
       return { type: "help" };
+    }
+
+    // "forget fact 42"
+    const forgetMatch = lower.match(/forget\s+fact\s+(\d+)/);
+    if (forgetMatch) {
+      return { type: "forget_fact", factId: parseInt(forgetMatch[1], 10) };
+    }
+
+    // "reinforce fact 42"
+    const reinforceMatch = lower.match(/reinforce\s+fact\s+(\d+)/);
+    if (reinforceMatch) {
+      return { type: "reinforce_fact", factId: parseInt(reinforceMatch[1], 10) };
     }
 
     // "prep me for call with X" / "prepare for meeting with X"
@@ -299,10 +340,73 @@ export class CRMAgent {
     return [
       "Memory Statistics:",
       `  Episodes:       ${stats.episodes} (${stats.unconsolidated} pending consolidation)`,
-      `  Semantic facts: ${stats.facts} (${stats.staleFacts} stale)`,
+      `  Semantic facts: ${stats.facts} (${stats.staleFacts} stale, ${stats.archivedFacts} archived)`,
       `  Procedures:     ${stats.procedures}`,
       `  Consolidation:  triggers at ${this.consolidationThreshold} unconsolidated episodes`,
     ].join("\n");
+  }
+
+  handleHealth() {
+    const health = this.memory.getMemoryHealth();
+    const dist = health.confidenceDistribution;
+    return [
+      "Memory Health Report:",
+      `  Active facts:          ${health.total}`,
+      `  Stale facts:           ${health.stale}`,
+      `  Archived facts:        ${health.archived}`,
+      `  Active contradictions: ${health.contradictions}`,
+      `  Compression targets:   ${health.compressionOpportunities} subjects with 5+ facts`,
+      "",
+      "  Confidence distribution:",
+      `    [0.00 - 0.25)  ${"█".repeat(dist["0.00-0.25"])} ${dist["0.00-0.25"]}`,
+      `    [0.25 - 0.50)  ${"█".repeat(dist["0.25-0.50"])} ${dist["0.25-0.50"]}`,
+      `    [0.50 - 0.75)  ${"█".repeat(dist["0.50-0.75"])} ${dist["0.50-0.75"]}`,
+      `    [0.75 - 1.00]  ${"█".repeat(Math.min(dist["0.75-1.00"], 40))} ${dist["0.75-1.00"]}`,
+    ].join("\n");
+  }
+
+  handleForgetFact(id) {
+    const result = this.memory.forgetFact(id);
+    if (!result.success) {
+      return `Could not forget fact #${id}: ${result.reason}`;
+    }
+    return `Forgotten: ${result.forgotten.subject} — ${result.forgotten.predicate}: ${result.forgotten.object}`;
+  }
+
+  handleReinforceFact(id) {
+    const result = this.memory.reinforceFact(id);
+    if (!result.success) {
+      return `Could not reinforce fact #${id}: ${result.reason}`;
+    }
+    return `Reinforced: ${result.reinforced.subject} — ${result.reinforced.predicate}: ${result.reinforced.object} (confidence reset to 1.0)`;
+  }
+
+  handleDecay() {
+    const result = this.memory.decayMemories();
+    return [
+      "Temporal decay applied:",
+      `  Decayed:    ${result.decayed} facts (confidence reduced)`,
+      `  Archived:   ${result.archived} facts (below threshold, soft-deleted)`,
+      `  Untouched:  ${result.untouched} facts (still fresh)`,
+    ].join("\n");
+  }
+
+  handleCompress() {
+    const result = this.memory.compressMemories();
+    let response = [
+      "Memory compression complete:",
+      `  Merged:   ${result.merged} fact pairs`,
+      `  Removed:  ${result.removed} redundant facts (archived)`,
+    ].join("\n");
+
+    if (result.compressed.length > 0) {
+      response += "\n\n  Merges:\n";
+      for (const c of result.compressed) {
+        response += `    ${c.subject} — ${c.predicate}: kept "${c.kept.value}", dropped "${c.dropped.value}"\n`;
+      }
+    }
+
+    return response;
   }
 
   handleListFacts() {
@@ -322,7 +426,9 @@ export class CRMAgent {
       response += `${person}:\n`;
       for (const f of personFacts) {
         const staleTag = f.stale ? " [STALE]" : "";
-        response += `  - ${formatPredicate(f.predicate)}: ${f.object}${staleTag}\n`;
+        const confTag =
+          f.confidence < 0.8 ? ` (${(f.confidence * 100).toFixed(0)}%)` : "";
+        response += `  - [#${f.id}] ${formatPredicate(f.predicate)}: ${f.object}${confTag}${staleTag}\n`;
       }
       response += "\n";
     }
@@ -341,6 +447,11 @@ export class CRMAgent {
       '  [person] moved to [company]               — Update facts',
       "  stats                                     — Memory statistics",
       "  facts                                     — List all known facts",
+      "  health                                    — Memory health report",
+      "  decay                                     — Run temporal decay cycle",
+      "  compress                                  — Run memory compression",
+      "  forget fact [id]                           — Soft-delete a fact",
+      "  reinforce fact [id]                        — Boost fact confidence to 1.0",
       "  help                                      — This message",
       "  exit / quit                               — Exit",
     ].join("\n");
@@ -374,12 +485,17 @@ export class CRMAgent {
         `[Consolidation] Processed ${result.episodesProcessed} episodes, extracted ${result.factsExtracted.length} facts`
       );
       for (const f of result.factsExtracted) {
-        const tag = f.action === "updated" ? "UPDATED" : "NEW";
+        const tag = f.action === "updated" ? "UPDATED"
+          : f.action === "contradiction_resolved" ? "CONTRADICTION"
+          : "NEW";
         console.log(
           `  [${tag}] ${f.subject} — ${f.predicate}: ${f.object}`
         );
         if (f.previous) {
           console.log(`         (was: ${f.previous})`);
+        }
+        if (f.resolution) {
+          console.log(`         (resolution: ${f.resolution})`);
         }
       }
     }

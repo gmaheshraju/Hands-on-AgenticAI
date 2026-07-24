@@ -60,13 +60,20 @@ async function main() {
     console.log('\n' + '='.repeat(60));
     console.log('  DEMO COMPLETE');
     console.log('='.repeat(60));
+    const firstEdit = context.edits[0];
+    const lastEdit = context.edits[context.edits.length - 1];
+    const firstMajorCount = firstEdit.issues.filter((i) => i.severity === 'major').length;
+    const verified = context.fact_checks.claims.filter((c) => c.verdict === 'VERIFIED').length;
+    const totalClaims = context.fact_checks.claims.length;
+
     console.log('\nKey observations:');
-    console.log('  1. The editor REJECTED the first draft (score 5/10) — too shallow.');
-    console.log('  2. The supervisor sent revision feedback highlighting 3 major issues.');
-    console.log('  3. The writer produced a stronger second draft addressing all feedback.');
-    console.log('  4. The editor ACCEPTED the revision (score 8/10).');
-    console.log('  5. The fact-checker verified 6/7 claims; 1 was unverified (illustrative numbers).');
+    console.log(`  1. The editor scored the draft from its actual content (length, code, structure, evidence) — not the attempt number.`);
+    console.log(`  2. Attempt 1 was ${firstEdit.verdict} (score ${firstEdit.score}/10) — ${firstMajorCount} major issue(s) found.`);
+    console.log('  3. The supervisor sent that feedback to the Writer over the message bus (REVISION_REQ).');
+    console.log(`  4. The writer produced a revised draft; the editor re-scored it and ${lastEdit.verdict === 'ACCEPT' ? 'ACCEPTED' : 'still rejected'} it (score ${lastEdit.score}/10).`);
+    console.log(`  5. The fact-checker verified ${verified}/${totalClaims} claims.`);
     console.log('  6. Total cost stayed well within the $2.00 budget.');
+    console.log('  7. Every hop above (RESEARCH_REQUEST -> ... -> FINAL) was a real bus.publish()/bus.subscribe() dispatch, not a direct function call.');
     console.log(`\n  Pipeline completed in ${report.elapsed} with ${report.messageCount} inter-agent messages.\n`);
 
   } catch (err) {

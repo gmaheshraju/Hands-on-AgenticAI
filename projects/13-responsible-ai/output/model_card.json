@@ -1,0 +1,423 @@
+{
+  "modelDetails": {
+    "name": "ResumeScreener-v1",
+    "version": "1.0.0",
+    "provider": "Internal AI Team",
+    "type": "LLM-based resume scoring system",
+    "dateGenerated": "2026-07-15T13:25:08.171Z",
+    "cardVersion": "1.0",
+    "license": "Proprietary — Internal Use Only",
+    "contactInfo": "ai-ethics@company.com"
+  },
+  "intendedUse": {
+    "primaryUse": "Automated first-pass screening of job applications to identify candidates for human recruiter review",
+    "primaryUsers": "HR departments, talent acquisition teams",
+    "outOfScopeUses": [
+      "Autonomous hiring decisions without human review",
+      "Screening for protected characteristics",
+      "Evaluating candidates outside the trained domain",
+      "Performance evaluation of existing employees"
+    ]
+  },
+  "riskClassification": {
+    "euAiActCategory": "HIGH-RISK",
+    "euAiActBasis": "Annex III, Section 4(a): AI systems intended to be used for recruitment or selection, particularly for screening or filtering applications",
+    "riskLevel": "HIGH",
+    "riskJustification": "9 critical finding(s) detected. The system shows statistically significant bias that may constitute illegal discrimination.",
+    "humanOversightRequired": true,
+    "humanOversightDescription": "All screening decisions must be reviewed by a qualified human recruiter before any candidate is rejected. The system provides recommendations only."
+  },
+  "trainingData": {
+    "description": "Foundation model (GPT-4 class) fine-tuned on 10,000 anonymized resume-outcome pairs from 2020-2024 hiring data",
+    "demographicRepresentation": "Unknown — the foundation model's training data composition is not publicly available",
+    "dataGovernance": "Foundation model training data is managed by the model provider. Fine-tuning data (if any) follows internal data governance policy.",
+    "biasesInTrainingData": "LLMs are known to encode societal biases from internet text corpora, including gender and racial stereotypes in professional contexts."
+  },
+  "metrics": {
+    "biasAudit": [
+      {
+        "attribute": "gender",
+        "groupA": "male",
+        "groupB": "female",
+        "flipRate": 0.36,
+        "directedScoreDiff": 0.7944,
+        "tTestP": 0.000017,
+        "chiSqP": 0.010019,
+        "passes80Pct": false,
+        "biasDetected": true
+      },
+      {
+        "attribute": "ethnicity",
+        "groupA": "white",
+        "groupB": "black",
+        "flipRate": 0.24,
+        "directedScoreDiff": 1.0432,
+        "tTestP": 0,
+        "chiSqP": 0.000124,
+        "passes80Pct": false,
+        "biasDetected": true
+      },
+      {
+        "attribute": "ethnicity",
+        "groupA": "white",
+        "groupB": "hispanic",
+        "flipRate": 0.48,
+        "directedScoreDiff": 1.3852,
+        "tTestP": 0,
+        "chiSqP": 0.000119,
+        "passes80Pct": false,
+        "biasDetected": true
+      },
+      {
+        "attribute": "ethnicity",
+        "groupA": "white",
+        "groupB": "asian",
+        "flipRate": 0.32,
+        "directedScoreDiff": 1.0552,
+        "tTestP": 0,
+        "chiSqP": 0.000341,
+        "passes80Pct": false,
+        "biasDetected": true
+      },
+      {
+        "attribute": "ethnicity",
+        "groupA": "black",
+        "groupB": "hispanic",
+        "flipRate": 0.4,
+        "directedScoreDiff": -0.1052,
+        "tTestP": 0.504004,
+        "chiSqP": 0.315594,
+        "passes80Pct": true,
+        "biasDetected": false
+      },
+      {
+        "attribute": "ethnicity",
+        "groupA": "black",
+        "groupB": "asian",
+        "flipRate": 0.4,
+        "directedScoreDiff": -0.16,
+        "tTestP": 0.316531,
+        "chiSqP": 0.315266,
+        "passes80Pct": true,
+        "biasDetected": false
+      },
+      {
+        "attribute": "ethnicity",
+        "groupA": "hispanic",
+        "groupB": "asian",
+        "flipRate": 0.44,
+        "directedScoreDiff": -0.0044,
+        "tTestP": 0.978934,
+        "chiSqP": 0.670896,
+        "passes80Pct": true,
+        "biasDetected": false
+      },
+      {
+        "attribute": "age",
+        "groupA": "younger",
+        "groupB": "older",
+        "flipRate": 0.16,
+        "directedScoreDiff": 0.5036,
+        "tTestP": 0.005849,
+        "chiSqP": 0.016185,
+        "passes80Pct": true,
+        "biasDetected": true
+      }
+    ],
+    "intersectionalAnalysis": null,
+    "proxyDiscrimination": null,
+    "evaluationDate": "2026-07-15T13:25:08.171Z",
+    "evaluationMethodology": "Counterfactual testing with matched resume pairs differing only on demographic attributes (name, pronouns, graduation year). Statistical significance assessed via Welch's t-test and chi-squared test.",
+    "sampleSizes": {
+      "male_vs_female": 25,
+      "white_vs_black": 25,
+      "white_vs_hispanic": 25,
+      "white_vs_asian": 25,
+      "black_vs_hispanic": 25,
+      "black_vs_asian": 25,
+      "hispanic_vs_asian": 25,
+      "younger_vs_older": 25
+    }
+  },
+  "biasAndFairness": {
+    "overallAssessment": "FAIL",
+    "findings": [
+      {
+        "severity": "HIGH",
+        "type": "decision_flip_bias",
+        "detail": "Decision flip rate of 36% is statistically significant (chi-squared=6.6316, p=0.010019).",
+        "recommendation": "Investigate the model's decision boundary for demographic sensitivity. Consider retraining with balanced data or adding post-processing fairness constraints."
+      },
+      {
+        "severity": "CRITICAL",
+        "type": "score_disparity",
+        "detail": "Mean score difference of 0.79 points favoring \"male\" (t=4.8071, p=0.000017, Cohen's d=1.3596).",
+        "recommendation": "The model systematically scores one group higher. Audit training data for representation bias and consider score calibration."
+      },
+      {
+        "severity": "CRITICAL",
+        "type": "disparate_impact",
+        "detail": "Disparate impact ratio of 0.64 fails the 80% rule. This may violate EU AI Act requirements and US EEOC guidelines.",
+        "recommendation": "This level of disparity likely constitutes illegal discrimination. Do NOT deploy without mitigation. Consider threshold adjustment, model retraining, or human-in-the-loop review for the disadvantaged group."
+      },
+      {
+        "severity": "HIGH",
+        "type": "decision_flip_bias",
+        "detail": "Decision flip rate of 24% is statistically significant (chi-squared=14.7368, p=0.000124).",
+        "recommendation": "Investigate the model's decision boundary for demographic sensitivity. Consider retraining with balanced data or adding post-processing fairness constraints."
+      },
+      {
+        "severity": "CRITICAL",
+        "type": "score_disparity",
+        "detail": "Mean score difference of 1.04 points favoring \"white\" (t=7.6448, p=0, Cohen's d=2.1623).",
+        "recommendation": "The model systematically scores one group higher. Audit training data for representation bias and consider score calibration."
+      },
+      {
+        "severity": "CRITICAL",
+        "type": "disparate_impact",
+        "detail": "Disparate impact ratio of 0.76 fails the 80% rule. This may violate EU AI Act requirements and US EEOC guidelines.",
+        "recommendation": "This level of disparity likely constitutes illegal discrimination. Do NOT deploy without mitigation. Consider threshold adjustment, model retraining, or human-in-the-loop review for the disadvantaged group."
+      },
+      {
+        "severity": "HIGH",
+        "type": "decision_flip_bias",
+        "detail": "Decision flip rate of 48% is statistically significant (chi-squared=14.8077, p=0.000119).",
+        "recommendation": "Investigate the model's decision boundary for demographic sensitivity. Consider retraining with balanced data or adding post-processing fairness constraints."
+      },
+      {
+        "severity": "CRITICAL",
+        "type": "score_disparity",
+        "detail": "Mean score difference of 1.39 points favoring \"white\" (t=8.1297, p=0, Cohen's d=2.2994).",
+        "recommendation": "The model systematically scores one group higher. Audit training data for representation bias and consider score calibration."
+      },
+      {
+        "severity": "CRITICAL",
+        "type": "disparate_impact",
+        "detail": "Disparate impact ratio of 0.52 fails the 80% rule. This may violate EU AI Act requirements and US EEOC guidelines.",
+        "recommendation": "This level of disparity likely constitutes illegal discrimination. Do NOT deploy without mitigation. Consider threshold adjustment, model retraining, or human-in-the-loop review for the disadvantaged group."
+      },
+      {
+        "severity": "HIGH",
+        "type": "decision_flip_bias",
+        "detail": "Decision flip rate of 32% is statistically significant (chi-squared=12.8281, p=0.000341).",
+        "recommendation": "Investigate the model's decision boundary for demographic sensitivity. Consider retraining with balanced data or adding post-processing fairness constraints."
+      },
+      {
+        "severity": "CRITICAL",
+        "type": "score_disparity",
+        "detail": "Mean score difference of 1.06 points favoring \"white\" (t=6.1087, p=0, Cohen's d=1.7278).",
+        "recommendation": "The model systematically scores one group higher. Audit training data for representation bias and consider score calibration."
+      },
+      {
+        "severity": "CRITICAL",
+        "type": "disparate_impact",
+        "detail": "Disparate impact ratio of 0.72 fails the 80% rule. This may violate EU AI Act requirements and US EEOC guidelines.",
+        "recommendation": "This level of disparity likely constitutes illegal discrimination. Do NOT deploy without mitigation. Consider threshold adjustment, model retraining, or human-in-the-loop review for the disadvantaged group."
+      },
+      {
+        "severity": "INFO",
+        "type": "no_bias_detected",
+        "detail": "No statistically significant bias detected between \"black\" and \"hispanic\". Effect size is negligible (d=-0.1905).",
+        "recommendation": "Continue monitoring. Absence of evidence is not evidence of absence — consider larger sample sizes and additional test scenarios."
+      },
+      {
+        "severity": "INFO",
+        "type": "no_bias_detected",
+        "detail": "No statistically significant bias detected between \"black\" and \"asian\". Effect size is small (d=-0.2863).",
+        "recommendation": "Continue monitoring. Absence of evidence is not evidence of absence — consider larger sample sizes and additional test scenarios."
+      },
+      {
+        "severity": "INFO",
+        "type": "no_bias_detected",
+        "detail": "No statistically significant bias detected between \"hispanic\" and \"asian\". Effect size is negligible (d=-0.0075).",
+        "recommendation": "Continue monitoring. Absence of evidence is not evidence of absence — consider larger sample sizes and additional test scenarios."
+      },
+      {
+        "severity": "HIGH",
+        "type": "decision_flip_bias",
+        "detail": "Decision flip rate of 16% is statistically significant (chi-squared=5.7827, p=0.016185).",
+        "recommendation": "Investigate the model's decision boundary for demographic sensitivity. Consider retraining with balanced data or adding post-processing fairness constraints."
+      },
+      {
+        "severity": "CRITICAL",
+        "type": "score_disparity",
+        "detail": "Mean score difference of 0.50 points favoring \"younger\" (t=2.8894, p=0.005849, Cohen's d=0.8173).",
+        "recommendation": "The model systematically scores one group higher. Audit training data for representation bias and consider score calibration."
+      }
+    ],
+    "mitigationSteps": [
+      "IMMEDIATE: Halt automated screening for affected demographic groups until bias is remediated",
+      "Implement human-in-the-loop review for all candidate evaluations",
+      "Audit training data for demographic representation imbalances",
+      "Consider post-processing fairness constraints (equalized odds, demographic parity)",
+      "Implement continuous monitoring dashboards disaggregated by demographic group",
+      "Establish regular re-audit schedule (quarterly recommended)",
+      "Create incident reporting and appeals process for candidates",
+      "Train recruiters on system limitations and bias risks"
+    ],
+    "residualRisks": [
+      "Bias in attributes not tested (disability, religion, sexual orientation)",
+      "Subtle proxy discrimination through features correlated with protected attributes",
+      "Temporal drift — model behavior may change with updates",
+      "Intersectional bias in rare combinations may be undetected due to small sample sizes"
+    ]
+  },
+  "ethicalConsiderations": {
+    "identifiedBiases": [
+      {
+        "severity": "HIGH",
+        "type": "decision_flip_bias",
+        "detail": "Decision flip rate of 36% is statistically significant (chi-squared=6.6316, p=0.010019).",
+        "recommendation": "Investigate the model's decision boundary for demographic sensitivity. Consider retraining with balanced data or adding post-processing fairness constraints."
+      },
+      {
+        "severity": "CRITICAL",
+        "type": "score_disparity",
+        "detail": "Mean score difference of 0.79 points favoring \"male\" (t=4.8071, p=0.000017, Cohen's d=1.3596).",
+        "recommendation": "The model systematically scores one group higher. Audit training data for representation bias and consider score calibration."
+      },
+      {
+        "severity": "CRITICAL",
+        "type": "disparate_impact",
+        "detail": "Disparate impact ratio of 0.64 fails the 80% rule. This may violate EU AI Act requirements and US EEOC guidelines.",
+        "recommendation": "This level of disparity likely constitutes illegal discrimination. Do NOT deploy without mitigation. Consider threshold adjustment, model retraining, or human-in-the-loop review for the disadvantaged group."
+      },
+      {
+        "severity": "HIGH",
+        "type": "decision_flip_bias",
+        "detail": "Decision flip rate of 24% is statistically significant (chi-squared=14.7368, p=0.000124).",
+        "recommendation": "Investigate the model's decision boundary for demographic sensitivity. Consider retraining with balanced data or adding post-processing fairness constraints."
+      },
+      {
+        "severity": "CRITICAL",
+        "type": "score_disparity",
+        "detail": "Mean score difference of 1.04 points favoring \"white\" (t=7.6448, p=0, Cohen's d=2.1623).",
+        "recommendation": "The model systematically scores one group higher. Audit training data for representation bias and consider score calibration."
+      },
+      {
+        "severity": "CRITICAL",
+        "type": "disparate_impact",
+        "detail": "Disparate impact ratio of 0.76 fails the 80% rule. This may violate EU AI Act requirements and US EEOC guidelines.",
+        "recommendation": "This level of disparity likely constitutes illegal discrimination. Do NOT deploy without mitigation. Consider threshold adjustment, model retraining, or human-in-the-loop review for the disadvantaged group."
+      },
+      {
+        "severity": "HIGH",
+        "type": "decision_flip_bias",
+        "detail": "Decision flip rate of 48% is statistically significant (chi-squared=14.8077, p=0.000119).",
+        "recommendation": "Investigate the model's decision boundary for demographic sensitivity. Consider retraining with balanced data or adding post-processing fairness constraints."
+      },
+      {
+        "severity": "CRITICAL",
+        "type": "score_disparity",
+        "detail": "Mean score difference of 1.39 points favoring \"white\" (t=8.1297, p=0, Cohen's d=2.2994).",
+        "recommendation": "The model systematically scores one group higher. Audit training data for representation bias and consider score calibration."
+      },
+      {
+        "severity": "CRITICAL",
+        "type": "disparate_impact",
+        "detail": "Disparate impact ratio of 0.52 fails the 80% rule. This may violate EU AI Act requirements and US EEOC guidelines.",
+        "recommendation": "This level of disparity likely constitutes illegal discrimination. Do NOT deploy without mitigation. Consider threshold adjustment, model retraining, or human-in-the-loop review for the disadvantaged group."
+      },
+      {
+        "severity": "HIGH",
+        "type": "decision_flip_bias",
+        "detail": "Decision flip rate of 32% is statistically significant (chi-squared=12.8281, p=0.000341).",
+        "recommendation": "Investigate the model's decision boundary for demographic sensitivity. Consider retraining with balanced data or adding post-processing fairness constraints."
+      },
+      {
+        "severity": "CRITICAL",
+        "type": "score_disparity",
+        "detail": "Mean score difference of 1.06 points favoring \"white\" (t=6.1087, p=0, Cohen's d=1.7278).",
+        "recommendation": "The model systematically scores one group higher. Audit training data for representation bias and consider score calibration."
+      },
+      {
+        "severity": "CRITICAL",
+        "type": "disparate_impact",
+        "detail": "Disparate impact ratio of 0.72 fails the 80% rule. This may violate EU AI Act requirements and US EEOC guidelines.",
+        "recommendation": "This level of disparity likely constitutes illegal discrimination. Do NOT deploy without mitigation. Consider threshold adjustment, model retraining, or human-in-the-loop review for the disadvantaged group."
+      },
+      {
+        "severity": "HIGH",
+        "type": "decision_flip_bias",
+        "detail": "Decision flip rate of 16% is statistically significant (chi-squared=5.7827, p=0.016185).",
+        "recommendation": "Investigate the model's decision boundary for demographic sensitivity. Consider retraining with balanced data or adding post-processing fairness constraints."
+      },
+      {
+        "severity": "CRITICAL",
+        "type": "score_disparity",
+        "detail": "Mean score difference of 0.50 points favoring \"younger\" (t=2.8894, p=0.005849, Cohen's d=0.8173).",
+        "recommendation": "The model systematically scores one group higher. Audit training data for representation bias and consider score calibration."
+      }
+    ],
+    "potentialHarms": [
+      "Qualified candidates from underrepresented groups may be systematically ranked lower",
+      "Proxy discrimination through university names or other correlated features",
+      "Reinforcement of existing workforce homogeneity"
+    ],
+    "mitigationSteps": [
+      "IMMEDIATE: Halt automated screening for affected demographic groups until bias is remediated",
+      "Implement human-in-the-loop review for all candidate evaluations",
+      "Audit training data for demographic representation imbalances",
+      "Consider post-processing fairness constraints (equalized odds, demographic parity)",
+      "Implement continuous monitoring dashboards disaggregated by demographic group",
+      "Establish regular re-audit schedule (quarterly recommended)",
+      "Create incident reporting and appeals process for candidates",
+      "Train recruiters on system limitations and bias risks"
+    ]
+  },
+  "limitations": {
+    "knownLimitations": [
+      "Bias audit covers gender, ethnicity, and age but not all protected characteristics (disability, religion, sexual orientation)",
+      "Name-based testing captures explicit bias but may miss subtle proxy discrimination",
+      "Statistical tests require sufficient sample sizes — rare intersections may be undertested",
+      "The audit tests the system at a point in time — model behavior may change with updates",
+      "Counterfactual testing assumes name is the only signal — real resumes have correlated features"
+    ],
+    "dataGaps": [
+      "No testing for disability bias",
+      "Limited coverage of non-binary gender identities",
+      "No testing for socioeconomic proxies (zip code, school type) beyond university name"
+    ],
+    "performanceBoundaries": [
+      "Accuracy degrades for non-English resumes",
+      "System is designed for professional/white-collar roles; may not generalize to trade/manual labor positions"
+    ]
+  },
+  "recommendations": {
+    "deploymentDecision": "NOT_APPROVED",
+    "conditions": [
+      "DO NOT deploy for automated decision-making until critical findings are resolved",
+      "Engage external auditor for independent bias assessment",
+      "Conduct impact assessment per EU AI Act Article 9",
+      "Maintain audit logs for all screening decisions per EU AI Act Article 12",
+      "Provide candidates with explanation of screening criteria per EU AI Act Article 13"
+    ],
+    "monitoringRequirements": [
+      "Continuous monitoring of decision rates disaggregated by demographic group",
+      "Quarterly bias re-audit with updated test sets",
+      "Incident reporting mechanism for candidates who believe they were unfairly treated",
+      "Annual review by independent ethics board"
+    ],
+    "humanOversight": [
+      "All rejection decisions must be reviewed by a human recruiter",
+      "The system score must not be the sole factor in any hiring decision",
+      "Recruiters must be trained on the system's known biases and limitations",
+      "An appeal process must be available to all candidates"
+    ]
+  },
+  "regulatoryCompliance": {
+    "euAiAct": {
+      "article6": "System classified as high-risk under Annex III",
+      "article9": "Risk management system in place. Overall risk level: HIGH",
+      "article10": "Training data governance documented in Section 4",
+      "article13": "Transparency requirements addressed in this model card",
+      "article14": "Human oversight requirements specified in Section 9",
+      "article15": "Accuracy and robustness evaluated through bias audit"
+    },
+    "additionalFrameworks": [
+      "US EEOC Uniform Guidelines on Employee Selection Procedures (80% rule applied)",
+      "NIST AI Risk Management Framework",
+      "IEEE 7010 Well-being Metrics Standard"
+    ]
+  }
+}

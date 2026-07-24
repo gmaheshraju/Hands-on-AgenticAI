@@ -53,22 +53,30 @@ function lengthScore(query) {
   return 0.8;
 }
 
+function escapeRegExp(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function hasWord(lower, kw) {
+  return new RegExp('\\b' + escapeRegExp(kw) + '\\b', 'i').test(lower);
+}
+
 function keywordScore(query) {
   const lower = query.toLowerCase();
 
   let simpleHits = 0;
   for (const kw of SIMPLE_KEYWORDS) {
-    if (lower.includes(kw)) simpleHits++;
+    if (hasWord(lower, kw)) simpleHits++;
   }
 
   let mediumHits = 0;
   for (const kw of MEDIUM_KEYWORDS) {
-    if (lower.includes(kw)) mediumHits++;
+    if (hasWord(lower, kw)) mediumHits++;
   }
 
   let complexHits = 0;
   for (const kw of COMPLEX_KEYWORDS) {
-    if (lower.includes(kw)) complexHits++;
+    if (hasWord(lower, kw)) complexHits++;
   }
 
   // Complex keywords dominate

@@ -22,16 +22,19 @@ export async function retryWithBackoff(fn, opts = {}) {
 
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     const start = Date.now();
+    let timer;
     try {
       const result = await Promise.race([
         fn(attempt),
-        new Promise((_, reject) =>
-          setTimeout(() => reject(new Error(`Timeout after ${timeoutMs}ms`)), timeoutMs)
-        ),
+        new Promise((_, reject) => {
+          timer = setTimeout(() => reject(new Error(`Timeout after ${timeoutMs}ms`)), timeoutMs);
+        }),
       ]);
+      clearTimeout(timer);
       attempts.push({ attempt, durationMs: Date.now() - start, status: 'success' });
       return { result, attempts };
     } catch (err) {
+      clearTimeout(timer);
       lastError = err;
       attempts.push({
         attempt,

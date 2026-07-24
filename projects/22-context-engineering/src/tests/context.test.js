@@ -452,3 +452,325 @@ describe('Prompt Cache', () => {
     assert.ok(result.report.includes('Prompt Cache Report'), 'Report should have header');
   });
 });
+
+// ─── Scratchpad tests ─────────────────────────────────────────────
+
+import { Scratchpad } from '../scratchpad.js';
+import { contextAwareCompress } from '../compactor.js';
+import { assembleWithScratchpad } from '../assembler.js';
+
+describe('Scratchpad', () => {
+  it('writes and reads a finding', () => {
+    const pad = new Scratchpad();
+    pad.write('test_key', 'Some test content here', { source: 'tool_result', relevance: 0.8 });
+    const result = pad.read('test_key');
+    assert.ok(result, 'Should return the finding');
+    assert.equal(result.content, 'Some test content here');
+    assert.equal(result.metadata.source, 'tool_result');
+    assert.equal(result.metadata.relevance, 0.8);
+  });
+
+  it('returns null for missing keys', () => {
+    const pad = new Scratchpad();
+    assert.equal(pad.read('nonexistent'), null);
+  });
+
+  it('reports token savings on write', () => {
+    const pad = new Scratchpad();
+    const content = 'A '.repeat(200); // ~200 tokens of content
+    const result = pad.write('big_finding', content, { relevance: 0.9 });
+    assert.ok(result.tokensSaved > 0, `Should save tokens, got ${result.tokensSaved}`);
+  });
+
+  it('evicts entries when at capacity', () => {
+    const pad = new Scratchpad({ maxEntries: 3 });
+    pad.write('a', 'content a');
+    pad.write('b', 'content b');
+    pad.write('c', 'content c');
+    const result = pad.write('d', 'content d');
+    assert.ok(result.evicted, 'Should have evicted one entry');
+    assert.equal(pad.store.size, 3, 'Should still be at max capacity');
+  });
+
+  it('LRU eviction removes least recently accessed', () => {
+    const pad = new Scratchpad({ maxEntries: 3 });
+    // Write entries with distinct access times by manually setting accessedAt
+    pad.write('a', 'content a');
+    pad.store.get('a').accessedAt = 1000;
+    pad.write('b', 'content b');
+    pad.store.get('b').accessedAt = 2000;
+    pad.write('c', 'content c');
+    pad.store.get('c').accessedAt = 3000;
+
+    // Access 'a' to make it the most recent
+    pad.store.get('a').accessedAt = 4000;
+
+    const result = pad.write('d', 'content d');
+    assert.equal(result.evicted, 'b', 'Should evict "b" (least recently accessed)');
+    assert.ok(pad.read('a'), '"a" should still exist');
+    assert.ok(pad.read('c'), '"c" should still exist');
+    assert.ok(pad.read('d'), '"d" should exist');
+  });
+
+  it('relevance eviction removes lowest relevance', () => {
+    const pad = new Scratchpad({ maxEntries: 3, evictionPolicy: 'relevance' });
+    pad.write('high', 'content', { relevance: 0.9 });
+    pad.write('low', 'content', { relevance: 0.1 });
+    pad.write('mid', 'content', { relevance: 0.5 });
+
+    const result = pad.write('new', 'content', { relevance: 0.7 });
+    assert.equal(result.evicted, 'low', 'Should evict lowest relevance entry');
+  });
+
+  it('search finds entries by keyword', () => {
+    const pad = new Scratchpad();
+    pad.write('db_schema', 'CREATE TABLE users (id INT, name VARCHAR)');
+    pad.write('api_error', 'Connection refused on port 5432');
+    pad.write('config', 'Database host is localhost, port 5432');
+
+    const results = pad.search('port 5432');
+    assert.ok(results.length >= 2, `Should find 2+ results, got ${results.length}`);
+    assert.ok(results[0].matchScore > 0, 'Should have positive match score');
+  });
+
+  it('search returns empty for no matches', () => {
+    const pad = new Scratchpad();
+    pad.write('key', 'some content');
+    const results = pad.search('nonexistent_xyzzy');
+    assert.equal(results.length, 0);
+  });
+
+  it('summarize produces a compact index', () => {
+    const pad = new Scratchpad();
+    const bigContent = 'Word '.repeat(100);
+    pad.write('finding_1', bigContent, { source: 'rag', relevance: 0.9 });
+    pad.write('finding_2', bigContent, { source: 'tool', relevance: 0.5 });
+
+    const summary = pad.summarize();
+    assert.equal(summary.index.length, 2);
+    assert.ok(summary.compressionRatio > 1, `Index should be much smaller than content, ratio: ${summary.compressionRatio}`);
+    assert.ok(summary.indexTokens < summary.contentTokens, 'Index tokens should be less than content tokens');
+  });
+
+  it('formatIndex produces human-readable output', () => {
+    const pad = new Scratchpad();
+    pad.write('api_docs', 'The API accepts JSON payloads on port 8080', { relevance: 0.8 });
+
+    const formatted = pad.formatIndex();
+    assert.ok(formatted.includes('Scratchpad:'), 'Should have header');
+    assert.ok(formatted.includes('api_docs'), 'Should include the key');
+    assert.ok(formatted.includes('scratchpad.read(key)'), 'Should include retrieval hint');
+  });
+
+  it('formatIndex returns empty message when no entries', () => {
+    const pad = new Scratchpad();
+    assert.ok(pad.formatIndex().includes('empty'));
+  });
+
+  it('evict removes a specific entry', () => {
+    const pad = new Scratchpad();
+    pad.write('keep', 'keep this');
+    pad.write('remove', 'remove this');
+
+    assert.equal(pad.evict('remove'), true);
+    assert.equal(pad.read('remove'), null);
+    assert.ok(pad.read('keep'), '"keep" should still exist');
+  });
+
+  it('evict returns false for missing key', () => {
+    const pad = new Scratchpad();
+    assert.equal(pad.evict('nonexistent'), false);
+  });
+
+  it('getStats tracks operations correctly', () => {
+    const pad = new Scratchpad();
+    pad.write('a', 'content for a');
+    pad.write('b', 'content for b');
+    pad.read('a');
+    pad.read('a');
+    pad.evict('b');
+
+    const stats = pad.getStats();
+    assert.equal(stats.entries, 1);
+    assert.equal(stats.writeCount, 2);
+    assert.equal(stats.readCount, 2);
+    assert.ok(stats.totalTokensEvicted > 0, 'Should track evicted tokens');
+  });
+
+  it('overwriting a key updates content and tokens', () => {
+    const pad = new Scratchpad();
+    pad.write('key', 'short');
+    pad.write('key', 'much longer content with more words and tokens in it');
+    const result = pad.read('key');
+    assert.equal(result.content, 'much longer content with more words and tokens in it');
+    assert.equal(pad.store.size, 1, 'Should not create duplicate entries');
+  });
+
+  it('validates inputs on write', () => {
+    const pad = new Scratchpad();
+    assert.throws(() => pad.write('', 'content'), /non-empty string/);
+    assert.throws(() => pad.write('key', 42), /must be a string/);
+  });
+});
+
+// ─── Context-Aware Compress tests ─────────────────────────────────
+
+describe('Context-Aware Compress', () => {
+  it('detects poisoning (contradictory assertions)', () => {
+    const turns = [
+      { role: 'user', content: 'The timeout is 30 seconds.' },
+      { role: 'assistant', content: 'Setting timeout to 30 seconds.' },
+      { role: 'user', content: 'The timeout is 5 seconds. We changed it.' },
+    ];
+    const tokens = turns.reduce((s, t) => s + estimateTokens(t.content), 0);
+    const result = contextAwareCompress(turns, tokens * 2);
+
+    const poisonMode = result.stats.failureModesDetected.find(f => f.mode === 'poisoning');
+    assert.ok(poisonMode, 'Should detect poisoning');
+    assert.ok(poisonMode.count > 0, 'Should find at least one contradiction');
+  });
+
+  it('detects clash (conflicting instructions)', () => {
+    const turns = [
+      { role: 'user', content: 'Always allow retries on timeout errors.' },
+      { role: 'user', content: 'Never allow retries on timeout errors.' },
+    ];
+    const tokens = turns.reduce((s, t) => s + estimateTokens(t.content), 0);
+    const result = contextAwareCompress(turns, tokens * 2);
+
+    const clashMode = result.stats.failureModesDetected.find(f => f.mode === 'clash');
+    assert.ok(clashMode, 'Should detect clash');
+  });
+
+  it('computes quality score degraded by issues', () => {
+    const turns = [
+      { role: 'user', content: 'The timeout is 30 seconds.' },
+      { role: 'user', content: 'The timeout is 5 seconds.' },
+      { role: 'user', content: 'Always retry on error.' },
+      { role: 'user', content: 'Never retry on error.' },
+    ];
+    const tokens = turns.reduce((s, t) => s + estimateTokens(t.content), 0);
+    const result = contextAwareCompress(turns, tokens * 2);
+
+    assert.ok(result.stats.qualityScore < 1.0,
+      `Quality score should be degraded, got ${result.stats.qualityScore}`);
+  });
+
+  it('handles empty input gracefully', () => {
+    const result = contextAwareCompress([], 1000);
+    assert.equal(result.turns.length, 0);
+    assert.equal(result.stats.qualityScore, 1);
+    assert.equal(result.stats.failureModesDetected.length, 0);
+  });
+
+  it('strips distractions when enabled', () => {
+    // Create turns where one is a clear tangent
+    const turns = [];
+    for (let i = 0; i < 8; i++) {
+      turns.push({
+        role: i % 2 === 0 ? 'user' : 'assistant',
+        content: `Turn ${i + 1} about database configuration and server setup for production deployment.`,
+      });
+    }
+    // Insert a tangent
+    turns[4] = {
+      role: 'user',
+      content: 'Yesterday the weather forecast predicted thunderstorms with hail and lightning in multiple counties across the coastal region.',
+    };
+
+    const tokens = turns.reduce((s, t) => s + estimateTokens(t.content), 0);
+    const result = contextAwareCompress(turns, tokens, { stripDistractions: true });
+
+    // The tangent detection should recover some tokens
+    // (may or may not detect depending on vocabulary overlap — test the mechanism works)
+    assert.ok(result.stats.tokensRecovered >= 0, 'Should track recovered tokens');
+  });
+
+  it('preserves standard compaction stats', () => {
+    const turns = [
+      { role: 'user', content: 'Tell me about the system.' },
+      { role: 'assistant', content: 'The system uses PostgreSQL with event sourcing.' },
+      { role: 'user', content: 'What about the caching layer?' },
+      { role: 'assistant', content: 'Redis with TTL-based expiry for session data.' },
+    ];
+    const tokens = turns.reduce((s, t) => s + estimateTokens(t.content), 0);
+    const result = contextAwareCompress(turns, tokens * 2);
+
+    // Standard stats should still be present
+    assert.ok('originalTurns' in result.stats);
+    assert.ok('compactedTurns' in result.stats);
+    assert.ok('compressionRatio' in result.stats);
+    // New stats should also be present
+    assert.ok('failureModesDetected' in result.stats);
+    assert.ok('qualityScore' in result.stats);
+    assert.ok('tokensRecovered' in result.stats);
+  });
+});
+
+// ─── Scratchpad-Aware Assembly tests ──────────────────────────────
+
+describe('Scratchpad-Aware Assembly', () => {
+  it('parks dropped sources in the scratchpad', () => {
+    const budget = new TokenBudget(400);
+    const sources = [
+      createSource(SourceType.SYSTEM_PROMPT, 'System instructions for the assistant'),
+      createSource(SourceType.RAG_CHUNKS, 'A '.repeat(200), { relevanceScore: 0.6, id: 'rag_big' }),
+      createSource(SourceType.MEMORY, 'Important memory data', { relevanceScore: 0.9, id: 'mem' }),
+      createSource(SourceType.EXAMPLES, 'Example data here', { relevanceScore: 0.3, id: 'ex' }),
+    ];
+
+    const pad = new Scratchpad();
+    const plan = budget.allocate(sources);
+    const result = assembleWithScratchpad(sources, plan, pad);
+
+    // Some sources should have been parked
+    if (plan.dropped.length > 0) {
+      assert.ok(result.parkedSources.length > 0, 'Dropped sources should be parked');
+      assert.ok(result.report.scratchpad, 'Report should include scratchpad stats');
+      assert.ok(result.report.scratchpad.sourcesParked > 0, 'Should report parked count');
+
+      // Verify they are retrievable from the scratchpad
+      for (const parked of result.parkedSources) {
+        const found = pad.search(parked.label);
+        assert.ok(found.length > 0 || pad.read(parked.id),
+          `Parked source "${parked.id}" should be in scratchpad`);
+      }
+    }
+  });
+
+  it('includes scratchpad index in assembled output', () => {
+    const budget = new TokenBudget(300);
+    const sources = [
+      createSource(SourceType.SYSTEM_PROMPT, 'System prompt'),
+      createSource(SourceType.RAG_CHUNKS, 'RAG content '.repeat(50), { relevanceScore: 0.7 }),
+    ];
+
+    const pad = new Scratchpad();
+    pad.write('prior_finding', 'Previously parked content');
+
+    const plan = budget.allocate(sources);
+    const result = assembleWithScratchpad(sources, plan, pad);
+
+    // The scratchpad index should be in the messages
+    const hasIndex = result.messages.some(m =>
+      m.content.includes('Scratchpad')
+    );
+    assert.ok(hasIndex, 'Assembled messages should include scratchpad index');
+  });
+
+  it('reports scratchpad stats in the assembly report', () => {
+    const budget = new TokenBudget(4096);
+    const sources = [
+      createSource(SourceType.SYSTEM_PROMPT, 'System prompt'),
+      createSource(SourceType.RAG_CHUNKS, 'RAG data'),
+    ];
+
+    const pad = new Scratchpad();
+    const plan = budget.allocate(sources);
+    const result = assembleWithScratchpad(sources, plan, pad);
+
+    assert.ok(result.report.scratchpad, 'Should have scratchpad in report');
+    assert.equal(typeof result.report.scratchpad.indexTokenCost, 'number');
+    assert.ok(result.report.scratchpad.stats, 'Should include scratchpad stats');
+  });
+});

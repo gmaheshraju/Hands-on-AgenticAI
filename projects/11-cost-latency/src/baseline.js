@@ -12,12 +12,13 @@ import { dirname, join } from 'path';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // ---------------------------------------------------------------------------
-// Pricing (per 1K tokens) — realistic Claude/GPT-4 class pricing
+// Pricing (per 1K tokens) — realistic 2024-2025 API pricing
 // ---------------------------------------------------------------------------
+// Frontier = GPT-4 class, Mid = Claude Sonnet class, Cheap = GPT-4o-mini class
 export const MODEL_PRICING = {
-  'frontier': { input: 0.015, output: 0.060, name: 'claude-sonnet-4-20250514' },
-  'mid':      { input: 0.003, output: 0.015, name: 'claude-haiku-3' },
-  'cheap':    { input: 0.00025, output: 0.00125, name: 'claude-haiku-3.5' },
+  'frontier': { input: 0.03,    output: 0.06,    name: 'gpt-4' },
+  'mid':      { input: 0.003,   output: 0.015,   name: 'claude-sonnet' },
+  'cheap':    { input: 0.00015, output: 0.0006,   name: 'gpt-4o-mini' },
 };
 
 // ---------------------------------------------------------------------------
@@ -34,18 +35,22 @@ export function estimateTokens(text) {
 export function simulateLLMCall(messages, {
   model = 'frontier',
   systemPrompt = null,
-  maxTokens = 1024,
+  maxTokens = 2048,
+  toolContextMultiplier = 4, // Agent overhead: tool schemas, RAG context, function call formatting (realistic 3-5x range)
 } = {}) {
   const pricing = MODEL_PRICING[model];
   const start = performance.now();
 
-  // Build full input
+  // Build full input — includes tool definitions, RAG context, etc.
   let inputText = '';
   if (systemPrompt) inputText += systemPrompt;
   for (const msg of messages) {
     inputText += msg.content;
   }
-  const inputTokens = estimateTokens(inputText);
+  // Agent overhead: tool schemas, retrieved docs, function call formatting
+  // A real agent sends 3-5x more tokens than just the conversation
+  const rawInputTokens = estimateTokens(inputText);
+  const inputTokens = Math.ceil(rawInputTokens * toolContextMultiplier);
 
   // Simulate response generation
   const lastUserMsg = messages.filter(m => m.role === 'user').pop();

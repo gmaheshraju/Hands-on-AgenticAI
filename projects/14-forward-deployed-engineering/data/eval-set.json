@@ -1,0 +1,552 @@
+{
+  "version": "1.0",
+  "createdAt": "2026-07-15T13:25:57.247Z",
+  "customer": "Legal Tech Solutions (Demo)",
+  "stats": {
+    "totalCandidates": 60,
+    "accepted": 60,
+    "rejected": 0
+  },
+  "questions": [
+    {
+      "id": "eval-001",
+      "question": "What is the dollar amount mentioned in the context of \"GDPR\" in compliance-memo.txt?",
+      "expectedAnswer": "The amount is $100.",
+      "source": "compliance-memo.txt",
+      "type": "factual",
+      "difficulty": "easy",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-002",
+      "question": "What is the dollar amount mentioned in the context of \"GDPR\" in compliance-memo.txt?",
+      "expectedAnswer": "The amount is $750.",
+      "source": "compliance-memo.txt",
+      "type": "factual",
+      "difficulty": "easy",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-003",
+      "question": "Explain the \"SCOPE\" section of compliance-memo.txt.",
+      "expectedAnswer": "1.  SCOPE\nThese procedures apply to all attorneys, paralegals, and staff who access, process,\nor store client personal data in any form, including electronic records, paper files,\nand verbal communications.",
+      "source": "compliance-memo.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-004",
+      "question": "Explain the \"DATA CLASSIFICATION\" section of compliance-memo.txt.",
+      "expectedAnswer": "2.  DATA CLASSIFICATION\nAll client data must be classified into the following categories:\n(a) Privileged Communications: Attorney-client privileged materials, including legal\nopinions, strategy memoranda, and litigation hold notices;\n(b) Sensitive Personal Data: Social Security numbers, financial account information,\nhealth records, and biometric data — requires enhanced security controls;\n(c) Standard Personal Data: Names, addresses, contact information, and employment\ninformation — standard security controls apply;\n(d) Public Information: Information that is publicly available through court filings,\nregulatory databases, or public records.",
+      "source": "compliance-memo.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-005",
+      "question": "What are the main risks or liabilities outlined in compliance-memo.txt?",
+      "expectedAnswer": "The document addresses the following risk areas: breach, termination, liability, damages. BREACH NOTIFICATION\n(a) Report any suspected data breach to the Compliance Office immediately;\n(b) The Compliance Office will assess the breach within 24 hours;\n(c) GDPR breaches must be reported to the relevant supervisory authority within 72 hours;\n(d) CCPA breaches requiring notification to affected individuals must be reported\nwithout unreasonable delay.  PENALTIES\nNon-compliance with these procedures may result in:\n(a) Disciplinary action, up to and including termination;\n(b) Personal liability for violations of GDPR (fines up to 4% of global revenue)\nor CCPA (statutory damages of $100-$750 per consumer per incident);\n(c) Referral to the relevant bar association for ethical violations.",
+      "source": "compliance-memo.txt",
+      "type": "analytical",
+      "difficulty": "hard",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-006",
+      "question": "What are the key timeframes and deadlines specified in compliance-memo.txt?",
+      "expectedAnswer": "Key timeframes include: 30 days, 45 days, 30 days.",
+      "source": "compliance-memo.txt",
+      "type": "extraction",
+      "difficulty": "easy",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-007",
+      "question": "Explain the \"DEFINITION OF CONFIDENTIAL INFORMATION\" section of contract-nda-template.txt.",
+      "expectedAnswer": "1.  DEFINITION OF CONFIDENTIAL INFORMATION\n\"Confidential Information\" means any and all non-public information, including but not limited\nto trade secrets, proprietary data, business plans, financial information, customer lists,\ntechnical specifications, source code, algorithms, and any information designated as\nconfidential by either party.",
+      "source": "contract-nda-template.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-008",
+      "question": "Explain the \"OBLIGATIONS OF RECEIVING PARTY\" section of contract-nda-template.txt.",
+      "expectedAnswer": "2.  OBLIGATIONS OF RECEIVING PARTY\nThe Receiving Party agrees to:\n(a) Hold the Confidential Information in strict confidence;\n(b) Not disclose Confidential Information to any third party without prior written consent;\n(c) Use the Confidential Information solely for the Purpose described herein;\n(d) Apply reasonable security measures to protect Confidential Information from unauthorized access.",
+      "source": "contract-nda-template.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-009",
+      "question": "What are the main risks or liabilities outlined in contract-nda-template.txt?",
+      "expectedAnswer": "The document addresses the following risk areas: termination, breach. REMEDIES\nThe parties acknowledge that any breach of this Agreement may cause irreparable harm, and\nthe non-breaching party shall be entitled to seek injunctive relief in addition to any other\nremedies available at law or in equity.",
+      "source": "contract-nda-template.txt",
+      "type": "analytical",
+      "difficulty": "hard",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-010",
+      "question": "What are the mandatory obligations (indicated by \"shall\") in contract-nda-template.txt?",
+      "expectedAnswer": "The document specifies 4 obligations, including: \"shall remain in effect for\", \"shall survive termination for an\", \"shall be entitled to seek\", \"shall be governed by and\".",
+      "source": "contract-nda-template.txt",
+      "type": "application",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-011",
+      "question": "What is the dollar amount mentioned in the context of \"COMPENSATION\" in employment-agreement.txt?",
+      "expectedAnswer": "The amount is $185,000,.",
+      "source": "employment-agreement.txt",
+      "type": "factual",
+      "difficulty": "easy",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-012",
+      "question": "Explain the \"POSITION AND DUTIES\" section of employment-agreement.txt.",
+      "expectedAnswer": "1.  POSITION AND DUTIES\nEmployee shall serve as Senior Associate in the Corporate Law Division.  Employee's\nduties shall include drafting corporate governance documents, reviewing merger and\nacquisition agreements, conducting due diligence investigations, and advising clients\non regulatory compliance matters.",
+      "source": "employment-agreement.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-013",
+      "question": "Explain the \"COMPENSATION\" section of employment-agreement.txt.",
+      "expectedAnswer": "2.  COMPENSATION\n(a) Base Salary: Employee shall receive an annual base salary of $185,000, payable\nin bi-weekly installments, subject to applicable withholdings and deductions. \n(b) Bonus: Employee shall be eligible for an annual discretionary bonus based on\nindividual performance and firm profitability, with a target bonus of 20% of base salary.",
+      "source": "employment-agreement.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-014",
+      "question": "What are the main risks or liabilities outlined in employment-agreement.txt?",
+      "expectedAnswer": "The document addresses the following risk areas: termination. ",
+      "source": "employment-agreement.txt",
+      "type": "analytical",
+      "difficulty": "hard",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-015",
+      "question": "What are the mandatory obligations (indicated by \"shall\") in employment-agreement.txt?",
+      "expectedAnswer": "The document specifies 12 obligations, including: \"shall serve as Senior Associate\", \"shall include drafting corporate governance\", \"shall receive an annual base\", \"shall be eligible for an\".",
+      "source": "employment-agreement.txt",
+      "type": "application",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-016",
+      "question": "What is the dollar amount mentioned in the context of \"IP\" in ip-assignment.txt?",
+      "expectedAnswer": "The amount is $25,000,.",
+      "source": "ip-assignment.txt",
+      "type": "factual",
+      "difficulty": "easy",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-017",
+      "question": "Explain the \"DEFINITIONS\" section of ip-assignment.txt.",
+      "expectedAnswer": "1.  DEFINITIONS\n(a) \"Assigned IP\" means all inventions, discoveries, improvements, designs, works of\nauthorship, trade secrets, know-how, software, source code, algorithms, databases,\ntrademarks, and other intellectual property created by the Assignor during the Assignment\nPeriod, whether or not patentable or copyrightable. \n(b) \"Assignment Period\" means the period from January 1, 2024 through the termination\nof Assignor's engagement with Assignee.",
+      "source": "ip-assignment.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-018",
+      "question": "Explain the \"ASSIGNMENT OF RIGHTS\" section of ip-assignment.txt.",
+      "expectedAnswer": "2.  ASSIGNMENT OF RIGHTS\nAssignor hereby irrevocably assigns, transfers, and conveys to Assignee all right, title,\nand interest in and to the Assigned IP, including:\n(a) All patent rights, including the right to file and prosecute patent applications worldwide;\n(b) All copyrights, including the right to reproduce, distribute, and create derivative works;\n(c) All trade secret rights;\n(d) All trademark rights associated with the Assigned IP;\n(e) All rights to sue for past, present, and future infringement.",
+      "source": "ip-assignment.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-019",
+      "question": "What are the mandatory obligations (indicated by \"shall\") in ip-assignment.txt?",
+      "expectedAnswer": "The document specifies 2 obligations, including: \"shall pay Assignor the sum\", \"shall be governed by the\".",
+      "source": "ip-assignment.txt",
+      "type": "application",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-020",
+      "question": "What is the dollar amount mentioned in the context of \"RENT\" in lease-agreement.txt?",
+      "expectedAnswer": "The amount is $28,600,.",
+      "source": "lease-agreement.txt",
+      "type": "factual",
+      "difficulty": "easy",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-021",
+      "question": "What is the dollar amount mentioned in the context of \"NNN\" in lease-agreement.txt?",
+      "expectedAnswer": "The amount is $57,200.",
+      "source": "lease-agreement.txt",
+      "type": "factual",
+      "difficulty": "easy",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-022",
+      "question": "Explain the \"PREMISES\" section of lease-agreement.txt.",
+      "expectedAnswer": "1.  PREMISES\nLandlord hereby leases to Tenant the premises located at 450 Market Street, Suite 800,\nSan Francisco, CA 94105, comprising approximately 5,200 square feet of office space\n(\"Premises\").",
+      "source": "lease-agreement.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-023",
+      "question": "Explain the \"LEASE TERM\" section of lease-agreement.txt.",
+      "expectedAnswer": "2.  LEASE TERM\n(a) Initial Term: The Lease shall commence on January 1, 2025 and expire on\nDecember 31, 2029 (\"Initial Term\"), for a total of five (5) years. \n(b) Renewal Option: Tenant shall have the option to renew the Lease for one (1)\nadditional term of three (3) years by providing written notice at least 180 days prior\nto the expiration of the Initial Term.",
+      "source": "lease-agreement.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-024",
+      "question": "What are the main risks or liabilities outlined in lease-agreement.txt?",
+      "expectedAnswer": "The document addresses the following risk areas: violation, termination, damages, default, breach. INDEMNIFICATION\nTenant shall indemnify and hold harmless Landlord from any claims, damages, or\nliabilities arising from Tenant's use of the Premises, except to the extent caused by\nLandlord's negligence or willful misconduct.  DEFAULT AND REMEDIES\n(a) Tenant Default: Failure to pay rent within ten (10) days of the due date or breach\nof any material term shall constitute a default.",
+      "source": "lease-agreement.txt",
+      "type": "analytical",
+      "difficulty": "hard",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-025",
+      "question": "What are the mandatory obligations (indicated by \"shall\") in lease-agreement.txt?",
+      "expectedAnswer": "The document specifies 17 obligations, including: \"shall commence on January\", \"shall have the option to\", \"shall pay monthly base rent\", \"shall increase by\".",
+      "source": "lease-agreement.txt",
+      "type": "application",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-026",
+      "question": "What is the dollar amount mentioned in the context of \"MERGER CONSIDERATION\" in merger-agreement.txt?",
+      "expectedAnswer": "The amount is $42,000,000.",
+      "source": "merger-agreement.txt",
+      "type": "factual",
+      "difficulty": "easy",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-027",
+      "question": "What is the dollar amount mentioned in the context of \"MERGER CONSIDERATION\" in merger-agreement.txt?",
+      "expectedAnswer": "The amount is $30,000,000.",
+      "source": "merger-agreement.txt",
+      "type": "factual",
+      "difficulty": "easy",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-028",
+      "question": "Explain the \"THE MERGER\" section of merger-agreement.txt.",
+      "expectedAnswer": "1.  THE MERGER\n(a) Structure: Target Company shall merge with and into a wholly-owned subsidiary\nof Acquiror (\"Merger Sub\"), with Merger Sub surviving the merger as a wholly-owned\nsubsidiary of Acquiror (the \"Surviving Entity\"). \n(b) Effective Time: The Merger shall become effective upon the filing of the Certificate\nof Merger with the Secretary of State of Delaware (\"Effective Time\").",
+      "source": "merger-agreement.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-029",
+      "question": "Explain the \"MERGER CONSIDERATION\" section of merger-agreement.txt.",
+      "expectedAnswer": "2.  MERGER CONSIDERATION\n(a) Purchase Price: The aggregate merger consideration shall be $42,000,000 (\"Purchase\nPrice\"), consisting of:\n  (i) $30,000,000 in cash payable at Closing;\n  (ii) $8,000,000 in Acquiror common stock, valued at the 20-day VWAP prior to Closing;\n  (iii) $4,000,000 in an escrow account for indemnification obligations. \n(b) Working Capital Adjustment: The Purchase Price shall be adjusted based on the\ndifference between actual working capital at Closing and a target working capital of\n$3,500,000.",
+      "source": "merger-agreement.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-030",
+      "question": "What are the key timeframes and deadlines specified in merger-agreement.txt?",
+      "expectedAnswer": "Key timeframes include: 24 months, 120 days.",
+      "source": "merger-agreement.txt",
+      "type": "extraction",
+      "difficulty": "easy",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-031",
+      "question": "What are the mandatory obligations (indicated by \"shall\") in merger-agreement.txt?",
+      "expectedAnswer": "The document specifies 11 obligations, including: \"shall merge with and into\", \"shall become effective upon the\", \"shall be\", \"shall be adjusted based on\".",
+      "source": "merger-agreement.txt",
+      "type": "application",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-032",
+      "question": "What is the dollar amount mentioned in the context of \"I\" in power-of-attorney.txt?",
+      "expectedAnswer": "The amount is $18,000.",
+      "source": "power-of-attorney.txt",
+      "type": "factual",
+      "difficulty": "easy",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-033",
+      "question": "Explain the \"GRANT OF AUTHORITY\" section of power-of-attorney.txt.",
+      "expectedAnswer": "1.  GRANT OF AUTHORITY\nI grant my Agent the following powers:\n(a) Financial Management: To manage my bank accounts, investments, real property, and\npersonal property, including the power to buy, sell, lease, mortgage, and otherwise\ndeal with any property, real or personal;\n(b) Tax Matters: To prepare, sign, and file tax returns, make estimated tax payments,\nand represent me before the Internal Revenue Service and state tax authorities;\n(c) Legal Proceedings: To commence, prosecute, discontinue, or defend any legal\nproceedings on my behalf, including the power to retain counsel and settle claims;\n(d) Government Benefits: To apply for and manage government benefits including Social\nSecurity, Medicare, Medicaid, and veterans' benefits;\n(e) Insurance: To procure, maintain, modify, or terminate insurance policies of any kind;\n(f) Estate Planning: To create, amend, or revoke trusts and make gifts on my behalf,\nsubject to the limitations set forth in Section 4.",
+      "source": "power-of-attorney.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-034",
+      "question": "Explain the \"DURABILITY\" section of power-of-attorney.txt.",
+      "expectedAnswer": "2.  DURABILITY\nThis Power of Attorney shall not be affected by my subsequent disability or incapacity. \nIt shall remain in full force and effect until revoked by me in writing or upon my death.",
+      "source": "power-of-attorney.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-035",
+      "question": "What are the mandatory obligations (indicated by \"shall\") in power-of-attorney.txt?",
+      "expectedAnswer": "The document specifies 13 obligations, including: \"shall not be affected by my\", \"shall remain in full force\", \"shall not make gifts exceeding the\", \"shall not use my assets for\".",
+      "source": "power-of-attorney.txt",
+      "type": "application",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-036",
+      "question": "Explain the \"INFORMATION WE COLLECT\" section of privacy-policy.txt.",
+      "expectedAnswer": "1.  INFORMATION WE COLLECT\n(a) Personal Information: Name, email address, phone number, job title, and employer\ninformation provided during account registration. \n(b) Usage Data: Information about how you interact with the Service, including pages\nvisited, features used, queries submitted, documents uploaded, and session duration.",
+      "source": "privacy-policy.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-037",
+      "question": "Explain the \"HOW WE USE YOUR INFORMATION\" section of privacy-policy.txt.",
+      "expectedAnswer": "2.  HOW WE USE YOUR INFORMATION\nWe use collected information to:\n(a) Provide, maintain, and improve the Service;\n(b) Process and analyze documents submitted by users;\n(c) Communicate with users about their accounts and service updates;\n(d) Detect, prevent, and address technical issues and security threats;\n(e) Comply with legal obligations and enforce our terms of service.",
+      "source": "privacy-policy.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-038",
+      "question": "What are the key timeframes and deadlines specified in privacy-policy.txt?",
+      "expectedAnswer": "Key timeframes include: 30 days, 90 days, 12 months.",
+      "source": "privacy-policy.txt",
+      "type": "extraction",
+      "difficulty": "easy",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-039",
+      "question": "What is the dollar amount mentioned in the context of \"NOW\" in settlement-agreement.txt?",
+      "expectedAnswer": "The amount is $3,750,000.",
+      "source": "settlement-agreement.txt",
+      "type": "factual",
+      "difficulty": "easy",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-040",
+      "question": "What is the dollar amount mentioned in the context of \"SETTLEMENT PAYMENT\" in settlement-agreement.txt?",
+      "expectedAnswer": "The amount is $2,000,000.",
+      "source": "settlement-agreement.txt",
+      "type": "factual",
+      "difficulty": "easy",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-041",
+      "question": "Explain the \"SETTLEMENT PAYMENT\" section of settlement-agreement.txt.",
+      "expectedAnswer": "1.  SETTLEMENT PAYMENT\nDefendant shall pay Plaintiff the total sum of $3,750,000 (\"Settlement Amount\") as follows:\n(a) $2,000,000 within thirty (30) days of execution of this Agreement;\n(b) $1,000,000 within ninety (90) days of execution;\n(c) $750,000 within one hundred eighty (180) days of execution. \nLate payments shall accrue interest at a rate of 8% per annum.",
+      "source": "settlement-agreement.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-042",
+      "question": "Explain the \"LICENSE GRANT\" section of settlement-agreement.txt.",
+      "expectedAnswer": "2.  LICENSE GRANT\n(a) Plaintiff hereby grants Defendant a non-exclusive, worldwide, perpetual license\nto use U. S.",
+      "source": "settlement-agreement.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-043",
+      "question": "What are the mandatory obligations (indicated by \"shall\") in settlement-agreement.txt?",
+      "expectedAnswer": "The document specifies 7 obligations, including: \"shall pay Plaintiff the total\", \"shall accrue interest at a\", \"shall file\na stipulation of\", \"shall be kept strictly\nconfidential\".",
+      "source": "settlement-agreement.txt",
+      "type": "application",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-044",
+      "question": "Explain the \"ACCEPTANCE OF TERMS\" section of terms-of-service.txt.",
+      "expectedAnswer": "1.  ACCEPTANCE OF TERMS\nBy accessing or using the Service, you agree to be bound by these Terms and our Privacy\nPolicy.  If you do not agree, you must not use the Service.",
+      "source": "terms-of-service.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-045",
+      "question": "Explain the \"SERVICE DESCRIPTION\" section of terms-of-service.txt.",
+      "expectedAnswer": "2.  SERVICE DESCRIPTION\nThe Service provides AI-powered document analysis, including:\n(a) Contract review and clause extraction;\n(b) Document summarization and key term identification;\n(c) Compliance checking against regulatory frameworks;\n(d) Risk assessment and anomaly detection;\n(e) Custom reporting and analytics dashboards.",
+      "source": "terms-of-service.txt",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-046",
+      "question": "What are the main risks or liabilities outlined in terms-of-service.txt?",
+      "expectedAnswer": "The document addresses the following risk areas: risk, violation, liability, damages. SERVICE DESCRIPTION\nThe Service provides AI-powered document analysis, including:\n(a) Contract review and clause extraction;\n(b) Document summarization and key term identification;\n(c) Compliance checking against regulatory frameworks;\n(d) Risk assessment and anomaly detection;\n(e) Custom reporting and analytics dashboards.  LIMITATION OF LIABILITY\n(a) THE SERVICE IS PROVIDED \"AS IS\" WITHOUT WARRANTIES OF ANY KIND;\n(b) THE COMPANY SHALL NOT BE LIABLE FOR INDIRECT, INCIDENTAL, CONSEQUENTIAL, OR\nPUNITIVE DAMAGES;\n(c) THE COMPANY'S TOTAL LIABILITY SHALL NOT EXCEED THE FEES PAID BY THE USER IN\nTHE TWELVE (12) MONTHS PRECEDING THE CLAIM;\n(d) THE SERVICE DOES NOT CONSTITUTE LEGAL ADVICE AND SHALL NOT BE RELIED UPON\nAS A SUBSTITUTE FOR PROFESSIONAL LEGAL COUNSEL.",
+      "source": "terms-of-service.txt",
+      "type": "analytical",
+      "difficulty": "hard",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-047",
+      "question": "What are the key timeframes and deadlines specified in terms-of-service.txt?",
+      "expectedAnswer": "Key timeframes include: 30 days, 30 days.",
+      "source": "terms-of-service.txt",
+      "type": "extraction",
+      "difficulty": "easy",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-048",
+      "question": "What are the mandatory obligations (indicated by \"shall\") in terms-of-service.txt?",
+      "expectedAnswer": "The document specifies 8 obligations, including: \"shall not\", \"shall NOT BE LIABLE FOR INDIRECT\", \"shall NOT EXCEED THE FEES PAID\", \"shall NOT BE RELIED UPON\nAS\".",
+      "source": "terms-of-service.txt",
+      "type": "application",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-049",
+      "question": "What is the dollar amount mentioned in the context of \"KE FORM\" in Client Intake Form — Johnson Estate?",
+      "expectedAnswer": "The amount is $1,200,000.",
+      "source": "Client Intake Form — Johnson Estate",
+      "type": "factual",
+      "difficulty": "easy",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-050",
+      "question": "What is the dollar amount mentioned in the context of \"Client\" in Client Intake Form — Johnson Estate?",
+      "expectedAnswer": "The amount is $850,000.",
+      "source": "Client Intake Form — Johnson Estate",
+      "type": "factual",
+      "difficulty": "easy",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-051",
+      "question": "Explain the \"Mr. Chen confirmed that safety inspections were conducted quarterly, not monthly\" section of Deposition Summary — Martinez v. ABC Corp.",
+      "expectedAnswer": "1.  Mr.  Chen confirmed that safety inspections were conducted quarterly, not monthly\n   as required by OSHA regulations (29 CFR 1910).",
+      "source": "Deposition Summary — Martinez v. ABC Corp",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-052",
+      "question": "Explain the \"The last inspection before the incident occurred on October 15, 2024 — six weeks\" section of Deposition Summary — Martinez v. ABC Corp.",
+      "expectedAnswer": "2.  The last inspection before the incident occurred on October 15, 2024 — six weeks\n   before the plaintiff's injury on November 28, 2024.",
+      "source": "Deposition Summary — Martinez v. ABC Corp",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-053",
+      "question": "Explain the \"Hess Corp. v. Port Authority (2d Cir. 2021): Force majeure requires the event to\" section of Legal Research Memo — Force Majeure.",
+      "expectedAnswer": "1.  Hess Corp.  v.",
+      "source": "Legal Research Memo — Force Majeure",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-054",
+      "question": "Explain the \"JN Contemporary Art v. Phillips (S.D.N.Y. 2020): The court held that the party\" section of Legal Research Memo — Force Majeure.",
+      "expectedAnswer": "2.  JN Contemporary Art v.  Phillips (S.",
+      "source": "Legal Research Memo — Force Majeure",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-055",
+      "question": "What are the main risks or liabilities outlined in Legal Research Memo — Force Majeure?",
+      "expectedAnswer": "The document addresses the following risk areas: breach, risk. LEGAL RESEARCH MEMORANDUM\n\nTO: Sarah Williams, Partner\nFROM: Associate Research Team\nRE: Applicability of Force Majeure Clause — CloudVault Contract\nDATE: January 20, 2025\n\nQUESTION PRESENTED:\nWhether the cybersecurity breach experienced by CloudVault Inc. \" A cybersecurity breach is generally considered a foreseeable risk\nthat can be mitigated through reasonable security measures, and courts have consistently\nheld that force majeure does not excuse performance failures attributable to the\nbreaching party's own systems.",
+      "source": "Legal Research Memo — Force Majeure",
+      "type": "analytical",
+      "difficulty": "hard",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-056",
+      "question": "Explain the \"AUTHORIZED SHARES: 2,000,000 shares of common stock reserved for issuance\" section of Board Resolution — Stock Option Plan.",
+      "expectedAnswer": "1.  AUTHORIZED SHARES: 2,000,000 shares of common stock reserved for issuance\n   under the Plan, representing approximately 8% of fully-diluted capitalization.",
+      "source": "Board Resolution — Stock Option Plan",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-057",
+      "question": "Explain the \"ELIGIBLE PARTICIPANTS: All full-time employees, directors, and consultants\" section of Board Resolution — Stock Option Plan.",
+      "expectedAnswer": "2.  ELIGIBLE PARTICIPANTS: All full-time employees, directors, and consultants\n   of the Company and its subsidiaries.",
+      "source": "Board Resolution — Stock Option Plan",
+      "type": "comprehension",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-058",
+      "question": "What are the key timeframes and deadlines specified in Board Resolution — Stock Option Plan?",
+      "expectedAnswer": "Key timeframes include: 12 months, 12 months.",
+      "source": "Board Resolution — Stock Option Plan",
+      "type": "extraction",
+      "difficulty": "easy",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-059",
+      "question": "What are the mandatory obligations (indicated by \"shall\") in Board Resolution — Stock Option Plan?",
+      "expectedAnswer": "The document specifies 2 obligations, including: \"shall accelerate and become fully\", \"shall administer\n   the Plan with\".",
+      "source": "Board Resolution — Stock Option Plan",
+      "type": "application",
+      "difficulty": "medium",
+      "status": "auto-accepted"
+    },
+    {
+      "id": "eval-060",
+      "question": "What is the dollar amount mentioned in the context of \"Tech\" in Regulatory Filing Cover Letter?",
+      "expectedAnswer": "The amount is $0.00.",
+      "source": "Regulatory Filing Cover Letter",
+      "type": "factual",
+      "difficulty": "easy",
+      "status": "auto-accepted"
+    }
+  ]
+}

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FDE Pilot Dashboard</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .header h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+    .header .customer {
+      color: #94a3b8;
+      font-size: 14px;
+    }
+    .status-badge {
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .status-ready { background: #065f46; color: #6ee7b7; }
+    .status-not-ready { background: #7f1d1d; color: #fca5a5; }
+    .status-in-progress { background: #78350f; color: #fcd34d; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: #1e293b;
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid #334155;
+    }
+    .card h2 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #94a3b8;
+      margin-bottom: 16px;
+    }
+
+    .metric {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+    }
+    .metric .label { color: #cbd5e1; font-size: 14px; }
+    .metric .value { font-size: 20px; font-weight: 700; color: #f8fafc; }
+    .metric .value.good { color: #34d399; }
+    .metric .value.warn { color: #fbbf24; }
+    .metric .value.bad { color: #f87171; }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #334155;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+    .progress-bar .fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.5s;
+    }
+    .fill-green { background: #34d399; }
+    .fill-yellow { background: #fbbf24; }
+    .fill-blue { background: #60a5fa; }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #334155;
+      font-size: 14px;
+    }
+    .checklist-item:last-child { border-bottom: none; }
+    .check-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .check-pass { background: #065f46; color: #6ee7b7; }
+    .check-fail { background: #7f1d1d; color: #fca5a5; }
+    .check-warn { background: #78350f; color: #fcd34d; }
+    .check-detail { color: #94a3b8; font-size: 12px; margin-top: 2px; }
+
+    .issue-list { list-style: none; }
+    .issue-item {
+      padding: 10px 0;
+      border-bottom: 1px solid #334155;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .issue-severity {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+    .severity-high { background: #f87171; }
+    .severity-medium { background: #fbbf24; }
+    .severity-low { background: #34d399; }
+
+    .activity-log {
+      max-height: 200px;
+      overflow-y: auto;
+      font-size: 13px;
+    }
+    .activity-entry {
+      padding: 6px 0;
+      border-bottom: 1px solid #334155;
+      display: flex;
+      gap: 12px;
+    }
+    .activity-time { color: #64748b; white-space: nowrap; min-width: 60px; }
+    .activity-text { color: #cbd5e1; }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .days-big {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .empty-state {
+      color: #64748b;
+      text-align: center;
+      padding: 24px;
+      font-style: italic;
+    }
+
+    .refresh-note {
+      text-align: center;
+      color: #475569;
+      font-size: 12px;
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <h1>FDE Pilot Dashboard</h1>
+      <div class="customer" id="customer-name">Loading...</div>
+    </div>
+    <div id="status-badge" class="status-badge status-in-progress">Loading...</div>
+  </div>
+
+  <div class="grid">
+    <!-- Timeline Card -->
+    <div class="card">
+      <h2>Pilot Timeline</h2>
+      <div class="timeline-header">
+        <div>
+          <div class="days-big" id="days-remaining">--</div>
+          <div style="color: #94a3b8; font-size: 13px;">days remaining</div>
+        </div>
+        <div style="text-align: right;">
+          <div class="metric">
+            <span class="label">Start:</span>
+            <span class="value" id="pilot-start" style="font-size: 14px;">--</span>
+          </div>
+          <div class="metric">
+            <span class="label">End:</span>
+            <span class="value" id="pilot-end" style="font-size: 14px;">--</span>
+          </div>
+        </div>
+      </div>
+      <div class="progress-bar">
+        <div class="fill fill-blue" id="timeline-progress" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <!-- Documents Card -->
+    <div class="card">
+      <h2>Documents Ingested</h2>
+      <div class="metric">
+        <span class="label">Total processed</span>
+        <span class="value" id="doc-total">0</span>
+      </div>
+      <div class="metric">
+        <span class="label">Succeeded</span>
+        <span class="value good" id="doc-success">0</span>
+      </div>
+      <div class="metric">
+        <span class="label">Failed</span>
+        <span class="value" id="doc-failed">0</span>
+      </div>
+      <div class="metric">
+        <span class="label">Avg Quality</span>
+        <span class="value" id="doc-quality">--</span>
+      </div>
+      <div class="progress-bar">
+        <div class="fill fill-green" id="doc-progress" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <!-- Domain Adaptation Card -->
+    <div class="card">
+      <h2>Domain Adaptation</h2>
+      <div class="metric">
+        <span class="label">Vocabulary terms</span>
+        <span class="value" id="vocab-count">0</span>
+      </div>
+      <div class="metric">
+        <span class="label">Categories</span>
+        <span class="value" id="category-count">0</span>
+      </div>
+      <div class="metric">
+        <span class="label">Few-shot examples</span>
+        <span class="value" id="fewshot-count">0</span>
+      </div>
+      <div class="metric">
+        <span class="label">System prompt</span>
+        <span class="value" id="prompt-status">--</span>
+      </div>
+    </div>
+
+    <!-- Eval Set Card -->
+    <div class="card">
+      <h2>Evaluation Set</h2>
+      <div class="metric">
+        <span class="label">Candidates generated</span>
+        <span class="value" id="eval-candidates">0</span>
+      </div>
+      <div class="metric">
+        <span class="label">Accepted</span>
+        <span class="value good" id="eval-accepted">0</span>
+      </div>
+      <div class="metric">
+        <span class="label">Rejected</span>
+        <span class="value" id="eval-rejected">0</span>
+      </div>
+      <div class="metric">
+        <span class="label">Target: 30 questions</span>
+        <span class="value" id="eval-target">--</span>
+      </div>
+      <div class="progress-bar">
+        <div class="fill fill-yellow" id="eval-progress" style="width: 0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full-width cards -->
+  <div class="grid" style="grid-template-columns: 1fr 1fr;">
+    <!-- Deployment Checklist -->
+    <div class="card">
+      <h2>Deployment Checklist</h2>
+      <div id="checklist-items">
+        <div class="empty-state">Run the onboarding pipeline to populate checklist</div>
+      </div>
+    </div>
+
+    <!-- Issues & Activity -->
+    <div class="card">
+      <h2>Issues & Blockers</h2>
+      <ul class="issue-list" id="issue-list">
+        <li class="empty-state">No issues reported</li>
+      </ul>
+      <h2 style="margin-top: 20px;">Activity Log</h2>
+      <div class="activity-log" id="activity-log">
+        <div class="empty-state">No activity yet</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="refresh-note">
+    Dashboard auto-refreshes every 10 seconds. Run <code>node src/demo.js</code> to populate with real data.
+  </div>
+
+  <script>
+    async function fetchState() {
+      try {
+        const res = await fetch('/api/state');
+        const state = await res.json();
+        render(state);
+      } catch (err) {
+        console.error('Failed to fetch state:', err);
+      }
+    }
+
+    function render(s) {
+      // Header
+      document.getElementById('customer-name').textContent = s.customer;
+      const badge = document.getElementById('status-badge');
+      if (s.checklist.ready) {
+        badge.textContent = 'Ready for Pilot';
+        badge.className = 'status-badge status-ready';
+      } else if (s.documents.total > 0) {
+        badge.textContent = 'In Progress';
+        badge.className = 'status-badge status-in-progress';
+      } else {
+        badge.textContent = 'Not Started';
+        badge.className = 'status-badge status-not-ready';
+      }
+
+      // Timeline
+      document.getElementById('days-remaining').textContent = s.daysRemaining ?? '--';
+      document.getElementById('pilot-start').textContent = s.pilotStart;
+      document.getElementById('pilot-end').textContent = s.pilotEnd || '--';
+      document.getElementById('timeline-progress').style.width = (s.progressPercent || 0) + '%';
+
+      // Documents
+      document.getElementById('doc-total').textContent = s.documents.total;
+      document.getElementById('doc-success').textContent = s.documents.succeeded;
+      const failedEl = document.getElementById('doc-failed');
+      failedEl.textContent = s.documents.failed;
+      failedEl.className = 'value ' + (s.documents.failed > 0 ? 'bad' : 'good');
+      const qualEl = document.getElementById('doc-quality');
+      qualEl.textContent = s.documents.avgQuality ? parseFloat(s.documents.avgQuality).toFixed(2) : '--';
+      qualEl.className = 'value ' + (parseFloat(s.documents.avgQuality) >= 0.7 ? 'good' : 'warn');
+      const docPct = s.documents.total > 0 ? (s.documents.succeeded / s.documents.total * 100) : 0;
+      document.getElementById('doc-progress').style.width = docPct + '%';
+
+      // Domain
+      document.getElementById('vocab-count').textContent = s.domain.vocabularyCount;
+      document.getElementById('category-count').textContent =
+        Array.isArray(s.domain.categories) ? s.domain.categories.length : 0;
+      document.getElementById('fewshot-count').textContent = s.domain.fewShotCount;
+      const promptEl = document.getElementById('prompt-status');
+      promptEl.textContent = s.domain.systemPromptLength > 0
+        ? s.domain.systemPromptLength + ' chars'
+        : 'Not generated';
+
+      // Eval
+      document.getElementById('eval-candidates').textContent = s.eval.totalCandidates;
+      document.getElementById('eval-accepted').textContent = s.eval.accepted;
+      document.getElementById('eval-rejected').textContent = s.eval.rejected;
+      const evalPct = Math.min(100, Math.round((s.eval.accepted / 30) * 100));
+      document.getElementById('eval-target').textContent = evalPct + '%';
+      document.getElementById('eval-progress').style.width = evalPct + '%';
+
+      // Checklist
+      const checklistEl = document.getElementById('checklist-items');
+      if (s.checklist.checks && s.checklist.checks.length > 0) {
+        checklistEl.innerHTML = s.checklist.checks.map(c => {
+          const cls = c.pass ? 'check-pass' : (c.severity === 'critical' ? 'check-fail' : 'check-warn');
+          const icon = c.pass ? '&#10003;' : (c.severity === 'critical' ? '&#10007;' : '!');
+          return `<div class="checklist-item">
+            <div class="check-icon ${cls}">${icon}</div>
+            <div>
+              <div>${c.name}</div>
+              <div class="check-detail">${c.detail}</div>
+            </div>
+          </div>`;
+        }).join('');
+      }
+
+      // Issues
+      const issueEl = document.getElementById('issue-list');
+      if (s.issues && s.issues.length > 0) {
+        issueEl.innerHTML = s.issues.map(i => {
+          return `<li class="issue-item">
+            <span><span class="issue-severity severity-${i.severity}"></span>${i.text}</span>
+            <span style="color: #64748b; font-size: 12px;">${i.status}</span>
+          </li>`;
+        }).join('');
+      }
+
+      // Activity
+      const actEl = document.getElementById('activity-log');
+      if (s.activity && s.activity.length > 0) {
+        actEl.innerHTML = s.activity.slice(-10).reverse().map(a => {
+          const time = new Date(a.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          return `<div class="activity-entry">
+            <span class="activity-time">${time}</span>
+            <span class="activity-text"><strong>${a.action}</strong>: ${a.detail}</span>
+          </div>`;
+        }).join('');
+      }
+    }
+
+    // Initial fetch + auto-refresh
+    fetchState();
+    setInterval(fetchState, 10000);
+  </script>
+</body>
+</html>

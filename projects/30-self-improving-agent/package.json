@@ -1,0 +1,14 @@
+{
+  "name": "30-self-improving-agent",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Self-improving research agent with real LLM calls, cross-session memory, and automated prompt evolution",
+  "scripts": {
+    "demo": "node src/demo.js",
+    "check": "node src/demo.js --check",
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0"
+  }
+}

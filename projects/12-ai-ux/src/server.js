@@ -186,7 +186,9 @@ function sleep(ms) {
 
 export { app };
 
-export function startServer(port = 3000) {
+const PORT = parseInt(process.env.PORT, 10) || 3000;
+
+export function startServer(port = PORT) {
   return new Promise(resolve => {
     const server = app.listen(port, () => {
       console.log(`Chat UI server running at http://localhost:${port}`);

@@ -313,3 +313,310 @@ export function compactConversation(turns, maxTokens, opts = {}) {
     },
   };
 }
+
+// ─── Failure mode detection (Drew Brunic's 4 failure modes) ─────────
+
+/**
+ * Detect contradictions across turns — the "Poisoning" failure mode.
+ * Two turns asserting opposite things about the same entity.
+ *
+ * @param {Array<{role: string, content: string}>} turns
+ * @returns {Array<{ turnA: number, turnB: number, description: string }>}
+ */
+function detectPoisoning(turns) {
+  const findings = [];
+
+  // Extract assertions: "X is Y" or "X = Y" patterns per turn
+  const assertions = turns.map((turn, idx) => {
+    const matches = [];
+    const patterns = [
+      /\b(\w[\w\s]{2,20})\s+(?:is|are|was|were|=)\s+(.{3,40}?)(?:\.|,|$)/gim,
+      /\bset\s+(\w[\w\s]{2,15})\s+to\s+(.{3,30}?)(?:\.|,|$)/gim,
+    ];
+    for (const pattern of patterns) {
+      pattern.lastIndex = 0;
+      let m;
+      while ((m = pattern.exec(turn.content)) !== null) {
+        matches.push({
+          subject: m[1].trim().toLowerCase(),
+          value: m[2].trim().toLowerCase(),
+          turnIndex: idx,
+        });
+      }
+    }
+    return matches;
+  });
+
+  // Compare assertions across turns for contradictions
+  const flat = assertions.flat();
+  for (let i = 0; i < flat.length; i++) {
+    for (let j = i + 1; j < flat.length; j++) {
+      const a = flat[i];
+      const b = flat[j];
+      // Same subject, different value, different turn
+      if (
+        a.subject === b.subject &&
+        a.value !== b.value &&
+        a.turnIndex !== b.turnIndex
+      ) {
+        findings.push({
+          turnA: a.turnIndex,
+          turnB: b.turnIndex,
+          description: `"${a.subject}" asserted as "${a.value}" (turn ${a.turnIndex + 1}) vs "${b.value}" (turn ${b.turnIndex + 1})`,
+        });
+      }
+    }
+  }
+
+  return findings;
+}
+
+/**
+ * Detect low-relevance tangents — the "Distraction" failure mode.
+ * Turns whose content diverges significantly from the dominant topic.
+ *
+ * @param {Array<{role: string, content: string}>} turns
+ * @returns {Array<{ turnIndex: number, description: string }>}
+ */
+function detectDistraction(turns) {
+  if (turns.length < 3) return [];
+
+  const findings = [];
+
+  // Build a combined vocabulary from all turns
+  const globalWords = new Map();
+  const turnWords = turns.map(t => {
+    const words = t.content.toLowerCase().split(/\s+/).filter(w => w.length > 3);
+    const wordSet = new Set(words);
+    for (const w of words) {
+      globalWords.set(w, (globalWords.get(w) || 0) + 1);
+    }
+    return wordSet;
+  });
+
+  // Words that appear in 50%+ of turns are "core topic" words
+  const threshold = Math.max(2, Math.floor(turns.length * 0.5));
+  const coreWords = new Set();
+  for (const [word, count] of globalWords) {
+    if (count >= threshold) coreWords.add(word);
+  }
+
+  if (coreWords.size === 0) return [];
+
+  // Score each turn by overlap with core words
+  for (let i = 0; i < turns.length; i++) {
+    const tw = turnWords[i];
+    let overlap = 0;
+    for (const w of tw) {
+      if (coreWords.has(w)) overlap++;
+    }
+    const overlapRatio = tw.size > 0 ? overlap / tw.size : 0;
+
+    // A turn with < 10% overlap with core vocabulary is a tangent
+    if (overlapRatio < 0.1 && tw.size > 5) {
+      findings.push({
+        turnIndex: i,
+        description: `Turn ${i + 1} shares <10% vocabulary with the dominant topic (${Math.round(overlapRatio * 100)}% overlap)`,
+      });
+    }
+  }
+
+  return findings;
+}
+
+/**
+ * Detect ambiguous references — the "Confusion" failure mode.
+ * Pronouns or vague references ("it", "that", "this") without clear antecedents.
+ *
+ * @param {Array<{role: string, content: string}>} turns
+ * @returns {Array<{ turnIndex: number, description: string }>}
+ */
+function detectConfusion(turns) {
+  const findings = [];
+
+  const vagueRefs = /\b(it|that|this|these|those|they|them)\b/gi;
+  const definiteNouns = /\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\b/g;
+
+  for (let i = 0; i < turns.length; i++) {
+    const content = turns[i].content;
+    const refs = content.match(vagueRefs) || [];
+    const nouns = content.match(definiteNouns) || [];
+
+    // High ratio of vague references to concrete nouns suggests confusion
+    if (refs.length > 3 && nouns.length < 2) {
+      findings.push({
+        turnIndex: i,
+        description: `Turn ${i + 1} has ${refs.length} vague references ("it", "that", etc.) with only ${nouns.length} concrete noun(s)`,
+      });
+    }
+  }
+
+  return findings;
+}
+
+/**
+ * Detect conflicting instructions — the "Clash" failure mode.
+ * Instructions that contradict each other (e.g., "always X" vs "never X").
+ *
+ * @param {Array<{role: string, content: string}>} turns
+ * @returns {Array<{ turnA: number, turnB: number, description: string }>}
+ */
+function detectClash(turns) {
+  const findings = [];
+
+  // Extract instruction-like statements
+  const instructionPattern = /\b(always|never|must|must not|don't|do not|should|should not|avoid|ensure|require)\s+(.{5,50}?)(?:\.|,|!|$)/gim;
+
+  const instructions = [];
+  for (let i = 0; i < turns.length; i++) {
+    instructionPattern.lastIndex = 0;
+    let m;
+    while ((m = instructionPattern.exec(turns[i].content)) !== null) {
+      const directive = m[1].toLowerCase();
+      const action = m[2].trim().toLowerCase();
+      const isNegative = ['never', 'must not', "don't", 'do not', 'should not', 'avoid'].includes(directive);
+
+      instructions.push({
+        turnIndex: i,
+        directive,
+        action,
+        isNegative,
+        raw: m[0].trim(),
+      });
+    }
+  }
+
+  // Compare instructions for contradictions
+  for (let i = 0; i < instructions.length; i++) {
+    for (let j = i + 1; j < instructions.length; j++) {
+      const a = instructions[i];
+      const b = instructions[j];
+
+      // Check if same action with opposite polarity
+      if (a.turnIndex !== b.turnIndex && a.isNegative !== b.isNegative) {
+        // Simple similarity: check if the action words overlap significantly
+        const wordsA = new Set(a.action.split(/\s+/).filter(w => w.length > 2));
+        const wordsB = new Set(b.action.split(/\s+/).filter(w => w.length > 2));
+        let overlap = 0;
+        for (const w of wordsA) {
+          if (wordsB.has(w)) overlap++;
+        }
+        const similarity = wordsA.size > 0 ? overlap / wordsA.size : 0;
+
+        if (similarity > 0.5) {
+          findings.push({
+            turnA: a.turnIndex,
+            turnB: b.turnIndex,
+            description: `Conflicting directives: "${a.raw}" (turn ${a.turnIndex + 1}) vs "${b.raw}" (turn ${b.turnIndex + 1})`,
+          });
+        }
+      }
+    }
+  }
+
+  return findings;
+}
+
+/**
+ * Context-aware compression with failure mode detection.
+ *
+ * Improves on compactConversation by first detecting Drew Brunic's 4 failure modes:
+ * - Poisoning: contradictory information across turns
+ * - Distraction: low-relevance tangents that waste tokens
+ * - Confusion: ambiguous references without clear antecedents
+ * - Clash: instructions that conflict with each other
+ *
+ * Problematic content is stripped or flagged before compression, improving
+ * both the quality and efficiency of the compacted output.
+ *
+ * @param {Array<{role: string, content: string}>} turns
+ * @param {number} maxTokens
+ * @param {object} opts - All compactConversation opts plus:
+ *   { stripDistractions: boolean (default true), flagContradictions: boolean (default true) }
+ * @returns {{ turns: Array, stats: object }}
+ */
+export function contextAwareCompress(turns, maxTokens, opts = {}) {
+  const stripDistractions = opts.stripDistractions ?? true;
+  const flagContradictions = opts.flagContradictions ?? true;
+
+  if (!turns || turns.length === 0) {
+    return {
+      turns: [],
+      stats: {
+        originalTurns: 0,
+        compactedTurns: 0,
+        originalTokens: 0,
+        compactedTokens: 0,
+        compressionRatio: 1,
+        summarizedTurns: 0,
+        recentTurnsKept: 0,
+        failureModesDetected: [],
+        tokensRecovered: 0,
+        qualityScore: 1,
+        description: 'No turns to compact',
+      },
+    };
+  }
+
+  // Step 1: Detect all failure modes
+  const poisoning = detectPoisoning(turns);
+  const distraction = detectDistraction(turns);
+  const confusion = detectConfusion(turns);
+  const clash = detectClash(turns);
+
+  const failureModesDetected = [];
+  if (poisoning.length > 0) failureModesDetected.push({ mode: 'poisoning', count: poisoning.length, details: poisoning });
+  if (distraction.length > 0) failureModesDetected.push({ mode: 'distraction', count: distraction.length, details: distraction });
+  if (confusion.length > 0) failureModesDetected.push({ mode: 'confusion', count: confusion.length, details: confusion });
+  if (clash.length > 0) failureModesDetected.push({ mode: 'clash', count: clash.length, details: clash });
+
+  // Step 2: Optionally strip distracting turns
+  let cleanedTurns = [...turns];
+  let tokensRecovered = 0;
+
+  if (stripDistractions && distraction.length > 0) {
+    const distractionIndices = new Set(distraction.map(d => d.turnIndex));
+    const before = cleanedTurns.reduce((s, t) => s + estimateTokens(t.content), 0);
+    cleanedTurns = cleanedTurns.filter((_, i) => !distractionIndices.has(i));
+    const after = cleanedTurns.reduce((s, t) => s + estimateTokens(t.content), 0);
+    tokensRecovered += before - after;
+  }
+
+  // Step 3: Add contradiction/clash warnings if flagging is enabled
+  if (flagContradictions && (poisoning.length > 0 || clash.length > 0)) {
+    const warnings = [];
+    for (const p of poisoning) {
+      warnings.push(`[WARNING: Contradiction] ${p.description}`);
+    }
+    for (const c of clash) {
+      warnings.push(`[WARNING: Conflicting instructions] ${c.description}`);
+    }
+
+    // Prepend warnings to the most recent user turn
+    const lastUserIdx = cleanedTurns.findLastIndex(t => t.role === 'user');
+    if (lastUserIdx >= 0) {
+      cleanedTurns[lastUserIdx] = {
+        ...cleanedTurns[lastUserIdx],
+        content: warnings.join('\n') + '\n\n' + cleanedTurns[lastUserIdx].content,
+      };
+    }
+  }
+
+  // Step 4: Run standard compaction on cleaned turns
+  const result = compactConversation(cleanedTurns, maxTokens, opts);
+
+  // Step 5: Compute quality score
+  // Quality degrades with each failure mode detected, weighted by severity
+  const totalIssues = poisoning.length * 3 + distraction.length + confusion.length * 2 + clash.length * 3;
+  const qualityScore = Math.max(0, Math.min(1, +(1 - totalIssues * 0.05).toFixed(2)));
+
+  return {
+    turns: result.turns,
+    stats: {
+      ...result.stats,
+      failureModesDetected,
+      tokensRecovered,
+      qualityScore,
+    },
+  };
+}

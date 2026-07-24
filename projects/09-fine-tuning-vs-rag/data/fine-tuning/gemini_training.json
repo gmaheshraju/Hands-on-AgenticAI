@@ -1,0 +1,402 @@
+[
+  {
+    "text_input": "Classify this support ticket: I was charged twice for my subscription this month. Please refund the duplicate charge.",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: The app crashes every time I try to upload a file larger than 10MB.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: I can't reset my password. The reset email never arrives.",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: It would be great if you could add dark mode to the mobile app.",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: My invoice shows the wrong tax rate. I'm in Oregon and there should be no sales tax.",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: Getting a 502 Bad Gateway error when accessing the dashboard since yesterday.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: How do I change the email address associated with my account?",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Can you add an option to export reports as CSV files?",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: I cancelled my plan but was still charged for next month.",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: The search function returns no results even when I search for exact titles.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: I need to merge two accounts that I accidentally created with different emails.",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Would love to see Slack integration for notifications.",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: Please explain the difference between the Pro and Enterprise billing plans.",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: API responses are timing out after 30 seconds on the /users endpoint.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: My account was locked after too many failed login attempts. How do I unlock it?",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Can you add two-factor authentication using hardware security keys?",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: I need a copy of all invoices from last year for my tax filing.",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: The webhook endpoint is not receiving POST events anymore.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: How do I transfer ownership of my organization to another team member?",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Please add the ability to schedule reports to be emailed weekly.",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: Why was I charged a different amount than what's shown on the pricing page?",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: Images are not loading in the email editor. I see broken image icons.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: I want to delete my account and all associated data permanently.",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: It would be helpful to have keyboard shortcuts for common actions.",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: Can I get a refund for the unused portion of my annual subscription?",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: The mobile app freezes on the login screen on Android 14.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: How do I add team members to my workspace?",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Please add support for Markdown formatting in comments.",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: My credit card was declined but my bank shows no issues. Can you retry?",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: The drag and drop feature doesn't work in Safari browser.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: I need to update my company name on the account. How do I do this?",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Could you add an API endpoint for bulk user creation?",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: I'm being charged for 10 seats but only have 5 active users.",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: Getting CORS errors when calling the API from my React app.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: My SSO login through Google is giving an OAuth error.",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Please add a way to set custom reminder times for tasks.",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: I need to switch from monthly to annual billing. Will I get the discount?",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: The notification bell shows a count of 5 but there are no new notifications.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: How do I set up role-based access control for my team?",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: It would be great to have a mobile widget for quick task entry.",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: My promo code isn't working at checkout. It says expired but it shouldn't be.",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: PDF export is cutting off the right side of wide tables.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: I forgot which email I used to sign up. Can you help me find my account?",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Can you add the ability to create custom fields in the project view?",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: How do I apply my education discount to an existing subscription?",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: The calendar view doesn't sync with Google Calendar properly.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: I need to revoke API keys for a former employee. Where is this setting?",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Would love to see a Gantt chart view for project timelines.",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: There's a pending charge on my card but my subscription shows as inactive.",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: The real-time collaboration feature has a 10-second lag for remote users.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: How do I enable audit logs for compliance purposes?",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Please add support for custom email templates in automations.",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: I was charged in USD but I selected EUR as my billing currency.",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: The file preview for .docx files shows garbled text.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: I can't find where to update my billing address for tax purposes.",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Can you add conditional logic to form fields?",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: My nonprofit discount was removed during the last renewal. Can you reinstate it?",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: Sorting by date in the table view puts items in wrong order.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: I need to change my username but the option is grayed out.",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: It would be great to have version history for documents.",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: The autopay feature charged my old card instead of the newly added one.",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: Memory usage spikes to 4GB when loading dashboards with many widgets.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: How do I set up SAML SSO for my organization?",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Can you add a public API for third-party integrations?",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: I need an itemized receipt that shows per-user charges for each month.",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: The browser extension conflicts with our company's ad blocker.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: My two-factor authentication app was on my old phone. I can't log in now.",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Please add the ability to archive projects without deleting them.",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: Why does my invoice show a charge for a feature I never activated?",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: The video conferencing integration keeps disconnecting every 5 minutes.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: I'm locked out because my backup codes don't work either.",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Would love to see AI-powered suggestions for task assignments.",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: Can I pause my subscription for 2 months instead of cancelling?",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: Automated tests in the CI pipeline are failing with authentication errors.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: How do I configure which notifications each team member receives?",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Please add a built-in time tracking feature for tasks.",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: The annual plan price increased without any prior notification.",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: Data import from CSV fails silently — no error message, no data imported.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: I need to restrict which IP addresses can access our workspace.",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Can you add the ability to create recurring tasks?",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: My payment method expired and I didn't get a reminder. Now there's a late fee.",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: The desktop app shows a white screen after the latest update on Windows 11.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: How do I downgrade my admin role to a regular user?",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: It would be useful to have a command palette like VS Code.",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: I need a W-9 or tax form from your company for our records.",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: The spell-check feature marks correct words as misspelled.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: I want to remove myself from a shared workspace without deleting it.",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Please add the option to set task dependencies.",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: We have 50 users but the invoice shows charges for 52. Where are the extra 2?",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: Print layout is broken — content overlaps headers on every page.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: How do I enable guest access for external contractors?",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Can you add native integration with Jira for issue syncing?",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: I accidentally deleted my payment method. Now I can't access premium features.",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: The auto-save feature is not working. I lost 30 minutes of edits.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: I need to verify my identity to regain access to a compromised account.",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Would love to see a kanban board view for task management.",
+    "output": "feature-request"
+  },
+  {
+    "text_input": "Classify this support ticket: I'm on the free tier but I keep getting charged $1 test transactions.",
+    "output": "billing"
+  },
+  {
+    "text_input": "Classify this support ticket: The API rate limiter is too aggressive — I'm being throttled at only 10 req/min.",
+    "output": "technical"
+  },
+  {
+    "text_input": "Classify this support ticket: Can I have separate login credentials for my personal and work accounts?",
+    "output": "account"
+  },
+  {
+    "text_input": "Classify this support ticket: Please add support for custom themes and branding on the dashboard.",
+    "output": "feature-request"
+  }
+]

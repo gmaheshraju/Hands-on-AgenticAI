@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# SQLite runtime databases (never commit — data + hygiene)
+*.db
+*.db-shm
+*.db-wal

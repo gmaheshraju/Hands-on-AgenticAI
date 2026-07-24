@@ -47,14 +47,59 @@ server.tool(
     limit: z.number().optional().default(100).describe("Maximum number of rows to return (default: 100, max: 1000)"),
   },
   async ({ sql, limit }) => {
-    // Safety: only allow SELECT queries
+    // Safety: only allow single, read-only SELECT queries
     const trimmed = sql.trim().toUpperCase();
+
+    // Must start with SELECT
     if (!trimmed.startsWith("SELECT")) {
       return {
         content: [{
           type: "text",
           text: JSON.stringify({
             error: "Only SELECT queries are allowed. This is a read-only interface.",
+          }),
+        }],
+        isError: true,
+      };
+    }
+
+    // Block multiple statements (semicolons followed by more content)
+    // Allow a trailing semicolon with only whitespace after it
+    const withoutStrings = sql.replace(/'[^']*'/g, '""'); // strip string literals
+    const statements = withoutStrings.split(';').filter(s => s.trim().length > 0);
+    if (statements.length > 1) {
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            error: "Multiple SQL statements are not allowed. Send one SELECT query at a time.",
+          }),
+        }],
+        isError: true,
+      };
+    }
+
+    // Block DDL/DML keywords anywhere in the query (even inside subqueries)
+    const dangerousKeywords = /\b(DROP|ALTER|CREATE|DELETE|INSERT|UPDATE|TRUNCATE|REPLACE|EXEC|EXECUTE|GRANT|REVOKE|ATTACH|DETACH|PRAGMA|REINDEX|VACUUM)\b/i;
+    if (dangerousKeywords.test(withoutStrings)) {
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            error: "Query contains prohibited keywords. Only read-only SELECT queries are allowed.",
+          }),
+        }],
+        isError: true,
+      };
+    }
+
+    // Block comment-based injection (-- and /* */)
+    if (/--|\/\*/.test(withoutStrings)) {
+      return {
+        content: [{
+          type: "text",
+          text: JSON.stringify({
+            error: "SQL comments are not allowed in queries.",
           }),
         }],
         isError: true,

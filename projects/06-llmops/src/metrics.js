@@ -29,7 +29,7 @@ function migrate() {
   db.exec(`
     CREATE TABLE IF NOT EXISTS requests (
       id            INTEGER PRIMARY KEY AUTOINCREMENT,
-      timestamp     TEXT    NOT NULL DEFAULT (datetime('now')),
+      timestamp     TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
       query_preview TEXT,
       complexity    REAL,
       tier          TEXT,
@@ -46,6 +46,16 @@ function migrate() {
 
     CREATE INDEX IF NOT EXISTS idx_requests_timestamp ON requests(timestamp);
     CREATE INDEX IF NOT EXISTS idx_requests_model     ON requests(model);
+  `);
+
+  // One-time migration: rows written before the ISO-8601 timestamp fix are
+  // stored as "YYYY-MM-DD HH:MM:SS" (space-separated). String comparison
+  // against JS `toISOString()` thresholds ("YYYY-MM-DDTHH:MM:SS.SSSZ") is
+  // unreliable across the space/T boundary, so normalize old rows in place.
+  db.exec(`
+    UPDATE requests
+    SET timestamp = REPLACE(timestamp, ' ', 'T') || '.000Z'
+    WHERE timestamp NOT LIKE '%T%'
   `);
 }
 

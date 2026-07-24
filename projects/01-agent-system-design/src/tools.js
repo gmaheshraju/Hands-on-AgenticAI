@@ -16,17 +16,21 @@ export function parsePRUrl(url) {
 /**
  * Make an authenticated GitHub API request.
  */
-async function githubFetch(path, token) {
+async function githubFetch(path, token, { method = 'GET', body } = {}) {
   const headers = {
     Accept: 'application/vnd.github.v3+json',
     'User-Agent': 'pr-review-agent/1.0',
   };
   if (token) headers.Authorization = `Bearer ${token}`;
+  if (body) headers['Content-Type'] = 'application/json';
 
-  const res = await fetch(`${GITHUB_API}${path}`, { headers });
+  const opts = { method, headers };
+  if (body) opts.body = JSON.stringify(body);
+
+  const res = await fetch(`${GITHUB_API}${path}`, opts);
   if (!res.ok) {
-    const body = await res.text().catch(() => '');
-    throw new Error(`GitHub API ${res.status}: ${path} — ${body.slice(0, 200)}`);
+    const text = await res.text().catch(() => '');
+    throw new Error(`GitHub API ${res.status}: ${path} — ${text.slice(0, 200)}`);
   }
   return res.json();
 }
@@ -173,6 +177,7 @@ export function createTools() {
         const res = await githubFetch(
           `/repos/${ctx.owner}/${ctx.repo}/issues/${ctx.number}/comments`,
           ctx.token,
+          { method: 'POST', body: { body: args.body } },
         );
         return { posted: true, id: res.id };
       },

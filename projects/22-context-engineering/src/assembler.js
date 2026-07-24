@@ -197,3 +197,96 @@ export function assemble(sources, plan, opts = {}) {
     totalTokens: actualTotal,
   };
 }
+
+/**
+ * Assemble context with scratchpad awareness.
+ *
+ * When a source would be dropped due to budget constraints, it is parked
+ * in the scratchpad instead. The scratchpad's compact index is injected
+ * as a low-cost source so the agent knows what is available without
+ * paying the full token cost.
+ *
+ * This is the "Write" move in practice: instead of losing information
+ * entirely, you park it and maintain a table of contents.
+ *
+ * @param {Array} sources - Original source array
+ * @param {object} plan - Allocation plan from budget.allocate() or a strategy
+ * @param {import('./scratchpad.js').Scratchpad} scratchpad - Scratchpad instance
+ * @param {object} opts - { ordering, parkRelevanceThreshold }
+ * @returns {object} { messages, report, totalTokens, parkedSources }
+ */
+export function assembleWithScratchpad(sources, plan, scratchpad, opts = {}) {
+  const parkThreshold = opts.parkRelevanceThreshold ?? 0.0; // park everything by default
+  const parkedSources = [];
+
+  // Park dropped sources into the scratchpad instead of losing them
+  for (const dropped of plan.dropped) {
+    if (dropped.relevanceScore >= parkThreshold) {
+      const result = scratchpad.write(
+        dropped.id || `dropped_${dropped.type.name}_${Date.now()}`,
+        dropped.content,
+        {
+          source: dropped.type.name,
+          relevance: dropped.relevanceScore,
+          tags: [dropped.type.label, dropped.reason || 'budget_exceeded'],
+        }
+      );
+      parkedSources.push({
+        id: dropped.id,
+        type: dropped.type.name,
+        label: dropped.type.label,
+        tokens: dropped.tokens,
+        tokensSaved: result.tokensSaved,
+        relevance: dropped.relevanceScore,
+      });
+    }
+  }
+
+  // Also park truncated sources (full version) — the truncated version
+  // is in-context, but the full version is available via scratchpad
+  for (const trunc of plan.truncated) {
+    scratchpad.write(
+      `full_${trunc.id || trunc.type.name}_${Date.now()}`,
+      trunc.content,
+      {
+        source: trunc.type.name,
+        relevance: trunc.relevanceScore,
+        tags: [trunc.type.label, 'full_version_of_truncated'],
+      }
+    );
+  }
+
+  // Build a scratchpad index source to inject into context
+  const scratchpadIndex = scratchpad.formatIndex();
+  const indexTokens = estimateTokens(scratchpadIndex);
+
+  // Create a modified plan that includes the scratchpad index
+  const scratchpadSource = {
+    type: { name: 'SCRATCHPAD_INDEX', priority: 3, label: 'Scratchpad Index' },
+    content: scratchpadIndex,
+    tokens: indexTokens,
+    allocatedTokens: indexTokens,
+    relevanceScore: 0.7,
+  };
+
+  const augmentedPlan = {
+    ...plan,
+    included: [...plan.included, scratchpadSource],
+    // Drop the "dropped" list since they are now parked
+    dropped: plan.dropped.filter(d => d.relevanceScore < parkThreshold),
+  };
+
+  // Run standard assembly with the augmented plan
+  const result = assemble(sources, augmentedPlan, opts);
+
+  // Enhance the report
+  result.report.scratchpad = {
+    sourcesParked: parkedSources.length,
+    totalTokensParked: parkedSources.reduce((s, p) => s + p.tokens, 0),
+    indexTokenCost: indexTokens,
+    stats: scratchpad.getStats(),
+  };
+  result.parkedSources = parkedSources;
+
+  return result;
+}

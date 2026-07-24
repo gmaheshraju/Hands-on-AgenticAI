@@ -30,18 +30,24 @@ export async function extractFacts(episodes, existingFacts, options = {}) {
  * @param {import('./memory.js').MemoryStore} memory
  * @param {object} options — { threshold, llm }
  */
+const URGENT_PATTERNS = /\b(?:moved\s+to|joined|switched\s+to|now\s+at|promoted\s+to|left|quit|fired\s+from)\b/i;
+
 export async function runConsolidation(memory, options = {}) {
   const threshold = options.threshold || 5;
   const unconsolidatedCount = memory.countUnconsolidated();
 
-  if (unconsolidatedCount < threshold) {
+  const urgent = unconsolidatedCount > 0 &&
+    memory.getUnconsolidatedEpisodes(unconsolidatedCount)
+      .some(e => URGENT_PATTERNS.test(e.raw_input));
+
+  if (!urgent && unconsolidatedCount < threshold) {
     return {
       ran: false,
       reason: `Only ${unconsolidatedCount} unconsolidated episodes (threshold: ${threshold})`,
     };
   }
 
-  const episodes = memory.getUnconsolidatedEpisodes(threshold);
+  const episodes = memory.getUnconsolidatedEpisodes(urgent ? unconsolidatedCount : threshold);
   const existingFacts = memory.getAllFacts();
   const newFacts = await extractFacts(episodes, existingFacts, options);
 
@@ -64,6 +70,9 @@ export async function runConsolidation(memory, options = {}) {
   for (const proc of procedures) {
     memory.addProcedure(proc.trigger, proc.action, proc.examples);
   }
+
+  // Age out facts that haven't been updated in 6+ months
+  memory.markStaleFacts(6);
 
   return {
     ran: true,
@@ -90,6 +99,12 @@ function mockLLMExtractor(episodes, _existingFacts) {
     "i", "met", "talked", "spoke", "had", "chatted", "who", "what",
     "do", "the", "a", "an", "to", "with", "at", "from", "on",
   ]);
+  const PREPOSITIONS = /\s+(?:on|in|for|as|about|with|from|to|and|but|where|who|which|using|during|after|before|over|under|through|into|across)\s+/i;
+
+  function trimAtPreposition(str) {
+    const match = str.match(PREPOSITIONS);
+    return match ? str.slice(0, match.index).trim() : str.trim();
+  }
 
   /**
    * Find the primary person name in a text.
@@ -171,7 +186,7 @@ function mockLLMExtractor(episodes, _existingFacts) {
         facts.push({
           subject: person,
           predicate: "company",
-          object: roleAt[3].trim(),
+          object: trimAtPreposition(roleAt[3]),
           confidence: 0.9,
         });
       }
@@ -187,7 +202,7 @@ function mockLLMExtractor(episodes, _existingFacts) {
         facts.push({
           subject: person,
           predicate: "company",
-          object: worksAt[2].trim(),
+          object: trimAtPreposition(worksAt[2]),
           confidence: 0.85,
         });
       }
@@ -230,7 +245,7 @@ function mockLLMExtractor(episodes, _existingFacts) {
         facts.push({
           subject: person,
           predicate: "company",
-          object: moved[2].trim(),
+          object: trimAtPreposition(moved[2]),
           confidence: 0.95,
         });
       }

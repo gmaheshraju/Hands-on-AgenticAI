@@ -113,10 +113,11 @@ registerTool('routeToTeam', async (params, input) => {
 
 registerTool('notifyTeam', async (params, input) => {
   await new Promise((r) => setTimeout(r, 20));
+  const routeData = input.responseActions?.route?.result?.routeToTeam || input.routeToTeam || {};
   return {
     notified: true,
-    channel: input.routeToTeam?.channel || params.channel || '#general',
-    team: input.routeToTeam?.team || params.team || 'Engineering',
+    channel: routeData.channel || params.channel || '#general',
+    team: routeData.team || params.team || 'Engineering',
     method: 'slack+pagerduty',
     notifiedAt: new Date().toISOString(),
   };

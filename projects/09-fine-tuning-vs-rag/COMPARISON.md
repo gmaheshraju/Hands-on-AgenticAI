@@ -13,10 +13,10 @@ Evaluated on a held-out test set of 30 tickets.
 
 | Approach | Accuracy | Avg Latency | P95 Latency | Est. Cost/Query | Setup Cost | Maintenance |
 |----------|----------|-------------|-------------|-----------------|------------|-------------|
-| Zero-Shot Prompting | 80.0% | 470ms | 537ms | $0.000003 | None | None |
-| Few-Shot Prompting | 90.0% | 528ms | 630ms | $0.000016 | Minimal (write 8 examples) | Low |
-| RAG (Retrieval) | 93.3% | 639ms | 746ms | $0.000028 | Medium (index 100 tickets) | Medium (update index) |
-| Fine-Tuned Model | 96.7% | 264ms | 341ms | $0.000002 | High ($0.07-$5 training) | High (retrain on changes) |
+| Zero-Shot Prompting | 80.0% | 442ms | 541ms | $0.000003 | None | None |
+| Few-Shot Prompting | 90.0% | 559ms | 638ms | $0.000016 | Minimal (write 8 examples) | Low |
+| RAG (Retrieval) | 93.3% | 586ms | 728ms | $0.000028 | Medium (index 100 tickets) | Medium (update index) |
+| Fine-Tuned Model | 96.7% | 270ms | 334ms | $0.000002 | High ($0.07-$5 training) | High (retrain on changes) |
 
 ---
 
