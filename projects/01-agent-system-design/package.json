@@ -6,7 +6,8 @@
   "main": "src/demo.js",
   "scripts": {
     "demo": "node src/demo.js",
-    "review": "node src/review.js"
+    "review": "node src/review.js",
+    "test": "node --test src/tests/*.test.js"
   },
   "keywords": ["agent", "react-loop", "code-review", "github"],
   "license": "MIT"

@@ -66,7 +66,20 @@ src/
   mock-data.js  — Realistic mock PR data (auth endpoint with planted bugs)
   demo.js       — Demo runner (mock LLM, no API keys)
   review.js     — Live runner (real GitHub API + real LLM)
+  tests/        — Unit tests for the schema and tool contracts (node:test)
 ```
+
+## Testing
+
+```bash
+node --test src/tests/*.test.js
+```
+
+Covers the parts of the system that don't require a live LLM or GitHub API call:
+- `schema.test.js` — finding validation (missing fields, bad enums, invalid line numbers), dedup grouping semantics, and severity sort order
+- `tools.test.js` — PR URL parsing edge cases, the tool registry contract, and demo-mode fallbacks (mock file miss, empty search, comment posting stub)
+
+These are the contract boundaries most likely to silently break during a refactor — a bad `severity` enum or a dedup key change won't throw until a real review runs, so they're worth locking down with fast, deterministic tests.
 
 ## Design Decisions
 
