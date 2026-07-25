@@ -502,6 +502,18 @@ function CoordinationPanel() {
         <strong>What to say in an interview:</strong> "I'd model the workflow as a state machine persisted after each step, make tool calls idempotent, and let the orchestrator be crash-recoverable by construction — not retry logic bolted on after the fact." That reframes reliability from a prompt problem into a distributed-systems problem, which is the level the question is testing.
       </Decision></FadeIn>
 
+      <FadeIn delay={400}><Decision question="A multi-agent run gives a great answer on Monday and a wrong one on Tuesday with the same input. How do you debug and evaluate it?">
+        <Pill type="amber">The hardest operational question</Pill> Non-determinism is the tax you pay for multi-agent systems. The same prompt produces different routing, different sub-agent decompositions, and different merges across runs. You cannot debug this with a stack trace, and you cannot evaluate it with a single golden output. Interviewers ask this to see whether you treat agents as software (observable, testable) or as magic (re-run and hope).
+        <br /><br />
+        <strong>1 — Trace the trajectory, not just the output.</strong> Emit a structured span for every step: the router's decision and why, each sub-agent's inputs/tools/outputs, and the merge. Use OpenTelemetry's GenAI conventions (or LangSmith/Langfuse/Braintrust) so one <code>trace_id</code> ties the whole run together. When Tuesday's answer is wrong, you diff Monday's trace against Tuesday's and the divergence point is visible — usually the router picked a different specialist, or one sub-agent got a truncated handoff.
+        <br /><br />
+        <strong>2 — Evaluate at two levels: outcome and trajectory.</strong> Outcome eval asks "was the final answer right?" — necessary but blunt, because a right answer can come from a broken process that won't generalize. Trajectory eval asks "did each agent do its job?" — did the router pick the correct specialist, did the sub-agent call the right tool, was the handoff lossless? Grade steps independently so you know <em>which</em> agent regressed, not just that the system did.
+        <br /><br />
+        <strong>3 — Pin the variance you can, measure the rest.</strong> Set <code>temperature: 0</code> and seed where the API allows it to shrink the search space, but accept that tool results, retrieval order, and model updates still make runs differ. So run each eval case N times and score the <em>distribution</em>: pass@k and variance matter more than a single pass/fail. A setup that's correct 6/10 times is a reliability bug even when today's run looks fine — that's exactly the Monday/Tuesday gap.
+        <br /><br />
+        <strong>What to say:</strong> "I'd make the system observable before I make it smarter — structured traces per step, trajectory-level evals graded per agent, and each case run N times so I'm measuring a reliability distribution, not a lucky sample. Then non-determinism becomes a metric I can drive down, not a mystery I re-run."
+      </Decision></FadeIn>
+
       <FadeIn><CodeBlock filename="context-handoff.js" code={CONTEXT_HANDOFF_CODE} output={CONTEXT_HANDOFF_OUTPUT} /></FadeIn>
 
       <FadeIn><Insight>
