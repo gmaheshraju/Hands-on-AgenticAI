@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 
 export default function ThemeToggle() {
+  // Guarded because this initializer runs during render, including the
+  // build-time prerender where there is no document.
   const [dark, setDark] = useState(() =>
+    typeof document !== 'undefined' &&
     document.documentElement.getAttribute('data-theme') === 'dark'
   );
 

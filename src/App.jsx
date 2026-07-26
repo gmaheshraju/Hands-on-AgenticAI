@@ -1,4 +1,6 @@
-import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { ROUTES, fullTitle, canonicalFor } from './seo/routes';
 import Layout from './components/Layout';
 import PageTransition from './components/PageTransition';
 import Home from './pages/Home';
@@ -34,7 +36,29 @@ import ForwardDeployedEngineering from './pages/blog/ForwardDeployedEngineering'
 import ContextEngineering from './pages/blog/ContextEngineering';
 import SoloDeveloperAdvantage from './pages/blog/SoloDeveloperAdvantage';
 
+// The prerendered HTML carries the right tags on first load, but client-side
+// navigation never re-reads the head — without this the tab title and canonical
+// stay stuck on whichever page the visitor landed on.
+function useDocumentMeta() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const route = ROUTES.find((r) => r.path === pathname);
+    if (!route) return;
+
+    document.title = fullTitle(route);
+    document
+      .querySelector('link[rel="canonical"]')
+      ?.setAttribute('href', canonicalFor(route));
+    document
+      .querySelector('meta[name="description"]')
+      ?.setAttribute('content', route.description);
+  }, [pathname]);
+}
+
 export default function App() {
+  useDocumentMeta();
+
   return (
     <Layout>
       <PageTransition>
