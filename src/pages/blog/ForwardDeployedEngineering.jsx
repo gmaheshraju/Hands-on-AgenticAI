@@ -43,6 +43,65 @@ console.log(paving
   ? 'VERDICT: healthy — custom work is hardening into product.'
   : 'VERDICT: stuck on gravel — every account is still bespoke.');`;
 
+const SEAM_CODE = `// The capability seam: every FDE customization is REGISTERED, not forked.
+// Each engagement overrides named capabilities instead of editing platform code.
+const overrides = {
+  acme:       { 'extract.tables': 'pdfplumber-grid', 'auth.sso': 'okta-saml',
+                'redact.pii': 'presidio-en' },
+  borealis:   { 'extract.tables': 'pdfplumber-grid', 'redact.pii': 'presidio-en',
+                'route.approval': 'two-step-cfo' },
+  cindermill: { 'extract.tables': 'pdfplumber-grid', 'redact.pii': 'presidio-multi',
+                'ocr.scan': 'tesseract-lowdpi' },
+  delta:      { 'redact.pii': 'presidio-en', 'auth.sso': 'entra-oidc' },
+};
+
+// Invert the registry: capability -> which impl each customer chose.
+const byCapability = new Map();
+for (const [customer, caps] of Object.entries(overrides)) {
+  for (const [cap, impl] of Object.entries(caps)) {
+    if (!byCapability.has(cap)) byCapability.set(cap, []);
+    byCapability.get(cap).push({ customer, impl });
+  }
+}
+
+// Promotion rule: >=3 customers independently landed on the SAME impl.
+// That is no longer bespoke work — it is a missing platform default.
+const PROMOTE_AT = 3;
+const rows = [...byCapability.entries()].map(([cap, picks]) => {
+  const tally = picks.reduce((m, p) => m.set(p.impl, (m.get(p.impl) || 0) + 1), new Map());
+  const [dominant, converged] = [...tally].sort((a, b) => b[1] - a[1])[0];
+  return {
+    capability: cap,
+    customers: picks.length,
+    dominant,
+    converged,
+    distinctImpls: tally.size,
+    verdict: converged >= PROMOTE_AT ? 'PROMOTE' : 'hold',
+  };
+});
+
+rows.sort((a, b) => b.converged - a.converged || b.customers - a.customers);
+console.table(rows.map(({ distinctImpls, ...r }) => r));
+
+// Divergence is a different signal than convergence — and easy to misread.
+const configSurfaces = rows.filter(
+  (r) => r.verdict === 'hold' && r.customers > 1 && r.distinctImpls === r.customers
+);
+for (const r of configSurfaces) {
+  console.log(\`CONFIG SURFACE: \${r.capability} — \${r.customers} customers, \${r.distinctImpls} impls.\`);
+}`;
+
+const SEAM_OUTPUT = `┌────────────────┬───────────┬──────────────────┬───────────┬─────────┐
+│ capability     │ customers │ dominant         │ converged │ verdict │
+├────────────────┼───────────┼──────────────────┼───────────┼─────────┤
+│ redact.pii     │     4     │ presidio-en      │     3     │ PROMOTE │
+│ extract.tables │     3     │ pdfplumber-grid  │     3     │ PROMOTE │
+│ auth.sso       │     2     │ okta-saml        │     1     │ hold    │
+│ route.approval │     1     │ two-step-cfo     │     1     │ hold    │
+│ ocr.scan       │     1     │ tesseract-lowdpi │     1     │ hold    │
+└────────────────┴───────────┴──────────────────┴───────────┴─────────┘
+CONFIG SURFACE: auth.sso — 2 customers, 2 impls.`;
+
 const LEVERAGE_OUTPUT = `┌─────────┬───────┬────────────┬─────────┐
 │ customer│ weeks │ configured │ speedup │
 ├─────────┼───────┼────────────┼─────────┤
@@ -423,7 +482,30 @@ function AIPlaybookPanel() {
         <Pill type="green">Failure mode catalog</Pill> FDEs discover how AI breaks in production: hallucinations on specific data types, latency spikes on certain query patterns, compliance issues in regulated domains. This becomes the product team&rsquo;s reliability roadmap.
       </Decision></FadeIn>
 
-      <FadeIn>
+      <FadeIn delay={60}>
+        <p style={{ fontSize: 14, color: 'var(--text-p)', lineHeight: 1.7, marginBottom: 4, marginTop: 24 }}>
+          &ldquo;Pattern extraction&rdquo; is the step most candidates wave at. The concrete answer is an engineering
+          constraint: FDEs never fork the platform, they <strong>register overrides against named capabilities</strong>.
+          Once customization is structured data instead of a diverged branch, productization stops being a quarterly
+          archaeology exercise and becomes a query you can run.
+        </p>
+      </FadeIn>
+
+      <FadeIn delay={120}>
+        <CodeBlock filename="promotion-candidates.js" code={SEAM_CODE} output={SEAM_OUTPUT} />
+      </FadeIn>
+
+      <FadeIn delay={180}>
+        <Insight tag="Convergence vs divergence">
+          Two customers overriding the same capability with <em>different</em> implementations is the opposite signal from
+          three landing on the same one. Convergence means you found a missing default &mdash; ship it into the platform.
+          Divergence means you found a <em>config surface</em>: the capability is genuinely customer-specific, and the right
+          product move is a clean extension point, not a built-in. Teams that only count override frequency promote the
+          divergent ones too, and end up shipping an opinionated default that every future account immediately overrides.
+        </Insight>
+      </FadeIn>
+
+      <FadeIn delay={240}>
         <Insight type="warn" tag="Data gravity warning">
           Once an FDE deeply integrates an AI system with a customer&rsquo;s data, switching costs become enormous. This is intentional &mdash; it&rsquo;s the moat. But it also means you must deliver real value, not just create lock-in through complexity. Customers who feel trapped become hostile; customers who feel empowered expand.
         </Insight>
