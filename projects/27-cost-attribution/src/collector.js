@@ -2,9 +2,9 @@ export class CostCollector {
   constructor(config = {}) {
     this.events = [];
     this.pricing = config.pricing || {
-      'claude-opus-4': { input: 0.015, output: 0.075 },
-      'claude-sonnet-4': { input: 0.003, output: 0.015 },
-      'claude-haiku-3.5': { input: 0.0008, output: 0.004 },
+      'claude-opus-5': { input: 0.005, output: 0.025 },
+      'claude-sonnet-5': { input: 0.003, output: 0.015 },
+      'claude-haiku-4-5': { input: 0.001, output: 0.005 },
       'gpt-4o': { input: 0.005, output: 0.015 },
       'gpt-4o-mini': { input: 0.00015, output: 0.0006 },
       'gemini-2.5-pro': { input: 0.00125, output: 0.01 },

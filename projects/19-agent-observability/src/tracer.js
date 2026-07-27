@@ -2,9 +2,9 @@ import { randomUUID } from 'crypto';
 
 // Cost per 1M tokens (USD)
 export const MODEL_PRICING = {
-  'claude-3-opus':    { input: 15.0,  output: 75.0  },
-  'claude-3-sonnet':  { input: 3.0,   output: 15.0  },
-  'claude-3-haiku':   { input: 0.25,  output: 1.25  },
+  'claude-opus-5':    { input: 5.0,   output: 25.0  },
+  'claude-sonnet-5':  { input: 3.0,   output: 15.0  },
+  'claude-haiku-4-5': { input: 1.0,   output: 5.0   },
   'claude-3.5-sonnet':{ input: 3.0,   output: 15.0  },
   'gpt-4-turbo':      { input: 10.0,  output: 30.0  },
   'gpt-4o':           { input: 2.5,   output: 10.0  },

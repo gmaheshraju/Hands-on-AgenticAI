@@ -263,13 +263,13 @@ describe('Model Router', () => {
     const router = new ModelRouter();
     const cb = new CircuitBreaker({ failureThreshold: 1 });
     cb.recordFailure('anthropic', new Error('down'));
-    const route = router.route({ model: 'claude-sonnet-4', messages: [{ content: 'test' }] }, cb);
+    const route = router.route({ model: 'claude-sonnet-5', messages: [{ content: 'test' }] }, cb);
     assert.notEqual(route.provider, 'anthropic');
   });
 
   it('estimates cost correctly', () => {
     const router = new ModelRouter();
-    const cost = router.estimateCost('claude-sonnet-4', 1000, 500);
+    const cost = router.estimateCost('claude-sonnet-5', 1000, 500);
     assert.ok(cost > 0);
     assert.equal(cost, (1000 / 1000) * 0.003 + (500 / 1000) * 0.015);
   });
@@ -280,8 +280,8 @@ describe('Model Router', () => {
 describe('Cost Tracker', () => {
   it('records and tracks costs', () => {
     const ct = new CostTracker();
-    ct.record({ teamId: 'eng', model: 'claude-sonnet-4', costUsd: 0.05 });
-    ct.record({ teamId: 'eng', model: 'claude-sonnet-4', costUsd: 0.03 });
+    ct.record({ teamId: 'eng', model: 'claude-sonnet-5', costUsd: 0.05 });
+    ct.record({ teamId: 'eng', model: 'claude-sonnet-5', costUsd: 0.03 });
     const report = ct.teamReport('eng');
     assert.equal(report.requestCount, 2);
     assert.equal(report.totalCostUsd, 0.08);
@@ -307,8 +307,8 @@ describe('Cost Tracker', () => {
 
   it('detects waste patterns', () => {
     const ct = new CostTracker();
-    ct.record({ teamId: 'eng', model: 'claude-opus-4', inputTokens: 100, outputTokens: 50, costUsd: 0.05 });
-    ct.record({ teamId: 'eng', model: 'claude-opus-4', inputTokens: 80, outputTokens: 30, costUsd: 0.04 });
+    ct.record({ teamId: 'eng', model: 'claude-opus-5', inputTokens: 100, outputTokens: 50, costUsd: 0.05 });
+    ct.record({ teamId: 'eng', model: 'claude-opus-5', inputTokens: 80, outputTokens: 30, costUsd: 0.04 });
     const waste = ct.wasteReport();
     const premiumWaste = waste.find(w => w.pattern === 'premium_model_for_simple_tasks');
     assert.ok(premiumWaste);
@@ -327,7 +327,7 @@ describe('Cost Tracker', () => {
 describe('Audit Log', () => {
   it('logs and queries entries', () => {
     const log = new AuditLog();
-    log.log({ teamId: 'eng', action: 'request', model: 'claude-sonnet-4', status: 'success' });
+    log.log({ teamId: 'eng', action: 'request', model: 'claude-sonnet-5', status: 'success' });
     log.log({ teamId: 'eng', action: 'request', model: 'gpt-4o', status: 'success' });
     log.log({ teamId: 'marketing', action: 'request', model: 'gpt-4o-mini', status: 'success' });
     const engLogs = log.query({ teamId: 'eng' });
@@ -344,8 +344,8 @@ describe('Audit Log', () => {
 
   it('generates compliance report', () => {
     const log = new AuditLog();
-    log.log({ teamId: 'eng', action: 'request', status: 'success', costUsd: 0.05, model: 'claude-sonnet-4' });
-    log.log({ teamId: 'eng', action: 'pii_detected', piiDetected: true, piiTypes: ['EMAIL'], status: 'success', model: 'claude-sonnet-4' });
+    log.log({ teamId: 'eng', action: 'request', status: 'success', costUsd: 0.05, model: 'claude-sonnet-5' });
+    log.log({ teamId: 'eng', action: 'pii_detected', piiDetected: true, piiTypes: ['EMAIL'], status: 'success', model: 'claude-sonnet-5' });
     log.log({ teamId: 'eng', action: 'blocked', status: 'blocked' });
     const report = log.complianceReport('eng', Date.now() - 60000);
     assert.equal(report.totalRequests, 3);
@@ -410,7 +410,7 @@ describe('LLM Gateway Integration', () => {
     gw.registerProvider('google', async () => ({ content: 'ok', usage: { inputTokens: 50, outputTokens: 20 } }));
     await gw.request({
       teamId: 'eng',
-      model: 'claude-sonnet-4',
+      model: 'claude-sonnet-5',
       messages: [{ role: 'user', content: 'My email is secret@corp.com' }],
     });
     assert.ok(capturedMessages, 'Provider should have been called');
@@ -439,7 +439,7 @@ describe('LLM Gateway Integration', () => {
       content: 'Google fallback', usage: { inputTokens: 50, outputTokens: 20 },
     }));
     const result = await gw.request({
-      model: 'claude-sonnet-4',
+      model: 'claude-sonnet-5',
       messages: [{ role: 'user', content: 'Test failover' }],
     });
     assert.notEqual(result.provider, 'anthropic');

@@ -355,32 +355,32 @@ const ERROR_RECOVERY_CODE = `class AIErrorRecovery {
 
 const recovery = new AIErrorRecovery({
   models: [
-    { name: 'claude-sonnet-4', timeout: 10000 },
-    { name: 'claude-haiku-3.5', timeout: 15000 },
+    { name: 'claude-sonnet-5', timeout: 10000 },
+    { name: 'claude-haiku-4-5', timeout: 15000 },
     { name: 'cached-responses', timeout: 1000 },
   ],
 });`;
 
 const ERROR_RECOVERY_OUTPUT = `Scenario 1: Primary model succeeds
-  attempt 0: claude-sonnet-4 -> 200 OK (1.2s)
+  attempt 0: claude-sonnet-5 -> 200 OK (1.2s)
   Result: full quality response
 
 Scenario 2: Primary times out, fallback succeeds
-  attempt 0: claude-sonnet-4 -> TIMEOUT (10s)
-  attempt 1: claude-haiku-3.5 -> 200 OK (2.1s)
+  attempt 0: claude-sonnet-5 -> TIMEOUT (10s)
+  attempt 1: claude-haiku-4-5 -> 200 OK (2.1s)
   Result: slightly lower quality, but user waited 12s total
   UX: "Taking a moment..." shown at 2s mark
 
 Scenario 3: Rate limited, retry works
-  attempt 0: claude-sonnet-4 -> 429 (rate limited)
+  attempt 0: claude-sonnet-5 -> 429 (rate limited)
   backoff: 1s wait
-  attempt 0 (retry): claude-sonnet-4 -> 200 OK (1.8s)
+  attempt 0 (retry): claude-sonnet-5 -> 200 OK (1.8s)
   Result: full quality, user waited ~3s total
   UX: "High demand, your request is queued..."
 
 Scenario 4: Everything fails
-  attempt 0: claude-sonnet-4 -> TIMEOUT
-  attempt 1: claude-haiku-3.5 -> 500
+  attempt 0: claude-sonnet-5 -> TIMEOUT
+  attempt 1: claude-haiku-4-5 -> 500
   attempt 2: cached-responses -> partial match
   Result: cached answer + "retry" + "contact support"
   UX: "I'm having trouble right now. Here's what I know
@@ -736,7 +736,7 @@ function ErrorStatesPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="Recovery patterns -- what to do when the primary path fails?">
-        <Pill type="green">Auto-retry with model fallback</Pill> Primary model times out or errors? Retry with a faster, cheaper model. claude-sonnet-4 fails, retry with claude-haiku-3.5. 90% of the time, the simpler model&apos;s answer is good enough for the user&apos;s question. Implementation: ordered model list with per-model timeouts and max 2-3 retries total.
+        <Pill type="green">Auto-retry with model fallback</Pill> Primary model times out or errors? Retry with a faster, cheaper model. claude-sonnet-5 fails, retry with claude-haiku-4-5. 90% of the time, the simpler model&apos;s answer is good enough for the user&apos;s question. Implementation: ordered model list with per-model timeouts and max 2-3 retries total.
         <br /><br />
         <Pill type="green">Graceful degradation</Pill> Tool fails? Answer from the model&apos;s knowledge with a caveat. &quot;Based on general policy, refunds take 5-7 days, but I was not able to check your specific order. Want me to try again?&quot; A partial answer with a disclaimer is better than no answer.
         <br /><br />

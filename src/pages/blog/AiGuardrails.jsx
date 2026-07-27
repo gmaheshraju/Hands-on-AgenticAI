@@ -278,7 +278,7 @@ const pipeline = new ContentModerationPipeline({
   ],
   classifier: new ToxicityClassifier('distilbert-toxicity'),  // ~5ms
   llmJudge: new LLMJudge({
-    model: 'claude-3-haiku',  // cheap + fast for moderation
+    model: 'claude-haiku-4-5',  // cheap + fast for moderation
     prompt: \`Rate this text for safety. Categories: safe, borderline, unsafe.
              Consider context, sarcasm, and cultural nuance.\`,
   }),

@@ -10,18 +10,18 @@ const MODEL_ROUTER_CODE = `async function routeToModel(query, { costCap = 0.01 }
   const complexity = await classifyComplexity(query);
 
   if (complexity === 'simple') {
-    // Haiku/GPT-4o-mini: ~$0.25/1M input tokens
-    return callModel('claude-haiku', query);
+    // Haiku 4.5: ~$1/1M input tokens
+    return callModel('claude-haiku-4-5', query);
   }
 
   if (complexity === 'medium') {
-    // Sonnet/GPT-4o: ~$3/1M input tokens
-    return callModel('claude-sonnet', query);
+    // Sonnet 5: ~$3/1M input tokens
+    return callModel('claude-sonnet-5', query);
   }
 
-  // Complex: Opus/GPT-4: ~$15/1M input tokens
+  // Complex: Opus 5: ~$5/1M input tokens
   // But verify the response — expensive model isn't always right
-  const response = await callModel('claude-opus', query);
+  const response = await callModel('claude-opus-5', query);
   return response;
 }
 
@@ -411,7 +411,7 @@ function LLMOpsArchDiagram() {
         <rect x="310" y="45" width="130" height="64" rx="8" fill="#E7157B" fillOpacity="0.1" stroke="#E7157B" strokeWidth="1.2" />
         <text x="375" y="67" textAnchor="middle" fontSize="10" fontWeight="600" fill="var(--text-h)" fontFamily={f}>Complexity</text>
         <text x="375" y="80" textAnchor="middle" fontSize="10" fontWeight="600" fill="var(--text-h)" fontFamily={f}>Classifier</text>
-        <text x="375" y="100" textAnchor="middle" fontSize="7" fill="var(--text-muted)" fontFamily={fm}>Haiku (~$0.001/1K)</text>
+        <text x="375" y="100" textAnchor="middle" fontSize="7" fill="var(--text-muted)" fontFamily={fm}>Haiku 4.5 (~$0.001/1K)</text>
 
         {/* Arrow: Classifier -> Router */}
         <line x1="440" y1="77" x2="475" y2="77" stroke="var(--text-muted)" strokeWidth="1" markerEnd="url(#arrowGray)" />
@@ -425,7 +425,7 @@ function LLMOpsArchDiagram() {
         {/* Model Pool - 3 boxes stacked on the right */}
         <rect x="620" y="15" width="100" height="36" rx="6" fill="#3F8624" fillOpacity="0.12" stroke="#3F8624" strokeWidth="1.2" />
         <text x="670" y="31" textAnchor="middle" fontSize="9" fontWeight="600" fill="var(--text-h)" fontFamily={f}>Haiku</text>
-        <text x="670" y="44" textAnchor="middle" fontSize="7" fill="var(--text-muted)" fontFamily={fm}>$0.25/1M in</text>
+        <text x="670" y="44" textAnchor="middle" fontSize="7" fill="var(--text-muted)" fontFamily={fm}>$1/1M in</text>
 
         <rect x="620" y="59" width="100" height="36" rx="6" fill="#ED7100" fillOpacity="0.12" stroke="#ED7100" strokeWidth="1.2" />
         <text x="670" y="75" textAnchor="middle" fontSize="9" fontWeight="600" fill="var(--text-h)" fontFamily={f}>Sonnet</text>
@@ -433,7 +433,7 @@ function LLMOpsArchDiagram() {
 
         <rect x="620" y="103" width="100" height="36" rx="6" fill="#C925D1" fillOpacity="0.12" stroke="#C925D1" strokeWidth="1.2" />
         <text x="670" y="119" textAnchor="middle" fontSize="9" fontWeight="600" fill="var(--text-h)" fontFamily={f}>Opus</text>
-        <text x="670" y="132" textAnchor="middle" fontSize="7" fill="var(--text-muted)" fontFamily={fm}>$15/1M in</text>
+        <text x="670" y="132" textAnchor="middle" fontSize="7" fill="var(--text-muted)" fontFamily={fm}>$5/1M in</text>
 
         {/* Arrows: Router -> Model Pool */}
         <line x1="585" y1="63" x2="620" y2="33" stroke="var(--text-muted)" strokeWidth="1" markerEnd="url(#arrowGray)" />
@@ -520,9 +520,9 @@ function ModelServingPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={160}><Decision question="Single model vs model routing?">
-        <Pill type="green">Model routing (recommended)</Pill> Route by query complexity. Use a cheap classifier (Haiku at $0.25/1M) to categorize incoming queries, then route to the appropriate model tier. In practice, 60-70% of queries are simple enough for Haiku, 25-30% need Sonnet, and &lt;5% need Opus. This cuts average cost per query by 80-90%.
+        <Pill type="green">Model routing (recommended)</Pill> Route by query complexity. Use a cheap classifier (Haiku 4.5 at $1/1M) to categorize incoming queries, then route to the appropriate model tier. In practice, 60-70% of queries are simple enough for Haiku, 25-30% need Sonnet, and &lt;5% need Opus. This cuts average cost per query by 80-90%.
         <br /><br />
-        <Pill type="red">Always use the best model</Pill> Using Opus/GPT-4 for classification tasks, FAQ lookups, or simple extraction is lighting money on fire. A "what's my order status?" query doesn't need a $15/1M-token model.
+        <Pill type="red">Always use the best model</Pill> Using a frontier model for classification tasks, FAQ lookups, or simple extraction is lighting money on fire. A "what's my order status?" query doesn't need a frontier-tier model.
       </Decision></FadeIn>
 
       <FadeIn><CodeBlock filename="model-router.js" code={MODEL_ROUTER_CODE} output={MODEL_ROUTER_OUTPUT} /></FadeIn>
@@ -547,7 +547,7 @@ function CostEngineeringPanel() {
         <br /><br />
         <Pill type="amber">Semantic caching (high-volume patterns)</Pill> Cache entire responses for semantically similar queries. Hash the prompt, check Redis before calling the API. Hit rate depends on query distribution — FAQ-style products see 30-50% cache hit rates. Conversational products see &lt;5%. Only worth building if you measure first.
         <br /><br />
-        <strong>Real pricing (as of 2025):</strong>
+        <strong>Real pricing (Anthropic first-party API, mid-2026):</strong>
         <br /><br />
         <div style={{ overflowX: 'auto' }}>
         <table style={{ fontSize: 12, borderCollapse: 'collapse', width: '100%' }}>
@@ -562,25 +562,25 @@ function CostEngineeringPanel() {
           </thead>
           <tbody>
             <tr style={{ borderBottom: '1px solid var(--border)' }}>
-              <td style={{ padding: '6px 12px', color: 'var(--text-p)', fontFamily: 'var(--font-mono)', fontSize: 11 }}>Claude Haiku</td>
-              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$0.25</td>
+              <td style={{ padding: '6px 12px', color: 'var(--text-p)', fontFamily: 'var(--font-mono)', fontSize: 11 }}>Claude Haiku 4.5</td>
+              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$1.00</td>
+              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$5.00</td>
               <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$1.25</td>
-              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$0.30</td>
-              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$0.03</td>
+              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$0.10</td>
             </tr>
             <tr style={{ borderBottom: '1px solid var(--border)' }}>
-              <td style={{ padding: '6px 12px', color: 'var(--text-p)', fontFamily: 'var(--font-mono)', fontSize: 11 }}>Claude Sonnet</td>
+              <td style={{ padding: '6px 12px', color: 'var(--text-p)', fontFamily: 'var(--font-mono)', fontSize: 11 }}>Claude Sonnet 5</td>
               <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$3.00</td>
               <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$15.00</td>
               <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$3.75</td>
               <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$0.30</td>
             </tr>
             <tr>
-              <td style={{ padding: '6px 12px', color: 'var(--text-p)', fontFamily: 'var(--font-mono)', fontSize: 11 }}>Claude Opus</td>
-              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$15.00</td>
-              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$75.00</td>
-              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$18.75</td>
-              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$1.50</td>
+              <td style={{ padding: '6px 12px', color: 'var(--text-p)', fontFamily: 'var(--font-mono)', fontSize: 11 }}>Claude Opus 5</td>
+              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$5.00</td>
+              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$25.00</td>
+              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$6.25</td>
+              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$0.50</td>
             </tr>
           </tbody>
         </table>

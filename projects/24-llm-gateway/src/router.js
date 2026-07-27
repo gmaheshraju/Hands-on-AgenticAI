@@ -1,7 +1,7 @@
 const MODEL_REGISTRY = {
-  'claude-opus-4': { provider: 'anthropic', costPer1kInput: 0.015, costPer1kOutput: 0.075, maxTokens: 200000, tier: 'premium', latencyMs: 3000 },
-  'claude-sonnet-4': { provider: 'anthropic', costPer1kInput: 0.003, costPer1kOutput: 0.015, maxTokens: 200000, tier: 'standard', latencyMs: 1500 },
-  'claude-haiku-3.5': { provider: 'anthropic', costPer1kInput: 0.0008, costPer1kOutput: 0.004, maxTokens: 200000, tier: 'fast', latencyMs: 500 },
+  'claude-opus-5': { provider: 'anthropic', costPer1kInput: 0.005, costPer1kOutput: 0.025, maxTokens: 1000000, tier: 'premium', latencyMs: 3000 },
+  'claude-sonnet-5': { provider: 'anthropic', costPer1kInput: 0.003, costPer1kOutput: 0.015, maxTokens: 1000000, tier: 'standard', latencyMs: 1500 },
+  'claude-haiku-4-5': { provider: 'anthropic', costPer1kInput: 0.001, costPer1kOutput: 0.005, maxTokens: 200000, tier: 'fast', latencyMs: 500 },
   'gpt-4o': { provider: 'openai', costPer1kInput: 0.005, costPer1kOutput: 0.015, maxTokens: 128000, tier: 'standard', latencyMs: 2000 },
   'gpt-4o-mini': { provider: 'openai', costPer1kInput: 0.00015, costPer1kOutput: 0.0006, maxTokens: 128000, tier: 'fast', latencyMs: 600 },
   'gemini-2.5-pro': { provider: 'google', costPer1kInput: 0.00125, costPer1kOutput: 0.01, maxTokens: 1000000, tier: 'standard', latencyMs: 1800 },
@@ -12,7 +12,7 @@ export class ModelRouter {
   constructor(config = {}) {
     this.models = { ...MODEL_REGISTRY };
     this.rules = config.rules || [];
-    this.fallbackChain = config.fallbackChain || ['claude-sonnet-4', 'gpt-4o', 'gemini-2.5-pro'];
+    this.fallbackChain = config.fallbackChain || ['claude-sonnet-5', 'gpt-4o', 'gemini-2.5-pro'];
     this.teamOverrides = new Map();
   }
 

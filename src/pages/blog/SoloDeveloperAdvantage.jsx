@@ -595,7 +595,7 @@ function AppliedPatterns() {
 
       <FadeIn delay={180}>
         <Insight tag="the meta-point">
-          This entire playbook — 15 deep dives, 29 projects with full test suites, architecture diagrams, interactive UI — was built by one engineer with AI. Shipped in weeks, not months. The leverage is real.
+          This entire playbook — 16 deep dives, 31 projects with full test suites, architecture diagrams, interactive UI — was built by one engineer with AI. Shipped in weeks, not months. The leverage is real.
         </Insight>
       </FadeIn>
 

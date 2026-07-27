@@ -16,16 +16,16 @@ function main() {
 
   // Simulate diverse agent activity
   const scenarios = [
-    { agentId: 'pr-reviewer', teamId: 'engineering', taskType: 'code_review', model: 'claude-sonnet-4', inputTokens: 2000, outputTokens: 800, outcome: 'success', latencyMs: 3200 },
-    { agentId: 'pr-reviewer', teamId: 'engineering', taskType: 'code_review', model: 'claude-sonnet-4', inputTokens: 1500, outputTokens: 600, outcome: 'success', latencyMs: 2800 },
-    { agentId: 'pr-reviewer', teamId: 'engineering', taskType: 'code_review', model: 'claude-opus-4', inputTokens: 300, outputTokens: 100, outcome: 'success', latencyMs: 5000 },
-    { agentId: 'ticket-bot', teamId: 'engineering', taskType: 'ticket_triage', model: 'claude-haiku-3.5', inputTokens: 800, outputTokens: 200, outcome: 'success', latencyMs: 400 },
-    { agentId: 'ticket-bot', teamId: 'engineering', taskType: 'ticket_triage', model: 'claude-haiku-3.5', inputTokens: 600, outputTokens: 150, outcome: 'success', latencyMs: 350 },
-    { agentId: 'ticket-bot', teamId: 'engineering', taskType: 'ticket_triage', model: 'claude-haiku-3.5', inputTokens: 900, outputTokens: 250, outcome: 'failure', latencyMs: 600 },
-    { agentId: 'ticket-bot', teamId: 'engineering', taskType: 'ticket_triage', model: 'claude-haiku-3.5', inputTokens: 700, outputTokens: 180, outcome: 'failure', latencyMs: 500 },
+    { agentId: 'pr-reviewer', teamId: 'engineering', taskType: 'code_review', model: 'claude-sonnet-5', inputTokens: 2000, outputTokens: 800, outcome: 'success', latencyMs: 3200 },
+    { agentId: 'pr-reviewer', teamId: 'engineering', taskType: 'code_review', model: 'claude-sonnet-5', inputTokens: 1500, outputTokens: 600, outcome: 'success', latencyMs: 2800 },
+    { agentId: 'pr-reviewer', teamId: 'engineering', taskType: 'code_review', model: 'claude-opus-5', inputTokens: 300, outputTokens: 100, outcome: 'success', latencyMs: 5000 },
+    { agentId: 'ticket-bot', teamId: 'engineering', taskType: 'ticket_triage', model: 'claude-haiku-4-5', inputTokens: 800, outputTokens: 200, outcome: 'success', latencyMs: 400 },
+    { agentId: 'ticket-bot', teamId: 'engineering', taskType: 'ticket_triage', model: 'claude-haiku-4-5', inputTokens: 600, outputTokens: 150, outcome: 'success', latencyMs: 350 },
+    { agentId: 'ticket-bot', teamId: 'engineering', taskType: 'ticket_triage', model: 'claude-haiku-4-5', inputTokens: 900, outputTokens: 250, outcome: 'failure', latencyMs: 600 },
+    { agentId: 'ticket-bot', teamId: 'engineering', taskType: 'ticket_triage', model: 'claude-haiku-4-5', inputTokens: 700, outputTokens: 180, outcome: 'failure', latencyMs: 500 },
     { agentId: 'content-writer', teamId: 'marketing', taskType: 'content_gen', model: 'gpt-4o', inputTokens: 400, outputTokens: 150, outcome: 'success', latencyMs: 1200 },
     { agentId: 'content-writer', teamId: 'marketing', taskType: 'content_gen', model: 'gpt-4o', inputTokens: 350, outputTokens: 120, outcome: 'success', latencyMs: 1100 },
-    { agentId: 'content-writer', teamId: 'marketing', taskType: 'content_gen', model: 'claude-opus-4', inputTokens: 200, outputTokens: 80, outcome: 'success', latencyMs: 4500 },
+    { agentId: 'content-writer', teamId: 'marketing', taskType: 'content_gen', model: 'claude-opus-5', inputTokens: 200, outputTokens: 80, outcome: 'success', latencyMs: 4500 },
     { agentId: 'data-analyst', teamId: 'engineering', taskType: 'data_query', model: 'gemini-2.5-flash', inputTokens: 1000, outputTokens: 500, outcome: 'success', latencyMs: 200 },
     { agentId: 'data-analyst', teamId: 'engineering', taskType: 'data_query', model: 'gemini-2.5-flash', inputTokens: 1000, outputTokens: 500, outcome: 'success', latencyMs: 200, cached: true },
   ];

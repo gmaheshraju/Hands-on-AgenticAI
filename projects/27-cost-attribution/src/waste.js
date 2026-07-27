@@ -19,7 +19,7 @@ export class WasteDetector {
   }
 
   _detectOverpoweredModels(events) {
-    const premium = ['claude-opus-4', 'gpt-4o'];
+    const premium = ['claude-opus-5', 'gpt-4o'];
     const premiumSimple = events.filter(e =>
       premium.includes(e.model) && e.inputTokens < 500 && e.outputTokens < 200
     );

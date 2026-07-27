@@ -8,10 +8,10 @@ import { CostAttributionEngine } from '../engine.js';
 
 function seedCollector() {
   const c = new CostCollector();
-  c.record({ agentId: 'a1', teamId: 'eng', taskType: 'review', model: 'claude-sonnet-4', inputTokens: 1000, outputTokens: 500, outcome: 'success', latencyMs: 2000 });
-  c.record({ agentId: 'a1', teamId: 'eng', taskType: 'review', model: 'claude-sonnet-4', inputTokens: 800, outputTokens: 400, outcome: 'success', latencyMs: 1500 });
-  c.record({ agentId: 'a2', teamId: 'eng', taskType: 'triage', model: 'claude-haiku-3.5', inputTokens: 500, outputTokens: 200, outcome: 'success', latencyMs: 300 });
-  c.record({ agentId: 'a2', teamId: 'eng', taskType: 'triage', model: 'claude-haiku-3.5', inputTokens: 400, outputTokens: 150, outcome: 'failure', latencyMs: 250 });
+  c.record({ agentId: 'a1', teamId: 'eng', taskType: 'review', model: 'claude-sonnet-5', inputTokens: 1000, outputTokens: 500, outcome: 'success', latencyMs: 2000 });
+  c.record({ agentId: 'a1', teamId: 'eng', taskType: 'review', model: 'claude-sonnet-5', inputTokens: 800, outputTokens: 400, outcome: 'success', latencyMs: 1500 });
+  c.record({ agentId: 'a2', teamId: 'eng', taskType: 'triage', model: 'claude-haiku-4-5', inputTokens: 500, outputTokens: 200, outcome: 'success', latencyMs: 300 });
+  c.record({ agentId: 'a2', teamId: 'eng', taskType: 'triage', model: 'claude-haiku-4-5', inputTokens: 400, outputTokens: 150, outcome: 'failure', latencyMs: 250 });
   c.record({ agentId: 'a3', teamId: 'mkt', taskType: 'content', model: 'gpt-4o', inputTokens: 600, outputTokens: 300, outcome: 'success', latencyMs: 1000 });
   return c;
 }
@@ -21,14 +21,14 @@ function seedCollector() {
 describe('Cost Collector', () => {
   it('records events with auto-calculated cost', () => {
     const c = new CostCollector();
-    const r = c.record({ agentId: 'a1', model: 'claude-sonnet-4', inputTokens: 1000, outputTokens: 500 });
+    const r = c.record({ agentId: 'a1', model: 'claude-sonnet-5', inputTokens: 1000, outputTokens: 500 });
     assert.ok(r.costUsd > 0);
     assert.equal(r.costUsd, (1000 / 1000) * 0.003 + (500 / 1000) * 0.015);
   });
 
   it('uses explicit cost when provided', () => {
     const c = new CostCollector();
-    const r = c.record({ agentId: 'a1', model: 'claude-sonnet-4', costUsd: 0.42 });
+    const r = c.record({ agentId: 'a1', model: 'claude-sonnet-5', costUsd: 0.42 });
     assert.equal(r.costUsd, 0.42);
   });
 
@@ -82,7 +82,7 @@ describe('Cost Attribution', () => {
     const attr = new CostAttribution(c);
     const byModel = attr.byModel();
     assert.ok(byModel.length >= 2);
-    const sonnet = byModel.find(m => m.model === 'claude-sonnet-4');
+    const sonnet = byModel.find(m => m.model === 'claude-sonnet-5');
     assert.equal(sonnet.requests, 2);
   });
 
@@ -101,8 +101,8 @@ describe('Cost Attribution', () => {
 describe('Waste Detection', () => {
   it('detects overpowered models', () => {
     const c = new CostCollector();
-    c.record({ agentId: 'a1', model: 'claude-opus-4', inputTokens: 200, outputTokens: 80 });
-    c.record({ agentId: 'a1', model: 'claude-opus-4', inputTokens: 100, outputTokens: 50 });
+    c.record({ agentId: 'a1', model: 'claude-opus-5', inputTokens: 200, outputTokens: 80 });
+    c.record({ agentId: 'a1', model: 'claude-opus-5', inputTokens: 100, outputTokens: 50 });
     const wd = new WasteDetector(c);
     const patterns = wd.analyze();
     const op = patterns.find(p => p.pattern === 'overpowered_model');
@@ -113,8 +113,8 @@ describe('Waste Detection', () => {
 
   it('detects duplicate requests', () => {
     const c = new CostCollector();
-    c.record({ agentId: 'a1', model: 'claude-sonnet-4', inputTokens: 500, outputTokens: 200, costUsd: 0.05 });
-    c.record({ agentId: 'a1', model: 'claude-sonnet-4', inputTokens: 500, outputTokens: 200, costUsd: 0.05 });
+    c.record({ agentId: 'a1', model: 'claude-sonnet-5', inputTokens: 500, outputTokens: 200, costUsd: 0.05 });
+    c.record({ agentId: 'a1', model: 'claude-sonnet-5', inputTokens: 500, outputTokens: 200, costUsd: 0.05 });
     const wd = new WasteDetector(c);
     const patterns = wd.analyze();
     const dup = patterns.find(p => p.pattern === 'duplicate_requests');
@@ -124,7 +124,7 @@ describe('Waste Detection', () => {
   it('detects low cache hit rate', () => {
     const c = new CostCollector();
     for (let i = 0; i < 15; i++) {
-      c.record({ agentId: 'a1', model: 'claude-sonnet-4', inputTokens: 500, outputTokens: 200, costUsd: 0.05, cached: false });
+      c.record({ agentId: 'a1', model: 'claude-sonnet-5', inputTokens: 500, outputTokens: 200, costUsd: 0.05, cached: false });
     }
     const wd = new WasteDetector(c);
     const patterns = wd.analyze();
@@ -134,7 +134,7 @@ describe('Waste Detection', () => {
 
   it('returns no patterns for clean usage', () => {
     const c = new CostCollector();
-    c.record({ agentId: 'a1', model: 'claude-haiku-3.5', inputTokens: 500, outputTokens: 200, outcome: 'success' });
+    c.record({ agentId: 'a1', model: 'claude-haiku-4-5', inputTokens: 500, outputTokens: 200, outcome: 'success' });
     const wd = new WasteDetector(c);
     const patterns = wd.analyze();
     assert.equal(patterns.filter(p => p.pattern === 'overpowered_model').length, 0);
@@ -146,8 +146,8 @@ describe('Waste Detection', () => {
 describe('ROI Calculator', () => {
   it('calculates agent ROI', () => {
     const c = new CostCollector();
-    c.record({ agentId: 'a1', taskType: 'review', model: 'claude-sonnet-4', inputTokens: 1000, outputTokens: 500, outcome: 'success' });
-    c.record({ agentId: 'a1', taskType: 'review', model: 'claude-sonnet-4', inputTokens: 800, outputTokens: 400, outcome: 'success' });
+    c.record({ agentId: 'a1', taskType: 'review', model: 'claude-sonnet-5', inputTokens: 1000, outputTokens: 500, outcome: 'success' });
+    c.record({ agentId: 'a1', taskType: 'review', model: 'claude-sonnet-5', inputTokens: 800, outputTokens: 400, outcome: 'success' });
     const roi = new ROICalculator(c);
     roi.setOutcomeValue('review', () => 5.00);
     const result = roi.agentROI('a1');
@@ -185,8 +185,8 @@ describe('ROI Calculator', () => {
 describe('Cost Attribution Engine Integration', () => {
   it('records and produces dashboard', () => {
     const engine = new CostAttributionEngine();
-    engine.record({ agentId: 'a1', teamId: 'eng', taskType: 'review', model: 'claude-sonnet-4', inputTokens: 1000, outputTokens: 500, outcome: 'success' });
-    engine.record({ agentId: 'a2', teamId: 'eng', taskType: 'triage', model: 'claude-haiku-3.5', inputTokens: 500, outputTokens: 200, outcome: 'success' });
+    engine.record({ agentId: 'a1', teamId: 'eng', taskType: 'review', model: 'claude-sonnet-5', inputTokens: 1000, outputTokens: 500, outcome: 'success' });
+    engine.record({ agentId: 'a2', teamId: 'eng', taskType: 'triage', model: 'claude-haiku-4-5', inputTokens: 500, outputTokens: 200, outcome: 'success' });
     const dash = engine.dashboard();
     assert.equal(dash.totalRequests, 2);
     assert.ok(dash.totalCost > 0);
@@ -196,8 +196,8 @@ describe('Cost Attribution Engine Integration', () => {
 
   it('generates executive summary', () => {
     const engine = new CostAttributionEngine();
-    engine.record({ agentId: 'a1', model: 'claude-sonnet-4', inputTokens: 1000, outputTokens: 500, outcome: 'success' });
-    engine.record({ agentId: 'a1', model: 'claude-sonnet-4', inputTokens: 800, outputTokens: 400, outcome: 'failure' });
+    engine.record({ agentId: 'a1', model: 'claude-sonnet-5', inputTokens: 1000, outputTokens: 500, outcome: 'success' });
+    engine.record({ agentId: 'a1', model: 'claude-sonnet-5', inputTokens: 800, outputTokens: 400, outcome: 'failure' });
     const summary = engine.executiveSummary();
     assert.equal(summary.totalRequests, 2);
     assert.equal(summary.successRate, 50);
@@ -207,7 +207,7 @@ describe('Cost Attribution Engine Integration', () => {
   it('triggers budget alerts', () => {
     const engine = new CostAttributionEngine();
     engine.setBudget('eng', 0.01);
-    engine.record({ agentId: 'a1', teamId: 'eng', model: 'claude-sonnet-4', inputTokens: 5000, outputTokens: 2000 });
+    engine.record({ agentId: 'a1', teamId: 'eng', model: 'claude-sonnet-5', inputTokens: 5000, outputTokens: 2000 });
     assert.ok(engine.alerts.length > 0);
     assert.equal(engine.alerts[0].teamId, 'eng');
   });

@@ -18,10 +18,10 @@ import { logRequest } from './metrics.js';
 
 export const MODEL_CONFIG = {
   'haiku': {
-    name: 'claude-3-haiku',
+    name: 'claude-haiku-4-5',
     tier: 'cheap',
-    inputCostPer1k:  0.00025,
-    outputCostPer1k: 0.00125,
+    inputCostPer1k:  0.001,
+    outputCostPer1k: 0.005,
     avgLatencyMs: 200,
     description: 'Fast, cheap — FAQ, status, simple formatting',
   },
@@ -34,7 +34,7 @@ export const MODEL_CONFIG = {
     description: 'OpenAI cheap tier — simple tasks',
   },
   'sonnet': {
-    name: 'claude-3.5-sonnet',
+    name: 'claude-sonnet-5',
     tier: 'medium',
     inputCostPer1k:  0.003,
     outputCostPer1k: 0.015,
@@ -50,10 +50,10 @@ export const MODEL_CONFIG = {
     description: 'OpenAI mid-tier',
   },
   'opus': {
-    name: 'claude-3-opus',
+    name: 'claude-opus-5',
     tier: 'expensive',
-    inputCostPer1k:  0.015,
-    outputCostPer1k: 0.075,
+    inputCostPer1k:  0.005,
+    outputCostPer1k: 0.025,
     avgLatencyMs: 2000,
     description: 'Frontier — reasoning, multi-step, creative, legal',
   },

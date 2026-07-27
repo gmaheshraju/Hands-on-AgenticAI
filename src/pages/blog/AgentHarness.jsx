@@ -652,7 +652,7 @@ function ProdOpsPanel() {
         <br /><br />
         <strong>Per-user daily cap:</strong> Limit total cost per user per day. Prevents abuse and sets user expectations.
         <br /><br />
-        <strong>Model tiering:</strong> Use cheap models (Haiku, GPT-3.5) for simple queries, expensive models (Opus, GPT-4) only when needed. A router model (cheapest tier) classifies complexity and selects the model.
+        <strong>Model tiering:</strong> Use cheap models (Haiku 4.5, GPT-4o-mini) for simple queries, frontier models (Opus 5) only when needed. A router model (cheapest tier) classifies complexity and selects the model.
         <br /><br />
         <strong>Alert thresholds:</strong> Alert at 2x normal average cost. Page at 5x. Kill switch at 10x.
       </Decision></FadeIn>

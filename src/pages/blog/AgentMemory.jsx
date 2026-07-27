@@ -458,7 +458,7 @@ function RetrievalPanel() {
         <br /><br />
         <strong>Why it matters:</strong> Searching 10,000 raw episodes is slow and noisy. Searching 200 consolidated facts is fast and relevant. "That's why your ChatGPT memory stays short but somehow always up to date" — the consolidation gate is running behind the scenes.
         <br /><br />
-        <strong>Implementation:</strong> Use a cheap model (Haiku, GPT-3.5-turbo) for consolidation — it's summarization, not reasoning. Run it asynchronously. Store consolidated facts with higher retrieval priority than raw episodes.
+        <strong>Implementation:</strong> Use a cheap model (Haiku 4.5, GPT-4o-mini) for consolidation — it's summarization, not reasoning. Run it asynchronously. Store consolidated facts with higher retrieval priority than raw episodes.
       </Decision></FadeIn>
 
       <FadeIn><CodeBlock filename="consolidation-gate.js" code={CONSOLIDATION_GATE_CODE} output={CONSOLIDATION_OUTPUT} /></FadeIn>

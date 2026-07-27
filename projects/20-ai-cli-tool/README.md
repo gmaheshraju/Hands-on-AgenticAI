@@ -190,10 +190,10 @@ When no API key is configured, aidev uses heuristic analysis:
 │ readFileContent │  │ calculateCost()       │  │                          │
 │ getStagedFiles()│  │   ▶ model pricing     │  │ getModelPricing()        │
 │ getDiffFiles()  │  │   ~/.aidev-usage.json │  │   6 models: gpt-4o-mini, │
-│ getRecentCommits│  │ formatCost()          │  │   gpt-4o, gpt-4-turbo,  │
-│ getCurrentBranch│  │ formatTokens()        │  │   claude-3-haiku/sonnet/ │
-│                 │  │ getTodayUsage()       │  │   opus, claude-sonnet-4, │
-│ execSync +      │  │                       │  │   claude-opus-4          │
+│ getRecentCommits│  │ formatCost()          │  │   gpt-4o, gpt-4-turbo,   │
+│ getCurrentBranch│  │ formatTokens()        │  │   claude-haiku-4-5,      │
+│                 │  │ getTodayUsage()       │  │   claude-sonnet-5,       │
+│ execSync +      │  │                       │  │   claude-opus-5          │
 │ execFileSync    │  │                       │  │                          │
 │ (no shell for   │  │                       │  │ saveConfig()             │
 │  user input)    │  │                       │  │                          │

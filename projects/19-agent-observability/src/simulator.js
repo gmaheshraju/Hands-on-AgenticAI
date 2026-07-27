@@ -8,7 +8,7 @@ import { CostTracker } from './costTracker.js';
 // import { DriftDetector } from './driftDetector.js';
 
 const AGENTS = ['research-agent', 'code-assistant', 'customer-support', 'data-analyst'];
-const MODELS = ['claude-3-sonnet', 'claude-3-haiku', 'gpt-4o', 'gpt-4o-mini'];
+const MODELS = ['claude-sonnet-5', 'claude-haiku-4-5', 'gpt-4o', 'gpt-4o-mini'];
 const WORKFLOWS = ['summarize', 'code-review', 'question-answer', 'data-extraction', 'chat'];
 const USERS = ['user-1', 'user-2', 'user-3', 'user-4', 'user-5'];
 const TOOLS = ['web_search', 'code_execute', 'file_read', 'database_query', 'calculator'];
@@ -47,10 +47,10 @@ function calculateCost(model, promptTokens, completionTokens) {
 /** Token ranges vary by model. */
 function tokenRangeForModel(model) {
   switch (model) {
-    case 'claude-3-haiku':
+    case 'claude-haiku-4-5':
     case 'gpt-4o-mini':
       return { promptMin: 200, promptMax: 1200, compMin: 100, compMax: 800 };
-    case 'claude-3-sonnet':
+    case 'claude-sonnet-5':
     case 'gpt-4o':
     default:
       return { promptMin: 400, promptMax: 2000, compMin: 200, compMax: 1500 };

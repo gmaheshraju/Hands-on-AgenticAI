@@ -6,9 +6,9 @@ import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
 
 const MODEL_ROUTER_CODE = `const MODEL_TIERS = {
-  simple:  { model: 'claude-haiku-4-5',  costPer1M: 0.25,  maxTokens: 1024 },
+  simple:  { model: 'claude-haiku-4-5',  costPer1M: 1.0,  maxTokens: 1024 },
   medium:  { model: 'claude-sonnet-5',   costPer1M: 3.0,   maxTokens: 4096 },
-  complex: { model: 'claude-opus-4',     costPer1M: 15.0,  maxTokens: 8192 },
+  complex: { model: 'claude-opus-5',     costPer1M: 5.0,  maxTokens: 8192 },
 };
 
 async function routeRequest(messages, tools) {
@@ -43,11 +43,11 @@ function classifyComplexity(messages, tools) {
 }`;
 
 const MODEL_ROUTER_OUTPUT = `> routeRequest([{ role: 'user', content: 'What time do you close?' }])
-{ model: 'claude-haiku-4-5', cost: $0.000034, latency: 180ms }
+{ model: 'claude-haiku-4-5', cost: $0.000136, latency: 180ms }
 
 > routeRequest([{ role: 'user', content: 'Compare our Q3 revenue across all
   regions and identify the underperforming segments with recommendations' }])
-{ model: 'claude-opus-4', cost: $0.0089, latency: 2400ms }
+{ model: 'claude-opus-5', cost: $0.0030, latency: 2400ms }
 
 Monthly savings at 100K requests: $12,400 → $2,100 (83% reduction)`;
 
@@ -248,10 +248,10 @@ function Tab2() {
       />
 
       <Decision question="How to tier your model routing?">
-        <p><Pill type="green">Tier 1 -- Haiku/GPT-4o-mini ($0.25/1M input)</Pill> Classification, entity extraction, simple Q&A, formatting, summarization under 200 words. Handles 70% of real-world requests. Latency: 150-300ms TTFT. These models are shockingly good at structured tasks -- most teams underestimate them.</p>
-        <p><Pill type="amber">Tier 2 -- Sonnet/GPT-4o ($3/1M input)</Pill> Multi-step reasoning, content synthesis, complex queries with nuance, code generation for known patterns. Handles 25% of requests. Latency: 400-800ms TTFT. The workhorse tier.</p>
-        <p><Pill type="red">Tier 3 -- Opus/o1 ($15/1M input)</Pill> Novel reasoning, ambiguous edge cases, complex multi-file code generation, tasks where correctness matters more than cost. 5% of requests. Latency: 1-3s TTFT. Reserve for high-stakes outputs.</p>
-        <p><strong>Blended math:</strong> 70% x $0.25 + 25% x $3 + 5% x $15 = $1.675/1M vs $15/1M all-Opus = 89% savings.</p>
+        <p><Pill type="green">Tier 1 -- Haiku 4.5 / small models ($1/1M input)</Pill> Classification, entity extraction, simple Q&A, formatting, summarization under 200 words. Handles 70% of real-world requests. Latency: 150-300ms TTFT. These models are shockingly good at structured tasks -- most teams underestimate them.</p>
+        <p><Pill type="amber">Tier 2 -- Sonnet 5 ($3/1M input)</Pill> Multi-step reasoning, content synthesis, complex queries with nuance, code generation for known patterns. Handles 25% of requests. Latency: 400-800ms TTFT. The workhorse tier.</p>
+        <p><Pill type="red">Tier 3 -- Opus 5 ($5/1M input)</Pill> Novel reasoning, ambiguous edge cases, complex multi-file code generation, tasks where correctness matters more than cost. 5% of requests. Latency: 1-3s TTFT. Reserve for high-stakes outputs.</p>
+        <p><strong>Blended math (2026 prices):</strong> 70% x $1 + 25% x $3 + 5% x $5 = $1.70/1M vs $5/1M all-Opus = 66% savings. Note the direction of travel: this argument was worth ~89% when the frontier tier cost $15/1M and the cheap tier $0.25/1M. The tiers have compressed, so routing still pays -- but the savings now come mostly from the Haiku-vs-Sonnet split, not from avoiding Opus. Quote the current spread in an interview, not the number you memorized two years ago.</p>
       </Decision>
 
       <Decision question="How to classify request complexity automatically?">

@@ -86,7 +86,7 @@ async function main() {
   for (let i = 0; i < 5; i++) {
     const r = await gw2.request({
       teamId: 'engineering',
-      model: 'claude-sonnet-4',
+      model: 'claude-sonnet-5',
       messages: [{ role: 'user', content: `Request ${i + 1} — testing failover` }],
     });
     const provider = r.provider || 'N/A';

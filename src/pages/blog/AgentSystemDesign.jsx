@@ -664,7 +664,7 @@ function EvalsPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="LLM-as-judge — does it work?">
-        <Pill type="green">Yes, with guardrails</Pill> Use a stronger model to judge a weaker one (Claude judging GPT-3.5 outputs). Agreement with human evaluators is 80-90% on factual correctness. Use rubrics — don't just ask "is this good?"
+        <Pill type="green">Yes, with guardrails</Pill> Use a stronger model to judge a weaker one (a frontier model judging a small model's outputs). Agreement with human evaluators is 80-90% on factual correctness. Use rubrics — don't just ask "is this good?"
         <br /><br />
         <strong>The pattern:</strong> Create a golden dataset of 50-100 question-answer pairs with human-verified correct answers. Run your agent on these questions. Use LLM-as-judge to score. Track regression over time. When the score drops, investigate before shipping.
       </Decision></FadeIn>

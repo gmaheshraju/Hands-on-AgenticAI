@@ -107,7 +107,7 @@ const client = new Anthropic();
 
 async function realLLM(messages) {
   const response = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-5',
     max_tokens: 500,
     system: messages[0].content,
     messages: messages.slice(1),

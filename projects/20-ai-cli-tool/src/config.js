@@ -19,11 +19,9 @@ const MODEL_PRICING = {
   'gpt-4o-mini':      { input: 0.15,  output: 0.60 },
   'gpt-4o':           { input: 2.50,  output: 10.00 },
   'gpt-4-turbo':      { input: 10.00, output: 30.00 },
-  'claude-3-haiku':   { input: 0.25,  output: 1.25 },
-  'claude-3-sonnet':  { input: 3.00,  output: 15.00 },
-  'claude-3-opus':    { input: 15.00, output: 75.00 },
-  'claude-sonnet-4':  { input: 3.00,  output: 15.00 },
-  'claude-opus-4':    { input: 15.00, output: 75.00 },
+  'claude-haiku-4-5': { input: 1.00,  output: 5.00 },
+  'claude-sonnet-5':  { input: 3.00,  output: 15.00 },
+  'claude-opus-5':    { input: 5.00,  output: 25.00 },
   'mock':             { input: 0,     output: 0 },
 };
 
