@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
+import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
 
 const tabs = [
@@ -425,9 +426,123 @@ function Patterns() {
           </p>
         </div>
       </FadeIn>
+
+      <FadeIn delay={300}>
+        <h3 style={styles.h3}>What L3 Actually Looks Like in Code</h3>
+        <p style={styles.p}>
+          "AI proposes, rules approve, human audits" sounds like a slogan until you write it down. The concrete shape is a
+          three-stage pipeline where the <strong>model never touches the side effect directly</strong>. It emits a typed
+          proposal; a deterministic policy layer accepts, downgrades, or rejects it; and every decision — including the
+          rejections — lands in an append-only log that you read the next morning.
+        </p>
+        <CodeBlock filename="autonomy-loop.js" code={AUTONOMY_LOOP_CODE} output={AUTONOMY_LOOP_OUTPUT} />
+      </FadeIn>
+
+      <FadeIn delay={360}>
+        <Insight tag="audit the rejections">
+          Everyone reads the actions their system took. Almost nobody reads the ones it <em>refused</em> to take — and that's
+          where the signal lives. A policy rule that fires constantly is either doing real work or is mis-calibrated, and you
+          cannot tell which from the accepted actions alone. Log rejections with the same fidelity as executions, and put a
+          count of each rule's firings in your daily digest. Rules that never fire are dead weight; rules that fire on 40% of
+          proposals mean the model and the policy disagree about the job, which is the L3 → L4 blocker.
+        </Insight>
+      </FadeIn>
+
+      <FadeIn delay={420}>
+        <Decision question="What actually stops a solo system from moving L3 → L4?">
+          Not model quality. The blocker is almost always <strong>reversibility</strong>. L3 works because a human reviews
+          within a day, so the cost of a bad action is bounded by how much damage accrues in that window. Moving to L4 means
+          accepting the damage of an unreviewed action — so the only actions that can safely graduate are the ones you can
+          undo, retry, or cap. Sending an email is irreversible; drafting one into a queue is not. Charging a card is
+          irreversible; issuing a credit is bounded.
+          <br /><br />
+          The practical migration path is per-action, not per-system. Take one action type, instrument it for 30 days at L3,
+          and measure two numbers: how often you overrode the proposal, and what the worst single override would have cost if
+          it had gone through. If the override rate is under ~2% and the worst case is bounded and reversible, that action
+          type graduates to L4 — with the policy layer unchanged and the audit log still recording everything. Everything
+          else stays at L3. A system at "L4" is really a system where 80% of action types earned it individually.
+          <Pill type="amber">Graduate actions, not systems</Pill>
+        </Decision>
+      </FadeIn>
     </>
   );
 }
+
+const AUTONOMY_LOOP_CODE = `// L3 autonomy: the model proposes, deterministic rules decide, you audit.
+// The model never calls the side-effecting function directly.
+
+const POLICY = [
+  // Each rule returns null (pass) or a string reason (block).
+  { name: 'known_action', check: p =>
+      ACTIONS[p.action] ? null : \`unknown action \${p.action}\` },
+  { name: 'value_cap', check: p =>
+      p.value <= 5000 ? null : \`value \${p.value} exceeds cap 5000\` },
+  { name: 'daily_budget', check: (p, s) =>
+      s.spentToday + p.value <= 25000 ? null : 'daily budget exhausted' },
+  { name: 'rate_limit', check: (p, s) =>
+      s.actionsThisHour < 10 ? null : 'hourly action limit reached' },
+  { name: 'confidence', check: p =>
+      p.confidence >= 0.7 ? null : \`confidence \${p.confidence} below 0.7\` },
+];
+
+async function runAutonomyCycle(context, state, audit) {
+  // 1. PROPOSE — model output is data, not a command. Validate the shape.
+  const proposal = await model.proposeAction(context);   // { action, args, value, confidence, rationale }
+  if (!proposal || typeof proposal.action !== 'string') {
+    return audit.write({ stage: 'propose', outcome: 'malformed', raw: proposal });
+  }
+
+  // 2. APPROVE — deterministic. Every rule runs; collect ALL failures, not the first.
+  const blocks = POLICY
+    .map(rule => ({ rule: rule.name, reason: rule.check(proposal, state) }))
+    .filter(r => r.reason !== null);
+
+  if (blocks.length > 0) {
+    // Rejections are logged with the same fidelity as executions.
+    return audit.write({ stage: 'approve', outcome: 'rejected', proposal, blocks });
+  }
+
+  // 3. EXECUTE — idempotency key means a crash-and-retry can't double-fire.
+  const key = \`\${proposal.action}:\${context.entityId}:\${context.cycleId}\`;
+  if (await audit.hasExecuted(key)) {
+    return audit.write({ stage: 'execute', outcome: 'deduped', key });
+  }
+
+  try {
+    const result = await ACTIONS[proposal.action](proposal.args, { key });
+    state.spentToday += proposal.value;
+    state.actionsThisHour += 1;
+    return audit.write({ stage: 'execute', outcome: 'ok', key, proposal, result });
+  } catch (err) {
+    // A failed side effect is a first-class audit event, not a swallowed log line.
+    return audit.write({ stage: 'execute', outcome: 'error', key, proposal, error: err.message });
+  }
+}
+
+// 4. AUDIT — the part people skip. Read it every morning, rejections included.
+async function dailyDigest(audit, day) {
+  const events = await audit.since(day);
+  const byOutcome = events.reduce((acc, e) => {
+    acc[e.outcome] = (acc[e.outcome] || 0) + 1;
+    return acc;
+  }, {});
+  const topBlocks = events
+    .filter(e => e.outcome === 'rejected')
+    .flatMap(e => e.blocks.map(b => b.rule))
+    .reduce((acc, r) => ({ ...acc, [r]: (acc[r] || 0) + 1 }), {});
+  return { byOutcome, topBlocks };
+}`;
+
+const AUTONOMY_LOOP_OUTPUT = `$ node autonomy-loop.js --digest 2026-07-26
+
+byOutcome:  { ok: 34, rejected: 11, deduped: 2, error: 1, malformed: 0 }
+topBlocks:  { confidence: 6, value_cap: 3, rate_limit: 2 }
+
+execution rate   34/48  (70.8%)
+override needed   1/34  ( 2.9%)   <- human reversed one accepted action
+worst rejection   value_cap: proposed 41,200 (cap 5,000)
+
+read the 11 rejections before the 34 successes.`;
 
 /* ─── Tab: Applied Patterns ─── */
 function AppliedPatterns() {
