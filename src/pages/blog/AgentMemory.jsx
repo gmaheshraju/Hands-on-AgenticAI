@@ -466,6 +466,10 @@ function RetrievalPanel() {
       <FadeIn><Insight>
         "The retrieval scoring formula is the maturity signal. Anyone can say 'use a vector database.' But explaining that you'd combine semantic similarity, recency decay, and importance weighting — and that you'd tune the weights based on the use case — that shows mastery. It shows you understand that retrieval is a ranking problem, not a search problem."
       </Insight></FadeIn>
+
+      <FadeIn delay={60}><Insight tag="Stale memory">
+        Every scoring formula above ranks memories. None of them <em>invalidate</em> one. That's the bug most memory systems ship with: the user says "I work at Acme" in March and "I just joined Globex" in July, and now both facts sit in the store with similar embeddings. Recency weighting makes the newer one rank higher — it does not make the older one stop being retrieved, and once both land in the context window the model has to guess. The fix is that a write is not an append: before storing a fact, retrieve the top-k neighbours above a similarity threshold and ask a cheap model whether the new fact <em>supersedes</em>, <em>refines</em>, or <em>coexists with</em> each one. Supersede tombstones the old fact (never hard-delete — you want the audit trail and the ability to roll back a bad consolidation). Refine merges them into one richer fact. Coexist is the default. In interviews, the tell is whether you talk about memory as a store or as a <strong>set of claims with a lifetime</strong> — facts about identity, employment, and preferences expire; facts about allergies and immutable history do not, and your schema should carry that distinction explicitly rather than hoping recency decay approximates it.
+      </Insight></FadeIn>
     </div>
   );
 }
