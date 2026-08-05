@@ -19,6 +19,7 @@ import DeploymentStrategies from './pages/DeploymentStrategies';
 import Concurrency from './pages/Concurrency';
 import DistributedSystems from './pages/DistributedSystems';
 import Blog from './pages/Blog';
+import WorkWithMe from './pages/WorkWithMe';
 import AgentSystemDesign from './pages/blog/AgentSystemDesign';
 import AgentMemory from './pages/blog/AgentMemory';
 import AgentHarness from './pages/blog/AgentHarness';
@@ -80,6 +81,7 @@ export default function App() {
         <Route path="/concurrency" element={<Concurrency />} />
         <Route path="/distributed-systems" element={<DistributedSystems />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/work-with-me" element={<WorkWithMe />} />
         <Route path="/blog/ai-agent-system-design" element={<AgentSystemDesign />} />
         <Route path="/blog/agent-memory-architecture" element={<AgentMemory />} />
         <Route path="/blog/agent-harness-loop-engineering" element={<AgentHarness />} />

@@ -144,6 +144,10 @@ export default function Blog() {
         <p style={styles.tagline}>
           Production architecture patterns for AI agents, RAG pipelines, and LLM systems — with real-world architecture diagrams and decision frameworks.
         </p>
+        <p style={styles.heroCta}>
+          Building something with AI agents?{' '}
+          <Link to="/work-with-me" style={styles.link}>Work with me &rarr;</Link>
+        </p>
       </section>
 
       <section style={styles.postsSection}>
@@ -230,6 +234,10 @@ const styles = {
     color: 'var(--text-accent)',
     textDecoration: 'underline',
     textUnderlineOffset: '3px',
+  },
+  heroCta: {
+    fontSize: 13,
+    color: 'var(--text-muted)',
   },
   vision: {
     fontSize: 13,

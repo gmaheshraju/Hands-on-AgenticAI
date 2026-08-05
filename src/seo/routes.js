@@ -29,6 +29,15 @@ export const ROUTES = [
     changefreq: 'weekly',
   },
 
+  {
+    path: '/work-with-me',
+    title: 'Work With Me — AI Engineering Consulting',
+    description:
+      'Consulting and hands-on engineering for production AI systems: agent architecture, RAG pipelines, LLM system reviews, cost & latency optimization, and team enablement.',
+    priority: '0.9',
+    changefreq: 'monthly',
+  },
+
   // ── Agentic AI posts ────────────────────────────────────────────────────
   {
     path: '/blog/ai-agent-system-design',

@@ -5,6 +5,7 @@ import ThemeToggle from './ThemeToggle';
 const links = [
   { to: '/home', label: 'Home' },
   { to: '/', label: 'AI Engineering' },
+  { to: '/work-with-me', label: 'Work With Me' },
 ];
 
 export default function Nav() {
