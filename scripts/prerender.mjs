@@ -6,11 +6,19 @@
 //
 // This script renders each route with react-dom/server, rewrites the SEO tags
 // in the document head, and writes dist/<route>/index.html. It also emits
-// sitemap.xml. Run after `vite build` and `vite build --ssr`.
+// sitemap.xml. Run after `vite build`.
+//
+// The SSR entry is loaded through Vite's programmatic ssrLoadModule rather
+// than a separate `vite build --ssr` pass: Cloudflare's build environment
+// wraps the vite CLI with @cloudflare/vite-plugin, which rebuilt the SSR
+// bundle as a client environment and stripped its exports (deploys failed
+// silently for weeks). configFile:false keeps that injection out of the loop.
 
-import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
+import { createServer } from 'vite';
+import react from '@vitejs/plugin-react';
 
 import {
   ROUTES,
@@ -111,39 +119,27 @@ function buildHead(html, route) {
   return out;
 }
 
-// Locally `vite build --ssr` emits the flat dist-ssr/entry-server.js, but
-// Cloudflare's build environment wraps vite with @cloudflare/vite-plugin,
-// which hashes the entry into dist-ssr/assets/entry-server-<hash>.js. Accept
-// either so the same script works in both places.
-async function resolveSsrEntry() {
-  const flat = join(root, 'dist-ssr', 'entry-server.js');
-  try {
-    await stat(flat);
-    return flat;
-  } catch {
-    for (const dir of [join(root, 'dist-ssr'), join(root, 'dist-ssr', 'assets')]) {
-      let names = [];
-      try {
-        names = await readdir(dir);
-      } catch {
-        continue;
-      }
-      const hit = names.find((n) => n.startsWith('entry-server') && n.endsWith('.js'));
-      if (hit) return join(dir, hit);
-    }
-    throw new Error('prerender: no entry-server*.js found in dist-ssr/ or dist-ssr/assets/');
-  }
-}
-
 async function main() {
   const template = await readFile(join(distDir, 'index.html'), 'utf8');
-  const entryPath = await resolveSsrEntry();
-  const mod = await import(pathToFileURL(entryPath).href);
-  const render = mod.render ?? mod.default?.render;
+
+  const vite = await createServer({
+    configFile: false,
+    root,
+    appType: 'custom',
+    plugins: [react()],
+    server: { middlewareMode: true, watch: null },
+    logLevel: 'error',
+  });
+
+  let render;
+  try {
+    const mod = await vite.ssrLoadModule('/src/entry-server.jsx');
+    render = mod.render;
+  } finally {
+    await vite.close();
+  }
   if (typeof render !== 'function') {
-    throw new Error(
-      `prerender: ${entryPath} exports [${Object.keys(mod).join(', ')}] — no render() function`,
-    );
+    throw new Error('prerender: entry-server.jsx does not export a render() function');
   }
 
   let written = 0;
