@@ -1,4 +1,9 @@
+import { useEffect } from 'react';
 import FadeIn from '../components/FadeIn';
+
+// Clarity custom events feed the consulting funnel (homepage → this page →
+// contact click). Optional-chained: no-op locally and during prerender.
+const track = (name) => window.clarity?.('event', name);
 
 const EMAIL = 'maheshraju1218@gmail.com';
 const LINKEDIN = 'https://www.linkedin.com/in/gmaheshraju/';
@@ -60,6 +65,10 @@ const proof = [
 ];
 
 export default function WorkWithMe() {
+  useEffect(() => {
+    track('workwithme_view');
+  }, []);
+
   return (
     <div>
       <section style={styles.hero}>
@@ -74,10 +83,20 @@ export default function WorkWithMe() {
           Everything I recommend, I&rsquo;ve run in production myself.
         </p>
         <div style={styles.ctaRow}>
-          <a href={`mailto:${EMAIL}?subject=Project inquiry`} style={styles.ctaPrimary}>
+          <a
+            href={`mailto:${EMAIL}?subject=Project inquiry`}
+            onClick={() => track('email_cta_click')}
+            style={styles.ctaPrimary}
+          >
             Email me &rarr;
           </a>
-          <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" style={styles.ctaSecondary}>
+          <a
+            href={LINKEDIN}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track('linkedin_cta_click')}
+            style={styles.ctaSecondary}
+          >
             Message on LinkedIn
           </a>
         </div>
@@ -166,10 +185,20 @@ export default function WorkWithMe() {
           I read every message and reply within two working days.
         </p>
         <div style={styles.ctaRow}>
-          <a href={`mailto:${EMAIL}?subject=Project inquiry`} style={styles.ctaPrimary}>
+          <a
+            href={`mailto:${EMAIL}?subject=Project inquiry`}
+            onClick={() => track('email_cta_click')}
+            style={styles.ctaPrimary}
+          >
             {EMAIL}
           </a>
-          <a href={LINKEDIN} target="_blank" rel="noopener noreferrer" style={styles.ctaSecondary}>
+          <a
+            href={LINKEDIN}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track('linkedin_cta_click')}
+            style={styles.ctaSecondary}
+          >
             LinkedIn
           </a>
         </div>

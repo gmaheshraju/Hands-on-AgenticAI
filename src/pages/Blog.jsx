@@ -146,7 +146,13 @@ export default function Blog() {
         </p>
         <p style={styles.heroCta}>
           Building something with AI agents?{' '}
-          <Link to="/work-with-me" style={styles.link}>Work with me &rarr;</Link>
+          <Link
+            to="/work-with-me"
+            onClick={() => window.clarity?.('event', 'home_hero_workwithme_click')}
+            style={styles.link}
+          >
+            Work with me &rarr;
+          </Link>
         </p>
       </section>
 
