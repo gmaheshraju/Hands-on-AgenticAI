@@ -8,7 +8,7 @@
 // in the document head, and writes dist/<route>/index.html. It also emits
 // sitemap.xml. Run after `vite build` and `vite build --ssr`.
 
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -111,11 +111,40 @@ function buildHead(html, route) {
   return out;
 }
 
+// Locally `vite build --ssr` emits the flat dist-ssr/entry-server.js, but
+// Cloudflare's build environment wraps vite with @cloudflare/vite-plugin,
+// which hashes the entry into dist-ssr/assets/entry-server-<hash>.js. Accept
+// either so the same script works in both places.
+async function resolveSsrEntry() {
+  const flat = join(root, 'dist-ssr', 'entry-server.js');
+  try {
+    await stat(flat);
+    return flat;
+  } catch {
+    for (const dir of [join(root, 'dist-ssr'), join(root, 'dist-ssr', 'assets')]) {
+      let names = [];
+      try {
+        names = await readdir(dir);
+      } catch {
+        continue;
+      }
+      const hit = names.find((n) => n.startsWith('entry-server') && n.endsWith('.js'));
+      if (hit) return join(dir, hit);
+    }
+    throw new Error('prerender: no entry-server*.js found in dist-ssr/ or dist-ssr/assets/');
+  }
+}
+
 async function main() {
   const template = await readFile(join(distDir, 'index.html'), 'utf8');
-  const { render } = await import(
-    pathToFileURL(join(root, 'dist-ssr', 'entry-server.js')).href
-  );
+  const entryPath = await resolveSsrEntry();
+  const mod = await import(pathToFileURL(entryPath).href);
+  const render = mod.render ?? mod.default?.render;
+  if (typeof render !== 'function') {
+    throw new Error(
+      `prerender: ${entryPath} exports [${Object.keys(mod).join(', ')}] — no render() function`,
+    );
+  }
 
   let written = 0;
   const failures = [];
