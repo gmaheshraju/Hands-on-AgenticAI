@@ -671,6 +671,20 @@ function LatencyReliabilityPanel() {
       <FadeIn delay={80}><Insight type="warn" tag="Latency trap">
         Agentic loops multiply latency. A 5-iteration agent loop where each iteration calls the LLM once takes 5-25 seconds. If each iteration also calls tools that call LLMs (e.g., a search-then-summarize tool), you're looking at 30-60 seconds total. Set iteration caps, parallelize independent tool calls, and show progressive results. The user should see something useful within 2 seconds even if the full agent loop takes 30.
       </Insight></FadeIn>
+
+      <FadeIn delay={160}><Decision question="Model deprecation — do you pin a version or float on an alias?">
+        This is the reliability question nobody asks until it bites them. Every provider ships two kinds of identifier: a floating alias that always resolves to the newest revision of a model line, and a dated snapshot pinned to one specific set of weights. Choosing between them is a real tradeoff, not a best practice you can copy.
+        <br /><br />
+        <Pill type="green">Pin snapshots for anything you've evaluated</Pill> If you tuned prompts against a model, ran an eval suite, and calibrated a judge threshold, that work is bound to those weights. A floating alias can move under you between deploys, and the failure is silent: no error, no version bump, just your extraction accuracy drifting three points because the new revision is more literal about instructions. Pin the snapshot, treat it as a dependency, and upgrade deliberately.
+        <br /><br />
+        <Pill type="amber">Float on aliases for exploratory and internal work</Pill> Prototypes, internal tools, and anything with a human in the loop reviewing every output can ride the alias and get improvements for free. The cost of a silent behavior change is a shrug, not an incident. Just be honest about which bucket a system is in — plenty of "internal tools" quietly become load-bearing.
+        <br /><br />
+        <Pill type="red">The trap: pinning without a migration process</Pill> A pinned snapshot is not permanent. Providers deprecate models on a published schedule, and a retired model ID stops resolving — your requests start returning 404, which your retry logic will correctly refuse to retry. Pinning buys you control over <em>when</em> you migrate, not whether you do. If you pin and never revisit, you've converted a gradual quality drift into a hard outage on a date somebody else picked.
+        <br /><br />
+        <strong>What a real migration process looks like:</strong> keep model IDs in config, never inlined at call sites, so a migration is one change rather than a grep. Subscribe to the provider's deprecation feed and open a ticket the day a model you use is deprecated, not the week it retires. Run your eval suite against the new model before switching, and read the provider's migration notes for breaking parameter changes — request shapes do change across model generations, and a parameter that was merely deprecated on one release often hard-errors on the next. Then shadow the new model on a slice of live traffic, diff the outputs against the old one, and cut over once the diff is boring.
+        <br /><br />
+        The senior answer names the second-order cost: a model migration is a prompt migration. Prompts accumulate workarounds for a specific model's failure modes — emphasis added because an older model under-triggered a tool, step-by-step scaffolding added because it planned poorly. Newer models follow instructions more literally, so that leftover text doesn't just waste tokens, it actively misfires. Budget prompt re-tuning into every migration instead of treating it as a string swap.
+      </Decision></FadeIn>
     </div>
   );
 }
