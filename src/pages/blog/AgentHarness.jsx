@@ -563,7 +563,7 @@ function SelfImprovePanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={240}><Decision question="Loop Engineering — improving the harness, not the model">
-        A framework from Lilian Wang (via Carbon Layer): the practice of improving the harness rather than the model. The harness keeps improving even after you stop changing the model.
+        The practice of improving the harness rather than the model. The harness keeps improving even after you stop changing the model.
         <br /><br />
         <strong>The Five-Level Ladder:</strong> Each level up is a bigger, riskier change. Know where you are before climbing.
         <br /><br />

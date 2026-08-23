@@ -658,7 +658,7 @@ function DeepDivePanel() {
         </p>
       </div></FadeIn>
 
-      <FadeIn delay={400}><Decision question="The four failure modes of context (Drew Brunic)">
+      <FadeIn delay={400}><Decision question="The four failure modes of context (Drew Breunig)">
         Context does not just fail by being absent — it fails by being wrong, noisy, contradictory, or overwhelming. Each mode requires a different fix:
         <br /><br />
         <Pill type="amber">Poisoning</Pill> A wrong fact enters the context and keeps getting referenced as true. An early hallucination or a stale retrieval result becomes the foundation for all subsequent reasoning. The model treats everything in context as ground truth — one poisoned sentence can corrupt an entire chain of thought. Fix: validate facts at insertion time, version your memory, and add provenance metadata so the model can weigh source reliability.
