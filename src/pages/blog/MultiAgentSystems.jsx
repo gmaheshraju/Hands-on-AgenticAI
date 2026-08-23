@@ -514,6 +514,20 @@ function CoordinationPanel() {
         <strong>What to say:</strong> "I'd make the system observable before I make it smarter — structured traces per step, trajectory-level evals graded per agent, and each case run N times so I'm measuring a reliability distribution, not a lucky sample. Then non-determinism becomes a metric I can drive down, not a mystery I re-run."
       </Decision></FadeIn>
 
+      <FadeIn delay={480}><Decision question="A sub-agent reports 'done' — do you trust it?">
+        <Pill type="red">The most underrated failure mode</Pill> No. An agent's self-report is a claim, not evidence. LLMs are trained to produce plausible completions, and "I have fixed the bug and all tests pass" is a very plausible completion — whether or not any test ran. In production multi-agent systems, silent non-work is more dangerous than loud failure: a crashed agent gets retried; a lying agent gets merged.
+        <br /><br />
+        <strong>1 — Demand artifacts, not assertions.</strong> Define what physical evidence "done" produces: a diff, a file path, a test log, a written report with line references. The orchestrator gates on the artifact existing and being non-trivial — an agent that claims success but produced no diff is treated as failed, automatically. This is a cheap structural check that catches the majority of phantom completions before any LLM judges anything.
+        <br /><br />
+        <strong>2 — Verify with a check the worker didn't write.</strong> Re-run the test suite yourself in the orchestrator (deterministic, ideal), or run a verifier agent whose only job is to refute the claim: "Here is the claim and the artifact. Try to prove it false." Asking a fresh context to refute is much more reliable than asking the original agent "are you sure?" — the original will defend its own work with the same confidence it fabricated it.
+        <br /><br />
+        <strong>3 — Make the default distrust, scaled by blast radius.</strong> Read-only research output can ship on artifact checks alone. Code changes need a deterministic re-verification (build + tests). Anything that mutates external state should require evidence <em>before</em> the mutation, not an apology after. The design smell to name in an interview: any pipeline where one agent's unverified claim is another agent's ground truth.
+      </Decision></FadeIn>
+
+      <FadeIn delay={560}><Insight tag="Handoff contracts">
+        The complement of verifying claims is constraining outputs. Free-text handoffs between agents fail in two quiet ways: unparseable output (the next agent chokes) and empty-but-well-formed output (an empty findings array reads as "all clear" when it actually means "the finder died"). Enforce a JSON Schema on every agent boundary — validate at the seam, retry the producing agent on violation, and treat "valid but empty" as its own signal that needs an explicit reason field: <code>{`{ findings: [], reason: "searched 40 files, pattern absent" }`}</code> is verifiable; a bare <code>[]</code> is indistinguishable from a crash.
+      </Insight></FadeIn>
+
       <FadeIn><CodeBlock filename="context-handoff.js" code={CONTEXT_HANDOFF_CODE} output={CONTEXT_HANDOFF_OUTPUT} /></FadeIn>
 
       <FadeIn><Insight>
