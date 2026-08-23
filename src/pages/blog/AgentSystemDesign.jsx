@@ -544,7 +544,7 @@ function ArchitecturePanel() {
         ))}
       </div></FadeIn>
 
-      <FadeIn delay={160}><Insight warn>
+      <FadeIn delay={160}><Insight type="warn">
         When an agent fails, don't ask "was the model smart enough?" Ask which harness layer ran out of road.
       </Insight></FadeIn>
     </div>

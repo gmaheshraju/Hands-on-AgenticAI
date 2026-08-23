@@ -15,6 +15,7 @@ export function Pill({ type, children }) {
     green: { bg: 'var(--bg-success)', color: 'var(--text-success)' },
     amber: { bg: 'var(--bg-warning)', color: 'var(--text-warning)' },
     red: { bg: 'var(--bg-danger)', color: 'var(--text-danger)' },
+    blue: { bg: 'var(--bg-accent)', color: 'var(--text-accent)' },
   };
   const c = colors[type] || colors.green;
   return (
