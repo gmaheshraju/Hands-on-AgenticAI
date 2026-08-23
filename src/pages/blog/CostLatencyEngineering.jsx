@@ -396,7 +396,7 @@ function Tab5() {
       </Insight>
 
       <Insight type="warn" tag="Common mistake">
-        Do not track cost in tokens. Track it in dollars. Tokens are meaningless across models -- 1000 tokens of Haiku input ($0.00025) vs 1000 tokens of Opus input ($0.015) is a 60x difference. Your dashboard should show dollar amounts, your alerts should fire on dollar thresholds, and your budget conversations with leadership should be in dollars per month, not millions of tokens.
+        Do not track cost in tokens. Track it in dollars. Tokens are meaningless across models -- 1000 tokens of Haiku input ($0.001) vs 1000 tokens of Opus input ($0.005) is a 5x difference at 2026 prices, and output tokens cost 5x their input rate on top of that. Your dashboard should show dollar amounts, your alerts should fire on dollar thresholds, and your budget conversations with leadership should be in dollars per month, not millions of tokens.
       </Insight>
     </FadeIn>
   );

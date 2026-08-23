@@ -88,9 +88,9 @@ const TOKEN_BUDGET_CODE = `class TokenBudgetManager {
 
   _estimateCost(model, inputTokens, outputTokens) {
     const rates = {
-      'claude-haiku':  { input: 0.25, output: 1.25 },   // per 1M tokens
+      'claude-haiku':  { input: 1.00, output: 5.00 },   // per 1M tokens (2026)
       'claude-sonnet': { input: 3.00, output: 15.00 },
-      'claude-opus':   { input: 15.00, output: 75.00 },
+      'claude-opus':   { input: 5.00, output: 25.00 },
     };
     const r = rates[model] || rates['claude-sonnet'];
     return (inputTokens * r.input + outputTokens * r.output) / 1_000_000;
@@ -131,12 +131,12 @@ const TOKEN_BUDGET_OUTPUT = `> const budget = new TokenBudgetManager({ dailyBudg
 
 > await budget.call('claude-opus', longConversation)
   Input: 12,400 tokens | Output: 1,820 tokens
-  Cost: $0.3225 | Budget remaining: $499.68
+  Cost: $0.1075 | Budget remaining: $499.89
 
 > // 15,000 requests later...
 > await budget.call('claude-opus', messages)
   Budget guard: downgrading claude-opus -> haiku
-  Cost: $0.000089 | Budget remaining: $2.14
+  Cost: $0.00036 | Budget remaining: $2.14
 
 > await budget.call('claude-haiku', messages)
   Error: Daily budget exhausted: $500.00/$500`;
