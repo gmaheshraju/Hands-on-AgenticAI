@@ -11,8 +11,8 @@ const MODEL_ROUTER_CODE = `const MODEL_TIERS = {
   complex: { model: 'claude-opus-5',     costPer1M: 5.0,  maxTokens: 8192 },
 };
 
-async function routeRequest(messages, tools) {
-  const complexity = classifyComplexity(messages, tools);
+async function routeRequest(messages, tools, tierOverride) {
+  const complexity = tierOverride ?? classifyComplexity(messages, tools);
   const tier = MODEL_TIERS[complexity];
 
   const response = await callModel({
@@ -22,10 +22,12 @@ async function routeRequest(messages, tools) {
     max_tokens: tier.maxTokens,
   });
 
-  // Quality check — cascade up if confidence is low
+  // Quality check — cascade up if confidence is low.
+  // Pass the higher tier explicitly: re-classifying the same input
+  // would pick the same tier and recurse forever.
   if (response.confidence < 0.7 && complexity !== 'complex') {
     const nextTier = complexity === 'simple' ? 'medium' : 'complex';
-    return routeRequest(messages, tools); // retry with higher tier
+    return routeRequest(messages, tools, nextTier);
   }
 
   return { ...response, model: tier.model, cost: calculateCost(response, tier) };
