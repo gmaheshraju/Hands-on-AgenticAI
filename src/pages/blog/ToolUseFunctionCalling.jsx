@@ -244,6 +244,75 @@ Provenance check: FAIL
 
 Hallucination catch rate: ~95% | False positive rate: <2% (user-provided IDs)`;
 
+const PERMISSION_TIER_CODE = `// Permission tiers live in the tool REGISTRY, not in prompt text.
+// The model never sees tier logic — the runtime enforces it.
+const toolRegistry = {
+  search_orders:  { tier: 'auto',    execute: searchOrders },
+  update_address: { tier: 'confirm', execute: updateAddress,
+                    dryRun: previewAddressChange },
+  cancel_order:   { tier: 'confirm', execute: cancelOrder,
+                    dryRun: previewCancellation },
+  process_refund: { tier: 'manual',  execute: processRefund,
+                    dryRun: previewRefund },
+  // NOTE: no tool can modify this registry. Tier assignments are
+  // code-reviewed config, never model-writable state.
+};
+
+async function enforceTier(toolCall, context) {
+  const tool = toolRegistry[toolCall.name];
+
+  switch (tool.tier) {
+    case 'auto':
+      // Read-only: execute immediately. Worst case is stale data.
+      return tool.execute(toolCall.arguments, context);
+
+    case 'confirm': {
+      // First pass: return a dry-run preview INSTEAD of executing.
+      // The model relays it; the user's "yes" arrives as a signed
+      // confirmation token — not as chat text the model interprets.
+      if (!context.confirmationToken) {
+        const preview = await tool.dryRun(toolCall.arguments, context);
+        return {
+          status: 'needs_confirmation',
+          preview,                          // "Cancel order #456, $89.99?"
+          confirm_token: signToken({        // HMAC over name + args
+            tool: toolCall.name,
+            args: toolCall.arguments,
+            expiresIn: '5m',
+          }),
+        };
+      }
+      // Second pass: token must match THESE args — the model cannot
+      // get a yes for one order and spend it on another.
+      verifyToken(context.confirmationToken, toolCall);
+      return tool.execute(toolCall.arguments, context);
+    }
+
+    case 'manual':
+      // Destructive/financial: route to a human approval queue.
+      // The agent's turn ends here; execution resumes out-of-band.
+      return {
+        status: 'pending_approval',
+        ticket: await approvalQueue.enqueue(toolCall, context),
+      };
+  }
+}`;
+
+const PERMISSION_TIER_OUTPUT = `> enforceTier({ name: 'search_orders', ... })          // tier: auto
+{ result: [...], status: "success" }                   // no friction
+
+> enforceTier({ name: 'cancel_order', arguments: { order_id: 'ord_456' } })
+{ status: "needs_confirmation",
+  preview: "Cancel order #456 — $89.99, placed yesterday, 3 items",
+  confirm_token: "eyJhbGc..." }
+
+> // Model swaps the order_id after user said yes:
+> enforceTier({ name: 'cancel_order', arguments: { order_id: 'ord_999' } },
+              { confirmationToken: "eyJhbGc..." })
+TokenMismatchError: confirmation was signed for ord_456, got ord_999
+
+Tier distribution in production: auto 91% | confirm 8% | manual <1%`;
+
 const TABS = ['Schema Design', 'Tool Dispatch', 'Error Recovery', 'Permissions & Sandboxing', 'Anti-patterns'];
 
 export default function ToolUseFunctionCalling() {
@@ -540,7 +609,9 @@ function PermissionsPanel() {
         <Pill type="amber">Cost cap</Pill> If total tool execution cost exceeds $0.50 per conversation (API calls, compute, third-party charges), stop and explain. This catches runaway agents before they generate a surprise bill. Track cost per tool in the registry and sum during dispatch.
       </Decision></FadeIn>
 
-      <FadeIn delay={300}><Insight>
+      <FadeIn delay={300}><CodeBlock filename="permission-tiers.js" code={PERMISSION_TIER_CODE} output={PERMISSION_TIER_OUTPUT} /></FadeIn>
+
+      <FadeIn delay={400}><Insight>
         In practice, the security question is a trap. If you say "we validate inputs" and stop there, you have missed the point. The real answer is defense in depth: input validation + output sanitization + permission tiers + rate limits + audit trail + human-in-the-loop for destructive actions + network allowlists + process isolation. Each layer catches what the previous one missed. A single layer gives you 90% protection. Six layers give you 99.99%. That last 9.99% is where production incidents live.
       </Insight></FadeIn>
     </div>
