@@ -426,7 +426,7 @@ function PatternsPanel() {
         <br /><br />
         <strong>Message bus as audit trail:</strong> Every lifecycle event (TASK_REQUEST, TASK_RESULT, TASK_FAILED, ESCALATION) flows through a typed pub/sub bus. Replay the bus history to debug any coordination issue — you get distributed tracing for free.
         <br /><br />
-        <Pill type="green">See Project 21</Pill> The <Link to="/projects" style={{ color: 'var(--text-accent)' }}>Multi-Agent Coordinator</Link> implements all five patterns: capability registry, load-aware routing, wave-based parallelism, escalation chains, and a message bus — in ~400 lines of JavaScript.
+        <Pill type="green">See Project 21</Pill> The <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/tree/main/projects/21-multi-agent-coordinator" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-accent)' }}>Multi-Agent Coordinator</a> implements all five patterns: capability registry, load-aware routing, wave-based parallelism, escalation chains, and a message bus — in ~400 lines of JavaScript.
       </Decision></FadeIn>
 
       <FadeIn><Insight>

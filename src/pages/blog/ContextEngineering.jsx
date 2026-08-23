@@ -198,7 +198,7 @@ export default function ContextEngineering() {
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Hands-On Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Context Window Optimizer</p>
         <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Design a context assembly pipeline with token budgeting, source prioritization, prompt caching, and compression — then measure its impact with evals.</p>
-        <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/blob/main/projects/22-context-engineering.md" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
+        <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/tree/main/projects/22-context-engineering" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
       </div></FadeIn>
     </div>
   );
@@ -653,7 +653,7 @@ function DeepDivePanel() {
       <FadeIn delay={320}><div style={{ marginBottom: 16 }}>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 8 }}>
           <strong>Related project:</strong>{' '}
-          <Link to="/projects/22" style={{ color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>Project 22 — Context Window Optimizer</Link>{' '}
+          <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/tree/main/projects/22-context-engineering" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>Project 22 — Context Window Optimizer</a>{' '}
           — build a full context assembly pipeline with token budgeting, priority scoring, and eval-driven optimization.
         </p>
       </div></FadeIn>
