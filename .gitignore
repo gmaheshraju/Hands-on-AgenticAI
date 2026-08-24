@@ -32,3 +32,7 @@ dist-ssr
 docs/diagrams/*/_render.png
 docs/diagrams/*/_standalone.svg
 docs/diagrams/_harness/*_backup.py
+
+# python bytecode
+__pycache__/
+*.pyc
