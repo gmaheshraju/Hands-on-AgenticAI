@@ -1,0 +1,179 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 800" role="img" aria-labelledby="hoa_agent_cicd_v1-t hoa_agent_cicd_v1-d" class="fts-diagram">
+  <title id="hoa_agent_cicd_v1-t">26 Agent CI/CD — Eval Suite + Quality Gates for AI Agents</title>
+  <desc id="hoa_agent_cicd_v1-d">One in-process pipeline that runs an eval suite against an agent-under-test, compares the scores to a stored baseline, applies quality-gate rules, and decides promote / block — all in four ordered stages, no network and no real LLM. Every element cites a source line in FACTS.md.</desc>
+  <defs>
+    <marker id="hoa_agent_cicd_v1-a-d-edge-artifact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32" class="d-edge-artifact-fill"/></marker>
+    <marker id="hoa_agent_cicd_v1-a-d-edge-data_in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9E9E9E" class="d-edge-data_in-fill"/></marker>
+    <marker id="hoa_agent_cicd_v1-a-d-edge-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-edge-primary-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="40" y="240" width="216" height="376" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="52" y="260" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">③ Inputs — demo.js CLI + eval config</text>
+  </g>
+  <g class="d-zone d-boundary-primary">
+    <rect x="320" y="96" width="976" height="684" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="332" y="116" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">① agent-cicd pipeline (Node ESM · no network, no real LLM)</text>
+  </g>
+  <g class="d-zone d-boundary-functional">
+    <rect x="528" y="216" width="752" height="256" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="540" y="236" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">4-stage pipeline — eval → baseline → gate → promote</text>
+  </g>
+  <g class="d-zone d-boundary-observability">
+    <rect x="1360" y="440" width="296" height="224" rx="8" fill="none" stroke="#E7157B" stroke-width="1" stroke-dasharray="8 4"/>
+    <text x="1372" y="460" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">④ Reported output (in-memory / stdout)</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_cli">
+    <polyline points="232,304.0 336,304.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_cicd_v1-a-d-edge-primary)"/>
+    <text x="284.0" y="298.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">runPipeline</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_cases">
+    <polyline points="232,400.0 288,400 288,280 336,280.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_agent_cicd_v1-a-d-edge-data_in)"/>
+    <text x="288.0" y="334.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">8 cases</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_scorers">
+    <polyline points="232,480.0 312,480 312,328 336,328.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_agent_cicd_v1-a-d-edge-data_in)"/>
+    <text x="312.0" y="398.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">scorers</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_agent">
+    <polyline points="232,560.0 424,560 424.0,352" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_agent_cicd_v1-a-d-edge-data_in)"/>
+    <text x="424.0" y="450.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">agentFn (SUT)</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_run">
+    <polyline points="512,304.0 552,304.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_cicd_v1-a-d-edge-primary)"/>
+    <text x="532.0" y="298.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label"></text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_base">
+    <polyline points="712,304.0 736,304.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_cicd_v1-a-d-edge-primary)"/>
+    <text x="724.0" y="298.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label"></text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_gate">
+    <polyline points="896,304.0 920,304.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_cicd_v1-a-d-edge-primary)"/>
+    <text x="908.0" y="298.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label"></text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_promo">
+    <polyline points="1080,304.0 1104,304.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_cicd_v1-a-d-edge-primary)"/>
+    <text x="1092.0" y="298.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label"></text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_read">
+    <polyline points="816.0,496 816.0,336" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_agent_cicd_v1-a-d-edge-data_in)"/>
+    <text x="816.0" y="410.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">read</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_save">
+    <polyline points="1144.0,336 1144,528 896,528.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_agent_cicd_v1-a-d-edge-artifact)"/>
+    <text x="1020.0" y="522.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">save on promote</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_report">
+    <polyline points="1264,304.0 1320,304 1320,488 1384,488.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_agent_cicd_v1-a-d-edge-artifact)"/>
+    <text x="1320.0" y="390.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">stdout</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_hist">
+    <polyline points="1224.0,336 1224,584 1384,584.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_cicd_v1-a-d-edge-primary)"/>
+    <text x="1224.0" y="454.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">run</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_cli" data-class="component.entry">
+    <rect x="64" y="272" width="168" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="148.0" y="292.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
+    <text x="148.0" y="307.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">5 scenarios</text>
+    <text x="148.0" y="322.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runPipeline ×3</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_cases" data-class="component.mock">
+    <rect x="64" y="368" width="168" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="148.0" y="388.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">8 eval cases</text>
+    <text x="148.0" y="403.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">tags + weights</text>
+    <text x="148.0" y="418.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">demo.js</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_scorers" data-class="component.mock">
+    <rect x="64" y="448" width="168" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="148.0" y="468.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">3 scorer fns</text>
+    <text x="148.0" y="483.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">faith / safety / cost</text>
+    <text x="148.0" y="498.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">demo.js</text>
+  </g>
+  <g class="d-node d-component-agent" data-id="n_agent" data-class="component.agent">
+    <rect x="64" y="528" width="168" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
+    <text x="148.0" y="548.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">agentFn (SUT · mock)</text>
+    <text x="148.0" y="563.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">good / bad agent</text>
+    <text x="148.0" y="578.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">demo.js</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_pipeline" data-class="component.service">
+    <rect x="336" y="256" width="176" height="96" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="424.0" y="285.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">AgentCICDPipeline</text>
+    <text x="424.0" y="300.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runPipeline()</text>
+    <text x="424.0" y="315.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">4-stage orchestrator</text>
+    <text x="424.0" y="330.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runs[] log</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_eval" data-class="component.service">
+    <rect x="552" y="272" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="632.0" y="285.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">① EvalSuite.run</text>
+    <text x="632.0" y="300.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">evalSuite.js</text>
+    <text x="632.0" y="315.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">agentFn</text>
+    <text x="632.0" y="330.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">score dims</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_baseline" data-class="component.service">
+    <rect x="736" y="272" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="816.0" y="292.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">② compare()</text>
+    <text x="816.0" y="307.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">baseline.js</text>
+    <text x="816.0" y="322.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">regression</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_gate" data-class="component.service">
+    <rect x="920" y="272" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1000.0" y="292.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">③ QualityGate</text>
+    <text x="1000.0" y="307.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">evaluate()</text>
+    <text x="1000.0" y="322.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">rules → verdict</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_promo" data-class="component.service">
+    <rect x="1104" y="272" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1184.0" y="292.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">④ _decide()</text>
+    <text x="1184.0" y="307.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">pipeline.js</text>
+    <text x="1184.0" y="322.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">promote / block</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_store" data-class="component.artifact">
+    <rect x="736" y="496" width="160" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="816.0" y="516.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">baseline store</text>
+    <text x="816.0" y="531.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">Map (in-memory)</text>
+    <text x="816.0" y="546.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">saveBaseline</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_report" data-class="component.artifact">
+    <rect x="1384" y="472" width="248" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1508.0" y="500.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">stdout report</text>
+    <text x="1508.0" y="515.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">generateReport</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_history" data-class="component.artifact">
+    <rect x="1384" y="568" width="248" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1508.0" y="588.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">run history</text>
+    <text x="1508.0" y="603.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">this.runs</text>
+    <text x="1508.0" y="618.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">getRunHistory</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_stages" data-class="card.invariant">
+    <rect x="336" y="616" width="304" height="160" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="344" y="650.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">FOUR STAGES — runPipeline() pipeline.js</text>
+    <text x="344" y="664.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 eval EvalSuite.run → scores</text>
+    <text x="344" y="678.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 baseline compare (skip if none)</text>
+    <text x="344" y="692.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 gate QualityGate.evaluate</text>
+    <text x="344" y="706.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 promote _decide → action</text>
+    <text x="344" y="720.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">each stage output feeds the next</text>
+    <text x="344" y="734.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">auto-save baseline only on &#x27;promote&#x27;</text>
+    <text x="344" y="748.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">(never on promote_with_warnings)</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_promo" data-class="card.failure">
+    <rect x="656" y="616" width="304" height="160" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="664" y="650.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">PROMOTION LADDER — _decide()</text>
+    <text x="664" y="664.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">first match wins, in code order:</text>
+    <text x="664" y="678.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 BLOCK if gate verdict = BLOCK</text>
+    <text x="664" y="692.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 BLOCK if baseline REGRESSION</text>
+    <text x="664" y="706.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 BLOCK if cases &lt; minCases(5)</text>
+    <text x="664" y="720.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 PROMOTE_WITH_WARNINGS if WARN</text>
+    <text x="664" y="734.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 PROMOTE if all clear</text>
+    <text x="664" y="748.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 independent block gates, not 1</text>
+  </g>
+  <g class="d-node d-card-primitive" data-id="card_gate" data-class="card.primitive">
+    <rect x="976" y="616" width="304" height="160" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="984" y="650.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">QUALITY GATE — qualityGate.js</text>
+    <text x="984" y="664.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">rule types (evaluate loop):</text>
+    <text x="984" y="678.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> threshold · regression · custom</text>
+    <text x="984" y="692.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">severity: error blocks, warning notes</text>
+    <text x="984" y="706.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">verdict: BLOCK / WARN / PASS</text>
+    <text x="984" y="720.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">history push → trend</text>
+    <text x="984" y="734.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">demo rules —</text>
+    <text x="984" y="748.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> safety gte 0.9 err · cost gte 0.7 warn</text>
+  </g>
+</svg>

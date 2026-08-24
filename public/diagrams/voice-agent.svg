@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 800" role="img" aria-labelledby="hoa_voice_agent_v1-t hoa_voice_agent_v1-d" class="fts-diagram">
+  <title id="hoa_voice_agent_v1-t">17 Real-Time Voice Agent — Architecture</title>
+  <desc id="hoa_voice_agent_v1-d">One Node process serving HTTP and WebSocket on the same port, with a per-connection set of four objects (TurnManager, MockSTT, ConversationEngine, MockTTS), the browser capture and playback halves it talks to, and two real-provider templates that no caller constructs. Every element cites a source line in FACTS.md.</desc>
+  <defs>
+    <marker id="hoa_voice_agent_v1-a-d-edge-artifact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32" class="d-edge-artifact-fill"/></marker>
+    <marker id="hoa_voice_agent_v1-a-d-edge-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1565C0" class="d-edge-call-fill"/></marker>
+    <marker id="hoa_voice_agent_v1-a-d-edge-data_in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9E9E9E" class="d-edge-data_in-fill"/></marker>
+    <marker id="hoa_voice_agent_v1-a-d-edge-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-edge-primary-fill"/></marker>
+    <marker id="hoa_voice_agent_v1-a-d-edge-stop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C62828" class="d-edge-stop-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="40" y="232" width="176" height="208" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="52" y="252" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">③ Entry — WS clients</text>
+  </g>
+  <g class="d-zone d-boundary-primary">
+    <rect x="280" y="96" width="1016" height="680" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="292" y="116" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">① 17-voice-agent server process (Node ESM, one port)</text>
+  </g>
+  <g class="d-zone d-boundary-functional">
+    <rect x="320" y="200" width="936" height="264" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="332" y="220" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">Per-connection instances — one set per socket · server.js</text>
+  </g>
+  <g class="d-zone d-boundary-external">
+    <rect x="1360" y="232" width="296" height="240" rx="8" fill="none" stroke="#1565C0" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="1372" y="252" fill="#1565C0" font-size="12" font-weight="600" class="d-zone-label">② Real-provider templates — constructed by no caller</text>
+  </g>
+  <g class="d-zone d-boundary-observability">
+    <rect x="1360" y="584" width="296" height="176" rx="8" fill="none" stroke="#E7157B" stroke-width="1" stroke-dasharray="8 4"/>
+    <text x="1372" y="604" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">④ Browser playback (public/voice.js)</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_get">
+    <polyline points="128.0,252 128,152 320,152.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_voice_agent_v1-a-d-edge-data_in)"/>
+    <text x="224.0" y="146.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">GET / · public/</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_audio">
+    <polyline points="200,284.0 344,284.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_voice_agent_v1-a-d-edge-primary)"/>
+    <text x="272.0" y="278.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">{type:&#x27;audio&#x27;} base64 PCM</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_demo">
+    <polyline points="200,388.0 388,388 388.0,316" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_voice_agent_v1-a-d-edge-primary)"/>
+    <text x="294.0" y="382.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">{type:&#x27;simulate&#x27;} demo.js</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_feed">
+    <polyline points="476.0,316 476,404 576,404.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_voice_agent_v1-a-d-edge-data_in)"/>
+    <text x="526.0" y="398.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">feedAudio · setNextTranscript</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_energy">
+    <polyline points="520,284.0 576,284.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_voice_agent_v1-a-d-edge-primary)"/>
+    <text x="548.0" y="278.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">onAudioEnergy · onCompleteUtterance</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_end">
+    <polyline points="752,284.0 808,284.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_voice_agent_v1-a-d-edge-primary)"/>
+    <text x="780.0" y="278.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">endpointDetected → processUserInput</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_gen">
+    <polyline points="984,284.0 1040,284.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_voice_agent_v1-a-d-edge-primary)"/>
+    <text x="1012.0" y="278.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">response.text → synthesize</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_chunk">
+    <polyline points="1216,284.0 1320,284 1320,648 1384,648.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_voice_agent_v1-a-d-edge-artifact)"/>
+    <text x="1320.0" y="460.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">tts_chunk</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_state">
+    <polyline points="708.0,252 708,228 1296,228 1296,716 1384,716.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_voice_agent_v1-a-d-edge-call)"/>
+    <text x="1002.0" y="222.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">stateChange → {type:&#x27;state&#x27;}</text>
+  </g>
+  <g class="d-edge d-edge-stop" data-edge="e_cancel">
+    <polyline points="620.0,316 620,344 1128,344 1128.0,316" fill="none" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_voice_agent_v1-a-d-edge-stop)"/>
+    <text x="874.0" y="338.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">INTERRUPTED → tts.cancel()</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_mic" data-class="component.entry">
+    <rect x="56" y="252" width="144" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="128.0" y="272.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">mic capture</text>
+    <text x="128.0" y="287.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">PCM → base64 → ws</text>
+    <text x="128.0" y="302.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">voice.js</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
+    <rect x="56" y="356" width="144" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="128.0" y="376.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
+    <text x="128.0" y="391.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">4 scripted turns</text>
+    <text x="128.0" y="406.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"></text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_static" data-class="component.service">
+    <rect x="320" y="124" width="176" height="56" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="408.0" y="140.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">express.static</text>
+    <text x="408.0" y="155.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">public/ → browser</text>
+    <text x="408.0" y="170.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">server.js</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_ws" data-class="component.service">
+    <rect x="344" y="252" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="432.0" y="272.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">ws message router</text>
+    <text x="432.0" y="287.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">7 branches · safeSend</text>
+    <text x="432.0" y="302.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">server.js</text>
+  </g>
+  <g class="d-node d-component-agent" data-id="n_turn" data-class="component.agent">
+    <rect x="576" y="252" width="176" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
+    <text x="664.0" y="272.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">TurnManager</text>
+    <text x="664.0" y="287.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">5 states · VAD · timer</text>
+    <text x="664.0" y="302.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"></text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_engine" data-class="component.service">
+    <rect x="808" y="252" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="896.0" y="272.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">ConversationEngine</text>
+    <text x="896.0" y="287.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">8 rules · 20-turn ctx</text>
+    <text x="896.0" y="302.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"></text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_tts" data-class="component.service">
+    <rect x="1040" y="252" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1128.0" y="272.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">MockTTS</text>
+    <text x="1128.0" y="287.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3-word chunks · 16kHz</text>
+    <text x="1128.0" y="302.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"></text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_stt" data-class="component.service">
+    <rect x="576" y="372" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="664.0" y="392.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">MockSTT</text>
+    <text x="664.0" y="407.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">buffers only · 5 phrases</text>
+    <text x="664.0" y="422.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"></text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_whisper" data-class="component.mock">
+    <rect x="1384" y="268" width="248" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="1508.0" y="288.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">WhisperSTT</text>
+    <text x="1508.0" y="303.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">OPENAI_API_KEY · whisper-1</text>
+    <text x="1508.0" y="318.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">speechToText.js</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_cloud" data-class="component.mock">
+    <rect x="1384" y="380" width="248" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="1508.0" y="400.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">CloudTTS</text>
+    <text x="1508.0" y="415.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">alloy · tts-1 · pcm stream</text>
+    <text x="1508.0" y="430.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">textToSpeech.js</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_play" data-class="component.artifact">
+    <rect x="1384" y="620" width="248" height="56" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1508.0" y="636.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">playback queue</text>
+    <text x="1508.0" y="651.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">sequential · onended</text>
+    <text x="1508.0" y="666.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">voice.js</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_ui" data-class="component.artifact">
+    <rect x="1384" y="692" width="248" height="48" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1508.0" y="712.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">transcript + waveform</text>
+    <text x="1508.0" y="727.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">voice.js</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_in" data-class="card.invariant">
+    <rect x="304" y="488" width="456" height="124" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="312" y="504.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">CLIENT → SERVER — every switch branch, in code order</text>
+    <text x="312" y="518.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 start — stt.reset · engine.reset · startConversation</text>
+    <text x="312" y="532.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 stop — tts.cancel · endConversation</text>
+    <text x="312" y="546.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 audio — base64 → Float32 → RMS → feedAudio + onAudioEnergy</text>
+    <text x="312" y="560.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 simulate — setNextTranscript → onCompleteUtterance → pipeline</text>
+    <text x="312" y="574.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 interrupt — only while SPEAKING: onAudioEnergy(1.0)</text>
+    <text x="312" y="588.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 get_history — undocumented in the protocol block</text>
+    <text x="312" y="602.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">7 default — unknown type; malformed JSON errors earlier at</text>
+  </g>
+  <g class="d-node d-card-primitive" data-id="card_out" data-class="card.primitive">
+    <rect x="792" y="488" width="456" height="124" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="800" y="504.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">SERVER → CLIENT — all 6 types and their only emitters</text>
+    <text x="800" y="518.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">state — on every stateChange, and once on connect</text>
+    <text x="800" y="532.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">transcript user assistant</text>
+    <text x="800" y="546.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">tts_chunk — Float32 → Buffer → base64, index/total</text>
+    <text x="800" y="560.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">tts_done interrupted=true interrupted=false</text>
+    <text x="800" y="574.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">history empty on start on get_history</text>
+    <text x="800" y="588.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">error pipeline throw bad JSON unknown type</text>
+    <text x="800" y="602.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">the browser handles exactly these six — voice.js</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_dead" data-class="card.failure">
+    <rect x="548" y="636" width="456" height="124" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="556" y="652.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">MIC AUDIO CANNOT PRODUCE A TRANSCRIPT — the wired path</text>
+    <text x="556" y="666.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 audio feedAudio() buffers the chunk — nothing drains it</text>
+    <text x="556" y="680.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 MockSTT.transcribe() speechToText.js — no caller exists</text>
+    <text x="556" y="694.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 onEndpointWithTranscript turnManager.js — no caller exists</text>
+    <text x="556" y="708.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 partialTranscript is written only by onCompleteUtterance</text>
+    <text x="556" y="722.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 endpointDetected therefore carries transcript = &#x27;&#x27;</text>
+    <text x="556" y="736.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 server.js returns early on falsy — the turn ends silently</text>
+    <text x="556" y="750.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">mic drives VAD only; only &#x27;simulate&#x27; reaches the engine</text>
+  </g>
+</svg>

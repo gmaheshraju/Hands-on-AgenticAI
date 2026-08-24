@@ -1,0 +1,185 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 800" role="img" aria-labelledby="hoa_eval_engineering_v1-t hoa_eval_engineering_v1-d" class="fts-diagram">
+  <title id="hoa_eval_engineering_v1-t">08 Eval Engineering — Architecture</title>
+  <desc id="hoa_eval_engineering_v1-d">The RAG eval harness: a golden Q&amp;A set and a RAG system under test enter a nine-step runEval() pipeline, an LLM-as-judge scores three calibrated dimensions against either Gemini or a mock backend, regression gates decide PASS/FAIL against a saved baseline, and a markdown report plus a new baseline are written. Every element cites a source line in FACTS.md.</desc>
+  <defs>
+    <marker id="hoa_eval_engineering_v1-a-d-edge-artifact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32" class="d-edge-artifact-fill"/></marker>
+    <marker id="hoa_eval_engineering_v1-a-d-edge-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1565C0" class="d-edge-call-fill"/></marker>
+    <marker id="hoa_eval_engineering_v1-a-d-edge-data_in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9E9E9E" class="d-edge-data_in-fill"/></marker>
+    <marker id="hoa_eval_engineering_v1-a-d-edge-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-edge-primary-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="40" y="96" width="240" height="160" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="52" y="116" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">③ Entry (CLI)</text>
+  </g>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="40" y="340" width="240" height="292" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="52" y="360" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">④ Inputs — golden data + system under test</text>
+  </g>
+  <g class="d-zone d-boundary-primary">
+    <rect x="344" y="96" width="936" height="688" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="356" y="116" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">① 08-eval-engineering process (Node ESM)</text>
+  </g>
+  <g class="d-zone d-boundary-functional">
+    <rect x="376" y="176" width="872" height="268" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="388" y="196" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">Eval pipeline — runEval(), one pass over the golden set</text>
+  </g>
+  <g class="d-zone d-boundary-external">
+    <rect x="1344" y="176" width="296" height="272" rx="8" fill="none" stroke="#1565C0" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="1356" y="196" fill="#1565C0" font-size="12" font-weight="600" class="d-zone-label">② Judge backends — only Gemini leaves the process</text>
+  </g>
+  <g class="d-zone d-boundary-observability">
+    <rect x="1344" y="592" width="296" height="176" rx="8" fill="none" stroke="#E7157B" stroke-width="1" stroke-dasharray="8 4"/>
+    <text x="1356" y="612" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">⑤ Artifacts written</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_run">
+    <polyline points="224,172.0 312,172 312,264 396,264.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_eval_engineering_v1-a-d-edge-primary)"/>
+    <text x="312.0" y="212.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">runEval() ×2</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_golden">
+    <polyline points="224,428.0 436,428 436.0,296" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_eval_engineering_v1-a-d-edge-data_in)"/>
+    <text x="330.0" y="422.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">30 questions</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_rag">
+    <polyline points="224,552.0 312,552 312,296 516.0,296" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_eval_engineering_v1-a-d-edge-data_in)"/>
+    <text x="312.0" y="418.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">answer + sources</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_eval">
+    <polyline points="556,264.0 620,264.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_eval_engineering_v1-a-d-edge-primary)"/>
+    <text x="588.0" y="258.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">per question</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_prompt">
+    <polyline points="700.0,296 700.0,360" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_eval_engineering_v1-a-d-edge-call)"/>
+    <text x="700.0" y="322.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">3 prompts</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_api">
+    <polyline points="700.0,232 700,140 1320,140 1320,264 1368,264.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_eval_engineering_v1-a-d-edge-call)"/>
+    <text x="1010.0" y="134.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">generateContent</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_mock">
+    <polyline points="660.0,232 660,208 1296,208 1296,392 1368,392.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_eval_engineering_v1-a-d-edge-call)"/>
+    <text x="978.0" y="202.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">--mock</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_regress">
+    <polyline points="780,264.0 844,264.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_eval_engineering_v1-a-d-edge-primary)"/>
+    <text x="812.0" y="258.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">scores</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_report">
+    <polyline points="1004,264.0 1068,264.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_eval_engineering_v1-a-d-edge-primary)"/>
+    <text x="1036.0" y="258.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">diff report</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_baseread">
+    <polyline points="1368,640.0 1296,640 1296,476 924,476 924.0,296" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_eval_engineering_v1-a-d-edge-data_in)"/>
+    <text x="1110.0" y="470.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">loadBaseline</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_basewrite">
+    <polyline points="964.0,296 964,500 1492,500 1492.0,616" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_eval_engineering_v1-a-d-edge-artifact)"/>
+    <text x="1228.0" y="494.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">saveBaseline</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_reportout">
+    <polyline points="1148.0,296 1148,452 1320,452 1320,712 1368,712.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_eval_engineering_v1-a-d-edge-artifact)"/>
+    <text x="1320.0" y="576.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">writeReport</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
+    <rect x="64" y="140" width="160" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="144.0" y="160.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
+    <text x="144.0" y="175.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runDemo()</text>
+    <text x="144.0" y="190.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">perfect vs degraded</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_golden" data-class="component.artifact">
+    <rect x="64" y="396" width="160" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="144.0" y="416.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">golden-set.json</text>
+    <text x="144.0" y="431.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">30 Q&amp;A triples</text>
+    <text x="144.0" y="446.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">read at runner.js</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_rag" data-class="component.mock">
+    <rect x="64" y="520" width="160" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="144.0" y="540.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">RAG under test</text>
+    <text x="144.0" y="555.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">injected fn</text>
+    <text x="144.0" y="570.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">called at runner.js</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_runner" data-class="component.service">
+    <rect x="396" y="232" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="476.0" y="252.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">runEval()</text>
+    <text x="476.0" y="267.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runner.js</text>
+    <text x="476.0" y="282.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">9-step pipeline</text>
+  </g>
+  <g class="d-node d-component-agent" data-id="n_judge" data-class="component.agent">
+    <rect x="620" y="232" width="160" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
+    <text x="700.0" y="252.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">LLM-as-judge</text>
+    <text x="700.0" y="267.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">evaluator.js</text>
+    <text x="700.0" y="282.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3 dims · Promise.all</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_regress" data-class="component.service">
+    <rect x="844" y="232" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="924.0" y="252.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">regression.js</text>
+    <text x="924.0" y="267.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">detectRegressions</text>
+    <text x="924.0" y="282.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">saveBaseline</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_reporter" data-class="component.service">
+    <rect x="1068" y="232" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1148.0" y="252.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">reporter.js</text>
+    <text x="1148.0" y="267.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">generateReport</text>
+    <text x="1148.0" y="282.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">markdown + verdict</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_dims" data-class="component.service">
+    <rect x="620" y="360" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="700.0" y="380.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">dimensions.js</text>
+    <text x="700.0" y="395.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3 rubric prompts</text>
+    <text x="700.0" y="410.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"></text>
+  </g>
+  <g class="d-node d-component-external" data-id="n_gemini" data-class="component.external">
+    <rect x="1368" y="232" width="248" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+    <text x="1492.0" y="252.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Gemini API</text>
+    <text x="1492.0" y="267.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">gemini-2.0-flash · temp 0.1</text>
+    <text x="1492.0" y="282.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">evaluator.js · maxOut 1024</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_mockjudge" data-class="component.mock">
+    <rect x="1368" y="360" width="248" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="1492.0" y="380.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">createMockJudge()</text>
+    <text x="1492.0" y="395.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">word-overlap heuristic</text>
+    <text x="1492.0" y="410.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">evaluator.js · no API key</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_baseline" data-class="component.artifact">
+    <rect x="1368" y="616" width="248" height="48" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1492.0" y="636.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">baselines/baseline.json</text>
+    <text x="1492.0" y="651.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">saveBaseline · regression.js</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_out_report" data-class="component.artifact">
+    <rect x="1368" y="688" width="248" height="48" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1492.0" y="708.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">reports/eval-&lt;ts&gt;.md</text>
+    <text x="1492.0" y="723.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">writeReport · reporter.js</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_pipeline" data-class="card.invariant">
+    <rect x="360" y="524" width="440" height="140" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="368" y="541.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">runEval() — 9 STEPS, complete, in code order · runner.js</text>
+    <text x="368" y="555.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 load golden-set.json · 2 create judge (mock|real)</text>
+    <text x="368" y="569.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 loop: ragSystem() → judge.evaluate()</text>
+    <text x="368" y="583.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 computeAggregate — skips parseError rows</text>
+    <text x="368" y="597.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 loadBaseline → detectRegressions</text>
+    <text x="368" y="611.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 generateReport → writeReport</text>
+    <text x="368" y="625.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">7 saveBaseline if --save-baseline OR no baseline</text>
+    <text x="368" y="639.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">8 print aggregate + PASS/FAIL verdict</text>
+    <text x="368" y="653.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">9 --ci AND hasRegressions → process.exit(1)</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_gates" data-class="card.failure">
+    <rect x="824" y="524" width="440" height="140" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="832" y="541.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">REGRESSION GATES — every threshold, regression.js</text>
+    <text x="832" y="555.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">REGRESSION_THRESHOLD_POINTS = 1 — per-dim drop</text>
+    <text x="832" y="569.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">IMPROVEMENT_THRESHOLD_POINTS = 1 — per-dim gain</text>
+    <text x="832" y="583.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">AGGREGATE_THRESHOLD_PERCENT = 0.05 — 5% drop</text>
+    <text x="832" y="597.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">applied: diff &lt; -1 → regressed</text>
+    <text x="832" y="611.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">diff &gt; +1 → improved · else unchanged</text>
+    <text x="832" y="625.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">pctChange &lt; -0.05 → aggregateRegression</text>
+    <text x="832" y="639.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">hasRegressions = regressions.length &gt; 0 OR agg</text>
+    <text x="832" y="653.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">no baseline → false, and this run becomes the baseline</text>
+  </g>
+  <g class="d-node d-card-primitive" data-id="card_dims" data-class="card.primitive">
+    <rect x="360" y="680" width="904" height="88" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="368" y="692.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">THE 3 DIMENSIONS — complete, in DIMENSIONS array order · dimensions.js</text>
+    <text x="368" y="706.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">faithfulness w=0.4 — grounded in sources? prompt · rubric 5→1 · 4 calibrations</text>
+    <text x="368" y="720.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">relevance w=0.3 — answers the question? prompt · rubric · 4 calibrations</text>
+    <text x="368" y="734.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">completeness w=0.3 — covers all key points? prompt · rubric · 4 calibrations</text>
+    <text x="368" y="748.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">composite sums only non-parseError dims · mock judge hard-codes the same weights</text>
+    <text x="368" y="762.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">parseJudgeResponse — 3 exits to score 0: no JSON · out of 1-5 · throw</text>
+  </g>
+</svg>

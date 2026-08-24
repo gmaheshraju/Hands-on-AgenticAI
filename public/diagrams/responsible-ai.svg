@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 800" role="img" aria-labelledby="hoa_responsible_ai_v1-t hoa_responsible_ai_v1-d" class="fts-diagram">
+  <title id="hoa_responsible_ai_v1-t">13 Responsible AI — Bias Audit Pipeline Architecture</title>
+  <desc id="hoa_responsible_ai_v1-d">The bias-audit pipeline that interrogates an opaque resume scorer: fixture-driven matched pairs, counterfactual testing across the system-under-test boundary, four from-scratch fairness tests, an optional intersectional branch, and the EU AI Act model card written as Markdown and JSON. Every element cites a source line in FACTS.md.</desc>
+  <defs>
+    <marker id="hoa_responsible_ai_v1-a-d-edge-analysis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E65100" class="d-edge-analysis-fill"/></marker>
+    <marker id="hoa_responsible_ai_v1-a-d-edge-artifact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32" class="d-edge-artifact-fill"/></marker>
+    <marker id="hoa_responsible_ai_v1-a-d-edge-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1565C0" class="d-edge-call-fill"/></marker>
+    <marker id="hoa_responsible_ai_v1-a-d-edge-data_in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9E9E9E" class="d-edge-data_in-fill"/></marker>
+    <marker id="hoa_responsible_ai_v1-a-d-edge-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-edge-primary-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="40" y="216" width="176" height="264" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="52" y="236" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">③ Entry + fixtures</text>
+  </g>
+  <g class="d-zone d-boundary-primary">
+    <rect x="280" y="96" width="1016" height="680" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="292" y="116" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">① 13-responsible-ai audit pipeline (Node ESM)</text>
+  </g>
+  <g class="d-zone d-boundary-functional">
+    <rect x="320" y="200" width="936" height="296" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="332" y="220" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">runDemo() — one pass, 5 numbered steps · demo.js</text>
+  </g>
+  <g class="d-zone d-boundary-external">
+    <rect x="1360" y="200" width="296" height="232" rx="8" fill="none" stroke="#1565C0" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="1372" y="220" fill="#1565C0" font-size="12" font-weight="600" class="d-zone-label">② System under test — opaque contract, MOCK scorer</text>
+  </g>
+  <g class="d-zone d-boundary-observability">
+    <rect x="1360" y="560" width="296" height="200" rx="8" fill="none" stroke="#E7157B" stroke-width="1" stroke-dasharray="8 4"/>
+    <text x="1372" y="580" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">④ Artifacts written</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_cli">
+    <polyline points="208,280.0 344,280.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_responsible_ai_v1-a-d-edge-primary)"/>
+    <text x="276.0" y="274.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">attribute · 25 pairs (50 if --full)</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_tmpl">
+    <polyline points="208,400.0 432,400 432.0,312" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_responsible_ai_v1-a-d-edge-data_in)"/>
+    <text x="320.0" y="394.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">templates + demographic data</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_pairs">
+    <polyline points="520,280.0 576,280.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_responsible_ai_v1-a-d-edge-primary)"/>
+    <text x="548.0" y="274.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">resumeA / resumeB</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_score">
+    <polyline points="664.0,248 664,160 1328,160 1328,268 1384,268.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_responsible_ai_v1-a-d-edge-call)"/>
+    <text x="996.0" y="154.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">scoringFn(A) ‖ (B)</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_ret">
+    <polyline points="1564.0,236 1564,136 708,136 708.0,248" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_responsible_ai_v1-a-d-edge-data_in)"/>
+    <text x="1136.0" y="130.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">score · decision · summary</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_agg">
+    <polyline points="752,280.0 808,280.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_responsible_ai_v1-a-d-edge-primary)"/>
+    <text x="780.0" y="274.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">aggregateResults()</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_stats">
+    <polyline points="984,280.0 1040,280.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_responsible_ai_v1-a-d-edge-primary)"/>
+    <text x="1012.0" y="274.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">combinedStats</text>
+  </g>
+  <g class="d-edge d-edge-analysis" data-edge="e_ipairs">
+    <polyline points="388.0,312 388,428 808,428.0" fill="none" stroke="#E65100" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_responsible_ai_v1-a-d-edge-analysis)"/>
+    <text x="598.0" y="422.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">intersectional pairs</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_iscore">
+    <polyline points="1504.0,300 1504,428 984,428.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_responsible_ai_v1-a-d-edge-call)"/>
+    <text x="1244.0" y="422.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">re-scores each resume</text>
+  </g>
+  <g class="d-edge d-edge-analysis" data-edge="e_icard">
+    <polyline points="940.0,396 940,356 1084,356 1084.0,312" fill="none" stroke="#E65100" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_responsible_ai_v1-a-d-edge-analysis)"/>
+    <text x="1012.0" y="350.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">intersectionalReport</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_md">
+    <polyline points="1172.0,312 1172,492 1304,492 1304,624 1384,624.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_responsible_ai_v1-a-d-edge-artifact)"/>
+    <text x="1172.0" y="396.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">writeModelCard()</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_json">
+    <polyline points="1216,296.0 1352,296 1352,704 1384,704.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_responsible_ai_v1-a-d-edge-artifact)"/>
+    <text x="1352.0" y="494.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">same call, both formats</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_cli" data-class="component.entry">
+    <rect x="48" y="248" width="160" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="128.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
+    <text x="128.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">CLI · 3 modes</text>
+    <text x="128.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"></text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_templates" data-class="component.mock">
+    <rect x="48" y="364" width="160" height="72" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="128.0" y="381.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">resumeTemplates.js</text>
+    <text x="128.0" y="396.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">5 templates</text>
+    <text x="128.0" y="411.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">attributes</text>
+    <text x="128.0" y="426.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">universities</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_builder" data-class="component.service">
+    <rect x="344" y="248" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="432.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">datasetBuilder.js</text>
+    <text x="432.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">matched · proxy</text>
+    <text x="432.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">intersectional</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_cf" data-class="component.service">
+    <rect x="576" y="248" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="664.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">counterfactual.js</text>
+    <text x="664.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">testPair · agg</text>
+    <text x="664.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">batch concurrency 5</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_stats" data-class="component.service">
+    <rect x="808" y="248" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="896.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">statistics.js</text>
+    <text x="896.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">analyzeResults</text>
+    <text x="896.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">4 tests from scratch</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_card" data-class="component.service">
+    <rect x="1040" y="248" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1128.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">modelCard.js</text>
+    <text x="1128.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">generateModelCard</text>
+    <text x="1128.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">renderMarkdown</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_inter" data-class="component.service">
+    <rect x="808" y="396" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="896.0" y="416.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">intersectional.js</text>
+    <text x="896.0" y="431.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">analyzeIntersections</text>
+    <text x="896.0" y="446.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">--full only</text>
+  </g>
+  <g class="d-node d-component-external" data-id="n_scorer" data-class="component.external">
+    <rect x="1384" y="236" width="240" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+    <text x="1504.0" y="256.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">scoringFn — the audited system</text>
+    <text x="1504.0" y="271.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">createBiasedScorer() demo.js</text>
+    <text x="1504.0" y="286.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">createFairScorer() --fair</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_md" data-class="component.artifact">
+    <rect x="1384" y="596" width="248" height="56" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1508.0" y="620.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">output/MODEL_CARD.md</text>
+    <text x="1508.0" y="635.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">renderMarkdown</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_json" data-class="component.artifact">
+    <rect x="1384" y="676" width="248" height="56" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1508.0" y="700.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">output/model_card.json</text>
+    <text x="1508.0" y="715.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">JSON.stringify(card)</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_tests" data-class="card.invariant">
+    <rect x="344" y="528" width="424" height="104" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="352" y="555.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">FAIRNESS TESTS — complete, in code order · analyzeResults</text>
+    <text x="352" y="569.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 chiSquaredTest — 2x2 flip-rate independence, df=1</text>
+    <text x="352" y="583.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 welchTTest · 3 cohensD · 4 demographicParity</text>
+    <text x="352" y="597.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">biasDetected = chiSq.sig OR t.sig OR NOT passes80PercentRule</text>
+    <text x="352" y="611.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">significance is p &lt; 0.05 in both tests —</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_findings" data-class="card.failure">
+    <rect x="344" y="656" width="424" height="116" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="352" y="675.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">FINDING LADDER — generateFindings, in code order</text>
+    <text x="352" y="689.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 HIGH decision_flip_bias — chi-squared significant</text>
+    <text x="352" y="703.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 CRITICAL if effect large else HIGH · score_disparity</text>
+    <text x="352" y="717.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 CRITICAL disparate_impact — 80% rule fails</text>
+    <text x="352" y="731.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 INFO no_bias_detected — only if 1-3 all silent</text>
+    <text x="352" y="745.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">risk: CRITICAL → HIGH · HIGH → MEDIUM · else LOW</text>
+    <text x="352" y="759.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">risk HIGH → NOT_APPROVED — one CRITICAL is enough</text>
+  </g>
+  <g class="d-node d-card-primitive" data-id="card_sections" data-class="card.primitive">
+    <rect x="800" y="592" width="456" height="104" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="808" y="619.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">MODEL CARD — 10 sections, code order · generateModelCard</text>
+    <text x="808" y="633.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 modelDetails · 2 intendedUse · 3 riskClassification</text>
+    <text x="808" y="647.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 trainingData · 5 metrics · 6 biasAndFairness</text>
+    <text x="808" y="661.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">7 ethicalConsiderations · 8 limitations</text>
+    <text x="808" y="675.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">9 recommendations · 10 regulatoryCompliance</text>
+  </g>
+</svg>

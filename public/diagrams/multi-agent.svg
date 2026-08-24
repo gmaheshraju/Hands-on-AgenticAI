@@ -1,0 +1,186 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 800" role="img" aria-labelledby="hoa_multi_agent_v1-t hoa_multi_agent_v1-d" class="fts-diagram">
+  <title id="hoa_multi_agent_v1-t">04 Multi-Agent Content Pipeline — Architecture</title>
+  <desc id="hoa_multi_agent_v1-d">One Node process with zero npm deps: a supervisor that owns the message bus and all five channel handlers, four bus-unaware agent functions it awaits directly, two mock tool surfaces, and three stdout-only outputs. Every element cites a source line in FACTS.md.</desc>
+  <defs>
+    <marker id="hoa_multi_agent_v1-a-d-edge-artifact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32" class="d-edge-artifact-fill"/></marker>
+    <marker id="hoa_multi_agent_v1-a-d-edge-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1565C0" class="d-edge-call-fill"/></marker>
+    <marker id="hoa_multi_agent_v1-a-d-edge-data_in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9E9E9E" class="d-edge-data_in-fill"/></marker>
+    <marker id="hoa_multi_agent_v1-a-d-edge-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-edge-primary-fill"/></marker>
+    <marker id="hoa_multi_agent_v1-a-d-edge-stop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C62828" class="d-edge-stop-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="40" y="272" width="176" height="112" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="52" y="292" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">③ Entry — CLI</text>
+  </g>
+  <g class="d-zone d-boundary-primary">
+    <rect x="280" y="56" width="1016" height="724" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="292" y="76" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">① runPipeline() — one Node ESM process, zero npm dependencies</text>
+  </g>
+  <g class="d-zone d-boundary-functional">
+    <rect x="424" y="104" width="848" height="152" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="436" y="124" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">② Agent tier — 4 pure async functions, ZERO bus awareness (grep: 0 hits)</text>
+  </g>
+  <g class="d-zone d-boundary-external">
+    <rect x="1360" y="76" width="296" height="212" rx="8" fill="none" stroke="#1565C0" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="1372" y="96" fill="#1565C0" font-size="12" font-weight="600" class="d-zone-label">④ Tool surface — MOCK, in-process, no network</text>
+  </g>
+  <g class="d-zone d-boundary-observability">
+    <rect x="1360" y="380" width="296" height="288" rx="8" fill="none" stroke="#E7157B" stroke-width="1" stroke-dasharray="8 4"/>
+    <text x="1372" y="400" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">⑤ Output — stdout only, no file is written</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_cli">
+    <polyline points="192,312.0 240,312 424,312.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_multi_agent_v1-a-d-edge-primary)"/>
+    <text x="332.0" y="306.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">runPipeline(topic) · demo.js</text>
+  </g>
+  <g class="d-edge d-edge-stop" data-edge="e_stop">
+    <polyline points="424,344.0 240,344 192,344.0" fill="none" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_multi_agent_v1-a-d-edge-stop)"/>
+    <text x="332.0" y="338.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">checkBudget throws → catch</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_pub">
+    <polyline points="636.0,360 636,392 636.0,424" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_multi_agent_v1-a-d-edge-call)"/>
+    <text x="636.0" y="370.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">bus.publish() ×10</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_route">
+    <polyline points="1060.0,424 1060,392 1060.0,360" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_multi_agent_v1-a-d-edge-data_in)"/>
+    <text x="1060.0" y="402.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">routes msg.to → handler</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_a1">
+    <polyline points="536.0,296 536,272 536.0,216" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_multi_agent_v1-a-d-edge-primary)"/>
+    <text x="536.0" y="238.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">await runResearcher()</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_a2">
+    <polyline points="744.0,296 744,272 744.0,216" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_multi_agent_v1-a-d-edge-primary)"/>
+    <text x="744.0" y="238.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">await runWriter()</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_a3">
+    <polyline points="952.0,296 952,272 952.0,216" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_multi_agent_v1-a-d-edge-primary)"/>
+    <text x="952.0" y="238.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">await runEditor()</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_a4">
+    <polyline points="1160.0,296 1160,272 1160.0,216" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_multi_agent_v1-a-d-edge-primary)"/>
+    <text x="1160.0" y="238.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">await runFactChecker()</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_t1">
+    <polyline points="448,184.0 400,184 400,88 1336,88 1336,148 1384,148.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_multi_agent_v1-a-d-edge-call)"/>
+    <text x="868.0" y="82.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">mock tools</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_t2">
+    <polyline points="1248,184.0 1304,184 1304,232 1384,232.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_multi_agent_v1-a-d-edge-call)"/>
+    <text x="1344.0" y="226.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">fetch_url ×3</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_rep">
+    <polyline points="1272,328.0 1508,328 1508.0,412" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_multi_agent_v1-a-d-edge-artifact)"/>
+    <text x="1390.0" y="322.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">report + resolve()</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_fin">
+    <polyline points="1272,440.0 1320,440 1320,524 1384,524.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_multi_agent_v1-a-d-edge-artifact)"/>
+    <text x="1320.0" y="476.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">FINAL</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_log">
+    <polyline points="1272,472.0 1344,472 1344,608 1384,608.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_multi_agent_v1-a-d-edge-artifact)"/>
+    <text x="1344.0" y="534.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">log</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
+    <rect x="64" y="296" width="128" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="128.0" y="316.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
+    <text x="128.0" y="331.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">CLI · argv[2]</text>
+    <text x="128.0" y="346.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">main()</text>
+  </g>
+  <g class="d-node d-component-agent" data-id="n_res" data-class="component.agent">
+    <rect x="448" y="152" width="176" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
+    <text x="536.0" y="172.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">① Researcher</text>
+    <text x="536.0" y="187.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runResearcher()</text>
+    <text x="536.0" y="202.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">web_search · fetch_url</text>
+  </g>
+  <g class="d-node d-component-agent" data-id="n_writer" data-class="component.agent">
+    <rect x="656" y="152" width="176" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
+    <text x="744.0" y="172.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">② Writer</text>
+    <text x="744.0" y="187.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runWriter()</text>
+    <text x="744.0" y="202.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">no tools · 2 draft fns</text>
+  </g>
+  <g class="d-node d-component-agent" data-id="n_editor" data-class="component.agent">
+    <rect x="864" y="152" width="176" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
+    <text x="952.0" y="172.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">③ Editor</text>
+    <text x="952.0" y="187.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runEditor()</text>
+    <text x="952.0" y="202.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">scoreDraft() — 0-10</text>
+  </g>
+  <g class="d-node d-component-agent" data-id="n_fc" data-class="component.agent">
+    <rect x="1072" y="152" width="176" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
+    <text x="1160.0" y="172.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">④ Fact-Checker</text>
+    <text x="1160.0" y="187.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runFactChecker()</text>
+    <text x="1160.0" y="202.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">fetch_url only</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_super" data-class="component.service">
+    <rect x="424" y="296" width="848" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="848.0" y="316.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">runPipeline() — supervisor.js · the ONLY module that touches the bus</text>
+    <text x="848.0" y="331.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">creates the bus · registers all 5 handlers · awaits each agent fn directly</text>
+    <text x="848.0" y="346.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">MAX_BUDGET $2 · MAX_RETRIES 2 · assembles the report · resolves the Promise</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_bus" data-class="component.service">
+    <rect x="424" y="424" width="848" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="848.0" y="444.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">createMessageBus() — messageBus.js</text>
+    <text x="848.0" y="459.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">publish(msg) — stamps id + timestamp, appends to log, then invokes every handler for msg.to</text>
+    <text x="848.0" y="474.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">subscribe(channel, handler) — channel is an agent NAME, not a topic · getLog() · printSummary()</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_tool_r" data-class="component.mock">
+    <rect x="1384" y="120" width="248" height="56" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="1508.0" y="136.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Researcher mockTools</text>
+    <text x="1508.0" y="151.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">web_search(q) — 3 hits</text>
+    <text x="1508.0" y="166.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">fetch_url(u) — canned</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_tool_f" data-class="component.mock">
+    <rect x="1384" y="204" width="248" height="56" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="1508.0" y="220.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Fact-Checker mockTools</text>
+    <text x="1508.0" y="235.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">fetch_url(u) only</text>
+    <text x="1508.0" y="250.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">a separate object</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_report" data-class="component.artifact">
+    <rect x="1384" y="412" width="248" height="56" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1508.0" y="428.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Pipeline report</text>
+    <text x="1508.0" y="443.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">supervisor.js</text>
+    <text x="1508.0" y="458.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">resolve() → demo.js</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_final" data-class="component.artifact">
+    <rect x="1384" y="496" width="248" height="56" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1508.0" y="512.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">FINAL → to: &#x27;Output&#x27;</text>
+    <text x="1508.0" y="527.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">supervisor.js</text>
+    <text x="1508.0" y="542.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">no subscriber — log only</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_buslog" data-class="component.artifact">
+    <rect x="1384" y="580" width="248" height="56" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1508.0" y="596.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Bus log (ordered)</text>
+    <text x="1508.0" y="611.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">getLog() · print</text>
+    <text x="1508.0" y="626.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">stdout only — no file</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_msg" data-class="card.invariant">
+    <rect x="304" y="520" width="968" height="132" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="312" y="533.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">MESSAGE TYPES — all 8, in publish order · every publish() AND every subscribe() lives in supervisor.js, none in src/agents/</text>
+    <text x="312" y="547.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 RESEARCH_REQUEST · Supervisor → Researcher — the kick-off, published LAST, after all five handlers are registered</text>
+    <text x="312" y="561.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 RESEARCH_COMPLETE · Researcher → Writer — emitted by the &#x27;Researcher&#x27; handler after it awaits runResearcher()</text>
+    <text x="312" y="575.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 DRAFT_COMPLETE · Writer → Editor (attempt 1) and (revision) — two publish sites, one type</text>
+    <text x="312" y="589.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 REVIEW_COMPLETE · Editor → Supervisor — carries verdict, score, issues and the draft itself</text>
+    <text x="312" y="603.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 REVISION_REQ · Supervisor → Writer — payload is the major-severity issues only, joined at</text>
+    <text x="312" y="617.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 FACT_CHECK_REQUEST · Supervisor → FactChecker (on ACCEPT) and (retries exhausted)</text>
+    <text x="312" y="631.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">7 FACT_CHECK_COMPLETE · FactChecker → Supervisor — triggers final assembly</text>
+    <text x="312" y="645.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">8 FINAL · Supervisor → &#x27;Output&#x27; — messageBus.js&#x27;s own header lists a different, stale set of names</text>
+  </g>
+  <g class="d-node d-card-primitive" data-id="card_chan" data-class="card.primitive">
+    <rect x="304" y="668" width="476" height="108" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="312" y="683.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">BUS CHANNELS — all 5, in code order, all in supervisor.js</text>
+    <text x="312" y="697.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 &#x27;Researcher&#x27; — RESEARCH_REQUEST only</text>
+    <text x="312" y="711.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 &#x27;Writer&#x27; — RESEARCH_COMPLETE · REVISION_REQ</text>
+    <text x="312" y="725.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 &#x27;Editor&#x27; — DRAFT_COMPLETE only</text>
+    <text x="312" y="739.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 &#x27;FactChecker&#x27; — FACT_CHECK_REQUEST only</text>
+    <text x="312" y="753.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 &#x27;Supervisor&#x27; — REVIEW_COMPLETE · FACT_CHECK_COMPLETE</text>
+    <text x="312" y="767.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">&#x27;Output&#x27; is published to but never subscribed — log-only hop.</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_stop" data-class="card.failure">
+    <rect x="796" y="668" width="476" height="108" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="804" y="690.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">SUPERVISOR VERDICT BRANCH — complete, in code order</text>
+    <text x="804" y="704.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 verdict === &#x27;ACCEPT&#x27; → publish FACT_CHECK_REQUEST</text>
+    <text x="804" y="718.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 else attempt ≤ MAX_RETRIES(2) → majors → REVISION_REQ</text>
+    <text x="804" y="732.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 else → stop revising, fact-check the best draft anyway</text>
+    <text x="804" y="746.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Budget gate: trackCost() bills every tokenUsage; checkBudget()</text>
+    <text x="804" y="760.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">THROWS above $2 at — called 4× at → demo.js</text>
+  </g>
+</svg>

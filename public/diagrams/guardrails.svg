@@ -1,0 +1,198 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 800" role="img" aria-labelledby="hoa_guardrails_v1-t hoa_guardrails_v1-d" class="fts-diagram">
+  <title id="hoa_guardrails_v1-t">07 Guardrails — Prompt Injection Test Suite + Defense Layer</title>
+  <desc id="hoa_guardrails_v1-d">One process that replays 88 attack prompts and 50 benign control queries through a three-layer prompt-injection defense, keeps the training and held-out sets apart end to end, and grades itself on the held-out rate alone. Every element cites a source line in FACTS.md.</desc>
+  <defs>
+    <marker id="hoa_guardrails_v1-a-d-edge-artifact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32" class="d-edge-artifact-fill"/></marker>
+    <marker id="hoa_guardrails_v1-a-d-edge-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1565C0" class="d-edge-call-fill"/></marker>
+    <marker id="hoa_guardrails_v1-a-d-edge-data_in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9E9E9E" class="d-edge-data_in-fill"/></marker>
+    <marker id="hoa_guardrails_v1-a-d-edge-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-edge-primary-fill"/></marker>
+    <marker id="hoa_guardrails_v1-a-d-edge-stop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C62828" class="d-edge-stop-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="40" y="240" width="216" height="376" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="52" y="260" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">③ Inputs — CLI + corpora</text>
+  </g>
+  <g class="d-zone d-boundary-primary">
+    <rect x="320" y="96" width="976" height="684" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="332" y="116" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">① 07-guardrails process (Node ESM · no network, no real LLM)</text>
+  </g>
+  <g class="d-zone d-boundary-functional">
+    <rect x="528" y="216" width="752" height="256" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="540" y="236" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">Per-input defense pipeline — L1 → target → L3</text>
+  </g>
+  <g class="d-zone d-boundary-observability">
+    <rect x="1360" y="504" width="296" height="144" rx="8" fill="none" stroke="#E7157B" stroke-width="1" stroke-dasharray="8 4"/>
+    <text x="1372" y="524" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">④ Reported output (stdout only)</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_cli">
+    <polyline points="232,304.0 296,304 336,304.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_guardrails_v1-a-d-edge-primary)"/>
+    <text x="264.0" y="298.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">3 modes</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_train">
+    <polyline points="232,400.0 288,400 288,280 336,280.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_guardrails_v1-a-d-edge-data_in)"/>
+    <text x="288.0" y="334.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">59 tuned</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_held">
+    <polyline points="232,480.0 264,480 264,328 336,328.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_guardrails_v1-a-d-edge-data_in)"/>
+    <text x="264.0" y="398.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">29 unseen</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_legit">
+    <polyline points="232,560.0 424,560 424.0,352" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_guardrails_v1-a-d-edge-data_in)"/>
+    <text x="424.0" y="450.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">50 benign controls</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_run">
+    <polyline points="512,304.0 520,304 560,304.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_guardrails_v1-a-d-edge-primary)"/>
+    <text x="540.0" y="298.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">prompt</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_allow">
+    <polyline points="736,304.0 740,304 800,304.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_guardrails_v1-a-d-edge-primary)"/>
+    <text x="770.0" y="298.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">allow</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_sand">
+    <polyline points="888.0,384 888,360 888.0,336" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_guardrails_v1-a-d-edge-call)"/>
+    <text x="888.0" y="366.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">demo-only</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_resp">
+    <polyline points="976,304.0 980,304 1040,304.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_guardrails_v1-a-d-edge-primary)"/>
+    <text x="1010.0" y="298.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">response</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_back">
+    <polyline points="1128.0,272 1128,192 424,192 424.0,256" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_guardrails_v1-a-d-edge-primary)"/>
+    <text x="776.0" y="186.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">outputCheck → result</text>
+  </g>
+  <g class="d-edge d-edge-stop" data-edge="e_block">
+    <polyline points="604.0,336 604,440 604.0,520" fill="none" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_guardrails_v1-a-d-edge-stop)"/>
+    <text x="604.0" y="382.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">blocked</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_res">
+    <polyline points="468.0,352 468,536 560,536.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_guardrails_v1-a-d-edge-primary)"/>
+    <text x="468.0" y="438.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">results[]</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_score">
+    <polyline points="736,552.0 748,552 840,552.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_guardrails_v1-a-d-edge-primary)"/>
+    <text x="794.0" y="546.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">runResults</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_print">
+    <polyline points="648.0,520 648,496 1312,496 1312,560 1384,560.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_guardrails_v1-a-d-edge-artifact)"/>
+    <text x="980.0" y="490.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">printResults</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_rep">
+    <polyline points="1016,552.0 1056,552 1056,592 1384,592.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_guardrails_v1-a-d-edge-artifact)"/>
+    <text x="1220.0" y="586.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">grade + gates</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_cli" data-class="component.entry">
+    <rect x="64" y="272" width="168" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="148.0" y="292.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
+    <text x="148.0" y="307.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">CLI · default / --e2e</text>
+    <text x="148.0" y="322.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">/ --verbose</text>
+  </g>
+  <g class="d-node d-component-external" data-id="n_train" data-class="component.external">
+    <rect x="64" y="368" width="168" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+    <text x="148.0" y="388.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Training corpora</text>
+    <text x="148.0" y="403.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">5 files · 59 attacks</text>
+    <text x="148.0" y="418.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runner.js</text>
+  </g>
+  <g class="d-node d-component-external" data-id="n_held" data-class="component.external">
+    <rect x="64" y="448" width="168" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+    <text x="148.0" y="468.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Held-out corpora</text>
+    <text x="148.0" y="483.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">held-out.json · 29</text>
+    <text x="148.0" y="498.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runner.js</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_legit" data-class="component.mock">
+    <rect x="64" y="528" width="168" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="148.0" y="548.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">LEGITIMATE_QUERIES</text>
+    <text x="148.0" y="563.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">50 control queries</text>
+    <text x="148.0" y="578.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">defense.js</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_runner" data-class="component.service">
+    <rect x="336" y="256" width="176" height="96" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="424.0" y="285.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">runAllAttacks()</text>
+    <text x="424.0" y="300.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runner.js</text>
+    <text x="424.0" y="315.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">88 attacks + 50 queries</text>
+    <text x="424.0" y="330.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">tagged training/held-out</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_defend" data-class="component.service">
+    <rect x="560" y="272" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="648.0" y="292.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">L1 defend()</text>
+    <text x="648.0" y="307.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">scanInput 156 regex</text>
+    <text x="648.0" y="322.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">block ≥ 0.5 · warn ≥ 0.3</text>
+  </g>
+  <g class="d-node d-component-agent" data-id="n_llm" data-class="component.agent">
+    <rect x="800" y="272" width="176" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
+    <text x="888.0" y="292.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">simulateNaiveLLM()</text>
+    <text x="888.0" y="307.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runner.js — SIMULATED</text>
+    <text x="888.0" y="322.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">no API call, 6 branches</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_validate" data-class="component.service">
+    <rect x="1040" y="272" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1128.0" y="292.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">L3 validateOutput()</text>
+    <text x="1128.0" y="307.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">defense.js</text>
+    <text x="1128.0" y="322.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">5 violation checks</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_sandwich" data-class="component.service">
+    <rect x="800" y="384" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="888.0" y="404.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">L2 sandwich prompt</text>
+    <text x="888.0" y="419.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">defense.js</text>
+    <text x="888.0" y="434.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">canary token</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_summary" data-class="component.service">
+    <rect x="560" y="520" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="648.0" y="540.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">buildSummary()</text>
+    <text x="648.0" y="555.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runner.js</text>
+    <text x="648.0" y="570.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">bySource split</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_scores" data-class="component.service">
+    <rect x="840" y="520" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="928.0" y="540.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">calculateScores()</text>
+    <text x="928.0" y="555.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">scorer.js · gaps, p95</text>
+    <text x="928.0" y="570.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">computeGrade</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_out" data-class="component.artifact">
+    <rect x="1384" y="544" width="248" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1508.0" y="564.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">stdout report</text>
+    <text x="1508.0" y="579.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">printResults runner.js</text>
+    <text x="1508.0" y="594.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">printScoreReport scorer.js</text>
+  </g>
+  <g class="d-node d-card-primitive" data-id="card_scan" data-class="card.primitive">
+    <rect x="336" y="616" width="304" height="160" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="344" y="629.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">scanInput() — 9 checks · normalize</text>
+    <text x="344" y="643.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 direct_override w1.00 · 37 regex</text>
+    <text x="344" y="657.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 role_hijacking w1.00 · 33 regex</text>
+    <text x="344" y="671.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 extraction w0.95 · 36 regex</text>
+    <text x="344" y="685.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 encoding w0.95 · 21 regex</text>
+    <text x="344" y="699.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 indirect_inject. w1.00 · 29 regex</text>
+    <text x="344" y="713.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 context flooding &gt;2000ch, &gt;20 nl → 0.40</text>
+    <text x="344" y="727.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">7 zero-width chars &gt;3 → 0.70</text>
+    <text x="344" y="741.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">8 base64 decode + rescan → 0.85</text>
+    <text x="344" y="755.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">9 hex decode + rescan → 0.85</text>
+    <text x="344" y="769.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">conf = 0.65 + 0.15/extra match, cap 1.0</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_layers" data-class="card.invariant">
+    <rect x="656" y="616" width="304" height="160" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="664" y="629.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">THREE LAYERS — defense.js, in call order</text>
+    <text x="664" y="643.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">L1 input defend() → scanInput</text>
+    <text x="664" y="657.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> block if conf &gt;= 0.5, warn &gt;= 0.3</text>
+    <text x="664" y="671.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> blocked ⇒ target never called</text>
+    <text x="664" y="685.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">L2 prompt buildSandwichedPrompt()</text>
+    <text x="664" y="699.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> USER INPUT START/END markers</text>
+    <text x="664" y="713.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> reminder block + canary</text>
+    <text x="664" y="727.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">L3 output validateOutput()</text>
+    <text x="664" y="741.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> canary · prompt leak n-gram</text>
+    <text x="664" y="755.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> PII 5 kinds · markers</text>
+    <text x="664" y="769.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> topic drift → safe</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_grade" data-class="card.failure">
+    <rect x="976" y="616" width="304" height="160" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="984" y="629.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">GRADED ON HELD-OUT ONLY — scorer.js</text>
+    <text x="984" y="643.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">training 59 — the regexes were tuned on them</text>
+    <text x="984" y="657.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">held-out 29 — never shown</text>
+    <text x="984" y="671.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">both run the SAME defend()</text>
+    <text x="984" y="685.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">split kept apart in buildSummary</text>
+    <text x="984" y="699.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">grade = f(held-out, FP, latency)</text>
+    <text x="984" y="713.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> detect 0-50 · FP 0-30</text>
+    <text x="984" y="727.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> latency 0-20 → A/B/C/D/F</text>
+    <text x="984" y="741.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">verdict gates runner.js</text>
+    <text x="984" y="755.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> held-out &gt;=70% · FP &lt;5% · avg &lt;100ms</text>
+    <text x="984" y="769.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">observed run: 100.0% / 86.2% · 0 FP · 0.25ms</text>
+  </g>
+</svg>

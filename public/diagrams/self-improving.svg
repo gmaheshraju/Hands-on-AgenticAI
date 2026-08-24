@@ -1,0 +1,209 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 800" role="img" aria-labelledby="hoa_self_improving_v1-t hoa_self_improving_v1-d" class="fts-diagram">
+  <title id="hoa_self_improving_v1-t">30 Self-Improving Agent — Research Loop + Prompt Evolution</title>
+  <desc id="hoa_self_improving_v1-d">One process (demo.js main) that researches a question through an observable harness, grades its own answer, runs a postmortem on the trace, and lets an LLM rewrite its own system prompt for the next round — closing a measurable self-improvement loop. Real fetch() to LLM providers and Wikipedia; cross-session memory in SQLite. Every element cites a source line in FACTS.md.</desc>
+  <defs>
+    <marker id="hoa_self_improving_v1-a-d-edge-analysis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E65100" class="d-edge-analysis-fill"/></marker>
+    <marker id="hoa_self_improving_v1-a-d-edge-artifact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32" class="d-edge-artifact-fill"/></marker>
+    <marker id="hoa_self_improving_v1-a-d-edge-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1565C0" class="d-edge-call-fill"/></marker>
+    <marker id="hoa_self_improving_v1-a-d-edge-data_in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9E9E9E" class="d-edge-data_in-fill"/></marker>
+    <marker id="hoa_self_improving_v1-a-d-edge-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-edge-primary-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="40" y="200" width="216" height="232" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="52" y="220" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">③ CLI + prompt store — data/prompt-history/</text>
+  </g>
+  <g class="d-zone d-boundary-primary">
+    <rect x="320" y="96" width="968" height="680" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="332" y="116" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">① Self-improvement loop — demo.js main() (Node ESM · better-sqlite3)</text>
+  </g>
+  <g class="d-zone d-boundary-functional">
+    <rect x="560" y="132" width="520" height="236" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="572" y="152" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">agent.step(i) — one observe→think→act iteration</text>
+  </g>
+  <g class="d-zone d-boundary-external">
+    <rect x="1352" y="132" width="308" height="236" rx="8" fill="none" stroke="#1565C0" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="1364" y="152" fill="#1565C0" font-size="12" font-weight="600" class="d-zone-label">② External network — real fetch(), no mock</text>
+  </g>
+  <g class="d-zone d-boundary-observability">
+    <rect x="1352" y="436" width="308" height="280" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="1364" y="456" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">④ State &amp; persistence — data/</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_load">
+    <polyline points="152.0,352 152.0,288" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_self_improving_v1-a-d-edge-data_in)"/>
+    <text x="152.0" y="314.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">loadHistory vN</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_cli">
+    <polyline points="240,256.0 344,256.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_self_improving_v1-a-d-edge-primary)"/>
+    <text x="292.0" y="250.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">orchestrate round</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_run">
+    <polyline points="520,256.0 584,256.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_self_improving_v1-a-d-edge-primary)"/>
+    <text x="552.0" y="250.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">run(i⇒step)</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_chat">
+    <polyline points="716.0,224 716,188 856,188.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_self_improving_v1-a-d-edge-call)"/>
+    <text x="786.0" y="182.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">chat</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_prov">
+    <polyline points="1032,188.0 1376,188.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_self_improving_v1-a-d-edge-call)"/>
+    <text x="1204.0" y="182.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">fetch (fallback)</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_tool">
+    <polyline points="716.0,288 716,324 856,324.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_self_improving_v1-a-d-edge-call)"/>
+    <text x="786.0" y="318.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">executeTool</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_wiki">
+    <polyline points="1032,324.0 1376,324.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_self_improving_v1-a-d-edge-call)"/>
+    <text x="1204.0" y="318.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">fetch</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_mem">
+    <polyline points="760,240.0 1300,240 1300,500 1376,500.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_self_improving_v1-a-d-edge-data_in)"/>
+    <text x="1030.0" y="234.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">prior facts / addFact</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_pad">
+    <polyline points="760,272.0 1276,272 1276,588 1376,588.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_self_improving_v1-a-d-edge-call)"/>
+    <text x="1018.0" y="266.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">note / index</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_eval">
+    <polyline points="432.0,288 432,444 584,444.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_self_improving_v1-a-d-edge-primary)"/>
+    <text x="432.0" y="360.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">runResult + answer</text>
+  </g>
+  <g class="d-edge d-edge-analysis" data-edge="e_an">
+    <polyline points="760,444.0 832,444.0" fill="none" stroke="#E65100" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_self_improving_v1-a-d-edge-analysis)"/>
+    <text x="796.0" y="438.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">then analyze</text>
+  </g>
+  <g class="d-edge d-edge-analysis" data-edge="e_find">
+    <polyline points="1008,444.0 1080,444.0" fill="none" stroke="#E65100" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_self_improving_v1-a-d-edge-analysis)"/>
+    <text x="1044.0" y="438.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">findings + scores</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_patch">
+    <polyline points="1168.0,476 1168,540 152,540 152.0,416" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_self_improving_v1-a-d-edge-artifact)"/>
+    <text x="660.0" y="534.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">save patch → v{N+1}</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_trace">
+    <polyline points="476.0,288 476,388 1324,388 1324,676 1376,676.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_self_improving_v1-a-d-edge-artifact)"/>
+    <text x="900.0" y="382.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">trace JSONL</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_cli" data-class="component.entry">
+    <rect x="64" y="224" width="176" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="152.0" y="244.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
+    <text x="152.0" y="259.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">CLI · main() loop</text>
+    <text x="152.0" y="274.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"> · rounds=3</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_prompts" data-class="component.artifact">
+    <rect x="64" y="352" width="176" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="152.0" y="372.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">prompt-history/</text>
+    <text x="152.0" y="387.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">v{N}.json on disk</text>
+    <text x="152.0" y="402.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">base→v2→v3</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_harness" data-class="component.service">
+    <rect x="344" y="224" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="432.0" y="237.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">harness.js</text>
+    <text x="432.0" y="252.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">run(i⇒step) wrapper</text>
+    <text x="432.0" y="267.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">cap·cost·converge</text>
+    <text x="432.0" y="282.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">trace JSONL</text>
+  </g>
+  <g class="d-node d-component-agent" data-id="n_agent" data-class="component.agent">
+    <rect x="584" y="224" width="176" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
+    <text x="672.0" y="237.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">agent.js</text>
+    <text x="672.0" y="252.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">ResearchAgent.step</text>
+    <text x="672.0" y="267.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">observe→think→act</text>
+    <text x="672.0" y="282.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"> · facts[]</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_llm" data-class="component.service">
+    <rect x="856" y="156" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="944.0" y="169.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">llm.js</text>
+    <text x="944.0" y="184.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">LLMAdapter.chat</text>
+    <text x="944.0" y="199.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3-provider fallback</text>
+    <text x="944.0" y="214.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"> · JSON retry</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_tools" data-class="component.service">
+    <rect x="856" y="292" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="944.0" y="312.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">tools.js</text>
+    <text x="944.0" y="327.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">executeTool</text>
+    <text x="944.0" y="342.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">5 tools · dispatch</text>
+  </g>
+  <g class="d-node d-component-external" data-id="n_providers" data-class="component.external">
+    <rect x="1376" y="156" width="176" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+    <text x="1464.0" y="176.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">LLM providers</text>
+    <text x="1464.0" y="191.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">NVIDIA·Ollama·Gemini</text>
+    <text x="1464.0" y="206.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">real fetch()</text>
+  </g>
+  <g class="d-node d-component-external" data-id="n_wiki" data-class="component.external">
+    <rect x="1376" y="292" width="176" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+    <text x="1464.0" y="312.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Wikipedia API</text>
+    <text x="1464.0" y="327.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">REST summary+search</text>
+    <text x="1464.0" y="342.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">real fetch()</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_eval" data-class="component.service">
+    <rect x="584" y="412" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="672.0" y="432.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">evaluator.js</text>
+    <text x="672.0" y="447.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">evaluate()</text>
+    <text x="672.0" y="462.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">4 dims → composite</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_pm" data-class="component.service">
+    <rect x="832" y="412" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="920.0" y="432.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">postmortem.js</text>
+    <text x="920.0" y="447.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">analyzeRun()</text>
+    <text x="920.0" y="462.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">7 finds · 6 prims</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_improve" data-class="component.service">
+    <rect x="1080" y="412" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1168.0" y="432.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">improver.js</text>
+    <text x="1168.0" y="447.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">generatePatch</text>
+    <text x="1168.0" y="462.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">applyPatch</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_memory" data-class="component.service">
+    <rect x="1376" y="468" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1464.0" y="481.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">memory.js</text>
+    <text x="1464.0" y="496.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">SQLite agent.db · WAL</text>
+    <text x="1464.0" y="511.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">episodes+facts+FTS5</text>
+    <text x="1464.0" y="526.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"> · decay</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_scratch" data-class="component.service">
+    <rect x="1376" y="556" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1464.0" y="576.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">scratchpad.js</text>
+    <text x="1464.0" y="591.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">Write move · Map</text>
+    <text x="1464.0" y="606.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">park·index</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_traces" data-class="component.artifact">
+    <rect x="1376" y="644" width="176" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1464.0" y="664.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">data/traces/</text>
+    <text x="1464.0" y="679.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">*.jsonl per run</text>
+    <text x="1464.0" y="694.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">harness</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_stop" data-class="card.invariant">
+    <rect x="344" y="592" width="300" height="180" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="352" y="643.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">STOP CONDITIONS — harness.run(), code order</text>
+    <text x="352" y="657.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 AGENT_DONE — step.done (synthesize)</text>
+    <text x="352" y="671.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 COST_CAP — totalCost ≥ $0.50</text>
+    <text x="352" y="685.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 CONVERGENCE — zeroFactStreak ≥ 3</text>
+    <text x="352" y="699.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 MAX_ITERATIONS — i &gt; 12 (demo cap)</text>
+    <text x="352" y="713.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">cost is SIMULATED: (in+out)·0.4 / 1e6</text>
+    <text x="352" y="727.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">thrown step logged &amp; skipped, not fatal</text>
+  </g>
+  <g class="d-node d-card-primitive" data-id="card_eval" data-class="card.primitive">
+    <rect x="672" y="592" width="296" height="180" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="680" y="643.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">EVALUATE — 4 dims → weighted composite</text>
+    <text x="680" y="657.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">factCount w0.25 · heuristic</text>
+    <text x="680" y="671.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">sourceDiversity w0.20 · heuristic</text>
+    <text x="680" y="685.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">coherence w0.25 · LLM-as-judge</text>
+    <text x="680" y="699.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">completeness w0.30 · LLM-as-judge</text>
+    <text x="680" y="713.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Σ weights = 1.00 · no answer ⇒ all 0</text>
+    <text x="680" y="727.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 heuristics + 2 real LLM grader calls</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_pm" data-class="card.failure">
+    <rect x="996" y="592" width="288" height="180" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="1004" y="615.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">SELF-DIAGNOSIS → THE PATCH — postmortem.js</text>
+    <text x="1004" y="629.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">7 findings (code order):</text>
+    <text x="1004" y="643.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">single_source · premature_synthesis</text>
+    <text x="1004" y="657.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">repeated_action · tool_failure</text>
+    <text x="1004" y="671.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">convergence_stall · no_synthesis</text>
+    <text x="1004" y="685.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">context_bloat</text>
+    <text x="1004" y="699.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 primitives → weakest picked</text>
+    <text x="1004" y="713.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">instructions·contextDelivery</text>
+    <text x="1004" y="727.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">contextManagement·toolInterface</text>
+    <text x="1004" y="741.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">orchestration·verification</text>
+    <text x="1004" y="755.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">→ LLM writes ONE patch → prompt v{N+1}</text>
+  </g>
+</svg>

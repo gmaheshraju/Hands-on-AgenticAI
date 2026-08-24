@@ -1,0 +1,199 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 800" role="img" aria-labelledby="hoa_coding_agent_v1-t hoa_coding_agent_v1-d" class="fts-diagram">
+  <title id="hoa_coding_agent_v1-t">16 AI Coding Agent — Architecture</title>
+  <desc id="hoa_coding_agent_v1-d">Issue-to-PR pipeline: parse a GitHub issue, plan a fix with a rule-based planner, patch the target repo on disk, run its tests in a child process with a bounded self-correction loop, and emit a PR description. The repo explorer is a shared tool surface, not a pipeline stage. Every element cites a source line in FACTS.md.</desc>
+  <defs>
+    <marker id="hoa_coding_agent_v1-a-d-edge-analysis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E65100" class="d-edge-analysis-fill"/></marker>
+    <marker id="hoa_coding_agent_v1-a-d-edge-artifact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32" class="d-edge-artifact-fill"/></marker>
+    <marker id="hoa_coding_agent_v1-a-d-edge-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1565C0" class="d-edge-call-fill"/></marker>
+    <marker id="hoa_coding_agent_v1-a-d-edge-data_in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9E9E9E" class="d-edge-data_in-fill"/></marker>
+    <marker id="hoa_coding_agent_v1-a-d-edge-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-edge-primary-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="40" y="200" width="176" height="288" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="52" y="220" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">③ Entry — CLI and issue source</text>
+  </g>
+  <g class="d-zone d-boundary-primary">
+    <rect x="280" y="96" width="1016" height="680" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="292" y="116" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">① 16-ai-coding-agent process (Node ESM, no LLM)</text>
+  </g>
+  <g class="d-zone d-boundary-functional">
+    <rect x="320" y="216" width="936" height="152" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="332" y="236" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">runAgent — six numbered steps, straight-line (agent.js)</text>
+  </g>
+  <g class="d-zone d-boundary-external">
+    <rect x="1360" y="216" width="296" height="232" rx="8" fill="none" stroke="#1565C0" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="1372" y="236" fill="#1565C0" font-size="12" font-weight="600" class="d-zone-label">② Target repo + child process (real disk, real OS)</text>
+  </g>
+  <g class="d-zone d-boundary-observability">
+    <rect x="1360" y="512" width="296" height="192" rx="8" fill="none" stroke="#E7157B" stroke-width="1" stroke-dasharray="8 4"/>
+    <text x="1372" y="532" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">④ Pull-request output</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_start">
+    <polyline points="192,276.0 256,276 256,156 340,156.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_coding_agent_v1-a-d-edge-primary)"/>
+    <text x="256.0" y="210.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">runAgent(config)</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_issue">
+    <polyline points="192,404.0 268,404 268,280 340,280.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_coding_agent_v1-a-d-edge-data_in)"/>
+    <text x="268.0" y="336.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">issue JSON</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_s1">
+    <polyline points="420.0,184 420.0,264" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_coding_agent_v1-a-d-edge-primary)"/>
+    <text x="420.0" y="218.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">[1/6]</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_s3">
+    <polyline points="500,296.0 524,296.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_coding_agent_v1-a-d-edge-primary)"/>
+    <text x="512.0" y="290.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">parsed issue</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_s4">
+    <polyline points="684,296.0 708,296.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_coding_agent_v1-a-d-edge-primary)"/>
+    <text x="696.0" y="290.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">plan.steps[]</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_s5">
+    <polyline points="868,296.0 892,296.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_coding_agent_v1-a-d-edge-primary)"/>
+    <text x="880.0" y="290.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">changes[]</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_s6">
+    <polyline points="1052,296.0 1076,296.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_coding_agent_v1-a-d-edge-primary)"/>
+    <text x="1064.0" y="290.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">testResult</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_plan_x">
+    <polyline points="604.0,328 604,456 700,456.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_coding_agent_v1-a-d-edge-call)"/>
+    <text x="604.0" y="386.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">gatherContext</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_code_x">
+    <polyline points="788.0,328 788.0,424" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_coding_agent_v1-a-d-edge-call)"/>
+    <text x="788.0" y="370.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">readFile</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_test_x">
+    <polyline points="972.0,328 972,400 832,400 832.0,424" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_coding_agent_v1-a-d-edge-call)"/>
+    <text x="902.0" y="394.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">readFile · searchCode</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_x_repo">
+    <polyline points="876,456.0 1320,456 1320,308 1384,308.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_coding_agent_v1-a-d-edge-data_in)"/>
+    <text x="1098.0" y="450.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">listFiles · readFile · searchCode</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_code_repo">
+    <polyline points="828.0,264 828,200 1296,200 1296,276 1384,276.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_coding_agent_v1-a-d-edge-artifact)"/>
+    <text x="1062.0" y="194.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">applyChanges → writeFile</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_exec">
+    <polyline points="1012.0,328 1012,372 1384,372.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_coding_agent_v1-a-d-edge-call)"/>
+    <text x="1198.0" y="366.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">execSync</text>
+  </g>
+  <g class="d-edge d-edge-analysis" data-edge="e_back">
+    <polyline points="1384,404.0 1296,404 1296,344 932,344 932.0,328" fill="none" stroke="#E65100" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_coding_agent_v1-a-d-edge-analysis)"/>
+    <text x="1114.0" y="338.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">raw output → parseFailures</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_pr">
+    <polyline points="1236,296.0 1272,296 1272,580 1384,580.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_coding_agent_v1-a-d-edge-artifact)"/>
+    <text x="1272.0" y="432.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">PR object</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_disp">
+    <polyline points="1508.0,608 1508.0,632" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_coding_agent_v1-a-d-edge-artifact)"/>
+    <text x="1508.0" y="614.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">formatPRForDisplay</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
+    <rect x="64" y="244" width="128" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="128.0" y="264.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
+    <text x="128.0" y="279.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">CLI · mock #1</text>
+    <text x="128.0" y="294.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"></text>
+  </g>
+  <g class="d-node d-component-external" data-id="n_github" data-class="component.external">
+    <rect x="64" y="372" width="128" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+    <text x="128.0" y="392.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">GitHub REST</text>
+    <text x="128.0" y="407.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">fetch()</text>
+    <text x="128.0" y="422.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">URL input only</text>
+  </g>
+  <g class="d-node d-component-agent" data-id="n_agent" data-class="component.agent">
+    <rect x="340" y="128" width="160" height="56" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
+    <text x="420.0" y="152.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">runAgent()</text>
+    <text x="420.0" y="167.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">agent.js · 6 steps</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_parse" data-class="component.service">
+    <rect x="340" y="264" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="420.0" y="284.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">parseIssue()</text>
+    <text x="420.0" y="299.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">issueParser.js</text>
+    <text x="420.0" y="314.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3 input forms</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_plan" data-class="component.service">
+    <rect x="524" y="264" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="604.0" y="284.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">createPlan()</text>
+    <text x="604.0" y="299.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">planner.js</text>
+    <text x="604.0" y="314.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">rule-based, no LLM</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_coder" data-class="component.service">
+    <rect x="708" y="264" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="788.0" y="284.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">createCoder()</text>
+    <text x="788.0" y="299.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">coder.js</text>
+    <text x="788.0" y="314.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">diff + applyChanges</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_test" data-class="component.service">
+    <rect x="892" y="264" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="972.0" y="284.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">selfCorrectLoop()</text>
+    <text x="972.0" y="299.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">testRunner.js</text>
+    <text x="972.0" y="314.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">≤ 3 retries</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_prgen" data-class="component.service">
+    <rect x="1076" y="264" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1156.0" y="284.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">generatePR()</text>
+    <text x="1156.0" y="299.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">prGenerator.js</text>
+    <text x="1156.0" y="314.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">title·body·labels</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_explorer" data-class="component.service">
+    <rect x="700" y="424" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="788.0" y="444.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">createExplorer()</text>
+    <text x="788.0" y="459.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">repoExplorer.js</text>
+    <text x="788.0" y="474.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">5 tools · shared</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_files" data-class="component.artifact">
+    <rect x="1384" y="260" width="248" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1508.0" y="280.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">sample-project/</text>
+    <text x="1508.0" y="295.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">src/app.js · tests/app.test.js</text>
+    <text x="1508.0" y="310.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">planted bug</text>
+  </g>
+  <g class="d-node d-component-external" data-id="n_proc" data-class="component.external">
+    <rect x="1384" y="356" width="248" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+    <text x="1508.0" y="376.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">child process</text>
+    <text x="1508.0" y="391.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">execSync(testCommand)</text>
+    <text x="1508.0" y="406.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">node --test · 30s timeout</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_pr" data-class="component.artifact">
+    <rect x="1384" y="552" width="248" height="56" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1508.0" y="576.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">PR object</text>
+    <text x="1508.0" y="591.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">title·body·branch·labels</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_stdout" data-class="component.artifact">
+    <rect x="1384" y="632" width="248" height="56" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1508.0" y="656.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">stdout</text>
+    <text x="1508.0" y="671.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">formatPRForDisplay</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_loop" data-class="card.invariant">
+    <rect x="320" y="508" width="456" height="112" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="328" y="525.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">SELF-CORRECTION LOOP — complete, in code order</text>
+    <text x="328" y="539.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">for attempt = 0 .. maxRetries — default maxRetries 3</text>
+    <text x="328" y="553.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 runTests() on EVERY attempt — fresh execSync, no cache</text>
+    <text x="328" y="567.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 if result.passed → return immediately</text>
+    <text x="328" y="581.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 else if attempt &lt; maxRetries → attemptCorrection</text>
+    <text x="328" y="595.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 retries exhausted → one MORE runTests()</text>
+    <text x="328" y="609.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">corrector writes the file itself, not via the coder</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_bug" data-class="card.failure">
+    <rect x="800" y="508" width="456" height="112" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="808" y="525.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">BUG-TYPE TAXONOMY — 4 branches, first match wins</text>
+    <text x="808" y="539.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 missing-null-check — hasNullError &amp;&amp; has500</text>
+    <text x="808" y="553.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 unhandled-error — has500 alone</text>
+    <text x="808" y="567.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 missing-route — has404 alone</text>
+    <text x="808" y="581.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 general — fallback, summary = issue title</text>
+    <text x="808" y="595.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">ONLY branch 1 emits code steps — generateSteps</text>
+    <text x="808" y="609.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">branches 2-4 fall through to test steps only</text>
+  </g>
+  <g class="d-node d-card-primitive" data-id="card_fix" data-class="card.primitive">
+    <rect x="320" y="644" width="936" height="104" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="328" y="664.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">FIX EMITTERS — the generateFix switch, complete and in code order</text>
+    <text x="328" y="678.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 missing-null-check → fixMissingNullCheck2 unhandled-error → fixUnhandledError, which returns its input unchanged</text>
+    <text x="328" y="692.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 default → originalContent.replace(oldCode, newCode), and only when BOTH are set on the step; otherwise the input is returned</text>
+    <text x="328" y="706.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">the null-check SHAPE is sniffed from the file&#x27;s own text, in this order —</text>
+    <text x="328" y="720.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">isExpress → res.status(404).json · isRawHttp → res.writeHead(404) · neither → throw new Error</text>
+    <text x="328" y="734.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">the guard is spliced in immediately after the lookup line, indentation copied from that line</text>
+  </g>
+</svg>

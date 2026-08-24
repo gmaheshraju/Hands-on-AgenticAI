@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 800" role="img" aria-labelledby="hoa_agent_executor_v1-t hoa_agent_executor_v1-d" class="fts-diagram">
+  <title id="hoa_agent_executor_v1-t">25 Agent Executor — Zero-Trust IAM Pipeline for AI Agents</title>
+  <desc id="hoa_agent_executor_v1-d">One in-memory Node process that runs every agent action through a 5-gate execute() pipeline — schema, IAM policy, human approval, sandboxed execution — and records every branch to an audit trail. The sandbox&#x27;s permission checks are demonstrated but NOT wired into gate 4. Every element cites a source line in FACTS.md.</desc>
+  <defs>
+    <marker id="hoa_agent_executor_v1-a-d-edge-artifact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32" class="d-edge-artifact-fill"/></marker>
+    <marker id="hoa_agent_executor_v1-a-d-edge-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1565C0" class="d-edge-call-fill"/></marker>
+    <marker id="hoa_agent_executor_v1-a-d-edge-data_in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9E9E9E" class="d-edge-data_in-fill"/></marker>
+    <marker id="hoa_agent_executor_v1-a-d-edge-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-edge-primary-fill"/></marker>
+    <marker id="hoa_agent_executor_v1-a-d-edge-stop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C62828" class="d-edge-stop-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="40" y="232" width="200" height="300" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="52" y="252" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">③ Entry + registrations</text>
+  </g>
+  <g class="d-zone d-boundary-primary">
+    <rect x="304" y="96" width="992" height="680" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="316" y="116" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">① AgentExecutor process (Node ESM · in-memory · no network, no real LLM)</text>
+  </g>
+  <g class="d-zone d-boundary-functional">
+    <rect x="500" y="216" width="784" height="148" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="512" y="236" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">execute() — 5-gate pipeline · first failing gate returns</text>
+  </g>
+  <g class="d-zone d-boundary-external">
+    <rect x="1360" y="200" width="300" height="152" rx="8" fill="none" stroke="#1565C0" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="1372" y="220" fill="#1565C0" font-size="12" font-weight="600" class="d-zone-label">② Mocked external surface</text>
+  </g>
+  <g class="d-zone d-boundary-observability">
+    <rect x="1360" y="560" width="300" height="160" rx="8" fill="none" stroke="#E7157B" stroke-width="1" stroke-dasharray="8 4"/>
+    <text x="1372" y="580" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">④ In-memory record → stdout</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_drive">
+    <polyline points="240,308.0 276,308 276,260 328,260.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_executor_v1-a-d-edge-primary)"/>
+    <text x="302.0" y="254.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">6 scenarios</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_princ">
+    <polyline points="240,428.0 300,428 300,300 328,300.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_agent_executor_v1-a-d-edge-call)"/>
+    <text x="300.0" y="358.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">startSession</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_g1">
+    <polyline points="488,280.0 516,280.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_executor_v1-a-d-edge-primary)"/>
+    <text x="502.0" y="274.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">gate 1</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_g2">
+    <polyline points="692,280.0 708,280.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_executor_v1-a-d-edge-primary)"/>
+    <text x="700.0" y="274.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">gate 2</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_g3">
+    <polyline points="884,280.0 900,280.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_executor_v1-a-d-edge-primary)"/>
+    <text x="892.0" y="274.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">gate 3</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_g4">
+    <polyline points="1076,280.0 1092,280.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_executor_v1-a-d-edge-primary)"/>
+    <text x="1084.0" y="274.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">gate 4</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_run">
+    <polyline points="1268,280.0 1384,280.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_agent_executor_v1-a-d-edge-call)"/>
+    <text x="1326.0" y="274.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">handler()</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_sess">
+    <polyline points="448.0,400 448.0,320" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_agent_executor_v1-a-d-edge-data_in)"/>
+    <text x="448.0" y="354.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">session (wired)</text>
+  </g>
+  <g class="d-edge d-edge-stop" data-edge="e_check">
+    <polyline points="240,328.0 324,328 324,444 344,444.0" fill="none" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_agent_executor_v1-a-d-edge-stop)"/>
+    <text x="324.0" y="380.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">checkPermission — demo only</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_audit">
+    <polyline points="472.0,320 472,372 712,372 712.0,400" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_agent_executor_v1-a-d-edge-artifact)"/>
+    <text x="592.0" y="366.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">record every branch</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_dash">
+    <polyline points="816,444.0 1336,444 1336,624 1384,624.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_agent_executor_v1-a-d-edge-artifact)"/>
+    <text x="1076.0" y="438.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">dashboard()</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
+    <rect x="64" y="268" width="176" height="80" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="152.0" y="289.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
+    <text x="152.0" y="304.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">6 actions · 4 policies</text>
+    <text x="152.0" y="319.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3 agents · 6 scenarios</text>
+    <text x="152.0" y="334.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"></text>
+  </g>
+  <g class="d-node d-component-agent" data-id="n_agents" data-class="component.agent">
+    <rect x="64" y="392" width="176" height="72" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
+    <text x="152.0" y="409.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Agents</text>
+    <text x="152.0" y="424.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3 records</text>
+    <text x="152.0" y="439.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">basic/elev/admin</text>
+    <text x="152.0" y="454.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">(perm records)</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_exec" data-class="component.service">
+    <rect x="328" y="240" width="160" height="80" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="408.0" y="261.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">AgentExecutor</text>
+    <text x="408.0" y="276.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">.execute()</text>
+    <text x="408.0" y="291.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">guards</text>
+    <text x="408.0" y="306.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">audit each branch</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_validate" data-class="component.service">
+    <rect x="516" y="248" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="604.0" y="261.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Gate 1 · schema</text>
+    <text x="604.0" y="276.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">validate()</text>
+    <text x="604.0" y="291.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">req·type·enum</text>
+    <text x="604.0" y="306.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">min/max·pattern</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_policy" data-class="component.service">
+    <rect x="708" y="248" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="796.0" y="261.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Gate 2 · policy</text>
+    <text x="796.0" y="276.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">evaluate()</text>
+    <text x="796.0" y="291.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">IAM deny-wins</text>
+    <text x="796.0" y="306.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">policy.js</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_approval" data-class="component.service">
+    <rect x="900" y="248" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="988.0" y="261.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Gate 3 · approval</text>
+    <text x="988.0" y="276.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">submit()</text>
+    <text x="988.0" y="291.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">auto / pending</text>
+    <text x="988.0" y="306.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">approvals.js</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_sbexec" data-class="component.service">
+    <rect x="1092" y="248" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1180.0" y="261.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Gate 4 · sandbox</text>
+    <text x="1180.0" y="276.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">_sandboxedExec</text>
+    <text x="1180.0" y="291.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">TIMEOUT RACE ONLY</text>
+    <text x="1180.0" y="306.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">no perm check</text>
+  </g>
+  <g class="d-node d-component-external" data-id="n_handler" data-class="component.external">
+    <rect x="1384" y="248" width="256" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+    <text x="1512.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">action.handler(s)</text>
+    <text x="1512.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">demo.js · MOCKED</text>
+    <text x="1512.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">canned data — no real DB/API/FS</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_sandbox" data-class="component.service">
+    <rect x="344" y="400" width="208" height="88" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="448.0" y="425.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Sandbox</text>
+    <text x="448.0" y="440.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">createSession (WIRED)</text>
+    <text x="448.0" y="455.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">checkPermission</text>
+    <text x="448.0" y="470.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">UNWIRED — demo only</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_audit" data-class="component.artifact">
+    <rect x="608" y="400" width="208" height="88" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="712.0" y="432.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">AuditTrail.record</text>
+    <text x="712.0" y="447.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">in-memory ring</text>
+    <text x="712.0" y="462.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">allowed/denied/error</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_dash" data-class="component.artifact">
+    <rect x="1384" y="592" width="256" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1512.0" y="620.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">dashboard()</text>
+    <text x="1512.0" y="635.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">securityReport → stdout</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_pipe" data-class="card.invariant">
+    <rect x="320" y="536" width="300" height="200" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="328" y="590.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">5-GATE PIPELINE — execute() code order</text>
+    <text x="328" y="604.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">0 session active?</text>
+    <text x="328" y="618.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 validate schema → VALIDATION_FAILED</text>
+    <text x="328" y="632.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 policy evaluate → POLICY_DENIED</text>
+    <text x="328" y="646.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 approval (if req) → APPROVAL_REQ</text>
+    <text x="328" y="660.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 _sandboxedExecute → EXEC_FAILED</text>
+    <text x="328" y="674.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 audit.record — every branch</text>
+    <text x="328" y="688.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">first failing gate returns; rest skip</text>
+  </g>
+  <g class="d-node d-card-primitive" data-id="card_policy" data-class="card.primitive">
+    <rect x="636" y="536" width="300" height="200" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="644" y="590.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">POLICY evaluate() — deny wins</text>
+    <text x="644" y="604.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">no matching policy → deny</text>
+    <text x="644" y="618.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">sort by priority, descending</text>
+    <text x="644" y="632.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">deny pass first → explicit_deny</text>
+    <text x="644" y="646.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">allow pass → explicit_allow</text>
+    <text x="644" y="660.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">default → deny</text>
+    <text x="644" y="674.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">8 ops: equals notEquals in notIn</text>
+    <text x="644" y="688.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> lessThan greaterThan exists matches</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_sandbox" data-class="card.failure">
+    <rect x="952" y="536" width="300" height="200" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="960" y="590.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">SANDBOX — DEMONSTRATED, NOT WIRED</text>
+    <text x="960" y="604.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">createSession · getSession — WIRED</text>
+    <text x="960" y="618.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">checkPermission — demo / tests ONLY</text>
+    <text x="960" y="632.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">gate 4 runs handler + timeout only</text>
+    <text x="960" y="646.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 ops file_read file_write</text>
+    <text x="960" y="660.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> network exec db</text>
+    <text x="960" y="674.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">blocked-path · auto-suspend @3</text>
+    <text x="960" y="688.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">README calls this &#x27;gate 4&#x27; — it is not</text>
+  </g>
+</svg>

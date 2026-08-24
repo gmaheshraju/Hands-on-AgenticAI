@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 800" role="img" aria-labelledby="hoa_agent_harness_v1-t hoa_agent_harness_v1-d" class="fts-diagram">
+  <title id="hoa_agent_harness_v1-t">03 Agent Harness — Architecture</title>
+  <desc id="hoa_agent_harness_v1-d">The harness process wrapping a research agent: entry CLI, run loop with four stop conditions, tool surface over mock data, and the JSONL trace and markdown report it writes. Every element cites a source line in FACTS.md.</desc>
+  <defs>
+    <marker id="hoa_agent_harness_v1-a-d-edge-analysis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E65100" class="d-edge-analysis-fill"/></marker>
+    <marker id="hoa_agent_harness_v1-a-d-edge-artifact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32" class="d-edge-artifact-fill"/></marker>
+    <marker id="hoa_agent_harness_v1-a-d-edge-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1565C0" class="d-edge-call-fill"/></marker>
+    <marker id="hoa_agent_harness_v1-a-d-edge-data_in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9E9E9E" class="d-edge-data_in-fill"/></marker>
+    <marker id="hoa_agent_harness_v1-a-d-edge-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-edge-primary-fill"/></marker>
+    <marker id="hoa_agent_harness_v1-a-d-edge-stop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C62828" class="d-edge-stop-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="40" y="232" width="176" height="176" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="52" y="252" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">③ Entry (CLI)</text>
+  </g>
+  <g class="d-zone d-boundary-primary">
+    <rect x="280" y="96" width="1016" height="680" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="292" y="116" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">① 03-agent-harness process (Node ESM)</text>
+  </g>
+  <g class="d-zone d-boundary-functional">
+    <rect x="320" y="200" width="936" height="264" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="332" y="220" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">Harness run loop — one continuous flow</text>
+  </g>
+  <g class="d-zone d-boundary-external">
+    <rect x="1360" y="232" width="296" height="288" rx="8" fill="none" stroke="#1565C0" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="1372" y="252" fill="#1565C0" font-size="12" font-weight="600" class="d-zone-label">② Tool surface (in-process, MOCK data)</text>
+  </g>
+  <g class="d-zone d-boundary-observability">
+    <rect x="1360" y="584" width="296" height="176" rx="8" fill="none" stroke="#E7157B" stroke-width="1" stroke-dasharray="8 4"/>
+    <text x="1372" y="604" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">④ Artifacts written</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_cli">
+    <polyline points="192,290.0 352,290.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_harness_v1-a-d-edge-primary)"/>
+    <text x="272.0" y="284.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">question</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_step">
+    <polyline points="512,290.0 624,290.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_harness_v1-a-d-edge-primary)"/>
+    <text x="568.0" y="284.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">agentStepFn(iter)</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_disp">
+    <polyline points="784,290.0 896,290.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_harness_v1-a-d-edge-primary)"/>
+    <text x="840.0" y="284.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">tool + args</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_call">
+    <polyline points="1056,290.0 1384,290.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_agent_harness_v1-a-d-edge-call)"/>
+    <text x="1220.0" y="284.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">toolDef.fn(…)</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_mock">
+    <polyline points="1508.0,320 1508.0,372" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_agent_harness_v1-a-d-edge-data_in)"/>
+    <text x="1508.0" y="340.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">lookup</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_ret">
+    <polyline points="976.0,260 976,232 744,232 744.0,260" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_harness_v1-a-d-edge-primary)"/>
+    <text x="860.0" y="226.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">result · tokens</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_trace">
+    <polyline points="432.0,320 432,340 976,340 976.0,356" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_agent_harness_v1-a-d-edge-artifact)"/>
+    <text x="704.0" y="334.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">per-iteration record</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_file">
+    <polyline points="1056,384.0 1316,384 1316,644 1384,644.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_agent_harness_v1-a-d-edge-artifact)"/>
+    <text x="1186.0" y="378.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">append JSONL</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_rep">
+    <polyline points="744.0,320 744,436 1340,436 1340,716 1384,716.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_agent_harness_v1-a-d-edge-artifact)"/>
+    <text x="1042.0" y="430.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">finalReport</text>
+  </g>
+  <g class="d-edge d-edge-stop" data-edge="e_stop">
+    <polyline points="392.0,320 392.0,512" fill="none" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_agent_harness_v1-a-d-edge-stop)"/>
+    <text x="392.0" y="410.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">on stop → analyse</text>
+  </g>
+  <g class="d-edge d-edge-analysis" data-edge="e_dx">
+    <polyline points="512,540.0 560,540.0" fill="none" stroke="#E65100" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_agent_harness_v1-a-d-edge-analysis)"/>
+    <text x="536.0" y="534.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">trace entries</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_cli" data-class="component.entry">
+    <rect x="64" y="260" width="128" height="60" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="128.0" y="278.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
+    <text x="128.0" y="293.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">CLI · 3 modes</text>
+    <text x="128.0" y="308.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"></text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_harness" data-class="component.service">
+    <rect x="352" y="260" width="160" height="60" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="432.0" y="286.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">AgentHarness.run()</text>
+    <text x="432.0" y="301.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">while(true)</text>
+  </g>
+  <g class="d-node d-component-agent" data-id="n_agent" data-class="component.agent">
+    <rect x="624" y="260" width="160" height="60" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
+    <text x="704.0" y="286.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">ResearchAgent.step()</text>
+    <text x="704.0" y="301.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3 phases</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_registry" data-class="component.service">
+    <rect x="896" y="260" width="160" height="60" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="976.0" y="286.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">TOOL_REGISTRY</text>
+    <text x="976.0" y="301.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">dispatch</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_tracer" data-class="component.service">
+    <rect x="896" y="356" width="160" height="56" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="976.0" y="380.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Tracer.log()</text>
+    <text x="976.0" y="395.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">every iteration</text>
+  </g>
+  <g class="d-node d-component-external" data-id="n_tools" data-class="component.external">
+    <rect x="1384" y="260" width="248" height="60" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+    <text x="1508.0" y="278.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">4 tools</text>
+    <text x="1508.0" y="293.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">webSearch · readPage</text>
+    <text x="1508.0" y="308.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">noteFindings · synthesize</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_mocks" data-class="component.mock">
+    <rect x="1384" y="372" width="248" height="60" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="1508.0" y="390.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">MOCK corpora</text>
+    <text x="1508.0" y="405.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">MOCK_SEARCH_RESULTS</text>
+    <text x="1508.0" y="420.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">MOCK_PAGES — no network</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_trace" data-class="component.artifact">
+    <rect x="1384" y="620" width="248" height="48" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1508.0" y="640.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">trace-&lt;runId&gt;.jsonl</text>
+    <text x="1508.0" y="655.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">tracer.js</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_report" data-class="component.artifact">
+    <rect x="1384" y="692" width="248" height="48" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1508.0" y="712.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">report-&lt;runId&gt;.md</text>
+    <text x="1508.0" y="727.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">demo.js</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_pm" data-class="component.service">
+    <rect x="352" y="512" width="160" height="56" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="432.0" y="536.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">postmortem()</text>
+    <text x="432.0" y="551.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">harness.js</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_dx" data-class="component.service">
+    <rect x="560" y="512" width="176" height="56" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="648.0" y="536.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">diagnosePrimitives()</text>
+    <text x="648.0" y="551.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">diagnosis.js</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_gates" data-class="card.invariant">
+    <rect x="832" y="496" width="424" height="116" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="840" y="529.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">STOP CONDITIONS — complete, in code order</text>
+    <text x="840" y="543.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 ITERATION_CAP — checked BEFORE the step</text>
+    <text x="840" y="557.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 AGENT_DONE · 3 COST_CAP · 4 CONVERGENCE</text>
+    <text x="840" y="571.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">counter resets on a productive iteration</text>
+    <text x="840" y="585.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">cost model $3 / $15 per 1M tokens</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_fail" data-class="card.failure">
+    <rect x="832" y="624" width="424" height="104" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="840" y="658.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">POSTMORTEM TAXONOMY — 8 patterns</text>
+    <text x="840" y="672.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">context_miss · bad_tool_result · wasteful_action</text>
+    <text x="840" y="686.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">hallucinated_tool_loop · convergence_stall · cost_overrun</text>
+    <text x="840" y="700.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">iteration_cap · tool_imbalance</text>
+  </g>
+  <g class="d-node d-card-primitive" data-id="card_prim" data-class="card.primitive">
+    <rect x="352" y="624" width="424" height="104" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="360" y="665.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">10 harness primitives, scored 0.0–1.0 · diagnosis.js</text>
+    <text x="360" y="679.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Instructions · Context Delivery · Context Management</text>
+    <text x="360" y="693.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Tool Interface · Execution Environment · Durable State …</text>
+  </g>
+</svg>

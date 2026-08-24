@@ -1,0 +1,222 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 1120" role="img" aria-labelledby="hoa_workflow_engine_v1-t hoa_workflow_engine_v1-d" class="fts-diagram">
+  <title id="hoa_workflow_engine_v1-t">18 Workflow Engine — DAG orchestrator (validate → Kahn layers → dispatch)</title>
+  <desc id="hoa_workflow_engine_v1-d">One in-process Node ESM engine that validates a JSON workflow, sorts it into parallel layers with Kahn&#x27;s algorithm, and dispatches each node — through a retry wrapper — to one of six node-type executors, recording every step on a WorkflowRun state machine and printing the result to stdout. No network, no real LLM. Every element cites a source line in FACTS.md.</desc>
+  <defs>
+    <marker id="hoa_workflow_engine_v1-a-d-edge-artifact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32" class="d-edge-artifact-fill"/></marker>
+    <marker id="hoa_workflow_engine_v1-a-d-edge-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1565C0" class="d-edge-call-fill"/></marker>
+    <marker id="hoa_workflow_engine_v1-a-d-edge-data_in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9E9E9E" class="d-edge-data_in-fill"/></marker>
+    <marker id="hoa_workflow_engine_v1-a-d-edge-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-edge-primary-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="40" y="232" width="232" height="300" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="52" y="252" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">③ Inputs — CLI + workflow DSL</text>
+  </g>
+  <g class="d-zone d-boundary-primary">
+    <rect x="336" y="96" width="1016" height="772" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="348" y="116" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">① Workflow engine (Node ESM · in-proc · no network, no real LLM)</text>
+  </g>
+  <g class="d-zone d-boundary-functional">
+    <rect x="408" y="384" width="624" height="476" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="420" y="404" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">Node-type executors</text>
+  </g>
+  <g class="d-zone d-boundary-observability">
+    <rect x="1416" y="240" width="244" height="180" rx="8" fill="none" stroke="#E7157B" stroke-width="1" stroke-dasharray="8 4"/>
+    <text x="1428" y="260" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">④ Reported output (stdout only)</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_load">
+    <polyline points="156.0,408 156.0,344" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-data_in)"/>
+    <text x="156.0" y="370.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">read</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_run">
+    <polyline points="256,312.0 312,312 312,200 368,200.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-primary)"/>
+    <text x="312.0" y="250.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">execute(wf)</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_val">
+    <polyline points="544,200.0 616,200.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-call)"/>
+    <text x="580.0" y="194.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">validate</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_sort">
+    <polyline points="792,200.0 864,200.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-primary)"/>
+    <text x="828.0" y="194.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">sort</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_loop">
+    <polyline points="1040,200.0 1112,200.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-primary)"/>
+    <text x="1076.0" y="194.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">per node</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_rec">
+    <polyline points="456.0,232 456.0,296" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-data_in)"/>
+    <text x="456.0" y="258.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">new run</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_sum">
+    <polyline points="544,328.0 1432,328.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-artifact)"/>
+    <text x="988.0" y="322.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">summary</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_disp">
+    <polyline points="1200.0,232 1200,372 600,372 600.00000016,424" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-call)"/>
+    <text x="900.0" y="366.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">dispatch</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_llm">
+    <polyline points="616,432.0000004 688,432.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-call)"/>
+    <text x="652.0" y="426.0000002" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label"></text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_tool">
+    <polyline points="616,508.0 688,508.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-call)"/>
+    <text x="652.0" y="502.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label"></text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_appr">
+    <polyline points="616,583.9999996 688,584.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-call)"/>
+    <text x="652.0" y="577.9999998000001" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label"></text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_cond">
+    <polyline points="616,659.9999992 688,660.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-call)"/>
+    <text x="652.0" y="653.9999996" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label"></text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_par">
+    <polyline points="616,735.9999988 688,736.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-call)"/>
+    <text x="652.0" y="729.9999994" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label"></text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_tran">
+    <polyline points="616,811.9999984000001 688,812.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-call)"/>
+    <text x="652.0" y="805.9999992" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label"></text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
+    <rect x="56" y="280" width="200" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="156.0" y="300.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
+    <text x="156.0" y="315.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">CLI runner</text>
+    <text x="156.0" y="330.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runs 3 workflows</text>
+  </g>
+  <g class="d-node d-component-external" data-id="n_wf" data-class="component.external">
+    <rect x="56" y="408" width="200" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+    <text x="156.0" y="428.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">workflows/*.json</text>
+    <text x="156.0" y="443.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3 DSL defs</text>
+    <text x="156.0" y="458.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">read by demo.js</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_exec" data-class="component.service">
+    <rect x="368" y="168" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="456.0" y="181.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">execute()</text>
+    <text x="456.0" y="196.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">orchestrator</text>
+    <text x="456.0" y="211.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">validate → sort</text>
+    <text x="456.0" y="226.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">+ _executeNode</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_val" data-class="component.service">
+    <rect x="616" y="168" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="704.0" y="188.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">validateWorkflow()</text>
+    <text x="704.0" y="203.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">engine.js</text>
+    <text x="704.0" y="218.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">8 checks, collected</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_topo" data-class="component.service">
+    <rect x="864" y="168" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="952.0" y="188.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">topologicalLayers()</text>
+    <text x="952.0" y="203.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">Kahn · cycle</text>
+    <text x="952.0" y="218.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">folds buildGraph</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_retry" data-class="component.service">
+    <rect x="1112" y="168" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1200.0" y="188.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">retryWithBackoff()</text>
+    <text x="1200.0" y="203.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">retry.js</text>
+    <text x="1200.0" y="218.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">2x exp backoff</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_state" data-class="component.service">
+    <rect x="368" y="296" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="456.0" y="309.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">WorkflowRun</text>
+    <text x="456.0" y="324.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">state machine</text>
+    <text x="456.0" y="339.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">+ summary()</text>
+    <text x="456.0" y="354.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">+ trace</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_dispatch" data-class="component.service">
+    <rect x="440" y="424" width="176" height="420" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="528.0" y="555.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">NODE_EXECUTORS</text>
+    <text x="528.0" y="570.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">engine.js</text>
+    <text x="528.0" y="585.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">dispatch table</text>
+    <text x="528.0" y="600.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">by node.type</text>
+    <text x="528.0" y="615.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"></text>
+    <text x="528.0" y="630.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"></text>
+    <text x="528.0" y="645.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">one of six</text>
+    <text x="528.0" y="660.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">fires per node</text>
+    <text x="528.0" y="675.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"></text>
+    <text x="528.0" y="690.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">unknown type</text>
+    <text x="528.0" y="705.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">⇒ validate</text>
+    <text x="528.0" y="720.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">fails</text>
+  </g>
+  <g class="d-node d-component-agent" data-id="n_llm" data-class="component.agent">
+    <rect x="688" y="400" width="240" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
+    <text x="808.0" y="413.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">llm → executeLLMNode</text>
+    <text x="808.0" y="428.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">llm.js</text>
+    <text x="808.0" y="443.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">simulateLLM</text>
+    <text x="808.0" y="458.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">MOCK — no API, no key</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_tool" data-class="component.mock">
+    <rect x="688" y="476" width="240" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="808.0" y="496.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">tool → executeToolNode</text>
+    <text x="808.0" y="511.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">tool.js · Map</text>
+    <text x="808.0" y="526.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">7 mock tools</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_approval" data-class="component.mock">
+    <rect x="688" y="552" width="240" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="808.0" y="565.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">approval → Approval</text>
+    <text x="808.0" y="580.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">approval.js</text>
+    <text x="808.0" y="595.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">autoApprove ONLY</text>
+    <text x="808.0" y="610.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">reject ⇒ throw</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_condition" data-class="component.service">
+    <rect x="688" y="628" width="240" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="808.0" y="641.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">condition → Condition</text>
+    <text x="808.0" y="656.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">condition.js</text>
+    <text x="808.0" y="671.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">10 operators</text>
+    <text x="808.0" y="686.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">engine skips subtree</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_parallel" data-class="component.service">
+    <rect x="688" y="704" width="240" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="808.0" y="717.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">parallel → Parallel</text>
+    <text x="808.0" y="732.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">parallel.js</text>
+    <text x="808.0" y="747.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3 of 6 sub-types</text>
+    <text x="808.0" y="762.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">allSettled</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_transform" data-class="component.service">
+    <rect x="688" y="780" width="240" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="808.0" y="793.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">transform → Transform</text>
+    <text x="808.0" y="808.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">transform.js</text>
+    <text x="808.0" y="823.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">7 pure ops</text>
+    <text x="808.0" y="838.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">unknown op throws</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_out" data-class="component.artifact">
+    <rect x="1432" y="296" width="212" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1538.0" y="316.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">stdout report</text>
+    <text x="1538.0" y="331.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">_printSummary</text>
+    <text x="1538.0" y="346.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">final tally demo.js</text>
+  </g>
+  <g class="d-node d-card-primitive" data-id="card_gate" data-class="card.primitive">
+    <rect x="120" y="896" width="456" height="200" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="128" y="950.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">VALIDATION GATE — 9 rejections, code order</text>
+    <text x="128" y="964.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">validateWorkflow — 8 checks, collected not short-circuit</text>
+    <text x="128" y="978.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 id missing 2 nodes empty 3 no edges[]</text>
+    <text x="128" y="992.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 edge.from unknown 5 edge.to unknown</text>
+    <text x="128" y="1006.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 node.id missing 7 node.type missing</text>
+    <text x="128" y="1020.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">8 type ∉ NODE_EXECUTORS → all joined, thrown</text>
+    <text x="128" y="1034.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">9 CYCLE sortedCount≠N — NOT in validate: Kahn</text>
+    <text x="128" y="1048.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">reached one line after validate ( then)</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_layers" data-class="card.invariant">
+    <rect x="624" y="896" width="456" height="200" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="632" y="943.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">LAYER BARRIER + STATE MACHINE</text>
+    <text x="632" y="957.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Kahn: in-degree-0 seeds a layer · whole queue = 1 layer</text>
+    <text x="632" y="971.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">a layer is dispatched as a unit — Promise.allSettled</text>
+    <text x="632" y="985.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">layer N+1 waits for layer N to settle</text>
+    <text x="632" y="999.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">condition returns branchTaken → engine marks edges</text>
+    <text x="632" y="1013.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">_markBranchSkipped walks the subtree · checked first</text>
+    <text x="632" y="1027.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">── VALID_TRANSITIONS state.js · bad pair throws ──</text>
+    <text x="632" y="1041.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">PENDING→RUNNING · RUNNING→WAIT_APPROVAL|COMPLETED|FAILED</text>
+    <text x="632" y="1055.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">WAIT_APPROVAL→RUNNING|FAILED · COMPLETED/FAILED terminal</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_seams" data-class="card.failure">
+    <rect x="1128" y="896" width="456" height="200" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="1136" y="950.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">FAILURE SEAMS — run against the real modules</text>
+    <text x="1136" y="964.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 two approval nodes in one layer ⇒ run FAILS</text>
+    <text x="1136" y="978.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> both set WAITING_APPROVAL, no self-loop · state.js</text>
+    <text x="1136" y="992.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 a human &#x27;no&#x27; is asked twice — approval runs in retry</text>
+    <text x="1136" y="1006.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 maxRetries is an ATTEMPT count — loop ≤ maxRetries</text>
+    <text x="1136" y="1020.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 a failed node erases downstream from the trace</text>
+    <text x="1136" y="1034.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">engine defaults 2/200ms/15s OVERRIDE retry 3/500/30s</text>
+    <text x="1136" y="1048.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">no *.test.js exists — declared test surface is empty (pkg)</text>
+  </g>
+</svg>
