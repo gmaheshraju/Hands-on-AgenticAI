@@ -39,5 +39,40 @@ def main(facts_path, src_root):
     for b in bad: print(f"     {b[0]}:{b[1]} — {b[2]}")
     return 1 if bad else 0
 
+def check_spec_labels(spec_path):
+    """A diagram LABEL must not carry a line number.
+
+    Line numbers are the most brittle anchor there is -- one added import above a
+    cited line and every :NNN below it is wrong. Worse, until 2026-08-24 the 1,787
+    line numbers baked into diagram labels were the ONLY citations nothing checked:
+    verify_facts.py reads FACTS.md, build.py reads geometry, and neither looked at a
+    label. The visible rigour was unverified while the verified rigour was invisible.
+
+    So the rule is: the DIAGRAM says where (filename), FACTS.md says exactly where
+    (file:line) and is machine-checked. If a line number ever reappears in a label,
+    it is unverifiable precision theatre -- fail instead of shipping it.
+    """
+    import re
+    s = open(spec_path).read()
+    bad = []
+    for m in re.finditer(r'"[^"]*"', s):
+        t = m.group(0)
+        if re.search(':' + r'\d', t):
+            bad.append(t[:70])
+    return bad
+
 if __name__ == '__main__':
+    if '--specs' in sys.argv:
+        import glob
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        tot = 0
+        for sp in sorted(glob.glob(os.path.join(root, '*_v*', 'spec.py'))):
+            bad = check_spec_labels(sp)
+            if bad:
+                tot += len(bad)
+                print("  %s: %d label(s) carry a line number" % (os.path.basename(os.path.dirname(sp)), len(bad)))
+                for b in bad[:3]:
+                    print("     ", b)
+        print("spec-label check: %d violation(s)" % tot)
+        sys.exit(1 if tot else 0)
     sys.exit(main(sys.argv[1], sys.argv[2]))

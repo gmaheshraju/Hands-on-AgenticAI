@@ -46,11 +46,11 @@
   </g>
   <g class="d-edge d-edge-call" data-edge="e_cost">
     <polyline points="864.0,312 864.0,368" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_tool_use_v1-a-d-edge-call)"/>
-    <text x="864.0" y="334.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">sql :291</text>
+    <text x="864.0" y="334.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">sql</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_fmt">
     <polyline points="1120.0,312 1120.0,368" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_tool_use_v1-a-d-edge-primary)"/>
-    <text x="1120.0" y="334.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">rows :303</text>
+    <text x="1120.0" y="334.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">rows</text>
   </g>
   <g class="d-edge d-edge-call" data-edge="e_db">
     <polyline points="1208,280.0 1336,280 1336,408 1384,408.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_tool_use_v1-a-d-edge-call)"/>
@@ -80,104 +80,104 @@
     <rect x="64" y="248" width="128" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
     <text x="128.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
     <text x="128.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">npm run demo</text>
-    <text x="128.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3 parts · :32</text>
+    <text x="128.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3 parts</text>
   </g>
   <g class="d-node d-component-service" data-id="n_ask" data-class="component.service">
     <rect x="304" y="248" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="384.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">agent.ask(question)</text>
     <text x="384.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">retry loop · 4 tries</text>
-    <text x="384.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">agent.js:239 :258</text>
+    <text x="384.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">agent.js</text>
   </g>
   <g class="d-node d-component-agent" data-id="n_llm" data-class="component.agent">
     <rect x="520" y="248" width="176" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
     <text x="608.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">llm(messages) — mockLLM</text>
     <text x="608.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">19 patterns + default</text>
-    <text x="608.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">agent.js:62 · seam :223</text>
+    <text x="608.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">agent.js · seam</text>
   </g>
   <g class="d-node d-component-service" data-id="n_perm" data-class="component.service">
     <rect x="776" y="248" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="864.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">validateQuery()</text>
     <text x="864.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3 tiers, deny-default</text>
-    <text x="864.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">permissions.js:144</text>
+    <text x="864.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">permissions.js</text>
   </g>
   <g class="d-node d-component-service" data-id="n_exec" data-class="component.service">
     <rect x="1032" y="248" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="1120.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">db.prepare(sql).all()</text>
     <text x="1120.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">better-sqlite3 · timed</text>
-    <text x="1120.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">agent.js:297 :296</text>
+    <text x="1120.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">agent.js</text>
   </g>
   <g class="d-node d-component-service" data-id="n_cost" data-class="component.service">
     <rect x="776" y="368" width="176" height="56" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="864.0" y="384.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">estimateQueryCost()</text>
     <text x="864.0" y="399.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">EXPLAIN QUERY PLAN</text>
-    <text x="864.0" y="414.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">permissions.js:329</text>
+    <text x="864.0" y="414.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">permissions.js</text>
   </g>
   <g class="d-node d-component-service" data-id="n_fmt" data-class="component.service">
     <rect x="1032" y="368" width="176" height="56" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="1120.0" y="384.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">formatResult(rows)</text>
     <text x="1120.0" y="399.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">table / scalar / meta</text>
-    <text x="1120.0" y="414.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">formatter.js:116</text>
+    <text x="1120.0" y="414.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">formatter.js</text>
   </g>
   <g class="d-node d-component-service" data-id="n_dbmod" data-class="component.service">
     <rect x="1384" y="260" width="248" height="72" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="1508.0" y="277.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">database.js</text>
-    <text x="1508.0" y="292.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">openDatabase :321 (WAL, FK on)</text>
-    <text x="1508.0" y="307.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">getSchemaContext :350</text>
-    <text x="1508.0" y="322.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">getAllowedTables :396</text>
+    <text x="1508.0" y="292.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">openDatabase (WAL, FK on)</text>
+    <text x="1508.0" y="307.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">getSchemaContext</text>
+    <text x="1508.0" y="322.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">getAllowedTables</text>
   </g>
   <g class="d-node d-component-artifact" data-id="n_db" data-class="component.artifact">
     <rect x="1384" y="372" width="248" height="72" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
     <text x="1508.0" y="389.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">analytics.db</text>
     <text x="1508.0" y="404.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">SQLite · users products</text>
     <text x="1508.0" y="419.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">orders events · 15,020 rows</text>
-    <text x="1508.0" y="434.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">database.js:13 · seeded :330</text>
+    <text x="1508.0" y="434.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">database.js · seeded</text>
   </g>
   <g class="d-node d-component-artifact" data-id="n_out" data-class="component.artifact">
     <rect x="1384" y="612" width="248" height="56" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
     <text x="1508.0" y="628.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">stdout — success</text>
     <text x="1508.0" y="643.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">table + query metadata</text>
-    <text x="1508.0" y="658.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">demo.js:99-101</text>
+    <text x="1508.0" y="658.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">demo.js</text>
   </g>
   <g class="d-node d-component-artifact" data-id="n_deny" data-class="component.artifact">
     <rect x="1384" y="684" width="248" height="56" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
     <text x="1508.0" y="700.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">stdout — refusal</text>
-    <text x="1508.0" y="715.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">PERMISSION DENIED :281</text>
-    <text x="1508.0" y="730.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">CONFIRMATION REQUIRED :286</text>
+    <text x="1508.0" y="715.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">PERMISSION DENIED</text>
+    <text x="1508.0" y="730.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">CONFIRMATION REQUIRED</text>
   </g>
   <g class="d-node d-card-invariant" data-id="card_gate" data-class="card.invariant">
     <rect x="304" y="496" width="456" height="112" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
-    <text x="312" y="513.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">validateQuery() — EVERY check, in code order · permissions.js:144</text>
-    <text x="312" y="527.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">BLOCK 1 multiple statements &#x27;;&#x27; :153 · 2 first keyword not SELECT :165</text>
-    <text x="312" y="541.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">BLOCK 3 destructive keyword x14 :177-192 · 4 metadata table x6 :207</text>
-    <text x="312" y="555.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">BLOCK 5 load_extension :229 · 6 table not in allowedTables :241-257</text>
-    <text x="312" y="569.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">BLOCK 7 subquery depth &gt; 2 :261 · 8 UNION + constant :274-287</text>
-    <text x="312" y="583.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">CONFIRM 9 over 3 JOINs :296 · 10 no WHERE clause :300 (one result :304)</text>
-    <text x="312" y="597.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">ALLOW  fall-through only :316 — first match wins; order is load-bearing</text>
+    <text x="312" y="513.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">validateQuery() — EVERY check, in code order · permissions.js</text>
+    <text x="312" y="527.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">BLOCK 1 multiple statements &#x27;;&#x27; · 2 first keyword not SELECT</text>
+    <text x="312" y="541.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">BLOCK 3 destructive keyword x14 · 4 metadata table x6</text>
+    <text x="312" y="555.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">BLOCK 5 load_extension · 6 table not in allowedTables</text>
+    <text x="312" y="569.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">BLOCK 7 subquery depth &gt; 2 · 8 UNION + constant</text>
+    <text x="312" y="583.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">CONFIRM 9 over 3 JOINs · 10 no WHERE clause (one result)</text>
+    <text x="312" y="597.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">ALLOW fall-through only — first match wins; order is load-bearing</text>
   </g>
   <g class="d-node d-card-failure" data-id="card_deny" data-class="card.failure">
     <rect x="304" y="632" width="456" height="96" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
     <text x="312" y="648.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">DENY LISTS — complete, in declaration order</text>
-    <text x="312" y="662.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">destructive :178-191 — INSERT UPDATE DELETE DROP ALTER CREATE</text>
-    <text x="312" y="676.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">TRUNCATE REPLACE EXEC ATTACH DETACH PRAGMA GRANT REVOKE  (14)</text>
-    <text x="312" y="690.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">metadata :208-213 — information_schema sqlite_master sqlite_schema</text>
-    <text x="312" y="704.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">sqlite_temp_master pg_catalog pg_tables  (6) · load_extension :229</text>
-    <text x="312" y="718.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">allowedTables database.js:397 — users products orders events  (4)</text>
+    <text x="312" y="662.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">destructive — INSERT UPDATE DELETE DROP ALTER CREATE</text>
+    <text x="312" y="676.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">TRUNCATE REPLACE EXEC ATTACH DETACH PRAGMA GRANT REVOKE (14)</text>
+    <text x="312" y="690.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">metadata — information_schema sqlite_master sqlite_schema</text>
+    <text x="312" y="704.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">sqlite_temp_master pg_catalog pg_tables (6) · load_extension</text>
+    <text x="312" y="718.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">allowedTables database.js — users products orders events (4)</text>
   </g>
   <g class="d-node d-card-primitive" data-id="card_attempt" data-class="card.primitive">
     <rect x="792" y="496" width="456" height="232" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
-    <text x="800" y="517.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">ONE ask() ATTEMPT — 4 steps in code order · agent.js:258-323</text>
-    <text x="800" y="531.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 llm(messages) :264 — md fences + trailing &#x27;;&#x27; stripped :266 :268</text>
-    <text x="800" y="545.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 validateQuery(sql, allowedTables) :277</text>
-    <text x="800" y="559.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">      !allowed -&gt; &#x27;PERMISSION DENIED&#x27;, return :280-283</text>
-    <text x="800" y="573.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">      needsConfirm and !autoConfirm -&gt; return :285-288 — never retried</text>
-    <text x="800" y="587.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 estimateQueryCost(db, sql) :291 — EXPLAIN QUERY PLAN :331</text>
-    <text x="800" y="601.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 db.prepare(sql).all() :297 — timed by performance.now() :296</text>
-    <text x="800" y="615.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">      on throw -&gt; errors.push :313 + retry prompt appended :317-321</text>
+    <text x="800" y="517.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">ONE ask() ATTEMPT — 4 steps in code order · agent.js</text>
+    <text x="800" y="531.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 llm(messages) — md fences + trailing &#x27;;&#x27; stripped</text>
+    <text x="800" y="545.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 validateQuery(sql, allowedTables)</text>
+    <text x="800" y="559.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> !allowed -&gt; &#x27;PERMISSION DENIED&#x27;, return</text>
+    <text x="800" y="573.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> needsConfirm and !autoConfirm -&gt; return — never retried</text>
+    <text x="800" y="587.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 estimateQueryCost(db, sql) — EXPLAIN QUERY PLAN</text>
+    <text x="800" y="601.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 db.prepare(sql).all() — timed by performance.now()</text>
+    <text x="800" y="615.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> on throw -&gt; errors.push + retry prompt appended</text>
     <text x="800" y="629.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"></text>
-    <text x="800" y="643.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">4 ATTEMPTS MAX — attempt = 0..maxRetries, default 3 :227 :258</text>
-    <text x="800" y="657.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">exhausted -&gt; &#x27;Failed after N attempts&#x27; + error list :327-334</text>
+    <text x="800" y="643.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">4 ATTEMPTS MAX — attempt = 0..maxRetries, default 3</text>
+    <text x="800" y="657.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">exhausted -&gt; &#x27;Failed after N attempts&#x27; + error list</text>
     <text x="800" y="671.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"></text>
-    <text x="800" y="685.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">AgentResult envelope — 10 fields · agent.js:206-215</text>
+    <text x="800" y="685.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">AgentResult envelope — 10 fields · agent.js</text>
     <text x="800" y="699.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">success · question · sql · rows · formatted · permission</text>
     <text x="800" y="713.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">cost · attempts · errors · executionTimeMs</text>
   </g>

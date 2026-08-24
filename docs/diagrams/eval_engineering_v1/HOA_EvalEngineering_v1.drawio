@@ -40,77 +40,77 @@
         <mxCell id="z_out_lbl" value="⑤ Artifacts written" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="1356" y="600" width="280" height="16" as="geometry" />
         </mxCell>
-        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;runDemo() :118&lt;br&gt;perfect vs degraded" class="component.entry" id="n_demo">
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;runDemo()&lt;br&gt;perfect vs degraded" class="component.entry" id="n_demo">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="140" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;golden-set.json&lt;/b&gt;&lt;br&gt;30 Q&amp;amp;A triples&lt;br&gt;read at runner.js:54" class="component.artifact" id="n_golden">
+        <object label="&lt;b&gt;golden-set.json&lt;/b&gt;&lt;br&gt;30 Q&amp;amp;A triples&lt;br&gt;read at runner.js" class="component.artifact" id="n_golden">
           <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="396" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;RAG under test&lt;/b&gt;&lt;br&gt;injected fn :30&lt;br&gt;called at runner.js:70" class="component.mock" id="n_rag">
+        <object label="&lt;b&gt;RAG under test&lt;/b&gt;&lt;br&gt;injected fn&lt;br&gt;called at runner.js" class="component.mock" id="n_rag">
           <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="520" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;runEval()&lt;/b&gt;&lt;br&gt;runner.js:37&lt;br&gt;9-step pipeline" class="component.service" id="n_runner">
+        <object label="&lt;b&gt;runEval()&lt;/b&gt;&lt;br&gt;runner.js&lt;br&gt;9-step pipeline" class="component.service" id="n_runner">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="396" y="232" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;LLM-as-judge&lt;/b&gt;&lt;br&gt;evaluator.js:22 :88&lt;br&gt;3 dims · Promise.all" class="component.agent" id="n_judge">
+        <object label="&lt;b&gt;LLM-as-judge&lt;/b&gt;&lt;br&gt;evaluator.js&lt;br&gt;3 dims · Promise.all" class="component.agent" id="n_judge">
           <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="620" y="232" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;regression.js&lt;/b&gt;&lt;br&gt;detectRegressions :61&lt;br&gt;saveBaseline :31" class="component.service" id="n_regress">
+        <object label="&lt;b&gt;regression.js&lt;/b&gt;&lt;br&gt;detectRegressions&lt;br&gt;saveBaseline" class="component.service" id="n_regress">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="844" y="232" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;reporter.js&lt;/b&gt;&lt;br&gt;generateReport :19&lt;br&gt;markdown + verdict" class="component.service" id="n_reporter">
+        <object label="&lt;b&gt;reporter.js&lt;/b&gt;&lt;br&gt;generateReport&lt;br&gt;markdown + verdict" class="component.service" id="n_reporter">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1068" y="232" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;dimensions.js&lt;/b&gt;&lt;br&gt;3 rubric prompts&lt;br&gt;:13 :57 :100" class="component.service" id="n_dims">
+        <object label="&lt;b&gt;dimensions.js&lt;/b&gt;&lt;br&gt;3 rubric prompts&lt;br&gt;" class="component.service" id="n_dims">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="620" y="360" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;Gemini API&lt;/b&gt;&lt;br&gt;gemini-2.0-flash · temp 0.1&lt;br&gt;evaluator.js:24 · maxOut 1024" class="component.external" id="n_gemini">
+        <object label="&lt;b&gt;Gemini API&lt;/b&gt;&lt;br&gt;gemini-2.0-flash · temp 0.1&lt;br&gt;evaluator.js · maxOut 1024" class="component.external" id="n_gemini">
           <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1368" y="232" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;createMockJudge()&lt;/b&gt;&lt;br&gt;word-overlap heuristic :89&lt;br&gt;evaluator.js:88 · no API key" class="component.mock" id="n_mockjudge">
+        <object label="&lt;b&gt;createMockJudge()&lt;/b&gt;&lt;br&gt;word-overlap heuristic&lt;br&gt;evaluator.js · no API key" class="component.mock" id="n_mockjudge">
           <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1368" y="360" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;baselines/baseline.json&lt;/b&gt;&lt;br&gt;saveBaseline · regression.js:53" class="component.artifact" id="n_baseline">
+        <object label="&lt;b&gt;baselines/baseline.json&lt;/b&gt;&lt;br&gt;saveBaseline · regression.js" class="component.artifact" id="n_baseline">
           <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1368" y="616" width="248" height="48" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;reports/eval-&amp;lt;ts&amp;gt;.md&lt;/b&gt;&lt;br&gt;writeReport · reporter.js:150" class="component.artifact" id="n_out_report">
+        <object label="&lt;b&gt;reports/eval-&amp;lt;ts&amp;gt;.md&lt;/b&gt;&lt;br&gt;writeReport · reporter.js" class="component.artifact" id="n_out_report">
           <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1368" y="688" width="248" height="48" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;runEval() — 9 STEPS, complete, in code order · runner.js:37&lt;/b&gt;&lt;br&gt;1 load golden-set.json :54 · 2 create judge (mock|real) :58&lt;br&gt;3 loop: ragSystem() :70 → judge.evaluate() :78&lt;br&gt;4 computeAggregate — skips parseError rows :118 :184&lt;br&gt;5 loadBaseline :127 → detectRegressions :128&lt;br&gt;6 generateReport :139 → writeReport :147&lt;br&gt;7 saveBaseline if --save-baseline OR no baseline :151&lt;br&gt;8 print aggregate + PASS/FAIL verdict :157 :164&lt;br&gt;9 --ci AND hasRegressions → process.exit(1) :167" class="card.invariant" id="card_pipeline">
+        <object label="&lt;b&gt;runEval() — 9 STEPS, complete, in code order · runner.js&lt;/b&gt;&lt;br&gt;1 load golden-set.json · 2 create judge (mock|real)&lt;br&gt;3 loop: ragSystem() → judge.evaluate()&lt;br&gt;4 computeAggregate — skips parseError rows&lt;br&gt;5 loadBaseline → detectRegressions&lt;br&gt;6 generateReport → writeReport&lt;br&gt;7 saveBaseline if --save-baseline OR no baseline&lt;br&gt;8 print aggregate + PASS/FAIL verdict&lt;br&gt;9 --ci AND hasRegressions → process.exit(1)" class="card.invariant" id="card_pipeline">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="360" y="524" width="440" height="140" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;REGRESSION GATES — every threshold, regression.js&lt;/b&gt;&lt;br&gt;REGRESSION_THRESHOLD_POINTS = 1 :13 — per-dim drop&lt;br&gt;IMPROVEMENT_THRESHOLD_POINTS = 1 :15 — per-dim gain&lt;br&gt;AGGREGATE_THRESHOLD_PERCENT = 0.05 :14 — 5% drop&lt;br&gt;applied: diff &amp;lt; -1 → regressed :109&lt;br&gt;diff &amp;gt; +1 → improved :112 · else unchanged :137&lt;br&gt;pctChange &amp;lt; -0.05 → aggregateRegression :155&lt;br&gt;hasRegressions = regressions.length &amp;gt; 0 OR agg :161&lt;br&gt;no baseline → false, and this run becomes the baseline :62" class="card.failure" id="card_gates">
+        <object label="&lt;b&gt;REGRESSION GATES — every threshold, regression.js&lt;/b&gt;&lt;br&gt;REGRESSION_THRESHOLD_POINTS = 1 — per-dim drop&lt;br&gt;IMPROVEMENT_THRESHOLD_POINTS = 1 — per-dim gain&lt;br&gt;AGGREGATE_THRESHOLD_PERCENT = 0.05 — 5% drop&lt;br&gt;applied: diff &amp;lt; -1 → regressed&lt;br&gt;diff &amp;gt; +1 → improved · else unchanged&lt;br&gt;pctChange &amp;lt; -0.05 → aggregateRegression&lt;br&gt;hasRegressions = regressions.length &amp;gt; 0 OR agg&lt;br&gt;no baseline → false, and this run becomes the baseline" class="card.failure" id="card_gates">
           <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="824" y="524" width="440" height="140" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;THE 3 DIMENSIONS — complete, in DIMENSIONS array order · dimensions.js:190-205&lt;/b&gt;&lt;br&gt;faithfulness w=0.4 :63 — grounded in sources? prompt :13 · rubric 5→1 :30 · 4 calibrations :38&lt;br&gt;relevance w=0.3 :63 — answers the question? prompt :57 · rubric :74 · 4 calibrations :82&lt;br&gt;completeness w=0.3 :63 — covers all key points? prompt :100 · rubric :119 · 4 calibrations :127&lt;br&gt;composite sums only non-parseError dims :67-76 · mock judge hard-codes the same weights :139&lt;br&gt;parseJudgeResponse :147 — 3 exits to score 0: no JSON :155 · out of 1-5 :167 · throw :177" class="card.primitive" id="card_dims">
+        <object label="&lt;b&gt;THE 3 DIMENSIONS — complete, in DIMENSIONS array order · dimensions.js&lt;/b&gt;&lt;br&gt;faithfulness w=0.4 — grounded in sources? prompt · rubric 5→1 · 4 calibrations&lt;br&gt;relevance w=0.3 — answers the question? prompt · rubric · 4 calibrations&lt;br&gt;completeness w=0.3 — covers all key points? prompt · rubric · 4 calibrations&lt;br&gt;composite sums only non-parseError dims · mock judge hard-codes the same weights&lt;br&gt;parseJudgeResponse — 3 exits to score 0: no JSON · out of 1-5 · throw" class="card.primitive" id="card_dims">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="360" y="680" width="904" height="88" as="geometry" />
           </mxCell>
@@ -118,37 +118,37 @@
         <mxCell id="e_run" value="runEval() ×2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_runner" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="312" y="172" /><mxPoint x="312" y="264" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_golden" value="30 questions :54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_golden" target="n_runner" edge="1">
+        <mxCell id="e_golden" value="30 questions" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_golden" target="n_runner" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="436" y="428" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_rag" value="answer + sources :70" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_rag" target="n_runner" edge="1">
+        <mxCell id="e_rag" value="answer + sources" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_rag" target="n_runner" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="312" y="552" /><mxPoint x="312" y="296" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_eval" value="per question :78" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_runner" target="n_judge" edge="1">
+        <mxCell id="e_eval" value="per question" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_runner" target="n_judge" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e_prompt" value="3 prompts" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_judge" target="n_dims" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_api" value="generateContent :36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_judge" target="n_gemini" edge="1">
+        <mxCell id="e_api" value="generateContent" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_judge" target="n_gemini" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="700" y="140" /><mxPoint x="1320" y="140" /><mxPoint x="1320" y="264" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_mock" value="--mock :58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_judge" target="n_mockjudge" edge="1">
+        <mxCell id="e_mock" value="--mock" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_judge" target="n_mockjudge" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="660" y="208" /><mxPoint x="1296" y="208" /><mxPoint x="1296" y="392" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_regress" value="scores :86" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_judge" target="n_regress" edge="1">
+        <mxCell id="e_regress" value="scores" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_judge" target="n_regress" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_report" value="diff report :128" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_regress" target="n_reporter" edge="1">
+        <mxCell id="e_report" value="diff report" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_regress" target="n_reporter" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_baseread" value="loadBaseline :127" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_baseline" target="n_regress" edge="1">
+        <mxCell id="e_baseread" value="loadBaseline" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_baseline" target="n_regress" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1296" y="640" /><mxPoint x="1296" y="476" /><mxPoint x="924" y="476" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_basewrite" value="saveBaseline :152" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_regress" target="n_baseline" edge="1">
+        <mxCell id="e_basewrite" value="saveBaseline" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_regress" target="n_baseline" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="964" y="500" /><mxPoint x="1492" y="500" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_reportout" value="writeReport :147" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_reporter" target="n_out_report" edge="1">
+        <mxCell id="e_reportout" value="writeReport" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_reporter" target="n_out_report" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1148" y="452" /><mxPoint x="1320" y="452" /><mxPoint x="1320" y="712" /></Array></mxGeometry>
         </mxCell>
       </root>

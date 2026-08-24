@@ -18,7 +18,7 @@
   </g>
   <g class="d-zone d-boundary-functional">
     <rect x="320" y="200" width="936" height="176" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
-    <text x="332" y="220" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">② Per-turn pipeline — runOptimizedPipeline benchmark.js:27</text>
+    <text x="332" y="220" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">② Per-turn pipeline — runOptimizedPipeline benchmark.js</text>
   </g>
   <g class="d-zone d-boundary-external">
     <rect x="1360" y="280" width="296" height="216" rx="8" fill="none" stroke="#1565C0" stroke-width="2" stroke-dasharray="8 4"/>
@@ -30,15 +30,15 @@
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_demo">
     <polyline points="128.0,224 128.0,252" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_cost_latency_v1-a-d-edge-primary)"/>
-    <text x="128.0" y="232.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">runIncremental :124</text>
+    <text x="128.0" y="232.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">runIncremental</text>
   </g>
   <g class="d-edge d-edge-data_in" data-edge="e_conv">
     <polyline points="128.0,336 128.0,308" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_cost_latency_v1-a-d-edge-data_in)"/>
-    <text x="128.0" y="316.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">50 convs :285</text>
+    <text x="128.0" y="316.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">50 convs</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_pipe">
     <polyline points="200,280.0 344,280.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_cost_latency_v1-a-d-edge-primary)"/>
-    <text x="272.0" y="274.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">per user turn :61</text>
+    <text x="272.0" y="274.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">per user turn</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_miss">
     <polyline points="504,280.0 528,280.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_cost_latency_v1-a-d-edge-primary)"/>
@@ -58,126 +58,126 @@
   </g>
   <g class="d-edge d-edge-call" data-edge="e_price">
     <polyline points="976.0,312 976,344 1384,344.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_cost_latency_v1-a-d-edge-call)"/>
-    <text x="1180.0" y="338.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">$ per 1K :69</text>
+    <text x="1180.0" y="338.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">$ per 1K</text>
   </g>
   <g class="d-edge d-edge-data_in" data-edge="e_gen">
     <polyline points="1016.0,312 1016,432 1384,432.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_cost_latency_v1-a-d-edge-data_in)"/>
-    <text x="1200.0" y="426.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">canned body :57</text>
+    <text x="1200.0" y="426.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">canned body</text>
   </g>
   <g class="d-edge d-edge-stop" data-edge="e_hit">
     <polyline points="424.0,248 424,160 1340,160 1340,648 1384,648.0" fill="none" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_cost_latency_v1-a-d-edge-stop)"/>
-    <text x="882.0" y="154.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">HIT ⇒ cost 0 · 2ms · continue :80</text>
+    <text x="882.0" y="154.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">HIT ⇒ cost 0 · 2ms · continue</text>
   </g>
   <g class="d-edge d-edge-artifact" data-edge="e_stats">
     <polyline points="1240,280.0 1316,280 1316,616 1384,616.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_cost_latency_v1-a-d-edge-artifact)"/>
-    <text x="1316.0" y="442.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">adjusted cost + latency :144</text>
+    <text x="1316.0" y="442.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">adjusted cost + latency</text>
   </g>
   <g class="d-edge d-edge-artifact" data-edge="e_roll">
     <polyline points="1508.0,664 1508.0,684" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_cost_latency_v1-a-d-edge-artifact)"/>
-    <text x="1508.0" y="668.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">per-stage :213</text>
+    <text x="1508.0" y="668.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">per-stage</text>
   </g>
   <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
     <rect x="56" y="168" width="144" height="56" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
     <text x="128.0" y="184.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
-    <text x="128.0" y="199.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">CLI · 3 demos :19</text>
-    <text x="128.0" y="214.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">ablation :135-153</text>
+    <text x="128.0" y="199.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">CLI · 3 demos</text>
+    <text x="128.0" y="214.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">ablation</text>
   </g>
   <g class="d-node d-component-entry" data-id="n_bench" data-class="component.entry">
     <rect x="56" y="252" width="144" height="56" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
     <text x="128.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">benchmark.js</text>
-    <text x="128.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runOptimized :27</text>
-    <text x="128.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">CLI main :281</text>
+    <text x="128.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runOptimized</text>
+    <text x="128.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">CLI main</text>
   </g>
   <g class="d-node d-component-mock" data-id="n_convs" data-class="component.mock">
     <rect x="56" y="336" width="144" height="56" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
     <text x="128.0" y="352.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">conversations.json</text>
-    <text x="128.0" y="367.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">50 fixtures :307</text>
+    <text x="128.0" y="367.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">50 fixtures</text>
     <text x="128.0" y="382.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">1–4 user turns each</text>
   </g>
   <g class="d-node d-component-service" data-id="n_cache" data-class="component.service">
     <rect x="344" y="248" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="424.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">SemanticCache</text>
-    <text x="424.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">lookup() :101</text>
+    <text x="424.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">lookup()</text>
     <text x="424.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">cos ≥ 0.60 · TTL 1h</text>
   </g>
   <g class="d-node d-component-service" data-id="n_compress" data-class="component.service">
     <rect x="528" y="248" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="608.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">summarizeHistory</text>
-    <text x="608.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">promptCompress :26</text>
-    <text x="608.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">keep last 2 :35</text>
+    <text x="608.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">promptCompress</text>
+    <text x="608.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">keep last 2</text>
   </g>
   <g class="d-node d-component-service" data-id="n_route" data-class="component.service">
     <rect x="712" y="248" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="792.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">classifyComplexity</text>
-    <text x="792.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">modelRouter :15</text>
-    <text x="792.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">routeToModel :77</text>
+    <text x="792.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">modelRouter</text>
+    <text x="792.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">routeToModel</text>
   </g>
   <g class="d-node d-component-agent" data-id="n_llm" data-class="component.agent">
     <rect x="896" y="248" width="160" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
     <text x="976.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">simulateLLMCall</text>
-    <text x="976.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">baseline.js :35</text>
-    <text x="976.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">tool ctx ×4 :39</text>
+    <text x="976.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">baseline.js</text>
+    <text x="976.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">tool ctx ×4</text>
   </g>
   <g class="d-node d-component-service" data-id="n_term" data-class="component.service">
     <rect x="1080" y="248" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="1160.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">applyEarlyTermination</text>
-    <text x="1160.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">earlyTermination :70</text>
-    <text x="1160.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">perceivedLatency :117</text>
+    <text x="1160.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">earlyTermination</text>
+    <text x="1160.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">perceivedLatency</text>
   </g>
   <g class="d-node d-component-external" data-id="n_pricing" data-class="component.external">
     <rect x="1384" y="312" width="248" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
     <text x="1508.0" y="332.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">MODEL_PRICING</text>
-    <text x="1508.0" y="347.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">baseline.js:18 — 3 tiers</text>
+    <text x="1508.0" y="347.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">baseline.js — 3 tiers</text>
     <text x="1508.0" y="362.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">frontier · mid · cheap</text>
   </g>
   <g class="d-node d-component-mock" data-id="n_gen" data-class="component.mock">
     <rect x="1384" y="400" width="248" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
     <text x="1508.0" y="420.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">generateResponse()</text>
-    <text x="1508.0" y="435.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">baseline.js:89 — 5 canned corpora</text>
+    <text x="1508.0" y="435.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">baseline.js — 5 canned corpora</text>
     <text x="1508.0" y="450.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">category matched, no network</text>
   </g>
   <g class="d-node d-component-artifact" data-id="n_stats" data-class="component.artifact">
     <rect x="1384" y="600" width="248" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
     <text x="1508.0" y="620.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">stats + summary</text>
-    <text x="1508.0" y="635.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">benchmark.js:174-193</text>
+    <text x="1508.0" y="635.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">benchmark.js</text>
     <text x="1508.0" y="650.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">cacheHitRate · terminationRate</text>
   </g>
   <g class="d-node d-component-artifact" data-id="n_table" data-class="component.artifact">
     <rect x="1384" y="684" width="248" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
     <text x="1508.0" y="704.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Comparison table</text>
-    <text x="1508.0" y="719.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">formatComparisonTable :227</text>
-    <text x="1508.0" y="734.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">5 stages :202-206 → stdout</text>
+    <text x="1508.0" y="719.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">formatComparisonTable</text>
+    <text x="1508.0" y="734.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">5 stages → stdout</text>
   </g>
   <g class="d-node d-card-invariant" data-id="card_pipe" data-class="card.invariant">
     <rect x="320" y="448" width="456" height="136" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
-    <text x="328" y="463.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">PER-TURN PIPELINE — complete, in code order · benchmark.js:27</text>
-    <text x="328" y="477.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 cache.lookup :66 — HIT ⇒ cost 0, 2ms, continue :80</text>
-    <text x="328" y="491.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 summarizeHistory :88 — no-op unless &gt;4 msgs :27; prompt swap :33</text>
-    <text x="328" y="505.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 classifyComplexity :95 → routeToModel :96 — tier chosen</text>
-    <text x="328" y="519.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 simulateLLMCall :103 — the only token spend in the loop</text>
-    <text x="328" y="533.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 applyEarlyTermination :113 — cost × (0.5 + 0.5·ratio) :118</text>
-    <text x="328" y="547.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 perceivedLatency :127 — TTFT replaces total latency</text>
-    <text x="328" y="561.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">7 cache.store :131 — every miss is written back</text>
+    <text x="328" y="463.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">PER-TURN PIPELINE — complete, in code order · benchmark.js</text>
+    <text x="328" y="477.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 cache.lookup — HIT ⇒ cost 0, 2ms, continue</text>
+    <text x="328" y="491.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 summarizeHistory — no-op unless &gt;4 msgs; prompt swap</text>
+    <text x="328" y="505.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 classifyComplexity → routeToModel — tier chosen</text>
+    <text x="328" y="519.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 simulateLLMCall — the only token spend in the loop</text>
+    <text x="328" y="533.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 applyEarlyTermination — cost × (0.5 + 0.5·ratio)</text>
+    <text x="328" y="547.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 perceivedLatency — TTFT replaces total latency</text>
+    <text x="328" y="561.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">7 cache.store — every miss is written back</text>
     <text x="328" y="575.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">README&#x27;s ASCII draws compression 1st; the code checks the cache 1st.</text>
   </g>
   <g class="d-node d-card-primitive" data-id="card_tiers" data-class="card.primitive">
     <rect x="808" y="448" width="456" height="136" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
-    <text x="816" y="477.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">MODEL TIERS — all three, complete · MODEL_PRICING baseline.js:18</text>
-    <text x="816" y="491.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">frontier · gpt-4 · $0.03 in / $0.06 out per 1K :19</text>
-    <text x="816" y="505.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">mid · claude-sonnet · $0.003 / $0.015 per 1K :20</text>
-    <text x="816" y="519.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">cheap · gpt-4o-mini · $0.00015 / $0.0006 per 1K :21</text>
-    <text x="816" y="533.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">latency 800/400/200ms base + 15/8/5ms per token :61-62, jitter :66</text>
-    <text x="816" y="547.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">routeToModel :79-81 — simple→cheap, medium→mid, complex→frontier</text>
-    <text x="816" y="561.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">TTFT floor 300/150/100ms feeds perceivedLatency :120</text>
+    <text x="816" y="477.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">MODEL TIERS — all three, complete · MODEL_PRICING baseline.js</text>
+    <text x="816" y="491.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">frontier · gpt-4 · $0.03 in / $0.06 out per 1K</text>
+    <text x="816" y="505.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">mid · claude-sonnet · $0.003 / $0.015 per 1K</text>
+    <text x="816" y="519.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">cheap · gpt-4o-mini · $0.00015 / $0.0006 per 1K</text>
+    <text x="816" y="533.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">latency 800/400/200ms base + 15/8/5ms per token, jitter</text>
+    <text x="816" y="547.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">routeToModel — simple→cheap, medium→mid, complex→frontier</text>
+    <text x="816" y="561.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">TTFT floor 300/150/100ms feeds perceivedLatency</text>
   </g>
   <g class="d-node d-card-failure" data-id="card_qual" data-class="card.failure">
     <rect x="564" y="616" width="456" height="116" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
-    <text x="572" y="635.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">QUALITY LEDGER — every debit, complete · benchmark.js:165-169</text>
-    <text x="572" y="649.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">0.92 start — frontier model + full system prompt :165</text>
-    <text x="572" y="663.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">− 0.03 promptCompression :166</text>
-    <text x="572" y="677.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">− 0.02 modelRouting :167</text>
-    <text x="572" y="691.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">− 0.03 earlyTermination :168</text>
-    <text x="572" y="705.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">− 0.00 semanticCaching — cached replies are frontier replies :169</text>
-    <text x="572" y="719.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">0.84 end — assigned, never measured: scoreQuality :278 is never called.</text>
+    <text x="572" y="635.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">QUALITY LEDGER — every debit, complete · benchmark.js</text>
+    <text x="572" y="649.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">0.92 start — frontier model + full system prompt</text>
+    <text x="572" y="663.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">− 0.03 promptCompression</text>
+    <text x="572" y="677.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">− 0.02 modelRouting</text>
+    <text x="572" y="691.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">− 0.03 earlyTermination</text>
+    <text x="572" y="705.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">− 0.00 semanticCaching — cached replies are frontier replies</text>
+    <text x="572" y="719.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">0.84 end — assigned, never measured: scoreQuality is never called.</text>
   </g>
 </svg>

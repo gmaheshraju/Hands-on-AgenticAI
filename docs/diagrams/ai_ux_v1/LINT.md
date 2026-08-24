@@ -1,6 +1,6 @@
 # Lint — ai_ux_v1
 
-Built by `_harness/build.py` from `spec.py` sha256 `7ad3099f838ac3d9`.
+Built by `_harness/build.py` from `spec.py` sha256 `ce465b0b4417be6c`.
 If that hash does not match the current spec, THIS REPORT IS STALE and its verdict must not be trusted — run `build.py --check` to detect it.
 
 Enforced by construction (cannot fail here): grid quantum, pinned ports, axis-aligned paths, theme-token-only colour, text attributes.

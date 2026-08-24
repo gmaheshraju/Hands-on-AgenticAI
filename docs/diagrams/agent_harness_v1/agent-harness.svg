@@ -77,27 +77,27 @@
     <rect x="64" y="260" width="128" height="60" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
     <text x="128.0" y="278.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
     <text x="128.0" y="293.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">CLI · 3 modes</text>
-    <text x="128.0" y="308.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">:27 :54 :84 :120</text>
+    <text x="128.0" y="308.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"></text>
   </g>
   <g class="d-node d-component-service" data-id="n_harness" data-class="component.service">
     <rect x="352" y="260" width="160" height="60" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="432.0" y="286.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">AgentHarness.run()</text>
-    <text x="432.0" y="301.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">while(true) · :74 :82</text>
+    <text x="432.0" y="301.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">while(true)</text>
   </g>
   <g class="d-node d-component-agent" data-id="n_agent" data-class="component.agent">
     <rect x="624" y="260" width="160" height="60" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
     <text x="704.0" y="286.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">ResearchAgent.step()</text>
-    <text x="704.0" y="301.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3 phases · :101</text>
+    <text x="704.0" y="301.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3 phases</text>
   </g>
   <g class="d-node d-component-service" data-id="n_registry" data-class="component.service">
     <rect x="896" y="260" width="160" height="60" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="976.0" y="286.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">TOOL_REGISTRY</text>
-    <text x="976.0" y="301.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">dispatch · :260</text>
+    <text x="976.0" y="301.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">dispatch</text>
   </g>
   <g class="d-node d-component-service" data-id="n_tracer" data-class="component.service">
     <rect x="896" y="356" width="160" height="56" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="976.0" y="380.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Tracer.log()</text>
-    <text x="976.0" y="395.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">every iteration · :44</text>
+    <text x="976.0" y="395.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">every iteration</text>
   </g>
   <g class="d-node d-component-external" data-id="n_tools" data-class="component.external">
     <rect x="1384" y="260" width="248" height="60" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
@@ -108,48 +108,48 @@
   <g class="d-node d-component-mock" data-id="n_mocks" data-class="component.mock">
     <rect x="1384" y="372" width="248" height="60" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
     <text x="1508.0" y="390.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">MOCK corpora</text>
-    <text x="1508.0" y="405.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">MOCK_SEARCH_RESULTS :17</text>
-    <text x="1508.0" y="420.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">MOCK_PAGES :55 — no network</text>
+    <text x="1508.0" y="405.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">MOCK_SEARCH_RESULTS</text>
+    <text x="1508.0" y="420.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">MOCK_PAGES — no network</text>
   </g>
   <g class="d-node d-component-artifact" data-id="n_trace" data-class="component.artifact">
     <rect x="1384" y="620" width="248" height="48" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
     <text x="1508.0" y="640.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">trace-&lt;runId&gt;.jsonl</text>
-    <text x="1508.0" y="655.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">tracer.js:20</text>
+    <text x="1508.0" y="655.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">tracer.js</text>
   </g>
   <g class="d-node d-component-artifact" data-id="n_report" data-class="component.artifact">
     <rect x="1384" y="692" width="248" height="48" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
     <text x="1508.0" y="712.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">report-&lt;runId&gt;.md</text>
-    <text x="1508.0" y="727.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">demo.js:66-67</text>
+    <text x="1508.0" y="727.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">demo.js</text>
   </g>
   <g class="d-node d-component-service" data-id="n_pm" data-class="component.service">
     <rect x="352" y="512" width="160" height="56" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="432.0" y="536.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">postmortem()</text>
-    <text x="432.0" y="551.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">harness.js:183</text>
+    <text x="432.0" y="551.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">harness.js</text>
   </g>
   <g class="d-node d-component-service" data-id="n_dx" data-class="component.service">
     <rect x="560" y="512" width="176" height="56" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="648.0" y="536.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">diagnosePrimitives()</text>
-    <text x="648.0" y="551.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">diagnosis.js:50</text>
+    <text x="648.0" y="551.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">diagnosis.js</text>
   </g>
   <g class="d-node d-card-invariant" data-id="card_gates" data-class="card.invariant">
     <rect x="832" y="496" width="424" height="116" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="840" y="529.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">STOP CONDITIONS — complete, in code order</text>
-    <text x="840" y="543.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 ITERATION_CAP :86 — checked BEFORE the step</text>
-    <text x="840" y="557.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 AGENT_DONE :126 · 3 COST_CAP :132 · 4 CONVERGENCE :138</text>
-    <text x="840" y="571.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">counter resets on a productive iteration :144</text>
-    <text x="840" y="585.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">cost model $3 / $15 per 1M tokens :20</text>
+    <text x="840" y="543.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 ITERATION_CAP — checked BEFORE the step</text>
+    <text x="840" y="557.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 AGENT_DONE · 3 COST_CAP · 4 CONVERGENCE</text>
+    <text x="840" y="571.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">counter resets on a productive iteration</text>
+    <text x="840" y="585.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">cost model $3 / $15 per 1M tokens</text>
   </g>
   <g class="d-node d-card-failure" data-id="card_fail" data-class="card.failure">
     <rect x="832" y="624" width="424" height="104" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
-    <text x="840" y="658.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">POSTMORTEM TAXONOMY — 8 patterns :170-177</text>
+    <text x="840" y="658.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">POSTMORTEM TAXONOMY — 8 patterns</text>
     <text x="840" y="672.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">context_miss · bad_tool_result · wasteful_action</text>
     <text x="840" y="686.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">hallucinated_tool_loop · convergence_stall · cost_overrun</text>
     <text x="840" y="700.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">iteration_cap · tool_imbalance</text>
   </g>
   <g class="d-node d-card-primitive" data-id="card_prim" data-class="card.primitive">
     <rect x="352" y="624" width="424" height="104" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
-    <text x="360" y="665.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">10 harness primitives, scored 0.0–1.0 · diagnosis.js:5</text>
+    <text x="360" y="665.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">10 harness primitives, scored 0.0–1.0 · diagnosis.js</text>
     <text x="360" y="679.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Instructions · Context Delivery · Context Management</text>
-    <text x="360" y="693.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Tool Interface · Execution Environment · Durable State … :9-14</text>
+    <text x="360" y="693.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Tool Interface · Execution Environment · Durable State …</text>
   </g>
 </svg>

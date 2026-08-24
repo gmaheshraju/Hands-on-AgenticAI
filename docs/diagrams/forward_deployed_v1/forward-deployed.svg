@@ -25,167 +25,167 @@
   </g>
   <g class="d-zone d-boundary-observability">
     <rect x="1360" y="232" width="296" height="300" rx="8" fill="none" stroke="#E7157B" stroke-width="1" stroke-dasharray="8 4"/>
-    <text x="1372" y="252" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">④ Outputs &amp; pilot surface (HTTP :3014)</text>
+    <text x="1372" y="252" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">④ Outputs &amp; pilot surface (HTTP)</text>
   </g>
   <g class="d-edge d-edge-call" data-edge="e_cli_fs">
     <polyline points="112.0,188 112.0,296" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_forward_deployed_v1-a-d-edge-call)"/>
-    <text x="112.0" y="236.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">new FilesystemConnector :40</text>
+    <text x="112.0" y="236.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">new FilesystemConnector</text>
   </g>
   <g class="d-edge d-edge-call" data-edge="e_cli_api">
     <polyline points="208.0,188 296,188 296,416 256,416.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_forward_deployed_v1-a-d-edge-call)"/>
-    <text x="296.0" y="296.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">new ApiConnector :46</text>
+    <text x="296.0" y="296.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">new ApiConnector</text>
   </g>
   <g class="d-edge d-edge-data_in" data-edge="e_fs_base">
     <polyline points="64,328.0 48,328 48,536 64,536.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_forward_deployed_v1-a-d-edge-data_in)"/>
-    <text x="48.0" y="426.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">extends :12</text>
+    <text x="48.0" y="426.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">extends</text>
   </g>
   <g class="d-edge d-edge-data_in" data-edge="e_api_base">
     <polyline points="112.0,464 112.0,504" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_forward_deployed_v1-a-d-edge-data_in)"/>
-    <text x="112.0" y="478.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">extends :60</text>
+    <text x="112.0" y="478.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">extends</text>
   </g>
   <g class="d-edge d-edge-data_in" data-edge="e_fs_proc">
     <polyline points="256,328.0 328,328 328,268 408,268.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_forward_deployed_v1-a-d-edge-data_in)"/>
-    <text x="368.0" y="262.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">processAll(fs) :60</text>
+    <text x="368.0" y="262.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">processAll(fs)</text>
   </g>
   <g class="d-edge d-edge-data_in" data-edge="e_api_proc">
     <polyline points="256,448.0 352,448 352,300 408,300.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_forward_deployed_v1-a-d-edge-data_in)"/>
-    <text x="352.0" y="368.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">processAll(api) :64</text>
+    <text x="352.0" y="368.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">processAll(api)</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_proc_adapt">
     <polyline points="584,284.0 624,284.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_forward_deployed_v1-a-d-edge-primary)"/>
-    <text x="604.0" y="278.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">allDocs → adapt() :86</text>
+    <text x="604.0" y="278.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">allDocs → adapt()</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_proc_eval">
     <polyline points="496.0,316 496,336 884,336 884.0,316" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_forward_deployed_v1-a-d-edge-primary)"/>
-    <text x="690.0" y="330.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">same allDocs :111</text>
+    <text x="690.0" y="330.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">same allDocs</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_proc_check">
     <polyline points="452.0,316 452,384 1188,384 1188.0,316" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_forward_deployed_v1-a-d-edge-primary)"/>
-    <text x="820.0" y="378.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">processingStats :140</text>
+    <text x="820.0" y="378.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">processingStats</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_adapt_check">
     <polyline points="756.0,316 756,360 1100,360 1100.0,316" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_forward_deployed_v1-a-d-edge-primary)"/>
-    <text x="928.0" y="354.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">domainStats + systemPrompt :141 :142</text>
+    <text x="928.0" y="354.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">domainStats + systemPrompt</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_eval_check">
     <polyline points="1016,284.0 1056,284.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_forward_deployed_v1-a-d-edge-primary)"/>
-    <text x="1036.0" y="278.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">evalStats :143</text>
+    <text x="1036.0" y="278.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">evalStats</text>
   </g>
   <g class="d-edge d-edge-artifact" data-edge="e_eval_file">
     <polyline points="972.0,252 972,216 1320,216 1320,316 1384,316.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_forward_deployed_v1-a-d-edge-artifact)"/>
-    <text x="1146.0" y="210.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">export() writes JSON :119 :218</text>
+    <text x="1146.0" y="210.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">export() writes JSON</text>
   </g>
   <g class="d-edge d-edge-data_in" data-edge="e_file_check">
     <polyline points="1384,284.0 1344,284 1344,240 1188,240 1188.0,252" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_forward_deployed_v1-a-d-edge-data_in)"/>
-    <text x="1266.0" y="234.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">check 7 re-reads disk :119</text>
+    <text x="1266.0" y="234.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">check 7 re-reads disk</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_check_dash">
     <polyline points="1232,284.0 1296,284 1296,388 1384,388.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_forward_deployed_v1-a-d-edge-primary)"/>
-    <text x="1296.0" y="330.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">checklistReport → dashboardState :187 :205</text>
+    <text x="1296.0" y="330.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">checklistReport → dashboardState</text>
   </g>
   <g class="d-edge d-edge-artifact" data-edge="e_dash_html">
     <polyline points="1508.0,420 1508.0,452" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_forward_deployed_v1-a-d-edge-artifact)"/>
-    <text x="1508.0" y="430.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">GET / reads it per request :62</text>
+    <text x="1508.0" y="430.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">GET / reads it per request</text>
   </g>
   <g class="d-node d-component-entry" data-id="n_cli" data-class="component.entry">
     <rect x="64" y="124" width="192" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
     <text x="160.0" y="144.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
     <text x="160.0" y="159.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">6-step pipeline</text>
-    <text x="160.0" y="174.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">run() :30</text>
+    <text x="160.0" y="174.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">run()</text>
   </g>
   <g class="d-node d-component-external" data-id="n_fs" data-class="component.external">
     <rect x="64" y="296" width="192" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
-    <text x="160.0" y="316.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">FilesystemConnector :12</text>
+    <text x="160.0" y="316.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">FilesystemConnector</text>
     <text x="160.0" y="331.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">reads data/sample-docs</text>
-    <text x="160.0" y="346.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">txt md json pdf docx :17</text>
+    <text x="160.0" y="346.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">txt md json pdf docx</text>
   </g>
   <g class="d-node d-component-mock" data-id="n_api" data-class="component.mock">
     <rect x="64" y="400" width="192" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
-    <text x="160.0" y="420.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">ApiConnector :60</text>
-    <text x="160.0" y="435.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">MOCK_API_DOCS :17 — n=5</text>
+    <text x="160.0" y="420.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">ApiConnector</text>
+    <text x="160.0" y="435.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">MOCK_API_DOCS — n=5</text>
     <text x="160.0" y="450.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">paginated, no network</text>
   </g>
   <g class="d-node d-component-service" data-id="n_base" data-class="component.service">
     <rect x="64" y="504" width="192" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
-    <text x="160.0" y="524.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">BaseConnector :8</text>
+    <text x="160.0" y="524.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">BaseConnector</text>
     <text x="160.0" y="539.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">4-method contract</text>
-    <text x="160.0" y="554.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">healthCheck default :44</text>
+    <text x="160.0" y="554.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">healthCheck default</text>
   </g>
   <g class="d-node d-component-service" data-id="n_proc" data-class="component.service">
     <rect x="408" y="252" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="496.0" y="272.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">DocumentProcessor</text>
-    <text x="496.0" y="287.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">processAll() :88</text>
+    <text x="496.0" y="287.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">processAll()</text>
     <text x="496.0" y="302.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">extract + score quality</text>
   </g>
   <g class="d-node d-component-agent" data-id="n_adapt" data-class="component.agent">
     <rect x="624" y="252" width="176" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
     <text x="712.0" y="272.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">DomainAdapter</text>
-    <text x="712.0" y="287.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">adapt() :68</text>
+    <text x="712.0" y="287.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">adapt()</text>
     <text x="712.0" y="302.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">vocab·fewshot·prompt</text>
   </g>
   <g class="d-node d-component-agent" data-id="n_eval" data-class="component.agent">
     <rect x="840" y="252" width="176" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
     <text x="928.0" y="265.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">EvalBuilder</text>
-    <text x="928.0" y="280.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">generateCandidates :32</text>
-    <text x="928.0" y="295.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">acceptAll :186</text>
-    <text x="928.0" y="310.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">export() :195</text>
+    <text x="928.0" y="280.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">generateCandidates</text>
+    <text x="928.0" y="295.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">acceptAll</text>
+    <text x="928.0" y="310.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">export()</text>
   </g>
   <g class="d-node d-component-service" data-id="n_check" data-class="component.service">
     <rect x="1056" y="252" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="1144.0" y="272.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">DeploymentChecklist</text>
-    <text x="1144.0" y="287.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">run() :34 — 9 checks</text>
-    <text x="1144.0" y="302.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">ready = 0 critical :180</text>
+    <text x="1144.0" y="287.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">run() — 9 checks</text>
+    <text x="1144.0" y="302.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">ready = 0 critical</text>
   </g>
   <g class="d-node d-component-artifact" data-id="n_evalfile" data-class="component.artifact">
     <rect x="1384" y="268" width="248" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
     <text x="1508.0" y="288.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">data/eval-set.json</text>
-    <text x="1508.0" y="303.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">written by export() :218</text>
-    <text x="1508.0" y="318.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">re-read by check 7 :119</text>
+    <text x="1508.0" y="303.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">written by export()</text>
+    <text x="1508.0" y="318.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">re-read by check 7</text>
   </g>
   <g class="d-node d-component-service" data-id="n_dash" data-class="component.service">
     <rect x="1384" y="356" width="248" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
-    <text x="1508.0" y="369.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">createDashboardServer :54</text>
-    <text x="1508.0" y="384.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">express · PORT || 3014 :204</text>
+    <text x="1508.0" y="369.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">createDashboardServer</text>
+    <text x="1508.0" y="384.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">express · PORT || 3014</text>
     <text x="1508.0" y="399.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">GET / · GET+POST /api/state</text>
     <text x="1508.0" y="414.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">POST /api/issues · /api/activity</text>
   </g>
   <g class="d-node d-component-artifact" data-id="n_html" data-class="component.artifact">
     <rect x="1384" y="452" width="248" height="56" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
     <text x="1508.0" y="476.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">public/dashboard.html</text>
-    <text x="1508.0" y="491.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">served by GET / :62 :64</text>
+    <text x="1508.0" y="491.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">served by GET /</text>
   </g>
   <g class="d-node d-card-failure" data-id="card_quality" data-class="card.failure">
     <rect x="376" y="428" width="424" height="104" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
-    <text x="384" y="441.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">EXTRACTION QUALITY GATE — _assessQuality, code order :186</text>
-    <text x="384" y="455.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">charCount == 0 → status EMPTY, score 0, hard stop :192</text>
-    <text x="384" y="469.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">wordCount &lt; 10 → &#x27;Very short document&#x27; :197</text>
-    <text x="384" y="483.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">alphaRatio &lt; 0.3 → &#x27;Possible garbage output&#x27; :203</text>
-    <text x="384" y="497.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">text contains U+FFFD → &#x27;possible encoding issue&#x27; :208</text>
-    <text x="384" y="511.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">charCount &lt; 20% of file size → &#x27;may be incomplete&#x27; :213</text>
-    <text x="384" y="525.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">score = 1.0 - 0.15 x warnings, clamped :219 :220; OK / WARNING :224</text>
+    <text x="384" y="441.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">EXTRACTION QUALITY GATE — _assessQuality, code order</text>
+    <text x="384" y="455.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">charCount == 0 → status EMPTY, score 0, hard stop</text>
+    <text x="384" y="469.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">wordCount &lt; 10 → &#x27;Very short document&#x27;</text>
+    <text x="384" y="483.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">alphaRatio &lt; 0.3 → &#x27;Possible garbage output&#x27;</text>
+    <text x="384" y="497.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">text contains U+FFFD → &#x27;possible encoding issue&#x27;</text>
+    <text x="384" y="511.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">charCount &lt; 20% of file size → &#x27;may be incomplete&#x27;</text>
+    <text x="384" y="525.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">score = 1.0 - 0.15 x warnings, clamped; OK / WARNING</text>
   </g>
   <g class="d-node d-card-primitive" data-id="card_qtypes" data-class="card.primitive">
     <rect x="376" y="560" width="424" height="104" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
     <text x="384" y="573.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">EVAL CANDIDATES — all 5 types, code order, evalBuilder.js</text>
-    <text x="384" y="587.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 factual · easy — dollar amounts, first 2 per doc :42</text>
-    <text x="384" y="601.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 comprehension · medium — numbered sections, first 2 :56</text>
-    <text x="384" y="615.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 analytical · hard — risk terms, needs &gt;= 2 :73</text>
-    <text x="384" y="629.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 extraction · easy — timeframes, needs &gt;= 2 :87</text>
-    <text x="384" y="643.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 application · medium — &#x27;shall&#x27; clauses, needs &gt;= 2 :100</text>
-    <text x="384" y="657.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">docs with quality FAILED are skipped before all five :37</text>
+    <text x="384" y="587.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 factual · easy — dollar amounts, first 2 per doc</text>
+    <text x="384" y="601.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 comprehension · medium — numbered sections, first 2</text>
+    <text x="384" y="615.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 analytical · hard — risk terms, needs &gt;= 2</text>
+    <text x="384" y="629.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 extraction · easy — timeframes, needs &gt;= 2</text>
+    <text x="384" y="643.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 application · medium — &#x27;shall&#x27; clauses, needs &gt;= 2</text>
+    <text x="384" y="657.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">docs with quality FAILED are skipped before all five</text>
   </g>
   <g class="d-node d-card-invariant" data-id="card_checks" data-class="card.invariant">
     <rect x="840" y="428" width="424" height="164" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
-    <text x="848" y="443.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">DEPLOYMENT READINESS — all 9 checks, code order :34-:168</text>
-    <text x="848" y="457.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 connector configured + tested — critical :38</text>
-    <text x="848" y="471.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 documents ingested &gt;=5, failed &lt;=2 — critical :52</text>
-    <text x="848" y="485.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 extraction quality &gt;= 0.7 — warning :65</text>
-    <text x="848" y="499.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 domain vocabulary &gt;= 10 terms — critical :79</text>
-    <text x="848" y="513.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 system prompt &gt; 500 chars — critical :92</text>
-    <text x="848" y="527.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 eval set &gt;= 15 accepted — critical :105</text>
-    <text x="848" y="541.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">7 eval set file on disk, parseable — warning :122</text>
-    <text x="848" y="555.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">8 pilot timeline days remaining &gt; 0 — warning :146</text>
-    <text x="848" y="569.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">9 few-shot examples &gt;= 5 — warning :159</text>
-    <text x="848" y="583.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">ready = (critical failures == 0) :180 — warnings never block</text>
+    <text x="848" y="443.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">DEPLOYMENT READINESS — all 9 checks, code order-</text>
+    <text x="848" y="457.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 connector configured + tested — critical</text>
+    <text x="848" y="471.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 documents ingested &gt;=5, failed &lt;=2 — critical</text>
+    <text x="848" y="485.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 extraction quality &gt;= 0.7 — warning</text>
+    <text x="848" y="499.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 domain vocabulary &gt;= 10 terms — critical</text>
+    <text x="848" y="513.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 system prompt &gt; 500 chars — critical</text>
+    <text x="848" y="527.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 eval set &gt;= 15 accepted — critical</text>
+    <text x="848" y="541.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">7 eval set file on disk, parseable — warning</text>
+    <text x="848" y="555.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">8 pilot timeline days remaining &gt; 0 — warning</text>
+    <text x="848" y="569.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">9 few-shot examples &gt;= 5 — warning</text>
+    <text x="848" y="583.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">ready = (critical failures == 0) — warnings never block</text>
   </g>
 </svg>

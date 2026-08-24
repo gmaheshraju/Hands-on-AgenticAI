@@ -1,53 +1,53 @@
 """Spec — 02-agent-memory (Personal CRM Agent, cross-session memory), L1 architecture."""
 
 META = {
-    "id": "hoa_agent_memory_v1",
-    "name": "02 Agent Memory — Personal CRM Agent",
-    "desc": "A CLI agent that logs every turn as an episodic SQLite row, consolidates episodes into "
-            "semantic facts with contradiction and decay hygiene, and answers queries through hybrid "
-            "retrieval — all state persisted in one on-disk SQLite file so memory survives restarts.",
-    "theme": "hoa-default.json",
-    "drawio": "HOA_AgentMemory_v1.drawio", "svg": "agent-memory.svg",
-    "w": 1700, "h": 1000, "svg_h": 800,
+ "id": "hoa_agent_memory_v1",
+ "name": "02 Agent Memory — Personal CRM Agent",
+ "desc": "A CLI agent that logs every turn as an episodic SQLite row, consolidates episodes into "
+ "semantic facts with contradiction and decay hygiene, and answers queries through hybrid "
+ "retrieval — all state persisted in one on-disk SQLite file so memory survives restarts.",
+ "theme": "hoa-default.json",
+ "drawio": "HOA_AgentMemory_v1.drawio", "svg": "agent-memory.svg",
+ "w": 1700, "h": 1000, "svg_h": 800,
 }
 
 ZONES = [
  ("z_entry", "③ Entry points", "boundary.datasource", 40, 200, 240, 292),
- ("z_proc",  "① CRM agent process (Node ESM)", "boundary.primary", 344, 96, 936, 680),
- ("z_flow",  "Turn → consolidate → retrieve (one continuous flow)", "boundary.functional", 376, 196, 872, 200),
- ("z_ext",   "② External driver", "boundary.external", 1344, 200, 296, 168),
- ("z_out",   "④ Durable state", "boundary.observability", 1344, 432, 296, 180),
+ ("z_proc", "① CRM agent process (Node ESM)", "boundary.primary", 344, 96, 936, 680),
+ ("z_flow", "Turn → consolidate → retrieve (one continuous flow)", "boundary.functional", 376, 196, 872, 200),
+ ("z_ext", "② External driver", "boundary.external", 1344, 200, 296, 168),
+ ("z_out", "④ Durable state", "boundary.observability", 1344, 432, 296, 180),
 ]
 
 NODES = [
- ("n_cli","component.entry","<b>cli.js:18</b><br>interactive readline", 64, 236, 160, 64),
- ("n_demo","component.entry","<b>demo.js:37</b><br>4-session demo", 64, 380, 160, 64),
- ("n_agent","component.service","<b>CRMAgent</b><br>classify · route · :23", 408, 252, 176, 64),
- ("n_consol","component.service","<b>Consolidation</b><br>consolidation.js:35", 664, 252, 176, 64),
- ("n_retr","component.service","<b>Retrieval</b><br>hybrid FTS · :28", 936, 252, 176, 64),
- ("n_memory","component.service","<b>MemoryStore</b><br>3 memory types · :29", 664, 400, 176, 64),
- ("n_mockllm","component.mock","<b>Mock extractor</b><br>regex fallback · :95", 408, 500, 176, 56),
- ("n_sqlite","component.external","<b>better-sqlite3</b><br>sync driver · package.json:13", 1368, 248, 248, 64),
- ("n_dbfile","component.artifact","<b>crm_memory.db</b><br>all three memory types<br>memory.js:27", 1368, 484, 248, 72),
+ ("n_cli","component.entry","<b>cli.js</b><br>interactive readline", 64, 236, 160, 64),
+ ("n_demo","component.entry","<b>demo.js</b><br>4-session demo", 64, 380, 160, 64),
+ ("n_agent","component.service","<b>CRMAgent</b><br>classify · route", 408, 252, 176, 64),
+ ("n_consol","component.service","<b>Consolidation</b><br>consolidation.js", 664, 252, 176, 64),
+ ("n_retr","component.service","<b>Retrieval</b><br>hybrid FTS", 936, 252, 176, 64),
+ ("n_memory","component.service","<b>MemoryStore</b><br>3 memory types", 664, 400, 176, 64),
+ ("n_mockllm","component.mock","<b>Mock extractor</b><br>regex fallback", 408, 500, 176, 56),
+ ("n_sqlite","component.external","<b>better-sqlite3</b><br>sync driver · package.json", 1368, 248, 248, 64),
+ ("n_dbfile","component.artifact","<b>crm_memory.db</b><br>all three memory types<br>memory.js", 1368, 484, 248, 72),
  ("card_gate","card.invariant",
-  "<b>CONSOLIDATION GATE — when it fires · :37-50</b><br>"
-  "1 unconsolidatedCount = countUnconsolidated()<br>"
-  "2 urgent = count &gt; 0 AND raw_input matches<br>"
-  "3 NOT urgent AND count &lt; threshold → return ran:false<br>"
-  "4 else gather (urgent ? all : threshold, oldest first)", 408, 596, 456, 116),
+ "<b>CONSOLIDATION GATE — when it fires</b><br>"
+ "1 unconsolidatedCount = countUnconsolidated()<br>"
+ "2 urgent = count &gt; 0 AND raw_input matches<br>"
+ "3 NOT urgent AND count &lt; threshold → return ran:false<br>"
+ "4 else gather (urgent ? all : threshold, oldest first)", 408, 596, 456, 116),
  ("card_fact","card.invariant",
-  "<b>addFact — create vs update · :157-237</b><br>"
-  "1 query existing row: subject+predicate<br>"
-  "2 none → INSERT (created)<br>"
-  "3 exists → detectContradiction, merge sources<br>"
-  "4 contradiction → halve existing confidence in place<br>"
-  "5 else UPDATE object · confidence · sources", 904, 400, 344, 148),
+ "<b>addFact — create vs update</b><br>"
+ "1 query existing row: subject+predicate<br>"
+ "2 none → INSERT (created)<br>"
+ "3 exists → detectContradiction, merge sources<br>"
+ "4 contradiction → halve existing confidence in place<br>"
+ "5 else UPDATE object · confidence · sources", 904, 400, 344, 148),
  ("card_decay","card.invariant",
-  "<b>decayMemories — per-fact outcome · :268-317</b><br>"
-  "ageDays ≤ 0 → untouched<br>"
-  "else confidence × 2^(−ageDays / halfLife)<br>"
-  "&lt; archiveThreshold (0.1) → archived + stale<br>"
-  "else Δ &gt; 0.001 → updated, otherwise untouched", 904, 604, 344, 128),
+ "<b>decayMemories — per-fact outcome</b><br>"
+ "ageDays ≤ 0 → untouched<br>"
+ "else confidence × 2^(−ageDays / halfLife)<br>"
+ "&lt; archiveThreshold (0.1) → archived + stale<br>"
+ "else Δ &gt; 0.001 → updated, otherwise untouched", 904, 604, 344, 128),
 ]
 
 EDGES = [

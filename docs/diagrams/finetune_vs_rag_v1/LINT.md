@@ -1,6 +1,6 @@
 # Lint — finetune_vs_rag_v1
 
-Built by `_harness/build.py` from `spec.py` sha256 `d00d6dff17112d2d`.
+Built by `_harness/build.py` from `spec.py` sha256 `9fa3634fc3702c42`.
 If that hash does not match the current spec, THIS REPORT IS STALE and its verdict must not be trusted — run `build.py --check` to detect it.
 
 Enforced by construction (cannot fail here): grid quantum, pinned ports, axis-aligned paths, theme-token-only colour, text attributes.

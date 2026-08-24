@@ -25,7 +25,7 @@
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_demo">
     <polyline points="240,296.0 344,296.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_compliance_audit_v1-a-d-edge-primary)"/>
-    <text x="292.0" y="290.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">5 scenarios :256</text>
+    <text x="292.0" y="290.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">5 scenarios</text>
   </g>
   <g class="d-edge d-edge-data_in" data-edge="e_events">
     <polyline points="240,376.0 344,376.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_compliance_audit_v1-a-d-edge-data_in)"/>
@@ -33,121 +33,121 @@
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_log">
     <polyline points="520,296.0 592,296.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_compliance_audit_v1-a-d-edge-primary)"/>
-    <text x="556.0" y="290.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">logEvent() :55</text>
+    <text x="556.0" y="290.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">logEvent()</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_check">
     <polyline points="768,296.0 832,296.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_compliance_audit_v1-a-d-edge-primary)"/>
-    <text x="800.0" y="290.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">check(logger) :336</text>
+    <text x="800.0" y="290.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">check(logger)</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_report">
     <polyline points="1008,296.0 1072,296.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_compliance_audit_v1-a-d-edge-primary)"/>
-    <text x="1040.0" y="290.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">results :83</text>
+    <text x="1040.0" y="290.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">results</text>
   </g>
   <g class="d-edge d-edge-artifact" data-edge="e_out">
     <polyline points="1248,296.0 1384,296.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_compliance_audit_v1-a-d-edge-artifact)"/>
-    <text x="1316.0" y="290.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">generate() :12</text>
+    <text x="1316.0" y="290.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">generate()</text>
   </g>
   <g class="d-edge d-edge-call" data-edge="e_replay">
     <polyline points="520,376.0 556,376 556,440 592,440.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_compliance_audit_v1-a-d-edge-call)"/>
-    <text x="556.0" y="402.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">replayDecision :62</text>
+    <text x="556.0" y="402.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">replayDecision</text>
   </g>
   <g class="d-edge d-edge-data_in" data-edge="e_reads">
     <polyline points="680.0,328 680.0,408" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_compliance_audit_v1-a-d-edge-data_in)"/>
-    <text x="680.0" y="362.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">reads chain :32</text>
+    <text x="680.0" y="362.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">reads chain</text>
   </g>
   <g class="d-edge d-edge-artifact" data-edge="e_evid">
     <polyline points="768,440.0 1508,440 1508.0,328" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_compliance_audit_v1-a-d-edge-artifact)"/>
-    <text x="1138.0" y="434.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">audit summary :144</text>
+    <text x="1138.0" y="434.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">audit summary</text>
   </g>
   <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
     <rect x="64" y="264" width="176" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
     <text x="152.0" y="284.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
     <text x="152.0" y="299.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">driver · 5 scenarios</text>
-    <text x="152.0" y="314.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">:251</text>
+    <text x="152.0" y="314.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"></text>
   </g>
   <g class="d-node d-component-mock" data-id="n_agents" data-class="component.mock">
     <rect x="64" y="344" width="176" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
     <text x="152.0" y="364.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Simulated agents</text>
     <text x="152.0" y="379.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">5 event producers</text>
-    <text x="152.0" y="394.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">(labels, not code) :32</text>
+    <text x="152.0" y="394.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">(labels, not code)</text>
   </g>
   <g class="d-node d-component-service" data-id="n_harness" data-class="component.service">
     <rect x="344" y="256" width="176" height="160" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="432.0" y="317.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">AuditHarness</text>
-    <text x="432.0" y="332.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">orchestrator :13</text>
+    <text x="432.0" y="332.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">orchestrator</text>
     <text x="432.0" y="347.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">4 public methods</text>
-    <text x="432.0" y="362.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">logEvent→…→report :55</text>
+    <text x="432.0" y="362.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">logEvent→…→report</text>
   </g>
   <g class="d-node d-component-service" data-id="n_logger" data-class="component.service">
     <rect x="592" y="264" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="680.0" y="284.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">EventLogger</text>
     <text x="680.0" y="299.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">SHA-256 hash chain</text>
-    <text x="680.0" y="314.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">append-only store :47</text>
+    <text x="680.0" y="314.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">append-only store</text>
   </g>
   <g class="d-node d-component-service" data-id="n_framework" data-class="component.service">
     <rect x="832" y="264" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="920.0" y="284.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">ComplianceFramework</text>
     <text x="920.0" y="299.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">12 rules · 3 regs</text>
-    <text x="920.0" y="314.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">check + risk :336</text>
+    <text x="920.0" y="314.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">check + risk</text>
   </g>
   <g class="d-node d-component-service" data-id="n_reporter" data-class="component.service">
     <rect x="1072" y="264" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="1160.0" y="284.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">ComplianceReporter</text>
     <text x="1160.0" y="299.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">Markdown report</text>
-    <text x="1160.0" y="314.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">generate() :12</text>
+    <text x="1160.0" y="314.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">generate()</text>
   </g>
   <g class="d-node d-component-service" data-id="n_replay" data-class="component.service">
     <rect x="592" y="408" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="680.0" y="428.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">DecisionReplay</text>
     <text x="680.0" y="443.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">reconstruct + replay</text>
-    <text x="680.0" y="458.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">drift detect :94</text>
+    <text x="680.0" y="458.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">drift detect</text>
   </g>
   <g class="d-node d-component-artifact" data-id="n_report" data-class="component.artifact">
     <rect x="1384" y="264" width="248" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
     <text x="1508.0" y="284.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">stdout output</text>
     <text x="1508.0" y="299.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">Markdown report + export</text>
-    <text x="1508.0" y="314.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">+ replay summary :186</text>
+    <text x="1508.0" y="314.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">+ replay summary</text>
   </g>
   <g class="d-node d-card-invariant" data-id="card_chain" data-class="card.invariant">
     <rect x="344" y="592" width="304" height="176" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="352" y="620.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">TAMPER-EVIDENT HASH CHAIN — eventLogger.js</text>
     <text x="352" y="634.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">11 entry fields, in code order:</text>
-    <text x="352" y="648.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> id·timestamp·agentId·action :73</text>
-    <text x="352" y="662.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> input·output·decision·rationale :77</text>
-    <text x="352" y="676.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> metadata·previousHash·hash :81-85</text>
-    <text x="352" y="690.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">genesis prevHash = 64×&#x27;0&#x27; :70</text>
-    <text x="352" y="704.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">hash = SHA-256(prevHash + entry) :40</text>
-    <text x="352" y="718.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">entries Object.freeze on append :87</text>
-    <text x="352" y="732.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">verifyChain → brokenAt index :135</text>
-    <text x="352" y="746.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">redact 12 keys before hashing :33</text>
+    <text x="352" y="648.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> id·timestamp·agentId·action</text>
+    <text x="352" y="662.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> input·output·decision·rationale</text>
+    <text x="352" y="676.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> metadata·previousHash·hash</text>
+    <text x="352" y="690.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">genesis prevHash = 64×&#x27;0&#x27;</text>
+    <text x="352" y="704.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">hash = SHA-256(prevHash + entry)</text>
+    <text x="352" y="718.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">entries Object.freeze on append</text>
+    <text x="352" y="732.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">verifyChain → brokenAt index</text>
+    <text x="352" y="746.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">redact 12 keys before hashing</text>
   </g>
   <g class="d-node d-card-invariant" data-id="card_rules" data-class="card.invariant">
     <rect x="664" y="592" width="304" height="176" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="672" y="606.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">12 RULES · 3 REGS — complianceFramework.js</text>
-    <text x="672" y="620.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">EU AI Act :10 — 4 rules</text>
-    <text x="672" y="634.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> explainability H:12 · audit-trail C:31</text>
-    <text x="672" y="648.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> human-review H:51 · protected C:76</text>
-    <text x="672" y="662.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">SOC2 :105 — 4 rules</text>
-    <text x="672" y="676.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> agent-id H:107 · immutable-log C:126</text>
-    <text x="672" y="690.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> redaction C:144 · config-change M:174</text>
-    <text x="672" y="704.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">GDPR :196 — 4 rules</text>
-    <text x="672" y="718.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> data-min H:198 · purpose M:229</text>
-    <text x="672" y="732.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> erasure H:248 · retention M:269</text>
-    <text x="672" y="746.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">check → score = passed/total :369</text>
+    <text x="672" y="620.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">EU AI Act — 4 rules</text>
+    <text x="672" y="634.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> explainability H · audit-trail C</text>
+    <text x="672" y="648.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> human-review H · protected C</text>
+    <text x="672" y="662.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">SOC2 — 4 rules</text>
+    <text x="672" y="676.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> agent-id H · immutable-log C</text>
+    <text x="672" y="690.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> redaction C · config-change M</text>
+    <text x="672" y="704.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">GDPR — 4 rules</text>
+    <text x="672" y="718.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> data-min H · purpose M</text>
+    <text x="672" y="732.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> erasure H · retention M</text>
+    <text x="672" y="746.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">check → score = passed/total</text>
     <text x="672" y="760.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">H high · C critical · M medium</text>
   </g>
   <g class="d-node d-card-failure" data-id="card_risk" data-class="card.failure">
     <rect x="984" y="592" width="304" height="176" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
-    <text x="992" y="613.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">RISK ESCALATION — complianceFramework.js:387</text>
+    <text x="992" y="613.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">RISK ESCALATION — complianceFramework.js</text>
     <text x="992" y="627.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">overallRisk, first match wins:</text>
-    <text x="992" y="641.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> critical if critical &gt; 0 :388</text>
-    <text x="992" y="655.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> high if high &gt; 1 :389</text>
-    <text x="992" y="669.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> medium if high&gt;0 or medium&gt;1 :390</text>
-    <text x="992" y="683.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> low otherwise :387</text>
-    <text x="992" y="697.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">fail tally by severity :383</text>
-    <text x="992" y="711.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">critical → criticalFindings → P0 :396</text>
+    <text x="992" y="641.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> critical if critical &gt; 0</text>
+    <text x="992" y="655.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> high if high &gt; 1</text>
+    <text x="992" y="669.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> medium if high&gt;0 or medium&gt;1</text>
+    <text x="992" y="683.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> low otherwise</text>
+    <text x="992" y="697.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">fail tally by severity</text>
+    <text x="992" y="711.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">critical → criticalFindings → P0</text>
     <text x="992" y="725.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">report: summary · tables · matrix</text>
-    <text x="992" y="739.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> · P0/P1/P2 roadmap :104</text>
+    <text x="992" y="739.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> · P0/P1/P2 roadmap</text>
     <text x="992" y="753.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">observed run: 92% · MEDIUM · 0 crit</text>
   </g>
 </svg>

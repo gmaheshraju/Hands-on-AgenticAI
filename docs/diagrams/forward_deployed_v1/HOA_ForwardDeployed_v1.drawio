@@ -31,122 +31,122 @@
         <mxCell id="z_out" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=1;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
           <mxGeometry x="1360" y="232" width="296" height="300" as="geometry" />
         </mxCell>
-        <mxCell id="z_out_lbl" value="④ Outputs &amp; pilot surface (HTTP :3014)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+        <mxCell id="z_out_lbl" value="④ Outputs &amp; pilot surface (HTTP)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="1372" y="240" width="280" height="16" as="geometry" />
         </mxCell>
-        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;6-step pipeline&lt;br&gt;run() :30" class="component.entry" id="n_cli">
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;6-step pipeline&lt;br&gt;run()" class="component.entry" id="n_cli">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="124" width="192" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;FilesystemConnector :12&lt;/b&gt;&lt;br&gt;reads data/sample-docs&lt;br&gt;txt md json pdf docx :17" class="component.external" id="n_fs">
+        <object label="&lt;b&gt;FilesystemConnector&lt;/b&gt;&lt;br&gt;reads data/sample-docs&lt;br&gt;txt md json pdf docx" class="component.external" id="n_fs">
           <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="296" width="192" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;ApiConnector :60&lt;/b&gt;&lt;br&gt;MOCK_API_DOCS :17 — n=5&lt;br&gt;paginated, no network" class="component.mock" id="n_api">
+        <object label="&lt;b&gt;ApiConnector&lt;/b&gt;&lt;br&gt;MOCK_API_DOCS — n=5&lt;br&gt;paginated, no network" class="component.mock" id="n_api">
           <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="400" width="192" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;BaseConnector :8&lt;/b&gt;&lt;br&gt;4-method contract&lt;br&gt;healthCheck default :44" class="component.service" id="n_base">
+        <object label="&lt;b&gt;BaseConnector&lt;/b&gt;&lt;br&gt;4-method contract&lt;br&gt;healthCheck default" class="component.service" id="n_base">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="504" width="192" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;DocumentProcessor&lt;/b&gt;&lt;br&gt;processAll() :88&lt;br&gt;extract + score quality" class="component.service" id="n_proc">
+        <object label="&lt;b&gt;DocumentProcessor&lt;/b&gt;&lt;br&gt;processAll()&lt;br&gt;extract + score quality" class="component.service" id="n_proc">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="408" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;DomainAdapter&lt;/b&gt;&lt;br&gt;adapt() :68&lt;br&gt;vocab·fewshot·prompt" class="component.agent" id="n_adapt">
+        <object label="&lt;b&gt;DomainAdapter&lt;/b&gt;&lt;br&gt;adapt()&lt;br&gt;vocab·fewshot·prompt" class="component.agent" id="n_adapt">
           <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="624" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;EvalBuilder&lt;/b&gt;&lt;br&gt;generateCandidates :32&lt;br&gt;acceptAll :186&lt;br&gt;export() :195" class="component.agent" id="n_eval">
+        <object label="&lt;b&gt;EvalBuilder&lt;/b&gt;&lt;br&gt;generateCandidates&lt;br&gt;acceptAll&lt;br&gt;export()" class="component.agent" id="n_eval">
           <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="840" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;DeploymentChecklist&lt;/b&gt;&lt;br&gt;run() :34 — 9 checks&lt;br&gt;ready = 0 critical :180" class="component.service" id="n_check">
+        <object label="&lt;b&gt;DeploymentChecklist&lt;/b&gt;&lt;br&gt;run() — 9 checks&lt;br&gt;ready = 0 critical" class="component.service" id="n_check">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1056" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;data/eval-set.json&lt;/b&gt;&lt;br&gt;written by export() :218&lt;br&gt;re-read by check 7 :119" class="component.artifact" id="n_evalfile">
+        <object label="&lt;b&gt;data/eval-set.json&lt;/b&gt;&lt;br&gt;written by export()&lt;br&gt;re-read by check 7" class="component.artifact" id="n_evalfile">
           <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="268" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;createDashboardServer :54&lt;/b&gt;&lt;br&gt;express · PORT || 3014 :204&lt;br&gt;GET / · GET+POST /api/state&lt;br&gt;POST /api/issues · /api/activity" class="component.service" id="n_dash">
+        <object label="&lt;b&gt;createDashboardServer&lt;/b&gt;&lt;br&gt;express · PORT || 3014&lt;br&gt;GET / · GET+POST /api/state&lt;br&gt;POST /api/issues · /api/activity" class="component.service" id="n_dash">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="356" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;public/dashboard.html&lt;/b&gt;&lt;br&gt;served by GET / :62 :64" class="component.artifact" id="n_html">
+        <object label="&lt;b&gt;public/dashboard.html&lt;/b&gt;&lt;br&gt;served by GET /" class="component.artifact" id="n_html">
           <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="452" width="248" height="56" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;EXTRACTION QUALITY GATE — _assessQuality, code order :186&lt;/b&gt;&lt;br&gt;charCount == 0 → status EMPTY, score 0, hard stop :192&lt;br&gt;wordCount &lt; 10 → &#x27;Very short document&#x27; :197&lt;br&gt;alphaRatio &lt; 0.3 → &#x27;Possible garbage output&#x27; :203&lt;br&gt;text contains U+FFFD → &#x27;possible encoding issue&#x27; :208&lt;br&gt;charCount &lt; 20% of file size → &#x27;may be incomplete&#x27; :213&lt;br&gt;score = 1.0 - 0.15 x warnings, clamped :219 :220; OK / WARNING :224" class="card.failure" id="card_quality">
+        <object label="&lt;b&gt;EXTRACTION QUALITY GATE — _assessQuality, code order&lt;/b&gt;&lt;br&gt;charCount == 0 → status EMPTY, score 0, hard stop&lt;br&gt;wordCount &lt; 10 → &#x27;Very short document&#x27;&lt;br&gt;alphaRatio &lt; 0.3 → &#x27;Possible garbage output&#x27;&lt;br&gt;text contains U+FFFD → &#x27;possible encoding issue&#x27;&lt;br&gt;charCount &lt; 20% of file size → &#x27;may be incomplete&#x27;&lt;br&gt;score = 1.0 - 0.15 x warnings, clamped; OK / WARNING" class="card.failure" id="card_quality">
           <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="376" y="428" width="424" height="104" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;EVAL CANDIDATES — all 5 types, code order, evalBuilder.js&lt;/b&gt;&lt;br&gt;1 factual · easy — dollar amounts, first 2 per doc :42&lt;br&gt;2 comprehension · medium — numbered sections, first 2 :56&lt;br&gt;3 analytical · hard — risk terms, needs &gt;= 2 :73&lt;br&gt;4 extraction · easy — timeframes, needs &gt;= 2 :87&lt;br&gt;5 application · medium — &#x27;shall&#x27; clauses, needs &gt;= 2 :100&lt;br&gt;docs with quality FAILED are skipped before all five :37" class="card.primitive" id="card_qtypes">
+        <object label="&lt;b&gt;EVAL CANDIDATES — all 5 types, code order, evalBuilder.js&lt;/b&gt;&lt;br&gt;1 factual · easy — dollar amounts, first 2 per doc&lt;br&gt;2 comprehension · medium — numbered sections, first 2&lt;br&gt;3 analytical · hard — risk terms, needs &gt;= 2&lt;br&gt;4 extraction · easy — timeframes, needs &gt;= 2&lt;br&gt;5 application · medium — &#x27;shall&#x27; clauses, needs &gt;= 2&lt;br&gt;docs with quality FAILED are skipped before all five" class="card.primitive" id="card_qtypes">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="376" y="560" width="424" height="104" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;DEPLOYMENT READINESS — all 9 checks, code order :34-:168&lt;/b&gt;&lt;br&gt;1 connector configured + tested — critical :38&lt;br&gt;2 documents ingested &gt;=5, failed &lt;=2 — critical :52&lt;br&gt;3 extraction quality &gt;= 0.7 — warning :65&lt;br&gt;4 domain vocabulary &gt;= 10 terms — critical :79&lt;br&gt;5 system prompt &gt; 500 chars — critical :92&lt;br&gt;6 eval set &gt;= 15 accepted — critical :105&lt;br&gt;7 eval set file on disk, parseable — warning :122&lt;br&gt;8 pilot timeline days remaining &gt; 0 — warning :146&lt;br&gt;9 few-shot examples &gt;= 5 — warning :159&lt;br&gt;ready = (critical failures == 0) :180 — warnings never block" class="card.invariant" id="card_checks">
+        <object label="&lt;b&gt;DEPLOYMENT READINESS — all 9 checks, code order-&lt;/b&gt;&lt;br&gt;1 connector configured + tested — critical&lt;br&gt;2 documents ingested &gt;=5, failed &lt;=2 — critical&lt;br&gt;3 extraction quality &gt;= 0.7 — warning&lt;br&gt;4 domain vocabulary &gt;= 10 terms — critical&lt;br&gt;5 system prompt &gt; 500 chars — critical&lt;br&gt;6 eval set &gt;= 15 accepted — critical&lt;br&gt;7 eval set file on disk, parseable — warning&lt;br&gt;8 pilot timeline days remaining &gt; 0 — warning&lt;br&gt;9 few-shot examples &gt;= 5 — warning&lt;br&gt;ready = (critical failures == 0) — warnings never block" class="card.invariant" id="card_checks">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="840" y="428" width="424" height="164" as="geometry" />
           </mxCell>
         </object>
-        <mxCell id="e_cli_fs" value="new FilesystemConnector :40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_cli" target="n_fs" edge="1">
+        <mxCell id="e_cli_fs" value="new FilesystemConnector" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_cli" target="n_fs" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_cli_api" value="new ApiConnector :46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_cli" target="n_api" edge="1">
+        <mxCell id="e_cli_api" value="new ApiConnector" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_cli" target="n_api" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="296" y="188" /><mxPoint x="296" y="416" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_fs_base" value="extends :12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_fs" target="n_base" edge="1">
+        <mxCell id="e_fs_base" value="extends" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_fs" target="n_base" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="48" y="328" /><mxPoint x="48" y="536" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_api_base" value="extends :60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_api" target="n_base" edge="1">
+        <mxCell id="e_api_base" value="extends" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_api" target="n_base" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_fs_proc" value="processAll(fs) :60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_fs" target="n_proc" edge="1">
+        <mxCell id="e_fs_proc" value="processAll(fs)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_fs" target="n_proc" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="328" y="328" /><mxPoint x="328" y="268" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_api_proc" value="processAll(api) :64" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_api" target="n_proc" edge="1">
+        <mxCell id="e_api_proc" value="processAll(api)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_api" target="n_proc" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="352" y="448" /><mxPoint x="352" y="300" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_proc_adapt" value="allDocs → adapt() :86" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_proc" target="n_adapt" edge="1">
+        <mxCell id="e_proc_adapt" value="allDocs → adapt()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_proc" target="n_adapt" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_proc_eval" value="same allDocs :111" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_proc" target="n_eval" edge="1">
+        <mxCell id="e_proc_eval" value="same allDocs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_proc" target="n_eval" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="496" y="336" /><mxPoint x="884" y="336" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_proc_check" value="processingStats :140" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_proc" target="n_check" edge="1">
+        <mxCell id="e_proc_check" value="processingStats" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_proc" target="n_check" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="452" y="384" /><mxPoint x="1188" y="384" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_adapt_check" value="domainStats + systemPrompt :141 :142" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_adapt" target="n_check" edge="1">
+        <mxCell id="e_adapt_check" value="domainStats + systemPrompt" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_adapt" target="n_check" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="756" y="360" /><mxPoint x="1100" y="360" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_eval_check" value="evalStats :143" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_eval" target="n_check" edge="1">
+        <mxCell id="e_eval_check" value="evalStats" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_eval" target="n_check" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_eval_file" value="export() writes JSON :119 :218" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_eval" target="n_evalfile" edge="1">
+        <mxCell id="e_eval_file" value="export() writes JSON" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_eval" target="n_evalfile" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="972" y="216" /><mxPoint x="1320" y="216" /><mxPoint x="1320" y="316" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_file_check" value="check 7 re-reads disk :119" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_evalfile" target="n_check" edge="1">
+        <mxCell id="e_file_check" value="check 7 re-reads disk" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_evalfile" target="n_check" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1344" y="284" /><mxPoint x="1344" y="240" /><mxPoint x="1188" y="240" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_check_dash" value="checklistReport → dashboardState :187 :205" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_check" target="n_dash" edge="1">
+        <mxCell id="e_check_dash" value="checklistReport → dashboardState" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_check" target="n_dash" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1296" y="284" /><mxPoint x="1296" y="388" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_dash_html" value="GET / reads it per request :62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_dash" target="n_html" edge="1">
+        <mxCell id="e_dash_html" value="GET / reads it per request" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_dash" target="n_html" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>

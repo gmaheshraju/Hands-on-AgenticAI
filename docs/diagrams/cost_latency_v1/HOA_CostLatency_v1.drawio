@@ -19,7 +19,7 @@
         <mxCell id="z_flow" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
           <mxGeometry x="320" y="200" width="936" height="176" as="geometry" />
         </mxCell>
-        <mxCell id="z_flow_lbl" value="② Per-turn pipeline — runOptimizedPipeline benchmark.js:27" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+        <mxCell id="z_flow_lbl" value="② Per-turn pipeline — runOptimizedPipeline benchmark.js" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="332" y="208" width="920" height="16" as="geometry" />
         </mxCell>
         <mxCell id="z_model" value="" style="rounded=1;fillColor=none;strokeColor=#1565C0;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#1565C0;" parent="1" vertex="1">
@@ -34,88 +34,88 @@
         <mxCell id="z_out_lbl" value="⑤ Deliverable — stdout" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="1372" y="568" width="280" height="16" as="geometry" />
         </mxCell>
-        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · 3 demos :19&lt;br&gt;ablation :135-153" class="component.entry" id="n_demo">
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · 3 demos&lt;br&gt;ablation" class="component.entry" id="n_demo">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="56" y="168" width="144" height="56" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;benchmark.js&lt;/b&gt;&lt;br&gt;runOptimized :27&lt;br&gt;CLI main :281" class="component.entry" id="n_bench">
+        <object label="&lt;b&gt;benchmark.js&lt;/b&gt;&lt;br&gt;runOptimized&lt;br&gt;CLI main" class="component.entry" id="n_bench">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="56" y="252" width="144" height="56" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;conversations.json&lt;/b&gt;&lt;br&gt;50 fixtures :307&lt;br&gt;1–4 user turns each" class="component.mock" id="n_convs">
+        <object label="&lt;b&gt;conversations.json&lt;/b&gt;&lt;br&gt;50 fixtures&lt;br&gt;1–4 user turns each" class="component.mock" id="n_convs">
           <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="56" y="336" width="144" height="56" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;SemanticCache&lt;/b&gt;&lt;br&gt;lookup() :101&lt;br&gt;cos ≥ 0.60 · TTL 1h" class="component.service" id="n_cache">
+        <object label="&lt;b&gt;SemanticCache&lt;/b&gt;&lt;br&gt;lookup()&lt;br&gt;cos ≥ 0.60 · TTL 1h" class="component.service" id="n_cache">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="344" y="248" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;summarizeHistory&lt;/b&gt;&lt;br&gt;promptCompress :26&lt;br&gt;keep last 2 :35" class="component.service" id="n_compress">
+        <object label="&lt;b&gt;summarizeHistory&lt;/b&gt;&lt;br&gt;promptCompress&lt;br&gt;keep last 2" class="component.service" id="n_compress">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="528" y="248" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;classifyComplexity&lt;/b&gt;&lt;br&gt;modelRouter :15&lt;br&gt;routeToModel :77" class="component.service" id="n_route">
+        <object label="&lt;b&gt;classifyComplexity&lt;/b&gt;&lt;br&gt;modelRouter&lt;br&gt;routeToModel" class="component.service" id="n_route">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="712" y="248" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;simulateLLMCall&lt;/b&gt;&lt;br&gt;baseline.js :35&lt;br&gt;tool ctx ×4 :39" class="component.agent" id="n_llm">
+        <object label="&lt;b&gt;simulateLLMCall&lt;/b&gt;&lt;br&gt;baseline.js&lt;br&gt;tool ctx ×4" class="component.agent" id="n_llm">
           <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="896" y="248" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;applyEarlyTermination&lt;/b&gt;&lt;br&gt;earlyTermination :70&lt;br&gt;perceivedLatency :117" class="component.service" id="n_term">
+        <object label="&lt;b&gt;applyEarlyTermination&lt;/b&gt;&lt;br&gt;earlyTermination&lt;br&gt;perceivedLatency" class="component.service" id="n_term">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1080" y="248" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;MODEL_PRICING&lt;/b&gt;&lt;br&gt;baseline.js:18 — 3 tiers&lt;br&gt;frontier · mid · cheap" class="component.external" id="n_pricing">
+        <object label="&lt;b&gt;MODEL_PRICING&lt;/b&gt;&lt;br&gt;baseline.js — 3 tiers&lt;br&gt;frontier · mid · cheap" class="component.external" id="n_pricing">
           <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="312" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;generateResponse()&lt;/b&gt;&lt;br&gt;baseline.js:89 — 5 canned corpora&lt;br&gt;category matched, no network" class="component.mock" id="n_gen">
+        <object label="&lt;b&gt;generateResponse()&lt;/b&gt;&lt;br&gt;baseline.js — 5 canned corpora&lt;br&gt;category matched, no network" class="component.mock" id="n_gen">
           <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="400" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;stats + summary&lt;/b&gt;&lt;br&gt;benchmark.js:174-193&lt;br&gt;cacheHitRate · terminationRate" class="component.artifact" id="n_stats">
+        <object label="&lt;b&gt;stats + summary&lt;/b&gt;&lt;br&gt;benchmark.js&lt;br&gt;cacheHitRate · terminationRate" class="component.artifact" id="n_stats">
           <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="600" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;Comparison table&lt;/b&gt;&lt;br&gt;formatComparisonTable :227&lt;br&gt;5 stages :202-206 → stdout" class="component.artifact" id="n_table">
+        <object label="&lt;b&gt;Comparison table&lt;/b&gt;&lt;br&gt;formatComparisonTable&lt;br&gt;5 stages → stdout" class="component.artifact" id="n_table">
           <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="684" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;PER-TURN PIPELINE — complete, in code order · benchmark.js:27&lt;/b&gt;&lt;br&gt;1 cache.lookup :66 — HIT ⇒ cost 0, 2ms, continue :80&lt;br&gt;2 summarizeHistory :88 — no-op unless &amp;gt;4 msgs :27; prompt swap :33&lt;br&gt;3 classifyComplexity :95 → routeToModel :96 — tier chosen&lt;br&gt;4 simulateLLMCall :103 — the only token spend in the loop&lt;br&gt;5 applyEarlyTermination :113 — cost × (0.5 + 0.5·ratio) :118&lt;br&gt;6 perceivedLatency :127 — TTFT replaces total latency&lt;br&gt;7 cache.store :131 — every miss is written back&lt;br&gt;README&#x27;s ASCII draws compression 1st; the code checks the cache 1st." class="card.invariant" id="card_pipe">
+        <object label="&lt;b&gt;PER-TURN PIPELINE — complete, in code order · benchmark.js&lt;/b&gt;&lt;br&gt;1 cache.lookup — HIT ⇒ cost 0, 2ms, continue&lt;br&gt;2 summarizeHistory — no-op unless &amp;gt;4 msgs; prompt swap&lt;br&gt;3 classifyComplexity → routeToModel — tier chosen&lt;br&gt;4 simulateLLMCall — the only token spend in the loop&lt;br&gt;5 applyEarlyTermination — cost × (0.5 + 0.5·ratio)&lt;br&gt;6 perceivedLatency — TTFT replaces total latency&lt;br&gt;7 cache.store — every miss is written back&lt;br&gt;README&#x27;s ASCII draws compression 1st; the code checks the cache 1st." class="card.invariant" id="card_pipe">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="320" y="448" width="456" height="136" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;MODEL TIERS — all three, complete · MODEL_PRICING baseline.js:18&lt;/b&gt;&lt;br&gt;frontier · gpt-4 · $0.03 in / $0.06 out per 1K :19&lt;br&gt;mid · claude-sonnet · $0.003 / $0.015 per 1K :20&lt;br&gt;cheap · gpt-4o-mini · $0.00015 / $0.0006 per 1K :21&lt;br&gt;latency 800/400/200ms base + 15/8/5ms per token :61-62, jitter :66&lt;br&gt;routeToModel :79-81 — simple→cheap, medium→mid, complex→frontier&lt;br&gt;TTFT floor 300/150/100ms feeds perceivedLatency :120" class="card.primitive" id="card_tiers">
+        <object label="&lt;b&gt;MODEL TIERS — all three, complete · MODEL_PRICING baseline.js&lt;/b&gt;&lt;br&gt;frontier · gpt-4 · $0.03 in / $0.06 out per 1K&lt;br&gt;mid · claude-sonnet · $0.003 / $0.015 per 1K&lt;br&gt;cheap · gpt-4o-mini · $0.00015 / $0.0006 per 1K&lt;br&gt;latency 800/400/200ms base + 15/8/5ms per token, jitter&lt;br&gt;routeToModel — simple→cheap, medium→mid, complex→frontier&lt;br&gt;TTFT floor 300/150/100ms feeds perceivedLatency" class="card.primitive" id="card_tiers">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="808" y="448" width="456" height="136" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;QUALITY LEDGER — every debit, complete · benchmark.js:165-169&lt;/b&gt;&lt;br&gt;0.92 start — frontier model + full system prompt :165&lt;br&gt;− 0.03 promptCompression :166&lt;br&gt;− 0.02 modelRouting :167&lt;br&gt;− 0.03 earlyTermination :168&lt;br&gt;− 0.00 semanticCaching — cached replies are frontier replies :169&lt;br&gt;0.84 end — assigned, never measured: scoreQuality :278 is never called." class="card.failure" id="card_qual">
+        <object label="&lt;b&gt;QUALITY LEDGER — every debit, complete · benchmark.js&lt;/b&gt;&lt;br&gt;0.92 start — frontier model + full system prompt&lt;br&gt;− 0.03 promptCompression&lt;br&gt;− 0.02 modelRouting&lt;br&gt;− 0.03 earlyTermination&lt;br&gt;− 0.00 semanticCaching — cached replies are frontier replies&lt;br&gt;0.84 end — assigned, never measured: scoreQuality is never called." class="card.failure" id="card_qual">
           <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="564" y="616" width="456" height="116" as="geometry" />
           </mxCell>
         </object>
-        <mxCell id="e_demo" value="runIncremental :124" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_bench" edge="1">
+        <mxCell id="e_demo" value="runIncremental" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_bench" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_conv" value="50 convs :285" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_convs" target="n_bench" edge="1">
+        <mxCell id="e_conv" value="50 convs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_convs" target="n_bench" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_pipe" value="per user turn :61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_bench" target="n_cache" edge="1">
+        <mxCell id="e_pipe" value="per user turn" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_bench" target="n_cache" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e_miss" value="miss" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_cache" target="n_compress" edge="1">
@@ -130,19 +130,19 @@
         <mxCell id="e_text" value="text" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_llm" target="n_term" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_price" value="$ per 1K :69" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_llm" target="n_pricing" edge="1">
+        <mxCell id="e_price" value="$ per 1K" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_llm" target="n_pricing" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="976" y="344" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_gen" value="canned body :57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_llm" target="n_gen" edge="1">
+        <mxCell id="e_gen" value="canned body" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_llm" target="n_gen" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1016" y="432" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_hit" value="HIT ⇒ cost 0 · 2ms · continue :80" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_cache" target="n_stats" edge="1">
+        <mxCell id="e_hit" value="HIT ⇒ cost 0 · 2ms · continue" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_cache" target="n_stats" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="424" y="160" /><mxPoint x="1340" y="160" /><mxPoint x="1340" y="648" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_stats" value="adjusted cost + latency :144" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_term" target="n_stats" edge="1">
+        <mxCell id="e_stats" value="adjusted cost + latency" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_term" target="n_stats" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1316" y="280" /><mxPoint x="1316" y="616" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_roll" value="per-stage :213" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_stats" target="n_table" edge="1">
+        <mxCell id="e_roll" value="per-stage" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_stats" target="n_table" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>

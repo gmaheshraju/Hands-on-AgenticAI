@@ -34,72 +34,72 @@
         <mxCell id="z_out_lbl" value="④ In-memory record → stdout" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="1372" y="568" width="284" height="16" as="geometry" />
         </mxCell>
-        <object label="&lt;b&gt;demo.js&lt;/b&gt; :3&lt;br&gt;6 actions · 4 policies&lt;br&gt;3 agents · 6 scenarios&lt;br&gt;:20 :59 :83" class="component.entry" id="n_demo">
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;6 actions · 4 policies&lt;br&gt;3 agents · 6 scenarios&lt;br&gt;" class="component.entry" id="n_demo">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="268" width="176" height="80" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;Agents&lt;/b&gt; :83&lt;br&gt;3 records&lt;br&gt;basic/elev/admin&lt;br&gt;(perm records)" class="component.agent" id="n_agents">
+        <object label="&lt;b&gt;Agents&lt;/b&gt;&lt;br&gt;3 records&lt;br&gt;basic/elev/admin&lt;br&gt;(perm records)" class="component.agent" id="n_agents">
           <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="392" width="176" height="72" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;AgentExecutor&lt;/b&gt;&lt;br&gt;.execute() :40&lt;br&gt;guards :43&lt;br&gt;audit each branch" class="component.service" id="n_exec">
+        <object label="&lt;b&gt;AgentExecutor&lt;/b&gt;&lt;br&gt;.execute()&lt;br&gt;guards&lt;br&gt;audit each branch" class="component.service" id="n_exec">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="328" y="240" width="160" height="80" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;Gate 1 · schema&lt;/b&gt;&lt;br&gt;validate() :38&lt;br&gt;req·type·enum&lt;br&gt;min/max·pattern" class="component.service" id="n_validate">
+        <object label="&lt;b&gt;Gate 1 · schema&lt;/b&gt;&lt;br&gt;validate()&lt;br&gt;req·type·enum&lt;br&gt;min/max·pattern" class="component.service" id="n_validate">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="516" y="248" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;Gate 2 · policy&lt;/b&gt;&lt;br&gt;evaluate() :62&lt;br&gt;IAM deny-wins&lt;br&gt;policy.js:28" class="component.service" id="n_policy">
+        <object label="&lt;b&gt;Gate 2 · policy&lt;/b&gt;&lt;br&gt;evaluate()&lt;br&gt;IAM deny-wins&lt;br&gt;policy.js" class="component.service" id="n_policy">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="708" y="248" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;Gate 3 · approval&lt;/b&gt;&lt;br&gt;submit() :86&lt;br&gt;auto / pending&lt;br&gt;approvals.js:10" class="component.service" id="n_approval">
+        <object label="&lt;b&gt;Gate 3 · approval&lt;/b&gt;&lt;br&gt;submit()&lt;br&gt;auto / pending&lt;br&gt;approvals.js" class="component.service" id="n_approval">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="900" y="248" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;Gate 4 · sandbox&lt;/b&gt;&lt;br&gt;_sandboxedExec :107&lt;br&gt;TIMEOUT RACE ONLY&lt;br&gt;no perm check :136" class="component.service" id="n_sbexec">
+        <object label="&lt;b&gt;Gate 4 · sandbox&lt;/b&gt;&lt;br&gt;_sandboxedExec&lt;br&gt;TIMEOUT RACE ONLY&lt;br&gt;no perm check" class="component.service" id="n_sbexec">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1092" y="248" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;action.handler(s)&lt;/b&gt;&lt;br&gt;demo.js:23-55 · MOCKED&lt;br&gt;canned data — no real DB/API/FS" class="component.external" id="n_handler">
+        <object label="&lt;b&gt;action.handler(s)&lt;/b&gt;&lt;br&gt;demo.js · MOCKED&lt;br&gt;canned data — no real DB/API/FS" class="component.external" id="n_handler">
           <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="248" width="256" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;Sandbox&lt;/b&gt; :1&lt;br&gt;createSession :14 (WIRED)&lt;br&gt;checkPermission :44&lt;br&gt;UNWIRED — demo only" class="component.service" id="n_sandbox">
+        <object label="&lt;b&gt;Sandbox&lt;/b&gt;&lt;br&gt;createSession (WIRED)&lt;br&gt;checkPermission&lt;br&gt;UNWIRED — demo only" class="component.service" id="n_sandbox">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="344" y="400" width="208" height="88" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;AuditTrail.record&lt;/b&gt; :7&lt;br&gt;in-memory ring :29&lt;br&gt;allowed/denied/error" class="component.artifact" id="n_audit">
+        <object label="&lt;b&gt;AuditTrail.record&lt;/b&gt;&lt;br&gt;in-memory ring&lt;br&gt;allowed/denied/error" class="component.artifact" id="n_audit">
           <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="608" y="400" width="208" height="88" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;dashboard()&lt;/b&gt; :144&lt;br&gt;securityReport :85 → stdout" class="component.artifact" id="n_dash">
+        <object label="&lt;b&gt;dashboard()&lt;/b&gt;&lt;br&gt;securityReport → stdout" class="component.artifact" id="n_dash">
           <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="592" width="256" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;5-GATE PIPELINE — execute() code order&lt;/b&gt;&lt;br&gt;0 session active? :43&lt;br&gt;1 validate schema → VALIDATION_FAILED :50&lt;br&gt;2 policy evaluate → POLICY_DENIED :62&lt;br&gt;3 approval (if req) → APPROVAL_REQ :86&lt;br&gt;4 _sandboxedExecute → EXEC_FAILED :107&lt;br&gt;5 audit.record — every branch :110&lt;br&gt;first failing gate returns; rest skip" class="card.invariant" id="card_pipe">
+        <object label="&lt;b&gt;5-GATE PIPELINE — execute() code order&lt;/b&gt;&lt;br&gt;0 session active?&lt;br&gt;1 validate schema → VALIDATION_FAILED&lt;br&gt;2 policy evaluate → POLICY_DENIED&lt;br&gt;3 approval (if req) → APPROVAL_REQ&lt;br&gt;4 _sandboxedExecute → EXEC_FAILED&lt;br&gt;5 audit.record — every branch&lt;br&gt;first failing gate returns; rest skip" class="card.invariant" id="card_pipe">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="320" y="536" width="300" height="200" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;POLICY evaluate() — deny wins :28&lt;/b&gt;&lt;br&gt;no matching policy → deny :32&lt;br&gt;sort by priority, descending :36&lt;br&gt;deny pass first → explicit_deny :42&lt;br&gt;allow pass → explicit_allow :51&lt;br&gt;default → deny :56&lt;br&gt;8 ops: equals notEquals in notIn :106&lt;br&gt;  lessThan greaterThan exists matches :113" class="card.primitive" id="card_policy">
+        <object label="&lt;b&gt;POLICY evaluate() — deny wins&lt;/b&gt;&lt;br&gt;no matching policy → deny&lt;br&gt;sort by priority, descending&lt;br&gt;deny pass first → explicit_deny&lt;br&gt;allow pass → explicit_allow&lt;br&gt;default → deny&lt;br&gt;8 ops: equals notEquals in notIn&lt;br&gt; lessThan greaterThan exists matches" class="card.primitive" id="card_policy">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="636" y="536" width="300" height="200" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;SANDBOX — DEMONSTRATED, NOT WIRED&lt;/b&gt;&lt;br&gt;createSession :14 · getSession :41 — WIRED&lt;br&gt;checkPermission :44 — demo / tests ONLY&lt;br&gt;gate 4 runs handler + timeout only :136&lt;br&gt;5 ops file_read:51 file_write:74&lt;br&gt;  network:90 exec:109 db:117&lt;br&gt;blocked-path :128 · auto-suspend @3 :135&lt;br&gt;README calls this &#x27;gate 4&#x27; — it is not" class="card.failure" id="card_sandbox">
+        <object label="&lt;b&gt;SANDBOX — DEMONSTRATED, NOT WIRED&lt;/b&gt;&lt;br&gt;createSession · getSession — WIRED&lt;br&gt;checkPermission — demo / tests ONLY&lt;br&gt;gate 4 runs handler + timeout only&lt;br&gt;5 ops file_read file_write&lt;br&gt; network exec db&lt;br&gt;blocked-path · auto-suspend @3&lt;br&gt;README calls this &#x27;gate 4&#x27; — it is not" class="card.failure" id="card_sandbox">
           <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="952" y="536" width="300" height="200" as="geometry" />
           </mxCell>
@@ -107,7 +107,7 @@
         <mxCell id="e_drive" value="6 scenarios" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_exec" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="276" y="308" /><mxPoint x="276" y="260" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_princ" value="startSession :31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_agents" target="n_exec" edge="1">
+        <mxCell id="e_princ" value="startSession" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_agents" target="n_exec" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="300" y="428" /><mxPoint x="300" y="300" /></Array></mxGeometry>
         </mxCell>
         <mxCell id="e_g1" value="gate 1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_exec" target="n_validate" edge="1">
@@ -122,19 +122,19 @@
         <mxCell id="e_g4" value="gate 4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_approval" target="n_sbexec" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_run" value="handler() :136" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_sbexec" target="n_handler" edge="1">
+        <mxCell id="e_run" value="handler()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_sbexec" target="n_handler" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_sess" value="session :35 (wired)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_sandbox" target="n_exec" edge="1">
+        <mxCell id="e_sess" value="session (wired)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_sandbox" target="n_exec" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_check" value="checkPermission :157 — demo only" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_sandbox" edge="1">
+        <mxCell id="e_check" value="checkPermission — demo only" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_sandbox" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="324" y="328" /><mxPoint x="324" y="444" /></Array></mxGeometry>
         </mxCell>
         <mxCell id="e_audit" value="record every branch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.9;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_exec" target="n_audit" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="472" y="372" /><mxPoint x="712" y="372" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_dash" value="dashboard() :144" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_audit" target="n_dash" edge="1">
+        <mxCell id="e_dash" value="dashboard()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_audit" target="n_dash" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1336" y="444" /><mxPoint x="1336" y="624" /></Array></mxGeometry>
         </mxCell>
       </root>

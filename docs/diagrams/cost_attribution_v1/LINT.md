@@ -1,6 +1,6 @@
 # Lint — cost_attribution_v1
 
-Built by `_harness/build.py` from `spec.py` sha256 `c22ed2e15d8aa972`.
+Built by `_harness/build.py` from `spec.py` sha256 `afaed8e9891f688c`.
 If that hash does not match the current spec, THIS REPORT IS STALE and its verdict must not be trusted — run `build.py --check` to detect it.
 
 Enforced by construction (cannot fail here): grid quantum, pinned ports, axis-aligned paths, theme-token-only colour, text attributes.

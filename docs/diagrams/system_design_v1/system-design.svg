@@ -37,15 +37,15 @@
   </g>
   <g class="d-edge d-edge-call" data-edge="e_tool">
     <polyline points="584,284.0 688,284.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_system_design_v1-a-d-edge-call)"/>
-    <text x="636.0" y="278.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">tool.execute :248</text>
+    <text x="636.0" y="278.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">tool.execute</text>
   </g>
   <g class="d-edge d-edge-call" data-edge="e_val">
     <polyline points="540.0,316 540,364 1012,364 1012.0,316" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_system_design_v1-a-d-edge-call)"/>
-    <text x="776.0" y="358.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">validate · dedupe · sort :219</text>
+    <text x="776.0" y="358.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">validate · dedupe · sort</text>
   </g>
   <g class="d-edge d-edge-call" data-edge="e_llm">
     <polyline points="496.0,316 496.0,460" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_system_design_v1-a-d-edge-call)"/>
-    <text x="496.0" y="382.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">llmCall :184</text>
+    <text x="496.0" y="382.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">llmCall</text>
   </g>
   <g class="d-edge d-edge-data_in" data-edge="e_fix">
     <polyline points="776.0,460 776.0,316" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_system_design_v1-a-d-edge-data_in)"/>
@@ -65,42 +65,42 @@
   </g>
   <g class="d-edge d-edge-artifact" data-edge="e_out">
     <polyline points="1100.0,316 1100,736 1368,736.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_system_design_v1-a-d-edge-artifact)"/>
-    <text x="1100.0" y="520.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">return output :222</text>
+    <text x="1100.0" y="520.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">return output</text>
   </g>
   <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
     <rect x="64" y="236" width="160" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
-    <text x="144.0" y="264.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js:166</text>
+    <text x="144.0" y="264.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
     <text x="144.0" y="279.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">mock LLM + fixtures</text>
   </g>
   <g class="d-node d-component-entry" data-id="n_live" data-class="component.entry">
     <rect x="64" y="380" width="160" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
-    <text x="144.0" y="408.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">review.js:87</text>
+    <text x="144.0" y="408.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">review.js</text>
     <text x="144.0" y="423.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">real GitHub + LLM</text>
   </g>
   <g class="d-node d-component-service" data-id="n_react" data-class="component.service">
     <rect x="408" y="252" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="496.0" y="280.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">runReActLoop()</text>
-    <text x="496.0" y="295.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">agent.js:157</text>
+    <text x="496.0" y="295.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">agent.js</text>
   </g>
   <g class="d-node d-component-service" data-id="n_tools" data-class="component.service">
     <rect x="688" y="252" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="776.0" y="280.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Tool Registry</text>
-    <text x="776.0" y="295.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">5 tools · tools.js:64</text>
+    <text x="776.0" y="295.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">5 tools · tools.js</text>
   </g>
   <g class="d-node d-component-service" data-id="n_schema" data-class="component.service">
     <rect x="968" y="252" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="1056.0" y="280.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Schema · validate</text>
-    <text x="1056.0" y="295.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">schema.js:39</text>
+    <text x="1056.0" y="295.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">schema.js</text>
   </g>
   <g class="d-node d-component-mock" data-id="n_mockllm" data-class="component.mock">
     <rect x="408" y="460" width="176" height="56" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
     <text x="496.0" y="484.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Simulated LLM</text>
-    <text x="496.0" y="499.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">8 scripted steps · :16</text>
+    <text x="496.0" y="499.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">8 scripted steps</text>
   </g>
   <g class="d-node d-component-mock" data-id="n_mockdata" data-class="component.mock">
     <rect x="688" y="460" width="176" height="56" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
     <text x="776.0" y="484.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Mock PR data</text>
-    <text x="776.0" y="499.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">mock-data.js:5</text>
+    <text x="776.0" y="499.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">mock-data.js</text>
   </g>
   <g class="d-node d-component-external" data-id="n_github" data-class="component.external">
     <rect x="1368" y="240" width="248" height="56" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
@@ -110,12 +110,12 @@
   <g class="d-node d-component-external" data-id="n_anthropic" data-class="component.external">
     <rect x="1368" y="332" width="248" height="56" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
     <text x="1492.0" y="356.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Anthropic API</text>
-    <text x="1492.0" y="371.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">review.js:26</text>
+    <text x="1492.0" y="371.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">review.js</text>
   </g>
   <g class="d-node d-component-external" data-id="n_openai" data-class="component.external">
     <rect x="1368" y="424" width="248" height="56" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
     <text x="1492.0" y="448.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">OpenAI API</text>
-    <text x="1492.0" y="463.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">review.js:59</text>
+    <text x="1492.0" y="463.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">review.js</text>
   </g>
   <g class="d-node d-component-artifact" data-id="n_findings" data-class="component.artifact">
     <rect x="1368" y="700" width="248" height="72" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
@@ -126,12 +126,12 @@
   <g class="d-node d-card-invariant" data-id="card_exit" data-class="card.invariant">
     <rect x="408" y="540" width="456" height="152" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="416" y="570.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">HOW ONE ITERATION EXITS — complete, in code order</text>
-    <text x="416" y="584.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 FINISH unparseable → retry message :197</text>
-    <text x="416" y="598.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 FINISH valid → validate · dedupe · sort · return :208</text>
-    <text x="416" y="612.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 unknown tool → error observation :234</text>
-    <text x="416" y="626.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 stall xN identical → force-finish :262</text>
-    <text x="416" y="640.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 neither FINISH nor ACTION → parse retry :284</text>
-    <text x="416" y="654.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 maxIterations → empty output, cappedOut :295</text>
-    <text x="416" y="668.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">&lt;i&gt;findings sort: bug → security → suggestion → nit · schema.js:138&lt;/i&gt;</text>
+    <text x="416" y="584.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 FINISH unparseable → retry message</text>
+    <text x="416" y="598.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 FINISH valid → validate · dedupe · sort · return</text>
+    <text x="416" y="612.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 unknown tool → error observation</text>
+    <text x="416" y="626.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 stall xN identical → force-finish</text>
+    <text x="416" y="640.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 neither FINISH nor ACTION → parse retry</text>
+    <text x="416" y="654.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 maxIterations → empty output, cappedOut</text>
+    <text x="416" y="668.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">&lt;i&gt;findings sort: bug → security → suggestion → nit · schema.js&lt;/i&gt;</text>
   </g>
 </svg>

@@ -13,7 +13,7 @@
         <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
           <mxGeometry x="304" y="80" width="1000" height="700" as="geometry" />
         </mxCell>
-        <mxCell id="z_proc_lbl" value="① 22-context-engineering — one Node ESM process, 0 dependencies, 0 network calls (4 moves claimed demo.js:495 — Isolate has no module)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+        <mxCell id="z_proc_lbl" value="① 22-context-engineering — one Node ESM process, 0 dependencies, 0 network calls (4 moves claimed demo.js — Isolate has no module)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="316" y="88" width="984" height="16" as="geometry" />
         </mxCell>
         <mxCell id="z_pipe" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
@@ -28,77 +28,77 @@
         <mxCell id="z_out_lbl" value="④ Return value — nothing is sent anywhere" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="1380" y="408" width="272" height="16" as="geometry" />
         </mxCell>
-        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;run() :492, :533&lt;br&gt;8 sections :497-504" class="component.entry" id="n_demo">
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;run(),&lt;br&gt;8 sections" class="component.entry" id="n_demo">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="216" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;createDemoSources()&lt;/b&gt;&lt;br&gt;demo.js:48 — 13 srcs&lt;br&gt;in-code, no files" class="component.mock" id="n_corpus">
+        <object label="&lt;b&gt;createDemoSources()&lt;/b&gt;&lt;br&gt;demo.js — 13 srcs&lt;br&gt;in-code, no files" class="component.mock" id="n_corpus">
           <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="336" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;createSource()&lt;/b&gt;&lt;br&gt;sources.js:26 · 6 types&lt;br&gt;rel clamp 0-1 :35" class="component.service" id="n_sources">
+        <object label="&lt;b&gt;createSource()&lt;/b&gt;&lt;br&gt;sources.js · 6 types&lt;br&gt;rel clamp 0-1" class="component.service" id="n_sources">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="352" y="216" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;strategies.js :111&lt;/b&gt;&lt;br&gt;greedy :9 relevance :19&lt;br&gt;balanced :44" class="component.service" id="n_strat">
+        <object label="&lt;b&gt;strategies.js&lt;/b&gt;&lt;br&gt;greedy relevance&lt;br&gt;balanced" class="component.service" id="n_strat">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="592" y="216" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;TokenBudget.allocate&lt;/b&gt;&lt;br&gt;budget.js:30 · 25% out&lt;br&gt;buffer :17 → plan :77" class="component.service" id="n_budget">
+        <object label="&lt;b&gt;TokenBudget.allocate&lt;/b&gt;&lt;br&gt;budget.js · 25% out&lt;br&gt;buffer → plan" class="component.service" id="n_budget">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="832" y="216" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;assemble()&lt;/b&gt;&lt;br&gt;assembler.js:100&lt;br&gt;ORDER :12 → msgs :150&lt;br&gt;+ scratchpad path :218" class="component.service" id="n_assemble">
+        <object label="&lt;b&gt;assemble()&lt;/b&gt;&lt;br&gt;assembler.js&lt;br&gt;ORDER → msgs&lt;br&gt;+ scratchpad path" class="component.service" id="n_assemble">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1072" y="216" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;reorderForAttention&lt;/b&gt;&lt;br&gt;assembler.js:40&lt;br&gt;even→start odd→end :67&lt;br&gt;middle band 0.3-0.7 :81" class="component.service" id="n_reorder">
+        <object label="&lt;b&gt;reorderForAttention&lt;/b&gt;&lt;br&gt;assembler.js&lt;br&gt;even→start odd→end&lt;br&gt;middle band 0.3-0.7" class="component.service" id="n_reorder">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="832" y="304" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;tokenizer.js&lt;/b&gt;&lt;br&gt;estimateTokens :92&lt;br&gt;truncateMiddle :220&lt;br&gt;TOKEN_PATTERNS :39 dead" class="component.service" id="n_tok">
+        <object label="&lt;b&gt;tokenizer.js&lt;/b&gt;&lt;br&gt;estimateTokens&lt;br&gt;truncateMiddle&lt;br&gt;TOKEN_PATTERNS dead" class="component.service" id="n_tok">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="352" y="440" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;compactConversation&lt;/b&gt;&lt;br&gt;compactor.js:177&lt;br&gt;keep last 3 turns :178&lt;br&gt;contextAwareCompress:538" class="component.service" id="n_compact">
+        <object label="&lt;b&gt;compactConversation&lt;/b&gt;&lt;br&gt;compactor.js&lt;br&gt;keep last 3 turns&lt;br&gt;contextAwareCompress" class="component.service" id="n_compact">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="592" y="440" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;Scratchpad&lt;/b&gt;&lt;br&gt;scratchpad.js:27&lt;br&gt;Map in RAM :38, no file&lt;br&gt;write :55 · index :234" class="component.artifact" id="n_scratch">
+        <object label="&lt;b&gt;Scratchpad&lt;/b&gt;&lt;br&gt;scratchpad.js&lt;br&gt;Map in RAM, no file&lt;br&gt;write · index" class="component.artifact" id="n_scratch">
           <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="832" y="440" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;ContextCache&lt;/b&gt;&lt;br&gt;cache.js:40 · TTL 300s&lt;br&gt;PRICING :16 — no API&lt;br&gt;simulateSession :228" class="component.service" id="n_cache">
+        <object label="&lt;b&gt;ContextCache&lt;/b&gt;&lt;br&gt;cache.js · TTL 300s&lt;br&gt;PRICING — no API&lt;br&gt;simulateSession" class="component.service" id="n_cache">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1072" y="440" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;{ messages, report, totalTokens }&lt;/b&gt;&lt;br&gt;assembler.js:194 — in-process&lt;br&gt;no LLM call anywhere in src/" class="component.artifact" id="n_ctx">
+        <object label="&lt;b&gt;{ messages, report, totalTokens }&lt;/b&gt;&lt;br&gt;assembler.js — in-process&lt;br&gt;no LLM call anywhere in src/" class="component.artifact" id="n_ctx">
           <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1392" y="448" width="240" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;6 SOURCE TYPES — sources.js:10-15, code order&lt;/b&gt;&lt;br&gt;prio 0 SYSTEM_PROMPT :10 — never dropped :40&lt;br&gt;prio 1 CONVERSATION_HISTORY :11&lt;br&gt;prio 2 RAG_CHUNKS :12 — RAG tiebreak :137&lt;br&gt;prio 3 MEMORY :13&lt;br&gt;prio 4 TOOL_RESULTS :14&lt;br&gt;prio 5 EXAMPLES :15&lt;br&gt;within a tier: higher relevanceScore wins :57&lt;br&gt;assembler ORDER :12-19 repeats all 6 ranks —&lt;br&gt;a second enumeration that must not drift;&lt;br&gt;unknown type sorts last via ?? 99 :133" class="card.primitive" id="card_types">
+        <object label="&lt;b&gt;6 SOURCE TYPES — sources.js, code order&lt;/b&gt;&lt;br&gt;prio 0 SYSTEM_PROMPT — never dropped&lt;br&gt;prio 1 CONVERSATION_HISTORY&lt;br&gt;prio 2 RAG_CHUNKS — RAG tiebreak&lt;br&gt;prio 3 MEMORY&lt;br&gt;prio 4 TOOL_RESULTS&lt;br&gt;prio 5 EXAMPLES&lt;br&gt;within a tier: higher relevanceScore wins&lt;br&gt;assembler ORDER repeats all 6 ranks —&lt;br&gt;a second enumeration that must not drift;&lt;br&gt;unknown type sorts last via ?? 99" class="card.primitive" id="card_types">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="336" y="576" width="304" height="160" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;allocate() — budget.js:30, the whole contract&lt;/b&gt;&lt;br&gt;available = total − floor(total × 0.25) :17-18&lt;br&gt;pass 1 · every priority-0 source, always :39-45&lt;br&gt;pass 2 · rest in sortByPriority order :31 :49&lt;br&gt;· remaining &amp;lt;= 0 → drop budget_exhausted :52&lt;br&gt;· fits → include at full tokens :56-58&lt;br&gt;· remaining &amp;gt;= 50 → truncated_to_fit :61-67&lt;br&gt;· else → drop insufficient_remaining :73&lt;br&gt;at most ONE source is ever truncated: pass 2&lt;br&gt;sets remaining = 0 right after it :70&lt;br&gt;out: included[] truncated[] dropped[] :77-80" class="card.invariant" id="card_alloc">
+        <object label="&lt;b&gt;allocate() — budget.js, the whole contract&lt;/b&gt;&lt;br&gt;available = total − floor(total × 0.25)&lt;br&gt;pass 1 · every priority-0 source, always&lt;br&gt;pass 2 · rest in sortByPriority order&lt;br&gt;· remaining &amp;lt;= 0 → drop budget_exhausted&lt;br&gt;· fits → include at full tokens&lt;br&gt;· remaining &amp;gt;= 50 → truncated_to_fit&lt;br&gt;· else → drop insufficient_remaining&lt;br&gt;at most ONE source is ever truncated: pass 2&lt;br&gt;sets remaining = 0 right after it&lt;br&gt;out: included[] truncated[] dropped[]" class="card.invariant" id="card_alloc">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="656" y="576" width="304" height="160" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;4 FAILURE MODES — compactor.js:538, code order&lt;/b&gt;&lt;br&gt;1 poisoning :562 — same subj, 2 values :357&lt;br&gt;2 distraction :563 — &amp;lt;10% core vocab :416&lt;br&gt;3 confusion :564 — &amp;gt;3 vague, &amp;lt;2 nouns :446&lt;br&gt;4 clash :565 — opposite polarity :506&lt;br&gt;ACTED ON — only 3 of the 4:&lt;br&gt;· distraction: turn deleted :577-580&lt;br&gt;· poisoning + clash: WARNING prepended :586-600&lt;br&gt;· confusion: detected, never acted on&lt;br&gt;quality = 1 − (3p+1d+2c+3k) × 0.05 :610-611&lt;br&gt;all 4 detectors are module-private" class="card.failure" id="card_fail">
+        <object label="&lt;b&gt;4 FAILURE MODES — compactor.js, code order&lt;/b&gt;&lt;br&gt;1 poisoning — same subj, 2 values&lt;br&gt;2 distraction — &amp;lt;10% core vocab&lt;br&gt;3 confusion — &amp;gt;3 vague, &amp;lt;2 nouns&lt;br&gt;4 clash — opposite polarity&lt;br&gt;ACTED ON — only 3 of the 4:&lt;br&gt;· distraction: turn deleted&lt;br&gt;· poisoning + clash: WARNING prepended&lt;br&gt;· confusion: detected, never acted on&lt;br&gt;quality = 1 − (3p+1d+2c+3k) × 0.05&lt;br&gt;all 4 detectors are module-private" class="card.failure" id="card_fail">
           <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="976" y="576" width="304" height="160" as="geometry" />
           </mxCell>
@@ -118,31 +118,31 @@
         <mxCell id="e_plan" value="plan" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_budget" target="n_assemble" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_reord" value="reorder :144" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_assemble" target="n_reorder" edge="1">
+        <mxCell id="e_reord" value="reorder" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_assemble" target="n_reorder" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1116" y="336" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_park" value="park dropped :225" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_assemble" target="n_scratch" edge="1">
+        <mxCell id="e_park" value="park dropped" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_assemble" target="n_scratch" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1204" y="400" /><mxPoint x="920" y="400" /></Array></mxGeometry>
         </mxCell>
         <mxCell id="e_ret" value="returns" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_assemble" target="n_ctx" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1328" y="248" /><mxPoint x="1328" y="480" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_tokS" value="estimate :34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_sources" target="n_tok" edge="1">
+        <mxCell id="e_tokS" value="estimate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_sources" target="n_tok" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_tokA" value="truncate :118" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_assemble" target="n_tok" edge="1">
+        <mxCell id="e_tokA" value="truncate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_assemble" target="n_tok" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1160" y="424" /><mxPoint x="484" y="424" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_tokD" value="BPE :5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_tok" edge="1">
+        <mxCell id="e_tokD" value="BPE" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_tok" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="264" y="280" /><mxPoint x="264" y="472" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_tokC" value="imports :6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_compact" target="n_tok" edge="1">
+        <mxCell id="e_tokC" value="imports" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_compact" target="n_tok" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_tokP" value="imports :9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_scratch" target="n_tok" edge="1">
+        <mxCell id="e_tokP" value="imports" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_scratch" target="n_tok" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="920" y="528" /><mxPoint x="396" y="528" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_tokH" value="imports :9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_cache" target="n_tok" edge="1">
+        <mxCell id="e_tokH" value="imports" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_cache" target="n_tok" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1160" y="552" /><mxPoint x="484" y="552" /></Array></mxGeometry>
         </mxCell>
       </root>

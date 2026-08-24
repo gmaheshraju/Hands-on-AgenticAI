@@ -25,7 +25,7 @@
   </g>
   <g class="d-edge d-edge-data_in" data-edge="e_load">
     <polyline points="156.0,408 156.0,344" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-data_in)"/>
-    <text x="156.0" y="370.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">read :14</text>
+    <text x="156.0" y="370.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">read</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_run">
     <polyline points="256,312.0 312,312 312,200 368,200.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-primary)"/>
@@ -45,15 +45,15 @@
   </g>
   <g class="d-edge d-edge-data_in" data-edge="e_rec">
     <polyline points="456.0,232 456.0,296" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-data_in)"/>
-    <text x="456.0" y="258.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">new run :152</text>
+    <text x="456.0" y="258.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">new run</text>
   </g>
   <g class="d-edge d-edge-artifact" data-edge="e_sum">
     <polyline points="544,328.0 1432,328.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-artifact)"/>
-    <text x="988.0" y="322.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">summary :316</text>
+    <text x="988.0" y="322.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">summary</text>
   </g>
   <g class="d-edge d-edge-call" data-edge="e_disp">
     <polyline points="1200.0,232 1200,372 600,372 600.00000016,424" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-call)"/>
-    <text x="900.0" y="366.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">dispatch :241</text>
+    <text x="900.0" y="366.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">dispatch</text>
   </g>
   <g class="d-edge d-edge-call" data-edge="e_llm">
     <polyline points="616,432.0000004 688,432.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_workflow_engine_v1-a-d-edge-call)"/>
@@ -82,129 +82,129 @@
   <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
     <rect x="56" y="280" width="200" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
     <text x="156.0" y="300.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
-    <text x="156.0" y="315.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">CLI runner :88</text>
-    <text x="156.0" y="330.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runs 3 workflows :97</text>
+    <text x="156.0" y="315.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">CLI runner</text>
+    <text x="156.0" y="330.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runs 3 workflows</text>
   </g>
   <g class="d-node d-component-external" data-id="n_wf" data-class="component.external">
     <rect x="56" y="408" width="200" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
     <text x="156.0" y="428.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">workflows/*.json</text>
     <text x="156.0" y="443.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3 DSL defs</text>
-    <text x="156.0" y="458.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">read by demo.js:14</text>
+    <text x="156.0" y="458.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">read by demo.js</text>
   </g>
   <g class="d-node d-component-service" data-id="n_exec" data-class="component.service">
     <rect x="368" y="168" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
-    <text x="456.0" y="181.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">execute() :149</text>
+    <text x="456.0" y="181.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">execute()</text>
     <text x="456.0" y="196.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">orchestrator</text>
     <text x="456.0" y="211.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">validate → sort</text>
-    <text x="456.0" y="226.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">+ _executeNode :223</text>
+    <text x="456.0" y="226.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">+ _executeNode</text>
   </g>
   <g class="d-node d-component-service" data-id="n_val" data-class="component.service">
     <rect x="616" y="168" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="704.0" y="188.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">validateWorkflow()</text>
-    <text x="704.0" y="203.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">engine.js:101</text>
+    <text x="704.0" y="203.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">engine.js</text>
     <text x="704.0" y="218.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">8 checks, collected</text>
   </g>
   <g class="d-node d-component-service" data-id="n_topo" data-class="component.service">
     <rect x="864" y="168" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="952.0" y="188.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">topologicalLayers()</text>
-    <text x="952.0" y="203.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">Kahn :64 · cycle :92</text>
-    <text x="952.0" y="218.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">folds buildGraph :38</text>
+    <text x="952.0" y="203.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">Kahn · cycle</text>
+    <text x="952.0" y="218.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">folds buildGraph</text>
   </g>
   <g class="d-node d-component-service" data-id="n_retry" data-class="component.service">
     <rect x="1112" y="168" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="1200.0" y="188.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">retryWithBackoff()</text>
-    <text x="1200.0" y="203.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">retry.js:12</text>
-    <text x="1200.0" y="218.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">2x exp backoff :48</text>
+    <text x="1200.0" y="203.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">retry.js</text>
+    <text x="1200.0" y="218.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">2x exp backoff</text>
   </g>
   <g class="d-node d-component-service" data-id="n_state" data-class="component.service">
     <rect x="368" y="296" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
-    <text x="456.0" y="309.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">WorkflowRun :20</text>
+    <text x="456.0" y="309.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">WorkflowRun</text>
     <text x="456.0" y="324.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">state machine</text>
-    <text x="456.0" y="339.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">+ summary() :109</text>
-    <text x="456.0" y="354.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">+ trace :98</text>
+    <text x="456.0" y="339.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">+ summary()</text>
+    <text x="456.0" y="354.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">+ trace</text>
   </g>
   <g class="d-node d-component-service" data-id="n_dispatch" data-class="component.service">
     <rect x="440" y="424" width="176" height="420" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="528.0" y="555.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">NODE_EXECUTORS</text>
-    <text x="528.0" y="570.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">engine.js:24</text>
+    <text x="528.0" y="570.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">engine.js</text>
     <text x="528.0" y="585.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">dispatch table</text>
     <text x="528.0" y="600.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">by node.type</text>
-    <text x="528.0" y="615.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">:241</text>
+    <text x="528.0" y="615.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"></text>
     <text x="528.0" y="630.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"></text>
     <text x="528.0" y="645.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">one of six</text>
     <text x="528.0" y="660.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">fires per node</text>
     <text x="528.0" y="675.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"></text>
     <text x="528.0" y="690.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">unknown type</text>
     <text x="528.0" y="705.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">⇒ validate</text>
-    <text x="528.0" y="720.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">fails :121</text>
+    <text x="528.0" y="720.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">fails</text>
   </g>
   <g class="d-node d-component-agent" data-id="n_llm" data-class="component.agent">
     <rect x="688" y="400" width="240" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
     <text x="808.0" y="413.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">llm → executeLLMNode</text>
-    <text x="808.0" y="428.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">llm.js:81</text>
-    <text x="808.0" y="443.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">simulateLLM :21</text>
+    <text x="808.0" y="428.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">llm.js</text>
+    <text x="808.0" y="443.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">simulateLLM</text>
     <text x="808.0" y="458.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">MOCK — no API, no key</text>
   </g>
   <g class="d-node d-component-mock" data-id="n_tool" data-class="component.mock">
     <rect x="688" y="476" width="240" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
     <text x="808.0" y="496.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">tool → executeToolNode</text>
-    <text x="808.0" y="511.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">tool.js:35 · Map :9</text>
-    <text x="808.0" y="526.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">7 mock tools :54-126</text>
+    <text x="808.0" y="511.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">tool.js · Map</text>
+    <text x="808.0" y="526.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">7 mock tools</text>
   </g>
   <g class="d-node d-component-mock" data-id="n_approval" data-class="component.mock">
     <rect x="688" y="552" width="240" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
     <text x="808.0" y="565.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">approval → Approval</text>
-    <text x="808.0" y="580.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">approval.js:61</text>
-    <text x="808.0" y="595.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">autoApprove ONLY :27</text>
-    <text x="808.0" y="610.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">reject ⇒ throw :67</text>
+    <text x="808.0" y="580.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">approval.js</text>
+    <text x="808.0" y="595.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">autoApprove ONLY</text>
+    <text x="808.0" y="610.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">reject ⇒ throw</text>
   </g>
   <g class="d-node d-component-service" data-id="n_condition" data-class="component.service">
     <rect x="688" y="628" width="240" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="808.0" y="641.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">condition → Condition</text>
-    <text x="808.0" y="656.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">condition.js:45</text>
-    <text x="808.0" y="671.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">10 operators :20-29</text>
-    <text x="808.0" y="686.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">engine skips subtree :272</text>
+    <text x="808.0" y="656.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">condition.js</text>
+    <text x="808.0" y="671.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">10 operators</text>
+    <text x="808.0" y="686.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">engine skips subtree</text>
   </g>
   <g class="d-node d-component-service" data-id="n_parallel" data-class="component.service">
     <rect x="688" y="704" width="240" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="808.0" y="717.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">parallel → Parallel</text>
-    <text x="808.0" y="732.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">parallel.js:26</text>
-    <text x="808.0" y="747.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3 of 6 sub-types :12</text>
-    <text x="808.0" y="762.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">allSettled :55</text>
+    <text x="808.0" y="732.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">parallel.js</text>
+    <text x="808.0" y="747.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3 of 6 sub-types</text>
+    <text x="808.0" y="762.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">allSettled</text>
   </g>
   <g class="d-node d-component-service" data-id="n_transform" data-class="component.service">
     <rect x="688" y="780" width="240" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="808.0" y="793.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">transform → Transform</text>
-    <text x="808.0" y="808.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">transform.js:102</text>
-    <text x="808.0" y="823.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">7 pure ops :17</text>
-    <text x="808.0" y="838.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">unknown op throws :112</text>
+    <text x="808.0" y="808.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">transform.js</text>
+    <text x="808.0" y="823.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">7 pure ops</text>
+    <text x="808.0" y="838.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">unknown op throws</text>
   </g>
   <g class="d-node d-component-artifact" data-id="n_out" data-class="component.artifact">
     <rect x="1432" y="296" width="212" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
     <text x="1538.0" y="316.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">stdout report</text>
-    <text x="1538.0" y="331.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">_printSummary :316</text>
-    <text x="1538.0" y="346.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">final tally demo.js:106</text>
+    <text x="1538.0" y="331.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">_printSummary</text>
+    <text x="1538.0" y="346.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">final tally demo.js</text>
   </g>
   <g class="d-node d-card-primitive" data-id="card_gate" data-class="card.primitive">
     <rect x="120" y="896" width="456" height="200" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
     <text x="128" y="950.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">VALIDATION GATE — 9 rejections, code order</text>
-    <text x="128" y="964.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">validateWorkflow :101 — 8 checks, collected not short-circuit</text>
-    <text x="128" y="978.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 id missing :104  2 nodes empty :105  3 no edges[] :108</text>
-    <text x="128" y="992.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 edge.from unknown :114  5 edge.to unknown :115</text>
-    <text x="128" y="1006.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 node.id missing :119  7 node.type missing :120</text>
-    <text x="128" y="1020.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">8 type ∉ NODE_EXECUTORS :121 → all joined, thrown :126</text>
-    <text x="128" y="1034.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">9 CYCLE sortedCount≠N :92 — NOT in validate: Kahn :64</text>
-    <text x="128" y="1048.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">reached one line after validate (:150 then :156)</text>
+    <text x="128" y="964.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">validateWorkflow — 8 checks, collected not short-circuit</text>
+    <text x="128" y="978.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 id missing 2 nodes empty 3 no edges[]</text>
+    <text x="128" y="992.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 edge.from unknown 5 edge.to unknown</text>
+    <text x="128" y="1006.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 node.id missing 7 node.type missing</text>
+    <text x="128" y="1020.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">8 type ∉ NODE_EXECUTORS → all joined, thrown</text>
+    <text x="128" y="1034.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">9 CYCLE sortedCount≠N — NOT in validate: Kahn</text>
+    <text x="128" y="1048.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">reached one line after validate ( then)</text>
   </g>
   <g class="d-node d-card-invariant" data-id="card_layers" data-class="card.invariant">
     <rect x="624" y="896" width="456" height="200" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="632" y="943.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">LAYER BARRIER + STATE MACHINE</text>
-    <text x="632" y="957.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Kahn: in-degree-0 seeds a layer :70 · whole queue = 1 layer :75</text>
-    <text x="632" y="971.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">a layer is dispatched as a unit — Promise.allSettled :186</text>
-    <text x="632" y="985.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">layer N+1 waits for layer N to settle :178</text>
-    <text x="632" y="999.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">condition returns branchTaken :53 → engine marks edges :272</text>
-    <text x="632" y="1013.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">_markBranchSkipped walks the subtree :305 · checked first :225</text>
-    <text x="632" y="1027.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">── VALID_TRANSITIONS state.js:12-18 · bad pair throws :35 ──</text>
+    <text x="632" y="957.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Kahn: in-degree-0 seeds a layer · whole queue = 1 layer</text>
+    <text x="632" y="971.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">a layer is dispatched as a unit — Promise.allSettled</text>
+    <text x="632" y="985.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">layer N+1 waits for layer N to settle</text>
+    <text x="632" y="999.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">condition returns branchTaken → engine marks edges</text>
+    <text x="632" y="1013.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">_markBranchSkipped walks the subtree · checked first</text>
+    <text x="632" y="1027.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">── VALID_TRANSITIONS state.js · bad pair throws ──</text>
     <text x="632" y="1041.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">PENDING→RUNNING · RUNNING→WAIT_APPROVAL|COMPLETED|FAILED</text>
     <text x="632" y="1055.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">WAIT_APPROVAL→RUNNING|FAILED · COMPLETED/FAILED terminal</text>
   </g>
@@ -212,11 +212,11 @@
     <rect x="1128" y="896" width="456" height="200" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
     <text x="1136" y="950.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">FAILURE SEAMS — run against the real modules</text>
     <text x="1136" y="964.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 two approval nodes in one layer ⇒ run FAILS</text>
-    <text x="1136" y="978.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  both set WAITING_APPROVAL, no self-loop :247 · state.js:15</text>
-    <text x="1136" y="992.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 a human &#x27;no&#x27; is asked twice — approval runs in retry :250</text>
-    <text x="1136" y="1006.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 maxRetries is an ATTEMPT count — loop ≤ maxRetries :23 :54</text>
-    <text x="1136" y="1020.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 a failed node erases downstream from the trace :200 :208</text>
-    <text x="1136" y="1034.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">engine defaults 2/200ms/15s :135 OVERRIDE retry 3/500/30s :13</text>
-    <text x="1136" y="1048.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">no *.test.js exists — declared test surface is empty (pkg :9)</text>
+    <text x="1136" y="978.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> both set WAITING_APPROVAL, no self-loop · state.js</text>
+    <text x="1136" y="992.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 a human &#x27;no&#x27; is asked twice — approval runs in retry</text>
+    <text x="1136" y="1006.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 maxRetries is an ATTEMPT count — loop ≤ maxRetries</text>
+    <text x="1136" y="1020.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 a failed node erases downstream from the trace</text>
+    <text x="1136" y="1034.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">engine defaults 2/200ms/15s OVERRIDE retry 3/500/30s</text>
+    <text x="1136" y="1048.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">no *.test.js exists — declared test surface is empty (pkg)</text>
   </g>
 </svg>

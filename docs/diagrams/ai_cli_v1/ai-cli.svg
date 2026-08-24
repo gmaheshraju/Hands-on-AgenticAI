@@ -29,162 +29,162 @@
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_cli_commit">
     <polyline points="240,232.0 416,232.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_ai_cli_v1-a-d-edge-primary)"/>
-    <text x="328.0" y="226.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">commit / c :27</text>
+    <text x="328.0" y="226.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">commit / c</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_cli_review">
     <polyline points="240,256.0 300,256 300,332 416,332.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_ai_cli_v1-a-d-edge-primary)"/>
-    <text x="358.0" y="326.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">review / r :32</text>
+    <text x="358.0" y="326.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">review / r</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_cli_explain">
     <polyline points="240,280.0 340,280 340,416 416,416.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_ai_cli_v1-a-d-edge-primary)"/>
-    <text x="340.0" y="342.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">explain / e :37</text>
+    <text x="340.0" y="342.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">explain / e</text>
   </g>
   <g class="d-edge d-edge-data_in" data-edge="e_git_commit">
     <polyline points="240,384.0 372,384 372,264 416,264.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_ai_cli_v1-a-d-edge-data_in)"/>
-    <text x="306.0" y="378.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">diff read :16 :24</text>
+    <text x="306.0" y="378.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">diff read</text>
   </g>
   <g class="d-edge d-edge-data_in" data-edge="e_config_cli">
     <polyline points="64,528.0 32,528 32,256 64,256.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_ai_cli_v1-a-d-edge-data_in)"/>
-    <text x="32.0" y="386.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">loadConfig :28</text>
+    <text x="32.0" y="386.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">loadConfig</text>
   </g>
   <g class="d-edge d-edge-artifact" data-edge="e_config_file">
     <polyline points="240,528.0 280,528 280,600 1320,600 1320,576 1384,576.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_ai_cli_v1-a-d-edge-artifact)"/>
-    <text x="800.0" y="594.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">save :41</text>
+    <text x="800.0" y="594.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">save</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_commit_llm">
     <polyline points="592,248.0 624,248 624,324 664,324.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_ai_cli_v1-a-d-edge-primary)"/>
-    <text x="624.0" y="280.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">commitMsg :47</text>
+    <text x="624.0" y="280.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">commitMsg</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_review_llm">
     <polyline points="592,332.0 608,332 608,348 664,348.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_ai_cli_v1-a-d-edge-primary)"/>
-    <text x="636.0" y="342.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">review :54</text>
+    <text x="636.0" y="342.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">review</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_explain_llm">
     <polyline points="592,416.0 640,416 640,372 664,372.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_ai_cli_v1-a-d-edge-primary)"/>
-    <text x="616.0" y="410.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">explain :75</text>
+    <text x="616.0" y="410.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">explain</text>
   </g>
   <g class="d-edge d-edge-call" data-edge="e_llm_mock">
     <polyline points="840,348.0 872,348 872,340 904,340.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_ai_cli_v1-a-d-edge-call)"/>
-    <text x="856.0" y="342.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">fallback :184</text>
+    <text x="856.0" y="342.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">fallback</text>
   </g>
   <g class="d-edge d-edge-call" data-edge="e_llm_oai">
     <polyline points="796.0,300 796,264 1320,264 1320,272 1384,272.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_ai_cli_v1-a-d-edge-call)"/>
-    <text x="1058.0" y="258.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">POST chat :137</text>
+    <text x="1058.0" y="258.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">POST chat</text>
   </g>
   <g class="d-edge d-edge-call" data-edge="e_llm_anth">
     <polyline points="752.0,300 752,240 1344,240 1344,376 1384,376.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_ai_cli_v1-a-d-edge-call)"/>
-    <text x="1048.0" y="234.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">POST messages :165</text>
+    <text x="1048.0" y="234.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">POST messages</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_llm_budget">
     <polyline points="752.0,396 752.0,496" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_ai_cli_v1-a-d-edge-primary)"/>
-    <text x="752.0" y="440.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">recordUsage :207 :244 :279</text>
+    <text x="752.0" y="440.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">recordUsage</text>
   </g>
   <g class="d-edge d-edge-artifact" data-edge="e_budget_file">
     <polyline points="840,544.0 1344,544 1344,672 1384,672.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_ai_cli_v1-a-d-edge-artifact)"/>
-    <text x="1092.0" y="538.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">saveUsage :18</text>
+    <text x="1092.0" y="538.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">saveUsage</text>
   </g>
   <g class="d-node d-component-entry" data-id="n_cli" data-class="component.entry">
     <rect x="64" y="208" width="176" height="96" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
     <text x="152.0" y="244.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">bin/aidev.js</text>
-    <text x="152.0" y="259.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">process.argv switch :26</text>
+    <text x="152.0" y="259.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">process.argv switch</text>
     <text x="152.0" y="274.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">7 verbs + flags</text>
   </g>
   <g class="d-node d-component-service" data-id="n_git" data-class="component.service">
     <rect x="64" y="336" width="176" height="96" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="152.0" y="372.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">git.js</text>
     <text x="152.0" y="387.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">diff / commit / log</text>
-    <text x="152.0" y="402.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">exec + execFile :1</text>
+    <text x="152.0" y="402.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">exec + execFile</text>
   </g>
   <g class="d-node d-component-service" data-id="n_config" data-class="component.service">
     <rect x="64" y="480" width="176" height="96" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="152.0" y="516.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">config.js</text>
     <text x="152.0" y="531.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">~/.aidev.json load/save</text>
-    <text x="152.0" y="546.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">isDemoMode gate :48</text>
+    <text x="152.0" y="546.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">isDemoMode gate</text>
   </g>
   <g class="d-node d-component-service" data-id="n_commit" data-class="component.service">
     <rect x="416" y="216" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="504.0" y="244.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">commit.js</text>
-    <text x="504.0" y="259.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">staged diff :16</text>
+    <text x="504.0" y="259.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">staged diff</text>
   </g>
   <g class="d-node d-component-service" data-id="n_review" data-class="component.service">
     <rect x="416" y="300" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="504.0" y="328.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">review.js</text>
-    <text x="504.0" y="343.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">diff · --json :84</text>
+    <text x="504.0" y="343.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">diff · --json</text>
   </g>
   <g class="d-node d-component-service" data-id="n_explain" data-class="component.service">
     <rect x="416" y="384" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="504.0" y="412.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">explain.js</text>
-    <text x="504.0" y="427.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">fs.readFileSync :57</text>
+    <text x="504.0" y="427.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">fs.readFileSync</text>
   </g>
   <g class="d-node d-component-service" data-id="n_llm" data-class="component.service">
     <rect x="664" y="300" width="176" height="96" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="752.0" y="336.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">llm.js</text>
-    <text x="752.0" y="351.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">isDemoMode? :184</text>
-    <text x="752.0" y="366.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">callLLM dispatch :300</text>
+    <text x="752.0" y="351.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">isDemoMode?</text>
+    <text x="752.0" y="366.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">callLLM dispatch</text>
   </g>
   <g class="d-node d-component-mock" data-id="n_mock" data-class="component.mock">
     <rect x="904" y="308" width="176" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
     <text x="992.0" y="328.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">mock heuristics</text>
-    <text x="992.0" y="343.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">llm.js:8 :39 :85</text>
+    <text x="992.0" y="343.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">llm.js</text>
     <text x="992.0" y="358.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">SIMULATED · cost 0</text>
   </g>
   <g class="d-node d-component-external" data-id="n_openai" data-class="component.external">
     <rect x="1384" y="240" width="256" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
     <text x="1512.0" y="260.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">OpenAI API</text>
     <text x="1512.0" y="275.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">api.openai.com</text>
-    <text x="1512.0" y="290.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">/v1/chat/completions :137</text>
+    <text x="1512.0" y="290.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">/v1/chat/completions</text>
   </g>
   <g class="d-node d-component-external" data-id="n_anthropic" data-class="component.external">
     <rect x="1384" y="344" width="256" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
     <text x="1512.0" y="364.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Anthropic API</text>
     <text x="1512.0" y="379.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">api.anthropic.com</text>
-    <text x="1512.0" y="394.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">/v1/messages :165</text>
+    <text x="1512.0" y="394.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">/v1/messages</text>
   </g>
   <g class="d-node d-component-service" data-id="n_budget" data-class="component.service">
     <rect x="664" y="496" width="176" height="96" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="752.0" y="532.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">budget.js</text>
-    <text x="752.0" y="547.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">recordUsage :32</text>
-    <text x="752.0" y="562.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">calculateCost :25</text>
+    <text x="752.0" y="547.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">recordUsage</text>
+    <text x="752.0" y="562.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">calculateCost</text>
   </g>
   <g class="d-node d-component-artifact" data-id="n_cfgfile" data-class="component.artifact">
     <rect x="1384" y="544" width="256" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
     <text x="1512.0" y="572.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">~/.aidev.json</text>
-    <text x="1512.0" y="587.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">config :5</text>
+    <text x="1512.0" y="587.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">config</text>
   </g>
   <g class="d-node d-component-artifact" data-id="n_usagefile" data-class="component.artifact">
     <rect x="1384" y="640" width="256" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
     <text x="1512.0" y="668.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">~/.aidev-usage.json</text>
-    <text x="1512.0" y="683.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">30-day cost ledger :6</text>
+    <text x="1512.0" y="683.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">30-day cost ledger</text>
   </g>
   <g class="d-node d-card-invariant" data-id="card_fallback" data-class="card.invariant">
     <rect x="344" y="608" width="304" height="172" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="352" y="655.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">GRACEFUL FALLBACK → mock (no network)</text>
-    <text x="352" y="669.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">isDemoMode = !api_key | provider=mock :48</text>
-    <text x="352" y="683.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">demo ⇒ mock heuristics, cost 0 :184</text>
+    <text x="352" y="669.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">isDemoMode = !api_key | provider=mock</text>
+    <text x="352" y="683.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">demo ⇒ mock heuristics, cost 0</text>
     <text x="352" y="697.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">live + overBudget ⇒ provider=mock</text>
-    <text x="352" y="711.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  commit:26 review:40 explain:62</text>
-    <text x="352" y="725.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">budget checked ONLY if !demo :24 :38 :60</text>
-    <text x="352" y="739.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">nearBudget warn &lt;20% :76 · over ≤0 :75</text>
+    <text x="352" y="711.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> commit review explain</text>
+    <text x="352" y="725.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">budget checked ONLY if !demo</text>
+    <text x="352" y="739.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">nearBudget warn &lt;20% · over ≤0</text>
   </g>
   <g class="d-node d-card-primitive" data-id="card_git" data-class="card.primitive">
     <rect x="664" y="608" width="304" height="172" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
-    <text x="672" y="655.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">git SAFETY — execFileSync, no shell :18</text>
+    <text x="672" y="655.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">git SAFETY — execFileSync, no shell</text>
     <text x="672" y="669.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">user input ⇒ execFileSync (safe):</text>
-    <text x="672" y="683.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  branchDiff:49 reviewTarget:61</text>
-    <text x="672" y="697.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  log:74 commit:82 cat:87 files:101</text>
-    <text x="672" y="711.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">fixed cmd ⇒ execSync (shell) :5</text>
-    <text x="672" y="725.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  isGitRepo:32 staged:36 unstaged:44</text>
-    <text x="672" y="739.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  status:70 branch:78 stagedFiles:94</text>
+    <text x="672" y="683.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> branchDiff reviewTarget</text>
+    <text x="672" y="697.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> log commit cat files</text>
+    <text x="672" y="711.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">fixed cmd ⇒ execSync (shell)</text>
+    <text x="672" y="725.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> isGitRepo staged unstaged</text>
+    <text x="672" y="739.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> status branch stagedFiles</text>
   </g>
   <g class="d-node d-card-primitive" data-id="card_providers" data-class="card.primitive">
     <rect x="984" y="608" width="304" height="172" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
     <text x="992" y="648.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">PROVIDERS + 6 PRICED MODELS</text>
-    <text x="992" y="662.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">callLLM: anthropic ⇒ callAnthropic :301</text>
-    <text x="992" y="676.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  else ⇒ callOpenAI (default) :304</text>
-    <text x="992" y="690.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">models config.js:19-24:</text>
-    <text x="992" y="704.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  gpt-4o-mini · gpt-4o · gpt-4-turbo</text>
-    <text x="992" y="718.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  claude-haiku-4-5 · sonnet-5 · opus-5</text>
-    <text x="992" y="732.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">mock priced 0/0 :25</text>
-    <text x="992" y="746.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">cost = tok/1M × in/out :27</text>
+    <text x="992" y="662.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">callLLM: anthropic ⇒ callAnthropic</text>
+    <text x="992" y="676.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> else ⇒ callOpenAI (default)</text>
+    <text x="992" y="690.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">models config.js:</text>
+    <text x="992" y="704.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> gpt-4o-mini · gpt-4o · gpt-4-turbo</text>
+    <text x="992" y="718.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label"> claude-haiku-4-5 · sonnet-5 · opus-5</text>
+    <text x="992" y="732.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">mock priced 0/0</text>
+    <text x="992" y="746.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">cost = tok/1M × in/out</text>
   </g>
 </svg>

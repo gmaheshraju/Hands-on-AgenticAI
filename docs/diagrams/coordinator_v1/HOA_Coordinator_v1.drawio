@@ -19,7 +19,7 @@
         <mxCell id="z_task" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
           <mxGeometry x="704" y="200" width="584" height="264" as="geometry" />
         </mxCell>
-        <mxCell id="z_task_lbl" value="per-task pipeline — _executeTask() :137" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+        <mxCell id="z_task_lbl" value="per-task pipeline — _executeTask()" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="716" y="208" width="568" height="16" as="geometry" />
         </mxCell>
         <mxCell id="z_out" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=1;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
@@ -28,17 +28,17 @@
         <mxCell id="z_out_lbl" value="④ Reported output (stdout only)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="1388" y="488" width="280" height="16" as="geometry" />
         </mxCell>
-        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI entry :19 :143&lt;br&gt;4 requests :59 :69&lt;br&gt;:79 :89 — no args" class="component.entry" id="n_demo">
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI entry&lt;br&gt;4 requests&lt;br&gt; — no args" class="component.entry" id="n_demo">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="40" y="136" width="176" height="96" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;ALL_AGENTS&lt;/b&gt;&lt;br&gt;agents.js:309 — 6 cards&lt;br&gt;15 skills, 12 names" class="component.mock" id="n_cards">
+        <object label="&lt;b&gt;ALL_AGENTS&lt;/b&gt;&lt;br&gt;agents.js — 6 cards&lt;br&gt;15 skills, 12 names" class="component.mock" id="n_cards">
           <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="40" y="256" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;DECOMPOSITION_RULES&lt;/b&gt;&lt;br&gt;decomposer.js:9&lt;br&gt;5 regex + fallback :78" class="component.mock" id="n_rules">
+        <object label="&lt;b&gt;DECOMPOSITION_RULES&lt;/b&gt;&lt;br&gt;decomposer.js&lt;br&gt;5 regex + fallback" class="component.mock" id="n_rules">
           <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="40" y="352" width="176" height="64" as="geometry" />
           </mxCell>
@@ -48,47 +48,47 @@
             <mxGeometry x="40" y="448" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;CapabilityRegistry&lt;/b&gt;&lt;br&gt;register() :19&lt;br&gt;skillIndex Map :16" class="component.service" id="n_registry">
+        <object label="&lt;b&gt;CapabilityRegistry&lt;/b&gt;&lt;br&gt;register()&lt;br&gt;skillIndex Map" class="component.service" id="n_registry">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="320" y="136" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;decomposer.js&lt;/b&gt;&lt;br&gt;decompose() :58&lt;br&gt;getExecutionPlan :97&lt;br&gt;waves by priority" class="component.service" id="n_decomp">
+        <object label="&lt;b&gt;decomposer.js&lt;/b&gt;&lt;br&gt;decompose()&lt;br&gt;getExecutionPlan&lt;br&gt;waves by priority" class="component.service" id="n_decomp">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="320" y="256" width="160" height="96" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;processRequest()&lt;/b&gt;&lt;br&gt;coordinator.js:47&lt;br&gt;wave loop :94&lt;br&gt;allSettled :99" class="component.service" id="n_exec">
+        <object label="&lt;b&gt;processRequest()&lt;/b&gt;&lt;br&gt;coordinator.js&lt;br&gt;wave loop&lt;br&gt;allSettled" class="component.service" id="n_exec">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="512" y="256" width="160" height="96" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;_executeTask()&lt;/b&gt;&lt;br&gt;coordinator.js:137&lt;br&gt;retry loop :140&lt;br&gt;maxRetries 2 :28" class="component.service" id="n_task">
+        <object label="&lt;b&gt;_executeTask()&lt;/b&gt;&lt;br&gt;coordinator.js&lt;br&gt;retry loop&lt;br&gt;maxRetries 2" class="component.service" id="n_task">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="728" y="256" width="160" height="96" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;selectAgent()&lt;/b&gt;&lt;br&gt;capability.js:80&lt;br&gt;load, then cost :70&lt;br&gt;maxConcurrency :85" class="component.service" id="n_select">
+        <object label="&lt;b&gt;selectAgent()&lt;/b&gt;&lt;br&gt;capability.js&lt;br&gt;load, then cost&lt;br&gt;maxConcurrency" class="component.service" id="n_select">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="920" y="256" width="160" height="96" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;skill handler&lt;/b&gt;&lt;br&gt;agents.js:17 :20&lt;br&gt;SIMULATED closure&lt;br&gt;setTimeout only :9" class="component.mock" id="n_handler">
+        <object label="&lt;b&gt;skill handler&lt;/b&gt;&lt;br&gt;agents.js&lt;br&gt;SIMULATED closure&lt;br&gt;setTimeout only" class="component.mock" id="n_handler">
           <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1112" y="256" width="160" height="96" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;_tryEscalation()&lt;/b&gt;&lt;br&gt;coordinator.js:225&lt;br&gt;escalatesTo chain :227" class="component.service" id="n_escalate">
+        <object label="&lt;b&gt;_tryEscalation()&lt;/b&gt;&lt;br&gt;coordinator.js&lt;br&gt;escalatesTo chain" class="component.service" id="n_escalate">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="920" y="376" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;MessageBus&lt;/b&gt;&lt;br&gt;bus.js:13 publish :28&lt;br&gt;history[] cap 500 :17" class="component.service" id="n_bus">
+        <object label="&lt;b&gt;MessageBus&lt;/b&gt;&lt;br&gt;bus.js publish&lt;br&gt;history[] cap 500" class="component.service" id="n_bus">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="920" y="520" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;run summary&lt;/b&gt;&lt;br&gt;_printRunSummary :299&lt;br&gt;demo totals :118" class="component.service" id="n_summary">
+        <object label="&lt;b&gt;run summary&lt;/b&gt;&lt;br&gt;_printRunSummary&lt;br&gt;demo totals" class="component.service" id="n_summary">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1120" y="520" width="160" height="64" as="geometry" />
           </mxCell>
@@ -98,28 +98,28 @@
             <mxGeometry x="1400" y="520" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;BUS = AUDIT LOG, NOT TRANSPORT&lt;/b&gt;&lt;br&gt;5 publish sites, ALL in coordinator.js:&lt;br&gt;  :160 TASK_REQUEST  :184 TASK_RESULT&lt;br&gt;  :200 TASK_FAILED   :245 ESCALATION&lt;br&gt;  :269 TASK_RESULT (escalated)&lt;br&gt;1 subscribe site: coordinator.js:37&lt;br&gt;  ESCALATION → console.log :39, nothing more&lt;br&gt;agents.js has 0 imports, 0 bus refs&lt;br&gt;handlers are called DIRECTLY :174 :259&lt;br&gt;bus.js:9-10 names HEARTBEAT + BROADCAST —&lt;br&gt;neither is ever published (README:90 false)" class="card.invariant" id="card_bus">
+        <object label="&lt;b&gt;BUS = AUDIT LOG, NOT TRANSPORT&lt;/b&gt;&lt;br&gt;5 publish sites, ALL in coordinator.js:&lt;br&gt; TASK_REQUEST TASK_RESULT&lt;br&gt; TASK_FAILED ESCALATION&lt;br&gt; TASK_RESULT (escalated)&lt;br&gt;1 subscribe site: coordinator.js&lt;br&gt; ESCALATION → console.log, nothing more&lt;br&gt;agents.js has 0 imports, 0 bus refs&lt;br&gt;handlers are called DIRECTLY&lt;br&gt;bus.js names HEARTBEAT + BROADCAST —&lt;br&gt;neither is ever published (README false)" class="card.invariant" id="card_bus">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="320" y="608" width="312" height="160" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;selectAgent() :80 — 7 checks, in order&lt;/b&gt;&lt;br&gt;1 skillIndex.get(skill) → ids, reg order :65&lt;br&gt;2 map to card, drop deregistered :67-68&lt;br&gt;3 sort: lower load first :70&lt;br&gt;4 tie → lower cost for THAT skill :71-73&lt;br&gt;5 no providers → null :82&lt;br&gt;6 best = providers[0] :84&lt;br&gt;7 load &amp;gt;= maxConcurrency || 5 → null :85&lt;br&gt;incrementLoad :152 fires BEFORE the await :173&lt;br&gt;→ 2nd parallel code task goes to Senior Dev&lt;br&gt;README:108 claims Junior ×2 — observed J then S" class="card.primitive" id="card_route">
+        <object label="&lt;b&gt;selectAgent() — 7 checks, in order&lt;/b&gt;&lt;br&gt;1 skillIndex.get(skill) → ids, reg order&lt;br&gt;2 map to card, drop deregistered&lt;br&gt;3 sort: lower load first&lt;br&gt;4 tie → lower cost for THAT skill&lt;br&gt;5 no providers → null&lt;br&gt;6 best = providers[0]&lt;br&gt;7 load &amp;gt;= maxConcurrency || 5 → null&lt;br&gt;incrementLoad fires BEFORE the await&lt;br&gt;→ 2nd parallel code task goes to Senior Dev&lt;br&gt;README claims Junior ×2 — observed J then S" class="card.primitive" id="card_route">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="652" y="608" width="312" height="160" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;ESCALATION: 4 NULL EXITS, 0 FIRINGS&lt;/b&gt;&lt;br&gt;_tryEscalation :225, called at :146 + :213&lt;br&gt;returns null on 4 guards, in code order:&lt;br&gt;  a assigned card has no escalatesTo :229&lt;br&gt;  b escalatesTo id not registered :232&lt;br&gt;  c target lacks that skill/handler :235&lt;br&gt;  d target handler throws :281-283&lt;br&gt;only 2 of 6 cards set escalatesTo :31 :198&lt;br&gt;demo: maxRetries 1 :49 + junior throws only&lt;br&gt;at attempt === 0 :40 ⇒ :213 unreachable&lt;br&gt;13 demo runs observed — Escalations: 0" class="card.failure" id="card_esc">
+        <object label="&lt;b&gt;ESCALATION: 4 NULL EXITS, 0 FIRINGS&lt;/b&gt;&lt;br&gt;_tryEscalation, called at +&lt;br&gt;returns null on 4 guards, in code order:&lt;br&gt; a assigned card has no escalatesTo&lt;br&gt; b escalatesTo id not registered&lt;br&gt; c target lacks that skill/handler&lt;br&gt; d target handler throws&lt;br&gt;only 2 of 6 cards set escalatesTo&lt;br&gt;demo: maxRetries 1 + junior throws only&lt;br&gt;at attempt === 0 ⇒ unreachable&lt;br&gt;13 demo runs observed — Escalations: 0" class="card.failure" id="card_esc">
           <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="984" y="608" width="312" height="160" as="geometry" />
           </mxCell>
         </object>
-        <mxCell id="e_demo_reg" value="register ×6 :32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_registry" edge="1">
+        <mxCell id="e_demo_reg" value="register ×6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_registry" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e_cards_reg" value="6 cards" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_cards" target="n_registry" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="264" y="288" /><mxPoint x="264" y="232" /><mxPoint x="360" y="232" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_demo_dec" value="decompose :71" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_decomp" edge="1">
+        <mxCell id="e_demo_dec" value="decompose" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_decomp" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="288" y="208" /><mxPoint x="288" y="280" /></Array></mxGeometry>
         </mxCell>
         <mxCell id="e_rules_dec" value="5 patterns" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_rules" target="n_decomp" edge="1">
@@ -134,22 +134,22 @@
         <mxCell id="e_exec_task" value="per task" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_exec" target="n_task" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_task_sel" value=":142" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_task" target="n_select" edge="1">
+        <mxCell id="e_task_sel" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_task" target="n_select" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_sel_handler" value=":174" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_select" target="n_handler" edge="1">
+        <mxCell id="e_sel_handler" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_select" target="n_handler" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e_reg_sel" value="skillIndex" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_registry" target="n_select" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1040" y="168" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_handler_back" value="result :194" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_handler" target="n_task" edge="1">
+        <mxCell id="e_handler_back" value="result" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_handler" target="n_task" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1192" y="368" /><mxPoint x="848" y="368" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_task_esc" value="escalate :146 :213" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_task" target="n_escalate" edge="1">
+        <mxCell id="e_task_esc" value="escalate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_task" target="n_escalate" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="808" y="392" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_esc_handler" value="senior :259" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_escalate" target="n_handler" edge="1">
+        <mxCell id="e_esc_handler" value="senior" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_escalate" target="n_handler" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1232" y="408" /></Array></mxGeometry>
         </mxCell>
         <mxCell id="e_task_bus" value="3 publishes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#E65100;fontColor=#E65100;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=4 4;" parent="1" source="n_task" target="n_bus" edge="1">
@@ -161,7 +161,7 @@
         <mxCell id="e_exec_sum" value="run object" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_exec" target="n_summary" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="632" y="496" /><mxPoint x="1160" y="496" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_bus_sum" value=":118" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#E65100;fontColor=#E65100;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=4 4;" parent="1" source="n_bus" target="n_summary" edge="1">
+        <mxCell id="e_bus_sum" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#E65100;fontColor=#E65100;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=4 4;" parent="1" source="n_bus" target="n_summary" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e_sum_out" value="console.log" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_summary" target="n_stdout" edge="1">

@@ -29,7 +29,7 @@
   </g>
   <g class="d-edge d-edge-data_in" data-edge="e_load">
     <polyline points="148.0,392 148.0,344" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_finetune_vs_rag_v1-a-d-edge-data_in)"/>
-    <text x="148.0" y="362.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">readFileSync :37 :38</text>
+    <text x="148.0" y="362.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">readFileSync</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_prep">
     <polyline points="232,312.0 384,312.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_finetune_vs_rag_v1-a-d-edge-primary)"/>
@@ -37,11 +37,11 @@
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_eval">
     <polyline points="560,312.0 664,312.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_finetune_vs_rag_v1-a-d-edge-primary)"/>
-    <text x="612.0" y="306.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">runEvaluation :101</text>
+    <text x="612.0" y="306.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">runEvaluation</text>
   </g>
   <g class="d-edge d-edge-data_in" data-edge="e_index">
     <polyline points="232,424.0 600,424 600,336 664,336.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_finetune_vs_rag_v1-a-d-edge-data_in)"/>
-    <text x="416.0" y="418.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">re-read :141 :142</text>
+    <text x="416.0" y="418.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">re-read</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_zs">
     <polyline points="840,288.0 872,288 872,224 904,224.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_finetune_vs_rag_v1-a-d-edge-primary)"/>
@@ -49,7 +49,7 @@
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_rag">
     <polyline points="840,312.0 904,312.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_finetune_vs_rag_v1-a-d-edge-primary)"/>
-    <text x="872.0" y="306.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">index 100 once :173</text>
+    <text x="872.0" y="306.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">index 100 once</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_ft">
     <polyline points="840,336.0 872,336 872,400 904,400.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_finetune_vs_rag_v1-a-d-edge-primary)"/>
@@ -73,114 +73,114 @@
   </g>
   <g class="d-edge d-edge-artifact" data-edge="e_results">
     <polyline points="708.0,360 708,496 1304,496 1304,688 1384,688.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_finetune_vs_rag_v1-a-d-edge-artifact)"/>
-    <text x="1006.0" y="490.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">allResults :200</text>
+    <text x="1006.0" y="490.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">allResults</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_cmp">
     <polyline points="796.0,360 796,576 1064,576.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_finetune_vs_rag_v1-a-d-edge-primary)"/>
-    <text x="930.0" y="570.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">allResults :109</text>
+    <text x="930.0" y="570.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">allResults</text>
   </g>
   <g class="d-edge d-edge-artifact" data-edge="e_md">
     <polyline points="1240,576.0 1328,576 1328,748 1384,748.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_finetune_vs_rag_v1-a-d-edge-artifact)"/>
-    <text x="1328.0" y="656.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">writeFileSync :111</text>
+    <text x="1328.0" y="656.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">writeFileSync</text>
   </g>
   <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
     <rect x="64" y="280" width="168" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
     <text x="148.0" y="300.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
     <text x="148.0" y="315.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">CLI · 5 steps</text>
-    <text x="148.0" y="330.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">--skip-eval :25</text>
+    <text x="148.0" y="330.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">--skip-eval</text>
   </g>
   <g class="d-node d-component-mock" data-id="n_corpus" data-class="component.mock">
     <rect x="64" y="392" width="168" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
     <text x="148.0" y="412.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">tickets.json 100</text>
     <text x="148.0" y="427.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">test-set.json 30</text>
-    <text x="148.0" y="442.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">4 categories · :37 :38</text>
+    <text x="148.0" y="442.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">4 categories</text>
   </g>
   <g class="d-node d-component-service" data-id="n_prep" data-class="component.service">
     <rect x="384" y="280" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="472.0" y="300.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">fineTuning.js</text>
-    <text x="472.0" y="315.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">validate :138</text>
-    <text x="472.0" y="330.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">writeTrainingFiles :62</text>
+    <text x="472.0" y="315.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">validate</text>
+    <text x="472.0" y="330.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">writeTrainingFiles</text>
   </g>
   <g class="d-node d-component-service" data-id="n_eval" data-class="component.service">
     <rect x="664" y="264" width="176" height="96" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="752.0" y="293.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">evaluate.js</text>
-    <text x="752.0" y="308.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runEvaluation :129</text>
-    <text x="752.0" y="323.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">evaluateApproach :85</text>
-    <text x="752.0" y="338.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">computeMetrics :23</text>
+    <text x="752.0" y="308.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runEvaluation</text>
+    <text x="752.0" y="323.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">evaluateApproach</text>
+    <text x="752.0" y="338.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">computeMetrics</text>
   </g>
   <g class="d-node d-component-agent" data-id="n_prompt" data-class="component.agent">
     <rect x="904" y="192" width="176" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
     <text x="992.0" y="205.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">prompting.js</text>
-    <text x="992.0" y="220.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">classifyZeroShot :25</text>
-    <text x="992.0" y="235.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">classifyFewShot :53</text>
-    <text x="992.0" y="250.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">8 few-shot ex. :11</text>
+    <text x="992.0" y="220.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">classifyZeroShot</text>
+    <text x="992.0" y="235.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">classifyFewShot</text>
+    <text x="992.0" y="250.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">8 few-shot ex.</text>
   </g>
   <g class="d-node d-component-agent" data-id="n_rag" data-class="component.agent">
     <rect x="904" y="280" width="176" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
     <text x="992.0" y="293.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">rag.js</text>
-    <text x="992.0" y="308.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">SimpleVectorStore :21</text>
-    <text x="992.0" y="323.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">TF-IDF · cosine :91</text>
-    <text x="992.0" y="338.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">retrieve top-5 :111</text>
+    <text x="992.0" y="308.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">SimpleVectorStore</text>
+    <text x="992.0" y="323.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">TF-IDF · cosine</text>
+    <text x="992.0" y="338.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">retrieve top-5</text>
   </g>
   <g class="d-node d-component-agent" data-id="n_ft" data-class="component.agent">
     <rect x="904" y="368" width="176" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
     <text x="992.0" y="388.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">fineTuning.js</text>
     <text x="992.0" y="403.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">classifyWithFineTuning</text>
-    <text x="992.0" y="418.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">:207 — MOCK, no weights</text>
+    <text x="992.0" y="418.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label"> — MOCK, no weights</text>
   </g>
   <g class="d-node d-component-external" data-id="n_gemini" data-class="component.external">
     <rect x="1384" y="264" width="248" height="96" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
     <text x="1508.0" y="293.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Google Gemini API</text>
     <text x="1508.0" y="308.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">gemini-2.0-flash</text>
     <text x="1508.0" y="323.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">@google/generative-ai ^0.24.0</text>
-    <text x="1508.0" y="338.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">the ONLY network call · :136</text>
+    <text x="1508.0" y="338.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">the ONLY network call</text>
   </g>
   <g class="d-node d-component-service" data-id="n_compare" data-class="component.service">
     <rect x="1064" y="544" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="1152.0" y="564.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">comparison.js</text>
-    <text x="1152.0" y="579.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">generateComparison :17</text>
-    <text x="1152.0" y="594.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">6 md sections :63-155</text>
+    <text x="1152.0" y="579.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">generateComparison</text>
+    <text x="1152.0" y="594.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">6 md sections</text>
   </g>
   <g class="d-node d-component-artifact" data-id="n_train" data-class="component.artifact">
     <rect x="1384" y="604" width="248" height="48" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
     <text x="1508.0" y="624.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">data/fine-tuning/ — 3 files</text>
-    <text x="1508.0" y="639.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">OpenAI · Gemini · instruction :62</text>
+    <text x="1508.0" y="639.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">OpenAI · Gemini · instruction</text>
   </g>
   <g class="d-node d-component-artifact" data-id="n_results" data-class="component.artifact">
     <rect x="1384" y="664" width="248" height="48" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
     <text x="1508.0" y="684.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">evaluation-results.json</text>
-    <text x="1508.0" y="699.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">evaluate.js:199 — not committed</text>
+    <text x="1508.0" y="699.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">evaluate.js — not committed</text>
   </g>
   <g class="d-node d-component-artifact" data-id="n_md" data-class="component.artifact">
     <rect x="1384" y="724" width="248" height="48" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
     <text x="1508.0" y="744.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">COMPARISON.md</text>
-    <text x="1508.0" y="759.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">the deliverable · demo.js:110</text>
+    <text x="1508.0" y="759.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">the deliverable · demo.js</text>
   </g>
   <g class="d-node d-card-invariant" data-id="card_gate" data-class="card.invariant">
     <rect x="352" y="544" width="424" height="96" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="360" y="560.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">DATA QUALITY GATE — 5 checks, complete, in code order</text>
-    <text x="360" y="574.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 imbalance max/min &gt; 2 :149 · 2 corpus &lt; 50 :156</text>
-    <text x="360" y="588.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 text &lt; 20 chars :166 · 4 duplicate texts :174</text>
-    <text x="360" y="602.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 category outside the 4-item whitelist :182</text>
-    <text x="360" y="616.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">it does not gate — demo.js prints the issues :48</text>
-    <text x="360" y="630.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">and continues to Step 2 unconditionally :60</text>
+    <text x="360" y="574.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 imbalance max/min &gt; 2 · 2 corpus &lt; 50</text>
+    <text x="360" y="588.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 text &lt; 20 chars · 4 duplicate texts</text>
+    <text x="360" y="602.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 category outside the 4-item whitelist</text>
+    <text x="360" y="616.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">it does not gate — demo.js prints the issues</text>
+    <text x="360" y="630.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">and continues to Step 2 unconditionally</text>
   </g>
   <g class="d-node d-card-primitive" data-id="card_appr" data-class="card.primitive">
     <rect x="352" y="656" width="424" height="96" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
     <text x="360" y="672.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">THE 4 EVALUATED APPROACHES — evaluate.js, in code order</text>
-    <text x="360" y="686.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 Zero-Shot :153 — categories + ticket, nothing else</text>
-    <text x="360" y="700.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 Few-Shot :163 — + 8 hand-picked examples :11</text>
-    <text x="360" y="714.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 RAG :177 — + top-5 TF-IDF neighbours of the 100</text>
-    <text x="360" y="728.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 Fine-Tuned :187 — persona prompt, ticket only :207</text>
-    <text x="360" y="742.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">one shared testSet :142 · one computeMetrics :23</text>
+    <text x="360" y="686.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 Zero-Shot — categories + ticket, nothing else</text>
+    <text x="360" y="700.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 Few-Shot — + 8 hand-picked examples</text>
+    <text x="360" y="714.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 RAG — + top-5 TF-IDF neighbours of the 100</text>
+    <text x="360" y="728.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 Fine-Tuned — persona prompt, ticket only</text>
+    <text x="360" y="742.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">one shared testSet · one computeMetrics</text>
   </g>
   <g class="d-node d-card-failure" data-id="card_mock" data-class="card.failure">
     <rect x="816" y="656" width="440" height="96" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
     <text x="824" y="672.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">SIMULATED, NOT REAL — the complete list</text>
-    <text x="824" y="686.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 no fine-tuned model: a persona prompt stands in :207</text>
-    <text x="824" y="700.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 its latency is the real API latency × 0.6 :246</text>
-    <text x="824" y="714.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 no vector DB: in-process TF-IDF maps :18 :21</text>
-    <text x="824" y="728.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 tokens are text.length / 4, never metered :45 :169 :252</text>
-    <text x="824" y="742.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 no API key → generateSampleResults() invents them :132</text>
+    <text x="824" y="686.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 no fine-tuned model: a persona prompt stands in</text>
+    <text x="824" y="700.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 its latency is the real API latency × 0.6</text>
+    <text x="824" y="714.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 no vector DB: in-process TF-IDF maps</text>
+    <text x="824" y="728.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 tokens are text.length / 4, never metered</text>
+    <text x="824" y="742.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 no API key → generateSampleResults() invents them</text>
   </g>
 </svg>

@@ -19,7 +19,7 @@
         <mxCell id="z_flow" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
           <mxGeometry x="320" y="200" width="936" height="264" as="geometry" />
         </mxCell>
-        <mxCell id="z_flow_lbl" value="Per-connection instances — one set per socket · server.js:49 :53-56" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+        <mxCell id="z_flow_lbl" value="Per-connection instances — one set per socket · server.js" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="332" y="208" width="920" height="16" as="geometry" />
         </mxCell>
         <mxCell id="z_ext" value="" style="rounded=1;fillColor=none;strokeColor=#1565C0;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#1565C0;" parent="1" vertex="1">
@@ -34,77 +34,77 @@
         <mxCell id="z_out_lbl" value="④ Browser playback (public/voice.js)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="1372" y="592" width="280" height="16" as="geometry" />
         </mxCell>
-        <object label="&lt;b&gt;mic capture&lt;/b&gt;&lt;br&gt;PCM → base64 → ws&lt;br&gt;voice.js:192-201" class="component.entry" id="n_mic">
+        <object label="&lt;b&gt;mic capture&lt;/b&gt;&lt;br&gt;PCM → base64 → ws&lt;br&gt;voice.js" class="component.entry" id="n_mic">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="56" y="252" width="144" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;4 scripted turns&lt;br&gt;:51 :56 :61 :69" class="component.entry" id="n_demo">
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;4 scripted turns&lt;br&gt;" class="component.entry" id="n_demo">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="56" y="356" width="144" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;express.static&lt;/b&gt;&lt;br&gt;public/ → browser&lt;br&gt;server.js:40-41" class="component.service" id="n_static">
+        <object label="&lt;b&gt;express.static&lt;/b&gt;&lt;br&gt;public/ → browser&lt;br&gt;server.js" class="component.service" id="n_static">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="320" y="124" width="176" height="56" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;ws message router&lt;/b&gt;&lt;br&gt;7 branches · safeSend&lt;br&gt;server.js:135 :143" class="component.service" id="n_ws">
+        <object label="&lt;b&gt;ws message router&lt;/b&gt;&lt;br&gt;7 branches · safeSend&lt;br&gt;server.js" class="component.service" id="n_ws">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="344" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;TurnManager&lt;/b&gt;&lt;br&gt;5 states · VAD · timer&lt;br&gt;:35 :80 :151" class="component.agent" id="n_turn">
+        <object label="&lt;b&gt;TurnManager&lt;/b&gt;&lt;br&gt;5 states · VAD · timer&lt;br&gt;" class="component.agent" id="n_turn">
           <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="576" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;ConversationEngine&lt;/b&gt;&lt;br&gt;8 rules · 20-turn ctx&lt;br&gt;:8 :13 :75" class="component.service" id="n_engine">
+        <object label="&lt;b&gt;ConversationEngine&lt;/b&gt;&lt;br&gt;8 rules · 20-turn ctx&lt;br&gt;" class="component.service" id="n_engine">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="808" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;MockTTS&lt;/b&gt;&lt;br&gt;3-word chunks · 16kHz&lt;br&gt;:33 :49 :76" class="component.service" id="n_tts">
+        <object label="&lt;b&gt;MockTTS&lt;/b&gt;&lt;br&gt;3-word chunks · 16kHz&lt;br&gt;" class="component.service" id="n_tts">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1040" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;MockSTT&lt;/b&gt;&lt;br&gt;buffers only · 5 phrases&lt;br&gt;:12 :17 :33" class="component.service" id="n_stt">
+        <object label="&lt;b&gt;MockSTT&lt;/b&gt;&lt;br&gt;buffers only · 5 phrases&lt;br&gt;" class="component.service" id="n_stt">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="576" y="372" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;WhisperSTT&lt;/b&gt;&lt;br&gt;OPENAI_API_KEY · whisper-1&lt;br&gt;speechToText.js:66 :88" class="component.mock" id="n_whisper">
+        <object label="&lt;b&gt;WhisperSTT&lt;/b&gt;&lt;br&gt;OPENAI_API_KEY · whisper-1&lt;br&gt;speechToText.js" class="component.mock" id="n_whisper">
           <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="268" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;CloudTTS&lt;/b&gt;&lt;br&gt;alloy · tts-1 · pcm stream&lt;br&gt;textToSpeech.js:98 :132" class="component.mock" id="n_cloud">
+        <object label="&lt;b&gt;CloudTTS&lt;/b&gt;&lt;br&gt;alloy · tts-1 · pcm stream&lt;br&gt;textToSpeech.js" class="component.mock" id="n_cloud">
           <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="380" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;playback queue&lt;/b&gt;&lt;br&gt;sequential · onended&lt;br&gt;voice.js:246 :251 :270" class="component.artifact" id="n_play">
+        <object label="&lt;b&gt;playback queue&lt;/b&gt;&lt;br&gt;sequential · onended&lt;br&gt;voice.js" class="component.artifact" id="n_play">
           <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="620" width="248" height="56" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;transcript + waveform&lt;/b&gt;&lt;br&gt;voice.js:282 :333" class="component.artifact" id="n_ui">
+        <object label="&lt;b&gt;transcript + waveform&lt;/b&gt;&lt;br&gt;voice.js" class="component.artifact" id="n_ui">
           <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="692" width="248" height="48" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;CLIENT → SERVER — every switch branch, in code order :143&lt;/b&gt;&lt;br&gt;1 start :144 — stt.reset · engine.reset · startConversation&lt;br&gt;2 stop :151 — tts.cancel · endConversation&lt;br&gt;3 audio :156 — base64 → Float32 → RMS → feedAudio + onAudioEnergy&lt;br&gt;4 simulate :167 — setNextTranscript → onCompleteUtterance → pipeline&lt;br&gt;5 interrupt :186 — only while SPEAKING: onAudioEnergy(1.0)&lt;br&gt;6 get_history :194 — undocumented in the :6-11 protocol block&lt;br&gt;7 default :198 — unknown type; malformed JSON errors earlier at :140" class="card.invariant" id="card_in">
+        <object label="&lt;b&gt;CLIENT → SERVER — every switch branch, in code order&lt;/b&gt;&lt;br&gt;1 start — stt.reset · engine.reset · startConversation&lt;br&gt;2 stop — tts.cancel · endConversation&lt;br&gt;3 audio — base64 → Float32 → RMS → feedAudio + onAudioEnergy&lt;br&gt;4 simulate — setNextTranscript → onCompleteUtterance → pipeline&lt;br&gt;5 interrupt — only while SPEAKING: onAudioEnergy(1.0)&lt;br&gt;6 get_history — undocumented in the protocol block&lt;br&gt;7 default — unknown type; malformed JSON errors earlier at" class="card.invariant" id="card_in">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="304" y="488" width="456" height="124" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;SERVER → CLIENT — all 6 types and their only emitters&lt;/b&gt;&lt;br&gt;state :60 — on every stateChange :65, and once on connect :210&lt;br&gt;transcript :91 user · :106 assistant&lt;br&gt;tts_chunk :112-119 — Float32 → Buffer → base64, index/total&lt;br&gt;tts_done :73 interrupted=true · :124 interrupted=false&lt;br&gt;history :148 empty on start · :195 on get_history&lt;br&gt;error :129 pipeline throw · :140 bad JSON · :199 unknown type&lt;br&gt;the browser handles exactly these six — voice.js:102-132" class="card.primitive" id="card_out">
+        <object label="&lt;b&gt;SERVER → CLIENT — all 6 types and their only emitters&lt;/b&gt;&lt;br&gt;state — on every stateChange, and once on connect&lt;br&gt;transcript user assistant&lt;br&gt;tts_chunk — Float32 → Buffer → base64, index/total&lt;br&gt;tts_done interrupted=true interrupted=false&lt;br&gt;history empty on start on get_history&lt;br&gt;error pipeline throw bad JSON unknown type&lt;br&gt;the browser handles exactly these six — voice.js" class="card.primitive" id="card_out">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="792" y="488" width="456" height="124" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;MIC AUDIO CANNOT PRODUCE A TRANSCRIPT — the wired path&lt;/b&gt;&lt;br&gt;1 audio :162 feedAudio() buffers the chunk — nothing drains it&lt;br&gt;2 MockSTT.transcribe() speechToText.js:38 — no caller exists&lt;br&gt;3 onEndpointWithTranscript turnManager.js:116 — no caller exists&lt;br&gt;4 partialTranscript is written only by onCompleteUtterance :111&lt;br&gt;5 endpointDetected :155 therefore carries transcript = &#x27;&#x27;&lt;br&gt;6 server.js:78 returns early on falsy — the turn ends silently&lt;br&gt;mic drives VAD only; only &#x27;simulate&#x27; reaches the engine :167-183" class="card.failure" id="card_dead">
+        <object label="&lt;b&gt;MIC AUDIO CANNOT PRODUCE A TRANSCRIPT — the wired path&lt;/b&gt;&lt;br&gt;1 audio feedAudio() buffers the chunk — nothing drains it&lt;br&gt;2 MockSTT.transcribe() speechToText.js — no caller exists&lt;br&gt;3 onEndpointWithTranscript turnManager.js — no caller exists&lt;br&gt;4 partialTranscript is written only by onCompleteUtterance&lt;br&gt;5 endpointDetected therefore carries transcript = &#x27;&#x27;&lt;br&gt;6 server.js returns early on falsy — the turn ends silently&lt;br&gt;mic drives VAD only; only &#x27;simulate&#x27; reaches the engine" class="card.failure" id="card_dead">
           <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="548" y="636" width="456" height="124" as="geometry" />
           </mxCell>
@@ -112,31 +112,31 @@
         <mxCell id="e_get" value="GET / · public/" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_mic" target="n_static" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="128" y="152" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_audio" value="{type:&#x27;audio&#x27;} base64 PCM :201" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_mic" target="n_ws" edge="1">
+        <mxCell id="e_audio" value="{type:&#x27;audio&#x27;} base64 PCM" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_mic" target="n_ws" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_demo" value="{type:&#x27;simulate&#x27;} demo.js:51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_ws" edge="1">
+        <mxCell id="e_demo" value="{type:&#x27;simulate&#x27;} demo.js" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_ws" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="388" y="388" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_feed" value="feedAudio :162 · setNextTranscript :172" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_ws" target="n_stt" edge="1">
+        <mxCell id="e_feed" value="feedAudio · setNextTranscript" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_ws" target="n_stt" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="476" y="404" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_energy" value="onAudioEnergy :163 · onCompleteUtterance :179" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_ws" target="n_turn" edge="1">
+        <mxCell id="e_energy" value="onAudioEnergy · onCompleteUtterance" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_ws" target="n_turn" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_end" value="endpointDetected :77 → processUserInput :94" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_turn" target="n_engine" edge="1">
+        <mxCell id="e_end" value="endpointDetected → processUserInput" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_turn" target="n_engine" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_gen" value="response.text → synthesize :109" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_engine" target="n_tts" edge="1">
+        <mxCell id="e_gen" value="response.text → synthesize" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_engine" target="n_tts" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_chunk" value="tts_chunk :112-119" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_tts" target="n_play" edge="1">
+        <mxCell id="e_chunk" value="tts_chunk" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_tts" target="n_play" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1320" y="284" /><mxPoint x="1320" y="648" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_state" value="stateChange :65 → {type:&#x27;state&#x27;} :60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_turn" target="n_ui" edge="1">
+        <mxCell id="e_state" value="stateChange → {type:&#x27;state&#x27;}" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_turn" target="n_ui" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="708" y="228" /><mxPoint x="1296" y="228" /><mxPoint x="1296" y="716" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_cancel" value="INTERRUPTED :69 → tts.cancel() :71" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_turn" target="n_tts" edge="1">
+        <mxCell id="e_cancel" value="INTERRUPTED → tts.cancel()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_turn" target="n_tts" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="620" y="344" /><mxPoint x="1128" y="344" /></Array></mxGeometry>
         </mxCell>
       </root>

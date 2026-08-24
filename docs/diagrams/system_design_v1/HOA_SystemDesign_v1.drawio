@@ -34,37 +34,37 @@
         <mxCell id="z_out_lbl" value="④ Output artifact" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="1356" y="608" width="280" height="16" as="geometry" />
         </mxCell>
-        <object label="&lt;b&gt;demo.js:166&lt;/b&gt;&lt;br&gt;mock LLM + fixtures" class="component.entry" id="n_demo">
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;mock LLM + fixtures" class="component.entry" id="n_demo">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="236" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;review.js:87&lt;/b&gt;&lt;br&gt;real GitHub + LLM" class="component.entry" id="n_live">
+        <object label="&lt;b&gt;review.js&lt;/b&gt;&lt;br&gt;real GitHub + LLM" class="component.entry" id="n_live">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="380" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;runReActLoop()&lt;/b&gt;&lt;br&gt;agent.js:157" class="component.service" id="n_react">
+        <object label="&lt;b&gt;runReActLoop()&lt;/b&gt;&lt;br&gt;agent.js" class="component.service" id="n_react">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="408" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;Tool Registry&lt;/b&gt;&lt;br&gt;5 tools · tools.js:64" class="component.service" id="n_tools">
+        <object label="&lt;b&gt;Tool Registry&lt;/b&gt;&lt;br&gt;5 tools · tools.js" class="component.service" id="n_tools">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="688" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;Schema · validate&lt;/b&gt;&lt;br&gt;schema.js:39" class="component.service" id="n_schema">
+        <object label="&lt;b&gt;Schema · validate&lt;/b&gt;&lt;br&gt;schema.js" class="component.service" id="n_schema">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="968" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;Simulated LLM&lt;/b&gt;&lt;br&gt;8 scripted steps · :16" class="component.mock" id="n_mockllm">
+        <object label="&lt;b&gt;Simulated LLM&lt;/b&gt;&lt;br&gt;8 scripted steps" class="component.mock" id="n_mockllm">
           <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="408" y="460" width="176" height="56" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;Mock PR data&lt;/b&gt;&lt;br&gt;mock-data.js:5" class="component.mock" id="n_mockdata">
+        <object label="&lt;b&gt;Mock PR data&lt;/b&gt;&lt;br&gt;mock-data.js" class="component.mock" id="n_mockdata">
           <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="688" y="460" width="176" height="56" as="geometry" />
           </mxCell>
@@ -74,12 +74,12 @@
             <mxGeometry x="1368" y="240" width="248" height="56" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;Anthropic API&lt;/b&gt;&lt;br&gt;review.js:26" class="component.external" id="n_anthropic">
+        <object label="&lt;b&gt;Anthropic API&lt;/b&gt;&lt;br&gt;review.js" class="component.external" id="n_anthropic">
           <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1368" y="332" width="248" height="56" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;OpenAI API&lt;/b&gt;&lt;br&gt;review.js:59" class="component.external" id="n_openai">
+        <object label="&lt;b&gt;OpenAI API&lt;/b&gt;&lt;br&gt;review.js" class="component.external" id="n_openai">
           <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1368" y="424" width="248" height="56" as="geometry" />
           </mxCell>
@@ -89,7 +89,7 @@
             <mxGeometry x="1368" y="700" width="248" height="72" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;HOW ONE ITERATION EXITS — complete, in code order&lt;/b&gt;&lt;br&gt;1 FINISH unparseable → retry message :197&lt;br&gt;2 FINISH valid → validate · dedupe · sort · return :208&lt;br&gt;3 unknown tool → error observation :234&lt;br&gt;4 stall xN identical → force-finish :262&lt;br&gt;5 neither FINISH nor ACTION → parse retry :284&lt;br&gt;6 maxIterations → empty output, cappedOut :295&lt;br&gt;&lt;i&gt;findings sort: bug → security → suggestion → nit · schema.js:138&lt;/i&gt;" class="card.invariant" id="card_exit">
+        <object label="&lt;b&gt;HOW ONE ITERATION EXITS — complete, in code order&lt;/b&gt;&lt;br&gt;1 FINISH unparseable → retry message&lt;br&gt;2 FINISH valid → validate · dedupe · sort · return&lt;br&gt;3 unknown tool → error observation&lt;br&gt;4 stall xN identical → force-finish&lt;br&gt;5 neither FINISH nor ACTION → parse retry&lt;br&gt;6 maxIterations → empty output, cappedOut&lt;br&gt;&lt;i&gt;findings sort: bug → security → suggestion → nit · schema.js&lt;/i&gt;" class="card.invariant" id="card_exit">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="408" y="540" width="456" height="152" as="geometry" />
           </mxCell>
@@ -100,13 +100,13 @@
         <mxCell id="e_live" value="runReActLoop" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_live" target="n_react" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="304" y="412" /><mxPoint x="304" y="300" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_tool" value="tool.execute :248" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_react" target="n_tools" edge="1">
+        <mxCell id="e_tool" value="tool.execute" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_react" target="n_tools" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_val" value="validate · dedupe · sort :219" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_react" target="n_schema" edge="1">
+        <mxCell id="e_val" value="validate · dedupe · sort" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_react" target="n_schema" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="540" y="364" /><mxPoint x="1012" y="364" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_llm" value="llmCall :184" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_react" target="n_mockllm" edge="1">
+        <mxCell id="e_llm" value="llmCall" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_react" target="n_mockllm" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e_fix" value="ctx.mockData branch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_mockdata" target="n_tools" edge="1">
@@ -121,7 +121,7 @@
         <mxCell id="e_oai" value="POST /v1/chat" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_live" target="n_openai" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="184" y="760" /><mxPoint x="1320" y="760" /><mxPoint x="1320" y="452" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_out" value="return output :222" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_schema" target="n_findings" edge="1">
+        <mxCell id="e_out" value="return output" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_schema" target="n_findings" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1100" y="736" /></Array></mxGeometry>
         </mxCell>
       </root>

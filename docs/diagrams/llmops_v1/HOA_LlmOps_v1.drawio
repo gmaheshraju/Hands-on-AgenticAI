@@ -7,7 +7,7 @@
         <mxCell id="z_entry" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
           <mxGeometry x="40" y="216" width="176" height="128" as="geometry" />
         </mxCell>
-        <mxCell id="z_entry_lbl" value="③ Entry — npm run demo (demo.js:74)" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+        <mxCell id="z_entry_lbl" value="③ Entry — npm run demo (demo.js)" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="52" y="224" width="160" height="16" as="geometry" />
         </mxCell>
         <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
@@ -34,87 +34,87 @@
         <mxCell id="z_out_lbl" value="④ Dashboard client — browser" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="1372" y="520" width="280" height="16" as="geometry" />
         </mxCell>
-        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;50 queries :14&lt;br&gt;await route() :82" class="component.entry" id="n_demo">
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;50 queries&lt;br&gt;await route()" class="component.entry" id="n_demo">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="248" width="128" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;classify()&lt;/b&gt;&lt;br&gt;kw .50 len .30 str .20&lt;br&gt;classifier.js:125 :135" class="component.service" id="n_classify">
+        <object label="&lt;b&gt;classify()&lt;/b&gt;&lt;br&gt;kw .50 len .30 str .20&lt;br&gt;classifier.js" class="component.service" id="n_classify">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="352" y="248" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;route()&lt;/b&gt;&lt;br&gt;router.js:153&lt;br&gt;fallback chain :167&lt;br&gt;3 logRequest sites" class="component.agent" id="n_route">
+        <object label="&lt;b&gt;route()&lt;/b&gt;&lt;br&gt;router.js&lt;br&gt;fallback chain&lt;br&gt;3 logRequest sites" class="component.agent" id="n_route">
           <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="624" y="248" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;mockModelCall() :107&lt;/b&gt;&lt;br&gt;MOCK — no network call&lt;br&gt;0.3 fail rate, len&amp;gt;300 :127" class="component.mock" id="n_mock">
+        <object label="&lt;b&gt;mockModelCall()&lt;/b&gt;&lt;br&gt;MOCK — no network call&lt;br&gt;0.3 fail rate, len&amp;gt;300" class="component.mock" id="n_mock">
           <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="248" width="240" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;MODEL_CONFIG :19&lt;/b&gt;&lt;br&gt;5 models · 3 reachable&lt;br&gt;ROUTING_TABLE :64" class="component.external" id="n_cfg">
+        <object label="&lt;b&gt;MODEL_CONFIG&lt;/b&gt;&lt;br&gt;5 models · 3 reachable&lt;br&gt;ROUTING_TABLE" class="component.external" id="n_cfg">
           <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="352" width="240" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;logRequest()&lt;/b&gt;&lt;br&gt;metrics.js:74&lt;br&gt;INSERT · 12 columns" class="component.service" id="n_log">
+        <object label="&lt;b&gt;logRequest()&lt;/b&gt;&lt;br&gt;metrics.js&lt;br&gt;INSERT · 12 columns" class="component.service" id="n_log">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="352" y="440" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;metrics.db&lt;/b&gt;&lt;br&gt;SQLite WAL :14 :21&lt;br&gt;requests table :30" class="component.artifact" id="n_db">
+        <object label="&lt;b&gt;metrics.db&lt;/b&gt;&lt;br&gt;SQLite WAL&lt;br&gt;requests table" class="component.artifact" id="n_db">
           <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="592" y="440" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;9 read queries&lt;/b&gt;&lt;br&gt;metrics.js :94-215" class="component.service" id="n_read">
+        <object label="&lt;b&gt;9 read queries&lt;/b&gt;&lt;br&gt;metrics.js" class="component.service" id="n_read">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="832" y="440" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;dashboard.js&lt;/b&gt;&lt;br&gt;http :3000 :69 :80&lt;br&gt;11-key payload :50" class="component.entry" id="n_server">
+        <object label="&lt;b&gt;dashboard.js&lt;/b&gt;&lt;br&gt;http&lt;br&gt;11-key payload" class="component.entry" id="n_server">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1072" y="440" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;public/dashboard.html&lt;/b&gt;&lt;br&gt;fetch /api/metrics :249&lt;br&gt;auto-refresh 10s :404" class="component.external" id="n_browser">
+        <object label="&lt;b&gt;public/dashboard.html&lt;/b&gt;&lt;br&gt;fetch /api/metrics&lt;br&gt;auto-refresh 10s" class="component.external" id="n_browser">
           <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="552" width="240" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;CLASSIFY → ROUTE — complete table, in code order&lt;/b&gt;&lt;br&gt;score = kw×0.50 + len×0.30 + struc×0.20 · classifier.js:135&lt;br&gt;tier: &amp;lt;0.30 simple · &amp;lt;0.55 medium · else complex :139-141&lt;br&gt;simple → haiku → sonnet → opus · router.js:65&lt;br&gt;medium → sonnet → opus · router.js:66&lt;br&gt;complex → opus, no fallback remains · router.js:67" class="card.invariant" id="card_route">
+        <object label="&lt;b&gt;CLASSIFY → ROUTE — complete table, in code order&lt;/b&gt;&lt;br&gt;score = kw×0.50 + len×0.30 + struc×0.20 · classifier.js&lt;br&gt;tier: &amp;lt;0.30 simple · &amp;lt;0.55 medium · else complex&lt;br&gt;simple → haiku → sonnet → opus · router.js&lt;br&gt;medium → sonnet → opus · router.js&lt;br&gt;complex → opus, no fallback remains · router.js" class="card.invariant" id="card_route">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="320" y="540" width="456" height="92" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;ESCALATION — LOW_QUALITY_SIGNALS, 6 in code order :92&lt;/b&gt;&lt;br&gt;1 len &amp;lt; 20 :93 · 2 /i don&#x27;t know/ :94 · 3 /i&#x27;m not sure/ :95&lt;br&gt;4 /i cannot/ &amp;amp; len&amp;lt;100 :96 · 5 /as an ai/ &amp;amp; len&amp;lt;150 :97&lt;br&gt;6 endsWith(&#x27;...&#x27;) &amp;amp; len&amp;lt;80 :98 — last in chain exempt :178&lt;br&gt;reason: response_too_short · low_quality_detected :183&lt;br&gt;error: &amp;lt;err.message&amp;gt; :240 · all_models_exhausted :273" class="card.failure" id="card_esc">
+        <object label="&lt;b&gt;ESCALATION — LOW_QUALITY_SIGNALS, 6 in code order&lt;/b&gt;&lt;br&gt;1 len &amp;lt; 20 · 2 /i don&#x27;t know/ · 3 /i&#x27;m not sure/&lt;br&gt;4 /i cannot/ &amp;amp; len&amp;lt;100 · 5 /as an ai/ &amp;amp; len&amp;lt;150&lt;br&gt;6 endsWith(&#x27;...&#x27;) &amp;amp; len&amp;lt;80 — last in chain exempt&lt;br&gt;reason: response_too_short · low_quality_detected&lt;br&gt;error: &amp;lt;err.message&amp;gt; · all_models_exhausted" class="card.failure" id="card_esc">
           <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="800" y="540" width="456" height="92" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;MODEL_CONFIG — 5 models in code order, $ per 1K :19&lt;/b&gt;&lt;br&gt;haiku · claude-haiku-4-5 · cheap · .001 / .005 · 200ms :20&lt;br&gt;gpt-4o-mini · cheap · .00015 / .0006 · 250ms :28&lt;br&gt;sonnet · claude-sonnet-5 · medium · .003 / .015 · 800ms :36&lt;br&gt;gpt-4o · medium · .0025 / .01 · 700ms :44&lt;br&gt;opus · claude-opus-5 · expensive · .005 / .025 · 2000ms :52&lt;br&gt;only haiku · sonnet · opus reachable — ROUTING_TABLE :64-68" class="card.primitive" id="card_models">
+        <object label="&lt;b&gt;MODEL_CONFIG — 5 models in code order, $ per 1K&lt;/b&gt;&lt;br&gt;haiku · claude-haiku-4-5 · cheap · .001 / .005 · 200ms&lt;br&gt;gpt-4o-mini · cheap · .00015 / .0006 · 250ms&lt;br&gt;sonnet · claude-sonnet-5 · medium · .003 / .015 · 800ms&lt;br&gt;gpt-4o · medium · .0025 / .01 · 700ms&lt;br&gt;opus · claude-opus-5 · expensive · .005 / .025 · 2000ms&lt;br&gt;only haiku · sonnet · opus reachable — ROUTING_TABLE" class="card.primitive" id="card_models">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="320" y="668" width="456" height="104" as="geometry" />
           </mxCell>
         </object>
-        <mxCell id="e_q" value="query :82" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_classify" edge="1">
+        <mxCell id="e_q" value="query" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_classify" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_cls" value="score · tier :158" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_classify" target="n_route" edge="1">
+        <mxCell id="e_cls" value="score · tier" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_classify" target="n_route" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_call" value="chain[i] :171" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_route" target="n_mock" edge="1">
+        <mxCell id="e_call" value="chain[i]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_route" target="n_mock" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_ret" value="response · tokens · cost :133" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_mock" target="n_route" edge="1">
+        <mxCell id="e_ret" value="response · tokens · cost" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_mock" target="n_route" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1444" y="208" /><mxPoint x="756" y="208" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_cfg" value="pricing :108" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_mock" target="n_cfg" edge="1">
+        <mxCell id="e_cfg" value="pricing" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_mock" target="n_cfg" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_log" value="3 sites :187 :207 :242" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_route" target="n_log" edge="1">
+        <mxCell id="e_log" value="3 sites" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_route" target="n_log" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="668" y="392" /><mxPoint x="432" y="392" /></Array></mxGeometry>
         </mxCell>
         <mxCell id="e_ins" value="INSERT" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_log" target="n_db" edge="1">
@@ -123,7 +123,7 @@
         <mxCell id="e_rd" value="SELECT" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#E65100;fontColor=#E65100;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=4 4;" parent="1" source="n_db" target="n_read" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_api" value="handleApi :44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#E65100;fontColor=#E65100;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=4 4;" parent="1" source="n_read" target="n_server" edge="1">
+        <mxCell id="e_api" value="handleApi" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#E65100;fontColor=#E65100;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=4 4;" parent="1" source="n_read" target="n_server" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e_http" value="GET /api/metrics" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#E65100;fontColor=#E65100;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=4 4;" parent="1" source="n_server" target="n_browser" edge="1">

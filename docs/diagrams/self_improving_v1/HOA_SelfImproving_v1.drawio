@@ -34,87 +34,87 @@
         <mxCell id="z_state_lbl" value="④ State &amp; persistence — data/" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="1364" y="444" width="292" height="16" as="geometry" />
         </mxCell>
-        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · main() loop&lt;br&gt;:89 · rounds=3 :36" class="component.entry" id="n_cli">
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · main() loop&lt;br&gt; · rounds=3" class="component.entry" id="n_cli">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="224" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;prompt-history/&lt;/b&gt;&lt;br&gt;v{N}.json on disk&lt;br&gt;base→v2→v3 :44" class="component.artifact" id="n_prompts">
+        <object label="&lt;b&gt;prompt-history/&lt;/b&gt;&lt;br&gt;v{N}.json on disk&lt;br&gt;base→v2→v3" class="component.artifact" id="n_prompts">
           <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="352" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;harness.js&lt;/b&gt;&lt;br&gt;run(i⇒step) wrapper&lt;br&gt;cap·cost·converge&lt;br&gt;trace JSONL :88" class="component.service" id="n_harness">
+        <object label="&lt;b&gt;harness.js&lt;/b&gt;&lt;br&gt;run(i⇒step) wrapper&lt;br&gt;cap·cost·converge&lt;br&gt;trace JSONL" class="component.service" id="n_harness">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="344" y="224" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;agent.js&lt;/b&gt;&lt;br&gt;ResearchAgent.step&lt;br&gt;observe→think→act&lt;br&gt;:18 · facts[] :83" class="component.agent" id="n_agent">
+        <object label="&lt;b&gt;agent.js&lt;/b&gt;&lt;br&gt;ResearchAgent.step&lt;br&gt;observe→think→act&lt;br&gt; · facts[]" class="component.agent" id="n_agent">
           <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="584" y="224" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;llm.js&lt;/b&gt;&lt;br&gt;LLMAdapter.chat&lt;br&gt;3-provider fallback&lt;br&gt;:18 · JSON retry :213" class="component.service" id="n_llm">
+        <object label="&lt;b&gt;llm.js&lt;/b&gt;&lt;br&gt;LLMAdapter.chat&lt;br&gt;3-provider fallback&lt;br&gt; · JSON retry" class="component.service" id="n_llm">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="856" y="156" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;tools.js&lt;/b&gt;&lt;br&gt;executeTool :93&lt;br&gt;5 tools · dispatch" class="component.service" id="n_tools">
+        <object label="&lt;b&gt;tools.js&lt;/b&gt;&lt;br&gt;executeTool&lt;br&gt;5 tools · dispatch" class="component.service" id="n_tools">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="856" y="292" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;LLM providers&lt;/b&gt;&lt;br&gt;NVIDIA·Ollama·Gemini&lt;br&gt;real fetch() :125" class="component.external" id="n_providers">
+        <object label="&lt;b&gt;LLM providers&lt;/b&gt;&lt;br&gt;NVIDIA·Ollama·Gemini&lt;br&gt;real fetch()" class="component.external" id="n_providers">
           <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1376" y="156" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;Wikipedia API&lt;/b&gt;&lt;br&gt;REST summary+search&lt;br&gt;real fetch() :8 :27" class="component.external" id="n_wiki">
+        <object label="&lt;b&gt;Wikipedia API&lt;/b&gt;&lt;br&gt;REST summary+search&lt;br&gt;real fetch()" class="component.external" id="n_wiki">
           <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1376" y="292" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;evaluator.js&lt;/b&gt;&lt;br&gt;evaluate() :1&lt;br&gt;4 dims → composite" class="component.service" id="n_eval">
+        <object label="&lt;b&gt;evaluator.js&lt;/b&gt;&lt;br&gt;evaluate()&lt;br&gt;4 dims → composite" class="component.service" id="n_eval">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="584" y="412" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;postmortem.js&lt;/b&gt;&lt;br&gt;analyzeRun() :1&lt;br&gt;7 finds · 6 prims" class="component.service" id="n_pm">
+        <object label="&lt;b&gt;postmortem.js&lt;/b&gt;&lt;br&gt;analyzeRun()&lt;br&gt;7 finds · 6 prims" class="component.service" id="n_pm">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="832" y="412" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;improver.js&lt;/b&gt;&lt;br&gt;generatePatch :1&lt;br&gt;applyPatch :82" class="component.service" id="n_improve">
+        <object label="&lt;b&gt;improver.js&lt;/b&gt;&lt;br&gt;generatePatch&lt;br&gt;applyPatch" class="component.service" id="n_improve">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1080" y="412" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;memory.js&lt;/b&gt;&lt;br&gt;SQLite agent.db · WAL&lt;br&gt;episodes+facts+FTS5&lt;br&gt;:6 · decay :116" class="component.service" id="n_memory">
+        <object label="&lt;b&gt;memory.js&lt;/b&gt;&lt;br&gt;SQLite agent.db · WAL&lt;br&gt;episodes+facts+FTS5&lt;br&gt; · decay" class="component.service" id="n_memory">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1376" y="468" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;scratchpad.js&lt;/b&gt;&lt;br&gt;Write move · Map&lt;br&gt;park·index :9 :62" class="component.service" id="n_scratch">
+        <object label="&lt;b&gt;scratchpad.js&lt;/b&gt;&lt;br&gt;Write move · Map&lt;br&gt;park·index" class="component.service" id="n_scratch">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1376" y="556" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;data/traces/&lt;/b&gt;&lt;br&gt;*.jsonl per run&lt;br&gt;harness :88" class="component.artifact" id="n_traces">
+        <object label="&lt;b&gt;data/traces/&lt;/b&gt;&lt;br&gt;*.jsonl per run&lt;br&gt;harness" class="component.artifact" id="n_traces">
           <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1376" y="644" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;STOP CONDITIONS — harness.run(), code order&lt;/b&gt;&lt;br&gt;1 AGENT_DONE — step.done (synthesize) :67&lt;br&gt;2 COST_CAP — totalCost ≥ $0.50 :72&lt;br&gt;3 CONVERGENCE — zeroFactStreak ≥ 3 :77&lt;br&gt;4 MAX_ITERATIONS — i &amp;gt; 12 (demo cap) :26&lt;br&gt;cost is SIMULATED: (in+out)·0.4 / 1e6 :102&lt;br&gt;thrown step logged &amp;amp; skipped, not fatal :32" class="card.invariant" id="card_stop">
+        <object label="&lt;b&gt;STOP CONDITIONS — harness.run(), code order&lt;/b&gt;&lt;br&gt;1 AGENT_DONE — step.done (synthesize)&lt;br&gt;2 COST_CAP — totalCost ≥ $0.50&lt;br&gt;3 CONVERGENCE — zeroFactStreak ≥ 3&lt;br&gt;4 MAX_ITERATIONS — i &amp;gt; 12 (demo cap)&lt;br&gt;cost is SIMULATED: (in+out)·0.4 / 1e6&lt;br&gt;thrown step logged &amp;amp; skipped, not fatal" class="card.invariant" id="card_stop">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="344" y="592" width="300" height="180" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;EVALUATE — 4 dims → weighted composite :15&lt;/b&gt;&lt;br&gt;factCount        w0.25 · heuristic :31&lt;br&gt;sourceDiversity  w0.20 · heuristic :46&lt;br&gt;coherence        w0.25 · LLM-as-judge :53&lt;br&gt;completeness     w0.30 · LLM-as-judge :72&lt;br&gt;Σ weights = 1.00 · no answer ⇒ all 0 :2&lt;br&gt;2 heuristics + 2 real LLM grader calls" class="card.primitive" id="card_eval">
+        <object label="&lt;b&gt;EVALUATE — 4 dims → weighted composite&lt;/b&gt;&lt;br&gt;factCount w0.25 · heuristic&lt;br&gt;sourceDiversity w0.20 · heuristic&lt;br&gt;coherence w0.25 · LLM-as-judge&lt;br&gt;completeness w0.30 · LLM-as-judge&lt;br&gt;Σ weights = 1.00 · no answer ⇒ all 0&lt;br&gt;2 heuristics + 2 real LLM grader calls" class="card.primitive" id="card_eval">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="672" y="592" width="296" height="180" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;SELF-DIAGNOSIS → THE PATCH — postmortem.js&lt;/b&gt;&lt;br&gt;7 findings (code order):&lt;br&gt;single_source :30 · premature_synthesis :46&lt;br&gt;repeated_action :65 · tool_failure :83&lt;br&gt;convergence_stall :97 · no_synthesis :109&lt;br&gt;context_bloat :121&lt;br&gt;6 primitives → weakest picked :13&lt;br&gt;instructions·contextDelivery :142 :146&lt;br&gt;contextManagement·toolInterface :150 :156&lt;br&gt;orchestration·verification :158 :162&lt;br&gt;→ LLM writes ONE patch → prompt v{N+1} :224" class="card.failure" id="card_pm">
+        <object label="&lt;b&gt;SELF-DIAGNOSIS → THE PATCH — postmortem.js&lt;/b&gt;&lt;br&gt;7 findings (code order):&lt;br&gt;single_source · premature_synthesis&lt;br&gt;repeated_action · tool_failure&lt;br&gt;convergence_stall · no_synthesis&lt;br&gt;context_bloat&lt;br&gt;6 primitives → weakest picked&lt;br&gt;instructions·contextDelivery&lt;br&gt;contextManagement·toolInterface&lt;br&gt;orchestration·verification&lt;br&gt;→ LLM writes ONE patch → prompt v{N+1}" class="card.failure" id="card_pm">
           <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="996" y="592" width="288" height="180" as="geometry" />
           </mxCell>

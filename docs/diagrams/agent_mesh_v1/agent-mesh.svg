@@ -25,121 +25,121 @@
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_submit">
     <polyline points="232,248.0 360,248.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_mesh_v1-a-d-edge-primary)"/>
-    <text x="296.0" y="242.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">submitWork :114</text>
+    <text x="296.0" y="242.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">submitWork</text>
   </g>
   <g class="d-edge d-edge-call" data-edge="e_select">
     <polyline points="536,264.0 664,264.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_agent_mesh_v1-a-d-edge-call)"/>
-    <text x="600.0" y="258.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">selectNode :229</text>
+    <text x="600.0" y="258.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">selectNode</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_enq">
     <polyline points="492.0,296 492,348 1352,348 1352.0,296" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_mesh_v1-a-d-edge-primary)"/>
-    <text x="922.0" y="342.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">enqueue :135</text>
+    <text x="922.0" y="342.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">enqueue</text>
   </g>
   <g class="d-edge d-edge-call" data-edge="e_gate">
     <polyline points="448.0,296 448,372 752,372 752.0,432" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_agent_mesh_v1-a-d-edge-call)"/>
-    <text x="600.0" y="366.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">allowRequest :129</text>
+    <text x="600.0" y="366.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">allowRequest</text>
   </g>
   <g class="d-edge d-edge-call" data-edge="e_redist">
     <polyline points="404.0,296 404,404 1056,404 1056.0,432" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_agent_mesh_v1-a-d-edge-call)"/>
-    <text x="730.0" y="398.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">redistribute :252</text>
+    <text x="730.0" y="398.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">redistribute</text>
   </g>
   <g class="d-edge d-edge-stop" data-edge="e_failed">
     <polyline points="360,464.0 324,464 324,280 360,280.0" fill="none" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_agent_mesh_v1-a-d-edge-stop)"/>
-    <text x="324.0" y="366.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">node_failed :59</text>
+    <text x="324.0" y="366.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">node_failed</text>
   </g>
   <g class="d-edge d-edge-primary" data-edge="e_reenq">
     <polyline points="1144,464.0 1144,416 1396,416 1396.0,296" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_mesh_v1-a-d-edge-primary)"/>
-    <text x="1270.0" y="410.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">re-enqueue :84</text>
+    <text x="1270.0" y="410.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">re-enqueue</text>
   </g>
   <g class="d-edge d-edge-artifact" data-edge="e_out">
     <polyline points="148.0,296 148.0,440" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_agent_mesh_v1-a-d-edge-artifact)"/>
-    <text x="148.0" y="362.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">dashboard :221</text>
+    <text x="148.0" y="362.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">dashboard</text>
   </g>
   <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
     <rect x="64" y="232" width="168" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
     <text x="148.0" y="252.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
     <text x="148.0" y="267.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">CLI · 5 scenarios</text>
-    <text x="148.0" y="282.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">main() :227</text>
+    <text x="148.0" y="282.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">main()</text>
   </g>
   <g class="d-node d-component-service" data-id="n_mesh" data-class="component.service">
     <rect x="360" y="232" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
-    <text x="448.0" y="245.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Mesh :22</text>
+    <text x="448.0" y="245.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Mesh</text>
     <text x="448.0" y="260.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">orchestrator + bus</text>
-    <text x="448.0" y="275.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">submitWork :114</text>
-    <text x="448.0" y="290.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">_onNodeFailed :240</text>
+    <text x="448.0" y="275.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">submitWork</text>
+    <text x="448.0" y="290.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">_onNodeFailed</text>
   </g>
   <g class="d-node d-component-service" data-id="n_router" data-class="component.service">
     <rect x="664" y="232" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
-    <text x="752.0" y="252.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">MeshRouter :24</text>
-    <text x="752.0" y="267.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">selectNode :65</text>
+    <text x="752.0" y="252.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">MeshRouter</text>
+    <text x="752.0" y="267.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">selectNode</text>
     <text x="752.0" y="282.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">4 strategies</text>
   </g>
   <g class="d-node d-component-agent" data-id="n_nodes" data-class="component.agent">
     <rect x="1264" y="232" width="176" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
-    <text x="1352.0" y="245.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">AgentNode ×N :20</text>
-    <text x="1352.0" y="260.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">enqueue :129</text>
+    <text x="1352.0" y="245.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">AgentNode ×N</text>
+    <text x="1352.0" y="260.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">enqueue</text>
     <text x="1352.0" y="275.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">queue · health · caps</text>
     <text x="1352.0" y="290.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">processor = async fn</text>
   </g>
   <g class="d-node d-component-service" data-id="n_monitor" data-class="component.service">
     <rect x="360" y="432" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
-    <text x="448.0" y="452.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">HealthMonitor :14</text>
-    <text x="448.0" y="467.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">_check :64</text>
+    <text x="448.0" y="452.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">HealthMonitor</text>
+    <text x="448.0" y="467.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">_check</text>
     <text x="448.0" y="482.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">heartbeat detect</text>
   </g>
   <g class="d-node d-component-service" data-id="n_cb" data-class="component.service">
     <rect x="664" y="432" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
-    <text x="752.0" y="452.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">CircuitBreaker :19</text>
-    <text x="752.0" y="467.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">Registry :128</text>
+    <text x="752.0" y="452.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">CircuitBreaker</text>
+    <text x="752.0" y="467.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">Registry</text>
     <text x="752.0" y="482.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">per-node · 3 states</text>
   </g>
   <g class="d-node d-component-service" data-id="n_redist" data-class="component.service">
     <rect x="968" y="432" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="1056.0" y="452.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">WorkRedistributor</text>
-    <text x="1056.0" y="467.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">redistribute :29</text>
+    <text x="1056.0" y="467.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">redistribute</text>
     <text x="1056.0" y="482.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">capability + cascade</text>
   </g>
   <g class="d-node d-component-artifact" data-id="n_stdout" data-class="component.artifact">
     <rect x="64" y="440" width="168" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
     <text x="148.0" y="460.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">stdout</text>
-    <text x="148.0" y="475.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">dashboardString :199</text>
+    <text x="148.0" y="475.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">dashboardString</text>
     <text x="148.0" y="490.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">console.log</text>
   </g>
   <g class="d-node d-card-invariant" data-id="card_routes" data-class="card.invariant">
     <rect x="336" y="544" width="376" height="184" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="344" y="590.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">ROUTING STRATEGIES — meshRouter.js, code order</text>
-    <text x="344" y="604.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">selectNode() switch :69-79 · default least-loaded :65</text>
-    <text x="344" y="618.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 round-robin        _roundRobin :95</text>
-    <text x="344" y="632.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 least-loaded       _leastLoaded :102  (default)</text>
-    <text x="344" y="646.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 capability-based   filter → least-loaded :75</text>
-    <text x="344" y="660.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 affinity-sticky    _affinitySticky :116</text>
-    <text x="344" y="674.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">all run on _healthyCandidates :84</text>
-    <text x="344" y="688.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">excludes FAILED + DEGRADED + excluded :88</text>
+    <text x="344" y="604.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">selectNode() switch · default least-loaded</text>
+    <text x="344" y="618.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 round-robin _roundRobin</text>
+    <text x="344" y="632.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 least-loaded _leastLoaded (default)</text>
+    <text x="344" y="646.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 capability-based filter → least-loaded</text>
+    <text x="344" y="660.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 affinity-sticky _affinitySticky</text>
+    <text x="344" y="674.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">all run on _healthyCandidates</text>
+    <text x="344" y="688.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">excludes FAILED + DEGRADED + excluded</text>
   </g>
   <g class="d-node d-card-invariant" data-id="card_breaker" data-class="card.invariant">
     <rect x="736" y="544" width="376" height="184" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
     <text x="744" y="576.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">CIRCUIT BREAKER — 3 states, circuitBreaker.js</text>
-    <text x="744" y="590.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">per-node breaker, lazy registry :128 :138</text>
-    <text x="744" y="604.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">CLOSED    requests flow :54</text>
-    <text x="744" y="618.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">OPEN      blocked :58</text>
-    <text x="744" y="632.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">HALF_OPEN one probe :55</text>
-    <text x="744" y="646.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">CLOSED→OPEN        ≥ 5 fails :90</text>
-    <text x="744" y="660.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">OPEN→HALF_OPEN     after 10s cooldown :43</text>
-    <text x="744" y="674.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">HALF_OPEN→CLOSED   probe ok :66</text>
-    <text x="744" y="688.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">HALF_OPEN→OPEN     probe fail :83</text>
-    <text x="744" y="702.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">trip() force-open :101 · reset() :107</text>
+    <text x="744" y="590.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">per-node breaker, lazy registry</text>
+    <text x="744" y="604.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">CLOSED requests flow</text>
+    <text x="744" y="618.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">OPEN blocked</text>
+    <text x="744" y="632.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">HALF_OPEN one probe</text>
+    <text x="744" y="646.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">CLOSED→OPEN ≥ 5 fails</text>
+    <text x="744" y="660.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">OPEN→HALF_OPEN after 10s cooldown</text>
+    <text x="744" y="674.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">HALF_OPEN→CLOSED probe ok</text>
+    <text x="744" y="688.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">HALF_OPEN→OPEN probe fail</text>
+    <text x="744" y="702.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">trip() force-open · reset()</text>
   </g>
   <g class="d-node d-card-failure" data-id="card_heal" data-class="card.failure">
     <rect x="1136" y="544" width="376" height="184" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
-    <text x="1144" y="576.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">SELF-HEALING on node_failed — mesh.js:240</text>
+    <text x="1144" y="576.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">SELF-HEALING on node_failed — mesh.js</text>
     <text x="1144" y="590.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">README says HealthMonitor → WorkRedistributor.</text>
-    <text x="1144" y="604.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">FALSE: monitor only emits :87; the MESH owns</text>
-    <text x="1144" y="618.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">the bus :59 and drives the reaction:</text>
-    <text x="1144" y="632.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 router.excludeNode :245</text>
-    <text x="1144" y="646.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 breaker.trip() :246</text>
-    <text x="1144" y="660.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 collect healthy nodes :249</text>
-    <text x="1144" y="674.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 redistribute pending work :252</text>
-    <text x="1144" y="688.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 if failed/total ≥ 0.5 → mesh_degraded :257</text>
-    <text x="1144" y="702.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 emit node_failed (+redistributed) :262</text>
+    <text x="1144" y="604.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">FALSE: monitor only emits; the MESH owns</text>
+    <text x="1144" y="618.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">the bus and drives the reaction:</text>
+    <text x="1144" y="632.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 router.excludeNode</text>
+    <text x="1144" y="646.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 breaker.trip()</text>
+    <text x="1144" y="660.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 collect healthy nodes</text>
+    <text x="1144" y="674.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 redistribute pending work</text>
+    <text x="1144" y="688.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 if failed/total ≥ 0.5 → mesh_degraded</text>
+    <text x="1144" y="702.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 emit node_failed (+redistributed)</text>
   </g>
 </svg>

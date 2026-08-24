@@ -34,77 +34,77 @@
         <mxCell id="z_out_lbl" value="⑤ Durable state (the only one)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
           <mxGeometry x="52" y="568" width="224" height="16" as="geometry" />
         </mxCell>
-        <object label="&lt;b&gt;chat.js&lt;/b&gt;&lt;br&gt;EventSource · 8 events&lt;br&gt;:67 · :73 · :80-193" class="component.entry" id="n_client">
+        <object label="&lt;b&gt;chat.js&lt;/b&gt;&lt;br&gt;EventSource · 8 events&lt;br&gt;" class="component.entry" id="n_client">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="72" y="232" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;Trust renderers&lt;/b&gt;&lt;br&gt;confidence :246&lt;br&gt;citation :279 hitl :344&lt;br&gt;error cards :472" class="component.entry" id="n_render">
+        <object label="&lt;b&gt;Trust renderers&lt;/b&gt;&lt;br&gt;confidence&lt;br&gt;citation hitl&lt;br&gt;error cards" class="component.entry" id="n_render">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="72" y="376" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;GET /api/chat/stream&lt;/b&gt;&lt;br&gt;SSE handler · send()&lt;br&gt;server.js:19 · :30" class="component.service" id="n_stream">
+        <object label="&lt;b&gt;GET /api/chat/stream&lt;/b&gt;&lt;br&gt;SSE handler · send()&lt;br&gt;server.js" class="component.service" id="n_stream">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="416" y="232" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;matchScenario()&lt;/b&gt;&lt;br&gt;first regex wins&lt;br&gt;agent.js:335" class="component.agent" id="n_match">
+        <object label="&lt;b&gt;matchScenario()&lt;/b&gt;&lt;br&gt;first regex wins&lt;br&gt;agent.js" class="component.agent" id="n_match">
           <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="720" y="232" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;event pump&lt;/b&gt;&lt;br&gt;for/switch · 6 cases&lt;br&gt;server.js:41 · :47" class="component.service" id="n_pump">
+        <object label="&lt;b&gt;event pump&lt;/b&gt;&lt;br&gt;for/switch · 6 cases&lt;br&gt;server.js" class="component.service" id="n_pump">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1024" y="232" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;POST hitl/resolve&lt;/b&gt;&lt;br&gt;wakes the Promise&lt;br&gt;server.js:157 · :163" class="component.service" id="n_hitl">
+        <object label="&lt;b&gt;POST hitl/resolve&lt;/b&gt;&lt;br&gt;wakes the Promise&lt;br&gt;server.js" class="component.service" id="n_hitl">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="416" y="400" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;POST chat/stop&lt;/b&gt;&lt;br&gt;sets aborted = true&lt;br&gt;server.js:145 · :149" class="component.service" id="n_stop">
+        <object label="&lt;b&gt;POST chat/stop&lt;/b&gt;&lt;br&gt;sets aborted = true&lt;br&gt;server.js" class="component.service" id="n_stop">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="720" y="400" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;in-memory Maps&lt;/b&gt;&lt;br&gt;activeStreams :14&lt;br&gt;pendingApprovals :16" class="component.service" id="n_state">
+        <object label="&lt;b&gt;in-memory Maps&lt;/b&gt;&lt;br&gt;activeStreams&lt;br&gt;pendingApprovals" class="component.service" id="n_state">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1024" y="400" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;SCENARIOS — 8 builders&lt;/b&gt;&lt;br&gt;scripted arrays · no LLM call&lt;br&gt;agent.js:47 · :82-300" class="component.external" id="n_scen">
+        <object label="&lt;b&gt;SCENARIOS — 8 builders&lt;/b&gt;&lt;br&gt;scripted arrays · no LLM call&lt;br&gt;agent.js" class="component.external" id="n_scen">
           <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1388" y="232" width="240" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;SOURCES — 5 mock docs&lt;/b&gt;&lt;br&gt;title · url · passage&lt;br&gt;agent.js:9 · no network" class="component.mock" id="n_sources">
+        <object label="&lt;b&gt;SOURCES — 5 mock docs&lt;/b&gt;&lt;br&gt;title · url · passage&lt;br&gt;agent.js · no network" class="component.mock" id="n_sources">
           <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1388" y="320" width="240" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;getHITLContinuation()&lt;/b&gt;&lt;br&gt;approved / rejected branches&lt;br&gt;agent.js:348 · :163 · :205" class="component.external" id="n_cont">
+        <object label="&lt;b&gt;getHITLContinuation()&lt;/b&gt;&lt;br&gt;approved / rejected branches&lt;br&gt;agent.js" class="component.external" id="n_cont">
           <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1388" y="408" width="240" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;localStorage&lt;/b&gt;&lt;br&gt;chat_history_v1&lt;br&gt;chat.js:13 · :638" class="component.artifact" id="n_storage">
+        <object label="&lt;b&gt;localStorage&lt;/b&gt;&lt;br&gt;chat_history_v1&lt;br&gt;chat.js" class="component.artifact" id="n_storage">
           <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="72" y="604" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;SSE EVENT TYPES — all 8, in first-emission order · server.js&lt;/b&gt;&lt;br&gt;1 stream_start :38 · 2 stream_stop :43&lt;br&gt;3 thinking :49 · 4 token :54 (text + confidence)&lt;br&gt;5 citation :64 · 6 hitl_request :69&lt;br&gt;7 done :92 :119 :129 · 8 error :101&lt;br&gt;client also listens &#x27;error_event&#x27; :147 — no server emitter" class="card.invariant" id="card_events">
+        <object label="&lt;b&gt;SSE EVENT TYPES — all 8, in first-emission order · server.js&lt;/b&gt;&lt;br&gt;1 stream_start · 2 stream_stop&lt;br&gt;3 thinking · 4 token (text + confidence)&lt;br&gt;5 citation · 6 hitl_request&lt;br&gt;7 done · 8 error&lt;br&gt;client also listens &#x27;error_event&#x27; — no server emitter" class="card.invariant" id="card_events">
           <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="384" y="520" width="424" height="92" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;SCENARIO ROUTER — 8 entries, first match wins · agent.js:47&lt;/b&gt;&lt;br&gt;1 refund_policy /refund|return|money back/i :49&lt;br&gt;2 send_email :55 · 3 database_query :58 — the two HITL flows&lt;br&gt;4 rate_limit :61 · 5 context_long :65 · 6 timeout :69&lt;br&gt;7 network_error :73 · 8 default /.*/ :77&lt;br&gt;loop skips &#x27;default&#x27; :337, returns it as fallback :342" class="card.primitive" id="card_router">
+        <object label="&lt;b&gt;SCENARIO ROUTER — 8 entries, first match wins · agent.js&lt;/b&gt;&lt;br&gt;1 refund_policy /refund|return|money back/i&lt;br&gt;2 send_email · 3 database_query — the two HITL flows&lt;br&gt;4 rate_limit · 5 context_long · 6 timeout&lt;br&gt;7 network_error · 8 default /.*/&lt;br&gt;loop skips &#x27;default&#x27;, returns it as fallback" class="card.primitive" id="card_router">
           <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="832" y="520" width="424" height="92" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;TYPED ERROR BRANCHES — the complete switch · chat.js:479&lt;/b&gt;&lt;br&gt;1 rate_limit :480 — live countdown; the server itself auto-retries after retry_after s (server.js:103-122)&lt;br&gt;2 context_too_long :507 — Summarize and Continue / Start New Chat&lt;br&gt;3 timeout :523 — Try Again / Dismiss, prints elapsed seconds&lt;br&gt;4 network_error :539 — Retry Now; header status flips to Disconnected :551&lt;br&gt;5 default :556 — Something Went Wrong / Try Again. Only branch 1 leaves the stream alive." class="card.failure" id="card_errors">
+        <object label="&lt;b&gt;TYPED ERROR BRANCHES — the complete switch · chat.js&lt;/b&gt;&lt;br&gt;1 rate_limit — live countdown; the server itself auto-retries after retry_after s (server.js)&lt;br&gt;2 context_too_long — Summarize and Continue / Start New Chat&lt;br&gt;3 timeout — Try Again / Dismiss, prints elapsed seconds&lt;br&gt;4 network_error — Retry Now; header status flips to Disconnected&lt;br&gt;5 default — Something Went Wrong / Try Again. Only branch 1 leaves the stream alive." class="card.failure" id="card_errors">
           <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="384" y="648" width="872" height="92" as="geometry" />
           </mxCell>
@@ -112,7 +112,7 @@
         <mxCell id="e_get" value="GET ?message&amp;id" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_client" target="n_stream" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_match" value="userMessage :34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_stream" target="n_match" edge="1">
+        <mxCell id="e_match" value="userMessage" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_stream" target="n_match" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e_events" value="events[]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_match" target="n_pump" edge="1">
@@ -121,31 +121,31 @@
         <mxCell id="e_scen" value="SCENARIOS[k].events()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_match" target="n_scen" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="852" y="208" /><mxPoint x="1448" y="208" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_src" value="SOURCES.find :62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_pump" target="n_sources" edge="1">
+        <mxCell id="e_src" value="SOURCES.find" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_pump" target="n_sources" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1320" y="264" /><mxPoint x="1320" y="352" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_cont" value="on resume :78" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_pump" target="n_cont" edge="1">
+        <mxCell id="e_cont" value="on resume" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_pump" target="n_cont" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1156" y="376" /><mxPoint x="1344" y="376" /><mxPoint x="1344" y="440" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_sse" value="SSE frames · send() :30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_pump" target="n_render" edge="1">
+        <mxCell id="e_sse" value="SSE frames · send()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_pump" target="n_render" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1068" y="340" /><mxPoint x="160" y="340" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_park" value="pendingApprovals.set :72" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_pump" target="n_state" edge="1">
+        <mxCell id="e_park" value="pendingApprovals.set" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_pump" target="n_state" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_hitl" value="POST resolve :461" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_render" target="n_hitl" edge="1">
+        <mxCell id="e_hitl" value="POST resolve" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_render" target="n_hitl" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="352" y="408" /><mxPoint x="352" y="432" /></Array></mxGeometry>
         </mxCell>
         <mxCell id="e_wake" value="resolve({approved, edits})" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_hitl" target="n_state" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="548" y="376" /><mxPoint x="1068" y="376" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="e_stop" value="POST stop :210" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_render" target="n_stop" edge="1">
+        <mxCell id="e_stop" value="POST stop" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_render" target="n_stop" edge="1">
           <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="204" y="488" /><mxPoint x="808" y="488" /></Array></mxGeometry>
         </mxCell>
         <mxCell id="e_abort" value="aborted = true" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_stop" target="n_state" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_save" value="setItem :638" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_render" target="n_storage" edge="1">
+        <mxCell id="e_save" value="setItem" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_render" target="n_storage" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>

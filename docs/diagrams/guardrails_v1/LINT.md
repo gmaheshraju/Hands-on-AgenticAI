@@ -1,6 +1,6 @@
 # Lint — guardrails_v1
 
-Built by `_harness/build.py` from `spec.py` sha256 `785d8bd6c707d9f1`.
+Built by `_harness/build.py` from `spec.py` sha256 `53ee29a6d6499364`.
 If that hash does not match the current spec, THIS REPORT IS STALE and its verdict must not be trusted — run `build.py --check` to detect it.
 
 Enforced by construction (cannot fail here): grid quantum, pinned ports, axis-aligned paths, theme-token-only colour, text attributes.
