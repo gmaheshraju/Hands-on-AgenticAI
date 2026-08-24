@@ -191,7 +191,7 @@ export default function FineTuningVsRag() {
       </p>
       <Diagram
       svg={finetuneVsRagSvg}
-      caption={<>The decision tree above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/09-fine-tuning-vs-rag</code> &mdash; <strong>four</strong> approaches, not three, dispatched in the order <code>runEvaluation</code> runs them (zero-shot, few-shot, RAG, fine-tuned) over the same 30-ticket held-out set, with the fine-tuned box marked MOCK because nothing is ever trained. Every box and card line cites a source line, machine-verified on each build.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/09-fine-tuning-vs-rag</code> &mdash; <strong>four</strong> approaches, not three, dispatched in the order <code>runEvaluation</code> runs them (zero-shot, few-shot, RAG, fine-tuned) over the same 30-ticket held-out set, with the fine-tuned box marked MOCK because nothing is ever trained. Each box was placed because a line of source put it there.</>}
       source="tree/main/projects/09-fine-tuning-vs-rag"
       facts="blob/main/docs/diagrams/finetune_vs_rag_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"

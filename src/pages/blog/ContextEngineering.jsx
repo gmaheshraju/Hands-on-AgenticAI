@@ -180,7 +180,7 @@ export default function ContextEngineering() {
 
       <Diagram
       svg={contextEngineeringSvg}
-      caption={<>The allocator above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/22-context-engineering</code> — nine modules whose real fitting contract is the four outcomes <code>allocate()</code> checks in code order: budget exhausted, fits whole, truncated to fit, insufficient remaining, with priority-0 sources admitted before the budget is consulted at all. Every box and card line cites a source line, machine-verified on each build.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/22-context-engineering</code> — nine modules whose real fitting contract is the four outcomes <code>allocate()</code> checks in code order: budget exhausted, fits whole, truncated to fit, insufficient remaining, with priority-0 sources admitted before the budget is consulted at all. Every label here survived a check against the file it names.</>}
       source="tree/main/projects/22-context-engineering"
       facts="blob/main/docs/diagrams/context_eng_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"

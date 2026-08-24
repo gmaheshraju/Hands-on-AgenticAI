@@ -141,7 +141,7 @@ export default function AgentMemory() {
 
       <Diagram
       svg={agentMemorySvg}
-      caption={<>The class above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/02-agent-memory</code> — two entry points driving one CRMAgent into three engines, and the three outcomes <code>MemoryStore.addFact</code> can produce, in the order <code>memory.js</code> decides them: <em>created</em> when no subject+predicate row exists, <em>contradiction_resolved</em> when the old row's confidence is halved and kept alongside the new one, <em>updated</em> when the existing row is rewritten in place. Every box and card line cites a source line, machine-verified on each build.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/02-agent-memory</code> — two entry points driving one CRMAgent into three engines, and the three outcomes <code>MemoryStore.addFact</code> can produce, in the order <code>memory.js</code> decides them: <em>created</em> when no subject+predicate row exists, <em>contradiction_resolved</em> when the old row's confidence is halved and kept alongside the new one, <em>updated</em> when the existing row is rewritten in place. Nothing on it is drawn from the README — only from the code.</>}
       source="tree/main/projects/02-agent-memory"
       facts="blob/main/docs/diagrams/agent_memory_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"

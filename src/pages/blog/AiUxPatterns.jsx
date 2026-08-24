@@ -541,7 +541,7 @@ export default function AiUxPatterns() {
 
       <Diagram
       svg={aiUxSvg}
-      caption={<>The hook above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/12-ai-ux</code> — the complete set of eight SSE event types in the order <code>server.js</code> first emits them (<code>stream_start</code> through <code>error</code>), the HITL park that keeps one connection open on a resolver stashed in <code>pendingApprovals</code>, and the single durable artifact in the whole system: one <code>localStorage</code> key, browser-side. Every box and card line cites a source line, machine-verified on each build.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/12-ai-ux</code> — the complete set of eight SSE event types in the order <code>server.js</code> first emits them (<code>stream_start</code> through <code>error</code>), the HITL park that keeps one connection open on a resolver stashed in <code>pendingApprovals</code>, and the single durable artifact in the whole system: one <code>localStorage</code> key, browser-side. Drawn from the source, not from the documentation.</>}
       source="tree/main/projects/12-ai-ux"
       facts="blob/main/docs/diagrams/ai_ux_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"

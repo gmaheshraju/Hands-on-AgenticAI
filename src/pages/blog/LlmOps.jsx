@@ -355,7 +355,7 @@ export default function LlmOps() {
 
       <Diagram
       svg={llmopsSvg}
-      caption={<>The router above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/06-llmops</code> — the complete <code>ROUTING_TABLE</code>, three chains in code order (<code>simple</code> ▸ haiku, sonnet, opus; <code>medium</code> ▸ sonnet, opus; <code>complex</code> ▸ opus alone, with no fallback left), and the finding that 2 of the 5 models in <code>MODEL_CONFIG</code> are priced but unroutable. Every box and card line cites a source line, machine-verified on each build.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/06-llmops</code> — the complete <code>ROUTING_TABLE</code>, three chains in code order (<code>simple</code> ▸ haiku, sonnet, opus; <code>medium</code> ▸ sonnet, opus; <code>complex</code> ▸ opus alone, with no fallback left), and the finding that 2 of the 5 models in <code>MODEL_CONFIG</code> are priced but unroutable. Drawn from the source, not from the documentation.</>}
       source="tree/main/projects/06-llmops"
       facts="blob/main/docs/diagrams/llmops_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"

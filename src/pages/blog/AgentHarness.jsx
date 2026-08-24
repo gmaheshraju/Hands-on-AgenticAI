@@ -179,7 +179,7 @@ export default function AgentHarness() {
 
       <Diagram
       svg={harnessSvg}
-      caption={<>The snippet above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/03-agent-harness</code> — four stop conditions in the order the loop actually checks them, the tool surface, and the two files a run writes. Every box and card line cites a source line, machine-verified on each build.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/03-agent-harness</code> — four stop conditions in the order the loop actually checks them, the tool surface, and the two files a run writes. Every element traces to a line in that source tree.</>}
       source="tree/main/projects/03-agent-harness"
       facts="blob/main/docs/diagrams/agent_harness_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"

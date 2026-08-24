@@ -164,7 +164,7 @@ export default function RagDeepDive() {
 
       <Diagram
       svg={ragPipelineSvg}
-      caption={<>The code above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/05-rag-pipeline</code> — seven tuning knobs read in one constructor block, narrowing the candidate funnel 20 BM25 + 20 vector → 15 survivors of RRF → 5 chunks that reach the answer prompt. Every box and card line cites a source line, machine-verified on each build.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/05-rag-pipeline</code> — seven tuning knobs read in one constructor block, narrowing the candidate funnel 20 BM25 + 20 vector → 15 survivors of RRF → 5 chunks that reach the answer prompt. Every element traces to a line in that source tree.</>}
       source="tree/main/projects/05-rag-pipeline"
       facts="blob/main/docs/diagrams/rag_pipeline_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"

@@ -421,7 +421,7 @@ export default function CostLatencyEngineering() {
 
       <Diagram
       svg={costLatencySvg}
-      caption={<>The router above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/11-cost-latency</code> &mdash; the seven steps of <code>runOptimizedPipeline</code> in the order the code runs them, with the semantic cache first, so a hit short-circuits and that turn is never compressed, never routed, never truncated. Every box and card line cites a source line, machine-verified on each build.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/11-cost-latency</code> &mdash; the seven steps of <code>runOptimizedPipeline</code> in the order the code runs them, with the semantic cache first, so a hit short-circuits and that turn is never compressed, never routed, never truncated. Every element traces to a line in that source tree.</>}
       source="tree/main/projects/11-cost-latency"
       facts="blob/main/docs/diagrams/cost_latency_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"

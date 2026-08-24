@@ -202,7 +202,7 @@ export default function MultiAgentSystems() {
 
       <Diagram
       svg={multiAgentSvg}
-      caption={<>The code above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/04-multi-agent-systems</code> — all eight message types in the order the supervisor publishes them, and all five bus channels, keyed by agent name rather than by topic. It also shows what the project's own README gets wrong: every one of the 5 <code>bus.subscribe</code> and 10 <code>bus.publish</code> calls lives in <code>supervisor.js</code>, the four agent modules contain zero bus references, and so no agent-to-agent edge exists. Every box and card line cites a source line, machine-verified on each build.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/04-multi-agent-systems</code> — all eight message types in the order the supervisor publishes them, and all five bus channels, keyed by agent name rather than by topic. It also shows what the project's own README gets wrong: every one of the 5 <code>bus.subscribe</code> and 10 <code>bus.publish</code> calls lives in <code>supervisor.js</code>, the four agent modules contain zero bus references, and so no agent-to-agent edge exists. Every label here survived a check against the file it names.</>}
       source="tree/main/projects/04-multi-agent-systems"
       facts="blob/main/docs/diagrams/multi_agent_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"

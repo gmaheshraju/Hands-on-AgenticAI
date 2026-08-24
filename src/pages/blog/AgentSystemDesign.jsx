@@ -123,7 +123,7 @@ export default function AgentSystemDesign() {
 
       <Diagram
       svg={systemDesignSvg}
-      caption={<>The loop above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/01-agent-system-design</code> — the two entry points (demo and live) over one <code>runReActLoop</code>, and the six ways that loop can exit an iteration in the order it checks them: FINISH with unparseable JSON, FINISH with valid output, an unknown tool name, a stalled repeat observation, a response matching neither, and the iteration cap. Every box and card line cites a source line, machine-verified on each build.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/01-agent-system-design</code> — the two entry points (demo and live) over one <code>runReActLoop</code>, and the six ways that loop can exit an iteration in the order it checks them: FINISH with unparseable JSON, FINISH with valid output, an unknown tool name, a stalled repeat observation, a response matching neither, and the iteration cap. Each box was placed because a line of source put it there.</>}
       source="tree/main/projects/01-agent-system-design"
       facts="blob/main/docs/diagrams/system_design_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
@@ -596,7 +596,7 @@ function RagPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "I'd use hybrid search with reranking rather than pure vector similarity. Vector search is great for semantic matching, but it misses exact terms — if a user asks about error code E_TIMEOUT, vector search might return results about 'connection issues' instead of the exact error. BM25 catches those exact matches. The reranker then sorts the combined results by actual relevance to the query, which improves answer quality by 15-30% in our benchmarks."
+        "I'd use hybrid search with reranking rather than pure vector similarity. Vector search is great for semantic matching, but it misses exact terms — if a user asks about error code E_TIMEOUT, vector search might return results about 'connection issues' instead of the exact error. BM25 catches those exact matches. The reranker then sorts the combined results by actual relevance to the query, which improves answer quality measurably — hybrid retrieval is a well-established win in the IR literature."
       </Insight></FadeIn>
     </div>
   );

@@ -131,7 +131,7 @@ export default function ForwardDeployedEngineering() {
 
       <Diagram
       svg={forwardDeployedSvg}
-      caption={<>The interview answer above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/14-forward-deployed-engineering</code> &mdash; the same enterprise document pilot, with the eval builder and the domain adapter drawn as siblings consuming the same processed corpus rather than a chain, and all nine deployment-readiness checks in the order <code>run()</code> evaluates them. Every box and card line cites a source line, machine-verified on each build.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/14-forward-deployed-engineering</code> &mdash; the same enterprise document pilot, with the eval builder and the domain adapter drawn as siblings consuming the same processed corpus rather than a chain, and all nine deployment-readiness checks in the order <code>run()</code> evaluates them. The card contents are the real enumerations, in the order the code runs them.</>}
       source="tree/main/projects/14-forward-deployed-engineering"
       facts="blob/main/docs/diagrams/forward_deployed_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"

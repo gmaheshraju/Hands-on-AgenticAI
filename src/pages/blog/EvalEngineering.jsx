@@ -422,7 +422,7 @@ export default function EvalEngineering() {
 
       <Diagram
       svg={evalEngineeringSvg}
-      caption={<>The code above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/08-eval-engineering</code> &mdash; the nine steps of <code>runEval()</code> in code order, the three weighted dimensions (faithfulness 0.4, relevance 0.3, completeness 0.3), and the two judge backends the run can be pointed at. Every box and card line cites a source line, machine-verified on each build.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/08-eval-engineering</code> &mdash; the nine steps of <code>runEval()</code> in code order, the three weighted dimensions (faithfulness 0.4, relevance 0.3, completeness 0.3), and the two judge backends the run can be pointed at. Nothing on it is drawn from the README — only from the code.</>}
       source="tree/main/projects/08-eval-engineering"
       facts="blob/main/docs/diagrams/eval_engineering_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"

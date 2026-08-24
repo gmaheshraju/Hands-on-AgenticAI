@@ -332,7 +332,7 @@ export default function ToolUseFunctionCalling() {
 
       <Diagram
       svg={toolUseSvg}
-      caption={<>The tiering code above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/10-tool-use</code>, a text-to-SQL agent whose permission gate is <code>validateQuery()</code> — ten checks evaluated top-to-bottom where the first match returns, eight of them <em>blocked</em> (multiple statements, non-SELECT, 14 destructive keywords, 6 metadata patterns, <code>load_extension</code>, any table outside the four allowed, subquery depth over 2, UNION-with-constant) and two <em>confirm</em> (more than 3 JOINs, no WHERE clause). Every box and card line cites a source line, machine-verified on each build.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/10-tool-use</code>, a text-to-SQL agent whose permission gate is <code>validateQuery()</code> — ten checks evaluated top-to-bottom where the first match returns, eight of them <em>blocked</em> (multiple statements, non-SELECT, 14 destructive keywords, 6 metadata patterns, <code>load_extension</code>, any table outside the four allowed, subquery depth over 2, UNION-with-constant) and two <em>confirm</em> (more than 3 JOINs, no WHERE clause). Each box was placed because a line of source put it there.</>}
       source="tree/main/projects/10-tool-use"
       facts="blob/main/docs/diagrams/tool_use_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"

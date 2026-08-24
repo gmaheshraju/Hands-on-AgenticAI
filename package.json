@@ -8,7 +8,8 @@
     "build": "vite build && node scripts/prerender.mjs",
     "build:spa": "vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "verify:diagrams": "python3 docs/diagrams/_harness/build.py --check && python3 docs/diagrams/_harness/verify_facts.py --specs"
   },
   "dependencies": {
     "react": "^19.2.7",
@@ -20,7 +21,6 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
     "oxlint": "^1.71.0",
-
     "vite": "^8.1.1"
   }
 }

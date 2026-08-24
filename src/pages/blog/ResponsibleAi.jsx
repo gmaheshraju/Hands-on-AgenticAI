@@ -262,7 +262,7 @@ function Tab1() {
 
       <Diagram
         svg={responsibleAiSvg}
-        caption={<>The audit above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/13-responsible-ai</code> — a matched-pair bias audit whose <code>analyzeResults</code> runs exactly four tests per group pair, in code order: chi-squared on decision flips, Welch's t-test on score gaps, Cohen's d, and the 80% demographic-parity rule, then ORs their verdicts. The finding ladder they feed sets the risk level, and one CRITICAL anywhere is enough to render the model card's deployment line as <code>NOT_APPROVED</code>. Every box and card line cites a source line, machine-verified on each build.</>}
+        caption={<><strong>This is the architecture of the working code</strong> in <code>projects/13-responsible-ai</code> — a matched-pair bias audit whose <code>analyzeResults</code> runs exactly four tests per group pair, in code order: chi-squared on decision flips, Welch's t-test on score gaps, Cohen's d, and the 80% demographic-parity rule, then ORs their verdicts. The finding ladder they feed sets the risk level, and one CRITICAL anywhere is enough to render the model card's deployment line as <code>NOT_APPROVED</code>. Nothing on it is drawn from the README — only from the code.</>}
         source="tree/main/projects/13-responsible-ai"
         facts="blob/main/docs/diagrams/responsible_ai_v1/FACTS.md"
         repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
