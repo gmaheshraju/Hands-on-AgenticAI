@@ -4,7 +4,7 @@
 Usage:  /usr/bin/python3 _harness/build.py [dir ...]      (default: all *_v* dirs)
 Exit 1 if any diagram has a lint failure.
 """
-import sys, os, importlib.util, json
+import sys, os, importlib.util, json, hashlib
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
@@ -29,17 +29,48 @@ def build(d):
     detail = ''
     for k, v in res.items():
         for item in v: detail += f"- `{k}` {item}\n"
+    # STAMP THE SOURCE. A committed report that cannot detect its own staleness is
+    # a green light from a stale instrument -- edit spec.py, skip the rebuild, and
+    # this file still claims CLEAN for a state that no longer exists. The hash makes
+    # that detectable: `build.py --check` fails when a LINT.md no longer matches its spec.
+    spec_sha = hashlib.sha256(open(os.path.join(d, 'spec.py'), 'rb').read()).hexdigest()
     open(os.path.join(d, 'LINT.md'), 'w').write(
         f"# Lint — {os.path.basename(d)}\n\n"
-        f"Built by `_harness/build.py`. Enforced by construction (cannot fail here): grid quantum, "
-        f"pinned ports, axis-aligned paths, theme-token-only colour, text attributes.\n\n"
+        f"Built by `_harness/build.py` from `spec.py` sha256 `{spec_sha[:16]}`.\n"
+        f"If that hash does not match the current spec, THIS REPORT IS STALE and its "
+        f"verdict must not be trusted — run `build.py --check` to detect it.\n\n"
+        f"Enforced by construction (cannot fail here): grid quantum, pinned ports, "
+        f"axis-aligned paths, theme-token-only colour, text attributes.\n\n"
         f"| Emergent check | Violations |\n|---|---|\n" + '\n'.join(rows) + "\n\n" +
         (detail and f"## Detail\n{detail}\n" or "") +
         f"\nHuman render gate is NOT covered by any of the above "
         f"(`DIAGRAM_RULES.md:108-111`). Legibility remains Mahesh's.\n")
     return os.path.basename(d), sp, n, res
 
+def check_stale(dirs):
+    """Fail if any committed LINT.md no longer matches its spec.py."""
+    stale = []
+    for d in dirs:
+        lp = os.path.join(d, 'LINT.md')
+        if not os.path.exists(lp):
+            stale.append((os.path.basename(d), 'NO LINT.md')); continue
+        want = hashlib.sha256(open(os.path.join(d, 'spec.py'), 'rb').read()).hexdigest()[:16]
+        txt = open(lp).read()
+        if want not in txt:
+            stale.append((os.path.basename(d), 'spec changed since last build'))
+    return stale
+
 if __name__ == '__main__':
+    if '--check' in sys.argv:
+        sys.argv.remove('--check')
+        dirs = sys.argv[1:] or sorted(
+            os.path.join(ROOT, x) for x in os.listdir(ROOT)
+            if '_v' in x and os.path.isdir(os.path.join(ROOT, x))
+            and os.path.exists(os.path.join(ROOT, x, 'spec.py')))
+        st = check_stale(dirs)
+        print(f"stale-report check: {len(dirs)} diagram(s), {len(st)} stale")
+        for s_ in st: print(f"  STALE  {s_[0]}: {s_[1]}")
+        sys.exit(1 if st else 0)
     dirs = sys.argv[1:] or sorted(
         os.path.join(ROOT, x) for x in os.listdir(ROOT)
         if '_v' in x and os.path.isdir(os.path.join(ROOT, x)) and os.path.exists(os.path.join(ROOT, x, 'spec.py')))
