@@ -4,7 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
-import Diagram from '../../components/Diagram';
+import Diagram, { ConceptNote } from '../../components/Diagram';
 import contextEngineeringSvg from '../../../docs/diagrams/context_eng_v1/context-engineering.svg?raw';
 
 const BUDGET_CODE = `function allocateTokenBudget(maxTokens, options = {}) {
@@ -177,6 +177,14 @@ export default function ContextEngineering() {
         in what order, with what token budget, and why getting it wrong silently kills
         your agent's performance.
       </p>
+
+      <Diagram
+      svg={contextEngineeringSvg}
+      caption={<>The allocator above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/22-context-engineering</code> — nine modules whose real fitting contract is the four outcomes <code>allocate()</code> checks in code order: budget exhausted, fits whole, truncated to fit, insufficient remaining, with priority-0 sources admitted before the budget is consulted at all. Every box and card line cites a source line, machine-verified on each build.</>}
+      source="tree/main/projects/22-context-engineering"
+      facts="blob/main/docs/diagrams/context_eng_v1/FACTS.md"
+      repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
+      />
 
       <div style={styles.tabWrap}>
         {TABS.map((t, i) => (
@@ -365,6 +373,7 @@ function ContextBudgetPanel() {
       />
 
       <ContextPipelineDiagram />
+      <ConceptNote />
 
       <FadeIn><Decision question="How to partition a context window">
         Every context window has competing consumers. A practical partition for a 128K model:
@@ -396,13 +405,6 @@ function ContextBudgetPanel() {
 
       <FadeIn delay={240}><CodeBlock filename="budget-allocator.js" code={BUDGET_CODE} output={BUDGET_OUTPUT} /></FadeIn>
 
-      <Diagram
-        svg={contextEngineeringSvg}
-        caption={<>The allocator above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/22-context-engineering</code> — nine modules whose real fitting contract is the four outcomes <code>allocate()</code> checks in code order: budget exhausted, fits whole, truncated to fit, insufficient remaining, with priority-0 sources admitted before the budget is consulted at all. Every box and card line cites a source line, machine-verified on each build.</>}
-        source="tree/main/projects/22-context-engineering"
-        facts="blob/main/docs/diagrams/context_eng_v1/FACTS.md"
-        repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
-      />
 
       <FadeIn delay={320}><Decision question="What to do when everything doesn't fit">
         Three strategies, in order of preference:

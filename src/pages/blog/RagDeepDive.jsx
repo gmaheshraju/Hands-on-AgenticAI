@@ -4,7 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
-import Diagram from '../../components/Diagram';
+import Diagram, { ConceptNote } from '../../components/Diagram';
 import ragPipelineSvg from '../../../docs/diagrams/rag_pipeline_v1/rag-pipeline.svg?raw';
 
 const CHUNKER_CODE = `function recursiveSplit(text, { maxTokens = 512, overlap = 100 } = {}) {
@@ -276,6 +276,7 @@ function ChunkingPanel() {
       />
 
       <ChunkComparisonDiagram />
+      <ConceptNote />
 
       <FadeIn><CodeBlock filename="recursive-splitter.js" code={CHUNKER_CODE} output={CHUNKER_OUTPUT} /></FadeIn>
 

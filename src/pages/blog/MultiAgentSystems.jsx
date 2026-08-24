@@ -4,7 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
-import Diagram from '../../components/Diagram';
+import Diagram, { ConceptNote } from '../../components/Diagram';
 import multiAgentSvg from '../../../docs/diagrams/multi_agent_v1/multi-agent.svg?raw';
 
 const SUPERVISOR_CODE = `async function supervisorAgent(userMessage, specialists) {
@@ -200,6 +200,14 @@ export default function MultiAgentSystems() {
         and the honest truth about when single-agent beats multi-agent.
       </p>
 
+      <Diagram
+      svg={multiAgentSvg}
+      caption={<>The code above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/04-multi-agent-systems</code> — all eight message types in the order the supervisor publishes them, and all five bus channels, keyed by agent name rather than by topic. It also shows what the project's own README gets wrong: every one of the 5 <code>bus.subscribe</code> and 10 <code>bus.publish</code> calls lives in <code>supervisor.js</code>, the four agent modules contain zero bus references, and so no agent-to-agent edge exists. Every box and card line cites a source line, machine-verified on each build.</>}
+      source="tree/main/projects/04-multi-agent-systems"
+      facts="blob/main/docs/diagrams/multi_agent_v1/FACTS.md"
+      repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
+      />
+
       <div style={styles.tabWrap}>
         {TABS.map((t, i) => (
           <button key={t} onClick={() => setTab(i)} style={{ ...styles.tabBtn, ...(tab === i ? styles.tabActive : {}) }}>{t}</button>
@@ -353,6 +361,7 @@ function PatternsPanel() {
       />
 
       <MultiAgentDiagram />
+      <ConceptNote />
 
       <div style={{ background: 'var(--bg-code)', borderTopWidth: 1, borderTopStyle: 'solid', borderTopColor: 'var(--border)', borderRightWidth: 1, borderRightStyle: 'solid', borderRightColor: 'var(--border)', borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', borderLeftWidth: 3, borderLeftStyle: 'solid', borderLeftColor: 'var(--bg-accent-strong)', borderRadius: 'var(--radius-md)', padding: '14px 16px', marginBottom: 16 }}>
         <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-accent)', marginBottom: 6, fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>MAHESH'S EVOLUTION FRAMEWORK</p>
@@ -375,13 +384,6 @@ function PatternsPanel() {
 
       <FadeIn><CodeBlock filename="supervisor-agent.js" code={SUPERVISOR_CODE} output={SUPERVISOR_OUTPUT} /></FadeIn>
 
-      <Diagram
-        svg={multiAgentSvg}
-        caption={<>The code above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/04-multi-agent-systems</code> — all eight message types in the order the supervisor publishes them, and all five bus channels, keyed by agent name rather than by topic. It also shows what the project's own README gets wrong: every one of the 5 <code>bus.subscribe</code> and 10 <code>bus.publish</code> calls lives in <code>supervisor.js</code>, the four agent modules contain zero bus references, and so no agent-to-agent edge exists. Every box and card line cites a source line, machine-verified on each build.</>}
-        source="tree/main/projects/04-multi-agent-systems"
-        facts="blob/main/docs/diagrams/multi_agent_v1/FACTS.md"
-        repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
-      />
 
       <FadeIn><Decision question="1. Supervisor pattern (hierarchical)">
         <Pill type="green">Most common</Pill> One supervisor agent routes tasks to specialist agents, collects results, and synthesizes the final response. The supervisor is the only agent that talks to the user.

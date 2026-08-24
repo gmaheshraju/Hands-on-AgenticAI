@@ -4,7 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
-import Diagram from '../../components/Diagram';
+import Diagram, { ConceptNote } from '../../components/Diagram';
 import evalEngineeringSvg from '../../../docs/diagrams/eval_engineering_v1/eval-engineering.svg?raw';
 
 const EVAL_HARNESS_CODE = `async function runEvals(testCases, agent, judges) {
@@ -420,6 +420,14 @@ export default function EvalEngineering() {
         if your AI system actually works, and catch when it silently breaks.
       </p>
 
+      <Diagram
+      svg={evalEngineeringSvg}
+      caption={<>The code above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/08-eval-engineering</code> &mdash; the nine steps of <code>runEval()</code> in code order, the three weighted dimensions (faithfulness 0.4, relevance 0.3, completeness 0.3), and the two judge backends the run can be pointed at. Every box and card line cites a source line, machine-verified on each build.</>}
+      source="tree/main/projects/08-eval-engineering"
+      facts="blob/main/docs/diagrams/eval_engineering_v1/FACTS.md"
+      repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
+      />
+
       <div style={styles.tabWrap}>
         {TABS.map((t, i) => (
           <button key={t} onClick={() => setTab(i)}
@@ -591,6 +599,7 @@ function FrameworksPanel() {
       />
 
       <EvalPipelineDiagram />
+      <ConceptNote />
 
       <FadeIn><Decision question="What dimensions should you evaluate? (It's NOT just correctness)">
         <Pill type="green">Correctness</Pill> Does the answer match ground truth? The obvious one. But useless in isolation &mdash; a correct answer buried in three paragraphs of hallucinated context scores high on correctness and zero on faithfulness.
@@ -628,13 +637,6 @@ function FrameworksPanel() {
 
       <FadeIn delay={300}><CodeBlock filename="eval-harness.js" code={EVAL_HARNESS_CODE} output={EVAL_HARNESS_OUTPUT} /></FadeIn>
 
-      <Diagram
-        svg={evalEngineeringSvg}
-        caption={<>The code above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/08-eval-engineering</code> &mdash; the nine steps of <code>runEval()</code> in code order, the three weighted dimensions (faithfulness 0.4, relevance 0.3, completeness 0.3), and the two judge backends the run can be pointed at. Every box and card line cites a source line, machine-verified on each build.</>}
-        source="tree/main/projects/08-eval-engineering"
-        facts="blob/main/docs/diagrams/eval_engineering_v1/FACTS.md"
-        repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
-      />
 
       <FadeIn delay={350}><Decision question="Agents: evaluate the trajectory or just the final answer?">
         <p style={{ fontSize: 13, lineHeight: 1.7, color: 'var(--text-p)' }}>

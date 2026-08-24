@@ -4,7 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
-import Diagram from '../../components/Diagram';
+import Diagram, { ConceptNote } from '../../components/Diagram';
 import harnessSvg from '../../../docs/diagrams/agent_harness_v1/agent-harness.svg?raw';
 
 const HARNESS_CODE = `async function runAgent(userMessage, config = {}) {
@@ -177,6 +177,14 @@ export default function AgentHarness() {
         turns a prompt into a reliable system.
       </p>
 
+      <Diagram
+      svg={harnessSvg}
+      caption={<>The snippet above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/03-agent-harness</code> — four stop conditions in the order the loop actually checks them, the tool surface, and the two files a run writes. Every box and card line cites a source line, machine-verified on each build.</>}
+      source="tree/main/projects/03-agent-harness"
+      facts="blob/main/docs/diagrams/agent_harness_v1/FACTS.md"
+      repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
+      />
+
       <div style={styles.tabWrap}>
         {TABS.map((t, i) => (
           <button key={t} onClick={() => setTab(i)} style={{ ...styles.tabBtn, ...(tab === i ? styles.tabActive : {}) }}>{t}</button>
@@ -307,6 +315,7 @@ function LoopPanel() {
       />
 
       <AgentLoopDiagram />
+      <ConceptNote />
 
       <div style={{ background: 'var(--bg-code)', borderTopWidth: 1, borderTopStyle: 'solid', borderTopColor: 'var(--border)', borderRightWidth: 1, borderRightStyle: 'solid', borderRightColor: 'var(--border)', borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', borderLeftWidth: 3, borderLeftStyle: 'solid', borderLeftColor: 'var(--bg-accent-strong)', borderRadius: 'var(--radius-md)', padding: '14px 16px', marginBottom: 16 }}>
         <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-accent)', marginBottom: 6, fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>MAHESH'S HARNESS COMPONENTS</p>
@@ -329,13 +338,6 @@ function LoopPanel() {
 
       <FadeIn><CodeBlock filename="agent-harness.js" code={HARNESS_CODE} output={HARNESS_OUTPUT} /></FadeIn>
 
-      <Diagram
-        svg={harnessSvg}
-        caption={<>The snippet above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/03-agent-harness</code> — four stop conditions in the order the loop actually checks them, the tool surface, and the two files a run writes. Every box and card line cites a source line, machine-verified on each build.</>}
-        source="tree/main/projects/03-agent-harness"
-        facts="blob/main/docs/diagrams/agent_harness_v1/FACTS.md"
-        repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
-      />
 
       <FadeIn><Decision question="Observe — what goes into the context?">
         The observe step assembles the context window: system prompt + conversation history + retrieved memories + tool results from the last iteration.

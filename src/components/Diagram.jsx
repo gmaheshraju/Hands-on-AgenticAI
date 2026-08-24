@@ -35,3 +35,16 @@ export default function Diagram({ svg, caption, source, facts, repo = 'https://g
     </FadeIn>
   );
 }
+
+/**
+ * A label for the hand-drawn concept art that sits alongside a governed diagram.
+ *
+ * Why this exists: those illustrations contain zero identifiers from the real
+ * codebase — they teach the general pattern. Unlabelled, next to a diagram of the
+ * actual implementation, a reader cannot tell which one describes the system.
+ * In 07-guardrails the concept art shows SIX layers while the code has THREE;
+ * neither is wrong, but only one is a claim about this repo. This says which.
+ */
+export function ConceptNote({ children = 'Conceptual — the general pattern, not this codebase.' }) {
+  return <p className="diagram__concept-note">{children}</p>;
+}

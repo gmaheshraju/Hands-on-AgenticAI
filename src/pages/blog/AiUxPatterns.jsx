@@ -539,6 +539,14 @@ export default function AiUxPatterns() {
         and error states — the product engineering that makes AI feel trustworthy instead of magical.
       </p>
 
+      <Diagram
+      svg={aiUxSvg}
+      caption={<>The hook above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/12-ai-ux</code> — the complete set of eight SSE event types in the order <code>server.js</code> first emits them (<code>stream_start</code> through <code>error</code>), the HITL park that keeps one connection open on a resolver stashed in <code>pendingApprovals</code>, and the single durable artifact in the whole system: one <code>localStorage</code> key, browser-side. Every box and card line cites a source line, machine-verified on each build.</>}
+      source="tree/main/projects/12-ai-ux"
+      facts="blob/main/docs/diagrams/ai_ux_v1/FACTS.md"
+      repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
+      />
+
       <div style={styles.tabWrap}>
         {TABS.map((t, i) => (
           <button key={t} onClick={() => setTab(i)} style={{ ...styles.tabBtn, ...(tab === i ? styles.tabActive : {}) }}>{t}</button>
@@ -608,13 +616,6 @@ function StreamingPanel() {
         <CodeBlock filename="useStreamingResponse.js" code={STREAMING_HOOK_CODE} output={STREAMING_HOOK_OUTPUT} />
       </FadeIn>
 
-      <Diagram
-        svg={aiUxSvg}
-        caption={<>The hook above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/12-ai-ux</code> — the complete set of eight SSE event types in the order <code>server.js</code> first emits them (<code>stream_start</code> through <code>error</code>), the HITL park that keeps one connection open on a resolver stashed in <code>pendingApprovals</code>, and the single durable artifact in the whole system: one <code>localStorage</code> key, browser-side. Every box and card line cites a source line, machine-verified on each build.</>}
-        source="tree/main/projects/12-ai-ux"
-        facts="blob/main/docs/diagrams/ai_ux_v1/FACTS.md"
-        repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
-      />
 
       <FadeIn delay={80}><Insight>
         The single most impactful UX improvement for AI products is not a better model — it is streaming. Early GPT-4 shipped with buffered 15-second responses; once streaming was added, the perceived experience transformed overnight despite identical generation speed. The engineering cost is 1-2 days: swap your fetch call for an SSE reader, add a state machine, and render tokens incrementally. Do this before you spend a single dollar on model latency optimization. TTFT under 500ms plus streaming equals &quot;instant&quot; in user perception, regardless of total generation time.

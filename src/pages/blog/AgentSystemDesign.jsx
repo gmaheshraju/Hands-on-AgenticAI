@@ -4,7 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
-import Diagram from '../../components/Diagram';
+import Diagram, { ConceptNote } from '../../components/Diagram';
 import systemDesignSvg from '../../../docs/diagrams/system_design_v1/system-design.svg?raw';
 
 const REACT_LOOP_CODE = `async function agentLoop(userMessage, tools, maxIterations = 5) {
@@ -120,6 +120,14 @@ export default function AgentSystemDesign() {
         Not "call the OpenAI API" — the full system: RAG pipelines, vector databases,
         function calling, evaluation loops, and guardrails.
       </p>
+
+      <Diagram
+      svg={systemDesignSvg}
+      caption={<>The loop above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/01-agent-system-design</code> — the two entry points (demo and live) over one <code>runReActLoop</code>, and the six ways that loop can exit an iteration in the order it checks them: FINISH with unparseable JSON, FINISH with valid output, an unknown tool name, a stalled repeat observation, a response matching neither, and the iteration cap. Every box and card line cites a source line, machine-verified on each build.</>}
+      source="tree/main/projects/01-agent-system-design"
+      facts="blob/main/docs/diagrams/system_design_v1/FACTS.md"
+      repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
+      />
 
       <div style={styles.tabWrap}>
         {TABS.map((t, i) => (
@@ -448,6 +456,7 @@ function ArchitecturePanel() {
       />
 
       <AgentArchDiagram />
+      <ConceptNote />
 
       <div style={{ background: 'var(--bg-code)', borderTopWidth: 1, borderTopStyle: 'solid', borderTopColor: 'var(--border)', borderRightWidth: 1, borderRightStyle: 'solid', borderRightColor: 'var(--border)', borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', borderLeftWidth: 3, borderLeftStyle: 'solid', borderLeftColor: 'var(--bg-accent-strong)', borderRadius: 'var(--radius-md)', padding: '14px 16px', marginBottom: 16 }}>
         <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-accent)', marginBottom: 6, fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>MAHESH'S FRAMEWORK</p>
@@ -470,13 +479,6 @@ function ArchitecturePanel() {
 
       <FadeIn><CodeBlock filename="agent-loop.js" code={REACT_LOOP_CODE} output={REACT_LOOP_OUTPUT} /></FadeIn>
 
-      <Diagram
-        svg={systemDesignSvg}
-        caption={<>The loop above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/01-agent-system-design</code> — the two entry points (demo and live) over one <code>runReActLoop</code>, and the six ways that loop can exit an iteration in the order it checks them: FINISH with unparseable JSON, FINISH with valid output, an unknown tool name, a stalled repeat observation, a response matching neither, and the iteration cap. Every box and card line cites a source line, machine-verified on each build.</>}
-        source="tree/main/projects/01-agent-system-design"
-        facts="blob/main/docs/diagrams/system_design_v1/FACTS.md"
-        repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
-      />
 
       <FadeIn><Decision question="What makes this different from 'just calling the API'?">
         A raw LLM call is stateless, has no tools, no memory, and no guardrails. A production agent adds: (1) an orchestration loop that plans multi-step actions, (2) tool access for real-time data, (3) RAG for domain knowledge, (4) memory across conversations, and (5) input/output guards for safety. The LLM is ~20% of the system — the other 80% is infrastructure.

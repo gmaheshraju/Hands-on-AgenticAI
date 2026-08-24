@@ -4,7 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
-import Diagram from '../../components/Diagram';
+import Diagram, { ConceptNote } from '../../components/Diagram';
 import guardrailsSvg from '../../../docs/diagrams/guardrails_v1/guardrails.svg?raw';
 
 const INJECTION_SANITIZER_CODE = `const INJECTION_PATTERNS = [
@@ -791,6 +791,7 @@ function DefenseInDepthPanel() {
 
       <FadeIn>
         <DefenseArchitectureDiagram />
+        <ConceptNote />
       </FadeIn>
 
       <FadeIn delay={80}><Decision question="Fail open vs fail closed — what happens when your guards are down?">

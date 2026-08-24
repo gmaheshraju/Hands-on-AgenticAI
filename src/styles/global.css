@@ -973,3 +973,8 @@ html { scroll-behavior: smooth; }
 .diagram__links { display: flex; gap: 1rem; white-space: nowrap; }
 .diagram__links a { color: var(--bg-accent-strong, #E05A2B); text-decoration: none; }
 .diagram__links a:hover { text-decoration: underline; }
+
+.diagram__concept-note {
+  font-size: .78rem; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--text-muted, #6b7280); margin: .5rem 0 1.6rem; font-weight: 600;
+}

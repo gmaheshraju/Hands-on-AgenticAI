@@ -4,7 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
-import Diagram from '../../components/Diagram';
+import Diagram, { ConceptNote } from '../../components/Diagram';
 import agentMemorySvg from '../../../docs/diagrams/agent_memory_v1/agent-memory.svg?raw';
 
 const MEMORY_SYSTEM_CODE = `class AgentMemory {
@@ -138,6 +138,14 @@ export default function AgentMemory() {
         Semantic memory, episodic memory, context window management, and the retrieval
         patterns that make memory useful instead of just big.
       </p>
+
+      <Diagram
+      svg={agentMemorySvg}
+      caption={<>The class above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/02-agent-memory</code> — two entry points driving one CRMAgent into three engines, and the three outcomes <code>MemoryStore.addFact</code> can produce, in the order <code>memory.js</code> decides them: <em>created</em> when no subject+predicate row exists, <em>contradiction_resolved</em> when the old row's confidence is halved and kept alongside the new one, <em>updated</em> when the existing row is rewritten in place. Every box and card line cites a source line, machine-verified on each build.</>}
+      source="tree/main/projects/02-agent-memory"
+      facts="blob/main/docs/diagrams/agent_memory_v1/FACTS.md"
+      repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
+      />
 
       <div style={styles.tabWrap}>
         {TABS.map((t, i) => (
@@ -285,6 +293,7 @@ function MemoryTypesPanel() {
       />
 
       <MemoryArchDiagram />
+      <ConceptNote />
 
       <div style={{ background: 'var(--bg-code)', borderTopWidth: 1, borderTopStyle: 'solid', borderTopColor: 'var(--border)', borderRightWidth: 1, borderRightStyle: 'solid', borderRightColor: 'var(--border)', borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', borderLeftWidth: 3, borderLeftStyle: 'solid', borderLeftColor: 'var(--bg-accent-strong)', borderRadius: 'var(--radius-md)', padding: '14px 16px', marginBottom: 16 }}>
         <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-accent)', marginBottom: 6, fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>MAHESH'S THREE PILLARS</p>
@@ -301,13 +310,6 @@ function MemoryTypesPanel() {
 
       <FadeIn><CodeBlock filename="agent-memory.js" code={MEMORY_SYSTEM_CODE} output={MEMORY_SYSTEM_OUTPUT} /></FadeIn>
 
-      <Diagram
-        svg={agentMemorySvg}
-        caption={<>The class above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/02-agent-memory</code> — two entry points driving one CRMAgent into three engines, and the three outcomes <code>MemoryStore.addFact</code> can produce, in the order <code>memory.js</code> decides them: <em>created</em> when no subject+predicate row exists, <em>contradiction_resolved</em> when the old row's confidence is halved and kept alongside the new one, <em>updated</em> when the existing row is rewritten in place. Every box and card line cites a source line, machine-verified on each build.</>}
-        source="tree/main/projects/02-agent-memory"
-        facts="blob/main/docs/diagrams/agent_memory_v1/FACTS.md"
-        repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
-      />
 
       <FadeIn><Decision question="Working memory — the context window itself">
         Working memory IS the context window. Everything the LLM can see right now — the system prompt, conversation history, tool results, and retrieved context. It's the most important and the most constrained.

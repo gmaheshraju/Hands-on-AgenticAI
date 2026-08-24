@@ -4,7 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
-import Diagram from '../../components/Diagram';
+import Diagram, { ConceptNote } from '../../components/Diagram';
 import llmopsSvg from '../../../docs/diagrams/llmops_v1/llmops.svg?raw';
 
 const MODEL_ROUTER_CODE = `async function routeToModel(query, { costCap = 0.01 } = {}) {
@@ -353,6 +353,14 @@ export default function LlmOps() {
         bankrupting your company.
       </p>
 
+      <Diagram
+      svg={llmopsSvg}
+      caption={<>The router above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/06-llmops</code> — the complete <code>ROUTING_TABLE</code>, three chains in code order (<code>simple</code> ▸ haiku, sonnet, opus; <code>medium</code> ▸ sonnet, opus; <code>complex</code> ▸ opus alone, with no fallback left), and the finding that 2 of the 5 models in <code>MODEL_CONFIG</code> are priced but unroutable. Every box and card line cites a source line, machine-verified on each build.</>}
+      source="tree/main/projects/06-llmops"
+      facts="blob/main/docs/diagrams/llmops_v1/FACTS.md"
+      repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
+      />
+
       <div style={styles.tabWrap}>
         {TABS.map((t, i) => (
           <button key={t} onClick={() => setTab(i)} style={{ ...styles.tabBtn, ...(tab === i ? styles.tabActive : {}) }}>{t}</button>
@@ -502,6 +510,7 @@ function ModelServingPanel() {
       />
 
       <LLMOpsArchDiagram />
+      <ConceptNote />
 
       <FadeIn><Decision question="Self-host (vLLM/TGI) vs API (Claude/GPT)?">
         <Pill type="green">API-first (Claude, GPT)</Pill> Use managed APIs until you hit at least one of: (1) &gt;$50K/month in API costs where self-hosting is cheaper, (2) strict data residency requirements (healthcare, finance, government), (3) need for fine-tuned open models that APIs don't offer. At $50K/mo on Sonnet you're doing ~16M requests/month. Most companies never reach this.
@@ -529,13 +538,6 @@ function ModelServingPanel() {
 
       <FadeIn><CodeBlock filename="model-router.js" code={MODEL_ROUTER_CODE} output={MODEL_ROUTER_OUTPUT} /></FadeIn>
 
-      <Diagram
-        svg={llmopsSvg}
-        caption={<>The router above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/06-llmops</code> — the complete <code>ROUTING_TABLE</code>, three chains in code order (<code>simple</code> ▸ haiku, sonnet, opus; <code>medium</code> ▸ sonnet, opus; <code>complex</code> ▸ opus alone, with no fallback left), and the finding that 2 of the 5 models in <code>MODEL_CONFIG</code> are priced but unroutable. Every box and card line cites a source line, machine-verified on each build.</>}
-        source="tree/main/projects/06-llmops"
-        facts="blob/main/docs/diagrams/llmops_v1/FACTS.md"
-        repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
-      />
 
       <FadeIn><Insight>
         The maturity signal isn't knowing that model routing exists. It's knowing the exact cost crossover points and being able to do the math live: "We're at 200K requests/day, average 1500 tokens in + 400 tokens out. On Sonnet that's $900/day. With routing, 65% go to Haiku, that drops to $180/day. The classifier cost is $12/day. Net savings: 80%." In a design review, pull out real numbers, not "it depends on the use case."

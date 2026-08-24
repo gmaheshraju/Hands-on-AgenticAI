@@ -4,7 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
-import Diagram from '../../components/Diagram';
+import Diagram, { ConceptNote } from '../../components/Diagram';
 import toolUseSvg from '../../../docs/diagrams/tool_use_v1/tool-use.svg?raw';
 
 const TOOL_SCHEMA_CODE = `const tools = [
@@ -590,6 +590,7 @@ function PermissionsPanel() {
       />
 
       <PermissionsDiagram />
+      <ConceptNote />
 
       <FadeIn><Decision question="How to tier tool permissions?">
         <Pill type="green">Tier 1 — auto-approve (read-only)</Pill> search, get, list. No confirmation needed. 90% of tool calls in a typical agent. Zero risk — the worst case is returning stale data. Latency: tool execution time only.

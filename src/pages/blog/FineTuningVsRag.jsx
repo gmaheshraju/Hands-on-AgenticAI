@@ -189,6 +189,14 @@ export default function FineTuningVsRag() {
         when to retrieve, when to fine-tune, and when to combine them. Get this wrong and
         you waste 3 months building the wrong thing.
       </p>
+      <Diagram
+      svg={finetuneVsRagSvg}
+      caption={<>The decision tree above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/09-fine-tuning-vs-rag</code> &mdash; <strong>four</strong> approaches, not three, dispatched in the order <code>runEvaluation</code> runs them (zero-shot, few-shot, RAG, fine-tuned) over the same 30-ticket held-out set, with the fine-tuned box marked MOCK because nothing is ever trained. Every box and card line cites a source line, machine-verified on each build.</>}
+      source="tree/main/projects/09-fine-tuning-vs-rag"
+      facts="blob/main/docs/diagrams/finetune_vs_rag_v1/FACTS.md"
+      repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
+      />
+
       <div style={styles.tabWrap}>
         {TABS.map((t, i) => (
           <button key={t} onClick={() => setTab(i)}
@@ -358,13 +366,6 @@ function DecisionTreePanel() {
         first two can't get the behavior right. Each step up costs 10x more in engineering time.
       </Insight>
 
-      <Diagram
-        svg={finetuneVsRagSvg}
-        caption={<>The decision tree above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/09-fine-tuning-vs-rag</code> &mdash; <strong>four</strong> approaches, not three, dispatched in the order <code>runEvaluation</code> runs them (zero-shot, few-shot, RAG, fine-tuned) over the same 30-ticket held-out set, with the fine-tuned box marked MOCK because nothing is ever trained. Every box and card line cites a source line, machine-verified on each build.</>}
-        source="tree/main/projects/09-fine-tuning-vs-rag"
-        facts="blob/main/docs/diagrams/finetune_vs_rag_v1/FACTS.md"
-        repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
-      />
     </FadeIn>
   );
 }
