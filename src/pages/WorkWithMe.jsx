@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import FadeIn from '../components/FadeIn';
+import { TOTALS } from '../data/diagrams';
 
 // Clarity custom events feed the consulting funnel (homepage → this page →
 // contact click). Optional-chained: no-op locally and during prerender.
@@ -54,13 +56,13 @@ const steps = [
   {
     number: '3',
     title: 'Build, review, hand off',
-    text: 'Working code, architecture docs, and eval coverage — delivered so your team owns it after I leave, not so you depend on me.',
+    text: 'Working code, eval coverage, and architecture diagrams where every box cites the line of code it came from — so the documentation cannot quietly rot after I leave. Your team owns the system, not a dependency on me.',
   },
 ];
 
 const proof = [
   { stat: '31', label: 'Production LLM & agent projects', href: GITHUB },
-  { stat: '16', label: 'Published architecture deep dives', href: '/blog' },
+  { stat: '2,707', label: 'Cited elements across 31 architecture diagrams', href: '/diagrams' },
   { stat: '24/5', label: 'Live production systems I run myself', href: null },
 ];
 
@@ -152,6 +154,25 @@ export default function WorkWithMe() {
             </FadeIn>
           ))}
         </div>
+
+        <FadeIn delay={200}>
+          <figure style={styles.specimen}>
+            <Link to="/diagrams" style={{ display: 'block' }}>
+              <img
+                src="/diagrams/guardrails.svg"
+                alt="Architecture of a prompt-injection defence pipeline, drawn from source: nine input checks, three defence layers, and the held-out grading path."
+                loading="lazy"
+                style={styles.specimenImg}
+              />
+            </Link>
+            <figcaption style={styles.specimenCap}>
+              Every box cites the line of code it came from.{' '}
+              <Link to="/diagrams" style={styles.specimenLink}>
+                See all {TOTALS.count} &rarr;
+              </Link>
+            </figcaption>
+          </figure>
+        </FadeIn>
         <p style={styles.proofNote}>
           The playbook on this site isn&rsquo;t theory I collected — it&rsquo;s the
           decision frameworks behind systems I operate every day. You get the
@@ -208,6 +229,25 @@ export default function WorkWithMe() {
 }
 
 const styles = {
+  specimen: {
+    margin: '36px 0 0',
+    background: 'var(--bg-card)',
+    border: '1px solid var(--border)',
+    borderRadius: 'var(--radius-md)',
+    padding: 14,
+    overflow: 'hidden',
+  },
+  specimenImg: { width: '100%', height: 'auto', display: 'block' },
+  specimenCap: {
+    marginTop: 10,
+    fontSize: 13,
+    color: 'var(--text-muted)',
+    display: 'flex',
+    justifyContent: 'space-between',
+    gap: 12,
+    flexWrap: 'wrap',
+  },
+  specimenLink: { color: 'var(--bg-accent-strong)', textDecoration: 'none', whiteSpace: 'nowrap' },
   hero: {
     marginBottom: '3.5rem',
     paddingBottom: '2.5rem',
