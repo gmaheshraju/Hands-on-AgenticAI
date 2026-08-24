@@ -4,6 +4,8 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import Diagram from '../../components/Diagram';
+import systemDesignSvg from '../../../docs/diagrams/system_design_v1/system-design.svg?raw';
 
 const REACT_LOOP_CODE = `async function agentLoop(userMessage, tools, maxIterations = 5) {
   const messages = [{ role: 'user', content: userMessage }];
@@ -467,6 +469,14 @@ function ArchitecturePanel() {
       </div>
 
       <FadeIn><CodeBlock filename="agent-loop.js" code={REACT_LOOP_CODE} output={REACT_LOOP_OUTPUT} /></FadeIn>
+
+      <Diagram
+        svg={systemDesignSvg}
+        caption={<>The loop above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/01-agent-system-design</code> — the two entry points (demo and live) over one <code>runReActLoop</code>, and the six ways that loop can exit an iteration in the order it checks them: FINISH with unparseable JSON, FINISH with valid output, an unknown tool name, a stalled repeat observation, a response matching neither, and the iteration cap. Every box and card line cites a source line, machine-verified on each build.</>}
+        source="tree/main/projects/01-agent-system-design"
+        facts="blob/main/docs/diagrams/system_design_v1/FACTS.md"
+        repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
+      />
 
       <FadeIn><Decision question="What makes this different from 'just calling the API'?">
         A raw LLM call is stateless, has no tools, no memory, and no guardrails. A production agent adds: (1) an orchestration loop that plans multi-step actions, (2) tool access for real-time data, (3) RAG for domain knowledge, (4) memory across conversations, and (5) input/output guards for safety. The LLM is ~20% of the system — the other 80% is infrastructure.

@@ -4,6 +4,8 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import Diagram from '../../components/Diagram';
+import guardrailsSvg from '../../../docs/diagrams/guardrails_v1/guardrails.svg?raw';
 
 const INJECTION_SANITIZER_CODE = `const INJECTION_PATTERNS = [
   /ignore\\s+(all\\s+)?previous\\s+instructions/i,
@@ -446,6 +448,14 @@ export default function AiGuardrails() {
         to production.
       </p>
 
+      <Diagram
+      svg={guardrailsSvg}
+      caption={<>The pipeline above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/07-guardrails</code> — the nine checks <code>scanInput()</code> runs on every input in code order (five weighted regex categories totalling 156 patterns, then context flooding, zero-width, base64 decode-and-rescan, hex decode-and-rescan), and the three layers in call order: block at confidence ≥ 0.5, the sandwiched prompt, and <code>validateOutput()</code>'s five violation checks. The letter grade is computed from the held-out rate alone — 29 unseen attacks the patterns were never tuned against, kept separate from the 59 training attacks all the way to the report. Every box and card line cites a source line, machine-verified on each build.</>}
+      source="tree/main/projects/07-guardrails"
+      facts="blob/main/docs/diagrams/guardrails_v1/FACTS.md"
+      repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
+      />
+
       <div style={styles.tabWrap}>
         {TABS.map((t, i) => (
           <button key={t} onClick={() => setTab(i)} style={{ ...styles.tabBtn, ...(tab === i ? styles.tabActive : {}) }}>{t}</button>
@@ -792,6 +802,7 @@ function DefenseInDepthPanel() {
       </Decision></FadeIn>
 
       <FadeIn><CodeBlock filename="defense-pipeline.js" code={DEFENSE_PIPELINE_CODE} output={DEFENSE_PIPELINE_OUTPUT} /></FadeIn>
+
 
       <FadeIn delay={80}><Decision question="Logging and alerting — what to track?">
         <Pill type="green">Every blocked request</Pill> Log: request ID, timestamp, which layer blocked, the trigger reason, and the input that triggered it (sanitized — don't log raw PII). This is your training data for improving guards and your evidence trail for security audits.

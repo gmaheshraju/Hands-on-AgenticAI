@@ -4,6 +4,8 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import Diagram from '../../components/Diagram';
+import forwardDeployedSvg from '../../../docs/diagrams/forward_deployed_v1/forward-deployed.svg?raw';
 
 const TABS = ['The FDE Model', 'Team Structure', 'FDE vs SaaS', 'The AI Playbook', 'In Practice'];
 
@@ -126,6 +128,14 @@ export default function ForwardDeployedEngineering() {
         embedded engineers, rapid prototyping, and the &ldquo;gravel road to paved highway&rdquo; playbook
         that turned non-scalable work into a competitive moat.
       </p>
+
+      <Diagram
+      svg={forwardDeployedSvg}
+      caption={<>The interview answer above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/14-forward-deployed-engineering</code> &mdash; the same enterprise document pilot, with the eval builder and the domain adapter drawn as siblings consuming the same processed corpus rather than a chain, and all nine deployment-readiness checks in the order <code>run()</code> evaluates them. Every box and card line cites a source line, machine-verified on each build.</>}
+      source="tree/main/projects/14-forward-deployed-engineering"
+      facts="blob/main/docs/diagrams/forward_deployed_v1/FACTS.md"
+      repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
+      />
 
       <div style={styles.tabWrap}>
         {TABS.map((t, i) => (
@@ -536,6 +546,7 @@ function AppliedPatternsPanel() {
           Most engineers design the system architecture but ignore deployment. FDE knowledge lets you address the full lifecycle: how does this AI system actually get to customers, integrate with their data, and improve over time? This is the gap between senior and staff-level thinking.
         </Insight>
       </FadeIn>
+
 
       <FadeIn delay={60}>
         <p style={{ fontSize: 14, color: 'var(--text-p)', lineHeight: 1.7, marginBottom: 4, marginTop: 24 }}>

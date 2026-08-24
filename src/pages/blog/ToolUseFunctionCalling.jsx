@@ -4,6 +4,8 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import Diagram from '../../components/Diagram';
+import toolUseSvg from '../../../docs/diagrams/tool_use_v1/tool-use.svg?raw';
 
 const TOOL_SCHEMA_CODE = `const tools = [
   {
@@ -328,6 +330,14 @@ export default function ToolUseFunctionCalling() {
         permission models, and sandboxing. Every agent that touches the real world runs through this layer.
       </p>
 
+      <Diagram
+      svg={toolUseSvg}
+      caption={<>The tiering code above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/10-tool-use</code>, a text-to-SQL agent whose permission gate is <code>validateQuery()</code> — ten checks evaluated top-to-bottom where the first match returns, eight of them <em>blocked</em> (multiple statements, non-SELECT, 14 destructive keywords, 6 metadata patterns, <code>load_extension</code>, any table outside the four allowed, subquery depth over 2, UNION-with-constant) and two <em>confirm</em> (more than 3 JOINs, no WHERE clause). Every box and card line cites a source line, machine-verified on each build.</>}
+      source="tree/main/projects/10-tool-use"
+      facts="blob/main/docs/diagrams/tool_use_v1/FACTS.md"
+      repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
+      />
+
       <div style={styles.tabWrap}>
         {TABS.map((t, i) => (
           <button key={t} onClick={() => setTab(i)} style={{ ...styles.tabBtn, ...(tab === i ? styles.tabActive : {}) }}>{t}</button>
@@ -610,6 +620,7 @@ function PermissionsPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={300}><CodeBlock filename="permission-tiers.js" code={PERMISSION_TIER_CODE} output={PERMISSION_TIER_OUTPUT} /></FadeIn>
+
 
       <FadeIn delay={400}><Insight>
         In practice, the security question is a trap. If you say "we validate inputs" and stop there, you have missed the point. The real answer is defense in depth: input validation + output sanitization + permission tiers + rate limits + audit trail + human-in-the-loop for destructive actions + network allowlists + process isolation. Each layer catches what the previous one missed. A single layer gives you 90% protection. Six layers give you 99.99%. That last 9.99% is where production incidents live.

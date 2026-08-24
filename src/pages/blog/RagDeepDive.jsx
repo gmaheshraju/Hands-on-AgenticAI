@@ -4,6 +4,8 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import Diagram from '../../components/Diagram';
+import ragPipelineSvg from '../../../docs/diagrams/rag_pipeline_v1/rag-pipeline.svg?raw';
 
 const CHUNKER_CODE = `function recursiveSplit(text, { maxTokens = 512, overlap = 100 } = {}) {
   const separators = ['\\n\\n', '\\n', '. ', ' '];
@@ -159,6 +161,14 @@ export default function RagDeepDive() {
         strategies, embedding model selection, hybrid search, reranking, and the
         pitfalls that cause silent quality degradation.
       </p>
+
+      <Diagram
+      svg={ragPipelineSvg}
+      caption={<>The code above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/05-rag-pipeline</code> — seven tuning knobs read in one constructor block, narrowing the candidate funnel 20 BM25 + 20 vector → 15 survivors of RRF → 5 chunks that reach the answer prompt. Every box and card line cites a source line, machine-verified on each build.</>}
+      source="tree/main/projects/05-rag-pipeline"
+      facts="blob/main/docs/diagrams/rag_pipeline_v1/FACTS.md"
+      repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
+      />
 
       <div style={styles.tabWrap}>
         {TABS.map((t, i) => (
@@ -372,6 +382,7 @@ function HybridSearchPanel() {
       />
 
       <FadeIn><CodeBlock filename="hybrid-search.js" code={HYBRID_SEARCH_CODE} output={HYBRID_SEARCH_OUTPUT} /></FadeIn>
+
 
       <FadeIn><Decision question="Why not just vector search?">
         Vector search finds semantically similar content — great for "how do I handle authentication?" → retrieves docs about auth flows even if they don't contain the word "authentication."

@@ -4,6 +4,8 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import Diagram from '../../components/Diagram';
+import llmopsSvg from '../../../docs/diagrams/llmops_v1/llmops.svg?raw';
 
 const MODEL_ROUTER_CODE = `async function routeToModel(query, { costCap = 0.01 } = {}) {
   // Classify complexity: simple queries go to fast/cheap model
@@ -526,6 +528,14 @@ function ModelServingPanel() {
       </Decision></FadeIn>
 
       <FadeIn><CodeBlock filename="model-router.js" code={MODEL_ROUTER_CODE} output={MODEL_ROUTER_OUTPUT} /></FadeIn>
+
+      <Diagram
+        svg={llmopsSvg}
+        caption={<>The router above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/06-llmops</code> — the complete <code>ROUTING_TABLE</code>, three chains in code order (<code>simple</code> ▸ haiku, sonnet, opus; <code>medium</code> ▸ sonnet, opus; <code>complex</code> ▸ opus alone, with no fallback left), and the finding that 2 of the 5 models in <code>MODEL_CONFIG</code> are priced but unroutable. Every box and card line cites a source line, machine-verified on each build.</>}
+        source="tree/main/projects/06-llmops"
+        facts="blob/main/docs/diagrams/llmops_v1/FACTS.md"
+        repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
+      />
 
       <FadeIn><Insight>
         The maturity signal isn't knowing that model routing exists. It's knowing the exact cost crossover points and being able to do the math live: "We're at 200K requests/day, average 1500 tokens in + 400 tokens out. On Sonnet that's $900/day. With routing, 65% go to Haiku, that drops to $180/day. The classifier cost is $12/day. Net savings: 80%." In a design review, pull out real numbers, not "it depends on the use case."

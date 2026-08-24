@@ -4,6 +4,8 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import Diagram from '../../components/Diagram';
+import responsibleAiSvg from '../../../docs/diagrams/responsible_ai_v1/responsible-ai.svg?raw';
 
 const FAIRNESS_AUDIT_CODE = `async function auditFairness(model, testSet, sensitiveAttribute) {
   const results = { groups: {}, overall: { tp: 0, fp: 0, tn: 0, fn: 0 } };
@@ -257,6 +259,14 @@ function Tab1() {
       </Decision>
 
       <CodeBlock code={FAIRNESS_AUDIT_CODE} filename="fairness-audit.js" output={FAIRNESS_AUDIT_OUTPUT} />
+
+      <Diagram
+        svg={responsibleAiSvg}
+        caption={<>The audit above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/13-responsible-ai</code> — a matched-pair bias audit whose <code>analyzeResults</code> runs exactly four tests per group pair, in code order: chi-squared on decision flips, Welch's t-test on score gaps, Cohen's d, and the 80% demographic-parity rule, then ORs their verdicts. The finding ladder they feed sets the risk level, and one CRITICAL anywhere is enough to render the model card's deployment line as <code>NOT_APPROVED</code>. Every box and card line cites a source line, machine-verified on each build.</>}
+        source="tree/main/projects/13-responsible-ai"
+        facts="blob/main/docs/diagrams/responsible_ai_v1/FACTS.md"
+        repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
+      />
 
       <Insight tag="Key insight">
         In practice, never say "we need to remove bias." Bias is a feature of data, not a bug

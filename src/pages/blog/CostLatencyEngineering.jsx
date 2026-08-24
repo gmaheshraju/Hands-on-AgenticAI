@@ -4,6 +4,8 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import Diagram from '../../components/Diagram';
+import costLatencySvg from '../../../docs/diagrams/cost_latency_v1/cost-latency.svg?raw';
 
 const MODEL_ROUTER_CODE = `const MODEL_TIERS = {
   simple:  { model: 'claude-haiku-4-5',  costPer1M: 1.0,  maxTokens: 1024 },
@@ -268,6 +270,7 @@ function Tab2() {
         output={MODEL_ROUTER_OUTPUT}
       />
 
+
       <Insight>
         The cascading pattern is underrated. Start with Haiku for everything. Only escalate when the cheap model's response fails a quality check. At 100K requests/month, this saves $10K+ because most requests are simple. The real engineering challenge is building a reliable quality scorer -- not the routing logic itself. A 200ms classifier that is 90% accurate saves you more money than a perfect classifier that adds 2 seconds of latency.
       </Insight>
@@ -415,6 +418,14 @@ export default function CostLatencyEngineering() {
         playbook -- model routing, semantic caching, prompt compression, token budgets, and
         the metrics that actually matter.
       </p>
+
+      <Diagram
+      svg={costLatencySvg}
+      caption={<>The router above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/11-cost-latency</code> &mdash; the seven steps of <code>runOptimizedPipeline</code> in the order the code runs them, with the semantic cache first, so a hit short-circuits and that turn is never compressed, never routed, never truncated. Every box and card line cites a source line, machine-verified on each build.</>}
+      source="tree/main/projects/11-cost-latency"
+      facts="blob/main/docs/diagrams/cost_latency_v1/FACTS.md"
+      repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
+      />
 
       <div style={styles.tabWrap}>
         {TABS.map((t, i) => (
