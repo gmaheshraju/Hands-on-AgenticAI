@@ -1,0 +1,154 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_mcp_server_v1" name="15 MCP Server + Client — Architecture">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_entry" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="32" y="184" width="192" height="272" as="geometry" />
+        </mxCell>
+        <mxCell id="z_entry_lbl" value="③ Entry — 3 npm scripts" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="44" y="192" width="176" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_client" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="288" y="200" width="240" height="264" as="geometry" />
+        </mxCell>
+        <mxCell id="z_client_lbl" value="① MCP CLIENT process (Node ESM)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="300" y="208" width="224" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_server" value="" style="rounded=1;fillColor=none;strokeColor=#1565C0;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#1565C0;" parent="1" vertex="1">
+          <mxGeometry x="592" y="152" width="552" height="344" as="geometry" />
+        </mxCell>
+        <mxCell id="z_server_lbl" value="② MCP SERVER process — spawned child, stdio" style="text;fontSize=10;fontStyle=1;fontColor=#1565C0;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="604" y="160" width="536" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_caps" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="872" y="184" width="240" height="288" as="geometry" />
+        </mxCell>
+        <mxCell id="z_caps_lbl" value="declared capability surface — all of it" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="884" y="192" width="224" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_data" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="1208" y="232" width="304" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="z_data_lbl" value="④ Durable store — SQLite, local file" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1220" y="240" width="288" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;scripted 5-step run&lt;br&gt;demo() :69" class="component.entry" id="n_demo">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="48" y="208" width="160" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;client.js&lt;/b&gt;&lt;br&gt;interactive REPL&lt;br&gt;11 commands :199-209" class="component.entry" id="n_cli">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="48" y="292" width="160" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;agent.js&lt;/b&gt;&lt;br&gt;NL question -&amp;gt; plan&lt;br&gt;planToolCalls :42" class="component.entry" id="n_agent">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="48" y="376" width="160" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Client (MCP SDK)&lt;/b&gt;&lt;br&gt;StdioClientTransport&lt;br&gt;spawns node server.js&lt;br&gt;client.js:59 :64 :75" class="component.service" id="n_client">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="312" y="272" width="176" height="96" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;protocol logger&lt;/b&gt;&lt;br&gt;raw JSON-RPC to stdout&lt;br&gt;client.js:25 :35" class="component.mock" id="n_log">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="312" y="384" width="176" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;McpServer&lt;/b&gt;&lt;br&gt;&amp;quot;sqlite-explorer&amp;quot; 1.0.0&lt;br&gt;StdioServerTransport&lt;br&gt;server.js:29 :342 :343" class="component.agent" id="n_mcp">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="624" y="272" width="176" height="96" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;TOOL query&lt;/b&gt;&lt;br&gt;read-only SELECT gate&lt;br&gt;4 blocks &amp;middot; server.js:42" class="component.service" id="n_query">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="896" y="208" width="192" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;TOOLS list_tables&lt;/b&gt;&lt;br&gt;+ describe_table&lt;br&gt;server.js:143 :174" class="component.service" id="n_meta">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="896" y="288" width="192" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;RESOURCES&lt;/b&gt;&lt;br&gt;db://schema :258&lt;br&gt;db://stats :299" class="component.service" id="n_res">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="896" y="384" width="192" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;stderr diagnostics&lt;/b&gt;&lt;br&gt;stdout is reserved&lt;br&gt;for protocol :345-349" class="component.mock" id="n_stderr">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="624" y="424" width="176" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;database.js&lt;/b&gt;&lt;br&gt;getDatabase :239 -&amp;gt; create :101&lt;br&gt;seedDatabase :158, idempotent :161&lt;br&gt;5 tables + 4 indexes :108-153" class="component.service" id="n_dbmod">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1232" y="272" width="256" height="96" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;ecommerce.db&lt;/b&gt;&lt;br&gt;SQLite, WAL :105 &amp;middot; path :20&lt;br&gt;8 cat, 50 users, 30 products&lt;br&gt;200 orders, 1-5 items each :212" class="component.artifact" id="n_db">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1232" y="440" width="256" height="80" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;query TOOL — EVERY GUARD, IN CODE ORDER &amp;middot; server.js:49-136&lt;/b&gt;&lt;br&gt;trimmed = sql.trim().toUpperCase() :51&lt;br&gt;1  must start with SELECT :54 — else refusal :63&lt;br&gt;withoutStrings = literals blanked :68 — checks 2-4 run on this copy&lt;br&gt;2  split on &#x27;;&#x27;, more than one statement :69 :70 — refusal :78&lt;br&gt;3  17 blocked keywords, anywhere incl. subqueries :83 :84 — refusal :92&lt;br&gt;4  SQL comments -- or /* :97 — refusal :106&lt;br&gt;then  effectiveLimit = min(limit || 100, 1000) :110&lt;br&gt;        LIMIT appended when the SQL has none :113 :114&lt;br&gt;        db.prepare(execSql).all() -&amp;gt; { rowCount, rows } :117 :121&lt;br&gt;catch -&amp;gt; { error } + isError :127-134 — the handler never throws" class="card.invariant" id="card_gate">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="288" y="512" width="456" height="160" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;BLOCKED KEYWORDS — all 17, in regex order &amp;middot; server.js:83&lt;/b&gt;&lt;br&gt;DROP &amp;middot; ALTER &amp;middot; CREATE &amp;middot; DELETE &amp;middot; INSERT &amp;middot; UPDATE &amp;middot; TRUNCATE&lt;br&gt;REPLACE &amp;middot; EXEC &amp;middot; EXECUTE &amp;middot; GRANT &amp;middot; REVOKE &amp;middot; ATTACH &amp;middot; DETACH&lt;br&gt;PRAGMA &amp;middot; REINDEX &amp;middot; VACUUM      case-insensitive, word-boundary&lt;br&gt;4 refusals in query :63 :78 :92 :106, 1 in describe_table :187&lt;br&gt;every one is a normal MCP result carrying isError — not an exception" class="card.failure" id="card_deny">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="288" y="688" width="456" height="88" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;MCP SURFACE — the complete declared set &amp;middot; server.js&lt;/b&gt;&lt;br&gt;TOOL  query(sql, limit? = 100, capped at 1000) :42 :46 :47 :110&lt;br&gt;TOOL  list_tables() — no params :143 :146&lt;br&gt;TOOL  describe_table(table_name) :174 :178&lt;br&gt;RES   db://schema   application/json :258 :260 :263&lt;br&gt;RES   db://stats    application/json :299 :301 :303&lt;br&gt;these 5 and nothing else — no server.prompt() exists in src/&lt;br&gt;client learns them at runtime: listTools :93, listResources :121" class="card.primitive" id="card_surface">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="776" y="592" width="456" height="116" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_demo" value="scripted calls" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_client" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="240" y="236" /><mxPoint x="240" y="296" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_cli" value="REPL command" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_cli" target="n_client" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_agent" value="planned tool call" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_agent" target="n_client" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="264" y="404" /><mxPoint x="264" y="344" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_log" value="every send / recv" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_client" target="n_log" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_rpc" value="JSON-RPC 2.0 over stdio" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_client" target="n_mcp" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_q" value="tools/call query" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_mcp" target="n_query" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="848" y="296" /><mxPoint x="848" y="240" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_m" value="tools/call metadata" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_mcp" target="n_meta" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r" value="resources/read" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_mcp" target="n_res" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="848" y="344" /><mxPoint x="848" y="416" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_stderr" value="console.error" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_mcp" target="n_stderr" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_qdb" value="prepared SELECT :117" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_query" target="n_dbmod" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1296" y="240" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_mdb" value="sqlite_master + PRAGMA" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_meta" target="n_dbmod" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_rdb" value="COUNT(*) + page_count" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_res" target="n_dbmod" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1424" y="416" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_file" value="open + seed if empty" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_dbmod" target="n_db" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

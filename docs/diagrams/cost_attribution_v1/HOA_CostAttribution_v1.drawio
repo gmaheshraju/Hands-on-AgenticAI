@@ -1,0 +1,132 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_cost_attribution_v1" name="27 Cost Attribution — Facade over one event store, four read-models">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_in" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="40" y="220" width="216" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="z_in_lbl" value="③ Inputs — demo CLI + simulated events" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="52" y="228" width="200" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="320" y="96" width="976" height="684" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc_lbl" value="① CostAttributionEngine (Node ESM · no network, no real LLM)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="332" y="104" width="960" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_analysis" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="856" y="200" width="240" height="336" as="geometry" />
+        </mxCell>
+        <mxCell id="z_analysis_lbl" value="Reporting — reads one store" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="868" y="208" width="224" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=1;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="300" width="296" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out_lbl" value="④ Reported output (stdout only)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="308" width="280" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · main() :3&lt;br&gt;records + prints" class="component.entry" id="n_demo">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="252" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;12 sim. events&lt;/b&gt;&lt;br&gt;no real LLM&lt;br&gt;demo.js:18-31" class="component.mock" id="n_scenarios">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="372" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;CostAttributionEngine&lt;/b&gt;&lt;br&gt;engine.js — facade&lt;br&gt;record + dashboard :16" class="component.service" id="n_engine">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="344" y="236" width="176" height="96" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Budget monitor&lt;/b&gt;&lt;br&gt;_checkBudget :26&lt;br&gt;budgets + alerts :12" class="component.service" id="n_budget">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="344" y="372" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Pricing table&lt;/b&gt;&lt;br&gt;7 models :4-12&lt;br&gt;hardcoded · no API" class="component.external" id="n_pricing">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="600" y="140" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;CostCollector&lt;/b&gt;&lt;br&gt;events[] store :3&lt;br&gt;query() :45" class="component.service" id="n_collector">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="600" y="252" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;CostAttribution&lt;/b&gt;&lt;br&gt;4 dimensions :6" class="component.service" id="n_attr">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="888" y="236" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;WasteDetector&lt;/b&gt;&lt;br&gt;6 patterns :7" class="component.service" id="n_waste">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="888" y="340" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;ROICalculator&lt;/b&gt;&lt;br&gt;ROI + efficiency :11" class="component.service" id="n_roi">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="888" y="444" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;stdout report&lt;/b&gt;&lt;br&gt;console.log — demo.js:36-81" class="component.artifact" id="n_out">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="340" width="248" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;4 ATTRIBUTION DIMENSIONS — attribution.js&lt;/b&gt;&lt;br&gt;1 byAgent :6 — cost·reqs·successRate·avg&lt;br&gt;2 byTeam :30 — cost·uniqueAgents·models&lt;br&gt;3 byTaskType :58 — costPerSuccess·rate&lt;br&gt;4 byModel :85 — tokens·cacheHitRate·avg&lt;br&gt;each reads collector.query() :7 :31 :59&lt;br&gt;sorted by totalCost desc :27 :55 :82 :106" class="card.invariant" id="card_attr">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="344" y="576" width="304" height="184" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;6 WASTE PATTERNS — waste.analyze() :7&lt;/b&gt;&lt;br&gt;1 overpowered_model :21 — opus/gpt4o 85%&lt;br&gt;2 duplicate_requests :40 — within 60s&lt;br&gt;3 excessive_retries :65 — &amp;gt;1 fail/task&lt;br&gt;4 low_cache_hit_rate :93 — &amp;gt;10 &amp;amp; &amp;lt;10%&lt;br&gt;5 high_failure_rate :110 — &amp;gt;5 &amp;amp; &amp;gt;30%&lt;br&gt;6 idle_agent :135 — &amp;gt;1h idle, cost&amp;gt;$.01&lt;br&gt;sorted by savingsUsd desc :18" class="card.invariant" id="card_waste">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="664" y="576" width="304" height="184" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;BUDGET ALERTS — engine._checkBudget :26&lt;/b&gt;&lt;br&gt;fires inside every record() :18&lt;br&gt;no budget set ⇒ skip :28&lt;br&gt;spend = today&#x27;s team cost :30-34&lt;br&gt;thresholds 0.5 · 0.8 · 0.95 · 1.0 :36&lt;br&gt;level: ≥1.0 crit · ≥0.8 warn · info :45&lt;br&gt;deduped per team·threshold·day :39-40&lt;br&gt;alerts accrue on this.alerts[] :13" class="card.failure" id="card_budget">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="984" y="576" width="304" height="184" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_demo" value="record + report" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_engine" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_scen" value="12 events" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_scenarios" target="n_engine" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="284" y="404" /><mxPoint x="284" y="308" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_rec" value="record()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_engine" target="n_collector" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_price" value="calculateCost" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_pricing" target="n_collector" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_budget" value="_checkBudget" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_engine" target="n_budget" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_attr" value="query()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_collector" target="n_attr" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="832" y="284" /><mxPoint x="832" y="268" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_waste" value="query()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_collector" target="n_waste" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="688" y="372" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_roi" value="query()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_collector" target="n_roi" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="644" y="476" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_out_a" value="byAgent…byModel" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_attr" target="n_out" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1508" y="268" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_out_w" value="6 patterns" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_waste" target="n_out" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_out_r" value="ROI + eff." style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_roi" target="n_out" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1508" y="476" /></Array></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

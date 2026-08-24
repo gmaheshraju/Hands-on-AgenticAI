@@ -1,0 +1,228 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 800" role="img" aria-labelledby="hoa_observability_v1-t hoa_observability_v1-d" class="fts-diagram">
+  <title id="hoa_observability_v1-t">19 Agent Observability — Trace Store, Dashboard, and the Two Drift Detectors</title>
+  <desc id="hoa_observability_v1-d">One Node process that fabricates 500 agent traces into SQLite, then serves them over 13 HTTP routes to a browser page. Drawn as it is wired, not as the README describes it: the OpenTelemetry-style tracer is never instantiated, drift is detected twice by two different formulas, and the browser reads field names the API never sends. Every element cites a source line in FACTS.md.</desc>
+  <defs>
+    <marker id="hoa_observability_v1-a-d-edge-analysis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E65100" class="d-edge-analysis-fill"/></marker>
+    <marker id="hoa_observability_v1-a-d-edge-artifact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32" class="d-edge-artifact-fill"/></marker>
+    <marker id="hoa_observability_v1-a-d-edge-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1565C0" class="d-edge-call-fill"/></marker>
+    <marker id="hoa_observability_v1-a-d-edge-data_in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9E9E9E" class="d-edge-data_in-fill"/></marker>
+    <marker id="hoa_observability_v1-a-d-edge-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-edge-primary-fill"/></marker>
+    <marker id="hoa_observability_v1-a-d-edge-stop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C62828" class="d-edge-stop-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="40" y="176" width="248" height="280" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="52" y="196" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">③ Entry — CLI + a dead SDK</text>
+  </g>
+  <g class="d-zone d-boundary-primary">
+    <rect x="352" y="96" width="944" height="684" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="364" y="116" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">① 19-agent-observability — one Node ESM process (no LLM call, no network egress)</text>
+  </g>
+  <g class="d-zone d-boundary-functional">
+    <rect x="368" y="192" width="464" height="136" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="380" y="212" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">Phase 1 — write path (demo.js:18)</text>
+  </g>
+  <g class="d-zone d-boundary-external">
+    <rect x="1360" y="200" width="296" height="136" rx="8" fill="none" stroke="#1565C0" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="1372" y="220" fill="#1565C0" font-size="12" font-weight="600" class="d-zone-label">② Browser — the only real network hop</text>
+  </g>
+  <g class="d-zone d-boundary-observability">
+    <rect x="1360" y="520" width="296" height="136" rx="8" fill="none" stroke="#E7157B" stroke-width="1" stroke-dasharray="8 4"/>
+    <text x="1372" y="540" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">④ stdout — what a human sees</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_cli">
+    <polyline points="264,248.0 400,248.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_observability_v1-a-d-edge-primary)"/>
+    <text x="332.0" y="242.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">npm start</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_store">
+    <polyline points="576,264.0 624,264.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_observability_v1-a-d-edge-primary)"/>
+    <text x="600.0" y="258.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">inserts</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_db">
+    <polyline points="800,264.0 848,264.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_observability_v1-a-d-edge-primary)"/>
+    <text x="824.0" y="258.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">sqlite3</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_read">
+    <polyline points="1024,264.0 1104,264.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_observability_v1-a-d-edge-data_in)"/>
+    <text x="1064.0" y="258.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">SELECT</text>
+  </g>
+  <g class="d-edge d-edge-stop" data-edge="e_tracer">
+    <polyline points="264,368.0 756,368 756.0,296" fill="none" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_observability_v1-a-d-edge-stop)"/>
+    <text x="510.0" y="362.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">never instantiated</text>
+  </g>
+  <g class="d-edge d-edge-analysis" data-edge="e_simdrift">
+    <polyline points="488.0,296 488.0,408" fill="none" stroke="#E65100" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_observability_v1-a-d-edge-analysis)"/>
+    <text x="488.0" y="346.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">post-run</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_inline">
+    <polyline points="576,424.0 600,424 600,296 668.0,296" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_observability_v1-a-d-edge-primary)"/>
+    <text x="600.0" y="354.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">3 alerts</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_qual">
+    <polyline points="1148.0,296 1148,360 952,360 952.0,408" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_observability_v1-a-d-edge-call)"/>
+    <text x="1050.0" y="354.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">never called</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_cost">
+    <polyline points="1236.0,296 1236,392 712,392 712.0,408" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_observability_v1-a-d-edge-call)"/>
+    <text x="974.0" y="386.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">1 route :200</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_drift">
+    <polyline points="1192.0,296 1192.0,408" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_observability_v1-a-d-edge-call)"/>
+    <text x="1192.0" y="346.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">1 route :294</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_serve">
+    <polyline points="1280,248.0 1384,248.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_observability_v1-a-d-edge-call)"/>
+    <text x="1332.0" y="242.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">HTML+JSON</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_fetch">
+    <polyline points="1384,280.0 1280,280.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_observability_v1-a-d-edge-call)"/>
+    <text x="1332.0" y="274.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">11 fetch()</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_stdout">
+    <polyline points="400,280.0 328,280 328,496 1320,496 1320,584 1384,584.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_observability_v1-a-d-edge-artifact)"/>
+    <text x="824.0" y="490.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">run summary</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
+    <rect x="64" y="232" width="200" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="164.0" y="245.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js — npm start</text>
+    <text x="164.0" y="260.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">unlink DB first :10-13</text>
+    <text x="164.0" y="275.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">simulate() :18</text>
+    <text x="164.0" y="290.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">startDashboard() :33</text>
+  </g>
+  <g class="d-node d-component-agent" data-id="n_tracer" data-class="component.agent">
+    <rect x="64" y="336" width="200" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
+    <text x="164.0" y="349.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Tracer tracer.js:160</text>
+    <text x="164.0" y="364.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">DEAD — 0 new sites</text>
+    <text x="164.0" y="379.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">Span.end() :57 writes</text>
+    <text x="164.0" y="394.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">camelCase keys :85</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_sim" data-class="component.mock">
+    <rect x="400" y="232" width="176" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="488.0" y="245.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">simulate()</text>
+    <text x="488.0" y="260.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">simulator.js:75</text>
+    <text x="488.0" y="275.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">500 reqs · 7 days</text>
+    <text x="488.0" y="290.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">1-4 spans each :125</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_store" data-class="component.service">
+    <rect x="624" y="232" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="712.0" y="245.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Store store.js:105</text>
+    <text x="712.0" y="260.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">WAL · FK on :108</text>
+    <text x="712.0" y="275.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">only writer API</text>
+    <text x="712.0" y="290.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">20 methods · 8 dead</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_db" data-class="component.artifact">
+    <rect x="848" y="232" width="176" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="936.0" y="245.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">observability.db</text>
+    <text x="936.0" y="260.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">SQLite · 7 tables</text>
+    <text x="936.0" y="275.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">6 ever written</text>
+    <text x="936.0" y="290.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">wiped each run :10</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_dash" data-class="component.service">
+    <rect x="1104" y="232" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1192.0" y="245.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">startDashboard()</text>
+    <text x="1192.0" y="260.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">dashboard.js:12</text>
+    <text x="1192.0" y="275.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">express · 13 routes</text>
+    <text x="1192.0" y="290.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">12 use store.db raw</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_inline" data-class="component.service">
+    <rect x="400" y="408" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="488.0" y="421.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">inline drift check</text>
+    <text x="488.0" y="436.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">simulator.js:289-377</text>
+    <text x="488.0" y="451.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">pct change, not z</text>
+    <text x="488.0" y="466.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3 alerts, 1 agent</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_cost" data-class="component.service">
+    <rect x="624" y="408" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="712.0" y="421.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">CostTracker</text>
+    <text x="712.0" y="436.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">costTracker.js:9</text>
+    <text x="712.0" y="451.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">12 methods · 2 used</text>
+    <text x="712.0" y="466.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">warn 80% block 100%</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_qual" data-class="component.service">
+    <rect x="864" y="408" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="952.0" y="421.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">QualityScorer</text>
+    <text x="952.0" y="436.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">qualityScorer.js:76</text>
+    <text x="952.0" y="451.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">8 methods · 0 used</text>
+    <text x="952.0" y="466.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">hash+LCG, no judge</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_drift" data-class="component.service">
+    <rect x="1104" y="408" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1192.0" y="421.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">DriftDetector</text>
+    <text x="1192.0" y="436.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">driftDetector.js:6</text>
+    <text x="1192.0" y="451.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">real z-score :18</text>
+    <text x="1192.0" y="466.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">5 metrics · 1 route</text>
+  </g>
+  <g class="d-node d-component-external" data-id="n_ui" data-class="component.external">
+    <rect x="1384" y="232" width="248" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+    <text x="1508.0" y="245.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">public/index.html — browser</text>
+    <text x="1508.0" y="260.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">5 tabs · hand-rolled canvas :297</text>
+    <text x="1508.0" y="275.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">11 fetch() sites :581-857</text>
+    <text x="1508.0" y="290.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">KPI auto-refresh 10 s :678</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_stdout" data-class="component.artifact">
+    <rect x="1384" y="552" width="248" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1508.0" y="565.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">stdout summary</text>
+    <text x="1508.0" y="580.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">demo.js:24-29 — traces · spans</text>
+    <text x="1508.0" y="595.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">quality scores · drift alerts</text>
+    <text x="1508.0" y="610.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">plus the URL, dashboard.js:343</text>
+  </g>
+  <g class="d-node d-card-primitive" data-id="card_drift" data-class="card.primitive">
+    <rect x="376" y="520" width="296" height="248" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="384" y="535.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">DRIFT — injected in 4 places, detected by 2</text>
+    <text x="384" y="549.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">INJECTED — simulator.js, one agent only</text>
+    <text x="384" y="563.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  :120 research-agent · :89 :121 last 2 of 7 d</text>
+    <text x="384" y="577.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  1 prompt+completion tokens x1.4  :144 :145</text>
+    <text x="384" y="591.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  2 latency x1.6                   :161</text>
+    <text x="384" y="605.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  3 tool-call chance .30 -&gt; .55    :165</text>
+    <text x="384" y="619.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  4 quality score -0.5             :266</text>
+    <text x="384" y="633.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">DETECTED TWICE, BY DIFFERENT MATH</text>
+    <text x="384" y="647.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  A simulator.js:289-377 — percent change</text>
+    <text x="384" y="661.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">    latency &gt;20% :322 · tokens &gt;20% :342</text>
+    <text x="384" y="675.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">    quality drop &gt;0.2 :362 · 3 alerts max</text>
+    <text x="384" y="689.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">    writes pct INTO the z_score column :331</text>
+    <text x="384" y="703.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">    runs on every npm start</text>
+    <text x="384" y="717.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  B driftDetector.js:154 — a real z-score :18</text>
+    <text x="384" y="731.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">    |z|&gt;=2 warn :181 · |z|&gt;=3 critical :179</text>
+    <text x="384" y="745.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">    5 metrics :1 x each agent x model :209</text>
+    <text x="384" y="759.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">    runs only via dashboard.js:289</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_wiring" data-class="card.invariant">
+    <rect x="688" y="520" width="272" height="248" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="696" y="535.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">SIX CLASSES — every construction site</text>
+    <text x="696" y="549.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Store          store.js:105</text>
+    <text x="696" y="563.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  simulator.js:82 · dashboard.js:13</text>
+    <text x="696" y="577.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  20 data methods, 8 with 0 callers</text>
+    <text x="696" y="591.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">CostTracker    costTracker.js:9</text>
+    <text x="696" y="605.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  simulator.js:83 · dashboard.js:14</text>
+    <text x="696" y="619.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  12 public, 2 called :381 :200</text>
+    <text x="696" y="633.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">QualityScorer  qualityScorer.js:76</text>
+    <text x="696" y="647.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  dashboard.js:15 — then NEVER called</text>
+    <text x="696" y="661.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">DriftDetector  driftDetector.js:6</text>
+    <text x="696" y="675.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  dashboard.js:16 · runAllChecks :294</text>
+    <text x="696" y="689.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Tracer         tracer.js:160</text>
+    <text x="696" y="703.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  ZERO construction sites in the repo</text>
+    <text x="696" y="717.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Span · Trace   tracer.js:21 :104</text>
+    <text x="696" y="731.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  reachable only via Tracer :120 :165</text>
+    <text x="696" y="745.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">metrics_snapshots store.js:78 is the only</text>
+    <text x="696" y="759.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">table with no writer and no reader</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_contract" data-class="card.failure">
+    <rect x="976" y="520" width="304" height="248" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="984" y="535.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">THE PAGE READS FIELDS THE API NEVER SENDS</text>
+    <text x="984" y="549.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">index.html reads          the row carries</text>
+    <text x="984" y="563.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  trace.latencyMs :883    traces has none</text>
+    <text x="984" y="577.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  trace.totalTokens       total_tokens</text>
+    <text x="984" y="591.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  trace.costCents         total_cost (USD)</text>
+    <text x="984" y="605.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  trace.timestamp         started_at</text>
+    <text x="984" y="619.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  span.durationMs :915    latency_ms</text>
+    <text x="984" y="633.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  span.tokens :917        total_tokens</text>
+    <text x="984" y="647.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  span.costCents :918     cost</text>
+    <text x="984" y="661.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  span.toolCalls :923     tool_calls, a string</text>
+    <text x="984" y="675.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  span.children :936      parent_span_id, flat</text>
+    <text x="984" y="689.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  alert.zScore :848       z_score</text>
+    <text x="984" y="703.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  data.metrics :865       dashboard.js:282</text>
+    <text x="984" y="717.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Adapted in 2 places only — timeseries :614,</text>
+    <text x="984" y="731.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">attribution :600. The rest are read raw.</text>
+    <text x="984" y="745.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">GET /api/traces/:id — dashboard.js:102 filters</text>
+    <text x="984" y="759.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">trace_id; store.js:5-16 has no such column.</text>
+  </g>
+</svg>

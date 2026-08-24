@@ -1,0 +1,209 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 800" role="img" aria-labelledby="hoa_long_running_v1-t hoa_long_running_v1-d" class="fts-diagram">
+  <title id="hoa_long_running_v1-t">23 Long-Running Agent — Durable Execution Engine</title>
+  <desc id="hoa_long_running_v1-d">One Node process, zero dependencies, that walks a task&#x27;s steps in order, gates each one on a budget, checkpoints after every outcome, and asks a seven-branch recovery ladder what to do when a step throws. The checkpoint store is an in-memory Map and the work surface is simulated: both corrections are carried on the boxes. Every element cites a source line in FACTS.md.</desc>
+  <defs>
+    <marker id="hoa_long_running_v1-a-d-edge-analysis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E65100" class="d-edge-analysis-fill"/></marker>
+    <marker id="hoa_long_running_v1-a-d-edge-artifact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32" class="d-edge-artifact-fill"/></marker>
+    <marker id="hoa_long_running_v1-a-d-edge-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1565C0" class="d-edge-call-fill"/></marker>
+    <marker id="hoa_long_running_v1-a-d-edge-data_in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9E9E9E" class="d-edge-data_in-fill"/></marker>
+    <marker id="hoa_long_running_v1-a-d-edge-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-edge-primary-fill"/></marker>
+    <marker id="hoa_long_running_v1-a-d-edge-stop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C62828" class="d-edge-stop-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="40" y="216" width="216" height="376" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="52" y="236" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">③ Entry — demo, tests, tasks</text>
+  </g>
+  <g class="d-zone d-boundary-primary">
+    <rect x="320" y="96" width="976" height="684" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="332" y="116" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">① 23-long-running-agent — one Node process, zero deps</text>
+  </g>
+  <g class="d-zone d-boundary-functional">
+    <rect x="536" y="200" width="504" height="176" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="548" y="220" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">Durable step loop — executor.js:65-185</text>
+  </g>
+  <g class="d-zone d-boundary-external">
+    <rect x="1360" y="216" width="296" height="176" rx="8" fill="none" stroke="#1565C0" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="1372" y="236" fill="#1565C0" font-size="12" font-weight="600" class="d-zone-label">② Work surface — SIMULATED</text>
+  </g>
+  <g class="d-zone d-boundary-observability">
+    <rect x="1360" y="496" width="296" height="128" rx="8" fill="none" stroke="#E7157B" stroke-width="1" stroke-dasharray="8 4"/>
+    <text x="1372" y="516" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">④ Output — stdout</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_demo">
+    <polyline points="240,264.0 312,264 312,280 336,280.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_long_running_v1-a-d-edge-primary)"/>
+    <text x="276.0" y="258.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">execute(task)</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_tasks">
+    <polyline points="240,496.0 296,496 296,304 336,304.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_long_running_v1-a-d-edge-data_in)"/>
+    <text x="296.0" y="394.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">task defs</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_onprog">
+    <polyline points="336,328.0 272,328 272,344 152,344 152.0,312" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_long_running_v1-a-d-edge-call)"/>
+    <text x="212.0" y="338.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">onProgress :236</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_tests">
+    <polyline points="240,400.0 272,400 272,432 696,432 696.0,460" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_long_running_v1-a-d-edge-call)"/>
+    <text x="484.0" y="426.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">sole caller :101</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_loop">
+    <polyline points="512,304.0 560,304.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_long_running_v1-a-d-edge-primary)"/>
+    <text x="536.0" y="298.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">per step</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_ok">
+    <polyline points="736,304.0 800,304.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_long_running_v1-a-d-edge-primary)"/>
+    <text x="768.0" y="298.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">ok :70</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_call">
+    <polyline points="976,304.0 1400,304.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_long_running_v1-a-d-edge-primary)"/>
+    <text x="1188.0" y="298.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">await handler()</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_usage">
+    <polyline points="1460.0,272 1460,248 604,248 604.0,272" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_long_running_v1-a-d-edge-data_in)"/>
+    <text x="1032.0" y="242.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">cost + tokens</text>
+  </g>
+  <g class="d-edge d-edge-stop" data-edge="e_fail">
+    <polyline points="844.0,336 844,444 740,444 740.0,460" fill="none" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_long_running_v1-a-d-edge-stop)"/>
+    <text x="844.0" y="384.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">on throw :103</text>
+  </g>
+  <g class="d-edge d-edge-analysis" data-edge="e_strat">
+    <polyline points="608,492.0 524,492 524,328 512,328.0" fill="none" stroke="#E65100" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_long_running_v1-a-d-edge-analysis)"/>
+    <text x="524.0" y="404.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">strategy</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_event">
+    <polyline points="932.0,336 932,444 968,444 968.0,460" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_long_running_v1-a-d-edge-call)"/>
+    <text x="932.0" y="384.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">record :235</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_save">
+    <polyline points="424.0,352 424.0,460" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_long_running_v1-a-d-edge-artifact)"/>
+    <text x="424.0" y="400.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">save ×7</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_load">
+    <polyline points="380.0,460 380.0,352" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_long_running_v1-a-d-edge-data_in)"/>
+    <text x="380.0" y="400.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">resume</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_report">
+    <polyline points="648.0,336 648,364 1256,364 1256,440 1520,440 1520.0,528" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_long_running_v1-a-d-edge-artifact)"/>
+    <text x="952.0" y="358.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">budget.report()</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_timeline">
+    <polyline points="1056,492.0 1320,492 1320,560 1400,560.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_long_running_v1-a-d-edge-artifact)"/>
+    <text x="1188.0" y="486.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">timeline + ETA</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
+    <rect x="64" y="248" width="176" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="152.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
+    <text x="152.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">4 scenarios · main :171</text>
+    <text x="152.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">:44 :70 :100 :143</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_tests" data-class="component.entry">
+    <rect x="64" y="368" width="176" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="152.0" y="388.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">agent.test.js</text>
+    <text x="152.0" y="403.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">27 tests · 6 suites</text>
+    <text x="152.0" y="418.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">rollback&#x27;s only caller</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_tasks" data-class="component.mock">
+    <rect x="64" y="464" width="176" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="152.0" y="477.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">tasks.js — 4 tasks</text>
+    <text x="152.0" y="492.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">24 steps · :22 :43</text>
+    <text x="152.0" y="507.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">:77 :108 · SIMULATED</text>
+    <text x="152.0" y="522.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">setTimeout only :8</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_exec" data-class="component.service">
+    <rect x="336" y="256" width="176" height="96" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="424.0" y="270.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">DurableExecutor</text>
+    <text x="424.0" y="285.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">execute() :36 — the loop</text>
+    <text x="424.0" y="300.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">budget+reporter per run</text>
+    <text x="424.0" y="315.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">exits :81 :155 :177 :187</text>
+    <text x="424.0" y="330.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">injects store :19 +</text>
+    <text x="424.0" y="345.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">recoveryManager :20</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_budget" data-class="component.service">
+    <rect x="560" y="272" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="648.0" y="285.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">ExecutionBudget</text>
+    <text x="648.0" y="300.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">budget.js:7 · check :45</text>
+    <text x="648.0" y="315.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">record :34 · report :64</text>
+    <text x="648.0" y="330.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">new per execute() :38</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_step" data-class="component.service">
+    <rect x="800" y="272" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="888.0" y="285.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">#executeStep()</text>
+    <text x="888.0" y="300.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">executor.js:200</text>
+    <text x="888.0" y="315.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">setTimeout :208 +</text>
+    <text x="888.0" y="330.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">clearTimeout :224 :240</text>
+  </g>
+  <g class="d-node d-component-agent" data-id="n_handler" data-class="component.agent">
+    <rect x="1400" y="272" width="240" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
+    <text x="1520.0" y="285.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">step.handler() — SIMULATED</text>
+    <text x="1520.0" y="300.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">awaited at executor.js:216</text>
+    <text x="1520.0" y="315.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">every handler = simulateWork</text>
+    <text x="1520.0" y="330.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">tasks.js:8 — setTimeout, no I/O</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_ckpt" data-class="component.artifact">
+    <rect x="336" y="460" width="176" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="424.0" y="473.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">CheckpointStore</text>
+    <text x="424.0" y="488.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">checkpoint.js:7 — Map :9</text>
+    <text x="424.0" y="503.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">IN-MEMORY, not durable</text>
+    <text x="424.0" y="518.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">save :17 · load :35</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_recovery" data-class="component.service">
+    <rect x="608" y="460" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="696.0" y="473.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">RecoveryManager</text>
+    <text x="696.0" y="488.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">recovery.js:8 · injected</text>
+    <text x="696.0" y="503.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">selectStrategy :19</text>
+    <text x="696.0" y="518.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">applyRollback :101</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_progress" data-class="component.service">
+    <rect x="880" y="460" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="968.0" y="473.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">ProgressReporter</text>
+    <text x="968.0" y="488.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">progress.js:4 · per run</text>
+    <text x="968.0" y="503.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">record :19 · 6 icons :55</text>
+    <text x="968.0" y="518.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">timeline :54 · ETA :39</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_out" data-class="component.artifact">
+    <rect x="1400" y="528" width="240" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1520.0" y="541.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">stdout — the only output</text>
+    <text x="1520.0" y="556.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">demo.js:61 :63 :90 :138 :162</text>
+    <text x="1520.0" y="571.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">timeline · budget · progress</text>
+    <text x="1520.0" y="586.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">no file is ever written</text>
+  </g>
+  <g class="d-node d-card-primitive" data-id="card_rec" data-class="card.primitive">
+    <rect x="336" y="600" width="456" height="160" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="344" y="613.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">selectStrategy() recovery.js:19 — 7 branches, in code order</text>
+    <text x="344" y="627.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 timeout | code TIMEOUT + retries left → retry, 100ms×n, t×2 :24</text>
+    <text x="344" y="641.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 rate limit | 429 | RATE_LIMIT + retries → retry, 2ⁿ s cap 16s :38</text>
+    <text x="344" y="655.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 auth | 401 | 403 | code AUTH → abort — never recoverable :52</text>
+    <text x="344" y="669.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 data | validation | parse, non-critical step → skip :59 :61</text>
+    <text x="344" y="683.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 data | validation | parse, critical step → abort :65</text>
+    <text x="344" y="697.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 any other error, retries left → retry, 200ms×n :71</text>
+    <text x="344" y="711.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">7 retries exhausted → skip if non-critical :82, else abort :87</text>
+    <text x="344" y="725.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">FALL-THROUGH: 1 and 2 do NOT return when retries hit 0 — they</text>
+    <text x="344" y="739.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">drop to branch 7. Only branch 3 returns unconditionally.</text>
+    <text x="344" y="753.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">&#x27;rollback&#x27; is in the return type :17 and is never returned.</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_dur" data-class="card.invariant">
+    <rect x="816" y="600" width="456" height="160" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="824" y="613.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">DURABILITY — the checkpoint store is a Map, checkpoint.js:9</text>
+    <text x="824" y="627.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">save() from 7 sites, all inside execute(): :79 :98 :138 :148</text>
+    <text x="824" y="641.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">  :153 :170 :175 — on abort as well as on success</text>
+    <text x="824" y="655.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">kept: currentStepIndex, completedSteps, 4 budget counters :256</text>
+    <text x="824" y="669.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">dropped: the step result payload — {...s, result: undefined} :258</text>
+    <text x="824" y="683.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">no file, no DB, no serialisation to disk anywhere in the repo</text>
+    <text x="824" y="697.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">the demo crash is a thrown Error tasks.js:90, caught in-process</text>
+    <text x="824" y="711.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">a real process exit takes the Map with it — resume is in-RAM</text>
+    <text x="824" y="725.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">budget.restore() :87 does not restore #startTime budget.js:25</text>
+    <text x="824" y="739.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">so the maxDuration clock restarts at zero on every resume</text>
+    <text x="824" y="753.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">observed: 8 steps → 8 checkpoints (demo.js:65, run 2026-08-24)</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_bud" data-class="card.failure">
+    <rect x="1360" y="656" width="296" height="132" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="1368" y="669.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">BUDGET IS A FLOOR, NOT A CEILING</text>
+    <text x="1368" y="683.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">check() runs BEFORE a step :69</text>
+    <text x="1368" y="697.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">record() runs AFTER it returns :229</text>
+    <text x="1368" y="711.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">→ the step that breaches the cap still</text>
+    <text x="1368" y="725.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">runs in full and is still billed</text>
+    <text x="1368" y="739.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">observed: $0.1200 spent vs $0.1000 cap</text>
+    <text x="1368" y="753.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 limits, all ≥ : cost :47, seconds :51,</text>
+    <text x="1368" y="767.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">calls :54 — calls counts steps :38</text>
+    <text x="1368" y="781.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">all default to Infinity :21 = no gate</text>
+  </g>
+</svg>

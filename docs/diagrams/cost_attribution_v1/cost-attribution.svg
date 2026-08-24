@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 800" role="img" aria-labelledby="hoa_cost_attribution_v1-t hoa_cost_attribution_v1-d" class="fts-diagram">
+  <title id="hoa_cost_attribution_v1-t">27 Cost Attribution — Facade over one event store, four read-models</title>
+  <desc id="hoa_cost_attribution_v1-d">One in-memory process that records simulated LLM-call events into a single CostCollector store, then reports over it four ways: cost attribution (4 dimensions), waste detection (6 patterns), ROI, and budget alerts checked on every record. No network, no real LLM. Every element cites a source line in FACTS.md.</desc>
+  <defs>
+    <marker id="hoa_cost_attribution_v1-a-d-edge-artifact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32" class="d-edge-artifact-fill"/></marker>
+    <marker id="hoa_cost_attribution_v1-a-d-edge-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1565C0" class="d-edge-call-fill"/></marker>
+    <marker id="hoa_cost_attribution_v1-a-d-edge-data_in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9E9E9E" class="d-edge-data_in-fill"/></marker>
+    <marker id="hoa_cost_attribution_v1-a-d-edge-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-edge-primary-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="40" y="220" width="216" height="240" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="52" y="240" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">③ Inputs — demo CLI + simulated events</text>
+  </g>
+  <g class="d-zone d-boundary-primary">
+    <rect x="320" y="96" width="976" height="684" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="332" y="116" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">① CostAttributionEngine (Node ESM · no network, no real LLM)</text>
+  </g>
+  <g class="d-zone d-boundary-functional">
+    <rect x="856" y="200" width="240" height="336" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="868" y="220" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">Reporting — reads one store</text>
+  </g>
+  <g class="d-zone d-boundary-observability">
+    <rect x="1360" y="300" width="296" height="160" rx="8" fill="none" stroke="#E7157B" stroke-width="1" stroke-dasharray="8 4"/>
+    <text x="1372" y="320" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">④ Reported output (stdout only)</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_demo">
+    <polyline points="224,284.0 344,284.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_cost_attribution_v1-a-d-edge-primary)"/>
+    <text x="284.0" y="278.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">record + report</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_scen">
+    <polyline points="224,404.0 284,404 284,308 344,308.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_cost_attribution_v1-a-d-edge-data_in)"/>
+    <text x="284.0" y="350.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">12 events</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_rec">
+    <polyline points="520,284.0 600,284.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_cost_attribution_v1-a-d-edge-primary)"/>
+    <text x="560.0" y="278.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">record()</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_price">
+    <polyline points="688.0,204 688.0,252" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_cost_attribution_v1-a-d-edge-data_in)"/>
+    <text x="688.0" y="222.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">calculateCost</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_budget">
+    <polyline points="432.0,332 432.0,372" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_cost_attribution_v1-a-d-edge-call)"/>
+    <text x="432.0" y="346.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">_checkBudget</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_attr">
+    <polyline points="776,284.0 832,284 832,268 888,268.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_cost_attribution_v1-a-d-edge-data_in)"/>
+    <text x="804.0" y="278.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">query()</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_waste">
+    <polyline points="688.0,316 688,372 888,372.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_cost_attribution_v1-a-d-edge-data_in)"/>
+    <text x="788.0" y="366.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">query()</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_roi">
+    <polyline points="644.0,316 644,476 888,476.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_cost_attribution_v1-a-d-edge-data_in)"/>
+    <text x="766.0" y="470.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">query()</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_out_a">
+    <polyline points="1064,268.0 1508,268 1508.0,340" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_cost_attribution_v1-a-d-edge-artifact)"/>
+    <text x="1286.0" y="262.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">byAgent…byModel</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_out_w">
+    <polyline points="1064,372.0 1384,372.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_cost_attribution_v1-a-d-edge-artifact)"/>
+    <text x="1224.0" y="366.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">6 patterns</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_out_r">
+    <polyline points="1064,476.0 1508,476 1508.0,404" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_cost_attribution_v1-a-d-edge-artifact)"/>
+    <text x="1286.0" y="470.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">ROI + eff.</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
+    <rect x="64" y="252" width="160" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="144.0" y="272.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
+    <text x="144.0" y="287.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">CLI · main() :3</text>
+    <text x="144.0" y="302.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">records + prints</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_scenarios" data-class="component.mock">
+    <rect x="64" y="372" width="160" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="144.0" y="392.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">12 sim. events</text>
+    <text x="144.0" y="407.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">no real LLM</text>
+    <text x="144.0" y="422.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">demo.js:18-31</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_engine" data-class="component.service">
+    <rect x="344" y="236" width="176" height="96" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="432.0" y="272.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">CostAttributionEngine</text>
+    <text x="432.0" y="287.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">engine.js — facade</text>
+    <text x="432.0" y="302.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">record + dashboard :16</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_budget" data-class="component.service">
+    <rect x="344" y="372" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="432.0" y="392.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Budget monitor</text>
+    <text x="432.0" y="407.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">_checkBudget :26</text>
+    <text x="432.0" y="422.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">budgets + alerts :12</text>
+  </g>
+  <g class="d-node d-component-external" data-id="n_pricing" data-class="component.external">
+    <rect x="600" y="140" width="176" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+    <text x="688.0" y="160.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Pricing table</text>
+    <text x="688.0" y="175.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">7 models :4-12</text>
+    <text x="688.0" y="190.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">hardcoded · no API</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_collector" data-class="component.service">
+    <rect x="600" y="252" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="688.0" y="272.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">CostCollector</text>
+    <text x="688.0" y="287.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">events[] store :3</text>
+    <text x="688.0" y="302.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">query() :45</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_attr" data-class="component.service">
+    <rect x="888" y="236" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="976.0" y="264.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">CostAttribution</text>
+    <text x="976.0" y="279.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">4 dimensions :6</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_waste" data-class="component.service">
+    <rect x="888" y="340" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="976.0" y="368.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">WasteDetector</text>
+    <text x="976.0" y="383.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">6 patterns :7</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_roi" data-class="component.service">
+    <rect x="888" y="444" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="976.0" y="472.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">ROICalculator</text>
+    <text x="976.0" y="487.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">ROI + efficiency :11</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_out" data-class="component.artifact">
+    <rect x="1384" y="340" width="248" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1508.0" y="368.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">stdout report</text>
+    <text x="1508.0" y="383.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">console.log — demo.js:36-81</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_attr" data-class="card.invariant">
+    <rect x="344" y="576" width="304" height="184" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="352" y="629.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">4 ATTRIBUTION DIMENSIONS — attribution.js</text>
+    <text x="352" y="643.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 byAgent :6 — cost·reqs·successRate·avg</text>
+    <text x="352" y="657.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 byTeam :30 — cost·uniqueAgents·models</text>
+    <text x="352" y="671.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 byTaskType :58 — costPerSuccess·rate</text>
+    <text x="352" y="685.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 byModel :85 — tokens·cacheHitRate·avg</text>
+    <text x="352" y="699.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">each reads collector.query() :7 :31 :59</text>
+    <text x="352" y="713.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">sorted by totalCost desc :27 :55 :82 :106</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_waste" data-class="card.invariant">
+    <rect x="664" y="576" width="304" height="184" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="672" y="622.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">6 WASTE PATTERNS — waste.analyze() :7</text>
+    <text x="672" y="636.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 overpowered_model :21 — opus/gpt4o 85%</text>
+    <text x="672" y="650.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 duplicate_requests :40 — within 60s</text>
+    <text x="672" y="664.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 excessive_retries :65 — &gt;1 fail/task</text>
+    <text x="672" y="678.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 low_cache_hit_rate :93 — &gt;10 &amp; &lt;10%</text>
+    <text x="672" y="692.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 high_failure_rate :110 — &gt;5 &amp; &gt;30%</text>
+    <text x="672" y="706.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 idle_agent :135 — &gt;1h idle, cost&gt;$.01</text>
+    <text x="672" y="720.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">sorted by savingsUsd desc :18</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_budget" data-class="card.failure">
+    <rect x="984" y="576" width="304" height="184" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="992" y="622.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">BUDGET ALERTS — engine._checkBudget :26</text>
+    <text x="992" y="636.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">fires inside every record() :18</text>
+    <text x="992" y="650.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">no budget set ⇒ skip :28</text>
+    <text x="992" y="664.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">spend = today&#x27;s team cost :30-34</text>
+    <text x="992" y="678.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">thresholds 0.5 · 0.8 · 0.95 · 1.0 :36</text>
+    <text x="992" y="692.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">level: ≥1.0 crit · ≥0.8 warn · info :45</text>
+    <text x="992" y="706.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">deduped per team·threshold·day :39-40</text>
+    <text x="992" y="720.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">alerts accrue on this.alerts[] :13</text>
+  </g>
+</svg>

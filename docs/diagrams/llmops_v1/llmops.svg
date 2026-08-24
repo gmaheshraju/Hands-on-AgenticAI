@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 800" role="img" aria-labelledby="hoa_llmops_v1-t hoa_llmops_v1-d" class="fts-diagram">
+  <title id="hoa_llmops_v1-t">06 LLMOps — Model Router &amp; Cost Dashboard</title>
+  <desc id="hoa_llmops_v1-d">A heuristic classifier scores each query, a router walks a per-tier fallback chain of mock models, every attempt is written to SQLite, and a second process serves aggregates to a browser dashboard. Every element cites a source line in FACTS.md.</desc>
+  <defs>
+    <marker id="hoa_llmops_v1-a-d-edge-analysis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E65100" class="d-edge-analysis-fill"/></marker>
+    <marker id="hoa_llmops_v1-a-d-edge-artifact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32" class="d-edge-artifact-fill"/></marker>
+    <marker id="hoa_llmops_v1-a-d-edge-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1565C0" class="d-edge-call-fill"/></marker>
+    <marker id="hoa_llmops_v1-a-d-edge-data_in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9E9E9E" class="d-edge-data_in-fill"/></marker>
+    <marker id="hoa_llmops_v1-a-d-edge-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-edge-primary-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="40" y="216" width="176" height="128" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="52" y="236" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">③ Entry — npm run demo (demo.js:74)</text>
+  </g>
+  <g class="d-zone d-boundary-primary">
+    <rect x="280" y="96" width="1016" height="680" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="292" y="116" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">① 06-llmops — Node ESM + better-sqlite3</text>
+  </g>
+  <g class="d-zone d-boundary-functional">
+    <rect x="320" y="184" width="504" height="200" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="332" y="204" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">Write path — one query, classify → route → escalate</text>
+  </g>
+  <g class="d-zone d-boundary-external">
+    <rect x="1360" y="216" width="296" height="232" rx="8" fill="none" stroke="#1565C0" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="1372" y="236" fill="#1565C0" font-size="12" font-weight="600" class="d-zone-label">② Model layer — MOCK, no network egress</text>
+  </g>
+  <g class="d-zone d-boundary-observability">
+    <rect x="1360" y="512" width="296" height="128" rx="8" fill="none" stroke="#E7157B" stroke-width="1" stroke-dasharray="8 4"/>
+    <text x="1372" y="532" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">④ Dashboard client — browser</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_q">
+    <polyline points="192,280.0 352,280.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_llmops_v1-a-d-edge-primary)"/>
+    <text x="272.0" y="274.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">query :82</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_cls">
+    <polyline points="528,280.0 624,280.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_llmops_v1-a-d-edge-primary)"/>
+    <text x="576.0" y="274.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">score · tier :158</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_call">
+    <polyline points="800,280.0 1384,280.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_llmops_v1-a-d-edge-call)"/>
+    <text x="1092.0" y="274.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">chain[i] :171</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_ret">
+    <polyline points="1444.0,248 1444,208 756,208 756.0,248" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_llmops_v1-a-d-edge-data_in)"/>
+    <text x="1100.0" y="202.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">response · tokens · cost :133</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_cfg">
+    <polyline points="1504.0,312 1504.0,352" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_llmops_v1-a-d-edge-data_in)"/>
+    <text x="1504.0" y="326.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">pricing :108</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_log">
+    <polyline points="668.0,312 668,392 432,392 432.0,440" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_llmops_v1-a-d-edge-artifact)"/>
+    <text x="550.0" y="386.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">3 sites :187 :207 :242</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_ins">
+    <polyline points="512,472.0 592,472.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_llmops_v1-a-d-edge-artifact)"/>
+    <text x="552.0" y="466.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">INSERT</text>
+  </g>
+  <g class="d-edge d-edge-analysis" data-edge="e_rd">
+    <polyline points="752,472.0 832,472.0" fill="none" stroke="#E65100" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_llmops_v1-a-d-edge-analysis)"/>
+    <text x="792.0" y="466.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">SELECT</text>
+  </g>
+  <g class="d-edge d-edge-analysis" data-edge="e_api">
+    <polyline points="992,472.0 1072,472.0" fill="none" stroke="#E65100" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_llmops_v1-a-d-edge-analysis)"/>
+    <text x="1032.0" y="466.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">handleApi :44</text>
+  </g>
+  <g class="d-edge d-edge-analysis" data-edge="e_http">
+    <polyline points="1232,472.0 1304,472 1304,584 1384,584.0" fill="none" stroke="#E65100" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_llmops_v1-a-d-edge-analysis)"/>
+    <text x="1304.0" y="522.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">GET /api/metrics</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
+    <rect x="64" y="248" width="128" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="128.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
+    <text x="128.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">50 queries :14</text>
+    <text x="128.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">await route() :82</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_classify" data-class="component.service">
+    <rect x="352" y="248" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="440.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">classify()</text>
+    <text x="440.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">kw .50 len .30 str .20</text>
+    <text x="440.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">classifier.js:125 :135</text>
+  </g>
+  <g class="d-node d-component-agent" data-id="n_route" data-class="component.agent">
+    <rect x="624" y="248" width="176" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
+    <text x="712.0" y="261.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">route()</text>
+    <text x="712.0" y="276.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">router.js:153</text>
+    <text x="712.0" y="291.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">fallback chain :167</text>
+    <text x="712.0" y="306.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3 logRequest sites</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_mock" data-class="component.mock">
+    <rect x="1384" y="248" width="240" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="1504.0" y="268.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">mockModelCall() :107</text>
+    <text x="1504.0" y="283.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">MOCK — no network call</text>
+    <text x="1504.0" y="298.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">0.3 fail rate, len&gt;300 :127</text>
+  </g>
+  <g class="d-node d-component-external" data-id="n_cfg" data-class="component.external">
+    <rect x="1384" y="352" width="240" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+    <text x="1504.0" y="372.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">MODEL_CONFIG :19</text>
+    <text x="1504.0" y="387.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">5 models · 3 reachable</text>
+    <text x="1504.0" y="402.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">ROUTING_TABLE :64</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_log" data-class="component.service">
+    <rect x="352" y="440" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="432.0" y="460.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">logRequest()</text>
+    <text x="432.0" y="475.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">metrics.js:74</text>
+    <text x="432.0" y="490.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">INSERT · 12 columns</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_db" data-class="component.artifact">
+    <rect x="592" y="440" width="160" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="672.0" y="460.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">metrics.db</text>
+    <text x="672.0" y="475.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">SQLite WAL :14 :21</text>
+    <text x="672.0" y="490.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">requests table :30</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_read" data-class="component.service">
+    <rect x="832" y="440" width="160" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="912.0" y="468.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">9 read queries</text>
+    <text x="912.0" y="483.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">metrics.js :94-215</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_server" data-class="component.entry">
+    <rect x="1072" y="440" width="160" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="1152.0" y="460.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">dashboard.js</text>
+    <text x="1152.0" y="475.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">http :3000 :69 :80</text>
+    <text x="1152.0" y="490.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">11-key payload :50</text>
+  </g>
+  <g class="d-node d-component-external" data-id="n_browser" data-class="component.external">
+    <rect x="1384" y="552" width="240" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+    <text x="1504.0" y="572.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">public/dashboard.html</text>
+    <text x="1504.0" y="587.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">fetch /api/metrics :249</text>
+    <text x="1504.0" y="602.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">auto-refresh 10s :404</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_route" data-class="card.invariant">
+    <rect x="320" y="540" width="456" height="92" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="328" y="554.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">CLASSIFY → ROUTE — complete table, in code order</text>
+    <text x="328" y="568.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">score = kw×0.50 + len×0.30 + struc×0.20 · classifier.js:135</text>
+    <text x="328" y="582.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">tier: &lt;0.30 simple · &lt;0.55 medium · else complex :139-141</text>
+    <text x="328" y="596.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">simple → haiku → sonnet → opus · router.js:65</text>
+    <text x="328" y="610.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">medium → sonnet → opus · router.js:66</text>
+    <text x="328" y="624.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">complex → opus, no fallback remains · router.js:67</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_esc" data-class="card.failure">
+    <rect x="800" y="540" width="456" height="92" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="808" y="554.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">ESCALATION — LOW_QUALITY_SIGNALS, 6 in code order :92</text>
+    <text x="808" y="568.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 len &lt; 20 :93 · 2 /i don&#x27;t know/ :94 · 3 /i&#x27;m not sure/ :95</text>
+    <text x="808" y="582.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 /i cannot/ &amp; len&lt;100 :96 · 5 /as an ai/ &amp; len&lt;150 :97</text>
+    <text x="808" y="596.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 endsWith(&#x27;...&#x27;) &amp; len&lt;80 :98 — last in chain exempt :178</text>
+    <text x="808" y="610.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">reason: response_too_short · low_quality_detected :183</text>
+    <text x="808" y="624.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">error: &lt;err.message&gt; :240 · all_models_exhausted :273</text>
+  </g>
+  <g class="d-node d-card-primitive" data-id="card_models" data-class="card.primitive">
+    <rect x="320" y="668" width="456" height="104" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="328" y="681.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">MODEL_CONFIG — 5 models in code order, $ per 1K :19</text>
+    <text x="328" y="695.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">haiku · claude-haiku-4-5 · cheap · .001 / .005 · 200ms :20</text>
+    <text x="328" y="709.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">gpt-4o-mini · cheap · .00015 / .0006 · 250ms :28</text>
+    <text x="328" y="723.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">sonnet · claude-sonnet-5 · medium · .003 / .015 · 800ms :36</text>
+    <text x="328" y="737.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">gpt-4o · medium · .0025 / .01 · 700ms :44</text>
+    <text x="328" y="751.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">opus · claude-opus-5 · expensive · .005 / .025 · 2000ms :52</text>
+    <text x="328" y="765.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">only haiku · sonnet · opus reachable — ROUTING_TABLE :64-68</text>
+  </g>
+</svg>

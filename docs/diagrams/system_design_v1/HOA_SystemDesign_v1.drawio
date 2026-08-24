@@ -1,0 +1,130 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_system_design_v1" name="01 Agent System Design — PR Review Agent">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_entry" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="40" y="200" width="240" height="292" as="geometry" />
+        </mxCell>
+        <mxCell id="z_entry_lbl" value="③ Entry points" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="52" y="208" width="224" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="344" y="96" width="936" height="680" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc_lbl" value="① PR Review Agent process (Node ESM)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="356" y="104" width="920" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_loop" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="376" y="200" width="872" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="z_loop_lbl" value="ReAct loop — observe · think · act" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="388" y="208" width="856" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_ext" value="" style="rounded=1;fillColor=none;strokeColor=#1565C0;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#1565C0;" parent="1" vertex="1">
+          <mxGeometry x="1344" y="200" width="296" height="336" as="geometry" />
+        </mxCell>
+        <mxCell id="z_ext_lbl" value="② External services (network boundary)" style="text;fontSize=10;fontStyle=1;fontColor=#1565C0;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1356" y="208" width="280" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=1;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="1344" y="600" width="296" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out_lbl" value="④ Output artifact" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1356" y="608" width="280" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;demo.js:166&lt;/b&gt;&lt;br&gt;mock LLM + fixtures" class="component.entry" id="n_demo">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="236" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;review.js:87&lt;/b&gt;&lt;br&gt;real GitHub + LLM" class="component.entry" id="n_live">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="380" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;runReActLoop()&lt;/b&gt;&lt;br&gt;agent.js:157" class="component.service" id="n_react">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="408" y="252" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Tool Registry&lt;/b&gt;&lt;br&gt;5 tools · tools.js:64" class="component.service" id="n_tools">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="688" y="252" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Schema · validate&lt;/b&gt;&lt;br&gt;schema.js:39" class="component.service" id="n_schema">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="968" y="252" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Simulated LLM&lt;/b&gt;&lt;br&gt;8 scripted steps · :16" class="component.mock" id="n_mockllm">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="408" y="460" width="176" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Mock PR data&lt;/b&gt;&lt;br&gt;mock-data.js:5" class="component.mock" id="n_mockdata">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="688" y="460" width="176" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;GitHub API&lt;/b&gt;&lt;br&gt;PR · diff · file · search · comment" class="component.external" id="n_github">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1368" y="240" width="248" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Anthropic API&lt;/b&gt;&lt;br&gt;review.js:26" class="component.external" id="n_anthropic">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1368" y="332" width="248" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;OpenAI API&lt;/b&gt;&lt;br&gt;review.js:59" class="component.external" id="n_openai">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1368" y="424" width="248" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Findings JSON&lt;/b&gt;&lt;br&gt;findings · summary&lt;br&gt;filesReviewed · filesSkipped" class="component.artifact" id="n_findings">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1368" y="700" width="248" height="72" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;HOW ONE ITERATION EXITS — complete, in code order&lt;/b&gt;&lt;br&gt;1 FINISH unparseable → retry message :197&lt;br&gt;2 FINISH valid → validate · dedupe · sort · return :208&lt;br&gt;3 unknown tool → error observation :234&lt;br&gt;4 stall xN identical → force-finish :262&lt;br&gt;5 neither FINISH nor ACTION → parse retry :284&lt;br&gt;6 maxIterations → empty output, cappedOut :295&lt;br&gt;&lt;i&gt;findings sort: bug → security → suggestion → nit · schema.js:138&lt;/i&gt;" class="card.invariant" id="card_exit">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="408" y="540" width="456" height="152" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_demo" value="runReActLoop" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_react" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_live" value="runReActLoop" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_live" target="n_react" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="304" y="412" /><mxPoint x="304" y="300" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_tool" value="tool.execute :248" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_react" target="n_tools" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_val" value="validate · dedupe · sort :219" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_react" target="n_schema" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="540" y="364" /><mxPoint x="1012" y="364" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_llm" value="llmCall :184" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_react" target="n_mockllm" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_fix" value="ctx.mockData branch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_mockdata" target="n_tools" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gh" value="fetch · post" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_tools" target="n_github" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="776" y="232" /><mxPoint x="1296" y="232" /><mxPoint x="1296" y="268" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_ant" value="POST /v1/messages" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_live" target="n_anthropic" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="144" y="712" /><mxPoint x="1296" y="712" /><mxPoint x="1296" y="360" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_oai" value="POST /v1/chat" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_live" target="n_openai" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="184" y="760" /><mxPoint x="1320" y="760" /><mxPoint x="1320" y="452" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_out" value="return output :222" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_schema" target="n_findings" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1100" y="736" /></Array></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 800" role="img" aria-labelledby="hoa_rag_pipeline_v1-t hoa_rag_pipeline_v1-d" class="fts-diagram">
+  <title id="hoa_rag_pipeline_v1-t">05 RAG Pipeline — Architecture</title>
+  <desc id="hoa_rag_pipeline_v1-d">Hybrid codebase Q&amp;A in one Node process: a demo that supplies its own corpus, a chunker feeding two independent indexes, BM25 and vector retrieval fused by RRF, a re-ranker, and answer generation over two LLM seams that are mock by default. Every element cites a source line in FACTS.md.</desc>
+  <defs>
+    <marker id="hoa_rag_pipeline_v1-a-d-edge-artifact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32" class="d-edge-artifact-fill"/></marker>
+    <marker id="hoa_rag_pipeline_v1-a-d-edge-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1565C0" class="d-edge-call-fill"/></marker>
+    <marker id="hoa_rag_pipeline_v1-a-d-edge-data_in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9E9E9E" class="d-edge-data_in-fill"/></marker>
+    <marker id="hoa_rag_pipeline_v1-a-d-edge-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-edge-primary-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="24" y="280" width="192" height="176" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="36" y="300" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">① Entry (CLI) — node src/demo.js</text>
+  </g>
+  <g class="d-zone d-boundary-primary">
+    <rect x="280" y="88" width="1056" height="696" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="292" y="108" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">② 05-rag-pipeline process (Node ESM, zero npm deps)</text>
+  </g>
+  <g class="d-zone d-boundary-functional">
+    <rect x="576" y="200" width="704" height="344" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="588" y="220" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">③ Query path — search() :210 then ask() :261</text>
+  </g>
+  <g class="d-zone d-boundary-external">
+    <rect x="1400" y="216" width="224" height="296" rx="8" fill="none" stroke="#1565C0" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="1412" y="236" fill="#1565C0" font-size="12" font-weight="600" class="d-zone-label">④ Pluggable seams — MOCK by default</text>
+  </g>
+  <g class="d-zone d-boundary-observability">
+    <rect x="1400" y="576" width="224" height="176" rx="8" fill="none" stroke="#E7157B" stroke-width="1" stroke-dasharray="8 4"/>
+    <text x="1412" y="596" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">⑤ Returned to caller</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_run">
+    <polyline points="200,348.0 272,348 272,284 360,284.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_rag_pipeline_v1-a-d-edge-primary)"/>
+    <text x="316.0" y="278.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">6 files · 5 Qs</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_idx">
+    <polyline points="448.0,316 448,368 448.0,412" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_rag_pipeline_v1-a-d-edge-primary)"/>
+    <text x="448.0" y="336.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">indexFile :145</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_qb">
+    <polyline points="536,284.0 568,284 600,284.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_rag_pipeline_v1-a-d-edge-primary)"/>
+    <text x="552.0" y="278.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">query</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_qv">
+    <polyline points="492.0,316 492,316 492,348 580,348 580,428 600,428.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_rag_pipeline_v1-a-d-edge-primary)"/>
+    <text x="536.0" y="342.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">query :222</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_cb">
+    <polyline points="536,428.0 556,428 556,248 644,248 644.0,252" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_rag_pipeline_v1-a-d-edge-data_in)"/>
+    <text x="556.0" y="332.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">addDocument :168</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_cv">
+    <polyline points="536,460.0 568,460 600,460.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_rag_pipeline_v1-a-d-edge-data_in)"/>
+    <text x="552.0" y="454.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">chunks</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_bf">
+    <polyline points="776,284.0 808,284 808,348 840,348.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_rag_pipeline_v1-a-d-edge-primary)"/>
+    <text x="808.0" y="310.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">top-20</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_vf">
+    <polyline points="776,444.0 808,444 808,380 840,380.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_rag_pipeline_v1-a-d-edge-primary)"/>
+    <text x="808.0" y="406.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">top-20</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_fr">
+    <polyline points="1016,364.0 1048,364 1080,364.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_rag_pipeline_v1-a-d-edge-primary)"/>
+    <text x="1032.0" y="358.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">top-15</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_ra">
+    <polyline points="1168.0,396 1168,428 1168.0,460" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_rag_pipeline_v1-a-d-edge-primary)"/>
+    <text x="1168.0" y="406.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">top-5</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_rl">
+    <polyline points="1256,364.0 1288,364 1288,268 1424,268.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_rag_pipeline_v1-a-d-edge-call)"/>
+    <text x="1356.0" y="262.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">mode &#x27;llm&#x27; only :162</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_al">
+    <polyline points="1256,508.0 1312,508 1312,300 1424,300.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_rag_pipeline_v1-a-d-edge-call)"/>
+    <text x="1312.0" y="398.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">llmCall(prompt) :272</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_ve">
+    <polyline points="732.0,476 732,532 1384,532 1384,444 1424,444.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_rag_pipeline_v1-a-d-edge-data_in)"/>
+    <text x="1058.0" y="526.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">embed(text) :166</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_ar">
+    <polyline points="1256,476.0 1336,476 1336,632 1424,632.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_rag_pipeline_v1-a-d-edge-artifact)"/>
+    <text x="1336.0" y="548.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">return :288</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_rc">
+    <polyline points="1512.0,656 1512,676 1512.0,692" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_rag_pipeline_v1-a-d-edge-artifact)"/>
+    <text x="1512.0" y="660.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">printed :489</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
+    <rect x="40" y="316" width="160" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="120.0" y="336.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
+    <text x="120.0" y="351.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">SAMPLE_CODEBASE :16</text>
+    <text x="120.0" y="366.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">5 questions :474</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_pipeline" data-class="component.service">
+    <rect x="360" y="252" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="448.0" y="272.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">RAGPipeline</text>
+    <text x="448.0" y="287.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">owns every stage :104</text>
+    <text x="448.0" y="302.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">indexFile :145 ask :261</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_chunker" data-class="component.service">
+    <rect x="360" y="412" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="448.0" y="432.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">chunker.js</text>
+    <text x="448.0" y="447.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">chunkFile :112</text>
+    <text x="448.0" y="462.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">shouldIndex :209</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_bm25" data-class="component.service">
+    <rect x="600" y="252" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="688.0" y="272.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">BM25Index</text>
+    <text x="688.0" y="287.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">inverted index :76</text>
+    <text x="688.0" y="302.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">k1=1.2 b=0.75 :67</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_vector" data-class="component.service">
+    <rect x="600" y="412" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="688.0" y="432.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">VectorIndex</text>
+    <text x="688.0" y="447.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">sparse cosine :94</text>
+    <text x="688.0" y="462.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">in-memory :131</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_fusion" data-class="component.service">
+    <rect x="840" y="332" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="928.0" y="352.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">reciprocalRankFusion</text>
+    <text x="928.0" y="367.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">1/(k + rank) :63</text>
+    <text x="928.0" y="382.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">rank-based merge :43</text>
+  </g>
+  <g class="d-node d-component-agent" data-id="n_rerank" data-class="component.agent">
+    <rect x="1080" y="332" width="176" height="64" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
+    <text x="1168.0" y="352.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Reranker.rerank</text>
+    <text x="1168.0" y="367.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">heuristic | llm :157</text>
+    <text x="1168.0" y="382.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">score 0-10 :96</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_answer" data-class="component.service">
+    <rect x="1080" y="460" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1168.0" y="480.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Answer generation</text>
+    <text x="1168.0" y="495.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">buildAnswerPrompt :25</text>
+    <text x="1168.0" y="510.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">mock fallback :55</text>
+  </g>
+  <g class="d-node d-component-external" data-id="n_llm" data-class="component.external">
+    <rect x="1424" y="252" width="176" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+    <text x="1512.0" y="272.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">llmCall(prompt)</text>
+    <text x="1512.0" y="287.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">caller-supplied :113</text>
+    <text x="1512.0" y="302.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">default null :123</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_embed" data-class="component.mock">
+    <rect x="1424" y="412" width="176" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="1512.0" y="432.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">MockEmbedding</text>
+    <text x="1512.0" y="447.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">bag-of-words :36</text>
+    <text x="1512.0" y="462.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">no network call :46</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_ret" data-class="component.artifact">
+    <rect x="1424" y="608" width="176" height="48" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1512.0" y="628.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">{answer,sources,debug}</text>
+    <text x="1512.0" y="643.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">pipeline.js:288</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_console" data-class="component.artifact">
+    <rect x="1424" y="692" width="176" height="48" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1512.0" y="712.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">stdout</text>
+    <text x="1512.0" y="727.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">demo.js:489 :490</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_funnel" data-class="card.invariant">
+    <rect x="304" y="560" width="456" height="116" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="312" y="579.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">CANDIDATE FUNNEL — every knob, in constructor order</text>
+    <text x="312" y="593.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 bm25TopK 20 :117 · 2 vectorTopK 20 :118 — candidates</text>
+    <text x="312" y="607.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 fusionTopK 15 :119 — survive RRF · 5 rrfK 60 :121</text>
+    <text x="312" y="621.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 rerankerTopK 5 :120 — reach the answer prompt</text>
+    <text x="312" y="635.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 llmCall null :123 · 7 rerankerMode &#x27;heuristic&#x27; :129</text>
+    <text x="312" y="649.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">every one is options.X || literal — no config file, no env</text>
+    <text x="312" y="663.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">20+20 → 15 → 5, applied at :216 :222 :230 :238</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_degrade" data-class="card.failure">
+    <rect x="792" y="560" width="456" height="116" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="800" y="572.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">SILENT DEGRADATIONS ON THE QUERY PATH — in call order</text>
+    <text x="800" y="586.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 bm25.search: query tokenizes to nothing → [] bm25.js:159</text>
+    <text x="800" y="600.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 cosineSimilarity: either norm 0 → 0 vectorSearch.js:115</text>
+    <text x="800" y="614.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 rerank: no candidates → [] reranker.js:158</text>
+    <text x="800" y="628.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 LLM JSON unparseable → heuristic; console.warn only :190</text>
+    <text x="800" y="642.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 candidate absent from LLM scores → rerankerScore 0 :199</text>
+    <text x="800" y="656.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">6 no llmCall → mockGenerateAnswer pipeline.js:276</text>
+    <text x="800" y="670.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">7 zero chunks → fixed &#x27;not found&#x27; string :57 — see below</text>
+  </g>
+  <g class="d-node d-card-primitive" data-id="card_index" data-class="card.primitive">
+    <rect x="304" y="692" width="456" height="76" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="312" y="705.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">chunker.js shouldIndex() REJECTS — complete, code order</text>
+    <text x="312" y="719.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 path part in SKIP_DIRS, n=11 :213 · 2 part starts &#x27;.&#x27; :214</text>
+    <text x="312" y="733.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 ext in SKIP_EXTENSIONS, n=19 :219 · 4 ext over 6 chars :222</text>
+    <text x="312" y="747.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">else return true :224 — reject is counted, never logged :147</text>
+    <text x="312" y="761.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">the ONE throw in the whole project: fusion.js:48 (weights len)</text>
+  </g>
+</svg>

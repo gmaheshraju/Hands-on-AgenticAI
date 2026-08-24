@@ -1,0 +1,166 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_workflow_engine_v1" name="18 Workflow Engine — DAG orchestrator (validate → Kahn layers → dispatch)">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1160" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_in" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="40" y="232" width="232" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="z_in_lbl" value="③ Inputs — CLI + workflow DSL" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="52" y="240" width="216" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="336" y="96" width="1016" height="772" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc_lbl" value="① Workflow engine (Node ESM · in-proc · no network, no real LLM)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="348" y="104" width="1000" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_exec" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="408" y="384" width="624" height="476" as="geometry" />
+        </mxCell>
+        <mxCell id="z_exec_lbl" value="Node-type executors" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="420" y="392" width="608" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=1;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="1416" y="240" width="244" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out_lbl" value="④ Reported output (stdout only)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1428" y="248" width="228" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI runner :88&lt;br&gt;runs 3 workflows :97" class="component.entry" id="n_demo">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="56" y="280" width="200" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;workflows/*.json&lt;/b&gt;&lt;br&gt;3 DSL defs&lt;br&gt;read by demo.js:14" class="component.external" id="n_wf">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="56" y="408" width="200" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;execute() :149&lt;/b&gt;&lt;br&gt;orchestrator&lt;br&gt;validate &amp;#8594; sort&lt;br&gt;+ _executeNode :223" class="component.service" id="n_exec">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="368" y="168" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;validateWorkflow()&lt;/b&gt;&lt;br&gt;engine.js:101&lt;br&gt;8 checks, collected" class="component.service" id="n_val">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="616" y="168" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;topologicalLayers()&lt;/b&gt;&lt;br&gt;Kahn :64 · cycle :92&lt;br&gt;folds buildGraph :38" class="component.service" id="n_topo">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="864" y="168" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;retryWithBackoff()&lt;/b&gt;&lt;br&gt;retry.js:12&lt;br&gt;2x exp backoff :48" class="component.service" id="n_retry">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1112" y="168" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;WorkflowRun :20&lt;/b&gt;&lt;br&gt;state machine&lt;br&gt;+ summary() :109&lt;br&gt;+ trace :98" class="component.service" id="n_state">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="368" y="296" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;NODE_EXECUTORS&lt;/b&gt;&lt;br&gt;engine.js:24&lt;br&gt;dispatch table&lt;br&gt;by node.type&lt;br&gt;:241&lt;br&gt;&lt;br&gt;one of six&lt;br&gt;fires per node&lt;br&gt;&lt;br&gt;unknown type&lt;br&gt;&amp;#8658; validate&lt;br&gt;fails :121" class="component.service" id="n_dispatch">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="440" y="424" width="176" height="420" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;llm &amp;#8594; executeLLMNode&lt;/b&gt;&lt;br&gt;llm.js:81&lt;br&gt;simulateLLM :21&lt;br&gt;MOCK — no API, no key" class="component.agent" id="n_llm">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="688" y="400" width="240" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;tool &amp;#8594; executeToolNode&lt;/b&gt;&lt;br&gt;tool.js:35 · Map :9&lt;br&gt;7 mock tools :54-126" class="component.mock" id="n_tool">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="688" y="476" width="240" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;approval &amp;#8594; Approval&lt;/b&gt;&lt;br&gt;approval.js:61&lt;br&gt;autoApprove ONLY :27&lt;br&gt;reject &amp;#8658; throw :67" class="component.mock" id="n_approval">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="688" y="552" width="240" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;condition &amp;#8594; Condition&lt;/b&gt;&lt;br&gt;condition.js:45&lt;br&gt;10 operators :20-29&lt;br&gt;engine skips subtree :272" class="component.service" id="n_condition">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="688" y="628" width="240" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;parallel &amp;#8594; Parallel&lt;/b&gt;&lt;br&gt;parallel.js:26&lt;br&gt;3 of 6 sub-types :12&lt;br&gt;allSettled :55" class="component.service" id="n_parallel">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="688" y="704" width="240" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;transform &amp;#8594; Transform&lt;/b&gt;&lt;br&gt;transform.js:102&lt;br&gt;7 pure ops :17&lt;br&gt;unknown op throws :112" class="component.service" id="n_transform">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="688" y="780" width="240" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;stdout report&lt;/b&gt;&lt;br&gt;_printSummary :316&lt;br&gt;final tally demo.js:106" class="component.artifact" id="n_out">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1432" y="296" width="212" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;VALIDATION GATE — 9 rejections, code order&lt;/b&gt;&lt;br&gt;validateWorkflow :101 — 8 checks, collected not short-circuit&lt;br&gt;1 id missing :104  2 nodes empty :105  3 no edges[] :108&lt;br&gt;4 edge.from unknown :114  5 edge.to unknown :115&lt;br&gt;6 node.id missing :119  7 node.type missing :120&lt;br&gt;8 type &amp;#8713; NODE_EXECUTORS :121 &amp;#8594; all joined, thrown :126&lt;br&gt;9 CYCLE sortedCount&amp;#8800;N :92 — NOT in validate: Kahn :64&lt;br&gt;reached one line after validate (:150 then :156)" class="card.primitive" id="card_gate">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="120" y="896" width="456" height="200" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;LAYER BARRIER + STATE MACHINE&lt;/b&gt;&lt;br&gt;Kahn: in-degree-0 seeds a layer :70 · whole queue = 1 layer :75&lt;br&gt;a layer is dispatched as a unit — Promise.allSettled :186&lt;br&gt;layer N+1 waits for layer N to settle :178&lt;br&gt;condition returns branchTaken :53 &amp;#8594; engine marks edges :272&lt;br&gt;_markBranchSkipped walks the subtree :305 · checked first :225&lt;br&gt;── VALID_TRANSITIONS state.js:12-18 · bad pair throws :35 ──&lt;br&gt;PENDING&amp;#8594;RUNNING · RUNNING&amp;#8594;WAIT_APPROVAL|COMPLETED|FAILED&lt;br&gt;WAIT_APPROVAL&amp;#8594;RUNNING|FAILED · COMPLETED/FAILED terminal" class="card.invariant" id="card_layers">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="624" y="896" width="456" height="200" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;FAILURE SEAMS — run against the real modules&lt;/b&gt;&lt;br&gt;1 two approval nodes in one layer &amp;#8658; run FAILS&lt;br&gt;  both set WAITING_APPROVAL, no self-loop :247 · state.js:15&lt;br&gt;2 a human &#x27;no&#x27; is asked twice — approval runs in retry :250&lt;br&gt;3 maxRetries is an ATTEMPT count — loop &amp;#8804; maxRetries :23 :54&lt;br&gt;4 a failed node erases downstream from the trace :200 :208&lt;br&gt;engine defaults 2/200ms/15s :135 OVERRIDE retry 3/500/30s :13&lt;br&gt;no *.test.js exists — declared test surface is empty (pkg :9)" class="card.failure" id="card_seams">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="1128" y="896" width="456" height="200" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_load" value="read :14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_wf" target="n_demo" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_run" value="execute(wf)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_exec" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="312" y="312" /><mxPoint x="312" y="200" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_val" value="validate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_exec" target="n_val" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sort" value="sort" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_val" target="n_topo" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_loop" value="per node" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_topo" target="n_retry" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_rec" value="new run :152" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_exec" target="n_state" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sum" value="summary :316" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_state" target="n_out" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_disp" value="dispatch :241" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.90909091;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_retry" target="n_dispatch" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1200" y="372" /><mxPoint x="600" y="372" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_llm" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.01904762;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_dispatch" target="n_llm" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_tool" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.2;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_dispatch" target="n_tool" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_appr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.38095238;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_dispatch" target="n_approval" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cond" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.56190476;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_dispatch" target="n_condition" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_par" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.74285714;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_dispatch" target="n_parallel" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_tran" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.92380952;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_dispatch" target="n_transform" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

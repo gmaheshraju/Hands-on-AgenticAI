@@ -1,0 +1,160 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_rag_pipeline_v1" name="05 RAG Pipeline — Architecture">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_entry" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="24" y="280" width="192" height="176" as="geometry" />
+        </mxCell>
+        <mxCell id="z_entry_lbl" value="① Entry (CLI) — node src/demo.js" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="36" y="288" width="176" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="280" y="88" width="1056" height="696" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc_lbl" value="② 05-rag-pipeline process (Node ESM, zero npm deps)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="292" y="96" width="1040" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_flow" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="576" y="200" width="704" height="344" as="geometry" />
+        </mxCell>
+        <mxCell id="z_flow_lbl" value="③ Query path — search() :210 then ask() :261" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="588" y="208" width="688" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_ext" value="" style="rounded=1;fillColor=none;strokeColor=#1565C0;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#1565C0;" parent="1" vertex="1">
+          <mxGeometry x="1400" y="216" width="224" height="296" as="geometry" />
+        </mxCell>
+        <mxCell id="z_ext_lbl" value="④ Pluggable seams — MOCK by default" style="text;fontSize=10;fontStyle=1;fontColor=#1565C0;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1412" y="224" width="208" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=1;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="1400" y="576" width="224" height="176" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out_lbl" value="⑤ Returned to caller" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1412" y="584" width="208" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;SAMPLE_CODEBASE :16&lt;br&gt;5 questions :474" class="component.entry" id="n_demo">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="40" y="316" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;RAGPipeline&lt;/b&gt;&lt;br&gt;owns every stage :104&lt;br&gt;indexFile :145 ask :261" class="component.service" id="n_pipeline">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="360" y="252" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;chunker.js&lt;/b&gt;&lt;br&gt;chunkFile :112&lt;br&gt;shouldIndex :209" class="component.service" id="n_chunker">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="360" y="412" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;BM25Index&lt;/b&gt;&lt;br&gt;inverted index :76&lt;br&gt;k1=1.2 b=0.75 :67" class="component.service" id="n_bm25">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="600" y="252" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;VectorIndex&lt;/b&gt;&lt;br&gt;sparse cosine :94&lt;br&gt;in-memory :131" class="component.service" id="n_vector">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="600" y="412" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;reciprocalRankFusion&lt;/b&gt;&lt;br&gt;1/(k + rank) :63&lt;br&gt;rank-based merge :43" class="component.service" id="n_fusion">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="840" y="332" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Reranker.rerank&lt;/b&gt;&lt;br&gt;heuristic | llm :157&lt;br&gt;score 0-10 :96" class="component.agent" id="n_rerank">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1080" y="332" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Answer generation&lt;/b&gt;&lt;br&gt;buildAnswerPrompt :25&lt;br&gt;mock fallback :55" class="component.service" id="n_answer">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1080" y="460" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;llmCall(prompt)&lt;/b&gt;&lt;br&gt;caller-supplied :113&lt;br&gt;default null :123" class="component.external" id="n_llm">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1424" y="252" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;MockEmbedding&lt;/b&gt;&lt;br&gt;bag-of-words :36&lt;br&gt;no network call :46" class="component.mock" id="n_embed">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1424" y="412" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;{answer,sources,debug}&lt;/b&gt;&lt;br&gt;pipeline.js:288" class="component.artifact" id="n_ret">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1424" y="608" width="176" height="48" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;stdout&lt;/b&gt;&lt;br&gt;demo.js:489 :490" class="component.artifact" id="n_console">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1424" y="692" width="176" height="48" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;CANDIDATE FUNNEL — every knob, in constructor order&lt;/b&gt;&lt;br&gt;1 bm25TopK 20 :117 · 2 vectorTopK 20 :118 — candidates&lt;br&gt;3 fusionTopK 15 :119 — survive RRF · 5 rrfK 60 :121&lt;br&gt;4 rerankerTopK 5 :120 — reach the answer prompt&lt;br&gt;6 llmCall null :123 · 7 rerankerMode &#x27;heuristic&#x27; :129&lt;br&gt;every one is options.X || literal — no config file, no env&lt;br&gt;20+20 → 15 → 5, applied at :216 :222 :230 :238" class="card.invariant" id="card_funnel">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="304" y="560" width="456" height="116" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;SILENT DEGRADATIONS ON THE QUERY PATH — in call order&lt;/b&gt;&lt;br&gt;1 bm25.search: query tokenizes to nothing → [] bm25.js:159&lt;br&gt;2 cosineSimilarity: either norm 0 → 0 vectorSearch.js:115&lt;br&gt;3 rerank: no candidates → [] reranker.js:158&lt;br&gt;4 LLM JSON unparseable → heuristic; console.warn only :190&lt;br&gt;5 candidate absent from LLM scores → rerankerScore 0 :199&lt;br&gt;6 no llmCall → mockGenerateAnswer pipeline.js:276&lt;br&gt;7 zero chunks → fixed &#x27;not found&#x27; string :57 — see below" class="card.failure" id="card_degrade">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="792" y="560" width="456" height="116" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;chunker.js shouldIndex() REJECTS — complete, code order&lt;/b&gt;&lt;br&gt;1 path part in SKIP_DIRS, n=11 :213 · 2 part starts &#x27;.&#x27; :214&lt;br&gt;3 ext in SKIP_EXTENSIONS, n=19 :219 · 4 ext over 6 chars :222&lt;br&gt;else return true :224 — reject is counted, never logged :147&lt;br&gt;the ONE throw in the whole project: fusion.js:48 (weights len)" class="card.primitive" id="card_index">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="304" y="692" width="456" height="76" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_run" value="6 files · 5 Qs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_pipeline" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="272" y="348" /><mxPoint x="272" y="284" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_idx" value="indexFile :145" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_pipeline" target="n_chunker" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="448" y="368" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_qb" value="query" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_pipeline" target="n_bm25" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="568" y="284" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_qv" value="query :222" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_pipeline" target="n_vector" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="492" y="316" /><mxPoint x="492" y="348" /><mxPoint x="580" y="348" /><mxPoint x="580" y="428" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_cb" value="addDocument :168" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_chunker" target="n_bm25" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="556" y="428" /><mxPoint x="556" y="248" /><mxPoint x="644" y="248" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_cv" value="chunks" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_chunker" target="n_vector" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="568" y="460" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_bf" value="top-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_bm25" target="n_fusion" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="808" y="284" /><mxPoint x="808" y="348" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_vf" value="top-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_vector" target="n_fusion" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="808" y="444" /><mxPoint x="808" y="380" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_fr" value="top-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_fusion" target="n_rerank" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1048" y="364" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_ra" value="top-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_rerank" target="n_answer" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1168" y="428" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_rl" value="mode &#x27;llm&#x27; only :162" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_rerank" target="n_llm" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1288" y="364" /><mxPoint x="1288" y="268" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_al" value="llmCall(prompt) :272" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_answer" target="n_llm" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1312" y="508" /><mxPoint x="1312" y="300" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_ve" value="embed(text) :166" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_vector" target="n_embed" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="732" y="532" /><mxPoint x="1384" y="532" /><mxPoint x="1384" y="444" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_ar" value="return :288" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_answer" target="n_ret" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1336" y="476" /><mxPoint x="1336" y="632" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_rc" value="printed :489" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_ret" target="n_console" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1512" y="676" /></Array></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

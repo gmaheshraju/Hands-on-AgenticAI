@@ -1,0 +1,151 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_guardrails_v1" name="07 Guardrails — Prompt Injection Test Suite + Defense Layer">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_in" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="40" y="240" width="216" height="376" as="geometry" />
+        </mxCell>
+        <mxCell id="z_in_lbl" value="③ Inputs — CLI + corpora" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="52" y="248" width="200" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="320" y="96" width="976" height="684" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc_lbl" value="① 07-guardrails process (Node ESM · no network, no real LLM)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="332" y="104" width="960" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_pipe" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="528" y="216" width="752" height="256" as="geometry" />
+        </mxCell>
+        <mxCell id="z_pipe_lbl" value="Per-input defense pipeline — L1 → target → L3" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="540" y="224" width="736" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=1;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="504" width="296" height="144" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out_lbl" value="④ Reported output (stdout only)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="512" width="280" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · default / --e2e&lt;br&gt;/ --verbose :163-166" class="component.entry" id="n_cli">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="272" width="168" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Training corpora&lt;/b&gt;&lt;br&gt;5 files · 59 attacks&lt;br&gt;runner.js:24-30" class="component.external" id="n_train">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="368" width="168" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Held-out corpora&lt;/b&gt;&lt;br&gt;held-out.json · 29&lt;br&gt;runner.js:35 :56" class="component.external" id="n_held">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="448" width="168" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;LEGITIMATE_QUERIES&lt;/b&gt;&lt;br&gt;50 control queries&lt;br&gt;defense.js:601" class="component.mock" id="n_legit">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="528" width="168" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;runAllAttacks()&lt;/b&gt;&lt;br&gt;runner.js:128&lt;br&gt;88 attacks + 50 queries&lt;br&gt;tagged training/held-out" class="component.service" id="n_runner">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="336" y="256" width="176" height="96" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;L1 defend() :553&lt;/b&gt;&lt;br&gt;scanInput 156 regex :231&lt;br&gt;block ≥ 0.5 · warn ≥ 0.3" class="component.service" id="n_defend">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="560" y="272" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;simulateNaiveLLM()&lt;/b&gt;&lt;br&gt;runner.js:75 — SIMULATED&lt;br&gt;no API call, 6 branches" class="component.agent" id="n_llm">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="800" y="272" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;L3 validateOutput()&lt;/b&gt;&lt;br&gt;defense.js:406&lt;br&gt;5 violation checks" class="component.service" id="n_validate">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1040" y="272" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;L2 sandwich prompt&lt;/b&gt;&lt;br&gt;defense.js:510&lt;br&gt;canary token :18" class="component.service" id="n_sandwich">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="800" y="384" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;buildSummary()&lt;/b&gt;&lt;br&gt;runner.js:204&lt;br&gt;bySource split :250" class="component.service" id="n_summary">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="560" y="520" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;calculateScores()&lt;/b&gt;&lt;br&gt;scorer.js:21 · gaps, p95&lt;br&gt;computeGrade :138 · :130" class="component.service" id="n_scores">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="840" y="520" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;stdout report&lt;/b&gt;&lt;br&gt;printResults runner.js:283&lt;br&gt;printScoreReport scorer.js:182" class="component.artifact" id="n_out">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="544" width="248" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;scanInput() :231 — 9 checks · normalize :338&lt;/b&gt;&lt;br&gt;1 direct_override  w1.00 · 37 regex :26-71&lt;br&gt;2 role_hijacking   w1.00 · 33 regex :76-113&lt;br&gt;3 extraction       w0.95 · 36 regex :118-156&lt;br&gt;4 encoding         w0.95 · 21 regex :161-186&lt;br&gt;5 indirect_inject. w1.00 · 29 regex :191-224&lt;br&gt;6 context flooding &amp;gt;2000ch, &amp;gt;20 nl → 0.40 :269&lt;br&gt;7 zero-width chars &amp;gt;3 → 0.70 :278&lt;br&gt;8 base64 decode + rescan → 0.85 :288&lt;br&gt;9 hex decode + rescan → 0.85 :310&lt;br&gt;conf = 0.65 + 0.15/extra match, cap 1.0 :254" class="card.primitive" id="card_scan">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="336" y="616" width="304" height="160" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;THREE LAYERS — defense.js, in call order&lt;/b&gt;&lt;br&gt;L1 input   defend() :553 → scanInput :558&lt;br&gt;   block if conf &amp;gt;= 0.5 :581, warn &amp;gt;= 0.3 :582&lt;br&gt;   blocked ⇒ target never called :151&lt;br&gt;L2 prompt  buildSandwichedPrompt() :510&lt;br&gt;   USER INPUT START/END markers :516 :518&lt;br&gt;   reminder block :520 + canary :514&lt;br&gt;L3 output  validateOutput() :406&lt;br&gt;   canary :412 · prompt leak n-gram :421&lt;br&gt;   PII 5 kinds :432 · markers :445&lt;br&gt;   topic drift :458 → safe :467" class="card.invariant" id="card_layers">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="656" y="616" width="304" height="160" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;GRADED ON HELD-OUT ONLY — scorer.js:130&lt;/b&gt;&lt;br&gt;training 59 — the regexes were tuned on them&lt;br&gt;held-out  29 — never shown :35 :56&lt;br&gt;both run the SAME defend() :176-177&lt;br&gt;split kept apart in buildSummary :250-253&lt;br&gt;grade = f(held-out, FP, latency) :138&lt;br&gt;  detect 0-50 :142 · FP 0-30 :149&lt;br&gt;  latency 0-20 :156 → A/B/C/D/F :162&lt;br&gt;verdict gates runner.js:368-370&lt;br&gt;  held-out &amp;gt;=70% · FP &amp;lt;5% · avg &amp;lt;100ms&lt;br&gt;observed run: 100.0% / 86.2% · 0 FP · 0.25ms" class="card.failure" id="card_grade">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="976" y="616" width="304" height="160" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_cli" value="3 modes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_cli" target="n_runner" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="296" y="304" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_train" value="59 tuned" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_train" target="n_runner" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="288" y="400" /><mxPoint x="288" y="280" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_held" value="29 unseen" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_held" target="n_runner" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="264" y="480" /><mxPoint x="264" y="328" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_legit" value="50 benign controls" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_legit" target="n_runner" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="424" y="560" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_run" value="prompt" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_runner" target="n_defend" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="520" y="304" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_allow" value="allow :151" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_defend" target="n_llm" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="740" y="304" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_sand" value="demo-only :89" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_sandwich" target="n_llm" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="888" y="360" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_resp" value="response" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_llm" target="n_validate" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="980" y="304" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_back" value="outputCheck → result :155" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_validate" target="n_runner" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1128" y="192" /><mxPoint x="424" y="192" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_block" value="blocked :143" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_defend" target="n_summary" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="604" y="440" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_res" value="results[] :160" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_runner" target="n_summary" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="468" y="536" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_score" value="runResults" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_summary" target="n_scores" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="748" y="552" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_print" value="printResults :280" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_summary" target="n_out" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="648" y="496" /><mxPoint x="1312" y="496" /><mxPoint x="1312" y="560" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_rep" value="grade + gates" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_scores" target="n_out" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1056" y="552" /><mxPoint x="1056" y="592" /></Array></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,145 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_agent_cicd_v1" name="26 Agent CI/CD — Eval Suite + Quality Gates for AI Agents">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_in" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="40" y="240" width="216" height="376" as="geometry" />
+        </mxCell>
+        <mxCell id="z_in_lbl" value="③ Inputs — demo.js CLI + eval config" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="52" y="248" width="200" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="320" y="96" width="976" height="684" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc_lbl" value="① agent-cicd pipeline (Node ESM · no network, no real LLM)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="332" y="104" width="960" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_pipe" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="528" y="216" width="752" height="256" as="geometry" />
+        </mxCell>
+        <mxCell id="z_pipe_lbl" value="4-stage pipeline — eval → baseline → gate → promote" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="540" y="224" width="736" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=1;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="440" width="296" height="224" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out_lbl" value="④ Reported output (in-memory / stdout)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="448" width="280" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;5 scenarios :59-114&lt;br&gt;runPipeline &amp;times;3" class="component.entry" id="n_cli">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="272" width="168" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;8 eval cases&lt;/b&gt;&lt;br&gt;tags + weights&lt;br&gt;demo.js:39-50" class="component.mock" id="n_cases">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="368" width="168" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;3 scorer fns&lt;/b&gt;&lt;br&gt;faith / safety / cost&lt;br&gt;demo.js:15-36" class="component.mock" id="n_scorers">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="448" width="168" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;agentFn (SUT · mock)&lt;/b&gt;&lt;br&gt;good / bad agent&lt;br&gt;demo.js:61 :92" class="component.agent" id="n_agent">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="528" width="168" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;AgentCICDPipeline&lt;/b&gt;&lt;br&gt;runPipeline() :18&lt;br&gt;4-stage orchestrator&lt;br&gt;runs[] log :73" class="component.service" id="n_pipeline">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="336" y="256" width="176" height="96" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;&amp;#9312; EvalSuite.run&lt;/b&gt;&lt;br&gt;evalSuite.js:32&lt;br&gt;agentFn :44&lt;br&gt;score dims :55" class="component.service" id="n_eval">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="552" y="272" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;&amp;#9313; compare()&lt;/b&gt;&lt;br&gt;baseline.js:24&lt;br&gt;regression :52" class="component.service" id="n_baseline">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="736" y="272" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;&amp;#9314; QualityGate&lt;/b&gt;&lt;br&gt;evaluate() :22&lt;br&gt;rules &amp;rarr; verdict :39" class="component.service" id="n_gate">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="920" y="272" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;&amp;#9315; _decide()&lt;/b&gt;&lt;br&gt;pipeline.js:82&lt;br&gt;promote / block" class="component.service" id="n_promo">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1104" y="272" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;baseline store&lt;/b&gt;&lt;br&gt;Map (in-memory)&lt;br&gt;saveBaseline :8" class="component.artifact" id="n_store">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="736" y="496" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;stdout report&lt;/b&gt;&lt;br&gt;generateReport :110" class="component.artifact" id="n_report">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="472" width="248" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;run history&lt;/b&gt;&lt;br&gt;this.runs :73&lt;br&gt;getRunHistory :102" class="component.artifact" id="n_history">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="568" width="248" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;FOUR STAGES — runPipeline() pipeline.js:18&lt;/b&gt;&lt;br&gt;1 eval     EvalSuite.run :24 &amp;rarr; scores&lt;br&gt;2 baseline compare :35 (skip if none :43)&lt;br&gt;3 gate     QualityGate.evaluate :47&lt;br&gt;4 promote  _decide :56 &amp;rarr; action&lt;br&gt;each stage output feeds the next&lt;br&gt;auto-save baseline only on &#x27;promote&#x27; :75&lt;br&gt;(never on promote_with_warnings)" class="card.invariant" id="card_stages">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="336" y="616" width="304" height="160" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;PROMOTION LADDER — _decide() :82&lt;/b&gt;&lt;br&gt;first match wins, in code order:&lt;br&gt;1 BLOCK if gate verdict = BLOCK :83&lt;br&gt;2 BLOCK if baseline REGRESSION :87&lt;br&gt;3 BLOCK if cases &amp;lt; minCases(5) :91&lt;br&gt;4 PROMOTE_WITH_WARNINGS if WARN :95&lt;br&gt;5 PROMOTE if all clear :99&lt;br&gt;3 independent block gates, not 1" class="card.failure" id="card_promo">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="656" y="616" width="304" height="160" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;QUALITY GATE — qualityGate.js:22&lt;/b&gt;&lt;br&gt;rule types (evaluate loop :27):&lt;br&gt;  threshold :55 · regression :64 · custom :76&lt;br&gt;severity: error blocks, warning notes :15&lt;br&gt;verdict: BLOCK / WARN / PASS :39&lt;br&gt;history push :50 &amp;rarr; trend&lt;br&gt;demo rules :53-56 —&lt;br&gt;  safety gte 0.9 err · cost gte 0.7 warn" class="card.primitive" id="card_gate">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="976" y="616" width="304" height="160" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_cli" value="runPipeline" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_cli" target="n_pipeline" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cases" value="8 cases" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_cases" target="n_pipeline" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="288" y="400" /><mxPoint x="288" y="280" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_scorers" value="scorers" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_scorers" target="n_pipeline" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="312" y="480" /><mxPoint x="312" y="328" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_agent" value="agentFn (SUT)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_agent" target="n_pipeline" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="424" y="560" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_run" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_pipeline" target="n_eval" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_base" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_eval" target="n_baseline" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gate" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_baseline" target="n_gate" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_promo" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_gate" target="n_promo" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_read" value="read :25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_store" target="n_baseline" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_save" value="save on promote :75" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_promo" target="n_store" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1144" y="528" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_report" value="stdout :110" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_promo" target="n_report" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1320" y="304" /><mxPoint x="1320" y="488" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_hist" value="run :73" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_promo" target="n_history" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1224" y="584" /></Array></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

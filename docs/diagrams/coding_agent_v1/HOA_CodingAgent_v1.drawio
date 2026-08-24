@@ -1,0 +1,168 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_coding_agent_v1" name="16 AI Coding Agent — Architecture">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_entry" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="40" y="200" width="176" height="288" as="geometry" />
+        </mxCell>
+        <mxCell id="z_entry_lbl" value="③ Entry — CLI and issue source" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="52" y="208" width="160" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="280" y="96" width="1016" height="680" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc_lbl" value="① 16-ai-coding-agent process (Node ESM, no LLM)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="292" y="104" width="1000" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_flow" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="320" y="216" width="936" height="152" as="geometry" />
+        </mxCell>
+        <mxCell id="z_flow_lbl" value="runAgent — six numbered steps, straight-line (agent.js:41)" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="332" y="224" width="920" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_repo" value="" style="rounded=1;fillColor=none;strokeColor=#1565C0;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#1565C0;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="216" width="296" height="232" as="geometry" />
+        </mxCell>
+        <mxCell id="z_repo_lbl" value="② Target repo + child process (real disk, real OS)" style="text;fontSize=10;fontStyle=1;fontColor=#1565C0;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="224" width="280" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=1;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="512" width="296" height="192" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out_lbl" value="④ Pull-request output" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="520" width="280" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · mock #1&lt;br&gt;:34 :81" class="component.entry" id="n_demo">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="244" width="128" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;GitHub REST&lt;/b&gt;&lt;br&gt;fetch() :155&lt;br&gt;URL input only" class="component.external" id="n_github">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="372" width="128" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;runAgent()&lt;/b&gt;&lt;br&gt;agent.js:41 · 6 steps" class="component.agent" id="n_agent">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="340" y="128" width="160" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;parseIssue()&lt;/b&gt;&lt;br&gt;issueParser.js:106&lt;br&gt;3 input forms" class="component.service" id="n_parse">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="340" y="264" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;createPlan()&lt;/b&gt;&lt;br&gt;planner.js:41&lt;br&gt;rule-based, no LLM" class="component.service" id="n_plan">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="524" y="264" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;createCoder()&lt;/b&gt;&lt;br&gt;coder.js:31&lt;br&gt;diff + applyChanges" class="component.service" id="n_coder">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="708" y="264" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;selfCorrectLoop()&lt;/b&gt;&lt;br&gt;testRunner.js:186&lt;br&gt;≤ 3 retries" class="component.service" id="n_test">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="892" y="264" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;generatePR()&lt;/b&gt;&lt;br&gt;prGenerator.js:23&lt;br&gt;title·body·labels" class="component.service" id="n_prgen">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1076" y="264" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;createExplorer()&lt;/b&gt;&lt;br&gt;repoExplorer.js:24&lt;br&gt;5 tools · shared :199" class="component.service" id="n_explorer">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="700" y="424" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;sample-project/&lt;/b&gt;&lt;br&gt;src/app.js · tests/app.test.js&lt;br&gt;planted bug :60 :68" class="component.artifact" id="n_files">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="260" width="248" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;child process&lt;/b&gt;&lt;br&gt;execSync(testCommand) :52&lt;br&gt;node --test · 30s timeout" class="component.external" id="n_proc">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="356" width="248" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;PR object&lt;/b&gt;&lt;br&gt;title·body·branch·labels :29" class="component.artifact" id="n_pr">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="552" width="248" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;stdout&lt;/b&gt;&lt;br&gt;formatPRForDisplay :144" class="component.artifact" id="n_stdout">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="632" width="248" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;SELF-CORRECTION LOOP — complete, in code order&lt;/b&gt;&lt;br&gt;for attempt = 0 .. maxRetries :190 — default maxRetries 3 :187&lt;br&gt;1 runTests() on EVERY attempt :195 — fresh execSync, no cache&lt;br&gt;2 if result.passed → return immediately :208-210&lt;br&gt;3 else if attempt &amp;lt; maxRetries → attemptCorrection :214-216&lt;br&gt;4 retries exhausted → one MORE runTests() :223-224&lt;br&gt;corrector writes the file itself, not via the coder :242-243" class="card.invariant" id="card_loop">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="320" y="508" width="456" height="112" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;BUG-TYPE TAXONOMY — 4 branches, first match wins&lt;/b&gt;&lt;br&gt;1 missing-null-check :137-140 — hasNullError &amp;amp;&amp;amp; has500&lt;br&gt;2 unhandled-error :141-144 — has500 alone&lt;br&gt;3 missing-route :145-148 — has404 alone&lt;br&gt;4 general :149-153 — fallback, summary = issue title&lt;br&gt;ONLY branch 1 emits code steps — generateSteps :186&lt;br&gt;branches 2-4 fall through to test steps only :231-239" class="card.failure" id="card_bug">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="800" y="508" width="456" height="112" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;FIX EMITTERS — the generateFix switch, complete and in code order :163&lt;/b&gt;&lt;br&gt;1 missing-null-check → fixMissingNullCheck :164-165   ·   2 unhandled-error → fixUnhandledError :166-167, which returns its input unchanged :220&lt;br&gt;3 default → originalContent.replace(oldCode, newCode), and only when BOTH are set on the step; otherwise the input is returned :168-173&lt;br&gt;the null-check SHAPE is sniffed from the file&amp;#39;s own text, in this order :197-206 —&lt;br&gt;isExpress → res.status(404).json :200-201   ·   isRawHttp → res.writeHead(404) :202-203   ·   neither → throw new Error :204-205&lt;br&gt;the guard is spliced in immediately after the lookup line, indentation copied from that line :194 :209" class="card.primitive" id="card_fix">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="320" y="644" width="936" height="104" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_start" value="runAgent(config) :81" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_agent" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="256" y="276" /><mxPoint x="256" y="156" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_issue" value="issue JSON :155" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_github" target="n_parse" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="268" y="404" /><mxPoint x="268" y="280" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_s1" value="[1/6] :61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_agent" target="n_parse" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_s3" value="parsed issue :75" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_parse" target="n_plan" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_s4" value="plan.steps[] :87" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_plan" target="n_coder" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_s5" value="changes[] :116" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_coder" target="n_test" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_s6" value="testResult :149" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_test" target="n_prgen" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_plan_x" value="gatherContext :58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_plan" target="n_explorer" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="604" y="456" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_code_x" value="readFile :67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_coder" target="n_explorer" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_test_x" value="readFile · searchCode :239 :257" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_test" target="n_explorer" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="972" y="400" /><mxPoint x="832" y="400" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_x_repo" value="listFiles · readFile · searchCode" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_explorer" target="n_files" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1320" y="456" /><mxPoint x="1320" y="308" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_code_repo" value="applyChanges → writeFile :114" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_coder" target="n_files" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="828" y="200" /><mxPoint x="1296" y="200" /><mxPoint x="1296" y="276" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_exec" value="execSync :52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_test" target="n_proc" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1012" y="372" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_back" value="raw output → parseFailures :64" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#E65100;fontColor=#E65100;fontSize=8;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;dashed=1;dashPattern=4 4;" parent="1" source="n_proc" target="n_test" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1296" y="404" /><mxPoint x="1296" y="344" /><mxPoint x="932" y="344" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_pr" value="PR object :29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_prgen" target="n_pr" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1272" y="296" /><mxPoint x="1272" y="580" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_disp" value="formatPRForDisplay :150" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_pr" target="n_stdout" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

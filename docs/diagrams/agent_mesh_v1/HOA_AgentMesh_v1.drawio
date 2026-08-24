@@ -1,0 +1,113 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_agent_mesh_v1" name="29 Agent Mesh — Self-Healing Orchestrator">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_entry" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="40" y="200" width="216" height="144" as="geometry" />
+        </mxCell>
+        <mxCell id="z_entry_lbl" value="③ Driver — CLI" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="52" y="208" width="200" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=1;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="40" y="408" width="216" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out_lbl" value="④ stdout" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="52" y="416" width="200" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="320" y="96" width="1200" height="680" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc_lbl" value="① 29-agent-mesh — one Node process · in-memory · no network, no DB, no real LLM" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="332" y="104" width="1184" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_flow" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="336" y="200" width="1180" height="128" as="geometry" />
+        </mxCell>
+        <mxCell id="z_flow_lbl" value="Work path — submit → select → gate → enqueue" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="348" y="208" width="1164" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · 5 scenarios&lt;br&gt;main() :227" class="component.entry" id="n_demo">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="232" width="168" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Mesh&lt;/b&gt; :22&lt;br&gt;orchestrator + bus&lt;br&gt;submitWork :114&lt;br&gt;_onNodeFailed :240" class="component.service" id="n_mesh">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="360" y="232" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;MeshRouter&lt;/b&gt; :24&lt;br&gt;selectNode :65&lt;br&gt;4 strategies" class="component.service" id="n_router">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="664" y="232" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;AgentNode ×N&lt;/b&gt; :20&lt;br&gt;enqueue :129&lt;br&gt;queue · health · caps&lt;br&gt;processor = async fn" class="component.agent" id="n_nodes">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1264" y="232" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;HealthMonitor&lt;/b&gt; :14&lt;br&gt;_check :64&lt;br&gt;heartbeat detect" class="component.service" id="n_monitor">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="360" y="432" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;CircuitBreaker&lt;/b&gt; :19&lt;br&gt;Registry :128&lt;br&gt;per-node · 3 states" class="component.service" id="n_cb">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="664" y="432" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;WorkRedistributor&lt;/b&gt;&lt;br&gt;redistribute :29&lt;br&gt;capability + cascade" class="component.service" id="n_redist">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="968" y="432" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;stdout&lt;/b&gt;&lt;br&gt;dashboardString :199&lt;br&gt;console.log" class="component.artifact" id="n_stdout">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="440" width="168" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;ROUTING STRATEGIES — meshRouter.js, code order&lt;/b&gt;&lt;br&gt;selectNode() switch :69-79 · default least-loaded :65&lt;br&gt;1 round-robin        _roundRobin :95&lt;br&gt;2 least-loaded       _leastLoaded :102  (default)&lt;br&gt;3 capability-based   filter → least-loaded :75&lt;br&gt;4 affinity-sticky    _affinitySticky :116&lt;br&gt;all run on _healthyCandidates :84&lt;br&gt;excludes FAILED + DEGRADED + excluded :88" class="card.invariant" id="card_routes">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="336" y="544" width="376" height="184" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;CIRCUIT BREAKER — 3 states, circuitBreaker.js&lt;/b&gt;&lt;br&gt;per-node breaker, lazy registry :128 :138&lt;br&gt;CLOSED    requests flow :54&lt;br&gt;OPEN      blocked :58&lt;br&gt;HALF_OPEN one probe :55&lt;br&gt;CLOSED→OPEN        ≥ 5 fails :90&lt;br&gt;OPEN→HALF_OPEN     after 10s cooldown :43&lt;br&gt;HALF_OPEN→CLOSED   probe ok :66&lt;br&gt;HALF_OPEN→OPEN     probe fail :83&lt;br&gt;trip() force-open :101 · reset() :107" class="card.invariant" id="card_breaker">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="736" y="544" width="376" height="184" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;SELF-HEALING on node_failed — mesh.js:240&lt;/b&gt;&lt;br&gt;README says HealthMonitor → WorkRedistributor.&lt;br&gt;FALSE: monitor only emits :87; the MESH owns&lt;br&gt;the bus :59 and drives the reaction:&lt;br&gt;1 router.excludeNode :245&lt;br&gt;2 breaker.trip() :246&lt;br&gt;3 collect healthy nodes :249&lt;br&gt;4 redistribute pending work :252&lt;br&gt;5 if failed/total ≥ 0.5 → mesh_degraded :257&lt;br&gt;6 emit node_failed (+redistributed) :262" class="card.failure" id="card_heal">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="1136" y="544" width="376" height="184" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_submit" value="submitWork :114" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_mesh" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_select" value="selectNode :229" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_mesh" target="n_router" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_enq" value="enqueue :135" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_mesh" target="n_nodes" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="492" y="348" /><mxPoint x="1352" y="348" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_gate" value="allowRequest :129" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_mesh" target="n_cb" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="448" y="372" /><mxPoint x="752" y="372" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_redist" value="redistribute :252" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_mesh" target="n_redist" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="404" y="404" /><mxPoint x="1056" y="404" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_failed" value="node_failed :59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_monitor" target="n_mesh" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="324" y="464" /><mxPoint x="324" y="280" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_reenq" value="re-enqueue :84" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_redist" target="n_nodes" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1144" y="416" /><mxPoint x="1396" y="416" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_out" value="dashboard :221" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_demo" target="n_stdout" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

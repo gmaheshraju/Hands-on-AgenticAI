@@ -1,0 +1,143 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_agent_harness_v1" name="03 Agent Harness — Architecture">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_entry" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="40" y="232" width="176" height="176" as="geometry" />
+        </mxCell>
+        <mxCell id="z_entry_lbl" value="③ Entry (CLI)" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="52" y="240" width="160" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="280" y="96" width="1016" height="680" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc_lbl" value="① 03-agent-harness process (Node ESM)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="292" y="104" width="1000" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_loop" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="320" y="200" width="936" height="264" as="geometry" />
+        </mxCell>
+        <mxCell id="z_loop_lbl" value="Harness run loop — one continuous flow" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="332" y="208" width="920" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_tools" value="" style="rounded=1;fillColor=none;strokeColor=#1565C0;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#1565C0;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="232" width="296" height="288" as="geometry" />
+        </mxCell>
+        <mxCell id="z_tools_lbl" value="② Tool surface (in-process, MOCK data)" style="text;fontSize=10;fontStyle=1;fontColor=#1565C0;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="240" width="280" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=1;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="584" width="296" height="176" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out_lbl" value="④ Artifacts written" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="592" width="280" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · 3 modes&lt;br&gt;:27 :54 :84 :120" class="component.entry" id="n_cli">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="260" width="128" height="60" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;AgentHarness.run()&lt;/b&gt;&lt;br&gt;while(true) · :74 :82" class="component.service" id="n_harness">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="352" y="260" width="160" height="60" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;ResearchAgent.step()&lt;/b&gt;&lt;br&gt;3 phases · :101" class="component.agent" id="n_agent">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="624" y="260" width="160" height="60" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;TOOL_REGISTRY&lt;/b&gt;&lt;br&gt;dispatch · :260" class="component.service" id="n_registry">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="896" y="260" width="160" height="60" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Tracer.log()&lt;/b&gt;&lt;br&gt;every iteration · :44" class="component.service" id="n_tracer">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="896" y="356" width="160" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;4 tools&lt;/b&gt;&lt;br&gt;webSearch · readPage&lt;br&gt;noteFindings · synthesize" class="component.external" id="n_tools">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="260" width="248" height="60" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;MOCK corpora&lt;/b&gt;&lt;br&gt;MOCK_SEARCH_RESULTS :17&lt;br&gt;MOCK_PAGES :55 — no network" class="component.mock" id="n_mocks">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="372" width="248" height="60" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;trace-&amp;lt;runId&amp;gt;.jsonl&lt;/b&gt;&lt;br&gt;tracer.js:20" class="component.artifact" id="n_trace">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="620" width="248" height="48" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;report-&amp;lt;runId&amp;gt;.md&lt;/b&gt;&lt;br&gt;demo.js:66-67" class="component.artifact" id="n_report">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="692" width="248" height="48" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;postmortem()&lt;/b&gt;&lt;br&gt;harness.js:183" class="component.service" id="n_pm">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="352" y="512" width="160" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;diagnosePrimitives()&lt;/b&gt;&lt;br&gt;diagnosis.js:50" class="component.service" id="n_dx">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="560" y="512" width="176" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;STOP CONDITIONS — complete, in code order&lt;/b&gt;&lt;br&gt;1 ITERATION_CAP :86 — checked BEFORE the step&lt;br&gt;2 AGENT_DONE :126 · 3 COST_CAP :132 · 4 CONVERGENCE :138&lt;br&gt;counter resets on a productive iteration :144&lt;br&gt;cost model $3 / $15 per 1M tokens :20" class="card.invariant" id="card_gates">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="832" y="496" width="424" height="116" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;POSTMORTEM TAXONOMY — 8 patterns :170-177&lt;/b&gt;&lt;br&gt;context_miss · bad_tool_result · wasteful_action&lt;br&gt;hallucinated_tool_loop · convergence_stall · cost_overrun&lt;br&gt;iteration_cap · tool_imbalance" class="card.failure" id="card_fail">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="832" y="624" width="424" height="104" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;10 harness primitives, scored 0.0–1.0 · diagnosis.js:5&lt;/b&gt;&lt;br&gt;Instructions · Context Delivery · Context Management&lt;br&gt;Tool Interface · Execution Environment · Durable State … :9-14" class="card.primitive" id="card_prim">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="352" y="624" width="424" height="104" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_cli" value="question" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_cli" target="n_harness" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_step" value="agentStepFn(iter)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_harness" target="n_agent" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_disp" value="tool + args" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_agent" target="n_registry" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_call" value="toolDef.fn(…)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_registry" target="n_tools" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mock" value="lookup" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_tools" target="n_mocks" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ret" value="result · tokens" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_registry" target="n_agent" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="976" y="232" /><mxPoint x="744" y="232" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_trace" value="per-iteration record" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_harness" target="n_tracer" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="432" y="340" /><mxPoint x="976" y="340" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_file" value="append JSONL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_tracer" target="n_trace" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1316" y="384" /><mxPoint x="1316" y="644" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_rep" value="finalReport" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_agent" target="n_report" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="744" y="436" /><mxPoint x="1340" y="436" /><mxPoint x="1340" y="716" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_stop" value="on stop → analyse" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_harness" target="n_pm" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_dx" value="trace entries" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#E65100;fontColor=#E65100;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=4 4;" parent="1" source="n_pm" target="n_dx" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

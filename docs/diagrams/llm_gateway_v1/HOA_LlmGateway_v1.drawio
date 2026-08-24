@@ -1,0 +1,143 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_llm_gateway_v1" name="24 LLM Gateway — Routing &amp; Governance Pipeline">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_entry" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="40" y="200" width="196" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="z_entry_lbl" value="③ Entry — CLI" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="52" y="208" width="180" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="300" y="96" width="1356" height="396" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc_lbl" value="① LLMGateway — request() orchestrator · gateway.js:32" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="312" y="104" width="1340" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_pipe" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="312" y="176" width="1320" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="z_pipe_lbl" value="request() — 7 ordered stages · each stage cites the module it calls" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="324" y="184" width="1304" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_ext" value="" style="rounded=1;fillColor=none;strokeColor=#1565C0;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#1565C0;" parent="1" vertex="1">
+          <mxGeometry x="1040" y="552" width="320" height="128" as="geometry" />
+        </mxCell>
+        <mxCell id="z_ext_lbl" value="② Provider handlers (MOCKED)" style="text;fontSize=10;fontStyle=1;fontColor=#1565C0;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1052" y="560" width="304" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_obs" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="1420" y="552" width="236" height="128" as="geometry" />
+        </mxCell>
+        <mxCell id="z_obs_lbl" value="④ Observability" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1432" y="560" width="220" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · 6 scenarios&lt;br&gt;main :15 · :144" class="component.entry" id="n_demo">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="52" y="236" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;1 · Budget&lt;/b&gt;&lt;br&gt;CostTracker&lt;br&gt;checkBudget :38" class="component.service" id="n_s1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="344" y="236" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;2 · Rate limit&lt;/b&gt;&lt;br&gt;TokenBucket&lt;br&gt;check :46" class="component.service" id="n_s2">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="520" y="236" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;3 · PII redact&lt;/b&gt;&lt;br&gt;pii.js&lt;br&gt;redactMessages :56" class="component.service" id="n_s3">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="696" y="236" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;4 · Route&lt;/b&gt;&lt;br&gt;ModelRouter&lt;br&gt;route :69" class="component.service" id="n_s4">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="872" y="236" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;5 · Middleware&lt;/b&gt;&lt;br&gt;use() chain :76&lt;br&gt;(empty by default)" class="component.service" id="n_s5">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1048" y="236" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;6 · Execute&lt;/b&gt;&lt;br&gt;+retry / failover&lt;br&gt;gateway :85 :114" class="component.service" id="n_s6">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1224" y="236" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;7 · Track&lt;/b&gt;&lt;br&gt;cost record + audit&lt;br&gt;gateway :88-97" class="component.service" id="n_s7">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1400" y="236" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;CircuitBreaker&lt;/b&gt;&lt;br&gt;per-provider gate&lt;br&gt;closed / open / half&lt;br&gt;circuitBreaker.js:26" class="component.service" id="n_cb">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1048" y="400" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Provider handlers&lt;/b&gt;&lt;br&gt;anthropic · openai&lt;br&gt;· google — MOCK&lt;br&gt;demo.js:25-27" class="component.external" id="n_prov">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1064" y="580" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;AuditLog + dash&lt;/b&gt;&lt;br&gt;query / compliance&lt;br&gt;replayTrace :85&lt;br&gt;dashboard :177" class="component.artifact" id="n_obs">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1436" y="580" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;PII — 10 patterns, redacted before route&lt;/b&gt;&lt;br&gt;1 SSN :2   ·   2 CREDIT_CARD (Luhn) :3&lt;br&gt;3 EMAIL :4   ·   4 PHONE_US :5&lt;br&gt;5 PHONE_IN :6   ·   6 IP_ADDRESS :7&lt;br&gt;7 AWS_KEY :8   ·   8 API_KEY :9&lt;br&gt;9 AADHAAR :10   ·   10 PAN :11&lt;br&gt;Luhn-fail skipped, not redacted :35" class="card.primitive" id="card_pii">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="40" y="520" width="300" height="200" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;ROUTING — 6 rungs, code order (router.js)&lt;/b&gt;&lt;br&gt;1 team → exact model    team_override :51&lt;br&gt;2 request.model set     explicit_model :58&lt;br&gt;3 custom rule           rule:&amp;lt;name&amp;gt; :65&lt;br&gt;4 complexity tier       complexity :74&lt;br&gt;5 fallback chain        fallback_chain :85&lt;br&gt;6 none left → all_providers_down :94&lt;br&gt;each rung gates on canRequest()" class="card.invariant" id="card_route">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="360" y="520" width="300" height="200" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;AUDIT — 7 write sites, not 1 (README: 1)&lt;/b&gt;&lt;br&gt;1 budget block :40&lt;br&gt;2 rate-limit block :48&lt;br&gt;3 PII detected :60&lt;br&gt;4 no provider :71&lt;br&gt;5 middleware block :79&lt;br&gt;6 response ok :97&lt;br&gt;7 failover / retry :134&lt;br&gt;cross-cutting sink — every stage logs" class="card.invariant" id="card_audit">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="680" y="520" width="300" height="200" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_demo" value="request()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_s1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_s1" target="n_s2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_s2" target="n_s3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e34" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_s3" target="n_s4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e45" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_s4" target="n_s5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e56" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_s5" target="n_s6" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e67" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_s6" target="n_s7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_route_cb" value="canRequest :53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_s4" target="n_cb" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="952" y="388" /><mxPoint x="1092" y="388" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_exec_cb" value="record :129" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_s6" target="n_cb" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1304" y="388" /><mxPoint x="1180" y="388" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_exec_prov" value="execute :128" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_s6" target="n_prov" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1344" y="520" /><mxPoint x="1152" y="520" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_track_obs" value="log() x7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_s7" target="n_obs" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1480" y="540" /><mxPoint x="1524" y="540" /></Array></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

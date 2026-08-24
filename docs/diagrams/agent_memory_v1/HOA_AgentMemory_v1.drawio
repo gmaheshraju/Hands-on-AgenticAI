@@ -1,0 +1,130 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_agent_memory_v1" name="02 Agent Memory — Personal CRM Agent">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_entry" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="40" y="200" width="240" height="292" as="geometry" />
+        </mxCell>
+        <mxCell id="z_entry_lbl" value="③ Entry points" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="52" y="208" width="224" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="344" y="96" width="936" height="680" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc_lbl" value="① CRM agent process (Node ESM)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="356" y="104" width="920" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_flow" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="376" y="196" width="872" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="z_flow_lbl" value="Turn → consolidate → retrieve (one continuous flow)" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="388" y="204" width="856" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_ext" value="" style="rounded=1;fillColor=none;strokeColor=#1565C0;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#1565C0;" parent="1" vertex="1">
+          <mxGeometry x="1344" y="200" width="296" height="168" as="geometry" />
+        </mxCell>
+        <mxCell id="z_ext_lbl" value="② External driver" style="text;fontSize=10;fontStyle=1;fontColor=#1565C0;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1356" y="208" width="280" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=1;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="1344" y="432" width="296" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out_lbl" value="④ Durable state" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1356" y="440" width="280" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;cli.js:18&lt;/b&gt;&lt;br&gt;interactive readline" class="component.entry" id="n_cli">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="236" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;demo.js:37&lt;/b&gt;&lt;br&gt;4-session demo" class="component.entry" id="n_demo">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="380" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;CRMAgent&lt;/b&gt;&lt;br&gt;classify · route · :23" class="component.service" id="n_agent">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="408" y="252" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Consolidation&lt;/b&gt;&lt;br&gt;consolidation.js:35" class="component.service" id="n_consol">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="664" y="252" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Retrieval&lt;/b&gt;&lt;br&gt;hybrid FTS · :28" class="component.service" id="n_retr">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="936" y="252" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;MemoryStore&lt;/b&gt;&lt;br&gt;3 memory types · :29" class="component.service" id="n_memory">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="664" y="400" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Mock extractor&lt;/b&gt;&lt;br&gt;regex fallback · :95" class="component.mock" id="n_mockllm">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="408" y="500" width="176" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;better-sqlite3&lt;/b&gt;&lt;br&gt;sync driver · package.json:13" class="component.external" id="n_sqlite">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1368" y="248" width="248" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;crm_memory.db&lt;/b&gt;&lt;br&gt;all three memory types&lt;br&gt;memory.js:27" class="component.artifact" id="n_dbfile">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1368" y="484" width="248" height="72" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;CONSOLIDATION GATE — when it fires · :37-50&lt;/b&gt;&lt;br&gt;1 unconsolidatedCount = countUnconsolidated()&lt;br&gt;2 urgent = count &amp;gt; 0 AND raw_input matches&lt;br&gt;3 NOT urgent AND count &amp;lt; threshold → return ran:false&lt;br&gt;4 else gather (urgent ? all : threshold, oldest first)" class="card.invariant" id="card_gate">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="408" y="596" width="456" height="116" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;addFact — create vs update · :157-237&lt;/b&gt;&lt;br&gt;1 query existing row: subject+predicate&lt;br&gt;2 none → INSERT (created)&lt;br&gt;3 exists → detectContradiction, merge sources&lt;br&gt;4 contradiction → halve existing confidence in place&lt;br&gt;5 else UPDATE object · confidence · sources" class="card.invariant" id="card_fact">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="904" y="400" width="344" height="148" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;decayMemories — per-fact outcome · :268-317&lt;/b&gt;&lt;br&gt;ageDays ≤ 0 → untouched&lt;br&gt;else confidence × 2^(−ageDays / halfLife)&lt;br&gt;&amp;lt; archiveThreshold (0.1) → archived + stale&lt;br&gt;else Δ &amp;gt; 0.001 → updated, otherwise untouched" class="card.invariant" id="card_decay">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="904" y="604" width="344" height="128" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_cli" value="process(turn)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_cli" target="n_agent" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_demo" value="process(turn)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_agent" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="304" y="412" /><mxPoint x="304" y="300" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_con" value="runConsolidation" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_agent" target="n_consol" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ret" value="retrieve / retrievePerson" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_agent" target="n_retr" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="496" y="224" /><mxPoint x="1024" y="224" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_ep" value="addEpisode" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_agent" target="n_memory" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="540" y="432" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_c2m" value="read + write facts" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_consol" target="n_memory" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r2m" value="FTS + direct search" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_retr" target="n_memory" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1024" y="368" /><mxPoint x="796" y="368" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_mock" value="extractFacts fallback" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_consol" target="n_mockllm" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="708" y="348" /><mxPoint x="496" y="348" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_drv" value="Database() driver" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_memory" target="n_sqlite" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="864" y="416" /><mxPoint x="864" y="556" /><mxPoint x="1296" y="556" /><mxPoint x="1296" y="280" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_db" value="persist WAL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_memory" target="n_dbfile" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="888" y="448" /><mxPoint x="888" y="580" /><mxPoint x="1320" y="580" /><mxPoint x="1320" y="520" /></Array></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

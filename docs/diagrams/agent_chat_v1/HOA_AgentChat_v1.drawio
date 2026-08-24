@@ -1,0 +1,151 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_agent_chat_v1" name="31 Agent Chat — Decision-Quality Observability for an LLM Agent">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_client" value="" style="rounded=1;fillColor=none;strokeColor=#1565C0;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#1565C0;" parent="1" vertex="1">
+          <mxGeometry x="40" y="208" width="200" height="344" as="geometry" />
+        </mxCell>
+        <mxCell id="z_client_lbl" value="③ Browser — untrusted client tier (HTTP + SSE)" style="text;fontSize=10;fontStyle=1;fontColor=#1565C0;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="52" y="216" width="184" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="320" y="96" width="976" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc_lbl" value="① Express server process — Node ESM, no framework" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="332" y="104" width="960" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_pipe" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="568" y="200" width="712" height="336" as="geometry" />
+        </mxCell>
+        <mxCell id="z_pipe_lbl" value="runAgent() — per-message agent pipeline (async generator)" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="580" y="208" width="696" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_net" value="" style="rounded=1;fillColor=none;strokeColor=#1565C0;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#1565C0;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="96" width="296" height="288" as="geometry" />
+        </mxCell>
+        <mxCell id="z_net_lbl" value="② Upstream network — real fetch() calls" style="text;fontSize=10;fontStyle=1;fontColor=#1565C0;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="104" width="280" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_data" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="452" width="296" height="176" as="geometry" />
+        </mxCell>
+        <mxCell id="z_data_lbl" value="④ SQLite persistence (WAL + FTS5)" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="460" width="280" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;Chat UI&lt;/b&gt;&lt;br&gt;SSE client · app.js&lt;br&gt;EventSource :401" class="component.entry" id="n_ui">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="56" y="264" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Run Inspector&lt;/b&gt;&lt;br&gt;report-card modal&lt;br&gt;showTrace :812" class="component.entry" id="n_inspector">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="56" y="400" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Express server&lt;/b&gt;&lt;br&gt;routes · CSP · limits&lt;br&gt;server.js :135" class="component.service" id="n_server">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="352" y="264" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;StreamManager&lt;/b&gt;&lt;br&gt;buffer + SSE replay&lt;br&gt;streams.js :29" class="component.service" id="n_streams">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="352" y="424" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Guardrails&lt;/b&gt;&lt;br&gt;block inject · redact&lt;br&gt;guardrails.js :10" class="component.service" id="n_guardrails">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="592" y="264" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;runAgent()&lt;/b&gt;&lt;br&gt;reason ≤8 → answer&lt;br&gt;agent.js:9 :234" class="component.agent" id="n_agent">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="844" y="264" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;LLMAdapter&lt;/b&gt;&lt;br&gt;chat/stream · JSON-retry&lt;br&gt;llm.js:18 :75" class="component.service" id="n_llm">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1096" y="264" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;AgentObserver&lt;/b&gt;&lt;br&gt;5 scores → report card&lt;br&gt;tracer.js:3 :60" class="component.service" id="n_observer">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="592" y="424" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Tools · executeTool&lt;/b&gt;&lt;br&gt;wiki search/read · calc&lt;br&gt;tools.js:3 :72" class="component.service" id="n_tools">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1096" y="424" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;LLM providers&lt;/b&gt;&lt;br&gt;Ollama NDJSON · NVIDIA/Gemini SSE&lt;br&gt;llm.js:103 :128 :163" class="component.external" id="n_providers">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="168" width="248" height="72" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Wikipedia API&lt;/b&gt;&lt;br&gt;opensearch + REST summary&lt;br&gt;tools.js:8 :27" class="component.external" id="n_wiki">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="288" width="248" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;SQLite · WAL + FTS5&lt;/b&gt;&lt;br&gt;threads · messages(tree) · runs&lt;br&gt;decisions · feedback · facts&lt;br&gt;db.js:7 (shared store)" class="component.artifact" id="n_db">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="512" width="248" height="80" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;FIVE SCORES PER RUN · tracer.js end() :60&lt;/b&gt;&lt;br&gt;1 Tool ROI = used ÷ tool decisions :72&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;n-gram overlap ≥ 0.15 ⇒ used :124 :150&lt;br&gt;2 Coherence = consec-thought terms :74&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;≥ 2 shared terms ⇒ coherent :167&lt;br&gt;3 Productivity: productive | wasted :68 :69&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;respond OR result used ⇒ productive :141&lt;br&gt;4 Confidence signals (from thought) :183&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;hedging·confident·uncertain·&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;seeking_info·ready_to_answer :189&lt;br&gt;5 Strategy :173&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;direct·single_tool·multi_tool·iterative&lt;br&gt;→ persisted: agent_runs + decisions :86 :78" class="card.invariant" id="card_scores">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="344" y="560" width="296" height="224" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;GUARDRAILS — block in, redact both ways&lt;/b&gt;&lt;br&gt;scanInput() :10&lt;br&gt;&amp;nbsp;&amp;nbsp;16 injection regex → block :40&lt;br&gt;&amp;nbsp;&amp;nbsp;5 PII types redacted :34&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;card·ssn·email·phone·apikey :70&lt;br&gt;&amp;nbsp;&amp;nbsp;blocked ⇒ canned reply :41&lt;br&gt;scanOutput() :60&lt;br&gt;&amp;nbsp;&amp;nbsp;same 5 PII masked on answer :72&lt;br&gt;&amp;nbsp;&amp;nbsp;2 disclaimer patterns flagged :76&lt;br&gt;one audit_log row per scan :45" class="card.failure" id="card_guard">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="664" y="560" width="296" height="160" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;PRODUCTION LIMITS — safe to expose publicly&lt;/b&gt;&lt;br&gt;rate/IP: 300 read · 20 write per min :113&lt;br&gt;20 concurrent runs → 503 :91&lt;br&gt;message &amp;gt; 8000 chars → 413 :86&lt;br&gt;JSON body ≤ 64 kb :103&lt;br&gt;CSP + 5 security headers :26&lt;br&gt;graceful drain + WAL checkpoint :380" class="card.primitive" id="card_limits">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="984" y="560" width="296" height="136" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_post" value="POST message" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_ui" target="n_server" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_sse" value="SSE tokens" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_streams" target="n_ui" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="292" y="456" /><mxPoint x="292" y="264" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_runs" value="GET /api/runs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_inspector" target="n_server" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="264" y="432" /><mxPoint x="264" y="328" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_run" value="runAgent()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_server" target="n_guardrails" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_srv_str" value="emit events" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_server" target="n_streams" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gna" value="input ok" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_guardrails" target="n_agent" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_al" value="reason + answer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_agent" target="n_llm" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_at" value="executeTool" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_agent" target="n_tools" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="976" y="392" /><mxPoint x="1184" y="392" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_ao" value="record / end" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_agent" target="n_observer" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="888" y="392" /><mxPoint x="680" y="392" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_llm_prov" value="chat / stream" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_llm" target="n_providers" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1328" y="296" /><mxPoint x="1328" y="204" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_tw" value="fetch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_tools" target="n_wiki" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1328" y="456" /><mxPoint x="1328" y="320" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_od" value="agent_runs + decisions" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_observer" target="n_db" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="680" y="520" /><mxPoint x="1328" y="520" /><mxPoint x="1328" y="552" /></Array></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

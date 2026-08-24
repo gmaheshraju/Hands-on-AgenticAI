@@ -1,0 +1,146 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_tool_use_v1" name="10 Tool Use — SQL Analytics Agent Architecture">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_entry" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="40" y="216" width="176" height="128" as="geometry" />
+        </mxCell>
+        <mxCell id="z_entry_lbl" value="③ Entry (CLI)" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="52" y="224" width="160" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="280" y="96" width="1016" height="680" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc_lbl" value="① 10-tool-use process (Node ESM)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="292" y="104" width="1000" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_flow" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="496" y="200" width="760" height="264" as="geometry" />
+        </mxCell>
+        <mxCell id="z_flow_lbl" value="② agent.ask() — ONE attempt, steps in code order" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="508" y="208" width="744" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_data" value="" style="rounded=1;fillColor=none;strokeColor=#1565C0;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#1565C0;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="232" width="296" height="288" as="geometry" />
+        </mxCell>
+        <mxCell id="z_data_lbl" value="④ Durable store — SQLite, local file" style="text;fontSize=10;fontStyle=1;fontColor=#1565C0;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="240" width="280" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=1;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="584" width="296" height="176" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out_lbl" value="⑤ Terminal outcomes (stdout)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="592" width="280" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;npm run demo&lt;br&gt;3 parts · :32" class="component.entry" id="n_cli">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="248" width="128" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;agent.ask(question)&lt;/b&gt;&lt;br&gt;retry loop · 4 tries&lt;br&gt;agent.js:239 :258" class="component.service" id="n_ask">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="304" y="248" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;llm(messages) — mockLLM&lt;/b&gt;&lt;br&gt;19 patterns + default&lt;br&gt;agent.js:62 · seam :223" class="component.agent" id="n_llm">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="520" y="248" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;validateQuery()&lt;/b&gt;&lt;br&gt;3 tiers, deny-default&lt;br&gt;permissions.js:144" class="component.service" id="n_perm">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="776" y="248" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;db.prepare(sql).all()&lt;/b&gt;&lt;br&gt;better-sqlite3 · timed&lt;br&gt;agent.js:297 :296" class="component.service" id="n_exec">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1032" y="248" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;estimateQueryCost()&lt;/b&gt;&lt;br&gt;EXPLAIN QUERY PLAN&lt;br&gt;permissions.js:329" class="component.service" id="n_cost">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="776" y="368" width="176" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;formatResult(rows)&lt;/b&gt;&lt;br&gt;table / scalar / meta&lt;br&gt;formatter.js:116" class="component.service" id="n_fmt">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1032" y="368" width="176" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;database.js&lt;/b&gt;&lt;br&gt;openDatabase :321 (WAL, FK on)&lt;br&gt;getSchemaContext :350&lt;br&gt;getAllowedTables :396" class="component.service" id="n_dbmod">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="260" width="248" height="72" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;analytics.db&lt;/b&gt;&lt;br&gt;SQLite · users products&lt;br&gt;orders events · 15,020 rows&lt;br&gt;database.js:13 · seeded :330" class="component.artifact" id="n_db">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="372" width="248" height="72" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;stdout — success&lt;/b&gt;&lt;br&gt;table + query metadata&lt;br&gt;demo.js:99-101" class="component.artifact" id="n_out">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="612" width="248" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;stdout — refusal&lt;/b&gt;&lt;br&gt;PERMISSION DENIED :281&lt;br&gt;CONFIRMATION REQUIRED :286" class="component.artifact" id="n_deny">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="684" width="248" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;validateQuery() — EVERY check, in code order · permissions.js:144&lt;/b&gt;&lt;br&gt;BLOCK 1 multiple statements &#x27;;&#x27; :153 · 2 first keyword not SELECT :165&lt;br&gt;BLOCK 3 destructive keyword x14 :177-192 · 4 metadata table x6 :207&lt;br&gt;BLOCK 5 load_extension :229 · 6 table not in allowedTables :241-257&lt;br&gt;BLOCK 7 subquery depth &gt; 2 :261 · 8 UNION + constant :274-287&lt;br&gt;CONFIRM 9 over 3 JOINs :296 · 10 no WHERE clause :300 (one result :304)&lt;br&gt;ALLOW  fall-through only :316 — first match wins; order is load-bearing" class="card.invariant" id="card_gate">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="304" y="496" width="456" height="112" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;DENY LISTS — complete, in declaration order&lt;/b&gt;&lt;br&gt;destructive :178-191 — INSERT UPDATE DELETE DROP ALTER CREATE&lt;br&gt;TRUNCATE REPLACE EXEC ATTACH DETACH PRAGMA GRANT REVOKE  (14)&lt;br&gt;metadata :208-213 — information_schema sqlite_master sqlite_schema&lt;br&gt;sqlite_temp_master pg_catalog pg_tables  (6) · load_extension :229&lt;br&gt;allowedTables database.js:397 — users products orders events  (4)" class="card.failure" id="card_deny">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="304" y="632" width="456" height="96" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;ONE ask() ATTEMPT — 4 steps in code order · agent.js:258-323&lt;/b&gt;&lt;br&gt;1 llm(messages) :264 — md fences + trailing &#x27;;&#x27; stripped :266 :268&lt;br&gt;2 validateQuery(sql, allowedTables) :277&lt;br&gt;      !allowed -&gt; &#x27;PERMISSION DENIED&#x27;, return :280-283&lt;br&gt;      needsConfirm and !autoConfirm -&gt; return :285-288 — never retried&lt;br&gt;3 estimateQueryCost(db, sql) :291 — EXPLAIN QUERY PLAN :331&lt;br&gt;4 db.prepare(sql).all() :297 — timed by performance.now() :296&lt;br&gt;      on throw -&gt; errors.push :313 + retry prompt appended :317-321&lt;br&gt;&lt;br&gt;&lt;b&gt;4 ATTEMPTS MAX&lt;/b&gt; — attempt = 0..maxRetries, default 3 :227 :258&lt;br&gt;exhausted -&gt; &#x27;Failed after N attempts&#x27; + error list :327-334&lt;br&gt;&lt;br&gt;&lt;b&gt;AgentResult envelope — 10 fields · agent.js:206-215&lt;/b&gt;&lt;br&gt;success · question · sql · rows · formatted · permission&lt;br&gt;cost · attempts · errors · executionTimeMs" class="card.primitive" id="card_attempt">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="792" y="496" width="456" height="232" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_ask" value="question (natural language)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_cli" target="n_ask" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_llm" value="messages[] · system + user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_ask" target="n_llm" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_perm" value="raw SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_llm" target="n_perm" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_exec" value="allowed" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_perm" target="n_exec" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cost" value="sql :291" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_perm" target="n_cost" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_fmt" value="rows :303" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_exec" target="n_fmt" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_db" value="prepared statement" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_exec" target="n_db" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1336" y="280" /><mxPoint x="1336" y="408" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_plan" value="EXPLAIN QUERY PLAN" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_cost" target="n_db" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="864" y="476" /><mxPoint x="1508" y="476" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_out" value="formatted string" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_fmt" target="n_out" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1312" y="396" /><mxPoint x="1312" y="640" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_deny" value="blocked / needs confirm" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_perm" target="n_deny" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="820" y="336" /><mxPoint x="772" y="336" /><mxPoint x="772" y="756" /><mxPoint x="1508" y="756" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_schema" value="schemaContext -&gt; system prompt" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_dbmod" target="n_llm" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1508" y="168" /><mxPoint x="608" y="168" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_seed" value="createSchema + seed if empty" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_dbmod" target="n_db" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

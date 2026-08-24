@@ -1,0 +1,116 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_compliance_audit_v1" name="28 Compliance-Audit — Tamper-Evident Audit Harness">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_in" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="40" y="232" width="216" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="z_in_lbl" value="③ Inputs — driver + audited agents" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="52" y="240" width="200" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="320" y="96" width="976" height="684" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc_lbl" value="① AuditHarness process (Node ESM · in-memory, no network)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="332" y="104" width="960" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_pipe" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="560" y="224" width="720" height="272" as="geometry" />
+        </mxCell>
+        <mxCell id="z_pipe_lbl" value="Audit pipeline — log → read → check → report" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="572" y="232" width="704" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=1;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="240" width="296" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out_lbl" value="④ Output — stdout" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="248" width="280" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;driver · 5 scenarios&lt;br&gt;:251" class="component.entry" id="n_demo">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="264" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Simulated agents&lt;/b&gt;&lt;br&gt;5 event producers&lt;br&gt;(labels, not code) :32" class="component.mock" id="n_agents">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="344" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;AuditHarness&lt;/b&gt;&lt;br&gt;orchestrator :13&lt;br&gt;4 public methods&lt;br&gt;logEvent→…→report :55" class="component.service" id="n_harness">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="344" y="256" width="176" height="160" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;EventLogger&lt;/b&gt;&lt;br&gt;SHA-256 hash chain&lt;br&gt;append-only store :47" class="component.service" id="n_logger">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="592" y="264" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;ComplianceFramework&lt;/b&gt;&lt;br&gt;12 rules · 3 regs&lt;br&gt;check + risk :336" class="component.service" id="n_framework">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="832" y="264" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;ComplianceReporter&lt;/b&gt;&lt;br&gt;Markdown report&lt;br&gt;generate() :12" class="component.service" id="n_reporter">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1072" y="264" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;DecisionReplay&lt;/b&gt;&lt;br&gt;reconstruct + replay&lt;br&gt;drift detect :94" class="component.service" id="n_replay">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="592" y="408" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;stdout output&lt;/b&gt;&lt;br&gt;Markdown report + export&lt;br&gt;+ replay summary :186" class="component.artifact" id="n_report">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="264" width="248" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;TAMPER-EVIDENT HASH CHAIN — eventLogger.js&lt;/b&gt;&lt;br&gt;11 entry fields, in code order:&lt;br&gt; id·timestamp·agentId·action :73&lt;br&gt; input·output·decision·rationale :77&lt;br&gt; metadata·previousHash·hash :81-85&lt;br&gt;genesis prevHash = 64×&#x27;0&#x27; :70&lt;br&gt;hash = SHA-256(prevHash + entry) :40&lt;br&gt;entries Object.freeze on append :87&lt;br&gt;verifyChain → brokenAt index :135&lt;br&gt;redact 12 keys before hashing :33" class="card.invariant" id="card_chain">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="344" y="592" width="304" height="176" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;12 RULES · 3 REGS — complianceFramework.js&lt;/b&gt;&lt;br&gt;EU AI Act :10 — 4 rules&lt;br&gt; explainability H:12 · audit-trail C:31&lt;br&gt; human-review H:51 · protected C:76&lt;br&gt;SOC2 :105 — 4 rules&lt;br&gt; agent-id H:107 · immutable-log C:126&lt;br&gt; redaction C:144 · config-change M:174&lt;br&gt;GDPR :196 — 4 rules&lt;br&gt; data-min H:198 · purpose M:229&lt;br&gt; erasure H:248 · retention M:269&lt;br&gt;check → score = passed/total :369&lt;br&gt;H high · C critical · M medium" class="card.invariant" id="card_rules">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="664" y="592" width="304" height="176" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;RISK ESCALATION — complianceFramework.js:387&lt;/b&gt;&lt;br&gt;overallRisk, first match wins:&lt;br&gt; critical if critical &amp;gt; 0 :388&lt;br&gt; high if high &amp;gt; 1 :389&lt;br&gt; medium if high&amp;gt;0 or medium&amp;gt;1 :390&lt;br&gt; low otherwise :387&lt;br&gt;fail tally by severity :383&lt;br&gt;critical → criticalFindings → P0 :396&lt;br&gt;report: summary · tables · matrix&lt;br&gt; · P0/P1/P2 roadmap :104&lt;br&gt;observed run: 92% · MEDIUM · 0 crit" class="card.failure" id="card_risk">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="984" y="592" width="304" height="176" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_demo" value="5 scenarios :256" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_harness" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_events" value="agent events" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_agents" target="n_harness" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_log" value="logEvent() :55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_harness" target="n_logger" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_check" value="check(logger) :336" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_logger" target="n_framework" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_report" value="results :83" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_framework" target="n_reporter" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_out" value="generate() :12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_reporter" target="n_report" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_replay" value="replayDecision :62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_harness" target="n_replay" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="556" y="376" /><mxPoint x="556" y="440" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_reads" value="reads chain :32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_logger" target="n_replay" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_evid" value="audit summary :144" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_replay" target="n_report" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1508" y="440" /></Array></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,141 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_responsible_ai_v1" name="13 Responsible AI — Bias Audit Pipeline Architecture">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_entry" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="40" y="216" width="176" height="264" as="geometry" />
+        </mxCell>
+        <mxCell id="z_entry_lbl" value="③ Entry + fixtures" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="52" y="224" width="160" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="280" y="96" width="1016" height="680" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc_lbl" value="① 13-responsible-ai audit pipeline (Node ESM)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="292" y="104" width="1000" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_flow" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="320" y="200" width="936" height="296" as="geometry" />
+        </mxCell>
+        <mxCell id="z_flow_lbl" value="runDemo() — one pass, 5 numbered steps · demo.js:146" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="332" y="208" width="920" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_sut" value="" style="rounded=1;fillColor=none;strokeColor=#1565C0;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#1565C0;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="200" width="296" height="232" as="geometry" />
+        </mxCell>
+        <mxCell id="z_sut_lbl" value="② System under test — opaque contract, MOCK scorer" style="text;fontSize=10;fontStyle=1;fontColor=#1565C0;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="208" width="280" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=1;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="560" width="296" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out_lbl" value="④ Artifacts written" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="568" width="280" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · 3 modes&lt;br&gt;:147 :148 :149" class="component.entry" id="n_cli">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="48" y="248" width="160" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;resumeTemplates.js&lt;/b&gt;&lt;br&gt;5 templates :5&lt;br&gt;attributes :144&lt;br&gt;universities :215" class="component.mock" id="n_templates">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="48" y="364" width="160" height="72" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;datasetBuilder.js&lt;/b&gt;&lt;br&gt;matched :38 · proxy :179&lt;br&gt;intersectional :126" class="component.service" id="n_builder">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="344" y="248" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;counterfactual.js&lt;/b&gt;&lt;br&gt;testPair :60 · agg :123&lt;br&gt;batch concurrency 5 :91" class="component.service" id="n_cf">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="576" y="248" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;statistics.js&lt;/b&gt;&lt;br&gt;analyzeResults :351&lt;br&gt;4 tests from scratch" class="component.service" id="n_stats">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="808" y="248" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;modelCard.js&lt;/b&gt;&lt;br&gt;generateModelCard :34&lt;br&gt;renderMarkdown :177" class="component.service" id="n_card">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1040" y="248" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;intersectional.js&lt;/b&gt;&lt;br&gt;analyzeIntersections :24&lt;br&gt;--full only :234" class="component.service" id="n_inter">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="808" y="396" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;scoringFn — the audited system&lt;/b&gt;&lt;br&gt;createBiasedScorer() demo.js:40&lt;br&gt;createFairScorer() --fair :116" class="component.external" id="n_scorer">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="236" width="240" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;output/MODEL_CARD.md&lt;/b&gt;&lt;br&gt;renderMarkdown :380 :381" class="component.artifact" id="n_md">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="596" width="248" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;output/model_card.json&lt;/b&gt;&lt;br&gt;JSON.stringify(card) :382" class="component.artifact" id="n_json">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="676" width="248" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;FAIRNESS TESTS — complete, in code order · analyzeResults :351&lt;/b&gt;&lt;br&gt;1 chiSquaredTest :365 — 2x2 flip-rate independence, df=1&lt;br&gt;2 welchTTest :368 · 3 cohensD :371 · 4 demographicParity :376&lt;br&gt;biasDetected = chiSq.sig OR t.sig OR NOT passes80PercentRule :391&lt;br&gt;significance is p &amp;lt; 0.05 in both tests — :208 :269" class="card.invariant" id="card_tests">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="344" y="528" width="424" height="104" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;FINDING LADDER — generateFindings :417, in code order&lt;/b&gt;&lt;br&gt;1 HIGH decision_flip_bias — chi-squared significant :420 :423&lt;br&gt;2 CRITICAL if effect large else HIGH · score_disparity :432 :433&lt;br&gt;3 CRITICAL disparate_impact — 80% rule fails :439 :442&lt;br&gt;4 INFO no_bias_detected — only if 1-3 all silent :448 :451&lt;br&gt;risk: CRITICAL → HIGH :419 · HIGH → MEDIUM :425 · else LOW :430&lt;br&gt;risk HIGH → NOT_APPROVED :133 — one CRITICAL is enough" class="card.failure" id="card_findings">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="344" y="656" width="424" height="116" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;MODEL CARD — 10 sections, code order · generateModelCard :34&lt;/b&gt;&lt;br&gt;1 modelDetails :42 · 2 intendedUse :54 · 3 riskClassification :65&lt;br&gt;4 trainingData :75 · 5 metrics :83 · 6 biasAndFairness :93&lt;br&gt;7 ethicalConsiderations :101 · 8 limitations :112&lt;br&gt;9 recommendations :132 · 10 regulatoryCompliance :150" class="card.primitive" id="card_sections">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="800" y="592" width="456" height="104" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_cli" value="attribute · 25 pairs (50 if --full) :152" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_cli" target="n_builder" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_tmpl" value="templates + demographic data :9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_templates" target="n_builder" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="432" y="400" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_pairs" value="resumeA / resumeB :106" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_builder" target="n_cf" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_score" value="scoringFn(A) ‖ (B) :61-63" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_cf" target="n_scorer" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="664" y="160" /><mxPoint x="1328" y="160" /><mxPoint x="1328" y="268" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_ret" value="score · decision · summary :105-108" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_scorer" target="n_cf" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1564" y="136" /><mxPoint x="708" y="136" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_agg" value="aggregateResults() :207" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_cf" target="n_stats" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_stats" value="combinedStats :216" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_stats" target="n_card" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ipairs" value="intersectional pairs :178" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#E65100;fontColor=#E65100;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=4 4;" parent="1" source="n_builder" target="n_inter" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="388" y="428" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_iscore" value="re-scores each resume :239" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_scorer" target="n_inter" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1504" y="428" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_icard" value="intersectionalReport :246" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#E65100;fontColor=#E65100;fontSize=8;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;dashed=1;dashPattern=4 4;" parent="1" source="n_inter" target="n_card" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="940" y="356" /><mxPoint x="1084" y="356" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_md" value="writeModelCard() :374" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_card" target="n_md" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1172" y="492" /><mxPoint x="1304" y="492" /><mxPoint x="1304" y="624" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_json" value="same call, both formats :382" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_card" target="n_json" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1352" y="296" /><mxPoint x="1352" y="704" /></Array></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

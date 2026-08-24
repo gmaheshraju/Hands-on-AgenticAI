@@ -1,0 +1,157 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_finetune_vs_rag_v1" name="09 Fine-Tuning vs RAG — Architecture">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_in" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="40" y="240" width="216" height="248" as="geometry" />
+        </mxCell>
+        <mxCell id="z_in_lbl" value="③ Inputs — CLI + labelled corpus" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="52" y="248" width="200" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="320" y="96" width="944" height="680" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc_lbl" value="① 09-fine-tuning-vs-rag process (Node ESM)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="332" y="104" width="928" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_flow" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="352" y="176" width="776" height="304" as="geometry" />
+        </mxCell>
+        <mxCell id="z_flow_lbl" value="Head-to-head evaluation — one pass, 30 held-out tickets, four approaches" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="364" y="184" width="760" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_ext" value="" style="rounded=1;fillColor=none;strokeColor=#1565C0;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#1565C0;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="216" width="296" height="176" as="geometry" />
+        </mxCell>
+        <mxCell id="z_ext_lbl" value="② External network — the only one" style="text;fontSize=10;fontStyle=1;fontColor=#1565C0;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="224" width="280" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=1;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="568" width="296" height="216" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out_lbl" value="④ Artifacts written" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="576" width="280" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · 5 steps&lt;br&gt;--skip-eval :25" class="component.entry" id="n_demo">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="280" width="168" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;tickets.json&lt;/b&gt; 100&lt;br&gt;test-set.json 30&lt;br&gt;4 categories · :37 :38" class="component.mock" id="n_corpus">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="392" width="168" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;fineTuning.js&lt;/b&gt;&lt;br&gt;validate :138&lt;br&gt;writeTrainingFiles :62" class="component.service" id="n_prep">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="384" y="280" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;evaluate.js&lt;/b&gt;&lt;br&gt;runEvaluation :129&lt;br&gt;evaluateApproach :85&lt;br&gt;computeMetrics :23" class="component.service" id="n_eval">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="664" y="264" width="176" height="96" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;prompting.js&lt;/b&gt;&lt;br&gt;classifyZeroShot :25&lt;br&gt;classifyFewShot :53&lt;br&gt;8 few-shot ex. :11" class="component.agent" id="n_prompt">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="904" y="192" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;rag.js&lt;/b&gt;&lt;br&gt;SimpleVectorStore :21&lt;br&gt;TF-IDF · cosine :91&lt;br&gt;retrieve top-5 :111" class="component.agent" id="n_rag">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="904" y="280" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;fineTuning.js&lt;/b&gt;&lt;br&gt;classifyWithFineTuning&lt;br&gt;:207 — MOCK, no weights" class="component.agent" id="n_ft">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="904" y="368" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Google Gemini API&lt;/b&gt;&lt;br&gt;gemini-2.0-flash&lt;br&gt;@google/generative-ai ^0.24.0&lt;br&gt;the ONLY network call · :136" class="component.external" id="n_gemini">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="264" width="248" height="96" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;comparison.js&lt;/b&gt;&lt;br&gt;generateComparison :17&lt;br&gt;6 md sections :63-155" class="component.service" id="n_compare">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1064" y="544" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;data/fine-tuning/ — 3 files&lt;/b&gt;&lt;br&gt;OpenAI · Gemini · instruction :62" class="component.artifact" id="n_train">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="604" width="248" height="48" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;evaluation-results.json&lt;/b&gt;&lt;br&gt;evaluate.js:199 — not committed" class="component.artifact" id="n_results">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="664" width="248" height="48" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;COMPARISON.md&lt;/b&gt;&lt;br&gt;the deliverable · demo.js:110" class="component.artifact" id="n_md">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="724" width="248" height="48" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;DATA QUALITY GATE — 5 checks, complete, in code order&lt;/b&gt;&lt;br&gt;1 imbalance max/min &amp;gt; 2 :149 · 2 corpus &amp;lt; 50 :156&lt;br&gt;3 text &amp;lt; 20 chars :166 · 4 duplicate texts :174&lt;br&gt;5 category outside the 4-item whitelist :182&lt;br&gt;&lt;b&gt;it does not gate&lt;/b&gt; — demo.js prints the issues :48&lt;br&gt;and continues to Step 2 unconditionally :60" class="card.invariant" id="card_gate">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="352" y="544" width="424" height="96" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;THE 4 EVALUATED APPROACHES — evaluate.js, in code order&lt;/b&gt;&lt;br&gt;1 Zero-Shot :153 — categories + ticket, nothing else&lt;br&gt;2 Few-Shot :163 — + 8 hand-picked examples :11&lt;br&gt;3 RAG :177 — + top-5 TF-IDF neighbours of the 100&lt;br&gt;4 Fine-Tuned :187 — persona prompt, ticket only :207&lt;br&gt;one shared testSet :142 · one computeMetrics :23" class="card.primitive" id="card_appr">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="352" y="656" width="424" height="96" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;SIMULATED, NOT REAL — the complete list&lt;/b&gt;&lt;br&gt;1 no fine-tuned model: a persona prompt stands in :207&lt;br&gt;2 its latency is the real API latency × 0.6 :246&lt;br&gt;3 no vector DB: in-process TF-IDF maps :18 :21&lt;br&gt;4 tokens are text.length / 4, never metered :45 :169 :252&lt;br&gt;5 no API key → generateSampleResults() invents them :132" class="card.failure" id="card_mock">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="816" y="656" width="440" height="96" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_load" value="readFileSync :37 :38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_corpus" target="n_demo" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_prep" value="100 training tickets" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_prep" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_eval" value="runEvaluation :101" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_prep" target="n_eval" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_index" value="re-read :141 :142" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_corpus" target="n_eval" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="600" y="424" /><mxPoint x="600" y="336" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_zs" value="zero-shot + few-shot" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_eval" target="n_prompt" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="872" y="288" /><mxPoint x="872" y="224" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_rag" value="index 100 once :173" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_eval" target="n_rag" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ft" value="ticket only" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_eval" target="n_ft" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="872" y="336" /><mxPoint x="872" y="400" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_api_p" value="prompt → category" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_prompt" target="n_gemini" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1240" y="224" /><mxPoint x="1240" y="288" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_api_r" value="prompt + 5 neighbours" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_rag" target="n_gemini" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_api_f" value="persona prompt" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_ft" target="n_gemini" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1200" y="400" /><mxPoint x="1200" y="336" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_train" value="3 training files" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_prep" target="n_train" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="472" y="520" /><mxPoint x="1280" y="520" /><mxPoint x="1280" y="628" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_results" value="allResults :200" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_eval" target="n_results" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="708" y="496" /><mxPoint x="1304" y="496" /><mxPoint x="1304" y="688" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_cmp" value="allResults :109" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_eval" target="n_compare" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="796" y="576" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_md" value="writeFileSync :111" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_compare" target="n_md" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1328" y="576" /><mxPoint x="1328" y="748" /></Array></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

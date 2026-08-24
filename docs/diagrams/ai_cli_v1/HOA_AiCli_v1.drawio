@@ -1,0 +1,162 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_ai_cli_v1" name="20 aidev — AI-Powered Developer CLI">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_in" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="40" y="176" width="224" height="536" as="geometry" />
+        </mxCell>
+        <mxCell id="z_in_lbl" value="③ Entry — CLI + git + config" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="52" y="184" width="208" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="328" y="96" width="968" height="692" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc_lbl" value="① aidev process (Node ESM · zero deps)" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="340" y="104" width="952" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_flow" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="392" y="200" width="712" height="264" as="geometry" />
+        </mxCell>
+        <mxCell id="z_flow_lbl" value="Per-command pipeline — read → analyze (LLM or mock)" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="404" y="208" width="696" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_ext" value="" style="rounded=1;fillColor=none;strokeColor=#1565C0;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#1565C0;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="208" width="304" height="232" as="geometry" />
+        </mxCell>
+        <mxCell id="z_ext_lbl" value="② External LLM APIs (network)" style="text;fontSize=10;fontStyle=1;fontColor=#1565C0;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="216" width="288" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=1;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="504" width="304" height="216" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out_lbl" value="④ Artifacts written — home dir" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="512" width="288" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;bin/aidev.js&lt;/b&gt;&lt;br&gt;process.argv switch :26&lt;br&gt;7 verbs + flags" class="component.entry" id="n_cli">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="208" width="176" height="96" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;git.js&lt;/b&gt;&lt;br&gt;diff / commit / log&lt;br&gt;exec + execFile :1" class="component.service" id="n_git">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="336" width="176" height="96" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;config.js&lt;/b&gt;&lt;br&gt;~/.aidev.json load/save&lt;br&gt;isDemoMode gate :48" class="component.service" id="n_config">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="480" width="176" height="96" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;commit.js&lt;/b&gt;&lt;br&gt;staged diff :16" class="component.service" id="n_commit">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="416" y="216" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;review.js&lt;/b&gt;&lt;br&gt;diff · --json :84" class="component.service" id="n_review">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="416" y="300" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;explain.js&lt;/b&gt;&lt;br&gt;fs.readFileSync :57" class="component.service" id="n_explain">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="416" y="384" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;llm.js&lt;/b&gt;&lt;br&gt;isDemoMode? :184&lt;br&gt;callLLM dispatch :300" class="component.service" id="n_llm">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="664" y="300" width="176" height="96" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;mock heuristics&lt;/b&gt;&lt;br&gt;llm.js:8 :39 :85&lt;br&gt;SIMULATED · cost 0" class="component.mock" id="n_mock">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="904" y="308" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;OpenAI API&lt;/b&gt;&lt;br&gt;api.openai.com&lt;br&gt;/v1/chat/completions :137" class="component.external" id="n_openai">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="240" width="256" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Anthropic API&lt;/b&gt;&lt;br&gt;api.anthropic.com&lt;br&gt;/v1/messages :165" class="component.external" id="n_anthropic">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="344" width="256" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;budget.js&lt;/b&gt;&lt;br&gt;recordUsage :32&lt;br&gt;calculateCost :25" class="component.service" id="n_budget">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="664" y="496" width="176" height="96" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;~/.aidev.json&lt;/b&gt;&lt;br&gt;config :5" class="component.artifact" id="n_cfgfile">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="544" width="256" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;~/.aidev-usage.json&lt;/b&gt;&lt;br&gt;30-day cost ledger :6" class="component.artifact" id="n_usagefile">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="640" width="256" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;GRACEFUL FALLBACK → mock (no network)&lt;/b&gt;&lt;br&gt;isDemoMode = !api_key | provider=mock :48&lt;br&gt;demo ⇒ mock heuristics, cost 0 :184&lt;br&gt;live + overBudget ⇒ provider=mock&lt;br&gt;  commit:26 review:40 explain:62&lt;br&gt;budget checked ONLY if !demo :24 :38 :60&lt;br&gt;nearBudget warn &amp;lt;20% :76 · over ≤0 :75" class="card.invariant" id="card_fallback">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="344" y="608" width="304" height="172" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;git SAFETY — execFileSync, no shell :18&lt;/b&gt;&lt;br&gt;user input ⇒ execFileSync (safe):&lt;br&gt;  branchDiff:49 reviewTarget:61&lt;br&gt;  log:74 commit:82 cat:87 files:101&lt;br&gt;fixed cmd ⇒ execSync (shell) :5&lt;br&gt;  isGitRepo:32 staged:36 unstaged:44&lt;br&gt;  status:70 branch:78 stagedFiles:94" class="card.primitive" id="card_git">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="664" y="608" width="304" height="172" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;PROVIDERS + 6 PRICED MODELS&lt;/b&gt;&lt;br&gt;callLLM: anthropic ⇒ callAnthropic :301&lt;br&gt;  else ⇒ callOpenAI (default) :304&lt;br&gt;models config.js:19-24:&lt;br&gt;  gpt-4o-mini · gpt-4o · gpt-4-turbo&lt;br&gt;  claude-haiku-4-5 · sonnet-5 · opus-5&lt;br&gt;mock priced 0/0 :25&lt;br&gt;cost = tok/1M × in/out :27" class="card.primitive" id="card_providers">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="984" y="608" width="304" height="172" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_cli_commit" value="commit / c :27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_cli" target="n_commit" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cli_review" value="review / r :32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_cli" target="n_review" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="300" y="256" /><mxPoint x="300" y="332" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_cli_explain" value="explain / e :37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_cli" target="n_explain" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="340" y="280" /><mxPoint x="340" y="416" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_git_commit" value="diff read :16 :24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_git" target="n_commit" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="372" y="384" /><mxPoint x="372" y="264" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_config_cli" value="loadConfig :28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_config" target="n_cli" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="32" y="528" /><mxPoint x="32" y="256" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_config_file" value="save :41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_config" target="n_cfgfile" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="280" y="528" /><mxPoint x="280" y="600" /><mxPoint x="1320" y="600" /><mxPoint x="1320" y="576" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_commit_llm" value="commitMsg :47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_commit" target="n_llm" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="624" y="248" /><mxPoint x="624" y="324" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_review_llm" value="review :54" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_review" target="n_llm" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="608" y="332" /><mxPoint x="608" y="348" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_explain_llm" value="explain :75" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_explain" target="n_llm" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="640" y="416" /><mxPoint x="640" y="372" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_llm_mock" value="fallback :184" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_llm" target="n_mock" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="872" y="348" /><mxPoint x="872" y="340" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_llm_oai" value="POST chat :137" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_llm" target="n_openai" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="796" y="264" /><mxPoint x="1320" y="264" /><mxPoint x="1320" y="272" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_llm_anth" value="POST messages :165" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_llm" target="n_anthropic" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="752" y="240" /><mxPoint x="1344" y="240" /><mxPoint x="1344" y="376" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_llm_budget" value="recordUsage :207 :244 :279" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_llm" target="n_budget" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_budget_file" value="saveUsage :18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_budget" target="n_usagefile" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1344" y="544" /><mxPoint x="1344" y="672" /></Array></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

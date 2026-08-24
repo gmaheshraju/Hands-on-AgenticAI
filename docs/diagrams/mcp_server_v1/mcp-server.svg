@@ -1,0 +1,191 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 800" role="img" aria-labelledby="hoa_mcp_server_v1-t hoa_mcp_server_v1-d" class="fts-diagram">
+  <title id="hoa_mcp_server_v1-t">15 MCP Server + Client — Architecture</title>
+  <desc id="hoa_mcp_server_v1-d">Two OS processes joined by one pipe: three client programs share a Client that spawns node server.js as a child and speaks JSON-RPC 2.0 over its stdio, and a sqlite-explorer server whose whole declared surface is 3 tools and 2 resources over one shared SQLite handle. Every element cites a source line in FACTS.md.</desc>
+  <defs>
+    <marker id="hoa_mcp_server_v1-a-d-edge-artifact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32" class="d-edge-artifact-fill"/></marker>
+    <marker id="hoa_mcp_server_v1-a-d-edge-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1565C0" class="d-edge-call-fill"/></marker>
+    <marker id="hoa_mcp_server_v1-a-d-edge-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-edge-primary-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="32" y="184" width="192" height="272" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="44" y="204" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">③ Entry — 3 npm scripts</text>
+  </g>
+  <g class="d-zone d-boundary-primary">
+    <rect x="288" y="200" width="240" height="264" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="300" y="220" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">① MCP CLIENT process (Node ESM)</text>
+  </g>
+  <g class="d-zone d-boundary-external">
+    <rect x="592" y="152" width="552" height="344" rx="8" fill="none" stroke="#1565C0" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="604" y="172" fill="#1565C0" font-size="12" font-weight="600" class="d-zone-label">② MCP SERVER process — spawned child, stdio</text>
+  </g>
+  <g class="d-zone d-boundary-functional">
+    <rect x="872" y="184" width="240" height="288" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="884" y="204" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">declared capability surface — all of it</text>
+  </g>
+  <g class="d-zone d-boundary-observability">
+    <rect x="1208" y="232" width="304" height="320" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="1220" y="252" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">④ Durable store — SQLite, local file</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_demo">
+    <polyline points="208,236.0 240,236 240,296 312,296.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_mcp_server_v1-a-d-edge-primary)"/>
+    <text x="276.0" y="290.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">scripted calls</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_cli">
+    <polyline points="208,320.0 312,320.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_mcp_server_v1-a-d-edge-primary)"/>
+    <text x="260.0" y="314.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">REPL command</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_agent">
+    <polyline points="208,404.0 264,404 264,344 312,344.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_mcp_server_v1-a-d-edge-primary)"/>
+    <text x="264.0" y="368.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">planned tool call</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_log">
+    <polyline points="400.0,368 400.0,384" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_mcp_server_v1-a-d-edge-artifact)"/>
+    <text x="400.0" y="370.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">every send / recv</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_rpc">
+    <polyline points="488,320.0 624,320.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_mcp_server_v1-a-d-edge-primary)"/>
+    <text x="556.0" y="314.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">JSON-RPC 2.0 over stdio</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_q">
+    <polyline points="800,296.0 848,296 848,240 896,240.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_mcp_server_v1-a-d-edge-primary)"/>
+    <text x="848.0" y="262.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">tools/call query</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_m">
+    <polyline points="800,320.0 896,320.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_mcp_server_v1-a-d-edge-call)"/>
+    <text x="848.0" y="314.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">tools/call metadata</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_r">
+    <polyline points="800,344.0 848,344 848,416 896,416.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_mcp_server_v1-a-d-edge-call)"/>
+    <text x="848.0" y="374.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">resources/read</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_stderr">
+    <polyline points="712.0,368 712.0,424" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_mcp_server_v1-a-d-edge-artifact)"/>
+    <text x="712.0" y="390.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">console.error</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_qdb">
+    <polyline points="1088,240.0 1296,240 1296.0,272" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_mcp_server_v1-a-d-edge-primary)"/>
+    <text x="1192.0" y="234.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">prepared SELECT :117</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_mdb">
+    <polyline points="1088,320.0 1232,320.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_mcp_server_v1-a-d-edge-call)"/>
+    <text x="1160.0" y="314.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">sqlite_master + PRAGMA</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_rdb">
+    <polyline points="1088,416.0 1424,416 1424.0,368" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_mcp_server_v1-a-d-edge-call)"/>
+    <text x="1256.0" y="410.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">COUNT(*) + page_count</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_file">
+    <polyline points="1296.0,368 1296.0,440" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_mcp_server_v1-a-d-edge-artifact)"/>
+    <text x="1296.0" y="398.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">open + seed if empty</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
+    <rect x="48" y="208" width="160" height="56" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="128.0" y="224.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
+    <text x="128.0" y="239.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">scripted 5-step run</text>
+    <text x="128.0" y="254.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">demo() :69</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_cli" data-class="component.entry">
+    <rect x="48" y="292" width="160" height="56" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="128.0" y="308.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">client.js</text>
+    <text x="128.0" y="323.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">interactive REPL</text>
+    <text x="128.0" y="338.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">11 commands :199-209</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_agent" data-class="component.entry">
+    <rect x="48" y="376" width="160" height="56" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="128.0" y="392.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">agent.js</text>
+    <text x="128.0" y="407.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">NL question -&gt; plan</text>
+    <text x="128.0" y="422.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">planToolCalls :42</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_client" data-class="component.service">
+    <rect x="312" y="272" width="176" height="96" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="400.0" y="301.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Client (MCP SDK)</text>
+    <text x="400.0" y="316.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">StdioClientTransport</text>
+    <text x="400.0" y="331.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">spawns node server.js</text>
+    <text x="400.0" y="346.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">client.js:59 :64 :75</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_log" data-class="component.mock">
+    <rect x="312" y="384" width="176" height="56" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="400.0" y="400.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">protocol logger</text>
+    <text x="400.0" y="415.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">raw JSON-RPC to stdout</text>
+    <text x="400.0" y="430.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">client.js:25 :35</text>
+  </g>
+  <g class="d-node d-component-agent" data-id="n_mcp" data-class="component.agent">
+    <rect x="624" y="272" width="176" height="96" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="1.5"/>
+    <text x="712.0" y="301.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">McpServer</text>
+    <text x="712.0" y="316.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">&quot;sqlite-explorer&quot; 1.0.0</text>
+    <text x="712.0" y="331.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">StdioServerTransport</text>
+    <text x="712.0" y="346.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">server.js:29 :342 :343</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_query" data-class="component.service">
+    <rect x="896" y="208" width="192" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="992.0" y="228.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">TOOL query</text>
+    <text x="992.0" y="243.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">read-only SELECT gate</text>
+    <text x="992.0" y="258.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">4 blocks · server.js:42</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_meta" data-class="component.service">
+    <rect x="896" y="288" width="192" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="992.0" y="308.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">TOOLS list_tables</text>
+    <text x="992.0" y="323.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">+ describe_table</text>
+    <text x="992.0" y="338.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">server.js:143 :174</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_res" data-class="component.service">
+    <rect x="896" y="384" width="192" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="992.0" y="404.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">RESOURCES</text>
+    <text x="992.0" y="419.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">db://schema :258</text>
+    <text x="992.0" y="434.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">db://stats :299</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_stderr" data-class="component.mock">
+    <rect x="624" y="424" width="176" height="56" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="712.0" y="440.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">stderr diagnostics</text>
+    <text x="712.0" y="455.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">stdout is reserved</text>
+    <text x="712.0" y="470.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">for protocol :345-349</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_dbmod" data-class="component.service">
+    <rect x="1232" y="272" width="256" height="96" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1360.0" y="301.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">database.js</text>
+    <text x="1360.0" y="316.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">getDatabase :239 -&gt; create :101</text>
+    <text x="1360.0" y="331.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">seedDatabase :158, idempotent :161</text>
+    <text x="1360.0" y="346.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">5 tables + 4 indexes :108-153</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_db" data-class="component.artifact">
+    <rect x="1232" y="440" width="256" height="80" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1360.0" y="461.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">ecommerce.db</text>
+    <text x="1360.0" y="476.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">SQLite, WAL :105 · path :20</text>
+    <text x="1360.0" y="491.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">8 cat, 50 users, 30 products</text>
+    <text x="1360.0" y="506.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">200 orders, 1-5 items each :212</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_gate" data-class="card.invariant">
+    <rect x="288" y="512" width="456" height="160" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="296" y="525.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">query TOOL — EVERY GUARD, IN CODE ORDER · server.js:49-136</text>
+    <text x="296" y="539.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">trimmed = sql.trim().toUpperCase() :51</text>
+    <text x="296" y="553.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1  must start with SELECT :54 — else refusal :63</text>
+    <text x="296" y="567.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">withoutStrings = literals blanked :68 — checks 2-4 run on this copy</text>
+    <text x="296" y="581.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2  split on &#x27;;&#x27;, more than one statement :69 :70 — refusal :78</text>
+    <text x="296" y="595.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3  17 blocked keywords, anywhere incl. subqueries :83 :84 — refusal :92</text>
+    <text x="296" y="609.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4  SQL comments -- or /* :97 — refusal :106</text>
+    <text x="296" y="623.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">then  effectiveLimit = min(limit || 100, 1000) :110</text>
+    <text x="296" y="637.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">        LIMIT appended when the SQL has none :113 :114</text>
+    <text x="296" y="651.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">        db.prepare(execSql).all() -&gt; { rowCount, rows } :117 :121</text>
+    <text x="296" y="665.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">catch -&gt; { error } + isError :127-134 — the handler never throws</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_deny" data-class="card.failure">
+    <rect x="288" y="688" width="456" height="88" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="296" y="700.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">BLOCKED KEYWORDS — all 17, in regex order · server.js:83</text>
+    <text x="296" y="714.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">DROP · ALTER · CREATE · DELETE · INSERT · UPDATE · TRUNCATE</text>
+    <text x="296" y="728.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">REPLACE · EXEC · EXECUTE · GRANT · REVOKE · ATTACH · DETACH</text>
+    <text x="296" y="742.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">PRAGMA · REINDEX · VACUUM      case-insensitive, word-boundary</text>
+    <text x="296" y="756.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 refusals in query :63 :78 :92 :106, 1 in describe_table :187</text>
+    <text x="296" y="770.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">every one is a normal MCP result carrying isError — not an exception</text>
+  </g>
+  <g class="d-node d-card-primitive" data-id="card_surface" data-class="card.primitive">
+    <rect x="776" y="592" width="456" height="116" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="784" y="604.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">MCP SURFACE — the complete declared set · server.js</text>
+    <text x="784" y="618.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">TOOL  query(sql, limit? = 100, capped at 1000) :42 :46 :47 :110</text>
+    <text x="784" y="632.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">TOOL  list_tables() — no params :143 :146</text>
+    <text x="784" y="646.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">TOOL  describe_table(table_name) :174 :178</text>
+    <text x="784" y="660.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">RES   db://schema   application/json :258 :260 :263</text>
+    <text x="784" y="674.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">RES   db://stats    application/json :299 :301 :303</text>
+    <text x="784" y="688.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">these 5 and nothing else — no server.prompt() exists in src/</text>
+    <text x="784" y="702.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">client learns them at runtime: listTools :93, listResources :121</text>
+  </g>
+</svg>

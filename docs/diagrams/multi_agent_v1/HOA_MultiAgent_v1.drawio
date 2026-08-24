@@ -1,0 +1,154 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_multi_agent_v1" name="04 Multi-Agent Content Pipeline — Architecture">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_entry" value="" style="rounded=1;fillColor=none;strokeColor=#9E9E9E;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#9E9E9E;" parent="1" vertex="1">
+          <mxGeometry x="40" y="272" width="176" height="112" as="geometry" />
+        </mxCell>
+        <mxCell id="z_entry_lbl" value="③ Entry — CLI" style="text;fontSize=10;fontStyle=1;fontColor=#9E9E9E;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="52" y="280" width="160" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="280" y="56" width="1016" height="724" as="geometry" />
+        </mxCell>
+        <mxCell id="z_proc_lbl" value="① runPipeline() — one Node ESM process, zero npm dependencies" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="292" y="64" width="1000" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_flow" value="" style="rounded=1;fillColor=none;strokeColor=#2E7D32;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#2E7D32;" parent="1" vertex="1">
+          <mxGeometry x="424" y="104" width="848" height="152" as="geometry" />
+        </mxCell>
+        <mxCell id="z_flow_lbl" value="② Agent tier — 4 pure async functions, ZERO bus awareness (grep: 0 hits)" style="text;fontSize=10;fontStyle=1;fontColor=#2E7D32;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="436" y="112" width="832" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_tools" value="" style="rounded=1;fillColor=none;strokeColor=#1565C0;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#1565C0;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="76" width="296" height="212" as="geometry" />
+        </mxCell>
+        <mxCell id="z_tools_lbl" value="④ Tool surface — MOCK, in-process, no network" style="text;fontSize=10;fontStyle=1;fontColor=#1565C0;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="84" width="280" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=1;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="380" width="296" height="288" as="geometry" />
+        </mxCell>
+        <mxCell id="z_out_lbl" value="⑤ Output — stdout only, no file is written" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="1372" y="388" width="280" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · argv[2] :16&lt;br&gt;main() :85" class="component.entry" id="n_demo">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="64" y="296" width="128" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;① Researcher&lt;/b&gt;&lt;br&gt;runResearcher() :58&lt;br&gt;web_search · fetch_url" class="component.agent" id="n_res">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="448" y="152" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;② Writer&lt;/b&gt;&lt;br&gt;runWriter() :25&lt;br&gt;no tools · 2 draft fns" class="component.agent" id="n_writer">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="656" y="152" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;③ Editor&lt;/b&gt;&lt;br&gt;runEditor() :147&lt;br&gt;scoreDraft() :46 — 0-10" class="component.agent" id="n_editor">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="864" y="152" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;④ Fact-Checker&lt;/b&gt;&lt;br&gt;runFactChecker() :40&lt;br&gt;fetch_url only :29" class="component.agent" id="n_fc">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1072" y="152" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;runPipeline() — supervisor.js:48 · the ONLY module that touches the bus&lt;/b&gt;&lt;br&gt;creates the bus :57 · registers all 5 handlers :81 :102 :140 :162 :182 · awaits each agent fn directly&lt;br&gt;MAX_BUDGET $2 :40 · MAX_RETRIES 2 :41 · assembles the report :243-259 · resolves the Promise :282" class="component.service" id="n_super">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="424" y="296" width="848" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;createMessageBus() — messageBus.js:22&lt;/b&gt;&lt;br&gt;publish(msg) :37 — stamps id + timestamp :39-40, appends to log :43, then invokes every handler for msg.to :46-47&lt;br&gt;subscribe(channel, handler) :31 — channel is an agent NAME, not a topic · getLog() :52 · printSummary() :69" class="component.service" id="n_bus">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="424" y="424" width="848" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Researcher mockTools&lt;/b&gt;&lt;br&gt;web_search(q) :27 — 3 hits&lt;br&gt;fetch_url(u) :47 — canned" class="component.mock" id="n_tool_r">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="120" width="248" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Fact-Checker mockTools&lt;/b&gt;&lt;br&gt;fetch_url(u) :29 only&lt;br&gt;a separate object :28" class="component.mock" id="n_tool_f">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="204" width="248" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Pipeline report&lt;/b&gt;&lt;br&gt;supervisor.js:243-259&lt;br&gt;resolve() :282 → demo.js:24" class="component.artifact" id="n_report">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="412" width="248" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;FINAL → to: &#x27;Output&#x27;&lt;/b&gt;&lt;br&gt;supervisor.js:233-238&lt;br&gt;no subscriber — log only" class="component.artifact" id="n_final">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="496" width="248" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Bus log (ordered)&lt;/b&gt;&lt;br&gt;getLog() :52 · print :69&lt;br&gt;stdout only — no file" class="component.artifact" id="n_buslog">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1384" y="580" width="248" height="56" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;MESSAGE TYPES — all 8, in publish order · every publish() AND every subscribe() lives in supervisor.js, none in src/agents/&lt;/b&gt;&lt;br&gt;1 RESEARCH_REQUEST · Supervisor → Researcher · :290-295 — the kick-off, published LAST, after all five handlers are registered&lt;br&gt;2 RESEARCH_COMPLETE · Researcher → Writer · :89-94 — emitted by the &#x27;Researcher&#x27; handler after it awaits runResearcher() :85&lt;br&gt;3 DRAFT_COMPLETE · Writer → Editor · :114-119 (attempt 1) and :127-132 (revision) — two publish sites, one type&lt;br&gt;4 REVIEW_COMPLETE · Editor → Supervisor · :150-155 — carries verdict, score, issues and the draft itself&lt;br&gt;5 REVISION_REQ · Supervisor → Writer · :206-211 — payload is the major-severity issues only, joined at :199-202&lt;br&gt;6 FACT_CHECK_REQUEST · Supervisor → FactChecker · :192-197 (on ACCEPT) and :216-221 (retries exhausted)&lt;br&gt;7 FACT_CHECK_COMPLETE · FactChecker → Supervisor · :169-174 — triggers final assembly :227&lt;br&gt;8 FINAL · Supervisor → &#x27;Output&#x27; · :233-238 — messageBus.js&#x27;s own header lists a different, stale set of names :11-17" class="card.invariant" id="card_msg">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="304" y="520" width="968" height="132" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;BUS CHANNELS — all 5, in code order, all in supervisor.js&lt;/b&gt;&lt;br&gt;1 &#x27;Researcher&#x27; :81 — RESEARCH_REQUEST only :82&lt;br&gt;2 &#x27;Writer&#x27; :102 — RESEARCH_COMPLETE :104 · REVISION_REQ :120&lt;br&gt;3 &#x27;Editor&#x27; :140 — DRAFT_COMPLETE only :141&lt;br&gt;4 &#x27;FactChecker&#x27; :162 — FACT_CHECK_REQUEST only :163&lt;br&gt;5 &#x27;Supervisor&#x27; :182 — REVIEW_COMPLETE :184 · FACT_CHECK_COMPLETE :223&lt;br&gt;&#x27;Output&#x27; :235 is published to but never subscribed — log-only hop." class="card.primitive" id="card_chan">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="304" y="668" width="476" height="108" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;SUPERVISOR VERDICT BRANCH — complete, in code order :184-222&lt;/b&gt;&lt;br&gt;1 verdict === &#x27;ACCEPT&#x27; :188 → publish FACT_CHECK_REQUEST :192&lt;br&gt;2 else attempt ≤ MAX_RETRIES(2) :198 → majors :199 → REVISION_REQ :206&lt;br&gt;3 else :212 → stop revising, fact-check the best draft anyway :216&lt;br&gt;Budget gate: trackCost() :301 bills every tokenUsage; checkBudget() :305&lt;br&gt;THROWS above $2 at :308 — called 4× at :106 :144 :186 :225 → demo.js:79" class="card.failure" id="card_stop">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="796" y="668" width="476" height="108" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_cli" value="runPipeline(topic) · demo.js:24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="n_demo" target="n_super" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="240" y="312" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_stop" value="checkBudget throws :308 → catch :79" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="n_super" target="n_demo" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="240" y="344" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_pub" value="bus.publish() ×10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="n_super" target="n_bus" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="636" y="392" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_route" value="routes msg.to → handler :46-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9E9E9E;fontColor=#9E9E9E;fontSize=8;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_bus" target="n_super" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1060" y="392" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_a1" value="await runResearcher() :85" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.1320754716981132;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_super" target="n_res" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="536" y="272" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_a2" value="await runWriter() :110 :123" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.37735849056603776;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_super" target="n_writer" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="744" y="272" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_a3" value="await runEditor() :147" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.6226415094339622;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_super" target="n_editor" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="952" y="272" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_a4" value="await runFactChecker() :166" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.8679245283018868;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="n_super" target="n_fc" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1160" y="272" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_t1" value="mock tools :78 :86" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_res" target="n_tool_r" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="400" y="184" /><mxPoint x="400" y="88" /><mxPoint x="1336" y="88" /><mxPoint x="1336" y="148" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_t2" value="fetch_url ×3 :59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#1565C0;fontColor=#1565C0;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_fc" target="n_tool_f" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1304" y="184" /><mxPoint x="1304" y="232" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_rep" value="report + resolve() :282" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_super" target="n_report" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1508" y="328" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_fin" value="FINAL :233" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_bus" target="n_final" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1320" y="440" /><mxPoint x="1320" y="524" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_log" value="log :43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2E7D32;fontColor=#2E7D32;fontSize=8;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;dashed=1;dashPattern=6 3;" parent="1" source="n_bus" target="n_buslog" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1344" y="472" /><mxPoint x="1344" y="608" /></Array></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

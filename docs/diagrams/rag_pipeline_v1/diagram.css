@@ -1,0 +1,93 @@
+/* Governed-diagram stylesheet.
+ * The SVG carries SEMANTIC tokens as CSS classes and NO hardcoded colour.
+ * "Themes may remap COLORS ONLY" becomes structurally true: this file is the
+ * palette, the SVG is the structure, and the site's existing
+ * data-theme="dark|light" toggle restyles the diagram with no regeneration. */
+
+.fts-diagram { width: 100%; height: auto; display: block;
+  font-family: var(--font-body, system-ui, sans-serif); }
+
+:root {
+  --d-ink:        #232F3E;  --d-ink-soft:  #5B6672;
+  --d-surface:    #FFFFFF;  --d-zone-pri:  #E7157B;
+  --d-zone-ext:   #1565C0;  --d-zone-src:  #9E9E9E;  --d-zone-fn: #2E7D32;
+  --d-service:    #E8EAF6;  --d-service-s: #3F51B5;
+  --d-agent:      #F3E5F5;  --d-agent-s:   #7B1FA2;
+  --d-artifact:   #C8E6C9;  --d-artifact-s:#2E7D32;
+  --d-external:   #E3F2FD;  --d-external-s:#1565C0;
+  --d-entry:      #FFF3E0;  --d-entry-s:   #E65100;
+  --d-mock:       #F5F5F5;  --d-mock-s:    #9E9E9E;
+  --d-card-inv:   #E8EAF6;  --d-card-inv-s:#3F51B5;
+  --d-card-fail:  #FFEBEE;  --d-card-fail-s:#C62828;
+  --d-card-prim:  #FFF3E0;  --d-card-prim-s:#E65100;
+  --d-e-primary:  #232F3E;  --d-e-call:    #1565C0;  --d-e-data:  #9E9E9E;
+  --d-e-artifact: #2E7D32;  --d-e-stop:    #C62828;  --d-e-analysis: #E65100;
+}
+
+/* Dark theme — fills darken, strokes brighten, contrast preserved.
+ * Contrast gate (DIAGRAM_RULES Theming): text keeps >=4.5:1 on every fill. */
+[data-theme="dark"] {
+  --d-ink:        #E8EAED;  --d-ink-soft:  #A8B0BA;
+  --d-surface:    #1B1F24;
+  --d-service:    #232B4A;  --d-service-s: #8C9EFF;
+  --d-agent:      #33224A;  --d-agent-s:   #CE93D8;
+  --d-artifact:   #1E3B24;  --d-artifact-s:#81C784;
+  --d-external:   #16304A;  --d-external-s:#64B5F6;
+  --d-entry:      #402A16;  --d-entry-s:   #FFB74D;
+  --d-mock:       #26292E;  --d-mock-s:    #B0B6BD;
+  --d-card-inv:   #232B4A;  --d-card-inv-s:#8C9EFF;
+  --d-card-fail:  #3A1E20;  --d-card-fail-s:#EF9A9A;
+  --d-card-prim:  #402A16;  --d-card-prim-s:#FFB74D;
+  --d-e-primary:  #CFD6DE;  --d-e-call:    #64B5F6;  --d-e-data:  #9AA2AA;
+  --d-e-artifact: #81C784;  --d-e-stop:    #EF9A9A;  --d-e-analysis: #FFB74D;
+  --d-zone-pri:   #FF6FA8;  --d-zone-ext:  #64B5F6;
+  --d-zone-src:   #A8B0BA;  --d-zone-fn:   #81C784;
+}
+
+/* zones */
+.d-zone rect { fill: none; stroke-dasharray: 8 4; stroke-width: 2; }
+.d-zone-label { font-size: 12px; font-weight: 600; }
+.d-boundary-primary       rect { stroke: var(--d-zone-pri); }
+.d-boundary-primary       text { fill:   var(--d-zone-pri); }
+.d-boundary-external      rect { stroke: var(--d-zone-ext); }
+.d-boundary-external      text { fill:   var(--d-zone-ext); }
+.d-boundary-datasource    rect { stroke: var(--d-zone-src); }
+.d-boundary-datasource    text { fill:   var(--d-zone-src); }
+.d-boundary-observability rect { stroke: var(--d-zone-pri); stroke-width: 1; }
+.d-boundary-observability text { fill:   var(--d-zone-pri); }
+.d-boundary-functional    rect { stroke: var(--d-zone-fn); }
+.d-boundary-functional    text { fill:   var(--d-zone-fn); }
+
+/* nodes */
+.d-node rect  { stroke-width: 1.5; }
+.d-label      { fill: var(--d-ink); }
+.d-bold       { font-weight: 700; }
+.d-component-service  rect { fill: var(--d-service);  stroke: var(--d-service-s); }
+.d-component-agent    rect { fill: var(--d-agent);    stroke: var(--d-agent-s); }
+.d-component-artifact rect { fill: var(--d-artifact); stroke: var(--d-artifact-s); }
+.d-component-external rect { fill: var(--d-external); stroke: var(--d-external-s); }
+.d-component-entry    rect { fill: var(--d-entry);    stroke: var(--d-entry-s); }
+.d-component-mock     rect { fill: var(--d-mock);     stroke: var(--d-mock-s); stroke-dasharray: 4 3; }
+.d-card-invariant     rect { fill: var(--d-card-inv);  stroke: var(--d-card-inv-s); }
+.d-card-failure       rect { fill: var(--d-card-fail); stroke: var(--d-card-fail-s); }
+.d-card-primitive     rect { fill: var(--d-card-prim); stroke: var(--d-card-prim-s); }
+
+/* edges */
+.d-edge polyline { fill: none; stroke-width: 1.75; }
+.d-edge-label    { font-size: 10px; fill: var(--d-ink-soft); }
+.d-edge-primary  polyline { stroke: var(--d-e-primary); stroke-width: 2.25; }
+.d-edge-primary-fill  { fill: var(--d-e-primary); }
+.d-edge-call     polyline { stroke: var(--d-e-call); }
+.d-edge-call-fill     { fill: var(--d-e-call); }
+.d-edge-data_in  polyline { stroke: var(--d-e-data); }
+.d-edge-data_in-fill  { fill: var(--d-e-data); }
+.d-edge-artifact polyline { stroke: var(--d-e-artifact); stroke-dasharray: 6 3; }
+.d-edge-artifact-fill { fill: var(--d-e-artifact); }
+.d-edge-stop     polyline { stroke: var(--d-e-stop); }
+.d-edge-stop-fill     { fill: var(--d-e-stop); }
+.d-edge-analysis polyline { stroke: var(--d-e-analysis); stroke-dasharray: 4 4; }
+.d-edge-analysis-fill { fill: var(--d-e-analysis); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .d-node rect, .d-edge polyline { transition: fill .2s ease, stroke .2s ease; }
+}

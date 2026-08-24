@@ -27,3 +27,8 @@ dist-ssr
 *.db
 *.db-shm
 *.db-wal
+
+# governed-diagram build artifacts (regenerate with _harness/build.py / export.py)
+docs/diagrams/*/_render.png
+docs/diagrams/*/_standalone.svg
+docs/diagrams/_harness/*_backup.py

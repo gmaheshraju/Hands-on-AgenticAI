@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 800" role="img" aria-labelledby="hoa_agent_memory_v1-t hoa_agent_memory_v1-d" class="fts-diagram">
+  <title id="hoa_agent_memory_v1-t">02 Agent Memory — Personal CRM Agent</title>
+  <desc id="hoa_agent_memory_v1-d">A CLI agent that logs every turn as an episodic SQLite row, consolidates episodes into semantic facts with contradiction and decay hygiene, and answers queries through hybrid retrieval — all state persisted in one on-disk SQLite file so memory survives restarts.</desc>
+  <defs>
+    <marker id="hoa_agent_memory_v1-a-d-edge-artifact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32" class="d-edge-artifact-fill"/></marker>
+    <marker id="hoa_agent_memory_v1-a-d-edge-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1565C0" class="d-edge-call-fill"/></marker>
+    <marker id="hoa_agent_memory_v1-a-d-edge-data_in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9E9E9E" class="d-edge-data_in-fill"/></marker>
+    <marker id="hoa_agent_memory_v1-a-d-edge-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-edge-primary-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="40" y="200" width="240" height="292" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="52" y="220" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">③ Entry points</text>
+  </g>
+  <g class="d-zone d-boundary-primary">
+    <rect x="344" y="96" width="936" height="680" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="356" y="116" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">① CRM agent process (Node ESM)</text>
+  </g>
+  <g class="d-zone d-boundary-functional">
+    <rect x="376" y="196" width="872" height="200" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="388" y="216" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">Turn → consolidate → retrieve (one continuous flow)</text>
+  </g>
+  <g class="d-zone d-boundary-external">
+    <rect x="1344" y="200" width="296" height="168" rx="8" fill="none" stroke="#1565C0" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="1356" y="220" fill="#1565C0" font-size="12" font-weight="600" class="d-zone-label">② External driver</text>
+  </g>
+  <g class="d-zone d-boundary-observability">
+    <rect x="1344" y="432" width="296" height="180" rx="8" fill="none" stroke="#E7157B" stroke-width="1" stroke-dasharray="8 4"/>
+    <text x="1356" y="452" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">④ Durable state</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_cli">
+    <polyline points="224,268.0 408,268.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_memory_v1-a-d-edge-primary)"/>
+    <text x="316.0" y="262.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">process(turn)</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_demo">
+    <polyline points="224,412.0 304,412 304,300 408,300.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_memory_v1-a-d-edge-primary)"/>
+    <text x="304.0" y="350.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">process(turn)</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_con">
+    <polyline points="584,284.0 664,284.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_memory_v1-a-d-edge-primary)"/>
+    <text x="624.0" y="278.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">runConsolidation</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_ret">
+    <polyline points="496.0,252 496,224 1024,224 1024.0,252" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_agent_memory_v1-a-d-edge-primary)"/>
+    <text x="760.0" y="218.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">retrieve / retrievePerson</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_ep">
+    <polyline points="540.0,316 540,432 664,432.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_agent_memory_v1-a-d-edge-call)"/>
+    <text x="602.0" y="426.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">addEpisode</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_c2m">
+    <polyline points="752.0,316 752.0,400" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_agent_memory_v1-a-d-edge-data_in)"/>
+    <text x="752.0" y="352.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">read + write facts</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_r2m">
+    <polyline points="1024.0,316 1024,368 796,368 796.0,400" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_agent_memory_v1-a-d-edge-data_in)"/>
+    <text x="910.0" y="362.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">FTS + direct search</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_mock">
+    <polyline points="708.0,316 708,348 496,348 496.0,500" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_agent_memory_v1-a-d-edge-call)"/>
+    <text x="602.0" y="342.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">extractFacts fallback</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_drv">
+    <polyline points="840,416.0 864,416 864,556 1296,556 1296,280 1368,280.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_agent_memory_v1-a-d-edge-call)"/>
+    <text x="1080.0" y="550.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">Database() driver</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_db">
+    <polyline points="840,448.0 888,448 888,580 1320,580 1320,520 1368,520.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_agent_memory_v1-a-d-edge-artifact)"/>
+    <text x="1104.0" y="574.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">persist WAL</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_cli" data-class="component.entry">
+    <rect x="64" y="236" width="160" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="144.0" y="264.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">cli.js:18</text>
+    <text x="144.0" y="279.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">interactive readline</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
+    <rect x="64" y="380" width="160" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="144.0" y="408.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js:37</text>
+    <text x="144.0" y="423.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">4-session demo</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_agent" data-class="component.service">
+    <rect x="408" y="252" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="496.0" y="280.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">CRMAgent</text>
+    <text x="496.0" y="295.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">classify · route · :23</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_consol" data-class="component.service">
+    <rect x="664" y="252" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="752.0" y="280.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Consolidation</text>
+    <text x="752.0" y="295.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">consolidation.js:35</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_retr" data-class="component.service">
+    <rect x="936" y="252" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1024.0" y="280.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Retrieval</text>
+    <text x="1024.0" y="295.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">hybrid FTS · :28</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_memory" data-class="component.service">
+    <rect x="664" y="400" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="752.0" y="428.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">MemoryStore</text>
+    <text x="752.0" y="443.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">3 memory types · :29</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_mockllm" data-class="component.mock">
+    <rect x="408" y="500" width="176" height="56" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="496.0" y="524.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Mock extractor</text>
+    <text x="496.0" y="539.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">regex fallback · :95</text>
+  </g>
+  <g class="d-node d-component-external" data-id="n_sqlite" data-class="component.external">
+    <rect x="1368" y="248" width="248" height="64" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="1.5"/>
+    <text x="1492.0" y="276.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">better-sqlite3</text>
+    <text x="1492.0" y="291.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">sync driver · package.json:13</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_dbfile" data-class="component.artifact">
+    <rect x="1368" y="484" width="248" height="72" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1492.0" y="508.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">crm_memory.db</text>
+    <text x="1492.0" y="523.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">all three memory types</text>
+    <text x="1492.0" y="538.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">memory.js:27</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_gate" data-class="card.invariant">
+    <rect x="408" y="596" width="456" height="116" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="416" y="629.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">CONSOLIDATION GATE — when it fires · :37-50</text>
+    <text x="416" y="643.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 unconsolidatedCount = countUnconsolidated()</text>
+    <text x="416" y="657.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 urgent = count &gt; 0 AND raw_input matches</text>
+    <text x="416" y="671.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 NOT urgent AND count &lt; threshold → return ran:false</text>
+    <text x="416" y="685.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 else gather (urgent ? all : threshold, oldest first)</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_fact" data-class="card.invariant">
+    <rect x="904" y="400" width="344" height="148" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="912" y="442.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">addFact — create vs update · :157-237</text>
+    <text x="912" y="456.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 query existing row: subject+predicate</text>
+    <text x="912" y="470.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 none → INSERT (created)</text>
+    <text x="912" y="484.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 exists → detectContradiction, merge sources</text>
+    <text x="912" y="498.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 contradiction → halve existing confidence in place</text>
+    <text x="912" y="512.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">5 else UPDATE object · confidence · sources</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_decay" data-class="card.invariant">
+    <rect x="904" y="604" width="344" height="128" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="912" y="643.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">decayMemories — per-fact outcome · :268-317</text>
+    <text x="912" y="657.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">ageDays ≤ 0 → untouched</text>
+    <text x="912" y="671.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">else confidence × 2^(−ageDays / halfLife)</text>
+    <text x="912" y="685.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">&lt; archiveThreshold (0.1) → archived + stale</text>
+    <text x="912" y="699.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">else Δ &gt; 0.001 → updated, otherwise untouched</text>
+  </g>
+</svg>

@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 800" role="img" aria-labelledby="hoa_context_eng_v1-t hoa_context_eng_v1-d" class="fts-diagram">
+  <title id="hoa_context_eng_v1-t">22 Context Engineering — Context Window Optimizer</title>
+  <desc id="hoa_context_eng_v1-d">One in-process Node ESM pipeline that types heterogeneous sources, ranks them by three interchangeable strategies, fits them into a token budget with a 25% output reserve, and assembles an attention-ordered message list — plus three subsystems that are NOT in that path. Every element cites a source line in FACTS.md.</desc>
+  <defs>
+    <marker id="hoa_context_eng_v1-a-d-edge-artifact" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E7D32" class="d-edge-artifact-fill"/></marker>
+    <marker id="hoa_context_eng_v1-a-d-edge-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1565C0" class="d-edge-call-fill"/></marker>
+    <marker id="hoa_context_eng_v1-a-d-edge-data_in" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9E9E9E" class="d-edge-data_in-fill"/></marker>
+    <marker id="hoa_context_eng_v1-a-d-edge-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-edge-primary-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-datasource">
+    <rect x="40" y="184" width="200" height="320" rx="8" fill="none" stroke="#9E9E9E" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="52" y="204" fill="#9E9E9E" font-size="12" font-weight="600" class="d-zone-label">③ In-code inputs — no files, no network</text>
+  </g>
+  <g class="d-zone d-boundary-primary">
+    <rect x="304" y="80" width="1000" height="700" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="316" y="100" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">① 22-context-engineering — one Node ESM process, 0 dependencies, 0 network calls (4 moves claimed demo.js:495 — Isolate has no module)</text>
+  </g>
+  <g class="d-zone d-boundary-functional">
+    <rect x="320" y="160" width="960" height="224" rx="8" fill="none" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="332" y="180" fill="#2E7D32" font-size="12" font-weight="600" class="d-zone-label">Select — createSource → strategy → allocate → assemble</text>
+  </g>
+  <g class="d-zone d-boundary-observability">
+    <rect x="1368" y="400" width="288" height="152" rx="8" fill="none" stroke="#E7157B" stroke-width="1" stroke-dasharray="8 4"/>
+    <text x="1380" y="420" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">④ Return value — nothing is sent anywhere</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_demo">
+    <polyline points="224,248.0 288,248 288,232 352,232.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_context_eng_v1-a-d-edge-primary)"/>
+    <text x="256.0" y="242.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">boots</text>
+  </g>
+  <g class="d-edge d-edge-data_in" data-edge="e_corpus">
+    <polyline points="224,368.0 288,368 288,264 352,264.0" fill="none" stroke="#9E9E9E" stroke-width="1.75" marker-end="url(#hoa_context_eng_v1-a-d-edge-data_in)"/>
+    <text x="288.0" y="310.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">13 sources</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_rank">
+    <polyline points="528,248.0 592,248.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_context_eng_v1-a-d-edge-primary)"/>
+    <text x="560.0" y="242.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">sources[]</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_alloc">
+    <polyline points="768,248.0 832,248.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_context_eng_v1-a-d-edge-primary)"/>
+    <text x="800.0" y="242.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">allocate()</text>
+  </g>
+  <g class="d-edge d-edge-primary" data-edge="e_plan">
+    <polyline points="1008,248.0 1072,248.0" fill="none" stroke="#232F3E" stroke-width="2.25" marker-end="url(#hoa_context_eng_v1-a-d-edge-primary)"/>
+    <text x="1040.0" y="242.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">plan</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_reord">
+    <polyline points="1116.0,280 1116,336 1008,336.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_context_eng_v1-a-d-edge-call)"/>
+    <text x="1062.0" y="330.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">reorder :144</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_park">
+    <polyline points="1204.0,280 1204,400 920,400 920.0,440" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_context_eng_v1-a-d-edge-call)"/>
+    <text x="1062.0" y="394.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">park dropped :225</text>
+  </g>
+  <g class="d-edge d-edge-artifact" data-edge="e_ret">
+    <polyline points="1248,248.0 1328,248 1328,480 1392,480.0" fill="none" stroke="#2E7D32" stroke-width="1.75" stroke-dasharray="6 3" marker-end="url(#hoa_context_eng_v1-a-d-edge-artifact)"/>
+    <text x="1328.0" y="358.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">returns</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_tokS">
+    <polyline points="396.0,280 396.0,440" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_context_eng_v1-a-d-edge-call)"/>
+    <text x="396.0" y="354.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">estimate :34</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_tokA">
+    <polyline points="1160.0,280 1160,424 484,424 484.0,440" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_context_eng_v1-a-d-edge-call)"/>
+    <text x="822.0" y="418.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">truncate :118</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_tokD">
+    <polyline points="224,280 264,280 264,472 352,472.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_context_eng_v1-a-d-edge-call)"/>
+    <text x="264.0" y="370.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">BPE :5</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_tokC">
+    <polyline points="592,472.0 528,472.0" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_context_eng_v1-a-d-edge-call)"/>
+    <text x="560.0" y="466.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">imports :6</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_tokP">
+    <polyline points="920.0,504 920,528 396,528 396.0,504" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_context_eng_v1-a-d-edge-call)"/>
+    <text x="658.0" y="522.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">imports :9</text>
+  </g>
+  <g class="d-edge d-edge-call" data-edge="e_tokH">
+    <polyline points="1160.0,504 1160,552 484,552 484.0,504" fill="none" stroke="#1565C0" stroke-width="1.75" marker-end="url(#hoa_context_eng_v1-a-d-edge-call)"/>
+    <text x="822.0" y="546.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">imports :9</text>
+  </g>
+  <g class="d-node d-component-entry" data-id="n_demo" data-class="component.entry">
+    <rect x="64" y="216" width="160" height="64" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="144.0" y="236.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">demo.js</text>
+    <text x="144.0" y="251.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">run() :492, :533</text>
+    <text x="144.0" y="266.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">8 sections :497-504</text>
+  </g>
+  <g class="d-node d-component-mock" data-id="n_corpus" data-class="component.mock">
+    <rect x="64" y="336" width="160" height="64" rx="6" fill="#F5F5F5" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="4 3"/>
+    <text x="144.0" y="356.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">createDemoSources()</text>
+    <text x="144.0" y="371.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">demo.js:48 — 13 srcs</text>
+    <text x="144.0" y="386.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">in-code, no files</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_sources" data-class="component.service">
+    <rect x="352" y="216" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="440.0" y="236.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">createSource()</text>
+    <text x="440.0" y="251.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">sources.js:26 · 6 types</text>
+    <text x="440.0" y="266.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">rel clamp 0-1 :35</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_strat" data-class="component.service">
+    <rect x="592" y="216" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="680.0" y="236.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">strategies.js :111</text>
+    <text x="680.0" y="251.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">greedy :9 relevance :19</text>
+    <text x="680.0" y="266.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">balanced :44</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_budget" data-class="component.service">
+    <rect x="832" y="216" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="920.0" y="236.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">TokenBudget.allocate</text>
+    <text x="920.0" y="251.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">budget.js:30 · 25% out</text>
+    <text x="920.0" y="266.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">buffer :17 → plan :77</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_assemble" data-class="component.service">
+    <rect x="1072" y="216" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1160.0" y="229.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">assemble()</text>
+    <text x="1160.0" y="244.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">assembler.js:100</text>
+    <text x="1160.0" y="259.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">ORDER :12 → msgs :150</text>
+    <text x="1160.0" y="274.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">+ scratchpad path :218</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_reorder" data-class="component.service">
+    <rect x="832" y="304" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="920.0" y="317.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">reorderForAttention</text>
+    <text x="920.0" y="332.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">assembler.js:40</text>
+    <text x="920.0" y="347.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">even→start odd→end :67</text>
+    <text x="920.0" y="362.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">middle band 0.3-0.7 :81</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_tok" data-class="component.service">
+    <rect x="352" y="440" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="440.0" y="453.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">tokenizer.js</text>
+    <text x="440.0" y="468.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">estimateTokens :92</text>
+    <text x="440.0" y="483.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">truncateMiddle :220</text>
+    <text x="440.0" y="498.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">TOKEN_PATTERNS :39 dead</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_compact" data-class="component.service">
+    <rect x="592" y="440" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="680.0" y="453.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">compactConversation</text>
+    <text x="680.0" y="468.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">compactor.js:177</text>
+    <text x="680.0" y="483.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">keep last 3 turns :178</text>
+    <text x="680.0" y="498.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">contextAwareCompress:538</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_scratch" data-class="component.artifact">
+    <rect x="832" y="440" width="176" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="920.0" y="453.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Scratchpad</text>
+    <text x="920.0" y="468.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">scratchpad.js:27</text>
+    <text x="920.0" y="483.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">Map in RAM :38, no file</text>
+    <text x="920.0" y="498.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">write :55 · index :234</text>
+  </g>
+  <g class="d-node d-component-service" data-id="n_cache" data-class="component.service">
+    <rect x="1072" y="440" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1160.0" y="453.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">ContextCache</text>
+    <text x="1160.0" y="468.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">cache.js:40 · TTL 300s</text>
+    <text x="1160.0" y="483.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">PRICING :16 — no API</text>
+    <text x="1160.0" y="498.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">simulateSession :228</text>
+  </g>
+  <g class="d-node d-component-artifact" data-id="n_ctx" data-class="component.artifact">
+    <rect x="1392" y="448" width="240" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.5"/>
+    <text x="1512.0" y="468.5" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">{ messages, report, totalTokens }</text>
+    <text x="1512.0" y="483.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">assembler.js:194 — in-process</text>
+    <text x="1512.0" y="498.5" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">no LLM call anywhere in src/</text>
+  </g>
+  <g class="d-node d-card-primitive" data-id="card_types" data-class="card.primitive">
+    <rect x="336" y="576" width="304" height="160" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="1.5"/>
+    <text x="344" y="589.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">6 SOURCE TYPES — sources.js:10-15, code order</text>
+    <text x="344" y="603.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">prio 0 SYSTEM_PROMPT :10 — never dropped :40</text>
+    <text x="344" y="617.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">prio 1 CONVERSATION_HISTORY :11</text>
+    <text x="344" y="631.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">prio 2 RAG_CHUNKS :12 — RAG tiebreak :137</text>
+    <text x="344" y="645.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">prio 3 MEMORY :13</text>
+    <text x="344" y="659.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">prio 4 TOOL_RESULTS :14</text>
+    <text x="344" y="673.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">prio 5 EXAMPLES :15</text>
+    <text x="344" y="687.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">within a tier: higher relevanceScore wins :57</text>
+    <text x="344" y="701.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">assembler ORDER :12-19 repeats all 6 ranks —</text>
+    <text x="344" y="715.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">a second enumeration that must not drift;</text>
+    <text x="344" y="729.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">unknown type sorts last via ?? 99 :133</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_alloc" data-class="card.invariant">
+    <rect x="656" y="576" width="304" height="160" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="664" y="589.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">allocate() — budget.js:30, the whole contract</text>
+    <text x="664" y="603.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">available = total − floor(total × 0.25) :17-18</text>
+    <text x="664" y="617.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">pass 1 · every priority-0 source, always :39-45</text>
+    <text x="664" y="631.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">pass 2 · rest in sortByPriority order :31 :49</text>
+    <text x="664" y="645.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">· remaining &lt;= 0 → drop budget_exhausted :52</text>
+    <text x="664" y="659.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">· fits → include at full tokens :56-58</text>
+    <text x="664" y="673.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">· remaining &gt;= 50 → truncated_to_fit :61-67</text>
+    <text x="664" y="687.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">· else → drop insufficient_remaining :73</text>
+    <text x="664" y="701.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">at most ONE source is ever truncated: pass 2</text>
+    <text x="664" y="715.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">sets remaining = 0 right after it :70</text>
+    <text x="664" y="729.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">out: included[] truncated[] dropped[] :77-80</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_fail" data-class="card.failure">
+    <rect x="976" y="576" width="304" height="160" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="984" y="589.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">4 FAILURE MODES — compactor.js:538, code order</text>
+    <text x="984" y="603.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">1 poisoning :562 — same subj, 2 values :357</text>
+    <text x="984" y="617.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">2 distraction :563 — &lt;10% core vocab :416</text>
+    <text x="984" y="631.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">3 confusion :564 — &gt;3 vague, &lt;2 nouns :446</text>
+    <text x="984" y="645.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">4 clash :565 — opposite polarity :506</text>
+    <text x="984" y="659.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">ACTED ON — only 3 of the 4:</text>
+    <text x="984" y="673.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">· distraction: turn deleted :577-580</text>
+    <text x="984" y="687.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">· poisoning + clash: WARNING prepended :586-600</text>
+    <text x="984" y="701.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">· confusion: detected, never acted on</text>
+    <text x="984" y="715.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">quality = 1 − (3p+1d+2c+3k) × 0.05 :610-611</text>
+    <text x="984" y="729.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">all 4 detectors are module-private</text>
+  </g>
+</svg>
