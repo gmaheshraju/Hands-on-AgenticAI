@@ -4,6 +4,8 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import Diagram from '../../components/Diagram';
+import harnessSvg from '../../../docs/diagrams/agent_harness_v1/agent-harness.svg?raw';
 
 const HARNESS_CODE = `async function runAgent(userMessage, config = {}) {
   const {
@@ -326,6 +328,14 @@ function LoopPanel() {
       </div>
 
       <FadeIn><CodeBlock filename="agent-harness.js" code={HARNESS_CODE} output={HARNESS_OUTPUT} /></FadeIn>
+
+      <Diagram
+        svg={harnessSvg}
+        caption={<>The snippet above is illustrative. <strong>This is the architecture of the working code</strong> in <code>projects/03-agent-harness</code> — four stop conditions in the order the loop actually checks them, the tool surface, and the two files a run writes. Every box and card line cites a source line, machine-verified on each build.</>}
+        source="tree/main/projects/03-agent-harness"
+        facts="blob/main/docs/diagrams/agent_harness_v1/FACTS.md"
+        repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
+      />
 
       <FadeIn><Decision question="Observe — what goes into the context?">
         The observe step assembles the context window: system prompt + conversation history + retrieved memories + tool results from the last iteration.
