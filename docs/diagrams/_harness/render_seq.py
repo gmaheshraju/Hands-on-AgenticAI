@@ -148,6 +148,22 @@ def message_boxes(sp):
     return out
 
 
+FRAG_TAB_H, FRAG_CHAR_W, FRAG_PAD = 18.0, 6.4, 14.0
+
+def fragment_tab_boxes(sp):
+    """Where each fragment's title bar is actually drawn, so lint can see it.
+
+    The tab is a filled rect in the top-left corner of the fragment, clipped to the
+    fragment width. It is opaque enough to print over a message label, which is what
+    happened on ai_ux_seq_v1 -- a CLEAN build with two lines of text on top of each
+    other. The renderer and the linter read this one function so they cannot disagree.
+    """
+    out = {}
+    for fid, lbl, x, y, w, h in sp.fragments:
+        out[fid] = (x, y, x + min(len(lbl) * FRAG_CHAR_W + FRAG_PAD, w), y + FRAG_TAB_H)
+    return out
+
+
 def emit_svg(sp, out_path):
     m = sp.meta
     txt, muted = sp.hexes('text.default'), sp.hexes('text.muted')
@@ -168,8 +184,8 @@ def emit_svg(sp, out_path):
         o += ['  <g class="d-fragment" data-id="%s">' % fid,
               '    <rect x="%s" y="%s" width="%s" height="%s" rx="4" fill="none" stroke="%s" '
               'stroke-width="1.5" stroke-dasharray="8 4"/>' % (x, y, w, h, c),
-              '    <rect x="%s" y="%s" width="%s" height="18" rx="3" fill="%s" fill-opacity="0.12" '
-              'stroke="%s" stroke-width="1"/>' % (x, y, min(len(lbl) * 6.4 + 14, w), c, c),
+              '    <rect x="%s" y="%s" width="%s" height="%d" rx="3" fill="%s" fill-opacity="0.12" '
+              'stroke="%s" stroke-width="1"/>' % (x, y, min(len(lbl) * FRAG_CHAR_W + FRAG_PAD, w), FRAG_TAB_H, c, c),
               '    <text x="%s" y="%s" fill="%s" font-size="11" font-weight="600" '
               'class="d-frag-label">%s</text>' % (x + 7, y + 13, c, html.escape(lbl)), '  </g>']
 

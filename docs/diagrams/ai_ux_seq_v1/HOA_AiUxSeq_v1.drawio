@@ -1,0 +1,120 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_ai_ux_seq_v1" name="12 AI UX — Stop pressed during a HITL pause">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1180" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="f_parked" value="the parked window — no read of aborted is reachable in here" style="shape=umlFrame;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#2E7D32;dashed=1;fontSize=10;fontColor=#2E7D32;align=left;" parent="1" vertex="1">
+          <mxGeometry x="140" y="384" width="1440" height="308" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;browser&lt;/b&gt;&lt;br&gt;holds the SSE connection" class="component.entry" id="browser">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="60.0" y="96" width="240" height="720" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;SSE handler&lt;/b&gt;&lt;br&gt;the async event loop" class="component.service" id="loop">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="380.0" y="96" width="240" height="720" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;streamState&lt;/b&gt;&lt;br&gt;{ scenarioName, aborted }" class="component.artifact" id="state">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="700.0" y="96" width="240" height="720" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;pendingApprovals&lt;/b&gt;&lt;br&gt;actionId to resolve" class="component.agent" id="pending">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="1020.0" y="96" width="240" height="720" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;POST /stop&lt;/b&gt;&lt;br&gt;a separate request" class="component.external" id="stop">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="1340.0" y="96" width="240" height="720" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="m1" value="GET /api/chat/stream" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="224" as="sourcePoint" />
+            <mxPoint x="500" y="224" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m2" value="read aborted at the top of the loop — false" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="268" as="sourcePoint" />
+            <mxPoint x="820" y="268" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m3" value="stream_start, thinking, token" style="html=1;rounded=0;strokeColor=#546E7A;fontColor=#546E7A;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;dashed=1;dashPattern=4 4;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="312" as="sourcePoint" />
+            <mxPoint x="180" y="312" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m4" value="hitl_request — asking the user to approve" style="html=1;rounded=0;strokeColor=#546E7A;fontColor=#546E7A;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;dashed=1;dashPattern=4 4;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="356" as="sourcePoint" />
+            <mxPoint x="180" y="356" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m5" value="store resolve, then await it" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="424" as="sourcePoint" />
+            <mxPoint x="1140" y="424" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m6" value="the user presses Stop" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="468" as="sourcePoint" />
+            <mxPoint x="1460" y="468" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m7" value="aborted = true" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1460" y="512" as="sourcePoint" />
+            <mxPoint x="820" y="512" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m8" value="200 { ok: true } — but nothing was stopped" style="html=1;rounded=0;strokeColor=#C62828;fontColor=#C62828;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1460" y="556" as="sourcePoint" />
+            <mxPoint x="180" y="556" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m9" value="still awaiting — the flag is never consulted here" style="html=1;rounded=0;strokeColor=#C62828;fontColor=#C62828;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="600" as="sourcePoint" />
+            <mxPoint x="588" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m10" value="Stop again — still 200, so the entry is still held" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="644" as="sourcePoint" />
+            <mxPoint x="1460" y="644" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m11" value="stream_stop — NEVER SENT" style="html=1;rounded=0;strokeColor=#C62828;fontColor=#C62828;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="712" as="sourcePoint" />
+            <mxPoint x="180" y="712" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m12" value="the second read of aborted — NEVER REACHED" style="html=1;rounded=0;strokeColor=#C62828;fontColor=#C62828;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="756" as="sourcePoint" />
+            <mxPoint x="820" y="756" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <object label="&lt;b&gt;MEASURED — AGAINST THE RUNNING SERVER, OVER REAL HTTP&lt;/b&gt;&lt;br&gt;A message matching the send-email scenario, so the stream reaches a HITL pause.&lt;br&gt;RAN — reached the HITL await: true. Events so far: stream_start, thinking,&lt;br&gt;token, hitl_request.&lt;br&gt;RAN — POST to the stop endpoint replied 200 with ok true.&lt;br&gt;Two and a half seconds later: stream_stop received false, done received false,&lt;br&gt;SSE connection closed false, and not one new event had arrived.&lt;br&gt;RAN — a second stop for the same id still returned 200, which proves the entry&lt;br&gt;is still in activeStreams.&lt;br&gt;The endpoint reports success because it succeeded at what it does: it set a&lt;br&gt;boolean. Nothing that would read that boolean can run." class="card.failure" id="card_measured">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="96" y="856" width="880" height="232" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;WHAT IS LEFT BEHIND, AND THE ONE PATH THAT CLEANS UP&lt;/b&gt;&lt;br&gt;Because the handler never leaves the await, none of its exits run: no&lt;br&gt;stream_stop is sent, res.end is never reached on either exit, and neither map&lt;br&gt;entry is deleted. pendingApprovals is freed only by the resolve handler, which&lt;br&gt;is the very call that was never made.&lt;br&gt;The client is left believing a stream is live that will never produce another&lt;br&gt;byte.&lt;br&gt;One path does clean up: if the BROWSER disconnects, the close handler sets the&lt;br&gt;flag and drops the stream from activeStreams. It cannot unpark the promise&lt;br&gt;either, so the async function outlives the client that created it — and a stop&lt;br&gt;for that id then answers 404 while the handler is still parked." class="card.invariant" id="card_left">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="1008" y="856" width="612" height="232" as="geometry" />
+          </mxCell>
+        </object>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

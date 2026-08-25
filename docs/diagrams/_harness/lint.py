@@ -169,9 +169,49 @@ def note_overlaps_lifeline(sp):
     return bad
 
 
+def msg_label_over_fragment_tab(sp, render_seq):
+    """A message label must not be printed under a fragment's title bar.
+
+    Found by LOOKING at ai_ux_seq_v1: the parked-window tab and the hitl_request label
+    rendered on top of each other, two lines of text in the same place, on a build that
+    reported CLEAN. Every other overlap check compared messages to messages or messages
+    to notes; nothing compared a message to the one opaque box a fragment draws.
+    """
+    tabs = render_seq.fragment_tab_boxes(sp)
+    labels = render_seq.message_boxes(sp)
+    bad = []
+    for mid, a in sorted(labels.items()):
+        for fid, b in sorted(tabs.items()):
+            ox = min(a[2], b[2]) - max(a[0], b[0])
+            oy = min(a[3], b[3]) - max(a[1], b[1])
+            if ox > 0 and oy > 0:
+                bad.append((mid, fid, round(ox), round(oy)))
+    return bad
+
+
+def lifeline_offpage(sp, render_seq):
+    """A lifeline header must fit inside the canvas.
+
+    Found by LOOKING: ai_ux_seq_v1 put its rightmost lifeline at x=1600 on a 1700-wide
+    canvas, so a 240px header ran 20px off the edge and the box was drawn with no right
+    side. Nothing checked it -- overflow measured TEXT against its box, never the box
+    against the page.
+    """
+    half = render_seq.LL_W / 2.0
+    bad = []
+    for lid, _tok, _lbl, cx in sp.lifelines:
+        if cx - half < 0:
+            bad.append((lid, 'header runs off the LEFT edge by', round(half - cx)))
+        if cx + half > sp.meta['w']:
+            bad.append((lid, 'header runs off the RIGHT edge by', round(cx + half - sp.meta['w'])))
+    return bad
+
+
 def run_seq(sp, render_seq):
     return {
         'msg_label_offpage':  msg_label_offpage(sp, render_seq),
+        'msg_over_frag_tab':  msg_label_over_fragment_tab(sp, render_seq),
+        'lifeline_offpage':   lifeline_offpage(sp, render_seq),
         'msg_crosses_note':   msg_crosses_note(sp),
         'note_on_lifeline':   note_overlaps_lifeline(sp),
         'overflow':           render_seq.check_overflow(sp),

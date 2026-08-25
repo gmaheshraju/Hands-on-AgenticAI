@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 1140" role="img" aria-labelledby="hoa_ai_ux_seq_v1-t hoa_ai_ux_seq_v1-d" class="fts-diagram">
+  <title id="hoa_ai_ux_seq_v1-t">12 AI UX — Stop pressed during a HITL pause</title>
+  <desc id="hoa_ai_ux_seq_v1-d">The stream parks on an approval promise, and while it is parked no read of the abort flag is reachable. Stop answers ok, sends no terminal event, closes nothing and frees nothing. Driven over real HTTP against the running server.</desc>
+  <defs>
+    <marker id="hoa_ai_ux_seq_v1-a-d-msg-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-msg-call-fill"/></marker>
+    <marker id="hoa_ai_ux_seq_v1-a-d-msg-failure" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C62828" class="d-msg-failure-fill"/></marker>
+    <marker id="hoa_ai_ux_seq_v1-a-d-msg-return" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#546E7A" class="d-msg-return-fill"/></marker>
+  </defs>
+  <g class="d-fragment" data-id="f_parked">
+    <rect x="140" y="384" width="1440" height="308" rx="4" fill="none" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="8 4"/>
+    <rect x="140" y="384" width="391.6" height="18" rx="3" fill="#2E7D32" fill-opacity="0.12" stroke="#2E7D32" stroke-width="1"/>
+    <text x="147" y="397" fill="#2E7D32" font-size="11" font-weight="600" class="d-frag-label">the parked window — no read of aborted is reachable in here</text>
+  </g>
+  <g class="d-lifeline d-component-entry" data-id="browser" data-class="component.entry">
+    <line x1="180" y1="156" x2="180" y2="816" stroke="#E65100" stroke-width="1.5" stroke-dasharray="4 5" class="d-lifeline-stem"/>
+    <rect x="60.0" y="96" width="240" height="60" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="2"/>
+    <text x="180" y="122.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">browser</text>
+    <text x="180" y="137.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">holds the SSE connection</text>
+  </g>
+  <g class="d-lifeline d-component-service" data-id="loop" data-class="component.service">
+    <line x1="500" y1="156" x2="500" y2="816" stroke="#3F51B5" stroke-width="1.5" stroke-dasharray="4 5" class="d-lifeline-stem"/>
+    <rect x="380.0" y="96" width="240" height="60" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="2"/>
+    <text x="500" y="122.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">SSE handler</text>
+    <text x="500" y="137.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">the async event loop</text>
+  </g>
+  <g class="d-lifeline d-component-artifact" data-id="state" data-class="component.artifact">
+    <line x1="820" y1="156" x2="820" y2="816" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="4 5" class="d-lifeline-stem"/>
+    <rect x="700.0" y="96" width="240" height="60" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+    <text x="820" y="122.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">streamState</text>
+    <text x="820" y="137.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">{ scenarioName, aborted }</text>
+  </g>
+  <g class="d-lifeline d-component-agent" data-id="pending" data-class="component.agent">
+    <line x1="1140" y1="156" x2="1140" y2="816" stroke="#7B1FA2" stroke-width="1.5" stroke-dasharray="4 5" class="d-lifeline-stem"/>
+    <rect x="1020.0" y="96" width="240" height="60" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="2"/>
+    <text x="1140" y="122.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">pendingApprovals</text>
+    <text x="1140" y="137.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">actionId to resolve</text>
+  </g>
+  <g class="d-lifeline d-component-external" data-id="stop" data-class="component.external">
+    <line x1="1460" y1="156" x2="1460" y2="816" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="4 5" class="d-lifeline-stem"/>
+    <rect x="1340.0" y="96" width="240" height="60" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+    <text x="1460" y="122.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">POST /stop</text>
+    <text x="1460" y="137.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">a separate request</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m1">
+    <line x1="180" y1="224" x2="500" y2="224" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_ai_ux_seq_v1-a-d-msg-call)"/>
+    <text x="340.0" y="217" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">GET /api/chat/stream</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m2">
+    <line x1="500" y1="268" x2="820" y2="268" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_ai_ux_seq_v1-a-d-msg-call)"/>
+    <text x="660.0" y="261" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">read aborted at the top of the loop — false</text>
+  </g>
+  <g class="d-msg d-msg-return" data-msg="m3">
+    <line x1="500" y1="312" x2="180" y2="312" stroke="#546E7A" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_ai_ux_seq_v1-a-d-msg-return)"/>
+    <text x="340.0" y="305" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">stream_start, thinking, token</text>
+  </g>
+  <g class="d-msg d-msg-return" data-msg="m4">
+    <line x1="500" y1="356" x2="180" y2="356" stroke="#546E7A" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_ai_ux_seq_v1-a-d-msg-return)"/>
+    <text x="340.0" y="349" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">hitl_request — asking the user to approve</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m5">
+    <line x1="500" y1="424" x2="1140" y2="424" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_ai_ux_seq_v1-a-d-msg-call)"/>
+    <text x="820.0" y="417" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">store resolve, then await it</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m6">
+    <line x1="180" y1="468" x2="1460" y2="468" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_ai_ux_seq_v1-a-d-msg-call)"/>
+    <text x="820.0" y="461" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">the user presses Stop</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m7">
+    <line x1="1460" y1="512" x2="820" y2="512" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_ai_ux_seq_v1-a-d-msg-call)"/>
+    <text x="1140.0" y="505" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">aborted = true</text>
+  </g>
+  <g class="d-msg d-msg-failure" data-msg="m8">
+    <line x1="1460" y1="556" x2="180" y2="556" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_ai_ux_seq_v1-a-d-msg-failure)"/>
+    <text x="820.0" y="549" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">200 { ok: true } — but nothing was stopped</text>
+  </g>
+  <g class="d-msg d-msg-failure" data-msg="m9">
+    <polyline points="500,600 588,600 588,620 504,620" fill="none" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_ai_ux_seq_v1-a-d-msg-failure)"/>
+    <text x="596" y="596" text-anchor="start" fill="#888888" font-size="11" class="d-msg-label">still awaiting — the flag is never consulted here</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m10">
+    <line x1="180" y1="644" x2="1460" y2="644" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_ai_ux_seq_v1-a-d-msg-call)"/>
+    <text x="820.0" y="637" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">Stop again — still 200, so the entry is still held</text>
+  </g>
+  <g class="d-msg d-msg-failure" data-msg="m11">
+    <line x1="500" y1="712" x2="180" y2="712" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_ai_ux_seq_v1-a-d-msg-failure)"/>
+    <text x="340.0" y="705" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">stream_stop — NEVER SENT</text>
+  </g>
+  <g class="d-msg d-msg-failure" data-msg="m12">
+    <line x1="500" y1="756" x2="820" y2="756" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_ai_ux_seq_v1-a-d-msg-failure)"/>
+    <text x="660.0" y="749" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">the second read of aborted — NEVER REACHED</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_measured" data-class="card.failure">
+    <rect x="96" y="856" width="880" height="232" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="104" y="905.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">MEASURED — AGAINST THE RUNNING SERVER, OVER REAL HTTP</text>
+    <text x="104" y="919.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">A message matching the send-email scenario, so the stream reaches a HITL pause.</text>
+    <text x="104" y="933.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">RAN — reached the HITL await: true. Events so far: stream_start, thinking,</text>
+    <text x="104" y="947.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">token, hitl_request.</text>
+    <text x="104" y="961.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">RAN — POST to the stop endpoint replied 200 with ok true.</text>
+    <text x="104" y="975.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Two and a half seconds later: stream_stop received false, done received false,</text>
+    <text x="104" y="989.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">SSE connection closed false, and not one new event had arrived.</text>
+    <text x="104" y="1003.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">RAN — a second stop for the same id still returned 200, which proves the entry</text>
+    <text x="104" y="1017.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">is still in activeStreams.</text>
+    <text x="104" y="1031.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">The endpoint reports success because it succeeded at what it does: it set a</text>
+    <text x="104" y="1045.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">boolean. Nothing that would read that boolean can run.</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_left" data-class="card.invariant">
+    <rect x="1008" y="856" width="612" height="232" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1016" y="905.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">WHAT IS LEFT BEHIND, AND THE ONE PATH THAT CLEANS UP</text>
+    <text x="1016" y="919.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Because the handler never leaves the await, none of its exits run: no</text>
+    <text x="1016" y="933.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">stream_stop is sent, res.end is never reached on either exit, and neither map</text>
+    <text x="1016" y="947.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">entry is deleted. pendingApprovals is freed only by the resolve handler, which</text>
+    <text x="1016" y="961.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">is the very call that was never made.</text>
+    <text x="1016" y="975.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">The client is left believing a stream is live that will never produce another</text>
+    <text x="1016" y="989.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">byte.</text>
+    <text x="1016" y="1003.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">One path does clean up: if the BROWSER disconnects, the close handler sets the</text>
+    <text x="1016" y="1017.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">flag and drops the stream from activeStreams. It cannot unpark the promise</text>
+    <text x="1016" y="1031.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">either, so the async function outlives the client that created it — and a stop</text>
+    <text x="1016" y="1045.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">for that id then answers 404 while the handler is still parked.</text>
+  </g>
+</svg>

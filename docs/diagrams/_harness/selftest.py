@@ -93,6 +93,25 @@ def s_crosses_note(m):
 def s_note_on_lifeline(m):
     s_crosses_note(m)
 
+def s_over_frag_tab(m):
+    """A fragment slid up so its title bar lands on the first label inside it.
+
+    Moving the FRAGMENT rather than the message: shifting a message here would trip
+    the strictly-increasing-y assert before the lint could see anything, which is
+    exactly what the first version of this case did.
+    """
+    f = list(m.FRAGMENTS[0])
+    bottom = f[3] + f[5]
+    inside = [x[5] for x in m.MESSAGES if f[3] <= x[5] <= bottom]
+    f[3] = min(inside) - 12                 # tab now overlaps that message's label
+    f[5] = bottom - f[3]
+    m.FRAGMENTS[0] = tuple(f)
+
+def s_lifeline_offpage(m):
+    """A lifeline whose header runs off the right edge."""
+    l = list(m.LIFELINES[-1]); l[3] = m.META['w'] - 40
+    m.LIFELINES[-1] = tuple(l)
+
 def s_overflow_lifeline(m):
     """A lifeline header is a fixed width however long its label is."""
     l = list(m.LIFELINES[3]); l[2] = '<b>' + 'CircuitBreakerRegistry' * 3 + '</b>'
@@ -134,6 +153,8 @@ LINT_CASES = [
     ('overflow',           L2,  m_overflow,           'overflow'),
     ('label_overlap',      L2,  m_label_overlap,      'label_overlap'),
     ('msg_label_offpage',  SEQ, s_offpage,            'msg_label_offpage'),
+    ('msg_over_frag_tab',  SEQ, s_over_frag_tab,      'msg_over_frag_tab'),
+    ('lifeline_offpage',   SEQ, s_lifeline_offpage,   'lifeline_offpage'),
     ('msg_crosses_note',   SEQ, s_crosses_note,       'msg_crosses_note'),
     ('note_on_lifeline',   SEQ, s_note_on_lifeline,   'note_on_lifeline'),
     ('overflow/lifeline',  SEQ, s_overflow_lifeline,  'overflow'),
