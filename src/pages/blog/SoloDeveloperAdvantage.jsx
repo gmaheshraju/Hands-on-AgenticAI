@@ -162,7 +162,7 @@ function Playbook() {
       <FadeIn delay={60}>
         <h3 style={styles.h3}>Phase 1: Find Your Unfair Advantage</h3>
         <p style={styles.p}>
-          Your unfair advantage is never technical — it's experiential. It comes from a domain you've lived in, not one
+          Your unfair advantage is never technical. It's experiential. It comes from a domain you've lived in, not one
           you've researched. The best solo products come from developers solving their own problems, or problems they've
           watched others struggle with for years.
         </p>
@@ -215,7 +215,7 @@ function Playbook() {
       <FadeIn delay={240}>
         <h3 style={styles.h3}>Phase 3: Ship Fast, Listen Faster</h3>
         <p style={styles.p}>
-          The solo developer's superpower isn't just speed — it's <strong>feedback loop compression</strong>. A feature goes
+          The solo developer's superpower isn't just speed. It's <strong>feedback loop compression</strong>. A feature goes
           from idea to production in hours, not weeks. But the real advantage is what happens after: you talk directly to users,
           see exactly how they use it, and iterate the same day. No product managers translating. No sprint ceremonies delaying.
           No committee diluting the insight.
@@ -388,7 +388,7 @@ function Patterns() {
           real conversations, not market research decks.
         </p>
         <Insight tag="distribution secret">
-          The biggest challenge for any product isn't building — it's distribution. Solo developers who build in communities
+          The biggest challenge for any product isn't building. It's distribution. Solo developers who build in communities
           they're already part of have solved distribution before writing a line of code. A developer who's been active in
           an Indian stock trading Telegram group for 3 years doesn't need a marketing strategy. They need to say "I built
           a thing" and 50 people try it that day. That's a customer acquisition cost of $0.
@@ -552,7 +552,7 @@ function AppliedPatterns() {
       <FadeIn delay={0}>
         <h2 style={styles.h2}>Applied Patterns</h2>
         <p style={styles.p}>
-          This isn't just a trend piece — it's a <strong>career strategy</strong>. Here's how to apply the solo developer
+          This isn't just a trend piece. It's a <strong>career strategy</strong>. Here's how to apply the solo developer
           thesis in practice as a senior engineer.
         </p>
       </FadeIn>
@@ -605,7 +605,7 @@ function AppliedPatterns() {
         <p style={styles.p}>
           We're at an inflection point. For the first time, a developer from a village in India, a suburb of Lagos, or a small
           town in Brazil has the same building power as a well-funded team in San Francisco. AI didn't just level the playing
-          field — it tilted it toward the people with the deepest domain expertise and the lowest overhead.
+          field. It tilted it toward the people with the deepest domain expertise and the lowest overhead.
         </p>
         <p style={styles.p}>
           The next wave of great software companies won't come from Stanford dorm rooms. They'll come from developers who

@@ -392,7 +392,7 @@ function ContextBudgetPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="Fixed vs dynamic allocation">
-        <Pill type="green">Fixed reserves</Pill> guarantee critical content is always present. The system prompt gets a fixed budget — it's always in, no matter what. This is your non-negotiable baseline.
+        <Pill type="green">Fixed reserves</Pill> guarantee critical content is always present. The system prompt gets a fixed budget. It's always in, no matter what. This is your non-negotiable baseline.
         <br /><br />
         <Pill type="amber">Dynamic allocation</Pill> lets you trade between source types based on the current request. A retrieval-heavy query? Shrink the example budget and give more tokens to RAG chunks. A multi-turn conversation? Grow the conversation window and drop examples entirely.
         <br /><br />
@@ -600,7 +600,7 @@ function ProductionPatternsPanel() {
         <br /><br />
         <strong>Metadata overhead:</strong> Include source URL, document title, section heading, and date with each chunk. Costs ~50 tokens per chunk but dramatically improves faithfulness — the model can cite its sources and calibrate confidence.
         <br /><br />
-        <strong>Retrieval score injection:</strong> Prepend the relevance score to each chunk: <code>[relevance: 0.92]</code>. This gives the model a confidence signal — it should weight a 0.92 chunk higher than a 0.65 chunk.
+        <strong>Retrieval score injection:</strong> Prepend the relevance score to each chunk: <code>[relevance: 0.92]</code>. This gives the model a confidence signal. It should weight a 0.92 chunk higher than a 0.65 chunk.
         <br /><br />
         <strong>Practical guideline:</strong> 5-8 chunks of 512 tokens with metadata is the sweet spot for most RAG systems. That's ~3K-5K tokens of retrieved context — enough for grounding without drowning the attention mechanism.
       </Decision></FadeIn>
@@ -671,13 +671,13 @@ function DeepDivePanel() {
       </div></FadeIn>
 
       <FadeIn delay={400}><Decision question="The four failure modes of context (Drew Breunig)">
-        Context does not just fail by being absent — it fails by being wrong, noisy, contradictory, or overwhelming. Each mode requires a different fix:
+        Context does not just fail by being absent. It fails by being wrong, noisy, contradictory, or overwhelming. Each mode requires a different fix:
         <br /><br />
         <Pill type="amber">Poisoning</Pill> A wrong fact enters the context and keeps getting referenced as true. An early hallucination or a stale retrieval result becomes the foundation for all subsequent reasoning. The model treats everything in context as ground truth — one poisoned sentence can corrupt an entire chain of thought. Fix: validate facts at insertion time, version your memory, and add provenance metadata so the model can weigh source reliability.
         <br /><br />
         <Pill type="amber">Distraction</Pill> Context so long that the model over-focuses on window content instead of drawing on its training. When you dump 80K tokens of raw documents into the window, the model stops reasoning and starts pattern-matching against the blob. It becomes a parrot of the context instead of a thinker that uses context. Fix: compress aggressively, keep signal density high, and test with shorter context to see if quality actually improves.
         <br /><br />
-        <Pill type="amber">Confusion</Pill> Superfluous material causes worse answers than no material at all. Adding a marginally relevant document does not help — it actively hurts. The model cannot distinguish "included because it might be useful" from "included because it is essential." Every token in the window carries implicit weight. Fix: set a minimum relevance threshold for inclusion. If a source scores below 0.7, dropping it outright beats including it.
+        <Pill type="amber">Confusion</Pill> Superfluous material causes worse answers than no material at all. Adding a marginally relevant document does not help. It actively hurts. The model cannot distinguish "included because it might be useful" from "included because it is essential." Every token in the window carries implicit weight. Fix: set a minimum relevance threshold for inclusion. If a source scores below 0.7, dropping it outright beats including it.
         <br /><br />
         <Pill type="amber">Clash</Pill> Accumulated facts contradict each other. The January pricing document says one thing, the July update says another, and both are in context. The model has no way to know which is current. Fix: timestamp all context sources, prefer recent over old when conflicts exist, and deduplicate aggressively across retrieval results.
       </Decision></FadeIn>

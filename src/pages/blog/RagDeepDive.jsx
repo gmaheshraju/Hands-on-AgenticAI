@@ -420,7 +420,7 @@ function HybridSearchPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "Hybrid search is the answer to 'but what about exact matches?' I cover this in my Agent System Design video under the RAG + Vector DB chapter — vector search alone misses exact terms like product SKUs, error codes, and customer IDs. My e-Commerce example: a customer asks about order #ORD-28491 — vector search returns general order FAQ, but BM25 catches the exact order ID. Every production RAG system uses hybrid. The RRF formula is the specific signal: 'I'd combine results using reciprocal rank fusion with k=60 — it's rank-based so I don't need to normalize scores.'"
+        "Hybrid search is the answer to 'but what about exact matches?' I cover this in my Agent System Design video under the RAG + Vector DB chapter — vector search alone misses exact terms like product SKUs, error codes, and customer IDs. My e-Commerce example: a customer asks about order #ORD-28491 — vector search returns general order FAQ, but BM25 catches the exact order ID. Every production RAG system uses hybrid. The RRF formula is the specific signal: 'I'd combine results using reciprocal rank fusion with k=60. It's rank-based so I don't need to normalize scores.'"
       </Insight></FadeIn>
     </div>
   );
@@ -441,7 +441,7 @@ function RerankingPanel() {
         <br />
         <strong>Step 3:</strong> Sort by cross-encoder score. Take top-5.
         <br /><br />
-        The cross-encoder sees the query and the document together — it can understand the relationship between them, not just the independent similarity. This is why it's more accurate than embedding-based similarity, which embeds query and document independently.
+        The cross-encoder sees the query and the document together. It can understand the relationship between them, not just the independent similarity. This is why it's more accurate than embedding-based similarity, which embeds query and document independently.
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="Which reranker?">

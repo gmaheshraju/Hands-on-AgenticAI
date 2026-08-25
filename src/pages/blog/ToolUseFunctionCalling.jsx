@@ -409,7 +409,7 @@ function SchemaDesignPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={500}><Insight tag="Production number">
-        In production systems processing 10K+ tool calls/day, the #1 cause of tool call failures is not schema mismatch — it is description ambiguity. Two tools with overlapping descriptions (e.g., "get user info" vs "fetch user profile") cause the model to pick randomly. Rename one to make intent crystal clear. Rewriting vague descriptions into specific, unambiguous ones is often the single highest-ROI fix for tool call accuracy.
+        In production systems processing 10K+ tool calls/day, the #1 cause of tool call failures is not schema mismatch. It is description ambiguity. Two tools with overlapping descriptions (e.g., "get user info" vs "fetch user profile") cause the model to pick randomly. Rename one to make intent crystal clear. Rewriting vague descriptions into specific, unambiguous ones is often the single highest-ROI fix for tool call accuracy.
       </Insight></FadeIn>
     </div>
   );
@@ -469,7 +469,7 @@ function ErrorRecoveryPanel() {
       <FadeIn><Decision question="Retry strategy — what to retry and what to surface?">
         <Pill type="green">Transient errors: retry with exponential backoff</Pill> Timeout, rate limit (429), server error (503). Max 3 retries with 200ms/400ms/800ms backoff. 80% of tool failures are transient — a single retry recovers most of them.
         <br /><br />
-        <Pill type="red">Input errors: never retry</Pill> Invalid arguments, missing required fields, malformed data. Retrying with the same bad input is a waste of compute. Return the error to the model immediately — it will fix its arguments and try again with correct input.
+        <Pill type="red">Input errors: never retry</Pill> Invalid arguments, missing required fields, malformed data. Retrying with the same bad input is a waste of compute. Return the error to the model immediately. It will fix its arguments and try again with correct input.
         <br /><br />
         <Pill type="amber">Business logic errors: surface to model</Pill> "Order already cancelled," "insufficient funds," "user not found." These are not failures — they are information. The model needs to tell the user what happened, not retry the same operation.
       </Decision></FadeIn>
@@ -487,11 +487,11 @@ function ErrorRecoveryPanel() {
       <FadeIn delay={300}><Decision question="Partial failures in parallel tool calls?">
         <Pill type="green">Return results for successful tools, errors for failed ones</Pill> Do not fail the entire batch because one tool timed out. If the model asked for weather AND flights, and flights API timed out, return the weather data. The model has enough to give a partial answer: "The weather in Tokyo is 22C. I could not look up flights right now — try again in a moment."
         <br /><br />
-        <strong>Implementation:</strong> Use Promise.allSettled, not Promise.all. Map each settled result to your structured response format. The model handles partial data gracefully — it was trained on conversations where information is incomplete.
+        <strong>Implementation:</strong> Use Promise.allSettled, not Promise.all. Map each settled result to your structured response format. The model handles partial data gracefully. It was trained on conversations where information is incomplete.
       </Decision></FadeIn>
 
       <FadeIn delay={400}><Insight type="warn">
-        The most dangerous failure mode is not tool errors — it is tool HALLUCINATION. The model invents a tool call that does not exist, or passes arguments that look valid but are completely fabricated (a customer_id it never retrieved from any tool result). Validate that every ID the model passes actually came from a previous tool result in this conversation. This is called argument provenance tracking — and it catches 95% of hallucinated-ID bugs before they hit your database.
+        The most dangerous failure mode is not tool errors. It is tool HALLUCINATION. The model invents a tool call that does not exist, or passes arguments that look valid but are completely fabricated (a customer_id it never retrieved from any tool result). Validate that every ID the model passes actually came from a previous tool result in this conversation. This is called argument provenance tracking — and it catches 95% of hallucinated-ID bugs before they hit your database.
       </Insight></FadeIn>
 
       <FadeIn delay={500}><CodeBlock filename="provenance-tracker.js" code={PROVENANCE_CODE} output={PROVENANCE_OUTPUT} /></FadeIn>

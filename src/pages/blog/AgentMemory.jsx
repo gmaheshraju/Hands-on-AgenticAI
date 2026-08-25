@@ -470,7 +470,7 @@ function RetrievalPanel() {
         <br /><br />
         <strong>Why it matters:</strong> Searching 10,000 raw episodes is slow and noisy. Searching 200 consolidated facts is fast and relevant. "That's why your ChatGPT memory stays short but somehow always up to date" — the consolidation gate is running behind the scenes.
         <br /><br />
-        <strong>Implementation:</strong> Use a cheap model (Haiku 4.5, GPT-4o-mini) for consolidation — it's summarization, not reasoning. Run it asynchronously. Store consolidated facts with higher retrieval priority than raw episodes.
+        <strong>Implementation:</strong> Use a cheap model (Haiku 4.5, GPT-4o-mini) for consolidation. It's summarization, not reasoning. Run it asynchronously. Store consolidated facts with higher retrieval priority than raw episodes.
       </Decision></FadeIn>
 
       <FadeIn><CodeBlock filename="consolidation-gate.js" code={CONSOLIDATION_GATE_CODE} output={CONSOLIDATION_OUTPUT} /></FadeIn>
@@ -480,7 +480,7 @@ function RetrievalPanel() {
       </Insight></FadeIn>
 
       <FadeIn delay={60}><Insight tag="Stale memory">
-        Every scoring formula above ranks memories. None of them <em>invalidate</em> one. That's the bug most memory systems ship with: the user says "I work at Acme" in March and "I just joined Globex" in July, and now both facts sit in the store with similar embeddings. Recency weighting makes the newer one rank higher — it does not make the older one stop being retrieved, and once both land in the context window the model has to guess. The fix is that a write is not an append: before storing a fact, retrieve the top-k neighbours above a similarity threshold and ask a cheap model whether the new fact <em>supersedes</em>, <em>refines</em>, or <em>coexists with</em> each one. Supersede tombstones the old fact (never hard-delete — you want the audit trail and the ability to roll back a bad consolidation). Refine merges them into one richer fact. Coexist is the default. In interviews, the tell is whether you talk about memory as a store or as a <strong>set of claims with a lifetime</strong> — facts about identity, employment, and preferences expire; facts about allergies and immutable history do not, and your schema should carry that distinction explicitly rather than hoping recency decay approximates it.
+        Every scoring formula above ranks memories. None of them <em>invalidate</em> one. That's the bug most memory systems ship with: the user says "I work at Acme" in March and "I just joined Globex" in July, and now both facts sit in the store with similar embeddings. Recency weighting makes the newer one rank higher. It does not make the older one stop being retrieved, and once both land in the context window the model has to guess. The fix is that a write is not an append: before storing a fact, retrieve the top-k neighbours above a similarity threshold and ask a cheap model whether the new fact <em>supersedes</em>, <em>refines</em>, or <em>coexists with</em> each one. Supersede tombstones the old fact (never hard-delete — you want the audit trail and the ability to roll back a bad consolidation). Refine merges them into one richer fact. Coexist is the default. In interviews, the tell is whether you talk about memory as a store or as a <strong>set of claims with a lifetime</strong> — facts about identity, employment, and preferences expire; facts about allergies and immutable history do not, and your schema should carry that distinction explicitly rather than hoping recency decay approximates it.
       </Insight></FadeIn>
     </div>
   );
@@ -522,7 +522,7 @@ function ProductionPanel() {
         <h3 style={styles.systemName}>Hermes Agent — SOUL.MD Pattern</h3>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>How it works</span>
-          <span style={styles.sysVal}>Three-layer memory: skills.md (procedural — how to do things), memory.md (semantic — facts about the user/project), state.db (episodic — conversation history and decisions). SOUL.MD is the system prompt that ties it all together — it's the agent's personality and operating instructions.</span>
+          <span style={styles.sysVal}>Three-layer memory: skills.md (procedural — how to do things), memory.md (semantic — facts about the user/project), state.db (episodic — conversation history and decisions). SOUL.MD is the system prompt that ties it all together. It's the agent's personality and operating instructions.</span>
         </div>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Key insight</span>
@@ -568,7 +568,7 @@ function DeepDivePanel() {
 
       <div style={styles.anti}>
         <p style={styles.strike}>"We'd use a vector database for all memory."</p>
-        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />Vector DBs are great for semantic retrieval but bad for exact lookups. "What's the user's name?" doesn't need cosine similarity — it needs a key-value store. Use structured storage (Postgres, Redis) for facts and preferences, vector storage for fuzzy retrieval of past conversations and knowledge.</p>
+        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />Vector DBs are great for semantic retrieval but bad for exact lookups. "What's the user's name?" doesn't need cosine similarity. It needs a key-value store. Use structured storage (Postgres, Redis) for facts and preferences, vector storage for fuzzy retrieval of past conversations and knowledge.</p>
       </div>
 
       <div style={styles.anti}>
@@ -605,7 +605,7 @@ function DeepDivePanel() {
         <br /><br />
         (2) <strong>Memories are data, not directives.</strong> At retrieval time, inject them as clearly-fenced facts ("Things you know about the user:"), never as system-level rules. A memory should never be able to change the agent's policy — only its knowledge.
         <br /><br />
-        (3) <strong>Gate the write, not just the read.</strong> This is where my consolidation gate earns its keep: a fact only gets persisted if a separate check confirms it's a durable preference, not an instruction or an authority claim. "Never ask for confirmation" fails the gate — it's a policy override wearing a preference costume.
+        (3) <strong>Gate the write, not just the read.</strong> This is where my consolidation gate earns its keep: a fact only gets persisted if a separate check confirms it's a durable preference, not an instruction or an authority claim. "Never ask for confirmation" fails the gate. It's a policy override wearing a preference costume.
         <br /><br />
         (4) <strong>Scope high-privilege actions to the live turn.</strong> Anything that moves money or changes permissions must be authorized <em>in the current conversation by the user</em> — memory can inform the action but can never be its sole authorization. Prohibited-action rules live in code, above the memory layer, so no stored fact can dissolve them.
         <br /><br />
@@ -649,7 +649,7 @@ function DeepDivePanel() {
       <FadeIn delay={320}><Decision question="The five evaluation questions for any memory system">
         Before shipping a memory layer, run every design decision through these five questions. They expose gaps that benchmarks miss.
         <br /><br />
-        <Pill type="green">1. What is in working memory right now?</Pill> Can you enumerate exactly what the model sees on this turn? If you cannot answer this precisely, you do not understand your own system. The context window is not a suggestion — it is the entire universe the model inhabits for that request.
+        <Pill type="green">1. What is in working memory right now?</Pill> Can you enumerate exactly what the model sees on this turn? If you cannot answer this precisely, you do not understand your own system. The context window is not a suggestion. It is the entire universe the model inhabits for that request.
         <br /><br />
         <Pill type="green">2. Which past sessions matter?</Pill> Not "all of them." Which specific episodes are relevant to the current task, and how does the system surface them? If the answer is "we retrieve the last 10," that is a heuristic, not a strategy.
         <br /><br />

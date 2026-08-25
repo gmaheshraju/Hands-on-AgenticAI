@@ -394,8 +394,7 @@ function PromptEngineeringPanel() {
 
       <Decision question="System prompt vs user prompt?">
         <p><Pill type="green">System prompt</Pill> Persistent behavior instructions: tone, format constraints,
-          persona, output schema, safety rules. This is your &quot;base model config&quot; &mdash;
-          it stays the same across requests. Cached system prompts on Claude/GPT-4 reduce input costs by 90%.</p>
+          persona, output schema, safety rules. This is your &quot;base model config&quot;. It stays the same across requests. Cached system prompts on Claude/GPT-4 reduce input costs by 90%.</p>
         <p><Pill type="amber">User prompt</Pill> Per-request context and instructions. The variable input
           that changes every call. Keep task-specific data here &mdash; the document to summarize, the ticket
           to classify, the code to review.</p>

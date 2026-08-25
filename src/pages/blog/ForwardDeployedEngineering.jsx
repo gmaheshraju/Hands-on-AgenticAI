@@ -67,7 +67,7 @@ for (const [customer, caps] of Object.entries(overrides)) {
 }
 
 // Promotion rule: >=3 customers independently landed on the SAME impl.
-// That is no longer bespoke work — it is a missing platform default.
+// That is no longer bespoke work. It is a missing platform default.
 const PROMOTE_AT = 3;
 const rows = [...byCapability.entries()].map(([cap, picks]) => {
   const tally = picks.reduce((m, p) => m.set(p.impl, (m.get(p.impl) || 0) + 1), new Map());
@@ -457,7 +457,7 @@ function AIPlaybookPanel() {
       <FadeIn><Decision question="Why can't AI startups just ship a product and iterate?">
         <Pill type="green">AI is context-dependent</Pill> A chatbot trained on general data hallucinates on your customer&rsquo;s domain. A document extraction model tuned for legal contracts fails on medical records. AI products need domain adaptation, and that requires someone inside the customer&rsquo;s environment understanding their data.
         <br /><br />
-        <Pill type="amber">Integration is the hard part</Pill> The AI model is the easy part. The real work: connecting to legacy systems, handling dirty data, building trust with end users, navigating compliance requirements. This is FDE work &mdash; it can&rsquo;t be done from HQ.
+        <Pill type="amber">Integration is the hard part</Pill> The AI model is the easy part. The real work: connecting to legacy systems, handling dirty data, building trust with end users, navigating compliance requirements. This is FDE work. It can&rsquo;t be done from HQ.
         <br /><br />
         <Pill type="red">The demo-to-production gap</Pill> Every AI startup can build a compelling demo. Very few can make it work in production with real customer data, real edge cases, and real regulatory constraints. FDEs close this gap by being physically present and technically capable.
       </Decision></FadeIn>
@@ -517,7 +517,7 @@ function AIPlaybookPanel() {
 
       <FadeIn delay={240}>
         <Insight type="warn" tag="Data gravity warning">
-          Once an FDE deeply integrates an AI system with a customer&rsquo;s data, switching costs become enormous. This is intentional &mdash; it&rsquo;s the moat. But it also means you must deliver real value, not just create lock-in through complexity. Customers who feel trapped become hostile; customers who feel empowered expand.
+          Once an FDE deeply integrates an AI system with a customer&rsquo;s data, switching costs become enormous. This is intentional. It&rsquo;s the moat. But it also means you must deliver real value, not just create lock-in through complexity. Customers who feel trapped become hostile; customers who feel empowered expand.
         </Insight>
       </FadeIn>
     </div>

@@ -473,7 +473,7 @@ function ArchitecturePanel() {
           <strong>3. Planner Agent</strong> — decomposes complex multi-step tasks (returns, exchanges, account changes) into executable action sequences with function calls.
         </p>
         <p style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.6, marginTop: 8, fontStyle: 'italic' }}>
-          This isn't three models — it's three system prompts with different tool sets, potentially running on the same LLM. The architecture decision is about context isolation and tool scoping, not model count.
+          This isn't three models. It's three system prompts with different tool sets, potentially running on the same LLM. The architecture decision is about context isolation and tool scoping, not model count.
         </p>
       </div>
 
@@ -724,7 +724,7 @@ function RealSystemsPanel() {
         </div>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Key insight</span>
-          <span style={styles.sysVal}>The Router isn't an LLM call — it's a lightweight classifier that runs in &lt;50ms. Only the Q&A and Planner agents use full LLM inference. This keeps 60% of queries fast (simple product questions) while reserving expensive reasoning for complex operations.</span>
+          <span style={styles.sysVal}>The Router isn't an LLM call. It's a lightweight classifier that runs in &lt;50ms. Only the Q&A and Planner agents use full LLM inference. This keeps 60% of queries fast (simple product questions) while reserving expensive reasoning for complex operations.</span>
         </div>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>From my build</span>
@@ -781,7 +781,7 @@ function RealSystemsPanel() {
       </div>
 
       <FadeIn><Insight>
-        "When asked to design a customer support agent, don't just describe the RAG pipeline. Talk about the confidence threshold — it's the most important product decision. Then talk about the escalation path, the feedback loop (human corrections improve the system), and the hard-coded guardrails. That's what separates an engineer who's built one from someone who's read about one."
+        "When asked to design a customer support agent, don't just describe the RAG pipeline. Talk about the confidence threshold. It's the most important product decision. Then talk about the escalation path, the feedback loop (human corrections improve the system), and the hard-coded guardrails. That's what separates an engineer who's built one from someone who's read about one."
       </Insight></FadeIn>
     </div>
   );

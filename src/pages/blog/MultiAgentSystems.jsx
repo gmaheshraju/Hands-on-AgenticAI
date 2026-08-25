@@ -428,7 +428,7 @@ function PatternsPanel() {
       <FadeIn delay={320}><Decision question="5. How do you coordinate 5-10 agents running in parallel without them stepping on each other?">
         This is the real production question. Fan-out is easy to draw on a whiteboard. Making it work when 8 agents are hitting shared state, competing for the same resources, and occasionally failing — that's engineering.
         <br /><br />
-        <strong>Capability cards:</strong> Each agent publishes a structured card: skills it can handle, cost per call, latency estimate, max concurrency, and who it escalates to on failure. The coordinator never hardcodes routing — it discovers agents at runtime. Add a new agent type without touching the coordinator.
+        <strong>Capability cards:</strong> Each agent publishes a structured card: skills it can handle, cost per call, latency estimate, max concurrency, and who it escalates to on failure. The coordinator never hardcodes routing. It discovers agents at runtime. Add a new agent type without touching the coordinator.
         <br /><br />
         <strong>Load-aware routing:</strong> When 3 agents all have the "code" skill, don't round-robin. Track current load per agent, route to the one with the lowest queue depth. This prevents hot-spotting — one agent drowning while others idle.
         <br /><br />
@@ -616,7 +616,7 @@ function ArchPanel() {
       </div>
 
       <FadeIn><Insight>
-        "The production insight is context isolation. Multi-agent isn't primarily about parallelism — it's about giving each agent a focused context window with only the information it needs. A search agent with 10 files in context outperforms a generalist with 100 files. Specialization reduces noise, which improves accuracy."
+        "The production insight is context isolation. Multi-agent isn't primarily about parallelism. It's about giving each agent a focused context window with only the information it needs. A search agent with 10 files in context outperforms a generalist with 100 files. Specialization reduces noise, which improves accuracy."
       </Insight></FadeIn>
     </div>
   );

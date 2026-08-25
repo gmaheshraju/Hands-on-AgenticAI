@@ -327,7 +327,7 @@ function Tab2() {
         <Pill type="amber">Crowdsourced bug bounty</Pill>
         <p>Works at scale but noisy — 80%+ reports are low-quality duplicates. Anthropic, OpenAI, and Google
         all run these. Budget $50-100K/year for a serious program. Good for breadth but you still need expert
-        depth. Don't make this your only red-teaming — it's supplementary.</p>
+        depth. Don't make this your only red-teaming. It's supplementary.</p>
       </Decision>
 
       <Decision question="What to do with findings">
@@ -346,7 +346,7 @@ function Tab2() {
 
       <Insight type="warn" tag="Critical distinction">
         The biggest red-teaming mistake: only testing for harmful outputs. The real risk for most companies
-        isn't that the AI says something offensive — it's that it confidently gives wrong medical advice,
+        isn't that the AI says something offensive. It's that it confidently gives wrong medical advice,
         makes up legal precedents, or fabricates financial data. A wrong fact that sounds authoritative
         is more dangerous than an obviously inappropriate response. Test for factual accuracy as hard as
         you test for safety. Budget 60% of red-teaming effort on factual correctness, 40% on safety.
@@ -398,7 +398,7 @@ function Tab3() {
         knew about v1.2 when you shipped it, even after v1.3 is out. Link to the latest evaluation results
         (which are continuously updated). Version changelog: what changed between v1.2 and v1.3, why, and
         what the impact was on each demographic group. EU AI Act Article 11 requires this for high-risk
-        applications — it's not optional documentation.</p>
+        applications. It's not optional documentation.</p>
       </Decision>
 
       <CodeBlock code={MODEL_CARD_CODE} filename="model-card-generator.js" output={MODEL_CARD_OUTPUT} />
@@ -431,7 +431,7 @@ function Tab4() {
         <p>If your AI touches hiring, credit, medical, or law enforcement: mandatory risk management system,
         data governance documentation, technical documentation (model cards), record-keeping, transparency to
         users, human oversight mechanisms, accuracy/robustness/cybersecurity requirements. This isn't a
-        checkbox — it's a continuous obligation with regular audits.</p>
+        checkbox. It's a continuous obligation with regular audits.</p>
 
         <Pill type="amber">Timeline: 2024-2027 phase-in</Pill>
         <p>Banned practices: Feb 2025. GPAI transparency: Aug 2025. High-risk in Annex III: Aug 2026.

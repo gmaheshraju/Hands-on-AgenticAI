@@ -706,7 +706,7 @@ function MonitoringPanel() {
     <div>
       <SectionHead
         title="Monitoring and debugging LLM systems"
-        desc="LLM failures are silent. The model doesn't crash — it returns a confident wrong answer. Traditional monitoring (uptime, error rate, latency) catches infrastructure failures but misses quality degradation. You need a different observability stack."
+        desc="LLM failures are silent. The model doesn't crash. It returns a confident wrong answer. Traditional monitoring (uptime, error rate, latency) catches infrastructure failures but misses quality degradation. You need a different observability stack."
       />
 
       <FadeIn><Decision question="What to monitor — the essential metrics">

@@ -537,7 +537,7 @@ function PIIPanel() {
     <div>
       <SectionHead
         title="PII detection and data safety"
-        desc="Every LLM API call is a data exfiltration risk. User data in prompts goes to a third-party API, gets logged, potentially used for training. PII filtering isn't optional — it's a legal requirement under GDPR, India's DPDPA, and HIPAA."
+        desc="Every LLM API call is a data exfiltration risk. User data in prompts goes to a third-party API, gets logged, potentially used for training. PII filtering isn't optional. It's a legal requirement under GDPR, India's DPDPA, and HIPAA."
       />
 
       <FadeIn><Decision question="Where do you filter PII — pre-LLM, post-LLM, or both?">
@@ -549,7 +549,7 @@ function PIIPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="Redact vs tokenize — which approach?">
-        <Pill type="amber">Redact: replace with [REDACTED]</Pill> Simple and safe. "Email raj@company.com" becomes "Email [REDACTED]." But the LLM loses context — it can't reason about relationships between entities. "Send the report to the same person who emailed yesterday" breaks because both references are just [REDACTED].
+        <Pill type="amber">Redact: replace with [REDACTED]</Pill> Simple and safe. "Email raj@company.com" becomes "Email [REDACTED]." But the LLM loses context. It can't reason about relationships between entities. "Send the report to the same person who emailed yesterday" breaks because both references are just [REDACTED].
         <br /><br />
         <Pill type="green">Tokenize: reversible placeholders</Pill> "Email raj@company.com" becomes "Email {'<<EMAIL_1>>'}." The LLM can still reason: "Send the report to {'<<EMAIL_1>>'}" works correctly. After the LLM responds, you detokenize back to the real value. The LLM never sees real PII but can track entity relationships.
         <br /><br />
@@ -818,7 +818,7 @@ function DefenseInDepthPanel() {
       </Insight></FadeIn>
 
       <FadeIn delay={200}><Insight type="warn" tag="The hard truth">
-        Prompt injection is fundamentally unsolvable with current LLM architectures. LLMs process instructions and data in the same channel — there is no hardware-level separation like kernel mode vs user mode in operating systems. Every defense is a heuristic, not a guarantee. The engineering goal isn't "prevent all attacks" — it's "make attacks expensive, detect them quickly, limit blast radius, and have an audit trail." When someone asks "how do you prevent prompt injection?" the honest senior engineering perspective starts with "you can't prevent it completely, but here's how you make it impractical..."
+        Prompt injection is fundamentally unsolvable with current LLM architectures. LLMs process instructions and data in the same channel — there is no hardware-level separation like kernel mode vs user mode in operating systems. Every defense is a heuristic, not a guarantee. The engineering goal isn't "prevent all attacks". It's "make attacks expensive, detect them quickly, limit blast radius, and have an audit trail." When someone asks "how do you prevent prompt injection?" the honest senior engineering perspective starts with "you can't prevent it completely, but here's how you make it impractical..."
       </Insight></FadeIn>
 
       {/* ── Sandboxing Masterclass ── */}
@@ -858,13 +858,13 @@ function DefenseInDepthPanel() {
         <br /><br />
         <Pill type="green">Boundary 2: What those tools can access</Pill> Credentials and scoped access. A tool that calls an API should use a scoped token with minimum necessary permissions, not the developer's admin key. A file-read tool should be chrooted to a specific directory, not able to traverse to <code>/etc/passwd</code>. The tool's capability is bounded by the credentials it holds, not by the model's judgment.
         <br /><br />
-        <Pill type="green">Boundary 3: Where execution touches the system</Pill> The sandbox. Even with a restricted tool registry and scoped credentials, what happens if the model chains tools in an unexpected way? What if it writes a script via a file-write tool and then executes it via a shell tool? The sandbox is the last boundary — it constrains the blast radius of any action the model takes, including actions you did not anticipate.
+        <Pill type="green">Boundary 3: Where execution touches the system</Pill> The sandbox. Even with a restricted tool registry and scoped credentials, what happens if the model chains tools in an unexpected way? What if it writes a script via a file-write tool and then executes it via a shell tool? The sandbox is the last boundary. It constrains the blast radius of any action the model takes, including actions you did not anticipate.
         <br /><br />
         <strong>These three boundaries are independent and all required.</strong> A locked-down tool registry with admin credentials is one SQL injection from disaster. Scoped credentials with no sandbox means a creative tool chain can still reach the filesystem. A sandbox with an unrestricted tool registry means you are trusting the sandbox to catch everything — and it will not.
       </Decision></FadeIn>
 
       <FadeIn delay={440}><Insight type="warn" tag="Anti-pattern">
-        The agent should earn access through configuration, not inherit it from your machine. Treat the Docker socket like a loaded weapon. Mounting <code>/var/run/docker.sock</code> into an agent's container gives it root-equivalent access to the host — it can spawn privileged containers, mount the host filesystem, and escalate to full control. The same applies to AWS credentials in environment variables, SSH keys in mounted volumes, and <code>.kube/config</code> files. Every credential in the agent's environment is a credential the model can use if it decides to. Strip the environment to the minimum, inject secrets through a vault with short-lived tokens, and audit what the agent actually accessed.
+        The agent should earn access through configuration, not inherit it from your machine. Treat the Docker socket like a loaded weapon. Mounting <code>/var/run/docker.sock</code> into an agent's container gives it root-equivalent access to the host. It can spawn privileged containers, mount the host filesystem, and escalate to full control. The same applies to AWS credentials in environment variables, SSH keys in mounted volumes, and <code>.kube/config</code> files. Every credential in the agent's environment is a credential the model can use if it decides to. Strip the environment to the minimum, inject secrets through a vault with short-lived tokens, and audit what the agent actually accessed.
       </Insight></FadeIn>
 
       <FadeIn delay={480}><Decision question="The follow-up checklist — when someone says 'the agent runs in a sandbox'">

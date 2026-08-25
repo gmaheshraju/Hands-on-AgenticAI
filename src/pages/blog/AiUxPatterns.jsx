@@ -618,7 +618,7 @@ function StreamingPanel() {
 
 
       <FadeIn delay={80}><Insight>
-        The single most impactful UX improvement for AI products is not a better model — it is streaming. Early GPT-4 shipped with buffered 15-second responses; once streaming was added, the perceived experience transformed overnight despite identical generation speed. The engineering cost is 1-2 days: swap your fetch call for an SSE reader, add a state machine, and render tokens incrementally. Do this before you spend a single dollar on model latency optimization. TTFT under 500ms plus streaming equals &quot;instant&quot; in user perception, regardless of total generation time.
+        The single most impactful UX improvement for AI products is not a better model. It is streaming. Early GPT-4 shipped with buffered 15-second responses; once streaming was added, the perceived experience transformed overnight despite identical generation speed. The engineering cost is 1-2 days: swap your fetch call for an SSE reader, add a state machine, and render tokens incrementally. Do this before you spend a single dollar on model latency optimization. TTFT under 500ms plus streaming equals &quot;instant&quot; in user perception, regardless of total generation time.
       </Insight></FadeIn>
     </div>
   );
@@ -739,7 +739,7 @@ function ErrorStatesPanel() {
         <br /><br />
         <Pill type="amber">Rate limited (429)</Pill> &quot;We are experiencing high demand. Your request is queued. Estimated wait: 30 seconds.&quot; Show position in queue if possible. Implement client-side token bucket to prevent hitting the rate limit in the first place. Anthropic rate limits: 60 RPM on Sonnet for Tier 1, 1000 RPM on Tier 4.
         <br /><br />
-        <Pill type="green">Content filtered</Pill> &quot;I cannot help with that specific request. Here is what I can help with: [alternatives].&quot; Never say &quot;content policy violation&quot; to the user — it sounds like you are accusing them of doing something wrong. Frame it as capability limitation, not user fault.
+        <Pill type="green">Content filtered</Pill> &quot;I cannot help with that specific request. Here is what I can help with: [alternatives].&quot; Never say &quot;content policy violation&quot; to the user. It sounds like you are accusing them of doing something wrong. Frame it as capability limitation, not user fault.
         <br /><br />
         <Pill type="amber">Hallucination detected post-generation</Pill> &quot;I want to make sure I give you accurate information. Let me verify this...&quot; Trigger a fact-check step transparently. Implementation: run the response through a grounding check against your knowledge base. If grounding score is below threshold, regenerate with explicit grounding instructions.
         <br /><br />
@@ -808,7 +808,7 @@ function TrustPatternsPanel() {
       <FadeIn delay={160}><Decision question="When should the AI say 'I don't know'?">
         <Pill type="green">No relevant sources found</Pill> Always say &quot;I do not know&quot; instead of guessing. Users respect honesty. Research consistently shows that users rate AI systems that admit uncertainty as more trustworthy than systems that always attempt an answer — even when the always-answer system is right more often overall. Honesty about limitations builds more trust than accuracy alone.
         <br /><br />
-        <Pill type="green">Medical, legal, or financial advice</Pill> Always add a disclaimer. &quot;I can share general information, but please consult a professional for advice specific to your situation.&quot; This is not just UX — it is legal liability protection. AI companies that provide unlicensed financial or medical advice face regulatory action in India (SEBI, MCI guidelines).
+        <Pill type="green">Medical, legal, or financial advice</Pill> Always add a disclaimer. &quot;I can share general information, but please consult a professional for advice specific to your situation.&quot; This is not just UX. It is legal liability protection. AI companies that provide unlicensed financial or medical advice face regulatory action in India (SEBI, MCI guidelines).
         <br /><br />
         <Pill type="amber">Conflicting sources</Pill> &quot;I found different answers in different sources. Here are both perspectives...&quot; Let the user decide. Do not silently pick one. Present both with source attribution and let the user evaluate. This is especially important for policy questions where the answer genuinely varies by context.
         <br /><br />
@@ -824,7 +824,7 @@ function TrustPatternsPanel() {
       </Insight></FadeIn>
 
       <FadeIn delay={160}><Insight tag="Engineering perspective">
-        When discussing AI UX in a design review, structure your answer around the trust equation. &quot;The technical challenge of AI UX is not rendering tokens — it is building calibrated trust. Users should trust the system exactly as much as it deserves to be trusted: highly when it is confident and grounded, cautiously when it is uncertain, and not at all when it does not know. Every UX pattern — streaming, confidence bands, source attribution, error recovery — exists to calibrate that trust signal. The product that gets this right wins, regardless of which underlying model it uses.&quot;
+        When discussing AI UX in a design review, structure your answer around the trust equation. &quot;The technical challenge of AI UX is not rendering tokens. It is building calibrated trust. Users should trust the system exactly as much as it deserves to be trusted: highly when it is confident and grounded, cautiously when it is uncertain, and not at all when it does not know. Every UX pattern — streaming, confidence bands, source attribution, error recovery — exists to calibrate that trust signal. The product that gets this right wins, regardless of which underlying model it uses.&quot;
       </Insight></FadeIn>
         </div>
   );
