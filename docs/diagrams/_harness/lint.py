@@ -118,15 +118,28 @@ def run(sp, render):
 
 
 # ---------------------------------------------------------------- L2b (time)
-def msg_label_overlap(sp, render_seq):
-    """Two message labels must not sit on top of each other."""
-    boxes = sorted(render_seq.message_boxes(sp).items())
+def msg_label_offpage(sp, render_seq):
+    """A message label must not run off the canvas.
+
+    THIS CHECK REPLACED msg_label_overlap, WHICH WAS DEAD CODE. That one asked whether
+    two message labels could collide; they cannot. MSG_MIN_DY forces consecutive
+    messages 28px apart while a label box is 12px tall, so the worst-case pairing still
+    leaves a 13px gap -- overlap is unreachable by construction, and a check that can
+    never fire is a second gate doing a job the first gate already does. render_seq
+    asserts the constant that makes that true, so deleting the check does not quietly
+    lose the guarantee.
+
+    What IS emergent: a long label centred between two close lifelines can extend past
+    x=0 or past the canvas width, which no constant prevents because it depends on how
+    many characters the author wrote. That is the real failure mode here, and it is
+    silent -- the SVG simply clips.
+    """
     bad = []
-    for (i1, a), (i2, b) in combinations(boxes, 2):
-        ox = min(a[2], b[2]) - max(a[0], b[0])
-        oy = min(a[3], b[3]) - max(a[1], b[1])
-        if ox > 0 and oy > 0:
-            bad.append((i1, i2, round(ox), round(oy)))
+    for mid, (x0, _y0, x1, _y1) in sorted(render_seq.message_boxes(sp).items()):
+        if x0 < 0:
+            bad.append((mid, 'runs off the LEFT edge by', round(-x0)))
+        if x1 > sp.meta['w']:
+            bad.append((mid, 'runs off the RIGHT edge by', round(x1 - sp.meta['w'])))
     return bad
 
 
@@ -158,7 +171,7 @@ def note_overlaps_lifeline(sp):
 
 def run_seq(sp, render_seq):
     return {
-        'msg_label_overlap':  msg_label_overlap(sp, render_seq),
+        'msg_label_offpage':  msg_label_offpage(sp, render_seq),
         'msg_crosses_note':   msg_crosses_note(sp),
         'note_on_lifeline':   note_overlaps_lifeline(sp),
         'overflow':           render_seq.check_overflow(sp),

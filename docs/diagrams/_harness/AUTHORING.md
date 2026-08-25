@@ -186,6 +186,17 @@ inside the lifeline span, consecutive messages are ≥28px apart, lifeline centr
 are far enough apart that headers cannot touch, and a fragment must contain at
 least one message (a fragment around nothing is a grouping that is not there).
 
+**What the L2b lint checks, and what it deliberately does not.** Three checks:
+a message label running off the canvas, a message crossing a note, and a note
+sitting on a lifeline stem. There was a fourth — message-label *overlap* — and
+it was **deleted as dead code**: `MSG_MIN_DY` (28) already exceeds the label box
+height (12), so the worst-case pairing still leaves a 13px gap and overlap is
+unreachable. A check that can never fire is a second gate doing the first gate's
+job. `render_seq` asserts `MSG_MIN_DY > LBL_LINE_H` so lowering the constant
+fails the build rather than quietly losing the guarantee that justified the
+deletion. Prove a new check fires before you keep it — an unfired lint is an
+unverified one.
+
 **Label the RELATIONSHIP, not the call, when the relationship is the point.**
 `includeNode(id) for each tried node still HEALTHY` is a true label and a useless
 one — the call looks harmless. What it undoes, one pass later, is the finding, so

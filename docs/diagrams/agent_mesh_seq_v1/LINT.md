@@ -7,7 +7,7 @@ Enforced by construction (cannot fail here): grid quantum, pinned ports, axis-al
 
 | Emergent check | Violations |
 |---|---|
-| msg_label_overlap | 0 |
+| msg_label_offpage | 0 |
 | msg_crosses_note | 0 |
 | note_on_lifeline | 0 |
 | overflow | 0 |

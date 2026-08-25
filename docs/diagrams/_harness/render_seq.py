@@ -39,6 +39,14 @@ LL_MIN_DX  = LL_W + 40     # centres: header boxes must not touch
 
 DASHED_MSG = {'msg.async': '5 4', 'msg.return': '4 4', 'msg.lifeline': '4 5'}
 
+# Label separation is guaranteed HERE, not by a lint. A label box is LBL_LINE_H tall and
+# sits just above its arrow, so any two consecutive labels clear each other as long as the
+# minimum spacing exceeds that height. lint dropped its msg_label_overlap check on the
+# strength of this assert -- if the constant is ever lowered, the build fails here rather
+# than the guarantee quietly evaporating.
+assert MSG_MIN_DY > LBL_LINE_H, \
+    'MSG_MIN_DY (%s) must exceed the label height (%s) or labels can collide' % (MSG_MIN_DY, LBL_LINE_H)
+
 
 class SeqSpec:
     def __init__(self, mod, theme_path):
@@ -271,15 +279,35 @@ def emit_drawio(sp, out_path):
 
 
 CW = 0.55
+def _fits(bad, ident, lbl, w, h, fs, lh):
+    for t, bold in _lines(lbl):
+        need = len(t) * fs * CW * (1.06 if bold else 1.0)
+        if need > w - 12:
+            bad.append((ident, 'H', t[:44], round(need), w - 12))
+    n = len(_lines(lbl))
+    if n * lh > h - 8:
+        bad.append((ident, 'V', '%d lines' % n, n * lh, h - 8))
+
+
 def check_overflow(sp):
-    """Note text must fit its box -- same rule and same measurement as the L1 cards."""
+    """Every piece of authored text must fit the box drawn around it.
+
+    Three surfaces, not one. The first version checked NOTES only, which is the
+    surface inherited from L1 -- and left the two that are specific to this altitude
+    unchecked. A lifeline header is a fixed 240px wide no matter how long the class
+    name inside it is, and a fragment's title bar is clipped to the fragment width by
+    the renderer, so an over-long `loop` label is silently truncated rather than
+    overflowing visibly. Both are exactly the kind of defect that survives a green
+    build and only a human eye catches, which is the thing this file exists to stop.
+    """
     bad = []
     for nid, tok, lbl, x, y, w, h in sp.notes:
-        fs, lh = 11, 14
-        for t, bold in _lines(lbl):
-            need = len(t) * fs * CW * (1.06 if bold else 1.0)
-            if need > w - 12:
-                bad.append((nid, 'H', t[:44], round(need), w - 12))
-        if len(_lines(lbl)) * lh > h - 8:
-            bad.append((nid, 'V', '%d lines' % len(_lines(lbl)), len(_lines(lbl)) * lh, h - 8))
+        _fits(bad, nid, lbl, w, h, 11, 14)
+    for lid, tok, lbl, cx in sp.lifelines:
+        _fits(bad, lid, lbl, LL_W, LL_H, 12, 15)
+    for fid, lbl, x, y, w, h in sp.fragments:
+        # The title bar is min(text+14, w) wide -- past that the renderer clips it, so
+        # the label must fit the fragment it names.
+        if len(lbl) * 6.4 + 14 > w:
+            bad.append((fid, 'H', lbl[:44], round(len(lbl) * 6.4 + 14), w))
     return bad
