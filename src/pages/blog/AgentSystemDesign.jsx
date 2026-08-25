@@ -461,7 +461,7 @@ function ArchitecturePanel() {
       <div style={{ background: 'var(--bg-code)', borderTopWidth: 1, borderTopStyle: 'solid', borderTopColor: 'var(--border)', borderRightWidth: 1, borderRightStyle: 'solid', borderRightColor: 'var(--border)', borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', borderLeftWidth: 3, borderLeftStyle: 'solid', borderLeftColor: 'var(--bg-accent-strong)', borderRadius: 'var(--radius-md)', padding: '14px 16px', marginBottom: 16 }}>
         <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-accent)', marginBottom: 6, fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>MAHESH'S FRAMEWORK</p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 8 }}>
-          Mahesh structures his AI agent as three specialized agents working together through an <strong>e-Commerce customer support</strong> use case:
+          I structure my agent as three specialized agents working together through an <strong>e-Commerce customer support</strong> use case:
         </p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 4 }}>
           <strong>1. Router Agent</strong> — classifies user intent (product question vs order issue vs complaint) and routes to the right specialist.
@@ -491,7 +491,7 @@ function ArchitecturePanel() {
         <br /><br />
         <strong>Default to ReAct.</strong> Plan-then-Execute only works when the task is highly structured and the tools are deterministic.
         <br /><br />
-        <strong>Mahesh's key insight:</strong> "AI Agents vs Deterministic Workflows" — don't build an agent when a workflow suffices. If every step is predictable and the logic never branches on LLM output, use a deterministic workflow (Temporal, Step Functions). Agents shine when the next action depends on reasoning about the result of the previous action.
+        <strong>My key insight:</strong> "AI Agents vs Deterministic Workflows" — don't build an agent when a workflow suffices. If every step is predictable and the logic never branches on LLM output, use a deterministic workflow (Temporal, Step Functions). Agents shine when the next action depends on reasoning about the result of the previous action.
       </Decision></FadeIn>
 
       <FadeIn delay={160}><Decision question="How many iterations should the agent loop run?">
@@ -702,7 +702,7 @@ function EvalsPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "Evals + Memory are the moats of AI products" — Mahesh's Top 8 Advice. Anyone can build a demo agent in a weekend. The production gap is the eval pipeline. Mahesh's rule: treat evals like CI/CD — no prompt change ships without passing your golden test cases. When you upgrade the model, compare outputs side-by-side. "Add continuous evals" is advice #8 on his list, and it's last because it's the one teams skip — and the one that separates shipped products from abandoned demos.
+        Evals and memory are the moats of AI products. Anyone can build a demo agent in a weekend. The production gap is the eval pipeline. My rule: treat evals like CI/CD — no prompt change ships without passing your golden test cases. When you upgrade the model, compare outputs side-by-side. "Add continuous evals" is advice #8 on my list, and it's last because it's the one teams skip — and the one that separates shipped products from abandoned demos.
       </Insight></FadeIn>
     </div>
   );
@@ -717,7 +717,7 @@ function RealSystemsPanel() {
       />
 
       <div style={styles.systemCard}>
-        <h3 style={styles.systemName}>Mahesh's e-Commerce Agent — The Reference Architecture</h3>
+        <h3 style={styles.systemName}>My e-Commerce Agent — The Reference Architecture</h3>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Architecture</span>
           <span style={styles.sysVal}>Three-agent system: Router (intent classification) {'>'} Q&A Agent with RAG over product catalog + help articles {'>'} Planner Agent for multi-step order operations. User Auth Gateway at the entry point. Each agent has scoped tools — the Q&A agent can search but can't modify orders.</span>
@@ -727,7 +727,7 @@ function RealSystemsPanel() {
           <span style={styles.sysVal}>The Router isn't an LLM call — it's a lightweight classifier that runs in &lt;50ms. Only the Q&A and Planner agents use full LLM inference. This keeps 60% of queries fast (simple product questions) while reserving expensive reasoning for complex operations.</span>
         </div>
         <div style={styles.systemDetail}>
-          <span style={styles.sysLabel}>From Mahesh</span>
+          <span style={styles.sysLabel}>From my build</span>
           <span style={styles.sysVal}>"When to Loop in Humans" — the Planner Agent has a confidence threshold. Order cancellations above $500 always escalate. Refund requests with shipping disputes always escalate. The agent handles the 80% — humans handle the 20% that needs judgment.</span>
         </div>
       </div>
@@ -797,7 +797,7 @@ function AntiPatternsPanel() {
 
       <div style={styles.anti}>
         <p style={styles.strike}>"I'd use LangChain to build the agent."</p>
-        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />LangChain is an implementation detail, not an architecture. Describe the components — orchestration loop, tool routing, RAG pipeline, eval system — then mention that LangChain (or LlamaIndex, or custom code) implements them. The framework is the last word.{' '}Mahesh's framework from his 107k-view video: describe the Router {'>'} Q&A {'>'} Planner agent architecture FIRST, then say "this could be implemented with LangGraph, CrewAI, or raw API calls — the architecture is the same."</p>
+        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />LangChain is an implementation detail, not an architecture. Describe the components — orchestration loop, tool routing, RAG pipeline, eval system — then mention that LangChain (or LlamaIndex, or custom code) implements them. The framework is the last word.{' '}My framework from the 107k-view video: describe the Router {'>'} Q&A {'>'} Planner agent architecture FIRST, then say "this could be implemented with LangGraph, CrewAI, or raw API calls — the architecture is the same."</p>
       </div>
 
       <div style={styles.anti}>
@@ -821,7 +821,7 @@ function AntiPatternsPanel() {
       </div>
 
       <FadeIn><Insight>
-        "The meta-pattern is Mahesh's Top 8 rule #3: go vertical-first. Don't build a 'general agent framework' — build an agent that solves one specific problem perfectly. The e-Commerce customer support agent doesn't need to write code or search the web. It needs to search products, check orders, and process returns. Scope the tools, scope the prompt, scope the eval set. Then reason about constraints: latency budget, cost per query, accuracy threshold. The framework — LangChain, LlamaIndex, custom code — is genuinely the last decision."
+        "The meta-pattern is my vertical-first rule. Don't build a 'general agent framework' — build an agent that solves one specific problem perfectly. The e-Commerce customer support agent doesn't need to write code or search the web. It needs to search products, check orders, and process returns. Scope the tools, scope the prompt, scope the eval set. Then reason about constraints: latency budget, cost per query, accuracy threshold. The framework — LangChain, LlamaIndex, custom code — is genuinely the last decision."
       </Insight></FadeIn>
         </div>
   );

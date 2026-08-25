@@ -272,7 +272,7 @@ function ChunkingPanel() {
     <div>
       <SectionHead
         title="Chunking — the foundation of RAG quality"
-        desc={<>Chunking determines what units of information your RAG pipeline can retrieve. Mahesh's Top 8 advice #1: <strong>"Smart defaults over infinite customization."</strong> Don't offer 15 chunking options — pick recursive splitting at 512 tokens as the default and validate it works. Get it wrong and even perfect search returns garbage.</>}
+        desc={<>Chunking determines what units of information your RAG pipeline can retrieve. My first rule: <strong>"Smart defaults over infinite customization."</strong> Don't offer 15 chunking options — pick recursive splitting at 512 tokens as the default and validate it works. Get it wrong and even perfect search returns garbage.</>}
       />
 
       <ChunkComparisonDiagram />
@@ -319,7 +319,7 @@ function ChunkingPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "Mahesh's advice #1: 'Smart defaults over infinite customization.' Chunking is the perfect example — don't build a settings panel with 15 chunking strategies. Pick recursive splitting at 512 tokens with 20% overlap as the default. Then validate by manually checking 50 retrievals. The senior engineering perspective starts with: 'The first question is how we chunk. If the answer spans two chunks, no amount of search quality saves us.' Then describe your validation process — that's what separates builders from readers."
+        "My first rule: smart defaults over infinite customization. Chunking is the perfect example — don't build a settings panel with 15 chunking strategies. Pick recursive splitting at 512 tokens with 20% overlap as the default. Then validate by manually checking 50 retrievals. The senior engineering perspective starts with: 'The first question is how we chunk. If the answer spans two chunks, no amount of search quality saves us.' Then describe your validation process — that's what separates builders from readers."
       </Insight></FadeIn>
     </div>
   );
@@ -368,7 +368,7 @@ function EmbeddingsPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "The common pitfall is fixating on the embedding model choice. Mahesh's advice #3 applies here: go vertical-first. Don't build a 'universal RAG platform' — build one that works perfectly for your specific document type. An e-Commerce product catalog needs different chunking, metadata, and retrieval strategies than a legal document corpus. The real engineering challenge is the pipeline: batch ingestion, incremental updates, model versioning. Mention the migration cost explicitly — 'choosing an embedding model is a one-way door because migration means re-embedding our entire corpus' — and senior engineers know you've done this for real."
+        "The common pitfall is fixating on the embedding model choice. My vertical-first rule applies here. Don't build a 'universal RAG platform' — build one that works perfectly for your specific document type. An e-Commerce product catalog needs different chunking, metadata, and retrieval strategies than a legal document corpus. The real engineering challenge is the pipeline: batch ingestion, incremental updates, model versioning. Mention the migration cost explicitly — 'choosing an embedding model is a one-way door because migration means re-embedding our entire corpus' — and senior engineers know you've done this for real."
       </Insight></FadeIn>
     </div>
   );
@@ -420,7 +420,7 @@ function HybridSearchPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "Hybrid search is the answer to 'but what about exact matches?' Mahesh covers this in his Agent System Design video under the RAG + Vector DB chapter — vector search alone misses exact terms like product SKUs, error codes, and customer IDs. His e-Commerce example: a customer asks about order #ORD-28491 — vector search returns general order FAQ, but BM25 catches the exact order ID. Every production RAG system uses hybrid. The RRF formula is the specific signal: 'I'd combine results using reciprocal rank fusion with k=60 — it's rank-based so I don't need to normalize scores.'"
+        "Hybrid search is the answer to 'but what about exact matches?' I cover this in my Agent System Design video under the RAG + Vector DB chapter — vector search alone misses exact terms like product SKUs, error codes, and customer IDs. My e-Commerce example: a customer asks about order #ORD-28491 — vector search returns general order FAQ, but BM25 catches the exact order ID. Every production RAG system uses hybrid. The RRF formula is the specific signal: 'I'd combine results using reciprocal rank fusion with k=60 — it's rank-based so I don't need to normalize scores.'"
       </Insight></FadeIn>
     </div>
   );
@@ -534,8 +534,8 @@ function PitfallsPanel() {
         Run this evaluation on every change to chunking strategy, embedding model, search parameters, or prompt template. This is your RAG CI/CD.
       </Decision></FadeIn>
 
-      <FadeIn delay={80}><Decision question="Mahesh's vertical-first rule for RAG">
-        Mahesh's Top 8 advice #3: go vertical-first. Don't build a "universal RAG platform" — build one that works perfectly for one domain.
+      <FadeIn delay={80}><Decision question="My vertical-first rule for RAG">
+        My vertical-first rule: go vertical-first. Don't build a "universal RAG platform" — build one that works perfectly for one domain.
         <br /><br />
         <strong>Why it matters for RAG:</strong>
         <br />
@@ -563,7 +563,7 @@ function PitfallsPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "Mahesh's Top 8 advice #8: 'Add continuous evals.' The production pitfalls are invisible without them — stale embeddings, lost-in-the-middle, domain vocabulary gaps all look like 'the agent works' from the outside. You need precision@k, groundedness, and answer correctness running on every change. Mahesh's rule: 'Evals + Memory are the moats of AI products.' The eval pipeline IS the product quality. Without it, you're flying blind — and in practice, understanding these failure modes with specific metrics shifts you from 'has read about RAG' to 'has operated a RAG pipeline at scale.'"
+        "My rule: add continuous evals. The production pitfalls are invisible without them — stale embeddings, lost-in-the-middle, domain vocabulary gaps all look like 'the agent works' from the outside. You need precision@k, groundedness, and answer correctness running on every change. My rule: 'Evals + Memory are the moats of AI products.' The eval pipeline IS the product quality. Without it, you're flying blind — and in practice, understanding these failure modes with specific metrics shifts you from 'has read about RAG' to 'has operated a RAG pipeline at scale.'"
       </Insight></FadeIn>
         </div>
   );
