@@ -2,6 +2,11 @@
 // Consumed at build time by scripts/prerender.mjs to emit a distinct HTML
 // document, canonical URL and sitemap entry for every route.
 
+// Counts come from the generated manifest, never from a number typed here. Three
+// separate hardcoded copies had already drifted (2,707 -> 2,721 -> 2,798 -> 2,829)
+// and each one was found by grep long after it went stale, not by anything failing.
+import { TOTALS } from '../data/diagrams.js';
+
 export const SITE_URL = 'https://curiousengineers.in';
 export const AUTHOR = 'Mahesh Guntumadugu';
 export const OG_IMAGE =
@@ -31,9 +36,12 @@ export const ROUTES = [
 
   {
     path: '/diagrams',
-    title: 'Architecture Diagrams — 31 Systems Drawn From Source',
+    title: `Architecture Diagrams — ${TOTALS.projects} Systems Drawn From Source`,
     description:
-      'Thirty-one production AI systems diagrammed from their source code, at two altitudes: where things live, and which state transitions are legal. Every box cites the line it came from — 2,798 citations, each machine-checked against that project\'s own source.',
+      `${TOTALS.projects} production AI systems diagrammed from their source code, at three altitudes: ` +
+      `where things live, which state transitions are legal, and what happens in what order. ` +
+      `Every box cites the line it came from — ${TOTALS.citations.toLocaleString()} citations across ` +
+      `${TOTALS.count} diagrams, each machine-checked against that project's own source.`,
     priority: '0.9',
     changefreq: 'monthly',
   },
