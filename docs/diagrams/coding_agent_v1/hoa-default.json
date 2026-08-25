@@ -92,5 +92,12 @@
     "failure": "#C62828",
     "revert": "#E65100",
     "doorway": "#E65100"
+  },
+  "msg": {
+    "call": "#232F3E",
+    "return": "#546E7A",
+    "async": "#1565C0",
+    "failure": "#C62828",
+    "revert": "#E65100"
   }
 }

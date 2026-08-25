@@ -115,3 +115,51 @@ def run(sp, render):
         'label_overlap': edge_label_overlap(sp, render),
         'overflow':    render.check_overflow(sp),
     }
+
+
+# ---------------------------------------------------------------- L2b (time)
+def msg_label_overlap(sp, render_seq):
+    """Two message labels must not sit on top of each other."""
+    boxes = sorted(render_seq.message_boxes(sp).items())
+    bad = []
+    for (i1, a), (i2, b) in combinations(boxes, 2):
+        ox = min(a[2], b[2]) - max(a[0], b[0])
+        oy = min(a[3], b[3]) - max(a[1], b[1])
+        if ox > 0 and oy > 0:
+            bad.append((i1, i2, round(ox), round(oy)))
+    return bad
+
+
+def msg_crosses_note(sp):
+    """A message arrow must not run through a note box.
+
+    Notes are placed by hand in the margins; a message that crosses one is the
+    sequence equivalent of edge_through_node, and just as unreadable.
+    """
+    bad = []
+    for m in sp.messages:
+        x0, x1, _self = sp.msg_span(m)
+        y = m[5]
+        for nid, _tok, _lbl, nx, ny, nw, nh in sp.notes:
+            if max(x0, x1) > nx and min(x0, x1) < nx + nw and ny < y < ny + nh:
+                bad.append((m[0], nid))
+    return bad
+
+
+def note_overlaps_lifeline(sp):
+    """A note must not sit on a lifeline stem -- it hides the thing it annotates."""
+    bad = []
+    for nid, _tok, _lbl, nx, ny, nw, nh in sp.notes:
+        for lid, _t, _l, cx in sp.lifelines:
+            if nx < cx < nx + nw and ny < sp.bottom and ny + nh > sp.top:
+                bad.append((nid, lid))
+    return bad
+
+
+def run_seq(sp, render_seq):
+    return {
+        'msg_label_overlap':  msg_label_overlap(sp, render_seq),
+        'msg_crosses_note':   msg_crosses_note(sp),
+        'note_on_lifeline':   note_overlaps_lifeline(sp),
+        'overflow':           render_seq.check_overflow(sp),
+    }

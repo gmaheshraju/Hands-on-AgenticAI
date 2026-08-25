@@ -147,6 +147,61 @@ guard, and its `evalBuilder.js` labels are assigned once into different arrays.
 That is classification, not a lifecycle, and drawing one would be manufacturing
 content. Three of 31 projects earned an L2; the honest answer was 3, not 4.
 
+## L2b — time (sequence diagrams)
+
+Written 2026-08-25 against `agent_mesh_seq_v1`, the first real one. The rules
+below are what that diagram forced, not what seemed sensible in advance.
+
+**Earn it, same as L2.** A sequence diagram is worth drawing when the ORDER can
+be wrong — a call that undoes an earlier one, a check whose answer is stale by
+the time it is used, two writers to one piece of state. A list of calls that
+could not go wrong in any order is a call graph, and a call graph is L1. The
+test that selected `29-agent-mesh`: **is there a defect that is invisible at the
+other two altitudes?** There, the exclude and the re-include are both `Mesh` →
+`MeshRouter`, so L1 draws them as one arrow, and neither reaches an illegal
+state, so L2 shows nothing. Only time shows it.
+
+**The grammar.** A folder declares `LIFELINES` and `MESSAGES` instead of
+`ZONES`/`NODES`/`EDGES`, and `build.py` dispatches on that.
+
+```
+LIFELINES = [(id, token, label, cx)]           # header boxes, one row, centres >= LL_W+40 apart
+MESSAGES  = [(id, src, dst, label, token, y)]  # src == dst -> self-call
+FRAGMENTS = [(id, label, x, y, w, h)]          # loop / alt / opt
+NOTES     = [(id, token, label, x, y, w, h)]   # cards, identical shape to NODES
+META      += ll_top, ll_bottom
+```
+
+Message tokens: `msg.call` · `msg.return` (dashed) · `msg.async` (dashed) ·
+`msg.failure` · `msg.revert`. Use `msg.revert` for a call that undoes an earlier
+one — on `agent_mesh_seq_v1` that single colour choice is what makes the finding
+findable.
+
+**ORDER IS THE CONTENT — the one invariant.** `MESSAGES` must be declared in
+strictly increasing `y`, and the build asserts it. This is not a tidiness rule.
+A sequence whose reading order differs from its declaration order is a false
+claim about what happened first, and that is the only claim the altitude makes.
+Also asserted: every message references a declared lifeline, every `y` sits
+inside the lifeline span, consecutive messages are ≥28px apart, lifeline centres
+are far enough apart that headers cannot touch, and a fragment must contain at
+least one message (a fragment around nothing is a grouping that is not there).
+
+**Label the RELATIONSHIP, not the call, when the relationship is the point.**
+`includeNode(id) for each tried node still HEALTHY` is a true label and a useless
+one — the call looks harmless. What it undoes, one pass later, is the finding, so
+the label says that. This is the L2b equivalent of a guard card.
+
+**Layout.** Time flows down; nothing else moves. Put the caller leftmost and the
+thing that does the work rightmost, so the arrows fan right as the call
+descends. Wrap the retry loop in a `loop` fragment and each branch in
+`alt`/`else` — without them a reader takes a branch for a step that always runs.
+Notes go BELOW `ll_bottom`, never beside the lifelines, or they cover the stems
+they annotate (lint checks this).
+
+**Still one sequence per page.** `29-agent-mesh` also has a node-failure
+choreography worth drawing. It belongs on its own page: two sequences on one
+page destroys the ordering claim, which is the only thing the page is for.
+
 ## Cards carry the invariants
 
 1–3 cards, each answering a question a reader would ask standing at that box

@@ -55,6 +55,8 @@ PROJECT = {
  'workflow_state_v1':('18','workflow-engine',None),
  'approval_state_v1':('25','agent-executor',None),
  'step_lifecycle_v1':('23','long-running-agent',None),
+ # L2b (time) diagrams
+ 'agent_mesh_seq_v1':('29','agent-mesh',None),
 }
 CITE = re.compile(r'[\w./-]+\.(?:js|mjs|jsx|ts|py):\d+')
 
@@ -67,16 +69,25 @@ for d in sorted(glob.glob(os.path.join(ROOT, '*_v1'))):
     m = importlib.util.module_from_spec(sp); sp.loader.exec_module(m)
     num, proj, post = PROJECT[key]
     cites = len(set(CITE.findall(open(os.path.join(d, 'FACTS.md')).read())))
+    seq = hasattr(m, 'LIFELINES')
     rows.append({
         'n': num, 'dir': key, 'project': proj, 'post': post,
-        # Altitude is DERIVED, not declared: a diagram whose nodes carry state.* tokens
-        # is answering the legality question, and one that does not is answering the
-        # spatial one. Reading it off the spec means the badge cannot disagree with the
-        # picture -- there is no second place to keep it in sync.
-        'alt': 'L2' if any(n[1].startswith('state.') for n in m.NODES) else 'L1',
+        # Altitude is DERIVED, not declared: a spec with LIFELINES is answering the
+        # TIME question, one whose nodes carry state.* tokens is answering the
+        # LEGALITY question, and anything else is answering the SPATIAL one. Reading
+        # it off the spec means the badge cannot disagree with the picture -- there is
+        # no second place to keep it in sync.
+        'alt': ('L2b' if seq else
+                'L2' if any(n[1].startswith('state.') for n in m.NODES) else 'L1'),
         'title': m.META['name'], 'desc': m.META['desc'],
-        'svg': m.META['svg'], 'nodes': len(m.NODES), 'edges': len(m.EDGES),
-        'zones': len(m.ZONES), 'cites': cites,
+        'svg': m.META['svg'],
+        # A sequence has no boxes or zones; its shape is lifelines and messages. The
+        # gallery tile reads whichever pair is real, so the caption never invents a
+        # count that the picture does not contain.
+        'nodes': len(m.LIFELINES) if seq else len(m.NODES),
+        'edges': len(m.MESSAGES) if seq else len(m.EDGES),
+        'zones': len(getattr(m, 'FRAGMENTS', [])) if seq else len(m.ZONES),
+        'cites': cites,
     })
 rows.sort(key=lambda r: (r['n'], r['dir']))
 

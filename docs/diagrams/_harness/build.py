@@ -8,7 +8,7 @@ import sys, os, importlib.util, json, hashlib
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
-import render, lint
+import render, render_seq, lint
 
 def load_spec(d):
     p = os.path.join(d, 'spec.py')
@@ -20,10 +20,19 @@ def build(d):
     m = load_spec(d)
     theme = os.path.join(d, m.META['theme'])
     if not os.path.exists(theme): theme = os.path.join(HERE, m.META['theme'])
-    sp = render.Spec(m, theme)
-    render.emit_drawio(sp, os.path.join(d, m.META['drawio']))
-    render.emit_svg(sp, os.path.join(d, m.META['svg']))
-    res = lint.run(sp, render)
+    # Altitude dispatch. A folder declares LIFELINES when it is answering the TIME
+    # question, and ZONES/NODES/EDGES when it is answering the space or legality one.
+    # Nothing else changes: same theme, same lint entry point, same LINT.md contract.
+    if hasattr(m, 'LIFELINES'):
+        sp = render_seq.SeqSpec(m, theme)
+        render_seq.emit_drawio(sp, os.path.join(d, m.META['drawio']))
+        render_seq.emit_svg(sp, os.path.join(d, m.META['svg']))
+        res = lint.run_seq(sp, render_seq)
+    else:
+        sp = render.Spec(m, theme)
+        render.emit_drawio(sp, os.path.join(d, m.META['drawio']))
+        render.emit_svg(sp, os.path.join(d, m.META['svg']))
+        res = lint.run(sp, render)
     n = sum(len(v) for v in res.values())
     rows = [f"| {k} | {'**' + str(len(v)) + '**' if v else '0'} |" for k, v in res.items()]
     detail = ''
@@ -78,7 +87,11 @@ if __name__ == '__main__':
     for d in dirs:
         name, sp, n, res = build(d)
         flag = 'CLEAN' if n == 0 else f'{n} VIOLATION(S)'
-        print(f"{name:34s} nodes={len(sp.nodes):3d} edges={len(sp.edges):3d} zones={len(sp.zones):2d}  {flag}")
+        if hasattr(sp, 'lifelines'):
+            shape = f"lifelines={len(sp.lifelines):3d} msgs={len(sp.messages):3d} frags={len(sp.fragments):2d}"
+        else:
+            shape = f"nodes={len(sp.nodes):3d} edges={len(sp.edges):3d} zones={len(sp.zones):2d}"
+        print(f"{name:34s} {shape}  {flag}")
         if n:
             fails += 1
             for k, v in res.items():

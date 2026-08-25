@@ -37,10 +37,13 @@ export default function Diagrams() {
       </div>
 
       <p style={S.legend}>
-        Two altitudes. <strong>L1</strong> answers where things live and what talks to what.
-        <strong> L2</strong> answers which state transitions are legal, which are guarded, and where the
-        machine can stop — drawn only for the three projects that have a real transition table rather than
-        a status label assigned once.
+        Three altitudes, because one picture cannot answer three questions.
+        <strong> L1</strong> is space — where things live, what talks to what.
+        <strong> L2</strong> is legality — which state transitions exist, which are guarded, where the
+        machine can stop. <strong>L2b</strong> is time — what happens in what order, and where the order
+        itself is the defect. The higher altitudes are drawn only where the code earns them: a real
+        transition table rather than a status label assigned once, a real ordering hazard rather than a
+        sequence of calls that could not go wrong.
       </p>
 
       <div style={S.grid}>
@@ -54,12 +57,12 @@ export default function Diagrams() {
               <figcaption style={S.cap}>
                 <span style={S.title}>
                   <span style={S.num}>{d.n}</span> {d.project}
-                  <span style={d.alt === 'L2' ? S.altL2 : S.altL1} title={d.alt === 'L2'
-                    ? 'Legality — which state transitions exist, and which are guarded'
-                    : 'Space — where things live, and what talks to what'}>{d.alt}</span>
+                  <span style={d.alt === 'L1' ? S.altL1 : S.altL2} title={ALT_TITLE[d.alt]}>{d.alt}</span>
                 </span>
                 <span style={S.stats}>
-                  {d.nodes} boxes · {d.edges} edges · <strong>{d.cites} cited</strong>
+                  {d.alt === 'L2b'
+                    ? `${d.nodes} lifelines · ${d.edges} messages`
+                    : `${d.nodes} boxes · ${d.edges} edges`} · <strong>{d.cites} cited</strong>
                 </span>
                 <span style={S.links}>
                   <a href={`${REPO}/blob/main/docs/diagrams/${d.dir}/FACTS.md`} target="_blank" rel="noreferrer" style={S.a}>facts</a>
@@ -79,6 +82,12 @@ export default function Diagrams() {
     </div>
   );
 }
+
+const ALT_TITLE = {
+  L1: 'Space — where things live, and what talks to what',
+  L2: 'Legality — which state transitions exist, and which are guarded',
+  L2b: 'Time — what happens in what order, and where the order is the defect',
+};
 
 const S = {
   legend: { fontSize: 14, lineHeight: 1.65, color: 'var(--text-muted)', margin: '0 0 26px', maxWidth: 720 },

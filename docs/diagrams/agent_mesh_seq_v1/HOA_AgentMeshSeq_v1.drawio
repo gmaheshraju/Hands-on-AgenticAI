@@ -1,0 +1,132 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_agent_mesh_seq_v1" name="29 Agent Mesh — submitWork over time">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1280" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="f_loop" value="loop — attempt 0 through maxRetries" style="shape=umlFrame;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#2E7D32;dashed=1;fontSize=10;fontColor=#2E7D32;align=left;" parent="1" vertex="1">
+          <mxGeometry x="400" y="264" width="1220" height="624" as="geometry" />
+        </mxCell>
+        <mxCell id="f_alt1" value="alt — the breaker refuses" style="shape=umlFrame;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#2E7D32;dashed=1;fontSize=10;fontColor=#2E7D32;align=left;" parent="1" vertex="1">
+          <mxGeometry x="440" y="536" width="1140" height="128" as="geometry" />
+        </mxCell>
+        <mxCell id="f_alt2" value="else — the breaker allows" style="shape=umlFrame;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#2E7D32;dashed=1;fontSize=10;fontColor=#2E7D32;align=left;" parent="1" vertex="1">
+          <mxGeometry x="440" y="680" width="1140" height="180" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;caller&lt;/b&gt;&lt;br&gt;awaits submitWork" class="component.entry" id="caller">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="80.0" y="96" width="240" height="864" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Mesh&lt;/b&gt;&lt;br&gt;owns the retry loop" class="component.service" id="mesh">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="400.0" y="96" width="240" height="864" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;MeshRouter&lt;/b&gt;&lt;br&gt;holds _excludedNodes" class="component.agent" id="router">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="720.0" y="96" width="240" height="864" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;CircuitBreakerRegistry&lt;/b&gt;&lt;br&gt;one breaker per node" class="component.external" id="breaker">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="1060.0" y="96" width="240" height="864" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;AgentNode&lt;/b&gt;&lt;br&gt;runs the work" class="component.artifact" id="node">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="1380.0" y="96" width="240" height="864" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="m1" value="submitWork(item, strategy)" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="224" as="sourcePoint" />
+            <mxPoint x="520" y="224" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m2" value="excludeNode(id) for each tried node — none on the first attempt" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="308" as="sourcePoint" />
+            <mxPoint x="840" y="308" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m3" value="selectNode(item, strategy)" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="360" as="sourcePoint" />
+            <mxPoint x="840" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m4" value="the chosen node, or null" style="html=1;rounded=0;strokeColor=#546E7A;fontColor=#546E7A;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;dashed=1;dashPattern=4 4;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="840" y="412" as="sourcePoint" />
+            <mxPoint x="520" y="412" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m5" value="includeNode(id) for each tried node still HEALTHY — undoes the red exclusion below, next pass" style="html=1;rounded=0;strokeColor=#E65100;fontColor=#E65100;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="464" as="sourcePoint" />
+            <mxPoint x="840" y="464" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m6" value="allowRequest(node.id)" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="516" as="sourcePoint" />
+            <mxPoint x="1180" y="516" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m7" value="false — this breaker is OPEN" style="html=1;rounded=0;strokeColor=#C62828;fontColor=#C62828;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1180" y="568" as="sourcePoint" />
+            <mxPoint x="520" y="568" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m8" value="excludeNode(node.id) — then continue to the next attempt" style="html=1;rounded=0;strokeColor=#C62828;fontColor=#C62828;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="620" as="sourcePoint" />
+            <mxPoint x="840" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m9" value="await node.enqueue(item)" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="700" as="sourcePoint" />
+            <mxPoint x="1500" y="700" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m10" value="result" style="html=1;rounded=0;strokeColor=#546E7A;fontColor=#546E7A;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;dashed=1;dashPattern=4 4;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1500" y="752" as="sourcePoint" />
+            <mxPoint x="520" y="752" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m11" value="recordSuccess(id) — or recordFailure(id) if it threw" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="804" as="sourcePoint" />
+            <mxPoint x="1180" y="804" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m12" value="work_completed record" style="html=1;rounded=0;strokeColor=#546E7A;fontColor=#546E7A;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;dashed=1;dashPattern=4 4;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="856" as="sourcePoint" />
+            <mxPoint x="200" y="856" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m13" value="throw — &#x27;no healthy node available&#x27;" style="html=1;rounded=0;strokeColor=#C62828;fontColor=#C62828;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="920" as="sourcePoint" />
+            <mxPoint x="200" y="920" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <object label="&lt;b&gt;THE ORDERING DEFECT — THE RE-INCLUDE UNDOES THE EXCLUSION&lt;/b&gt;&lt;br&gt;The breaker refuses a node, so the mesh excludes it from routing. On the NEXT&lt;br&gt;attempt the mesh excludes every tried node, picks another, and then re-includes&lt;br&gt;the tried ones — testing HEALTH, which knows nothing about breaker state. The&lt;br&gt;condemned node is healthy, so it goes back into the routing pool.&lt;br&gt;RAN — the instrumented calls for one submitWork read: select node_1, exclude&lt;br&gt;node_1, exclude node_1, select node_2, include node_1. The breaker is still&lt;br&gt;OPEN and the excluded set is EMPTY.&lt;br&gt;RAN — four consecutive calls then pick the condemned node FIRST every time,&lt;br&gt;four out of four, and it completes zero work. Each pass burns one attempt.&lt;br&gt;RAN — with two condemned nodes and a two-attempt budget, submitWork THROWS&lt;br&gt;&#x27;no healthy node available&#x27; while a healthy idle node was never selected. In&lt;br&gt;that case the thrown message is false." class="card.failure" id="note_finding">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="96" y="1000" width="880" height="232" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;WHAT STILL HOLDS, AND WHY THE FIX IS NOT &#x27;DELETE THE RE-INCLUDE&#x27;&lt;/b&gt;&lt;br&gt;No work is ever misrouted. The breaker is re-asked on every attempt, so a&lt;br&gt;condemned node is refused each time — the cost is a wasted attempt, not a&lt;br&gt;wrong destination.&lt;br&gt;The re-include is also not gratuitous. The mesh excludes tried nodes only to&lt;br&gt;stop selectNode returning them again inside THIS call, and it has to undo&lt;br&gt;that so other work can still route to them.&lt;br&gt;The real defect is that a temporary exclusion and a durable one are kept in&lt;br&gt;the SAME set, with no record of who excluded a node or why. Separating those&lt;br&gt;two is a design decision, so this diagram states the finding and stops&lt;br&gt;there.&lt;br&gt;A node marked FAILED by the health monitor is unaffected — it fails the&lt;br&gt;HEALTHY test and is never re-included." class="card.invariant" id="note_gate">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="1008" y="1000" width="612" height="232" as="geometry" />
+          </mxCell>
+        </object>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

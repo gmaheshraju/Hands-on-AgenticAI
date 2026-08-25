@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 1240" role="img" aria-labelledby="hoa_agent_mesh_seq_v1-t hoa_agent_mesh_seq_v1-d" class="fts-diagram">
+  <title id="hoa_agent_mesh_seq_v1-t">29 Agent Mesh — submitWork over time</title>
+  <desc id="hoa_agent_mesh_seq_v1-d">One attempt of the mesh&#x27;s retry loop, in order: the router is asked to forget the tried nodes, pick one, and remember them again — and that last step silently puts back a node the circuit breaker removed two messages earlier. Verified by execution.</desc>
+  <defs>
+    <marker id="hoa_agent_mesh_seq_v1-a-d-msg-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-msg-call-fill"/></marker>
+    <marker id="hoa_agent_mesh_seq_v1-a-d-msg-failure" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C62828" class="d-msg-failure-fill"/></marker>
+    <marker id="hoa_agent_mesh_seq_v1-a-d-msg-return" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#546E7A" class="d-msg-return-fill"/></marker>
+    <marker id="hoa_agent_mesh_seq_v1-a-d-msg-revert" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E65100" class="d-msg-revert-fill"/></marker>
+  </defs>
+  <g class="d-fragment" data-id="f_loop">
+    <rect x="400" y="264" width="1220" height="624" rx="4" fill="none" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="8 4"/>
+    <rect x="400" y="264" width="238.0" height="18" rx="3" fill="#2E7D32" fill-opacity="0.12" stroke="#2E7D32" stroke-width="1"/>
+    <text x="407" y="277" fill="#2E7D32" font-size="11" font-weight="600" class="d-frag-label">loop — attempt 0 through maxRetries</text>
+  </g>
+  <g class="d-fragment" data-id="f_alt1">
+    <rect x="440" y="536" width="1140" height="128" rx="4" fill="none" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="8 4"/>
+    <rect x="440" y="536" width="174.0" height="18" rx="3" fill="#2E7D32" fill-opacity="0.12" stroke="#2E7D32" stroke-width="1"/>
+    <text x="447" y="549" fill="#2E7D32" font-size="11" font-weight="600" class="d-frag-label">alt — the breaker refuses</text>
+  </g>
+  <g class="d-fragment" data-id="f_alt2">
+    <rect x="440" y="680" width="1140" height="180" rx="4" fill="none" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="8 4"/>
+    <rect x="440" y="680" width="174.0" height="18" rx="3" fill="#2E7D32" fill-opacity="0.12" stroke="#2E7D32" stroke-width="1"/>
+    <text x="447" y="693" fill="#2E7D32" font-size="11" font-weight="600" class="d-frag-label">else — the breaker allows</text>
+  </g>
+  <g class="d-lifeline d-component-entry" data-id="caller" data-class="component.entry">
+    <line x1="200" y1="156" x2="200" y2="960" stroke="#E65100" stroke-width="1.5" stroke-dasharray="4 5" class="d-lifeline-stem"/>
+    <rect x="80.0" y="96" width="240" height="60" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="2"/>
+    <text x="200" y="122.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">caller</text>
+    <text x="200" y="137.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">awaits submitWork</text>
+  </g>
+  <g class="d-lifeline d-component-service" data-id="mesh" data-class="component.service">
+    <line x1="520" y1="156" x2="520" y2="960" stroke="#3F51B5" stroke-width="1.5" stroke-dasharray="4 5" class="d-lifeline-stem"/>
+    <rect x="400.0" y="96" width="240" height="60" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="2"/>
+    <text x="520" y="122.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Mesh</text>
+    <text x="520" y="137.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">owns the retry loop</text>
+  </g>
+  <g class="d-lifeline d-component-agent" data-id="router" data-class="component.agent">
+    <line x1="840" y1="156" x2="840" y2="960" stroke="#7B1FA2" stroke-width="1.5" stroke-dasharray="4 5" class="d-lifeline-stem"/>
+    <rect x="720.0" y="96" width="240" height="60" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="2"/>
+    <text x="840" y="122.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">MeshRouter</text>
+    <text x="840" y="137.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">holds _excludedNodes</text>
+  </g>
+  <g class="d-lifeline d-component-external" data-id="breaker" data-class="component.external">
+    <line x1="1180" y1="156" x2="1180" y2="960" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="4 5" class="d-lifeline-stem"/>
+    <rect x="1060.0" y="96" width="240" height="60" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+    <text x="1180" y="122.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">CircuitBreakerRegistry</text>
+    <text x="1180" y="137.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">one breaker per node</text>
+  </g>
+  <g class="d-lifeline d-component-artifact" data-id="node" data-class="component.artifact">
+    <line x1="1500" y1="156" x2="1500" y2="960" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="4 5" class="d-lifeline-stem"/>
+    <rect x="1380.0" y="96" width="240" height="60" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+    <text x="1500" y="122.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">AgentNode</text>
+    <text x="1500" y="137.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">runs the work</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m1">
+    <line x1="200" y1="224" x2="520" y2="224" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_agent_mesh_seq_v1-a-d-msg-call)"/>
+    <text x="360.0" y="217" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">submitWork(item, strategy)</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m2">
+    <line x1="520" y1="308" x2="840" y2="308" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_agent_mesh_seq_v1-a-d-msg-call)"/>
+    <text x="680.0" y="301" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">excludeNode(id) for each tried node — none on the first attempt</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m3">
+    <line x1="520" y1="360" x2="840" y2="360" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_agent_mesh_seq_v1-a-d-msg-call)"/>
+    <text x="680.0" y="353" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">selectNode(item, strategy)</text>
+  </g>
+  <g class="d-msg d-msg-return" data-msg="m4">
+    <line x1="840" y1="412" x2="520" y2="412" stroke="#546E7A" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_agent_mesh_seq_v1-a-d-msg-return)"/>
+    <text x="680.0" y="405" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">the chosen node, or null</text>
+  </g>
+  <g class="d-msg d-msg-revert" data-msg="m5">
+    <line x1="520" y1="464" x2="840" y2="464" stroke="#E65100" stroke-width="1.75" marker-end="url(#hoa_agent_mesh_seq_v1-a-d-msg-revert)"/>
+    <text x="680.0" y="457" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">includeNode(id) for each tried node still HEALTHY — undoes the red exclusion below, next pass</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m6">
+    <line x1="520" y1="516" x2="1180" y2="516" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_agent_mesh_seq_v1-a-d-msg-call)"/>
+    <text x="850.0" y="509" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">allowRequest(node.id)</text>
+  </g>
+  <g class="d-msg d-msg-failure" data-msg="m7">
+    <line x1="1180" y1="568" x2="520" y2="568" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_agent_mesh_seq_v1-a-d-msg-failure)"/>
+    <text x="850.0" y="561" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">false — this breaker is OPEN</text>
+  </g>
+  <g class="d-msg d-msg-failure" data-msg="m8">
+    <line x1="520" y1="620" x2="840" y2="620" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_agent_mesh_seq_v1-a-d-msg-failure)"/>
+    <text x="680.0" y="613" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">excludeNode(node.id) — then continue to the next attempt</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m9">
+    <line x1="520" y1="700" x2="1500" y2="700" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_agent_mesh_seq_v1-a-d-msg-call)"/>
+    <text x="1010.0" y="693" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">await node.enqueue(item)</text>
+  </g>
+  <g class="d-msg d-msg-return" data-msg="m10">
+    <line x1="1500" y1="752" x2="520" y2="752" stroke="#546E7A" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_agent_mesh_seq_v1-a-d-msg-return)"/>
+    <text x="1010.0" y="745" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">result</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m11">
+    <line x1="520" y1="804" x2="1180" y2="804" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_agent_mesh_seq_v1-a-d-msg-call)"/>
+    <text x="850.0" y="797" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">recordSuccess(id) — or recordFailure(id) if it threw</text>
+  </g>
+  <g class="d-msg d-msg-return" data-msg="m12">
+    <line x1="520" y1="856" x2="200" y2="856" stroke="#546E7A" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_agent_mesh_seq_v1-a-d-msg-return)"/>
+    <text x="360.0" y="849" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">work_completed record</text>
+  </g>
+  <g class="d-msg d-msg-failure" data-msg="m13">
+    <line x1="520" y1="920" x2="200" y2="920" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_agent_mesh_seq_v1-a-d-msg-failure)"/>
+    <text x="360.0" y="913" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">throw — &#x27;no healthy node available&#x27;</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="note_finding" data-class="card.failure">
+    <rect x="96" y="1000" width="880" height="232" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="104" y="1035.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">THE ORDERING DEFECT — THE RE-INCLUDE UNDOES THE EXCLUSION</text>
+    <text x="104" y="1049.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">The breaker refuses a node, so the mesh excludes it from routing. On the NEXT</text>
+    <text x="104" y="1063.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">attempt the mesh excludes every tried node, picks another, and then re-includes</text>
+    <text x="104" y="1077.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">the tried ones — testing HEALTH, which knows nothing about breaker state. The</text>
+    <text x="104" y="1091.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">condemned node is healthy, so it goes back into the routing pool.</text>
+    <text x="104" y="1105.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">RAN — the instrumented calls for one submitWork read: select node_1, exclude</text>
+    <text x="104" y="1119.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">node_1, exclude node_1, select node_2, include node_1. The breaker is still</text>
+    <text x="104" y="1133.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">OPEN and the excluded set is EMPTY.</text>
+    <text x="104" y="1147.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">RAN — four consecutive calls then pick the condemned node FIRST every time,</text>
+    <text x="104" y="1161.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">four out of four, and it completes zero work. Each pass burns one attempt.</text>
+    <text x="104" y="1175.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">RAN — with two condemned nodes and a two-attempt budget, submitWork THROWS</text>
+    <text x="104" y="1189.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">&#x27;no healthy node available&#x27; while a healthy idle node was never selected. In</text>
+    <text x="104" y="1203.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">that case the thrown message is false.</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="note_gate" data-class="card.invariant">
+    <rect x="1008" y="1000" width="612" height="232" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1016" y="1035.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">WHAT STILL HOLDS, AND WHY THE FIX IS NOT &#x27;DELETE THE RE-INCLUDE&#x27;</text>
+    <text x="1016" y="1049.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">No work is ever misrouted. The breaker is re-asked on every attempt, so a</text>
+    <text x="1016" y="1063.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">condemned node is refused each time — the cost is a wasted attempt, not a</text>
+    <text x="1016" y="1077.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">wrong destination.</text>
+    <text x="1016" y="1091.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">The re-include is also not gratuitous. The mesh excludes tried nodes only to</text>
+    <text x="1016" y="1105.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">stop selectNode returning them again inside THIS call, and it has to undo</text>
+    <text x="1016" y="1119.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">that so other work can still route to them.</text>
+    <text x="1016" y="1133.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">The real defect is that a temporary exclusion and a durable one are kept in</text>
+    <text x="1016" y="1147.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">the SAME set, with no record of who excluded a node or why. Separating those</text>
+    <text x="1016" y="1161.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">two is a design decision, so this diagram states the finding and stops</text>
+    <text x="1016" y="1175.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">there.</text>
+    <text x="1016" y="1189.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">A node marked FAILED by the health monitor is unaffected — it fails the</text>
+    <text x="1016" y="1203.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">HEALTHY test and is never re-included.</text>
+  </g>
+</svg>
