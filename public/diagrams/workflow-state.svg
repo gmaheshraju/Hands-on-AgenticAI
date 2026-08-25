@@ -69,7 +69,7 @@
   </g>
   <g class="d-node d-card-failure" data-id="card_swallow" data-class="card.failure">
     <rect x="736" y="568" width="560" height="144" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
-    <text x="744" y="608.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">THE ONE SWALLOWED FAILURE — engine.js:210</text>
+    <text x="744" y="608.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">THE ONE SWALLOWED FAILURE — engine.js</text>
     <text x="744" y="622.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">try { run.transition(&#x27;FAILED&#x27;) } catch (_) { /* already failed */ }</text>
     <text x="744" y="636.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">The only transition() call wrapped in a bare catch. FAILED is</text>
     <text x="744" y="650.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">terminal, so a second failure throws and that throw is discarded.</text>

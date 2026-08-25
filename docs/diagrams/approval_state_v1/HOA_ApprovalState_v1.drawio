@@ -1,0 +1,74 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_approval_state_v1" name="25 Agent Executor — ApprovalRequest lifecycle">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1480" pageHeight="940" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_q" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="96" y="64" width="1200" height="608" as="geometry" />
+        </mxCell>
+        <mxCell id="z_q_lbl" value="src/approvals.js — ApprovalQueue owns every write to .status" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="108" y="72" width="1184" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;submit(request)&lt;/b&gt;&lt;br&gt;the only entry" class="state.initial" id="n_submit">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="160" y="264" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;pending&lt;/b&gt;&lt;br&gt;the only live state" class="state.active" id="s_pending">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="464" y="264" width="208" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;auto_approved&lt;/b&gt;&lt;br&gt;born already decided" class="state.terminal" id="s_auto">
+          <mxCell style="rounded=1;fillColor=#ECEFF1;strokeColor=#455A64;strokeWidth=3;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1000" y="120" width="224" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;approved&lt;/b&gt;&lt;br&gt;then deleted from the Map" class="state.terminal" id="s_appr">
+          <mxCell style="rounded=1;fillColor=#ECEFF1;strokeColor=#455A64;strokeWidth=3;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1000" y="264" width="224" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;denied&lt;/b&gt;&lt;br&gt;then deleted from the Map" class="state.terminal" id="s_deny">
+          <mxCell style="rounded=1;fillColor=#ECEFF1;strokeColor=#455A64;strokeWidth=3;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1000" y="408" width="224" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;expired&lt;/b&gt;&lt;br&gt;swept, then deleted" class="state.terminal" id="s_exp">
+          <mxCell style="rounded=1;fillColor=#ECEFF1;strokeColor=#455A64;strokeWidth=3;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1000" y="552" width="224" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;THE GUARD IS THE MAP, NOT THE STATUS CHECK&lt;/b&gt;&lt;br&gt;approve() and deny() each test status !== &#x27;pending&#x27; and return&lt;br&gt;&#x27;already_decided&#x27;. That branch is UNREACHABLE. Every decision&lt;br&gt;deletes from the Map first, so a second call returns at the&lt;br&gt;earlier guard instead — RAN: it gives &#x27;not_found&#x27;, never&lt;br&gt;&#x27;already_decided&#x27;. No record inside the Map can hold a&lt;br&gt;non-pending status. The request is still refused correctly;&lt;br&gt;what is wrong is the REASON a reader will believe." class="card.invariant" id="card_guard">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="160" y="704" width="592" height="176" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;&#x27;escalated&#x27; IS REPORTED, NEVER STORED&lt;/b&gt;&lt;br&gt;escalate() raises escalationLevel and returns a payload saying&lt;br&gt;status &#x27;escalated&#x27; — but never assigns .status. The record stays&lt;br&gt;&#x27;pending&#x27;. RAN: the call reports level 1 while the record reads&lt;br&gt;status &#x27;pending&#x27;, escalationLevel 1.&lt;br&gt;So getHistory filtered on status &#x27;escalated&#x27; matches 0 records,&lt;br&gt;always. The word exists in the return channel and nowhere in&lt;br&gt;the data — which is why escalate is drawn as a self-loop." class="card.failure" id="card_escalated">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="808" y="704" width="608" height="176" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="e_auto" value="a rule in autoApproveRules matched" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_submit" target="s_auto" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="248" y="152" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_pend" value="no rule matched" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="n_submit" target="s_pending" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_appr" value="approve(id, approver)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="s_pending" target="s_appr" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_deny" value="deny(id, approver, reason)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="s_pending" target="s_deny" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="568" y="440" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_exp" value="checkExpired() sweep: now past expiresAt" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="s_pending" target="s_exp" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="620" y="584" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="e_esc" value="escalate() — level++, status unchanged" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#E65100;fontColor=#E65100;fontSize=8;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" parent="1" source="s_pending" target="s_pending" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="516" y="200" /><mxPoint x="620" y="200" /></Array></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

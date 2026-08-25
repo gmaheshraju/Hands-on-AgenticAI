@@ -10,7 +10,15 @@ Exit 1 on any unresolved citation.
 """
 import re, sys, os
 
-def main(facts_path, src_root):
+def main(facts_path, src_root, scope=None):
+    # SCOPE REMOVES THE AMBIGUITY BY CONSTRUCTION. Every FACTS.md belongs to exactly
+    # one project, so searching all 31 for a basename was never right -- it is what let
+    # `engine.js:168` match two different projects. The diagram->project map that the
+    # manifest already maintains is the same fact, so resolution reuses it. Unscoped
+    # calls still work and still report AMBIGUOUS rather than guessing.
+    if scope:
+        scoped = os.path.join(src_root, scope)
+        if os.path.isdir(scoped): src_root = scoped
     s = open(facts_path).read()
     cites = sorted(set(re.findall(r'\b([\w./-]+\.(?:js|mjs|jsx|ts|py)):(\d+)', s)),
                    key=lambda x: (x[0], int(x[1])))
@@ -23,11 +31,24 @@ def main(facts_path, src_root):
         cand = [os.path.join(src_root, f), os.path.join(src_root, 'src', os.path.basename(f))]
         p = next((c for c in cand if os.path.exists(c)), None)
         if not p:
+            # AMBIGUITY IS AN ERROR, NOT A COIN FLIP. The first version took the first
+            # basename match found while walking. In a 31-project monorepo two projects
+            # both have src/executor.js, so `executor.js:211` silently resolved to the
+            # WRONG project's file -- and either reported a false OUT OF RANGE or, worse,
+            # validated the line against source the diagram is not about. A verifier that
+            # answers confidently from the wrong file is a green light from a stale
+            # instrument. Now: exactly one match resolves, more than one is a failure that
+            # names the candidates, and the citation must be qualified until it is unique.
             base = os.path.basename(f)
+            hits = []
             for dirpath, _, names in os.walk(src_root):
                 if 'node_modules' in dirpath: continue
-                if base in names:
-                    p = os.path.join(dirpath, base); break
+                if base in names: hits.append(os.path.join(dirpath, base))
+            if len(hits) > 1:
+                rel = sorted(os.path.relpath(h, src_root) for h in hits)
+                bad.append((f, ln, 'AMBIGUOUS -- %d files match, qualify the path: %s'
+                            % (len(hits), ', '.join(rel[:4])))); continue
+            if hits: p = hits[0]
         if not p:
             bad.append((f, ln, 'FILE NOT FOUND')); continue
         lines = open(p).read().split('\n')
@@ -62,6 +83,34 @@ def check_spec_labels(spec_path):
     return bad
 
 if __name__ == '__main__':
+    if '--all' in sys.argv:
+        # Bulk mode. The per-diagram citation check existed but nothing ran it over every
+        # FACTS.md, so it could only catch what someone remembered to point it at.
+        import glob, importlib.util
+        root = sys.argv[sys.argv.index('--all') + 1]
+        here = os.path.dirname(os.path.abspath(__file__))
+        mspec = importlib.util.spec_from_file_location('em', os.path.join(here, 'emit_manifest.py'))
+        PROJ = {}
+        try:
+            src = open(os.path.join(here, 'emit_manifest.py')).read()
+            ns = {}
+            exec(src[src.index('PROJECT = {'):src.index('CITE = re.compile')], {'re': re}, ns)
+            PROJ = ns['PROJECT']
+        except Exception as e:
+            print('  WARN could not read PROJECT map (%s); falling back to unscoped' % e)
+        tot = 0
+        for fp in sorted(glob.glob(os.path.join(os.path.dirname(here), '*_v*', 'FACTS.md'))):
+            key = os.path.basename(os.path.dirname(fp))
+            sc = None
+            if key in PROJ:
+                num, slug, _ = PROJ[key]
+                sc = '%s-%s' % (num, slug)
+            elif key not in PROJ:
+                print('  WARN unmapped diagram (unscoped): %s' % key)
+            tot += main(fp, root, sc)
+        print("FACTS citation check: %d file(s) with unresolved citations" % tot)
+        sys.exit(1 if tot else 0)
+
     if '--specs' in sys.argv:
         import glob
         root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

@@ -33,7 +33,7 @@ export const ROUTES = [
     path: '/diagrams',
     title: 'Architecture Diagrams — 31 Systems Drawn From Source',
     description:
-      'Thirty-one production AI systems diagrammed from their source code. Every box cites the line it came from — 2,707 citations, each checked against the source on every build.',
+      'Thirty-one production AI systems diagrammed from their source code, at two altitudes: where things live, and which state transitions are legal. Every box cites the line it came from — 2,798 citations, each machine-checked against that project\'s own source.',
     priority: '0.9',
     changefreq: 'monthly',
   },

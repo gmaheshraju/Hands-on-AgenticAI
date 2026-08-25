@@ -67,13 +67,31 @@ top of a functional zone, exit the node LEFT and run the riser outside the zone.
 
 ## Fixed in the renderer — do NOT work around these any more
 
-- **Edge labels** are now centred on the **longest segment** of the path. v1 put
-  them at `pp[len//2]`, which on a 2-point edge is the entry port, so labels
-  landed inside the target box. If you read older specs that add a pointless
-  mid-lane waypoint purely to move a label, that hack is obsolete. Labels are
-  still **not** overflow-checked — keep them 1–3 words.
+- **Edge labels** are centred on the **longest segment** of the path, and if that
+  position collides with a label already placed they **dodge** to the first free
+  slot along the same segment (`render.label_boxes`). v1 put them at
+  `pp[len//2]`, which on a 2-point edge is the entry port, so labels landed
+  inside the target box; v2 put two labels on the same spot whenever a
+  horizontal and a vertical edge crossed near their middles. If you read older
+  specs that add a pointless mid-lane waypoint purely to move a label, that hack
+  is obsolete. Labels are still **not** overflow-checked — keep them short.
 - **Colour** is emitted as presentation attributes AND CSS classes. Never put a
   hex in a spec; the build rejects it.
+
+## Two things the diagram may NOT say
+
+- **No line numbers in labels.** `verify_facts.py --specs` fails the build if a
+  label contains `:` followed by a digit. Line numbers are the most brittle
+  anchor there is, and until 2026-08-24 the ones baked into labels were the only
+  citations nothing checked — visible rigour that was unverified, while the
+  verified rigour was invisible. Name the **method** instead; it survives edits.
+  Every line number belongs in `FACTS.md`, where it is machine-checked.
+- **No bare filenames in FACTS.md citations that two projects share.**
+  Resolution is scoped to the diagram's own project via the map in
+  `emit_manifest.py`, so `executor.js:211` means *this* project's. If the
+  diagram is not in that map the check falls back to searching every project
+  and reports **AMBIGUOUS** rather than picking one — which it used to do
+  silently, validating line numbers against a different project's file.
 
 ## Run the harness with the RIGHT interpreter
 
@@ -112,6 +130,23 @@ L1 is **space**: where things live, what talks to what, what crosses a boundary.
 6–12 component boxes. An internal loop or state machine is L2/L2b — exclude it
 and say so in FACTS.md. More than ~12 boxes means you are drawing a call graph.
 
+L2 is **legality**: which transitions exist, what enforces them, where the
+machine can stop. Four state classes (`state.initial|active|transitional|
+terminal`) and four transition classes (`transition.normal|failure|revert|
+doorway`) — and no decision pseudo-state, so a branch point is a **guard card**
+with its complete enumeration in code order, never a box. Terminal states get a
+3px border from the token; that is what makes "where can this stop?" answerable
+at a glance, so never spend it on a non-terminal state.
+
+**Earn the L2 before drawing it.** Statuses on a record are not a state machine.
+The test is whether a status is ever *reassigned* under a rule: `18-workflow-
+engine` has a `VALID_TRANSITIONS` table that throws, `23` and `25` have real
+reassignment with guards. `14-forward-deployed-engineering` was rejected — its
+`dashboard.js` writes `issue.status = req.body.status` with no enum and no
+guard, and its `evalBuilder.js` labels are assigned once into different arrays.
+That is classification, not a lifecycle, and drawing one would be manufacturing
+content. Three of 31 projects earned an L2; the honest answer was 3, not 4.
+
 ## Cards carry the invariants
 
 1–3 cards, each answering a question a reader would ask standing at that box
@@ -121,5 +156,13 @@ show 6. A card is executable truth on a picture — that is the whole product.
 
 ## Done means
 
-`build.py` prints **CLEAN**, `verify_facts.py` prints **BAD=0**, and you changed
-nothing outside your own diagram folder.
+`npm run verify:diagrams` passes — that is `build.py --check` (every diagram
+CLEAN and no LINT.md stale against its spec hash), `verify_facts.py --specs`
+(no line numbers in labels) and `verify_facts.py --all projects` (every citation
+resolves, scoped to its own project).
+
+Then **look at the render**. `rsvg-convert -w 1700 <dir>/*.svg -o /tmp/x.png`
+and open it. Every lint check in `lint.py` exists because someone looked at a
+picture that had passed a green build — the straddling card, the smeared pair of
+edge labels. A CLEAN build means the geometry is legal, not that the picture is
+readable. Mahesh's eye is the acceptance test; run it on yourself first.

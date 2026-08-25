@@ -40,7 +40,7 @@
             <mxGeometry x="160" y="568" width="528" height="128" as="geometry" />
           </mxCell>
         </object>
-        <object label="&lt;b&gt;THE ONE SWALLOWED FAILURE — engine.js:210&lt;/b&gt;&lt;br&gt;try { run.transition(&#x27;FAILED&#x27;) } catch (_) { /* already failed */ }&lt;br&gt;The only transition() call wrapped in a bare catch. FAILED is&lt;br&gt;terminal, so a second failure throws and that throw is discarded.&lt;br&gt;The guard still holds — no illegal state is reached. What is lost&lt;br&gt;is the signal, if it ever fires for another reason." class="card.failure" id="card_swallow">
+        <object label="&lt;b&gt;THE ONE SWALLOWED FAILURE — engine.js&lt;/b&gt;&lt;br&gt;try { run.transition(&#x27;FAILED&#x27;) } catch (_) { /* already failed */ }&lt;br&gt;The only transition() call wrapped in a bare catch. FAILED is&lt;br&gt;terminal, so a second failure throws and that throw is discarded.&lt;br&gt;The guard still holds — no illegal state is reached. What is lost&lt;br&gt;is the signal, if it ever fires for another reason." class="card.failure" id="card_swallow">
           <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="736" y="568" width="560" height="144" as="geometry" />
           </mxCell>

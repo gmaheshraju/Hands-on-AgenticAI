@@ -62,7 +62,7 @@ const steps = [
 
 const proof = [
   { stat: '31', label: 'Production LLM & agent projects', href: GITHUB },
-  { stat: '2,707', label: 'Cited elements across 31 architecture diagrams', href: '/diagrams' },
+  { stat: TOTALS.citations.toLocaleString(), label: `Cited elements across ${TOTALS.count} governed diagrams`, href: '/diagrams' },
   { stat: '24/5', label: 'Live production systems I run myself', href: null },
 ];
 

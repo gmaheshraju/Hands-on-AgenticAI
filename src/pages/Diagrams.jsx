@@ -16,11 +16,11 @@ export default function Diagrams() {
   return (
     <div className="page-content">
       <p style={S.eyebrow}>Architecture</p>
-      <h1 style={S.h1}>{TOTALS.count} systems, drawn from source</h1>
+      <h1 style={S.h1}>{TOTALS.projects} systems, drawn from source</h1>
       <p style={S.sub}>
         Every box on these diagrams cites the line of code it came from — {TOTALS.citations.toLocaleString()} citations
-        across {TOTALS.count} projects, each one checked against the source on every build. A diagram
-        that cannot be checked is decoration.
+        across {TOTALS.count} diagrams, each one machine-checked against that project's own source. A
+        diagram that cannot be checked is decoration.
       </p>
 
       <div style={S.note}>
@@ -36,6 +36,13 @@ export default function Diagrams() {
         </p>
       </div>
 
+      <p style={S.legend}>
+        Two altitudes. <strong>L1</strong> answers where things live and what talks to what.
+        <strong> L2</strong> answers which state transitions are legal, which are guarded, and where the
+        machine can stop — drawn only for the three projects that have a real transition table rather than
+        a status label assigned once.
+      </p>
+
       <div style={S.grid}>
         {DIAGRAMS.map((d, i) => (
           <FadeIn key={d.dir} delay={Math.min(i, 8) * 25}>
@@ -47,6 +54,9 @@ export default function Diagrams() {
               <figcaption style={S.cap}>
                 <span style={S.title}>
                   <span style={S.num}>{d.n}</span> {d.project}
+                  <span style={d.alt === 'L2' ? S.altL2 : S.altL1} title={d.alt === 'L2'
+                    ? 'Legality — which state transitions exist, and which are guarded'
+                    : 'Space — where things live, and what talks to what'}>{d.alt}</span>
                 </span>
                 <span style={S.stats}>
                   {d.nodes} boxes · {d.edges} edges · <strong>{d.cites} cited</strong>
@@ -71,6 +81,11 @@ export default function Diagrams() {
 }
 
 const S = {
+  legend: { fontSize: 14, lineHeight: 1.65, color: 'var(--text-muted)', margin: '0 0 26px', maxWidth: 720 },
+  altL1: { fontFamily: 'var(--font-mono)', fontSize: 10, padding: '1px 5px', marginLeft: 7, borderRadius: 3,
+           border: '1px solid var(--border)', color: 'var(--text-muted)', verticalAlign: 'middle' },
+  altL2: { fontFamily: 'var(--font-mono)', fontSize: 10, padding: '1px 5px', marginLeft: 7, borderRadius: 3,
+           border: '1px solid var(--text-accent)', color: 'var(--text-accent)', verticalAlign: 'middle' },
   eyebrow: { fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: '0.08em', color: 'var(--text-accent)', marginBottom: 8 },
   h1: { fontFamily: 'var(--font-display)', fontSize: 'clamp(30px,4vw,44px)', fontWeight: 400, margin: '0 0 14px' },
   sub: { fontSize: 16, lineHeight: 1.65, color: 'var(--text-p)', maxWidth: 720, marginBottom: 26 },

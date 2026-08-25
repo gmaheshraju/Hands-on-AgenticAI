@@ -1,6 +1,6 @@
-# Lint — mcp_server_v1
+# Lint — approval_state_v1
 
-Built by `_harness/build.py` from `spec.py` sha256 `6b1d7ff9ec217ce7`.
+Built by `_harness/build.py` from `spec.py` sha256 `f535ce583cc76512`.
 If that hash does not match the current spec, THIS REPORT IS STALE and its verdict must not be trusted — run `build.py --check` to detect it.
 
 Enforced by construction (cannot fail here): grid quantum, pinned ports, axis-aligned paths, theme-token-only colour, text attributes.

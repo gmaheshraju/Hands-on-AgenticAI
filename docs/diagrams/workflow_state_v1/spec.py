@@ -37,7 +37,7 @@ NODES = [
   "Every accepted move logs a state_change trace with {from, to}.", 160, 568, 528, 128),
 
  ("card_swallow","card.failure",
-  "<b>THE ONE SWALLOWED FAILURE — engine.js:210</b><br>"
+  "<b>THE ONE SWALLOWED FAILURE — engine.js</b><br>"
   "try { run.transition('FAILED') } catch (_) { /* already failed */ }<br>"
   "The only transition() call wrapped in a bare catch. FAILED is<br>"
   "terminal, so a second failure throws and that throw is discarded.<br>"

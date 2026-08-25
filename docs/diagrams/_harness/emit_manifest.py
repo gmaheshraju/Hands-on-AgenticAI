@@ -53,6 +53,8 @@ PROJECT = {
  'agent_chat_v1':('31','agent-chat',None),
  # L2 (legality) diagrams — a different altitude of the same project
  'workflow_state_v1':('18','workflow-engine',None),
+ 'approval_state_v1':('25','agent-executor',None),
+ 'step_lifecycle_v1':('23','long-running-agent',None),
 }
 CITE = re.compile(r'[\w./-]+\.(?:js|mjs|jsx|ts|py):\d+')
 
@@ -67,6 +69,11 @@ for d in sorted(glob.glob(os.path.join(ROOT, '*_v1'))):
     cites = len(set(CITE.findall(open(os.path.join(d, 'FACTS.md')).read())))
     rows.append({
         'n': num, 'dir': key, 'project': proj, 'post': post,
+        # Altitude is DERIVED, not declared: a diagram whose nodes carry state.* tokens
+        # is answering the legality question, and one that does not is answering the
+        # spatial one. Reading it off the spec means the badge cannot disagree with the
+        # picture -- there is no second place to keep it in sync.
+        'alt': 'L2' if any(n[1].startswith('state.') for n in m.NODES) else 'L1',
         'title': m.META['name'], 'desc': m.META['desc'],
         'svg': m.META['svg'], 'nodes': len(m.NODES), 'edges': len(m.EDGES),
         'zones': len(m.ZONES), 'cites': cites,
@@ -95,14 +102,18 @@ export const DIAGRAMS = [
 ];
 
 export const TOTALS = {
-  count: %d,
+  count: %d,       // diagrams
+  projects: %d,    // distinct systems -- fewer than `count`, because a project
+                   // can carry more than one altitude (L1 space + L2 legality)
   citations: %d,
   nodes: %d,
 };
-""" % (imports, entries, len(rows), sum(r['cites'] for r in rows), sum(r['nodes'] for r in rows))
+""" % (imports, entries, len(rows), len({r['project'] for r in rows}),
+        sum(r['cites'] for r in rows), sum(r['nodes'] for r in rows))
 
 dest = os.path.join(REPO, 'src', 'data', 'diagrams.js')
 os.makedirs(os.path.dirname(dest), exist_ok=True)
 open(dest, 'w').write(out)
-print("  wrote %s — %d diagrams, %d citations, %d boxes"
-      % (os.path.relpath(dest, REPO), len(rows), sum(r['cites'] for r in rows), sum(r['nodes'] for r in rows)))
+print("  wrote %s — %d diagrams over %d projects, %d citations, %d boxes"
+      % (os.path.relpath(dest, REPO), len(rows), len({r["project"] for r in rows}),
+         sum(r['cites'] for r in rows), sum(r['nodes'] for r in rows)))

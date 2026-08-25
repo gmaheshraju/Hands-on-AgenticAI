@@ -110,6 +110,51 @@ DASHED_EDGE = {'edge.artifact': '6 3', 'edge.analysis': '4 4', 'transition.doorw
 def _stroke_w(tok):
     return STROKE_W.get(tok, 1.5)
 
+
+# ---------------------------------------------------------------- edge labels
+LBL_CHAR_W, LBL_LINE_H = 5.2, 12.0
+# Candidate positions along the longest segment, tried in this order. 0.5 is the
+# midpoint and is what every non-colliding label keeps, so adding this pass changes
+# nothing on a diagram that had no overlap.
+LBL_SLOTS = (0.5, 0.34, 0.66, 0.22, 0.78)
+
+def label_boxes(sp):
+    """Deterministic final position of every edge label, plus its box.
+
+    Placement used to be 'midpoint of the longest segment', full stop. That put two
+    labels on the same spot whenever a horizontal and a vertical edge crossed near
+    their middles -- which shipped an unreadable smear on two live diagrams before a
+    lint check caught it. Hand-nudging each one would have meant per-diagram tuning,
+    the thing this harness exists to avoid.
+
+    So placement dodges instead: walk edges in a stable order, and give each label
+    the first slot along its own segment that does not collide with one already
+    placed. Deterministic, needs no authoring, and identical for the renderer and
+    the linter because both call this function. Where no slot is free the label
+    stays at the midpoint and lint reports the overlap rather than hiding it.
+    """
+    placed, out = [], {}
+    for e in sorted(sp.edges, key=lambda e: e[0]):
+        eid, lbl = e[0], e[3]
+        pp = sp.path(e)
+        segs = list(zip(pp, pp[1:]))
+        if not segs: continue
+        (ax, ay), (bx, by) = max(segs, key=lambda s: abs(s[0][0]-s[1][0]) + abs(s[0][1]-s[1][1]))
+        w = len(lbl) * LBL_CHAR_W
+        chosen = None
+        for t in LBL_SLOTS:
+            mx, my = ax + (bx-ax)*t, ay + (by-ay)*t - 6
+            box = (mx - w/2, my - LBL_LINE_H, mx + w/2, my)
+            if not any(min(box[2],q[2]) - max(box[0],q[0]) > 0 and
+                       min(box[3],q[3]) - max(box[1],q[1]) > 0 for q in placed):
+                chosen = (mx, my, box); break
+        if chosen is None:
+            mx, my = (ax+bx)/2.0, (ay+by)/2.0 - 6
+            chosen = (mx, my, (mx - w/2, my - LBL_LINE_H, mx + w/2, my))
+        placed.append(chosen[2])
+        out[eid] = chosen
+    return out
+
 def emit_drawio(sp, out_path):
     o = ['<mxfile host="app.diagrams.net">',
          f'  <diagram id="{sp.meta["id"]}" name="{html.escape(sp.meta["name"])}">',
@@ -172,21 +217,20 @@ def emit_svg(sp, out_path):
               f'stroke-width="{sw}" stroke-dasharray="8 4"/>',
               f'    <text x="{x+12}" y="{y+20}" fill="{c}" font-size="12" font-weight="600" '
               f'class="d-zone-label">{html.escape(lbl)}</text>', '  </g>']
+    LB = label_boxes(sp)
     for e in sp.edges:
         eid, _, _, lbl, tok, _, _, _ = e
         c = sp.hexes(tok)
         pp = sp.path(e); pts = ' '.join(f'{px},{py}' for px, py in pp)
         # FIX 2: midpoint of the LONGEST segment, not pp[len//2] (which is the
         # entry port on a 2-point path, putting the label on top of the target).
-        segs = list(zip(pp, pp[1:]))
-        (ax, ay), (bx, by) = max(segs, key=lambda s2: abs(s2[0][0]-s2[1][0]) + abs(s2[0][1]-s2[1][1]))
-        mx, my = (ax + bx) / 2, (ay + by) / 2
+        mx, my, _lb = LB[eid]
         dash = (' stroke-dasharray="%s"' % DASHED_EDGE[tok]) if tok in DASHED_EDGE else ''
         wid = 2.25 if tok == 'edge.primary' else 1.75
         o += [f'  <g class="d-edge {_css(tok)}" data-edge="{eid}">',
               f'    <polyline points="{pts}" fill="none" stroke="{c}" stroke-width="{wid}"{dash} '
               f'marker-end="url(#{m["id"]}-a-{_css(tok)})"/>',
-              f'    <text x="{mx}" y="{my-6}" text-anchor="middle" fill="{sp.hexes("text.muted")}" '
+              f'    <text x="{mx}" y="{my}" text-anchor="middle" fill="{sp.hexes("text.muted")}" '
               f'font-size="10" class="d-edge-label">{html.escape(lbl)}</text>', '  </g>']
     for nid, tok, lbl, x, y, w, h in sp.nodes:
         ls = _lines(lbl); card = tok.startswith('card.')

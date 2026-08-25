@@ -11,6 +11,7 @@ Enforced by construction (cannot fail here): grid quantum, pinned ports, axis-al
 | through_node | 0 |
 | gutters | 0 |
 | straddle | 0 |
+| label_overlap | 0 |
 | overflow | 0 |
 
 

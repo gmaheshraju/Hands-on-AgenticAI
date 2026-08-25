@@ -82,11 +82,36 @@ def node_straddles_zone(sp):
                 bad.append((nid, zid))
     return bad
 
+
+def edge_label_overlap(sp, render):
+    """Two edge labels must not sit on top of each other.
+
+    Found by LOOKING at a render, not by any existing check: two parallel vertical
+    edges 48px apart both had their labels placed at the midpoint of their only
+    segment, so both landed at the same y and the text overlapped into an unreadable
+    smear. The build was CLEAN -- the geometry was legal, the PICTURE was not. The
+    same check then found the same defect on two diagrams already live on the site.
+
+    The renderer now dodges labels into the first free slot along their own segment,
+    so most collisions never reach here. This is the backstop for the ones the dodge
+    cannot solve, and it reads the positions from render.label_boxes() so the linter
+    can never disagree with what was actually drawn.
+    """
+    boxes = [(eid, b) for eid, (_, _, b) in render.label_boxes(sp).items()]
+    bad = []
+    for (i1, a), (i2, b) in combinations(sorted(boxes), 2):
+        ox = min(a[2], b[2]) - max(a[0], b[0])
+        oy = min(a[3], b[3]) - max(a[1], b[1])
+        if ox > 0 and oy > 0:
+            bad.append((i1, i2, round(ox), round(oy)))
+    return bad
+
 def run(sp, render):
     return {
         'collinear':   collinear(sp),
         'through_node': edge_through_node(sp),
         'gutters':     zone_gutters(sp),
         'straddle':    node_straddles_zone(sp),
+        'label_overlap': edge_label_overlap(sp, render),
         'overflow':    render.check_overflow(sp),
     }

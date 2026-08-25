@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1480 920" role="img" aria-labelledby="hoa_approval_state_v1-t hoa_approval_state_v1-d" class="fts-diagram">
+  <title id="hoa_approval_state_v1-t">25 Agent Executor — ApprovalRequest lifecycle</title>
+  <desc id="hoa_approval_state_v1-d">The approval queue&#x27;s real state machine: one live state, four terminal ones, and a guard that is not the guard it claims to be. No transition table exists here — terminality is enforced by removal from a Map. Two findings verified by execution.</desc>
+  <defs>
+    <marker id="hoa_approval_state_v1-a-d-transition-failure" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C62828" class="d-transition-failure-fill"/></marker>
+    <marker id="hoa_approval_state_v1-a-d-transition-normal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-transition-normal-fill"/></marker>
+    <marker id="hoa_approval_state_v1-a-d-transition-revert" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E65100" class="d-transition-revert-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-primary">
+    <rect x="96" y="64" width="1200" height="608" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="108" y="84" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">src/approvals.js — ApprovalQueue owns every write to .status</text>
+  </g>
+  <g class="d-edge d-transition-normal" data-edge="e_auto">
+    <polyline points="248.0,264 248,152 1000,152.0" fill="none" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_approval_state_v1-a-d-transition-normal)"/>
+    <text x="624.0" y="146.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">a rule in autoApproveRules matched</text>
+  </g>
+  <g class="d-edge d-transition-normal" data-edge="e_pend">
+    <polyline points="336,296.0 464,296.0" fill="none" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_approval_state_v1-a-d-transition-normal)"/>
+    <text x="400.0" y="290.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">no rule matched</text>
+  </g>
+  <g class="d-edge d-transition-normal" data-edge="e_appr">
+    <polyline points="672,296.0 1000,296.0" fill="none" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_approval_state_v1-a-d-transition-normal)"/>
+    <text x="836.0" y="290.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">approve(id, approver)</text>
+  </g>
+  <g class="d-edge d-transition-failure" data-edge="e_deny">
+    <polyline points="568.0,328 568,440 1000,440.0" fill="none" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_approval_state_v1-a-d-transition-failure)"/>
+    <text x="784.0" y="434.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">deny(id, approver, reason)</text>
+  </g>
+  <g class="d-edge d-transition-failure" data-edge="e_exp">
+    <polyline points="620.0,328 620,584 1000,584.0" fill="none" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_approval_state_v1-a-d-transition-failure)"/>
+    <text x="810.0" y="578.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">checkExpired() sweep: now past expiresAt</text>
+  </g>
+  <g class="d-edge d-transition-revert" data-edge="e_esc">
+    <polyline points="516.0,264 516,200 620,200 620.0,264" fill="none" stroke="#E65100" stroke-width="1.75" marker-end="url(#hoa_approval_state_v1-a-d-transition-revert)"/>
+    <text x="568.0" y="194.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">escalate() — level++, status unchanged</text>
+  </g>
+  <g class="d-node d-state-initial" data-id="n_submit" data-class="state.initial">
+    <rect x="160" y="264" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="248.0" y="292.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">submit(request)</text>
+    <text x="248.0" y="307.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">the only entry</text>
+  </g>
+  <g class="d-node d-state-active" data-id="s_pending" data-class="state.active">
+    <rect x="464" y="264" width="208" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+    <text x="568.0" y="292.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">pending</text>
+    <text x="568.0" y="307.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">the only live state</text>
+  </g>
+  <g class="d-node d-state-terminal" data-id="s_auto" data-class="state.terminal">
+    <rect x="1000" y="120" width="224" height="64" rx="6" fill="#ECEFF1" stroke="#455A64" stroke-width="3"/>
+    <text x="1112.0" y="148.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">auto_approved</text>
+    <text x="1112.0" y="163.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">born already decided</text>
+  </g>
+  <g class="d-node d-state-terminal" data-id="s_appr" data-class="state.terminal">
+    <rect x="1000" y="264" width="224" height="64" rx="6" fill="#ECEFF1" stroke="#455A64" stroke-width="3"/>
+    <text x="1112.0" y="292.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">approved</text>
+    <text x="1112.0" y="307.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">then deleted from the Map</text>
+  </g>
+  <g class="d-node d-state-terminal" data-id="s_deny" data-class="state.terminal">
+    <rect x="1000" y="408" width="224" height="64" rx="6" fill="#ECEFF1" stroke="#455A64" stroke-width="3"/>
+    <text x="1112.0" y="436.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">denied</text>
+    <text x="1112.0" y="451.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">then deleted from the Map</text>
+  </g>
+  <g class="d-node d-state-terminal" data-id="s_exp" data-class="state.terminal">
+    <rect x="1000" y="552" width="224" height="64" rx="6" fill="#ECEFF1" stroke="#455A64" stroke-width="3"/>
+    <text x="1112.0" y="580.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">expired</text>
+    <text x="1112.0" y="595.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">swept, then deleted</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_guard" data-class="card.invariant">
+    <rect x="160" y="704" width="592" height="176" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="168" y="746.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">THE GUARD IS THE MAP, NOT THE STATUS CHECK</text>
+    <text x="168" y="760.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">approve() and deny() each test status !== &#x27;pending&#x27; and return</text>
+    <text x="168" y="774.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">&#x27;already_decided&#x27;. That branch is UNREACHABLE. Every decision</text>
+    <text x="168" y="788.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">deletes from the Map first, so a second call returns at the</text>
+    <text x="168" y="802.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">earlier guard instead — RAN: it gives &#x27;not_found&#x27;, never</text>
+    <text x="168" y="816.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">&#x27;already_decided&#x27;. No record inside the Map can hold a</text>
+    <text x="168" y="830.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">non-pending status. The request is still refused correctly;</text>
+    <text x="168" y="844.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">what is wrong is the REASON a reader will believe.</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_escalated" data-class="card.failure">
+    <rect x="808" y="704" width="608" height="176" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="816" y="746.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">&#x27;escalated&#x27; IS REPORTED, NEVER STORED</text>
+    <text x="816" y="760.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">escalate() raises escalationLevel and returns a payload saying</text>
+    <text x="816" y="774.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">status &#x27;escalated&#x27; — but never assigns .status. The record stays</text>
+    <text x="816" y="788.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">&#x27;pending&#x27;. RAN: the call reports level 1 while the record reads</text>
+    <text x="816" y="802.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">status &#x27;pending&#x27;, escalationLevel 1.</text>
+    <text x="816" y="816.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">So getHistory filtered on status &#x27;escalated&#x27; matches 0 records,</text>
+    <text x="816" y="830.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">always. The word exists in the return channel and nowhere in</text>
+    <text x="816" y="844.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">the data — which is why escalate is drawn as a self-loop.</text>
+  </g>
+</svg>
