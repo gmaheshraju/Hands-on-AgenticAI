@@ -222,10 +222,21 @@ show 6. A card is executable truth on a picture — that is the whole product.
 
 ## Done means
 
-`npm run verify:diagrams` passes — that is `build.py --check` (every diagram
+`npm run verify:diagrams` passes — that is `selftest.py` (every lint check and
+build assert still fires), `build.py --check` (every diagram
 CLEAN and no LINT.md stale against its spec hash), `verify_facts.py --specs`
 (no line numbers in labels) and `verify_facts.py --all projects` (every citation
 resolves, scoped to its own project).
+
+**The self-test runs first, and that ordering is the point.** `selftest.py`
+breaks a real spec eleven ways and asserts each lint reports its own defect, then
+breaks it five more ways and asserts each build invariant raises. It also asserts
+both baselines stay CLEAN, so a check that fires on *everything* fails it too. It
+exists because one L2b check turned out to be unfireable — a constant already made
+its condition unreachable — and it had passed every build since it was written.
+A green build from a check that cannot fail is worth nothing, and this is the only
+way to know the difference. If you add a check, add its case here; if a case
+cannot be written, that is the check telling you it is redundant.
 
 Then **look at the render**. `rsvg-convert -w 1700 <dir>/*.svg -o /tmp/x.png`
 and open it. Every lint check in `lint.py` exists because someone looked at a
