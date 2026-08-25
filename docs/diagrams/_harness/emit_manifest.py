@@ -57,6 +57,7 @@ PROJECT = {
  # L2b (time) diagrams
  'agent_mesh_seq_v1':('29','agent-mesh',None),
  'gateway_budget_seq_v1':('24','llm-gateway',None),
+ 'coding_agent_seq_v1':('16','ai-coding-agent',None),
 }
 CITE = re.compile(r'[\w./-]+\.(?:js|mjs|jsx|ts|py):\d+')
 

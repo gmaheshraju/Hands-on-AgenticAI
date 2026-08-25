@@ -1,0 +1,130 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_coding_agent_seq_v1" name="16 AI Coding Agent — two fixes to one file">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1220" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="f_reads" value="every step reads before any step writes" style="shape=umlFrame;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#2E7D32;dashed=1;fontSize=10;fontColor=#2E7D32;align=left;" parent="1" vertex="1">
+          <mxGeometry x="140" y="248" width="1060" height="264" as="geometry" />
+        </mxCell>
+        <mxCell id="f_writes" value="both writes take the same path; the second overwrites" style="shape=umlFrame;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#2E7D32;dashed=1;fontSize=10;fontColor=#2E7D32;align=left;" parent="1" vertex="1">
+          <mxGeometry x="140" y="600" width="1060" height="88" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;Agent&lt;/b&gt;&lt;br&gt;calls the two phases" class="component.entry" id="agent">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="80.0" y="96" width="240" height="760" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Coder&lt;/b&gt;&lt;br&gt;executePlan, applyChanges" class="component.service" id="coder">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="440.0" y="96" width="240" height="760" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;src/app.js&lt;/b&gt;&lt;br&gt;the file on disk" class="component.artifact" id="disk">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="800.0" y="96" width="240" height="760" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;PR body&lt;/b&gt;&lt;br&gt;written from the changes" class="component.external" id="pr">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="1160.0" y="96" width="240" height="760" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="m1" value="executePlan(plan, explorer)" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="224" as="sourcePoint" />
+            <mxPoint x="560" y="224" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m2" value="readFile — for the step that guards the user lookup" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="268" as="sourcePoint" />
+            <mxPoint x="920" y="268" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m3" value="twelve lines, no guards" style="html=1;rounded=0;strokeColor=#546E7A;fontColor=#546E7A;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;dashed=1;dashPattern=4 4;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="920" y="312" as="sourcePoint" />
+            <mxPoint x="560" y="312" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m4" value="compute the new content from those bytes" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="356" as="sourcePoint" />
+            <mxPoint x="648" y="376" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m5" value="readFile — for the step that guards the todo lookup" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="400" as="sourcePoint" />
+            <mxPoint x="920" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m6" value="the SAME twelve lines — nothing has been written yet" style="html=1;rounded=0;strokeColor=#546E7A;fontColor=#546E7A;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;dashed=1;dashPattern=4 4;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="920" y="444" as="sourcePoint" />
+            <mxPoint x="560" y="444" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m7" value="compute from the same bytes again" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="488" as="sourcePoint" />
+            <mxPoint x="648" y="508" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m8" value="two changes, each carrying its own diff" style="html=1;rounded=0;strokeColor=#546E7A;fontColor=#546E7A;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;dashed=1;dashPattern=4 4;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="532" as="sourcePoint" />
+            <mxPoint x="200" y="532" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m9" value="applyChanges()" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="576" as="sourcePoint" />
+            <mxPoint x="560" y="576" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m10" value="write the first — the user guard lands" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="620" as="sourcePoint" />
+            <mxPoint x="920" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m11" value="write the second — computed without the user guard" style="html=1;rounded=0;strokeColor=#C62828;fontColor=#C62828;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="664" as="sourcePoint" />
+            <mxPoint x="920" y="664" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m12" value="applied — two files, no conflict reported" style="html=1;rounded=0;strokeColor=#546E7A;fontColor=#546E7A;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;dashed=1;dashPattern=4 4;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="560" y="708" as="sourcePoint" />
+            <mxPoint x="200" y="708" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m13" value="generatePR(changes) — every diff is embedded" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="752" as="sourcePoint" />
+            <mxPoint x="1280" y="752" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m14" value="a diff adding a guard that is not in the branch" style="html=1;rounded=0;strokeColor=#C62828;fontColor=#C62828;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1280" y="796" as="sourcePoint" />
+            <mxPoint x="200" y="796" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <object label="&lt;b&gt;MEASURED — TWO FIXES IN, ONE FIX OUT&lt;/b&gt;&lt;br&gt;A fixture with two independent unguarded lookups in one file, and a plan with&lt;br&gt;one null-check step for each.&lt;br&gt;RAN — changes produced 2. Both read the SAME original: true. Step one&#x27;s diff&lt;br&gt;adds the user guard, step two&#x27;s adds the todo guard. applyChanges reported 2&lt;br&gt;applied. On disk afterwards: user guard present false, todo guard present true.&lt;br&gt;The first fix is gone. No error, no warning, nothing recording that it was&lt;br&gt;lost.&lt;br&gt;Which step survives is DETERMINISTIC, not arbitrary. The steps are sorted by&lt;br&gt;priority and the sort is stable, so equal priorities keep plan order and the&lt;br&gt;LAST step touching a file wins. Nothing signals that anywhere." class="card.failure" id="card_measured">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="96" y="896" width="880" height="232" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;THE REPORT IS WRONG, NOT JUST THE FILE&lt;/b&gt;&lt;br&gt;applyChanges returns one entry per change, so the agent is told two files&lt;br&gt;were written. generatePR then loops every change and embeds each diff in a&lt;br&gt;fenced block — including the one that was reverted.&lt;br&gt;So a reviewer is shown a diff adding the user guard while the branch does not&lt;br&gt;contain it. Approving that diff approves something never applied.&lt;br&gt;This is what makes it worse than a plain lost update: the system does not&lt;br&gt;merely fail to apply a fix, it reports having applied it and produces the&lt;br&gt;evidence.&lt;br&gt;No concurrency is involved. A read phase separated from a write phase is&lt;br&gt;enough." class="card.invariant" id="card_report">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="1008" y="896" width="612" height="232" as="geometry" />
+          </mxCell>
+        </object>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

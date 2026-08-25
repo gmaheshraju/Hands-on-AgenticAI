@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 1180" role="img" aria-labelledby="hoa_coding_agent_seq_v1-t hoa_coding_agent_seq_v1-d" class="fts-diagram">
+  <title id="hoa_coding_agent_seq_v1-t">16 AI Coding Agent — two fixes to one file</title>
+  <desc id="hoa_coding_agent_seq_v1-d">Every plan step reads the file before any step writes it, so two fixes to one file are both computed from the same pre-write bytes. Both are reported applied, one survives, and the pull request shows a reviewer the diff that was reverted.</desc>
+  <defs>
+    <marker id="hoa_coding_agent_seq_v1-a-d-msg-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-msg-call-fill"/></marker>
+    <marker id="hoa_coding_agent_seq_v1-a-d-msg-failure" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C62828" class="d-msg-failure-fill"/></marker>
+    <marker id="hoa_coding_agent_seq_v1-a-d-msg-return" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#546E7A" class="d-msg-return-fill"/></marker>
+  </defs>
+  <g class="d-fragment" data-id="f_reads">
+    <rect x="140" y="248" width="1060" height="264" rx="4" fill="none" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="8 4"/>
+    <rect x="140" y="248" width="263.6" height="18" rx="3" fill="#2E7D32" fill-opacity="0.12" stroke="#2E7D32" stroke-width="1"/>
+    <text x="147" y="261" fill="#2E7D32" font-size="11" font-weight="600" class="d-frag-label">every step reads before any step writes</text>
+  </g>
+  <g class="d-fragment" data-id="f_writes">
+    <rect x="140" y="600" width="1060" height="88" rx="4" fill="none" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="8 4"/>
+    <rect x="140" y="600" width="353.20000000000005" height="18" rx="3" fill="#2E7D32" fill-opacity="0.12" stroke="#2E7D32" stroke-width="1"/>
+    <text x="147" y="613" fill="#2E7D32" font-size="11" font-weight="600" class="d-frag-label">both writes take the same path; the second overwrites</text>
+  </g>
+  <g class="d-lifeline d-component-entry" data-id="agent" data-class="component.entry">
+    <line x1="200" y1="156" x2="200" y2="856" stroke="#E65100" stroke-width="1.5" stroke-dasharray="4 5" class="d-lifeline-stem"/>
+    <rect x="80.0" y="96" width="240" height="60" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="2"/>
+    <text x="200" y="122.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Agent</text>
+    <text x="200" y="137.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">calls the two phases</text>
+  </g>
+  <g class="d-lifeline d-component-service" data-id="coder" data-class="component.service">
+    <line x1="560" y1="156" x2="560" y2="856" stroke="#3F51B5" stroke-width="1.5" stroke-dasharray="4 5" class="d-lifeline-stem"/>
+    <rect x="440.0" y="96" width="240" height="60" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="2"/>
+    <text x="560" y="122.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Coder</text>
+    <text x="560" y="137.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">executePlan, applyChanges</text>
+  </g>
+  <g class="d-lifeline d-component-artifact" data-id="disk" data-class="component.artifact">
+    <line x1="920" y1="156" x2="920" y2="856" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="4 5" class="d-lifeline-stem"/>
+    <rect x="800.0" y="96" width="240" height="60" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+    <text x="920" y="122.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">src/app.js</text>
+    <text x="920" y="137.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">the file on disk</text>
+  </g>
+  <g class="d-lifeline d-component-external" data-id="pr" data-class="component.external">
+    <line x1="1280" y1="156" x2="1280" y2="856" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="4 5" class="d-lifeline-stem"/>
+    <rect x="1160.0" y="96" width="240" height="60" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+    <text x="1280" y="122.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">PR body</text>
+    <text x="1280" y="137.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">written from the changes</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m1">
+    <line x1="200" y1="224" x2="560" y2="224" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_coding_agent_seq_v1-a-d-msg-call)"/>
+    <text x="380.0" y="217" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">executePlan(plan, explorer)</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m2">
+    <line x1="560" y1="268" x2="920" y2="268" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_coding_agent_seq_v1-a-d-msg-call)"/>
+    <text x="740.0" y="261" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">readFile — for the step that guards the user lookup</text>
+  </g>
+  <g class="d-msg d-msg-return" data-msg="m3">
+    <line x1="920" y1="312" x2="560" y2="312" stroke="#546E7A" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_coding_agent_seq_v1-a-d-msg-return)"/>
+    <text x="740.0" y="305" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">twelve lines, no guards</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m4">
+    <polyline points="560,356 648,356 648,376 564,376" fill="none" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_coding_agent_seq_v1-a-d-msg-call)"/>
+    <text x="656" y="352" text-anchor="start" fill="#888888" font-size="11" class="d-msg-label">compute the new content from those bytes</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m5">
+    <line x1="560" y1="400" x2="920" y2="400" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_coding_agent_seq_v1-a-d-msg-call)"/>
+    <text x="740.0" y="393" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">readFile — for the step that guards the todo lookup</text>
+  </g>
+  <g class="d-msg d-msg-return" data-msg="m6">
+    <line x1="920" y1="444" x2="560" y2="444" stroke="#546E7A" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_coding_agent_seq_v1-a-d-msg-return)"/>
+    <text x="740.0" y="437" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">the SAME twelve lines — nothing has been written yet</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m7">
+    <polyline points="560,488 648,488 648,508 564,508" fill="none" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_coding_agent_seq_v1-a-d-msg-call)"/>
+    <text x="656" y="484" text-anchor="start" fill="#888888" font-size="11" class="d-msg-label">compute from the same bytes again</text>
+  </g>
+  <g class="d-msg d-msg-return" data-msg="m8">
+    <line x1="560" y1="532" x2="200" y2="532" stroke="#546E7A" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_coding_agent_seq_v1-a-d-msg-return)"/>
+    <text x="380.0" y="525" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">two changes, each carrying its own diff</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m9">
+    <line x1="200" y1="576" x2="560" y2="576" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_coding_agent_seq_v1-a-d-msg-call)"/>
+    <text x="380.0" y="569" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">applyChanges()</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m10">
+    <line x1="560" y1="620" x2="920" y2="620" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_coding_agent_seq_v1-a-d-msg-call)"/>
+    <text x="740.0" y="613" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">write the first — the user guard lands</text>
+  </g>
+  <g class="d-msg d-msg-failure" data-msg="m11">
+    <line x1="560" y1="664" x2="920" y2="664" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_coding_agent_seq_v1-a-d-msg-failure)"/>
+    <text x="740.0" y="657" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">write the second — computed without the user guard</text>
+  </g>
+  <g class="d-msg d-msg-return" data-msg="m12">
+    <line x1="560" y1="708" x2="200" y2="708" stroke="#546E7A" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_coding_agent_seq_v1-a-d-msg-return)"/>
+    <text x="380.0" y="701" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">applied — two files, no conflict reported</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m13">
+    <line x1="200" y1="752" x2="1280" y2="752" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_coding_agent_seq_v1-a-d-msg-call)"/>
+    <text x="740.0" y="745" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">generatePR(changes) — every diff is embedded</text>
+  </g>
+  <g class="d-msg d-msg-failure" data-msg="m14">
+    <line x1="1280" y1="796" x2="200" y2="796" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_coding_agent_seq_v1-a-d-msg-failure)"/>
+    <text x="740.0" y="789" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">a diff adding a guard that is not in the branch</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_measured" data-class="card.failure">
+    <rect x="96" y="896" width="880" height="232" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="104" y="945.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">MEASURED — TWO FIXES IN, ONE FIX OUT</text>
+    <text x="104" y="959.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">A fixture with two independent unguarded lookups in one file, and a plan with</text>
+    <text x="104" y="973.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">one null-check step for each.</text>
+    <text x="104" y="987.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">RAN — changes produced 2. Both read the SAME original: true. Step one&#x27;s diff</text>
+    <text x="104" y="1001.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">adds the user guard, step two&#x27;s adds the todo guard. applyChanges reported 2</text>
+    <text x="104" y="1015.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">applied. On disk afterwards: user guard present false, todo guard present true.</text>
+    <text x="104" y="1029.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">The first fix is gone. No error, no warning, nothing recording that it was</text>
+    <text x="104" y="1043.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">lost.</text>
+    <text x="104" y="1057.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Which step survives is DETERMINISTIC, not arbitrary. The steps are sorted by</text>
+    <text x="104" y="1071.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">priority and the sort is stable, so equal priorities keep plan order and the</text>
+    <text x="104" y="1085.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">LAST step touching a file wins. Nothing signals that anywhere.</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_report" data-class="card.invariant">
+    <rect x="1008" y="896" width="612" height="232" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1016" y="945.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">THE REPORT IS WRONG, NOT JUST THE FILE</text>
+    <text x="1016" y="959.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">applyChanges returns one entry per change, so the agent is told two files</text>
+    <text x="1016" y="973.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">were written. generatePR then loops every change and embeds each diff in a</text>
+    <text x="1016" y="987.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">fenced block — including the one that was reverted.</text>
+    <text x="1016" y="1001.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">So a reviewer is shown a diff adding the user guard while the branch does not</text>
+    <text x="1016" y="1015.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">contain it. Approving that diff approves something never applied.</text>
+    <text x="1016" y="1029.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">This is what makes it worse than a plain lost update: the system does not</text>
+    <text x="1016" y="1043.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">merely fail to apply a fix, it reports having applied it and produces the</text>
+    <text x="1016" y="1057.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">evidence.</text>
+    <text x="1016" y="1071.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">No concurrency is involved. A read phase separated from a write phase is</text>
+    <text x="1016" y="1085.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">enough.</text>
+  </g>
+</svg>
