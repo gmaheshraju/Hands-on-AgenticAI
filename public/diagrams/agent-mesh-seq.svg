@@ -117,23 +117,22 @@
     <text x="104" y="1147.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">RAN — four consecutive calls then pick the condemned node FIRST every time,</text>
     <text x="104" y="1161.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">four out of four, and it completes zero work. Each pass burns one attempt.</text>
     <text x="104" y="1175.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">RAN — with two condemned nodes and a two-attempt budget, submitWork THROWS</text>
-    <text x="104" y="1189.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">&#x27;no healthy node available&#x27; while a healthy idle node was never selected. In</text>
-    <text x="104" y="1203.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">that case the thrown message is false.</text>
+    <text x="104" y="1189.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">&#x27;no healthy node available&#x27; while a healthy idle node was never selected —</text>
+    <text x="104" y="1203.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">in that case the message it throws is false.</text>
   </g>
   <g class="d-node d-card-invariant" data-id="note_gate" data-class="card.invariant">
     <rect x="1008" y="1000" width="612" height="232" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
-    <text x="1016" y="1035.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">WHAT STILL HOLDS, AND WHY THE FIX IS NOT &#x27;DELETE THE RE-INCLUDE&#x27;</text>
-    <text x="1016" y="1049.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">No work is ever misrouted. The breaker is re-asked on every attempt, so a</text>
-    <text x="1016" y="1063.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">condemned node is refused each time — the cost is a wasted attempt, not a</text>
-    <text x="1016" y="1077.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">wrong destination.</text>
-    <text x="1016" y="1091.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">The re-include is also not gratuitous. The mesh excludes tried nodes only to</text>
-    <text x="1016" y="1105.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">stop selectNode returning them again inside THIS call, and it has to undo</text>
-    <text x="1016" y="1119.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">that so other work can still route to them.</text>
-    <text x="1016" y="1133.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">The real defect is that a temporary exclusion and a durable one are kept in</text>
-    <text x="1016" y="1147.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">the SAME set, with no record of who excluded a node or why. Separating those</text>
-    <text x="1016" y="1161.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">two is a design decision, so this diagram states the finding and stops</text>
-    <text x="1016" y="1175.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">there.</text>
-    <text x="1016" y="1189.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">A node marked FAILED by the health monitor is unaffected — it fails the</text>
-    <text x="1016" y="1203.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">HEALTHY test and is never re-included.</text>
+    <text x="1016" y="1042.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">WHAT STILL HOLDS, AND WHY THE FIX IS NOT &#x27;DELETE THE RE-INCLUDE&#x27;</text>
+    <text x="1016" y="1056.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">No work is ever misrouted. The breaker is re-asked on every attempt, so a</text>
+    <text x="1016" y="1070.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">condemned node is refused each time — the cost is a wasted attempt, not a</text>
+    <text x="1016" y="1084.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">wrong destination.</text>
+    <text x="1016" y="1098.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">The re-include is also not gratuitous. The mesh excludes tried nodes only to</text>
+    <text x="1016" y="1112.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">stop selectNode returning them again inside THIS call, and it has to undo</text>
+    <text x="1016" y="1126.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">that so other work can still route to them.</text>
+    <text x="1016" y="1140.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">The real defect is that a temporary exclusion and a durable one are kept in</text>
+    <text x="1016" y="1154.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">the SAME set, with no record of who excluded a node or why. Separating the</text>
+    <text x="1016" y="1168.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">two is a design decision, so this diagram states the finding and stops there.</text>
+    <text x="1016" y="1182.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">A node marked FAILED by the health monitor is unaffected — it fails the</text>
+    <text x="1016" y="1196.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">HEALTHY test and is never re-included.</text>
   </g>
 </svg>

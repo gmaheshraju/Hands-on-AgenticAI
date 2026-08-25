@@ -89,7 +89,13 @@ for d in sorted(glob.glob(os.path.join(ROOT, '*_v1'))):
         'zones': len(getattr(m, 'FRAGMENTS', [])) if seq else len(m.ZONES),
         'cites': cites,
     })
-rows.sort(key=lambda r: (r['n'], r['dir']))
+# Order within a project is ALTITUDE, not filename. The L1 map is the establishing
+# shot -- you read where things live before you read which transitions are legal or
+# what happens in what order. Sorting by directory name got this right for three
+# projects by luck and wrong for the fourth: 'agent_mesh_seq_v1' sorts before
+# 'agent_mesh_v1', so 29 showed its sequence diagram ahead of its map.
+ALT_RANK = {'L1': 0, 'L2': 1, 'L2b': 2}
+rows.sort(key=lambda r: (r['n'], ALT_RANK.get(r['alt'], 9), r['dir']))
 
 # copy each rendered SVG into public/diagrams/ under a stable, unhashed name
 import shutil
