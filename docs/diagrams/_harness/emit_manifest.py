@@ -54,7 +54,6 @@ PROJECT = {
  # L2 (legality) diagrams — a different altitude of the same project
  'workflow_state_v1':('18','workflow-engine',None),
  'approval_state_v1':('25','agent-executor',None),
- 'step_lifecycle_v1':('23','long-running-agent',None),
  # L2b (time) diagrams
  'agent_mesh_seq_v1':('29','agent-mesh',None),
 }
