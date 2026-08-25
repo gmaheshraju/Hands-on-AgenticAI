@@ -1,0 +1,132 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_coordinator_seq_v1" name="21 Multi-Agent Coordinator — a timeout that frees a busy slot">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1220" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="f_loop" value="the retry loop — every pass abandons a handler and frees its slot" style="shape=umlFrame;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#2E7D32;dashed=1;fontSize=10;fontColor=#2E7D32;align=left;" parent="1" vertex="1">
+          <mxGeometry x="140" y="180" width="1440" height="640" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;Coordinator&lt;/b&gt;&lt;br&gt;the retry loop" class="component.entry" id="coord">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="60.0" y="96" width="240" height="760" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Registry&lt;/b&gt;&lt;br&gt;holds the agent&#x27;s load" class="component.service" id="reg">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="380.0" y="96" width="240" height="760" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;handler&lt;/b&gt;&lt;br&gt;attempt 0" class="component.artifact" id="h0">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="700.0" y="96" width="240" height="760" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;handler&lt;/b&gt;&lt;br&gt;attempt 1" class="component.artifact" id="h1">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="1020.0" y="96" width="240" height="760" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;handler&lt;/b&gt;&lt;br&gt;attempt 2" class="component.artifact" id="h2">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="1340.0" y="96" width="240" height="760" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="m1" value="selectAgent — load 0, under the cap" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="224" as="sourcePoint" />
+            <mxPoint x="500" y="224" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m2" value="incrementLoad — load is now 1" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="268" as="sourcePoint" />
+            <mxPoint x="500" y="268" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m3" value="start the handler, raced against a timer" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="312" as="sourcePoint" />
+            <mxPoint x="820" y="312" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m4" value="the timer wins the race — the handler does not stop" style="html=1;rounded=0;strokeColor=#C62828;fontColor=#C62828;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="356" as="sourcePoint" />
+            <mxPoint x="268" y="376" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m5" value="decrementLoad — load 0, but attempt 0 is still live" style="html=1;rounded=0;strokeColor=#C62828;fontColor=#C62828;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="400" as="sourcePoint" />
+            <mxPoint x="500" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m6" value="selectAgent — reads the freed counter, passes" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="444" as="sourcePoint" />
+            <mxPoint x="500" y="444" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m7" value="incrementLoad — load is 1 again" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="488" as="sourcePoint" />
+            <mxPoint x="500" y="488" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m8" value="start a SECOND handler — two are now live" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="532" as="sourcePoint" />
+            <mxPoint x="1140" y="532" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m9" value="the timer wins again" style="html=1;rounded=0;strokeColor=#C62828;fontColor=#C62828;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="576" as="sourcePoint" />
+            <mxPoint x="268" y="596" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m10" value="decrementLoad — load 0, two handlers still live" style="html=1;rounded=0;strokeColor=#C62828;fontColor=#C62828;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="620" as="sourcePoint" />
+            <mxPoint x="500" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m11" value="selectAgent — passes a third time" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="664" as="sourcePoint" />
+            <mxPoint x="500" y="664" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m12" value="incrementLoad — load is 1 again" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="708" as="sourcePoint" />
+            <mxPoint x="500" y="708" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m13" value="start a THIRD handler — three are now live" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="752" as="sourcePoint" />
+            <mxPoint x="1460" y="752" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m14" value="retries exhausted; the task is reported failed" style="html=1;rounded=0;strokeColor=#C62828;fontColor=#C62828;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="180" y="796" as="sourcePoint" />
+            <mxPoint x="268" y="816" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <object label="&lt;b&gt;MEASURED — THREE AT ONCE ON AN AGENT THAT DECLARED ONE&lt;/b&gt;&lt;br&gt;One agent with maxConcurrency 1, a handler taking 900ms, a 200ms task timeout&lt;br&gt;and two retries. The handler counts itself in and out, so live handlers are&lt;br&gt;counted directly rather than inferred.&lt;br&gt;RAN — declared maxConcurrency 1. PEAK concurrent live handlers: 3.&lt;br&gt;RAN — the load values the registry ever showed: 1 and 0. Maximum observed: 1.&lt;br&gt;The second line is the one that matters. The cap is not merely exceeded, the&lt;br&gt;overage is INVISIBLE. Every routing decision that consults load — the sort that&lt;br&gt;prefers the least loaded agent, and the refusal at the cap — is reading a&lt;br&gt;number that does not describe the system.&lt;br&gt;Three rather than two because two retries give three passes, and each pass&lt;br&gt;leaves its handler behind." class="card.failure" id="card_measured">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="96" y="896" width="880" height="232" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;WHAT IS ACTUALLY CORRECT HERE, AND WHY THAT MATTERS&lt;/b&gt;&lt;br&gt;The check and the reserve are adjacent with no await between them, so the&lt;br&gt;ordinary check-then-act race is genuinely absent — two callers cannot both&lt;br&gt;pass the cap. That part was written carefully.&lt;br&gt;The defect is the RELEASE. It is issued when a timer wins a race, and winning&lt;br&gt;that race stops nothing: Promise.race cannot cancel its loser, and nothing&lt;br&gt;here tries to.&lt;br&gt;The timeout wraps every skill invocation and defaults to ten seconds, so this&lt;br&gt;is the ordinary route, not an exotic configuration.&lt;br&gt;No fix is drawn. Cancelling needs a channel the skill interface does not have,&lt;br&gt;and holding the slot until the handler settles changes what a timeout means." class="card.invariant" id="card_correct">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="1008" y="896" width="612" height="232" as="geometry" />
+          </mxCell>
+        </object>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

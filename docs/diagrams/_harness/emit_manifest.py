@@ -59,6 +59,7 @@ PROJECT = {
  'gateway_budget_seq_v1':('24','llm-gateway',None),
  'coding_agent_seq_v1':('16','ai-coding-agent',None),
  'ai_ux_seq_v1':('12','ai-ux','ai-ux-patterns'),
+ 'coordinator_seq_v1':('21','multi-agent-coordinator',None),
 }
 CITE = re.compile(r'[\w./-]+\.(?:js|mjs|jsx|ts|py):\d+')
 
