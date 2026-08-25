@@ -29,57 +29,57 @@
           <mxGeometry x="348" y="208" width="1164" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · 5 scenarios&lt;br&gt;main()" class="component.entry" id="n_demo">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="232" width="168" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Mesh&lt;/b&gt;&lt;br&gt;orchestrator + bus&lt;br&gt;submitWork&lt;br&gt;_onNodeFailed" class="component.service" id="n_mesh">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="360" y="232" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;MeshRouter&lt;/b&gt;&lt;br&gt;selectNode&lt;br&gt;4 strategies" class="component.service" id="n_router">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="664" y="232" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;AgentNode ×N&lt;/b&gt;&lt;br&gt;enqueue&lt;br&gt;queue · health · caps&lt;br&gt;processor = async fn" class="component.agent" id="n_nodes">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1264" y="232" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;HealthMonitor&lt;/b&gt;&lt;br&gt;_check&lt;br&gt;heartbeat detect" class="component.service" id="n_monitor">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="360" y="432" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;CircuitBreaker&lt;/b&gt;&lt;br&gt;Registry&lt;br&gt;per-node · 3 states" class="component.service" id="n_cb">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="664" y="432" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;WorkRedistributor&lt;/b&gt;&lt;br&gt;redistribute&lt;br&gt;capability + cascade" class="component.service" id="n_redist">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="968" y="432" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;stdout&lt;/b&gt;&lt;br&gt;dashboardString&lt;br&gt;console.log" class="component.artifact" id="n_stdout">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="440" width="168" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;ROUTING STRATEGIES — meshRouter.js, code order&lt;/b&gt;&lt;br&gt;selectNode() switch · default least-loaded&lt;br&gt;1 round-robin _roundRobin&lt;br&gt;2 least-loaded _leastLoaded (default)&lt;br&gt;3 capability-based filter → least-loaded&lt;br&gt;4 affinity-sticky _affinitySticky&lt;br&gt;all run on _healthyCandidates&lt;br&gt;excludes FAILED + DEGRADED + excluded" class="card.invariant" id="card_routes">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="336" y="544" width="376" height="184" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;CIRCUIT BREAKER — 3 states, circuitBreaker.js&lt;/b&gt;&lt;br&gt;per-node breaker, lazy registry&lt;br&gt;CLOSED requests flow&lt;br&gt;OPEN blocked&lt;br&gt;HALF_OPEN one probe&lt;br&gt;CLOSED→OPEN ≥ 5 fails&lt;br&gt;OPEN→HALF_OPEN after 10s cooldown&lt;br&gt;HALF_OPEN→CLOSED probe ok&lt;br&gt;HALF_OPEN→OPEN probe fail&lt;br&gt;trip() force-open · reset()" class="card.invariant" id="card_breaker">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="736" y="544" width="376" height="184" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;SELF-HEALING on node_failed — mesh.js&lt;/b&gt;&lt;br&gt;README says HealthMonitor → WorkRedistributor.&lt;br&gt;FALSE: monitor only emits; the MESH owns&lt;br&gt;the bus and drives the reaction:&lt;br&gt;1 router.excludeNode&lt;br&gt;2 breaker.trip()&lt;br&gt;3 collect healthy nodes&lt;br&gt;4 redistribute pending work&lt;br&gt;5 if failed/total ≥ 0.5 → mesh_degraded&lt;br&gt;6 emit node_failed (+redistributed)" class="card.failure" id="card_heal">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="1136" y="544" width="376" height="184" as="geometry" />
           </mxCell>
         </object>

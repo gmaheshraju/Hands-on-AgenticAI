@@ -35,72 +35,72 @@
           <mxGeometry x="1432" y="560" width="220" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · 6 scenarios&lt;br&gt;main" class="component.entry" id="n_demo">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="52" y="236" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;1 · Budget&lt;/b&gt;&lt;br&gt;CostTracker&lt;br&gt;checkBudget" class="component.service" id="n_s1">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="344" y="236" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;2 · Rate limit&lt;/b&gt;&lt;br&gt;TokenBucket&lt;br&gt;check" class="component.service" id="n_s2">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="520" y="236" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;3 · PII redact&lt;/b&gt;&lt;br&gt;pii.js&lt;br&gt;redactMessages" class="component.service" id="n_s3">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="696" y="236" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;4 · Route&lt;/b&gt;&lt;br&gt;ModelRouter&lt;br&gt;route" class="component.service" id="n_s4">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="872" y="236" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;5 · Middleware&lt;/b&gt;&lt;br&gt;use() chain&lt;br&gt;(empty by default)" class="component.service" id="n_s5">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1048" y="236" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;6 · Execute&lt;/b&gt;&lt;br&gt;+retry / failover&lt;br&gt;gateway" class="component.service" id="n_s6">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1224" y="236" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;7 · Track&lt;/b&gt;&lt;br&gt;cost record + audit&lt;br&gt;gateway" class="component.service" id="n_s7">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1400" y="236" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;CircuitBreaker&lt;/b&gt;&lt;br&gt;per-provider gate&lt;br&gt;closed / open / half&lt;br&gt;circuitBreaker.js" class="component.service" id="n_cb">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1048" y="400" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Provider handlers&lt;/b&gt;&lt;br&gt;anthropic · openai&lt;br&gt;· google — MOCK&lt;br&gt;demo.js" class="component.external" id="n_prov">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1064" y="580" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;AuditLog + dash&lt;/b&gt;&lt;br&gt;query / compliance&lt;br&gt;replayTrace&lt;br&gt;dashboard" class="component.artifact" id="n_obs">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1436" y="580" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;PII — 10 patterns, redacted before route&lt;/b&gt;&lt;br&gt;1 SSN · 2 CREDIT_CARD (Luhn)&lt;br&gt;3 EMAIL · 4 PHONE_US&lt;br&gt;5 PHONE_IN · 6 IP_ADDRESS&lt;br&gt;7 AWS_KEY · 8 API_KEY&lt;br&gt;9 AADHAAR · 10 PAN&lt;br&gt;Luhn-fail skipped, not redacted" class="card.primitive" id="card_pii">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="40" y="520" width="300" height="200" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;ROUTING — 6 rungs, code order (router.js)&lt;/b&gt;&lt;br&gt;1 team → exact model team_override&lt;br&gt;2 request.model set explicit_model&lt;br&gt;3 custom rule rule:&amp;lt;name&amp;gt;&lt;br&gt;4 complexity tier complexity&lt;br&gt;5 fallback chain fallback_chain&lt;br&gt;6 none left → all_providers_down&lt;br&gt;each rung gates on canRequest()" class="card.invariant" id="card_route">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="360" y="520" width="300" height="200" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;AUDIT — 7 write sites, not 1 (README: 1)&lt;/b&gt;&lt;br&gt;1 budget block&lt;br&gt;2 rate-limit block&lt;br&gt;3 PII detected&lt;br&gt;4 no provider&lt;br&gt;5 middleware block&lt;br&gt;6 response ok&lt;br&gt;7 failover / retry&lt;br&gt;cross-cutting sink — every stage logs" class="card.invariant" id="card_audit">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="680" y="520" width="300" height="200" as="geometry" />
           </mxCell>
         </object>

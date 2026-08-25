@@ -35,77 +35,77 @@
           <mxGeometry x="1372" y="576" width="280" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · 5 steps&lt;br&gt;--skip-eval" class="component.entry" id="n_demo">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="280" width="168" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;tickets.json&lt;/b&gt; 100&lt;br&gt;test-set.json 30&lt;br&gt;4 categories" class="component.mock" id="n_corpus">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="392" width="168" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;fineTuning.js&lt;/b&gt;&lt;br&gt;validate&lt;br&gt;writeTrainingFiles" class="component.service" id="n_prep">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="384" y="280" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;evaluate.js&lt;/b&gt;&lt;br&gt;runEvaluation&lt;br&gt;evaluateApproach&lt;br&gt;computeMetrics" class="component.service" id="n_eval">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="664" y="264" width="176" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;prompting.js&lt;/b&gt;&lt;br&gt;classifyZeroShot&lt;br&gt;classifyFewShot&lt;br&gt;8 few-shot ex." class="component.agent" id="n_prompt">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="904" y="192" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;rag.js&lt;/b&gt;&lt;br&gt;SimpleVectorStore&lt;br&gt;TF-IDF · cosine&lt;br&gt;retrieve top-5" class="component.agent" id="n_rag">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="904" y="280" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;fineTuning.js&lt;/b&gt;&lt;br&gt;classifyWithFineTuning&lt;br&gt; — MOCK, no weights" class="component.agent" id="n_ft">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="904" y="368" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Google Gemini API&lt;/b&gt;&lt;br&gt;gemini-2.0-flash&lt;br&gt;@google/generative-ai ^0.24.0&lt;br&gt;the ONLY network call" class="component.external" id="n_gemini">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="264" width="248" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;comparison.js&lt;/b&gt;&lt;br&gt;generateComparison&lt;br&gt;6 md sections" class="component.service" id="n_compare">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1064" y="544" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;data/fine-tuning/ — 3 files&lt;/b&gt;&lt;br&gt;OpenAI · Gemini · instruction" class="component.artifact" id="n_train">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="604" width="248" height="48" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;evaluation-results.json&lt;/b&gt;&lt;br&gt;evaluate.js — not committed" class="component.artifact" id="n_results">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="664" width="248" height="48" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;COMPARISON.md&lt;/b&gt;&lt;br&gt;the deliverable · demo.js" class="component.artifact" id="n_md">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="724" width="248" height="48" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;DATA QUALITY GATE — 5 checks, complete, in code order&lt;/b&gt;&lt;br&gt;1 imbalance max/min &amp;gt; 2 · 2 corpus &amp;lt; 50&lt;br&gt;3 text &amp;lt; 20 chars · 4 duplicate texts&lt;br&gt;5 category outside the 4-item whitelist&lt;br&gt;&lt;b&gt;it does not gate&lt;/b&gt; — demo.js prints the issues&lt;br&gt;and continues to Step 2 unconditionally" class="card.invariant" id="card_gate">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="352" y="544" width="424" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;THE 4 EVALUATED APPROACHES — evaluate.js, in code order&lt;/b&gt;&lt;br&gt;1 Zero-Shot — categories + ticket, nothing else&lt;br&gt;2 Few-Shot — + 8 hand-picked examples&lt;br&gt;3 RAG — + top-5 TF-IDF neighbours of the 100&lt;br&gt;4 Fine-Tuned — persona prompt, ticket only&lt;br&gt;one shared testSet · one computeMetrics" class="card.primitive" id="card_appr">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="352" y="656" width="424" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;SIMULATED, NOT REAL — the complete list&lt;/b&gt;&lt;br&gt;1 no fine-tuned model: a persona prompt stands in&lt;br&gt;2 its latency is the real API latency × 0.6&lt;br&gt;3 no vector DB: in-process TF-IDF maps&lt;br&gt;4 tokens are text.length / 4, never metered&lt;br&gt;5 no API key → generateSampleResults() invents them" class="card.failure" id="card_mock">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="816" y="656" width="440" height="96" as="geometry" />
           </mxCell>
         </object>

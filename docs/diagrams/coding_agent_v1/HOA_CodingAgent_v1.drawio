@@ -35,82 +35,82 @@
           <mxGeometry x="1372" y="520" width="280" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · mock #1&lt;br&gt;" class="component.entry" id="n_demo">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="244" width="128" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;GitHub REST&lt;/b&gt;&lt;br&gt;fetch()&lt;br&gt;URL input only" class="component.external" id="n_github">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="372" width="128" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;runAgent()&lt;/b&gt;&lt;br&gt;agent.js · 6 steps" class="component.agent" id="n_agent">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="340" y="128" width="160" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;parseIssue()&lt;/b&gt;&lt;br&gt;issueParser.js&lt;br&gt;3 input forms" class="component.service" id="n_parse">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="340" y="264" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;createPlan()&lt;/b&gt;&lt;br&gt;planner.js&lt;br&gt;rule-based, no LLM" class="component.service" id="n_plan">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="524" y="264" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;createCoder()&lt;/b&gt;&lt;br&gt;coder.js&lt;br&gt;diff + applyChanges" class="component.service" id="n_coder">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="708" y="264" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;selfCorrectLoop()&lt;/b&gt;&lt;br&gt;testRunner.js&lt;br&gt;≤ 3 retries" class="component.service" id="n_test">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="892" y="264" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;generatePR()&lt;/b&gt;&lt;br&gt;prGenerator.js&lt;br&gt;title·body·labels" class="component.service" id="n_prgen">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1076" y="264" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;createExplorer()&lt;/b&gt;&lt;br&gt;repoExplorer.js&lt;br&gt;5 tools · shared" class="component.service" id="n_explorer">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="700" y="424" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;sample-project/&lt;/b&gt;&lt;br&gt;src/app.js · tests/app.test.js&lt;br&gt;planted bug" class="component.artifact" id="n_files">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="260" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;child process&lt;/b&gt;&lt;br&gt;execSync(testCommand)&lt;br&gt;node --test · 30s timeout" class="component.external" id="n_proc">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="356" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;PR object&lt;/b&gt;&lt;br&gt;title·body·branch·labels" class="component.artifact" id="n_pr">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="552" width="248" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;stdout&lt;/b&gt;&lt;br&gt;formatPRForDisplay" class="component.artifact" id="n_stdout">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="632" width="248" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;SELF-CORRECTION LOOP — complete, in code order&lt;/b&gt;&lt;br&gt;for attempt = 0 .. maxRetries — default maxRetries 3&lt;br&gt;1 runTests() on EVERY attempt — fresh execSync, no cache&lt;br&gt;2 if result.passed → return immediately&lt;br&gt;3 else if attempt &amp;lt; maxRetries → attemptCorrection&lt;br&gt;4 retries exhausted → one MORE runTests()&lt;br&gt;corrector writes the file itself, not via the coder" class="card.invariant" id="card_loop">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="320" y="508" width="456" height="112" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;BUG-TYPE TAXONOMY — 4 branches, first match wins&lt;/b&gt;&lt;br&gt;1 missing-null-check — hasNullError &amp;amp;&amp;amp; has500&lt;br&gt;2 unhandled-error — has500 alone&lt;br&gt;3 missing-route — has404 alone&lt;br&gt;4 general — fallback, summary = issue title&lt;br&gt;ONLY branch 1 emits code steps — generateSteps&lt;br&gt;branches 2-4 fall through to test steps only" class="card.failure" id="card_bug">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="800" y="508" width="456" height="112" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;FIX EMITTERS — the generateFix switch, complete and in code order&lt;/b&gt;&lt;br&gt;1 missing-null-check → fixMissingNullCheck2 unhandled-error → fixUnhandledError, which returns its input unchanged&lt;br&gt;3 default → originalContent.replace(oldCode, newCode), and only when BOTH are set on the step; otherwise the input is returned&lt;br&gt;the null-check SHAPE is sniffed from the file&amp;#39;s own text, in this order —&lt;br&gt;isExpress → res.status(404).json · isRawHttp → res.writeHead(404) · neither → throw new Error&lt;br&gt;the guard is spliced in immediately after the lookup line, indentation copied from that line" class="card.primitive" id="card_fix">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="320" y="644" width="936" height="104" as="geometry" />
           </mxCell>
         </object>

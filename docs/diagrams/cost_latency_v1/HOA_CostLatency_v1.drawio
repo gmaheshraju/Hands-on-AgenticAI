@@ -35,77 +35,77 @@
           <mxGeometry x="1372" y="568" width="280" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · 3 demos&lt;br&gt;ablation" class="component.entry" id="n_demo">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="56" y="168" width="144" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;benchmark.js&lt;/b&gt;&lt;br&gt;runOptimized&lt;br&gt;CLI main" class="component.entry" id="n_bench">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="56" y="252" width="144" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;conversations.json&lt;/b&gt;&lt;br&gt;50 fixtures&lt;br&gt;1–4 user turns each" class="component.mock" id="n_convs">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="56" y="336" width="144" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;SemanticCache&lt;/b&gt;&lt;br&gt;lookup()&lt;br&gt;cos ≥ 0.60 · TTL 1h" class="component.service" id="n_cache">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="344" y="248" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;summarizeHistory&lt;/b&gt;&lt;br&gt;promptCompress&lt;br&gt;keep last 2" class="component.service" id="n_compress">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="528" y="248" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;classifyComplexity&lt;/b&gt;&lt;br&gt;modelRouter&lt;br&gt;routeToModel" class="component.service" id="n_route">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="712" y="248" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;simulateLLMCall&lt;/b&gt;&lt;br&gt;baseline.js&lt;br&gt;tool ctx ×4" class="component.agent" id="n_llm">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="896" y="248" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;applyEarlyTermination&lt;/b&gt;&lt;br&gt;earlyTermination&lt;br&gt;perceivedLatency" class="component.service" id="n_term">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1080" y="248" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;MODEL_PRICING&lt;/b&gt;&lt;br&gt;baseline.js — 3 tiers&lt;br&gt;frontier · mid · cheap" class="component.external" id="n_pricing">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="312" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;generateResponse()&lt;/b&gt;&lt;br&gt;baseline.js — 5 canned corpora&lt;br&gt;category matched, no network" class="component.mock" id="n_gen">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="400" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;stats + summary&lt;/b&gt;&lt;br&gt;benchmark.js&lt;br&gt;cacheHitRate · terminationRate" class="component.artifact" id="n_stats">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="600" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Comparison table&lt;/b&gt;&lt;br&gt;formatComparisonTable&lt;br&gt;5 stages → stdout" class="component.artifact" id="n_table">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="684" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;PER-TURN PIPELINE — complete, in code order · benchmark.js&lt;/b&gt;&lt;br&gt;1 cache.lookup — HIT ⇒ cost 0, 2ms, continue&lt;br&gt;2 summarizeHistory — no-op unless &amp;gt;4 msgs; prompt swap&lt;br&gt;3 classifyComplexity → routeToModel — tier chosen&lt;br&gt;4 simulateLLMCall — the only token spend in the loop&lt;br&gt;5 applyEarlyTermination — cost × (0.5 + 0.5·ratio)&lt;br&gt;6 perceivedLatency — TTFT replaces total latency&lt;br&gt;7 cache.store — every miss is written back&lt;br&gt;README&#x27;s ASCII draws compression 1st; the code checks the cache 1st." class="card.invariant" id="card_pipe">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="320" y="448" width="456" height="136" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;MODEL TIERS — all three, complete · MODEL_PRICING baseline.js&lt;/b&gt;&lt;br&gt;frontier · gpt-4 · $0.03 in / $0.06 out per 1K&lt;br&gt;mid · claude-sonnet · $0.003 / $0.015 per 1K&lt;br&gt;cheap · gpt-4o-mini · $0.00015 / $0.0006 per 1K&lt;br&gt;latency 800/400/200ms base + 15/8/5ms per token, jitter&lt;br&gt;routeToModel — simple→cheap, medium→mid, complex→frontier&lt;br&gt;TTFT floor 300/150/100ms feeds perceivedLatency" class="card.primitive" id="card_tiers">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="808" y="448" width="456" height="136" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;QUALITY LEDGER — every debit, complete · benchmark.js&lt;/b&gt;&lt;br&gt;0.92 start — frontier model + full system prompt&lt;br&gt;− 0.03 promptCompression&lt;br&gt;− 0.02 modelRouting&lt;br&gt;− 0.03 earlyTermination&lt;br&gt;− 0.00 semanticCaching — cached replies are frontier replies&lt;br&gt;0.84 end — assigned, never measured: scoreQuality is never called." class="card.failure" id="card_qual">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="564" y="616" width="456" height="116" as="geometry" />
           </mxCell>
         </object>

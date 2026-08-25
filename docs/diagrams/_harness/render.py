@@ -100,6 +100,16 @@ def _lines(label):
 def _css(tok):
     return 'd-' + tok.replace('.', '-')
 
+# L2 (legality) grammar. DIAGRAM_RULES_LLD.md requires terminal states to be
+# "visually unmistakable" — a 3px border is how, and it is the one thing that
+# makes a state diagram readable at a glance: you can see where the machine can
+# stop. Doorways (sanctioned exceptions) are dashed because they ARE exceptional.
+STROKE_W = {'state.terminal': 3, 'state.active': 2}
+DASHED_EDGE = {'edge.artifact': '6 3', 'edge.analysis': '4 4', 'transition.doorway': '4 4'}
+
+def _stroke_w(tok):
+    return STROKE_W.get(tok, 1.5)
+
 def emit_drawio(sp, out_path):
     o = ['<mxfile host="app.diagrams.net">',
          f'  <diagram id="{sp.meta["id"]}" name="{html.escape(sp.meta["name"])}">',
@@ -119,7 +129,8 @@ def emit_drawio(sp, out_path):
         o.append('        </mxCell>')
     for nid, tok, lbl, x, y, w, h in sp.nodes:
         c = sp.hexes(tok); card = tok.startswith('card.')
-        style = (f'rounded=1;fillColor={c["fill"]};strokeColor={c["stroke"]};fontSize={8 if card else 9};'
+        style = (f'rounded=1;fillColor={c["fill"]};strokeColor={c["stroke"]};strokeWidth={_stroke_w(tok)};'
+                 f'fontSize={8 if card else 9};'
                  f'fontColor={sp.hexes("text.default")};html=1;whiteSpace=wrap;'
                  f'align={"left;spacingLeft=6" if card else "center"}{";opacity=70" if card else ""};')
         o += [f'        <object label="{html.escape(lbl)}" class="{tok}" id="{nid}">',
@@ -128,8 +139,7 @@ def emit_drawio(sp, out_path):
               '          </mxCell>', '        </object>']
     for eid, s, d, lbl, tok, (ex, ey), (nx, ny), pts in sp.edges:
         c = sp.hexes(tok)
-        dash = ';dashed=1;dashPattern=6 3' if tok in ('edge.artifact',) else (
-               ';dashed=1;dashPattern=4 4' if tok in ('edge.analysis',) else '')
+        dash = (';dashed=1;dashPattern=' + DASHED_EDGE[tok]) if tok in DASHED_EDGE else ''
         style = (f'edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor={c};fontColor={c};fontSize=8;'
                  f'exitX={ex};exitY={ey};exitDx=0;exitDy=0;entryX={nx};entryY={ny};entryDx=0;entryDy=0{dash};')
         o.append(f'        <mxCell id="{eid}" value="{html.escape(lbl)}" style="{style}" parent="1" '
@@ -171,8 +181,7 @@ def emit_svg(sp, out_path):
         segs = list(zip(pp, pp[1:]))
         (ax, ay), (bx, by) = max(segs, key=lambda s2: abs(s2[0][0]-s2[1][0]) + abs(s2[0][1]-s2[1][1]))
         mx, my = (ax + bx) / 2, (ay + by) / 2
-        dash = ' stroke-dasharray="6 3"' if tok == 'edge.artifact' else (
-               ' stroke-dasharray="4 4"' if tok == 'edge.analysis' else '')
+        dash = (' stroke-dasharray="%s"' % DASHED_EDGE[tok]) if tok in DASHED_EDGE else ''
         wid = 2.25 if tok == 'edge.primary' else 1.75
         o += [f'  <g class="d-edge {_css(tok)}" data-edge="{eid}">',
               f'    <polyline points="{pts}" fill="none" stroke="{c}" stroke-width="{wid}"{dash} '
@@ -186,7 +195,7 @@ def emit_svg(sp, out_path):
         mock_dash = ' stroke-dasharray="4 3"' if tok == 'component.mock' else ''
         o += [f'  <g class="d-node {_css(tok)}" data-id="{nid}" data-class="{tok}">',
               f'    <rect x="{x}" y="{y}" width="{w}" height="{h}" rx="6" fill="{c["fill"]}" '
-              f'stroke="{c["stroke"]}" stroke-width="1.5"{mock_dash}/>']
+              f'stroke="{c["stroke"]}" stroke-width="{_stroke_w(tok)}"{mock_dash}/>']
         ty = y + (h - len(ls)*lh)/2 + lh - 4
         for i, (txt, bold) in enumerate(ls):
             weight = ' font-weight="700"' if bold else ''

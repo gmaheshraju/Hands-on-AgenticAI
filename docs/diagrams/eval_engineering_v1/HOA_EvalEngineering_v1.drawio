@@ -41,77 +41,77 @@
           <mxGeometry x="1356" y="600" width="280" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;runDemo()&lt;br&gt;perfect vs degraded" class="component.entry" id="n_demo">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="140" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;golden-set.json&lt;/b&gt;&lt;br&gt;30 Q&amp;amp;A triples&lt;br&gt;read at runner.js" class="component.artifact" id="n_golden">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="396" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;RAG under test&lt;/b&gt;&lt;br&gt;injected fn&lt;br&gt;called at runner.js" class="component.mock" id="n_rag">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="520" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;runEval()&lt;/b&gt;&lt;br&gt;runner.js&lt;br&gt;9-step pipeline" class="component.service" id="n_runner">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="396" y="232" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;LLM-as-judge&lt;/b&gt;&lt;br&gt;evaluator.js&lt;br&gt;3 dims · Promise.all" class="component.agent" id="n_judge">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="620" y="232" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;regression.js&lt;/b&gt;&lt;br&gt;detectRegressions&lt;br&gt;saveBaseline" class="component.service" id="n_regress">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="844" y="232" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;reporter.js&lt;/b&gt;&lt;br&gt;generateReport&lt;br&gt;markdown + verdict" class="component.service" id="n_reporter">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1068" y="232" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;dimensions.js&lt;/b&gt;&lt;br&gt;3 rubric prompts&lt;br&gt;" class="component.service" id="n_dims">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="620" y="360" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Gemini API&lt;/b&gt;&lt;br&gt;gemini-2.0-flash · temp 0.1&lt;br&gt;evaluator.js · maxOut 1024" class="component.external" id="n_gemini">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1368" y="232" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;createMockJudge()&lt;/b&gt;&lt;br&gt;word-overlap heuristic&lt;br&gt;evaluator.js · no API key" class="component.mock" id="n_mockjudge">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1368" y="360" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;baselines/baseline.json&lt;/b&gt;&lt;br&gt;saveBaseline · regression.js" class="component.artifact" id="n_baseline">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1368" y="616" width="248" height="48" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;reports/eval-&amp;lt;ts&amp;gt;.md&lt;/b&gt;&lt;br&gt;writeReport · reporter.js" class="component.artifact" id="n_out_report">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1368" y="688" width="248" height="48" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;runEval() — 9 STEPS, complete, in code order · runner.js&lt;/b&gt;&lt;br&gt;1 load golden-set.json · 2 create judge (mock|real)&lt;br&gt;3 loop: ragSystem() → judge.evaluate()&lt;br&gt;4 computeAggregate — skips parseError rows&lt;br&gt;5 loadBaseline → detectRegressions&lt;br&gt;6 generateReport → writeReport&lt;br&gt;7 saveBaseline if --save-baseline OR no baseline&lt;br&gt;8 print aggregate + PASS/FAIL verdict&lt;br&gt;9 --ci AND hasRegressions → process.exit(1)" class="card.invariant" id="card_pipeline">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="360" y="524" width="440" height="140" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;REGRESSION GATES — every threshold, regression.js&lt;/b&gt;&lt;br&gt;REGRESSION_THRESHOLD_POINTS = 1 — per-dim drop&lt;br&gt;IMPROVEMENT_THRESHOLD_POINTS = 1 — per-dim gain&lt;br&gt;AGGREGATE_THRESHOLD_PERCENT = 0.05 — 5% drop&lt;br&gt;applied: diff &amp;lt; -1 → regressed&lt;br&gt;diff &amp;gt; +1 → improved · else unchanged&lt;br&gt;pctChange &amp;lt; -0.05 → aggregateRegression&lt;br&gt;hasRegressions = regressions.length &amp;gt; 0 OR agg&lt;br&gt;no baseline → false, and this run becomes the baseline" class="card.failure" id="card_gates">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="824" y="524" width="440" height="140" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;THE 3 DIMENSIONS — complete, in DIMENSIONS array order · dimensions.js&lt;/b&gt;&lt;br&gt;faithfulness w=0.4 — grounded in sources? prompt · rubric 5→1 · 4 calibrations&lt;br&gt;relevance w=0.3 — answers the question? prompt · rubric · 4 calibrations&lt;br&gt;completeness w=0.3 — covers all key points? prompt · rubric · 4 calibrations&lt;br&gt;composite sums only non-parseError dims · mock judge hard-codes the same weights&lt;br&gt;parseJudgeResponse — 3 exits to score 0: no JSON · out of 1-5 · throw" class="card.primitive" id="card_dims">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="360" y="680" width="904" height="88" as="geometry" />
           </mxCell>
         </object>

@@ -29,87 +29,87 @@
           <mxGeometry x="1388" y="488" width="280" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI entry&lt;br&gt;4 requests&lt;br&gt; — no args" class="component.entry" id="n_demo">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="40" y="136" width="176" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;ALL_AGENTS&lt;/b&gt;&lt;br&gt;agents.js — 6 cards&lt;br&gt;15 skills, 12 names" class="component.mock" id="n_cards">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="40" y="256" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;DECOMPOSITION_RULES&lt;/b&gt;&lt;br&gt;decomposer.js&lt;br&gt;5 regex + fallback" class="component.mock" id="n_rules">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="40" y="352" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;coordinator.test.js&lt;/b&gt;&lt;br&gt;2nd entry — 15 tests&lt;br&gt;4 suites, all pass" class="component.entry" id="n_test">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="40" y="448" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;CapabilityRegistry&lt;/b&gt;&lt;br&gt;register()&lt;br&gt;skillIndex Map" class="component.service" id="n_registry">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="320" y="136" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;decomposer.js&lt;/b&gt;&lt;br&gt;decompose()&lt;br&gt;getExecutionPlan&lt;br&gt;waves by priority" class="component.service" id="n_decomp">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="320" y="256" width="160" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;processRequest()&lt;/b&gt;&lt;br&gt;coordinator.js&lt;br&gt;wave loop&lt;br&gt;allSettled" class="component.service" id="n_exec">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="512" y="256" width="160" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;_executeTask()&lt;/b&gt;&lt;br&gt;coordinator.js&lt;br&gt;retry loop&lt;br&gt;maxRetries 2" class="component.service" id="n_task">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="728" y="256" width="160" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;selectAgent()&lt;/b&gt;&lt;br&gt;capability.js&lt;br&gt;load, then cost&lt;br&gt;maxConcurrency" class="component.service" id="n_select">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="920" y="256" width="160" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;skill handler&lt;/b&gt;&lt;br&gt;agents.js&lt;br&gt;SIMULATED closure&lt;br&gt;setTimeout only" class="component.mock" id="n_handler">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1112" y="256" width="160" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;_tryEscalation()&lt;/b&gt;&lt;br&gt;coordinator.js&lt;br&gt;escalatesTo chain" class="component.service" id="n_escalate">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="920" y="376" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;MessageBus&lt;/b&gt;&lt;br&gt;bus.js publish&lt;br&gt;history[] cap 500" class="component.service" id="n_bus">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="920" y="520" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;run summary&lt;/b&gt;&lt;br&gt;_printRunSummary&lt;br&gt;demo totals" class="component.service" id="n_summary">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1120" y="520" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;stdout — console.log only&lt;/b&gt;&lt;br&gt;no file written, no socket open&lt;br&gt;0 fs/http refs in src/" class="component.artifact" id="n_stdout">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1400" y="520" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;BUS = AUDIT LOG, NOT TRANSPORT&lt;/b&gt;&lt;br&gt;5 publish sites, ALL in coordinator.js:&lt;br&gt; TASK_REQUEST TASK_RESULT&lt;br&gt; TASK_FAILED ESCALATION&lt;br&gt; TASK_RESULT (escalated)&lt;br&gt;1 subscribe site: coordinator.js&lt;br&gt; ESCALATION → console.log, nothing more&lt;br&gt;agents.js has 0 imports, 0 bus refs&lt;br&gt;handlers are called DIRECTLY&lt;br&gt;bus.js names HEARTBEAT + BROADCAST —&lt;br&gt;neither is ever published (README false)" class="card.invariant" id="card_bus">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="320" y="608" width="312" height="160" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;selectAgent() — 7 checks, in order&lt;/b&gt;&lt;br&gt;1 skillIndex.get(skill) → ids, reg order&lt;br&gt;2 map to card, drop deregistered&lt;br&gt;3 sort: lower load first&lt;br&gt;4 tie → lower cost for THAT skill&lt;br&gt;5 no providers → null&lt;br&gt;6 best = providers[0]&lt;br&gt;7 load &amp;gt;= maxConcurrency || 5 → null&lt;br&gt;incrementLoad fires BEFORE the await&lt;br&gt;→ 2nd parallel code task goes to Senior Dev&lt;br&gt;README claims Junior ×2 — observed J then S" class="card.primitive" id="card_route">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="652" y="608" width="312" height="160" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;ESCALATION: 4 NULL EXITS, 0 FIRINGS&lt;/b&gt;&lt;br&gt;_tryEscalation, called at +&lt;br&gt;returns null on 4 guards, in code order:&lt;br&gt; a assigned card has no escalatesTo&lt;br&gt; b escalatesTo id not registered&lt;br&gt; c target lacks that skill/handler&lt;br&gt; d target handler throws&lt;br&gt;only 2 of 6 cards set escalatesTo&lt;br&gt;demo: maxRetries 1 + junior throws only&lt;br&gt;at attempt === 0 ⇒ unreachable&lt;br&gt;13 demo runs observed — Escalations: 0" class="card.failure" id="card_esc">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="984" y="608" width="312" height="160" as="geometry" />
           </mxCell>
         </object>

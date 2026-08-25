@@ -35,77 +35,77 @@
           <mxGeometry x="52" y="568" width="224" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;chat.js&lt;/b&gt;&lt;br&gt;EventSource · 8 events&lt;br&gt;" class="component.entry" id="n_client">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="72" y="232" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Trust renderers&lt;/b&gt;&lt;br&gt;confidence&lt;br&gt;citation hitl&lt;br&gt;error cards" class="component.entry" id="n_render">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="72" y="376" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;GET /api/chat/stream&lt;/b&gt;&lt;br&gt;SSE handler · send()&lt;br&gt;server.js" class="component.service" id="n_stream">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="416" y="232" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;matchScenario()&lt;/b&gt;&lt;br&gt;first regex wins&lt;br&gt;agent.js" class="component.agent" id="n_match">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="720" y="232" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;event pump&lt;/b&gt;&lt;br&gt;for/switch · 6 cases&lt;br&gt;server.js" class="component.service" id="n_pump">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1024" y="232" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;POST hitl/resolve&lt;/b&gt;&lt;br&gt;wakes the Promise&lt;br&gt;server.js" class="component.service" id="n_hitl">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="416" y="400" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;POST chat/stop&lt;/b&gt;&lt;br&gt;sets aborted = true&lt;br&gt;server.js" class="component.service" id="n_stop">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="720" y="400" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;in-memory Maps&lt;/b&gt;&lt;br&gt;activeStreams&lt;br&gt;pendingApprovals" class="component.service" id="n_state">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1024" y="400" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;SCENARIOS — 8 builders&lt;/b&gt;&lt;br&gt;scripted arrays · no LLM call&lt;br&gt;agent.js" class="component.external" id="n_scen">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1388" y="232" width="240" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;SOURCES — 5 mock docs&lt;/b&gt;&lt;br&gt;title · url · passage&lt;br&gt;agent.js · no network" class="component.mock" id="n_sources">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1388" y="320" width="240" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;getHITLContinuation()&lt;/b&gt;&lt;br&gt;approved / rejected branches&lt;br&gt;agent.js" class="component.external" id="n_cont">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1388" y="408" width="240" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;localStorage&lt;/b&gt;&lt;br&gt;chat_history_v1&lt;br&gt;chat.js" class="component.artifact" id="n_storage">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="72" y="604" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;SSE EVENT TYPES — all 8, in first-emission order · server.js&lt;/b&gt;&lt;br&gt;1 stream_start · 2 stream_stop&lt;br&gt;3 thinking · 4 token (text + confidence)&lt;br&gt;5 citation · 6 hitl_request&lt;br&gt;7 done · 8 error&lt;br&gt;client also listens &#x27;error_event&#x27; — no server emitter" class="card.invariant" id="card_events">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="384" y="520" width="424" height="92" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;SCENARIO ROUTER — 8 entries, first match wins · agent.js&lt;/b&gt;&lt;br&gt;1 refund_policy /refund|return|money back/i&lt;br&gt;2 send_email · 3 database_query — the two HITL flows&lt;br&gt;4 rate_limit · 5 context_long · 6 timeout&lt;br&gt;7 network_error · 8 default /.*/&lt;br&gt;loop skips &#x27;default&#x27;, returns it as fallback" class="card.primitive" id="card_router">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="832" y="520" width="424" height="92" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;TYPED ERROR BRANCHES — the complete switch · chat.js&lt;/b&gt;&lt;br&gt;1 rate_limit — live countdown; the server itself auto-retries after retry_after s (server.js)&lt;br&gt;2 context_too_long — Summarize and Continue / Start New Chat&lt;br&gt;3 timeout — Try Again / Dismiss, prints elapsed seconds&lt;br&gt;4 network_error — Retry Now; header status flips to Disconnected&lt;br&gt;5 default — Something Went Wrong / Try Again. Only branch 1 leaves the stream alive." class="card.failure" id="card_errors">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="384" y="648" width="872" height="92" as="geometry" />
           </mxCell>
         </object>

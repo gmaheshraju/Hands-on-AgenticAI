@@ -35,77 +35,77 @@
           <mxGeometry x="1372" y="460" width="280" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;Chat UI&lt;/b&gt;&lt;br&gt;SSE client · app.js&lt;br&gt;EventSource" class="component.entry" id="n_ui">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="56" y="264" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Run Inspector&lt;/b&gt;&lt;br&gt;report-card modal&lt;br&gt;showTrace" class="component.entry" id="n_inspector">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="56" y="400" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Express server&lt;/b&gt;&lt;br&gt;routes · CSP · limits&lt;br&gt;server.js" class="component.service" id="n_server">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="352" y="264" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;StreamManager&lt;/b&gt;&lt;br&gt;buffer + SSE replay&lt;br&gt;streams.js" class="component.service" id="n_streams">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="352" y="424" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Guardrails&lt;/b&gt;&lt;br&gt;block inject · redact&lt;br&gt;guardrails.js" class="component.service" id="n_guardrails">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="592" y="264" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;runAgent()&lt;/b&gt;&lt;br&gt;reason ≤8 → answer&lt;br&gt;agent.js" class="component.agent" id="n_agent">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="844" y="264" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;LLMAdapter&lt;/b&gt;&lt;br&gt;chat/stream · JSON-retry&lt;br&gt;llm.js" class="component.service" id="n_llm">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1096" y="264" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;AgentObserver&lt;/b&gt;&lt;br&gt;5 scores → report card&lt;br&gt;tracer.js" class="component.service" id="n_observer">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="592" y="424" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Tools · executeTool&lt;/b&gt;&lt;br&gt;wiki search/read · calc&lt;br&gt;tools.js" class="component.service" id="n_tools">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1096" y="424" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;LLM providers&lt;/b&gt;&lt;br&gt;Ollama NDJSON · NVIDIA/Gemini SSE&lt;br&gt;llm.js" class="component.external" id="n_providers">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="168" width="248" height="72" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Wikipedia API&lt;/b&gt;&lt;br&gt;opensearch + REST summary&lt;br&gt;tools.js" class="component.external" id="n_wiki">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="288" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;SQLite · WAL + FTS5&lt;/b&gt;&lt;br&gt;threads · messages(tree) · runs&lt;br&gt;decisions · feedback · facts&lt;br&gt;db.js (shared store)" class="component.artifact" id="n_db">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="512" width="248" height="80" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;FIVE SCORES PER RUN · tracer.js end()&lt;/b&gt;&lt;br&gt;1 Tool ROI = used ÷ tool decisions&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;n-gram overlap ≥ 0.15 ⇒ used&lt;br&gt;2 Coherence = consec-thought terms&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;≥ 2 shared terms ⇒ coherent&lt;br&gt;3 Productivity: productive | wasted&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;respond OR result used ⇒ productive&lt;br&gt;4 Confidence signals (from thought)&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;hedging·confident·uncertain·&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;seeking_info·ready_to_answer&lt;br&gt;5 Strategy&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;direct·single_tool·multi_tool·iterative&lt;br&gt;→ persisted: agent_runs + decisions" class="card.invariant" id="card_scores">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="344" y="560" width="296" height="224" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;GUARDRAILS — block in, redact both ways&lt;/b&gt;&lt;br&gt;scanInput()&lt;br&gt;&amp;nbsp;&amp;nbsp;16 injection regex → block&lt;br&gt;&amp;nbsp;&amp;nbsp;5 PII types redacted&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;card·ssn·email·phone·apikey&lt;br&gt;&amp;nbsp;&amp;nbsp;blocked ⇒ canned reply&lt;br&gt;scanOutput()&lt;br&gt;&amp;nbsp;&amp;nbsp;same 5 PII masked on answer&lt;br&gt;&amp;nbsp;&amp;nbsp;2 disclaimer patterns flagged&lt;br&gt;one audit_log row per scan" class="card.failure" id="card_guard">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="664" y="560" width="296" height="160" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;PRODUCTION LIMITS — safe to expose publicly&lt;/b&gt;&lt;br&gt;rate/IP: 300 read · 20 write per min&lt;br&gt;20 concurrent runs → 503&lt;br&gt;message &amp;gt; 8000 chars → 413&lt;br&gt;JSON body ≤ 64 kb&lt;br&gt;CSP + 5 security headers&lt;br&gt;graceful drain + WAL checkpoint" class="card.primitive" id="card_limits">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="984" y="560" width="296" height="136" as="geometry" />
           </mxCell>
         </object>

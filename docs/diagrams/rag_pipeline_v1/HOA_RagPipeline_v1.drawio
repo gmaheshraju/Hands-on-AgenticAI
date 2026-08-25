@@ -35,77 +35,77 @@
           <mxGeometry x="1412" y="584" width="208" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;SAMPLE_CODEBASE&lt;br&gt;5 questions" class="component.entry" id="n_demo">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="40" y="316" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;RAGPipeline&lt;/b&gt;&lt;br&gt;owns every stage&lt;br&gt;indexFile ask" class="component.service" id="n_pipeline">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="360" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;chunker.js&lt;/b&gt;&lt;br&gt;chunkFile&lt;br&gt;shouldIndex" class="component.service" id="n_chunker">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="360" y="412" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;BM25Index&lt;/b&gt;&lt;br&gt;inverted index&lt;br&gt;k1=1.2 b=0.75" class="component.service" id="n_bm25">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="600" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;VectorIndex&lt;/b&gt;&lt;br&gt;sparse cosine&lt;br&gt;in-memory" class="component.service" id="n_vector">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="600" y="412" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;reciprocalRankFusion&lt;/b&gt;&lt;br&gt;1/(k + rank)&lt;br&gt;rank-based merge" class="component.service" id="n_fusion">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="840" y="332" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Reranker.rerank&lt;/b&gt;&lt;br&gt;heuristic | llm&lt;br&gt;score 0-10" class="component.agent" id="n_rerank">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1080" y="332" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Answer generation&lt;/b&gt;&lt;br&gt;buildAnswerPrompt&lt;br&gt;mock fallback" class="component.service" id="n_answer">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1080" y="460" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;llmCall(prompt)&lt;/b&gt;&lt;br&gt;caller-supplied&lt;br&gt;default null" class="component.external" id="n_llm">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1424" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;MockEmbedding&lt;/b&gt;&lt;br&gt;bag-of-words&lt;br&gt;no network call" class="component.mock" id="n_embed">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1424" y="412" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;{answer,sources,debug}&lt;/b&gt;&lt;br&gt;pipeline.js" class="component.artifact" id="n_ret">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1424" y="608" width="176" height="48" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;stdout&lt;/b&gt;&lt;br&gt;demo.js" class="component.artifact" id="n_console">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1424" y="692" width="176" height="48" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;CANDIDATE FUNNEL — every knob, in constructor order&lt;/b&gt;&lt;br&gt;1 bm25TopK 20 · 2 vectorTopK 20 — candidates&lt;br&gt;3 fusionTopK 15 — survive RRF · 5 rrfK 60&lt;br&gt;4 rerankerTopK 5 — reach the answer prompt&lt;br&gt;6 llmCall null · 7 rerankerMode &#x27;heuristic&#x27;&lt;br&gt;every one is options.X || literal — no config file, no env&lt;br&gt;20+20 → 15 → 5, applied at" class="card.invariant" id="card_funnel">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="304" y="560" width="456" height="116" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;SILENT DEGRADATIONS ON THE QUERY PATH — in call order&lt;/b&gt;&lt;br&gt;1 bm25.search: query tokenizes to nothing → [] bm25.js&lt;br&gt;2 cosineSimilarity: either norm 0 → 0 vectorSearch.js&lt;br&gt;3 rerank: no candidates → [] reranker.js&lt;br&gt;4 LLM JSON unparseable → heuristic; console.warn only&lt;br&gt;5 candidate absent from LLM scores → rerankerScore 0&lt;br&gt;6 no llmCall → mockGenerateAnswer pipeline.js&lt;br&gt;7 zero chunks → fixed &#x27;not found&#x27; string — see below" class="card.failure" id="card_degrade">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="792" y="560" width="456" height="116" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;chunker.js shouldIndex() REJECTS — complete, code order&lt;/b&gt;&lt;br&gt;1 path part in SKIP_DIRS, n=11 · 2 part starts &#x27;.&#x27;&lt;br&gt;3 ext in SKIP_EXTENSIONS, n=19 · 4 ext over 6 chars&lt;br&gt;else return true — reject is counted, never logged&lt;br&gt;the ONE throw in the whole project: fusion.js (weights len)" class="card.primitive" id="card_index">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="304" y="692" width="456" height="76" as="geometry" />
           </mxCell>
         </object>

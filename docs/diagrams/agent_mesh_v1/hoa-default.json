@@ -7,28 +7,90 @@
       "edge.money -> edge.primary": "no money path outside a trading system; the general case is the critical execution path",
       "component.store -> component.artifact": "durable output here is files, not a database"
     },
-    "contrast_rule": "text fontColor must keep >=4.5:1 on its fill"
+    "contrast_rule": "text fontColor must keep >=4.5:1 on its fill",
+    "l2_note": "state.* and transition.* added 2026-08-25 for L2 (legality) diagrams. state.active replaces the FTS name state.stable: 'money-on' does not generalise, the portable meaning is 'the state where work happens'."
   },
   "boundary": {
-    "primary": "#E7157B", "external": "#1565C0", "datasource": "#9E9E9E",
-    "observability": "#E7157B", "functional": "#2E7D32"
+    "primary": "#E7157B",
+    "external": "#1565C0",
+    "datasource": "#9E9E9E",
+    "observability": "#E7157B",
+    "functional": "#2E7D32"
   },
   "component": {
-    "service":  { "fill": "#E8EAF6", "stroke": "#3F51B5" },
-    "agent":    { "fill": "#F3E5F5", "stroke": "#7B1FA2" },
-    "artifact": { "fill": "#C8E6C9", "stroke": "#2E7D32" },
-    "external": { "fill": "#E3F2FD", "stroke": "#1565C0" },
-    "entry":    { "fill": "#FFF3E0", "stroke": "#E65100" },
-    "mock":     { "fill": "#F5F5F5", "stroke": "#9E9E9E" }
+    "service": {
+      "fill": "#E8EAF6",
+      "stroke": "#3F51B5"
+    },
+    "agent": {
+      "fill": "#F3E5F5",
+      "stroke": "#7B1FA2"
+    },
+    "artifact": {
+      "fill": "#C8E6C9",
+      "stroke": "#2E7D32"
+    },
+    "external": {
+      "fill": "#E3F2FD",
+      "stroke": "#1565C0"
+    },
+    "entry": {
+      "fill": "#FFF3E0",
+      "stroke": "#E65100"
+    },
+    "mock": {
+      "fill": "#F5F5F5",
+      "stroke": "#9E9E9E"
+    }
   },
   "card": {
-    "invariant": { "fill": "#E8EAF6", "stroke": "#3F51B5" },
-    "failure":   { "fill": "#FFEBEE", "stroke": "#C62828" },
-    "primitive": { "fill": "#FFF3E0", "stroke": "#E65100" }
+    "invariant": {
+      "fill": "#E8EAF6",
+      "stroke": "#3F51B5"
+    },
+    "failure": {
+      "fill": "#FFEBEE",
+      "stroke": "#C62828"
+    },
+    "primitive": {
+      "fill": "#FFF3E0",
+      "stroke": "#E65100"
+    }
   },
   "edge": {
-    "primary": "#232F3E", "call": "#1565C0", "data_in": "#9E9E9E",
-    "artifact": "#2E7D32", "stop": "#C62828", "analysis": "#E65100"
+    "primary": "#232F3E",
+    "call": "#1565C0",
+    "data_in": "#9E9E9E",
+    "artifact": "#2E7D32",
+    "stop": "#C62828",
+    "analysis": "#E65100"
   },
-  "text": { "default": "#232F3E", "muted": "#888888" }
+  "text": {
+    "default": "#232F3E",
+    "muted": "#888888"
+  },
+  "state": {
+    "initial": {
+      "fill": "#E8EAF6",
+      "stroke": "#3F51B5"
+    },
+    "transitional": {
+      "fill": "#FFF8E1",
+      "stroke": "#F9A825"
+    },
+    "active": {
+      "fill": "#C8E6C9",
+      "stroke": "#2E7D32"
+    },
+    "terminal": {
+      "fill": "#ECEFF1",
+      "stroke": "#455A64"
+    }
+  },
+  "transition": {
+    "normal": "#232F3E",
+    "failure": "#C62828",
+    "revert": "#E65100",
+    "doorway": "#E65100"
+  }
 }

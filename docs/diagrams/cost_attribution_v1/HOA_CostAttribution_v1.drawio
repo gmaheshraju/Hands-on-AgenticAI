@@ -29,67 +29,67 @@
           <mxGeometry x="1372" y="308" width="280" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · main()&lt;br&gt;records + prints" class="component.entry" id="n_demo">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="252" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;12 sim. events&lt;/b&gt;&lt;br&gt;no real LLM&lt;br&gt;demo.js" class="component.mock" id="n_scenarios">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="372" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;CostAttributionEngine&lt;/b&gt;&lt;br&gt;engine.js — facade&lt;br&gt;record + dashboard" class="component.service" id="n_engine">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="344" y="236" width="176" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Budget monitor&lt;/b&gt;&lt;br&gt;_checkBudget&lt;br&gt;budgets + alerts" class="component.service" id="n_budget">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="344" y="372" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Pricing table&lt;/b&gt;&lt;br&gt;7 models&lt;br&gt;hardcoded · no API" class="component.external" id="n_pricing">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="600" y="140" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;CostCollector&lt;/b&gt;&lt;br&gt;events[] store&lt;br&gt;query()" class="component.service" id="n_collector">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="600" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;CostAttribution&lt;/b&gt;&lt;br&gt;4 dimensions" class="component.service" id="n_attr">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="888" y="236" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;WasteDetector&lt;/b&gt;&lt;br&gt;6 patterns" class="component.service" id="n_waste">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="888" y="340" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;ROICalculator&lt;/b&gt;&lt;br&gt;ROI + efficiency" class="component.service" id="n_roi">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="888" y="444" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;stdout report&lt;/b&gt;&lt;br&gt;console.log — demo.js" class="component.artifact" id="n_out">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="340" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;4 ATTRIBUTION DIMENSIONS — attribution.js&lt;/b&gt;&lt;br&gt;1 byAgent — cost·reqs·successRate·avg&lt;br&gt;2 byTeam — cost·uniqueAgents·models&lt;br&gt;3 byTaskType — costPerSuccess·rate&lt;br&gt;4 byModel — tokens·cacheHitRate·avg&lt;br&gt;each reads collector.query()&lt;br&gt;sorted by totalCost desc" class="card.invariant" id="card_attr">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="344" y="576" width="304" height="184" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;6 WASTE PATTERNS — waste.analyze()&lt;/b&gt;&lt;br&gt;1 overpowered_model — opus/gpt4o 85%&lt;br&gt;2 duplicate_requests — within 60s&lt;br&gt;3 excessive_retries — &amp;gt;1 fail/task&lt;br&gt;4 low_cache_hit_rate — &amp;gt;10 &amp;amp; &amp;lt;10%&lt;br&gt;5 high_failure_rate — &amp;gt;5 &amp;amp; &amp;gt;30%&lt;br&gt;6 idle_agent — &amp;gt;1h idle, cost&amp;gt;$.01&lt;br&gt;sorted by savingsUsd desc" class="card.invariant" id="card_waste">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="664" y="576" width="304" height="184" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;BUDGET ALERTS — engine._checkBudget&lt;/b&gt;&lt;br&gt;fires inside every record()&lt;br&gt;no budget set ⇒ skip&lt;br&gt;spend = today&#x27;s team cost&lt;br&gt;thresholds 0.5 · 0.8 · 0.95 · 1.0&lt;br&gt;level: ≥1.0 crit · ≥0.8 warn · info&lt;br&gt;deduped per team·threshold·day&lt;br&gt;alerts accrue on this.alerts[]" class="card.failure" id="card_budget">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="984" y="576" width="304" height="184" as="geometry" />
           </mxCell>
         </object>

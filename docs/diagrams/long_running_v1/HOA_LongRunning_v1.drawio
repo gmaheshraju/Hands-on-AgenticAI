@@ -35,72 +35,72 @@
           <mxGeometry x="1372" y="504" width="280" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;4 scenarios · main&lt;br&gt;" class="component.entry" id="n_demo">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="248" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;agent.test.js&lt;/b&gt;&lt;br&gt;27 tests · 6 suites&lt;br&gt;rollback&#x27;s only caller" class="component.entry" id="n_tests">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="368" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;tasks.js — 4 tasks&lt;/b&gt;&lt;br&gt;24 steps&lt;br&gt; · SIMULATED&lt;br&gt;setTimeout only" class="component.mock" id="n_tasks">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="464" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;DurableExecutor&lt;/b&gt;&lt;br&gt;execute() — the loop&lt;br&gt;budget+reporter per run&lt;br&gt;exits&lt;br&gt;injects store +&lt;br&gt;recoveryManager" class="component.service" id="n_exec">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="336" y="256" width="176" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;ExecutionBudget&lt;/b&gt;&lt;br&gt;budget.js · check&lt;br&gt;record · report&lt;br&gt;new per execute()" class="component.service" id="n_budget">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="560" y="272" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;#executeStep()&lt;/b&gt;&lt;br&gt;executor.js&lt;br&gt;setTimeout +&lt;br&gt;clearTimeout" class="component.service" id="n_step">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="800" y="272" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;step.handler() — SIMULATED&lt;/b&gt;&lt;br&gt;awaited at executor.js&lt;br&gt;every handler = simulateWork&lt;br&gt;tasks.js — setTimeout, no I/O" class="component.agent" id="n_handler">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1400" y="272" width="240" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;CheckpointStore&lt;/b&gt;&lt;br&gt;checkpoint.js — Map&lt;br&gt;IN-MEMORY, not durable&lt;br&gt;save · load" class="component.artifact" id="n_ckpt">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="336" y="460" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;RecoveryManager&lt;/b&gt;&lt;br&gt;recovery.js · injected&lt;br&gt;selectStrategy&lt;br&gt;applyRollback" class="component.service" id="n_recovery">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="608" y="460" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;ProgressReporter&lt;/b&gt;&lt;br&gt;progress.js · per run&lt;br&gt;record · 6 icons&lt;br&gt;timeline · ETA" class="component.service" id="n_progress">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="880" y="460" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;stdout — the only output&lt;/b&gt;&lt;br&gt;demo.js&lt;br&gt;timeline · budget · progress&lt;br&gt;no file is ever written" class="component.artifact" id="n_out">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1400" y="528" width="240" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;selectStrategy() recovery.js — 7 branches, in code order&lt;/b&gt;&lt;br&gt;1 timeout | code TIMEOUT + retries left → retry, 100ms×n, t×2&lt;br&gt;2 rate limit | 429 | RATE_LIMIT + retries → retry, 2ⁿ s cap 16s&lt;br&gt;3 auth | 401 | 403 | code AUTH → abort — never recoverable&lt;br&gt;4 data | validation | parse, non-critical step → skip&lt;br&gt;5 data | validation | parse, critical step → abort&lt;br&gt;6 any other error, retries left → retry, 200ms×n&lt;br&gt;7 retries exhausted → skip if non-critical, else abort&lt;br&gt;FALL-THROUGH: 1 and 2 do NOT return when retries hit 0 — they&lt;br&gt;drop to branch 7. Only branch 3 returns unconditionally.&lt;br&gt;&#x27;rollback&#x27; is in the return type and is never returned." class="card.primitive" id="card_rec">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="336" y="600" width="456" height="160" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;DURABILITY — the checkpoint store is a Map, checkpoint.js&lt;/b&gt;&lt;br&gt;save() from 7 sites, all inside execute():&lt;br&gt; — on abort as well as on success&lt;br&gt;kept: currentStepIndex, completedSteps, 4 budget counters&lt;br&gt;dropped: the step result payload — {...s, result: undefined}&lt;br&gt;no file, no DB, no serialisation to disk anywhere in the repo&lt;br&gt;the demo crash is a thrown Error tasks.js, caught in-process&lt;br&gt;a real process exit takes the Map with it — resume is in-RAM&lt;br&gt;budget.restore() does not restore #startTime budget.js&lt;br&gt;so the maxDuration clock restarts at zero on every resume&lt;br&gt;observed: 8 steps → 8 checkpoints (demo.js, run 2026-08-24)" class="card.invariant" id="card_dur">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="816" y="600" width="456" height="160" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;BUDGET IS A FLOOR, NOT A CEILING&lt;/b&gt;&lt;br&gt;check() runs BEFORE a step&lt;br&gt;record() runs AFTER it returns&lt;br&gt;→ the step that breaches the cap still&lt;br&gt;runs in full and is still billed&lt;br&gt;observed: $0.1200 spent vs $0.1000 cap&lt;br&gt;3 limits, all ≥ : cost, seconds,&lt;br&gt;calls — calls counts steps&lt;br&gt;all default to Infinity = no gate" class="card.failure" id="card_bud">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="1360" y="656" width="296" height="132" as="geometry" />
           </mxCell>
         </object>

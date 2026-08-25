@@ -35,72 +35,72 @@
           <mxGeometry x="1372" y="592" width="280" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;npm run demo&lt;br&gt;3 parts" class="component.entry" id="n_cli">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="248" width="128" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;agent.ask(question)&lt;/b&gt;&lt;br&gt;retry loop · 4 tries&lt;br&gt;agent.js" class="component.service" id="n_ask">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="304" y="248" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;llm(messages) — mockLLM&lt;/b&gt;&lt;br&gt;19 patterns + default&lt;br&gt;agent.js · seam" class="component.agent" id="n_llm">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="520" y="248" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;validateQuery()&lt;/b&gt;&lt;br&gt;3 tiers, deny-default&lt;br&gt;permissions.js" class="component.service" id="n_perm">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="776" y="248" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;db.prepare(sql).all()&lt;/b&gt;&lt;br&gt;better-sqlite3 · timed&lt;br&gt;agent.js" class="component.service" id="n_exec">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1032" y="248" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;estimateQueryCost()&lt;/b&gt;&lt;br&gt;EXPLAIN QUERY PLAN&lt;br&gt;permissions.js" class="component.service" id="n_cost">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="776" y="368" width="176" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;formatResult(rows)&lt;/b&gt;&lt;br&gt;table / scalar / meta&lt;br&gt;formatter.js" class="component.service" id="n_fmt">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1032" y="368" width="176" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;database.js&lt;/b&gt;&lt;br&gt;openDatabase (WAL, FK on)&lt;br&gt;getSchemaContext&lt;br&gt;getAllowedTables" class="component.service" id="n_dbmod">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="260" width="248" height="72" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;analytics.db&lt;/b&gt;&lt;br&gt;SQLite · users products&lt;br&gt;orders events · 15,020 rows&lt;br&gt;database.js · seeded" class="component.artifact" id="n_db">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="372" width="248" height="72" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;stdout — success&lt;/b&gt;&lt;br&gt;table + query metadata&lt;br&gt;demo.js" class="component.artifact" id="n_out">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="612" width="248" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;stdout — refusal&lt;/b&gt;&lt;br&gt;PERMISSION DENIED&lt;br&gt;CONFIRMATION REQUIRED" class="component.artifact" id="n_deny">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="684" width="248" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;validateQuery() — EVERY check, in code order · permissions.js&lt;/b&gt;&lt;br&gt;BLOCK 1 multiple statements &#x27;;&#x27; · 2 first keyword not SELECT&lt;br&gt;BLOCK 3 destructive keyword x14 · 4 metadata table x6&lt;br&gt;BLOCK 5 load_extension · 6 table not in allowedTables&lt;br&gt;BLOCK 7 subquery depth &gt; 2 · 8 UNION + constant&lt;br&gt;CONFIRM 9 over 3 JOINs · 10 no WHERE clause (one result)&lt;br&gt;ALLOW fall-through only — first match wins; order is load-bearing" class="card.invariant" id="card_gate">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="304" y="496" width="456" height="112" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;DENY LISTS — complete, in declaration order&lt;/b&gt;&lt;br&gt;destructive — INSERT UPDATE DELETE DROP ALTER CREATE&lt;br&gt;TRUNCATE REPLACE EXEC ATTACH DETACH PRAGMA GRANT REVOKE (14)&lt;br&gt;metadata — information_schema sqlite_master sqlite_schema&lt;br&gt;sqlite_temp_master pg_catalog pg_tables (6) · load_extension&lt;br&gt;allowedTables database.js — users products orders events (4)" class="card.failure" id="card_deny">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="304" y="632" width="456" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;ONE ask() ATTEMPT — 4 steps in code order · agent.js&lt;/b&gt;&lt;br&gt;1 llm(messages) — md fences + trailing &#x27;;&#x27; stripped&lt;br&gt;2 validateQuery(sql, allowedTables)&lt;br&gt; !allowed -&gt; &#x27;PERMISSION DENIED&#x27;, return&lt;br&gt; needsConfirm and !autoConfirm -&gt; return — never retried&lt;br&gt;3 estimateQueryCost(db, sql) — EXPLAIN QUERY PLAN&lt;br&gt;4 db.prepare(sql).all() — timed by performance.now()&lt;br&gt; on throw -&gt; errors.push + retry prompt appended&lt;br&gt;&lt;br&gt;&lt;b&gt;4 ATTEMPTS MAX&lt;/b&gt; — attempt = 0..maxRetries, default 3&lt;br&gt;exhausted -&gt; &#x27;Failed after N attempts&#x27; + error list&lt;br&gt;&lt;br&gt;&lt;b&gt;AgentResult envelope — 10 fields · agent.js&lt;/b&gt;&lt;br&gt;success · question · sql · rows · formatted · permission&lt;br&gt;cost · attempts · errors · executionTimeMs" class="card.primitive" id="card_attempt">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="792" y="496" width="456" height="232" as="geometry" />
           </mxCell>
         </object>

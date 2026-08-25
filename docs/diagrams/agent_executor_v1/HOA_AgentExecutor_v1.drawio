@@ -35,72 +35,72 @@
           <mxGeometry x="1372" y="568" width="284" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;6 actions · 4 policies&lt;br&gt;3 agents · 6 scenarios&lt;br&gt;" class="component.entry" id="n_demo">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="268" width="176" height="80" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Agents&lt;/b&gt;&lt;br&gt;3 records&lt;br&gt;basic/elev/admin&lt;br&gt;(perm records)" class="component.agent" id="n_agents">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="392" width="176" height="72" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;AgentExecutor&lt;/b&gt;&lt;br&gt;.execute()&lt;br&gt;guards&lt;br&gt;audit each branch" class="component.service" id="n_exec">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="328" y="240" width="160" height="80" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Gate 1 · schema&lt;/b&gt;&lt;br&gt;validate()&lt;br&gt;req·type·enum&lt;br&gt;min/max·pattern" class="component.service" id="n_validate">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="516" y="248" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Gate 2 · policy&lt;/b&gt;&lt;br&gt;evaluate()&lt;br&gt;IAM deny-wins&lt;br&gt;policy.js" class="component.service" id="n_policy">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="708" y="248" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Gate 3 · approval&lt;/b&gt;&lt;br&gt;submit()&lt;br&gt;auto / pending&lt;br&gt;approvals.js" class="component.service" id="n_approval">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="900" y="248" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Gate 4 · sandbox&lt;/b&gt;&lt;br&gt;_sandboxedExec&lt;br&gt;TIMEOUT RACE ONLY&lt;br&gt;no perm check" class="component.service" id="n_sbexec">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1092" y="248" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;action.handler(s)&lt;/b&gt;&lt;br&gt;demo.js · MOCKED&lt;br&gt;canned data — no real DB/API/FS" class="component.external" id="n_handler">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="248" width="256" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Sandbox&lt;/b&gt;&lt;br&gt;createSession (WIRED)&lt;br&gt;checkPermission&lt;br&gt;UNWIRED — demo only" class="component.service" id="n_sandbox">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="344" y="400" width="208" height="88" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;AuditTrail.record&lt;/b&gt;&lt;br&gt;in-memory ring&lt;br&gt;allowed/denied/error" class="component.artifact" id="n_audit">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="608" y="400" width="208" height="88" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;dashboard()&lt;/b&gt;&lt;br&gt;securityReport → stdout" class="component.artifact" id="n_dash">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="592" width="256" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;5-GATE PIPELINE — execute() code order&lt;/b&gt;&lt;br&gt;0 session active?&lt;br&gt;1 validate schema → VALIDATION_FAILED&lt;br&gt;2 policy evaluate → POLICY_DENIED&lt;br&gt;3 approval (if req) → APPROVAL_REQ&lt;br&gt;4 _sandboxedExecute → EXEC_FAILED&lt;br&gt;5 audit.record — every branch&lt;br&gt;first failing gate returns; rest skip" class="card.invariant" id="card_pipe">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="320" y="536" width="300" height="200" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;POLICY evaluate() — deny wins&lt;/b&gt;&lt;br&gt;no matching policy → deny&lt;br&gt;sort by priority, descending&lt;br&gt;deny pass first → explicit_deny&lt;br&gt;allow pass → explicit_allow&lt;br&gt;default → deny&lt;br&gt;8 ops: equals notEquals in notIn&lt;br&gt; lessThan greaterThan exists matches" class="card.primitive" id="card_policy">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="636" y="536" width="300" height="200" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;SANDBOX — DEMONSTRATED, NOT WIRED&lt;/b&gt;&lt;br&gt;createSession · getSession — WIRED&lt;br&gt;checkPermission — demo / tests ONLY&lt;br&gt;gate 4 runs handler + timeout only&lt;br&gt;5 ops file_read file_write&lt;br&gt; network exec db&lt;br&gt;blocked-path · auto-suspend @3&lt;br&gt;README calls this &#x27;gate 4&#x27; — it is not" class="card.failure" id="card_sandbox">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="952" y="536" width="300" height="200" as="geometry" />
           </mxCell>
         </object>

@@ -35,77 +35,77 @@
           <mxGeometry x="1372" y="592" width="280" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;mic capture&lt;/b&gt;&lt;br&gt;PCM → base64 → ws&lt;br&gt;voice.js" class="component.entry" id="n_mic">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="56" y="252" width="144" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;4 scripted turns&lt;br&gt;" class="component.entry" id="n_demo">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="56" y="356" width="144" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;express.static&lt;/b&gt;&lt;br&gt;public/ → browser&lt;br&gt;server.js" class="component.service" id="n_static">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="320" y="124" width="176" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;ws message router&lt;/b&gt;&lt;br&gt;7 branches · safeSend&lt;br&gt;server.js" class="component.service" id="n_ws">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="344" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;TurnManager&lt;/b&gt;&lt;br&gt;5 states · VAD · timer&lt;br&gt;" class="component.agent" id="n_turn">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="576" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;ConversationEngine&lt;/b&gt;&lt;br&gt;8 rules · 20-turn ctx&lt;br&gt;" class="component.service" id="n_engine">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="808" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;MockTTS&lt;/b&gt;&lt;br&gt;3-word chunks · 16kHz&lt;br&gt;" class="component.service" id="n_tts">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1040" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;MockSTT&lt;/b&gt;&lt;br&gt;buffers only · 5 phrases&lt;br&gt;" class="component.service" id="n_stt">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="576" y="372" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;WhisperSTT&lt;/b&gt;&lt;br&gt;OPENAI_API_KEY · whisper-1&lt;br&gt;speechToText.js" class="component.mock" id="n_whisper">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="268" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;CloudTTS&lt;/b&gt;&lt;br&gt;alloy · tts-1 · pcm stream&lt;br&gt;textToSpeech.js" class="component.mock" id="n_cloud">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="380" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;playback queue&lt;/b&gt;&lt;br&gt;sequential · onended&lt;br&gt;voice.js" class="component.artifact" id="n_play">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="620" width="248" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;transcript + waveform&lt;/b&gt;&lt;br&gt;voice.js" class="component.artifact" id="n_ui">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="692" width="248" height="48" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;CLIENT → SERVER — every switch branch, in code order&lt;/b&gt;&lt;br&gt;1 start — stt.reset · engine.reset · startConversation&lt;br&gt;2 stop — tts.cancel · endConversation&lt;br&gt;3 audio — base64 → Float32 → RMS → feedAudio + onAudioEnergy&lt;br&gt;4 simulate — setNextTranscript → onCompleteUtterance → pipeline&lt;br&gt;5 interrupt — only while SPEAKING: onAudioEnergy(1.0)&lt;br&gt;6 get_history — undocumented in the protocol block&lt;br&gt;7 default — unknown type; malformed JSON errors earlier at" class="card.invariant" id="card_in">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="304" y="488" width="456" height="124" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;SERVER → CLIENT — all 6 types and their only emitters&lt;/b&gt;&lt;br&gt;state — on every stateChange, and once on connect&lt;br&gt;transcript user assistant&lt;br&gt;tts_chunk — Float32 → Buffer → base64, index/total&lt;br&gt;tts_done interrupted=true interrupted=false&lt;br&gt;history empty on start on get_history&lt;br&gt;error pipeline throw bad JSON unknown type&lt;br&gt;the browser handles exactly these six — voice.js" class="card.primitive" id="card_out">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="792" y="488" width="456" height="124" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;MIC AUDIO CANNOT PRODUCE A TRANSCRIPT — the wired path&lt;/b&gt;&lt;br&gt;1 audio feedAudio() buffers the chunk — nothing drains it&lt;br&gt;2 MockSTT.transcribe() speechToText.js — no caller exists&lt;br&gt;3 onEndpointWithTranscript turnManager.js — no caller exists&lt;br&gt;4 partialTranscript is written only by onCompleteUtterance&lt;br&gt;5 endpointDetected therefore carries transcript = &#x27;&#x27;&lt;br&gt;6 server.js returns early on falsy — the turn ends silently&lt;br&gt;mic drives VAD only; only &#x27;simulate&#x27; reaches the engine" class="card.failure" id="card_dead">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="548" y="636" width="456" height="124" as="geometry" />
           </mxCell>
         </object>

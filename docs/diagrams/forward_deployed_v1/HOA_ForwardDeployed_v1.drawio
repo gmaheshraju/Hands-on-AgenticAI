@@ -35,72 +35,72 @@
           <mxGeometry x="1372" y="240" width="280" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;6-step pipeline&lt;br&gt;run()" class="component.entry" id="n_cli">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="124" width="192" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;FilesystemConnector&lt;/b&gt;&lt;br&gt;reads data/sample-docs&lt;br&gt;txt md json pdf docx" class="component.external" id="n_fs">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="296" width="192" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;ApiConnector&lt;/b&gt;&lt;br&gt;MOCK_API_DOCS — n=5&lt;br&gt;paginated, no network" class="component.mock" id="n_api">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="400" width="192" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;BaseConnector&lt;/b&gt;&lt;br&gt;4-method contract&lt;br&gt;healthCheck default" class="component.service" id="n_base">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="504" width="192" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;DocumentProcessor&lt;/b&gt;&lt;br&gt;processAll()&lt;br&gt;extract + score quality" class="component.service" id="n_proc">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="408" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;DomainAdapter&lt;/b&gt;&lt;br&gt;adapt()&lt;br&gt;vocab·fewshot·prompt" class="component.agent" id="n_adapt">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="624" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;EvalBuilder&lt;/b&gt;&lt;br&gt;generateCandidates&lt;br&gt;acceptAll&lt;br&gt;export()" class="component.agent" id="n_eval">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="840" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;DeploymentChecklist&lt;/b&gt;&lt;br&gt;run() — 9 checks&lt;br&gt;ready = 0 critical" class="component.service" id="n_check">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1056" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;data/eval-set.json&lt;/b&gt;&lt;br&gt;written by export()&lt;br&gt;re-read by check 7" class="component.artifact" id="n_evalfile">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="268" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;createDashboardServer&lt;/b&gt;&lt;br&gt;express · PORT || 3014&lt;br&gt;GET / · GET+POST /api/state&lt;br&gt;POST /api/issues · /api/activity" class="component.service" id="n_dash">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="356" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;public/dashboard.html&lt;/b&gt;&lt;br&gt;served by GET /" class="component.artifact" id="n_html">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="452" width="248" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;EXTRACTION QUALITY GATE — _assessQuality, code order&lt;/b&gt;&lt;br&gt;charCount == 0 → status EMPTY, score 0, hard stop&lt;br&gt;wordCount &lt; 10 → &#x27;Very short document&#x27;&lt;br&gt;alphaRatio &lt; 0.3 → &#x27;Possible garbage output&#x27;&lt;br&gt;text contains U+FFFD → &#x27;possible encoding issue&#x27;&lt;br&gt;charCount &lt; 20% of file size → &#x27;may be incomplete&#x27;&lt;br&gt;score = 1.0 - 0.15 x warnings, clamped; OK / WARNING" class="card.failure" id="card_quality">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="376" y="428" width="424" height="104" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;EVAL CANDIDATES — all 5 types, code order, evalBuilder.js&lt;/b&gt;&lt;br&gt;1 factual · easy — dollar amounts, first 2 per doc&lt;br&gt;2 comprehension · medium — numbered sections, first 2&lt;br&gt;3 analytical · hard — risk terms, needs &gt;= 2&lt;br&gt;4 extraction · easy — timeframes, needs &gt;= 2&lt;br&gt;5 application · medium — &#x27;shall&#x27; clauses, needs &gt;= 2&lt;br&gt;docs with quality FAILED are skipped before all five" class="card.primitive" id="card_qtypes">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="376" y="560" width="424" height="104" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;DEPLOYMENT READINESS — all 9 checks, code order-&lt;/b&gt;&lt;br&gt;1 connector configured + tested — critical&lt;br&gt;2 documents ingested &gt;=5, failed &lt;=2 — critical&lt;br&gt;3 extraction quality &gt;= 0.7 — warning&lt;br&gt;4 domain vocabulary &gt;= 10 terms — critical&lt;br&gt;5 system prompt &gt; 500 chars — critical&lt;br&gt;6 eval set &gt;= 15 accepted — critical&lt;br&gt;7 eval set file on disk, parseable — warning&lt;br&gt;8 pilot timeline days remaining &gt; 0 — warning&lt;br&gt;9 few-shot examples &gt;= 5 — warning&lt;br&gt;ready = (critical failures == 0) — warnings never block" class="card.invariant" id="card_checks">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="840" y="428" width="424" height="164" as="geometry" />
           </mxCell>
         </object>

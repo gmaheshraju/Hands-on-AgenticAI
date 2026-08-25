@@ -51,6 +51,8 @@ PROJECT = {
  'agent_mesh_v1':('29','agent-mesh',None),
  'self_improving_v1':('30','self-improving-agent',None),
  'agent_chat_v1':('31','agent-chat',None),
+ # L2 (legality) diagrams — a different altitude of the same project
+ 'workflow_state_v1':('18','workflow-engine',None),
 }
 CITE = re.compile(r'[\w./-]+\.(?:js|mjs|jsx|ts|py):\d+')
 
@@ -69,7 +71,7 @@ for d in sorted(glob.glob(os.path.join(ROOT, '*_v1'))):
         'svg': m.META['svg'], 'nodes': len(m.NODES), 'edges': len(m.EDGES),
         'zones': len(m.ZONES), 'cites': cites,
     })
-rows.sort(key=lambda r: r['n'])
+rows.sort(key=lambda r: (r['n'], r['dir']))
 
 # copy each rendered SVG into public/diagrams/ under a stable, unhashed name
 import shutil

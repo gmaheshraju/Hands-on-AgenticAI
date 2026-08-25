@@ -35,62 +35,62 @@
           <mxGeometry x="1356" y="440" width="280" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;cli.js&lt;/b&gt;&lt;br&gt;interactive readline" class="component.entry" id="n_cli">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="236" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;4-session demo" class="component.entry" id="n_demo">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="380" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;CRMAgent&lt;/b&gt;&lt;br&gt;classify · route" class="component.service" id="n_agent">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="408" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Consolidation&lt;/b&gt;&lt;br&gt;consolidation.js" class="component.service" id="n_consol">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="664" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Retrieval&lt;/b&gt;&lt;br&gt;hybrid FTS" class="component.service" id="n_retr">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="936" y="252" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;MemoryStore&lt;/b&gt;&lt;br&gt;3 memory types" class="component.service" id="n_memory">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="664" y="400" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Mock extractor&lt;/b&gt;&lt;br&gt;regex fallback" class="component.mock" id="n_mockllm">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="408" y="500" width="176" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;better-sqlite3&lt;/b&gt;&lt;br&gt;sync driver · package.json" class="component.external" id="n_sqlite">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1368" y="248" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;crm_memory.db&lt;/b&gt;&lt;br&gt;all three memory types&lt;br&gt;memory.js" class="component.artifact" id="n_dbfile">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1368" y="484" width="248" height="72" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;CONSOLIDATION GATE — when it fires&lt;/b&gt;&lt;br&gt;1 unconsolidatedCount = countUnconsolidated()&lt;br&gt;2 urgent = count &amp;gt; 0 AND raw_input matches&lt;br&gt;3 NOT urgent AND count &amp;lt; threshold → return ran:false&lt;br&gt;4 else gather (urgent ? all : threshold, oldest first)" class="card.invariant" id="card_gate">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="408" y="596" width="456" height="116" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;addFact — create vs update&lt;/b&gt;&lt;br&gt;1 query existing row: subject+predicate&lt;br&gt;2 none → INSERT (created)&lt;br&gt;3 exists → detectContradiction, merge sources&lt;br&gt;4 contradiction → halve existing confidence in place&lt;br&gt;5 else UPDATE object · confidence · sources" class="card.invariant" id="card_fact">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="904" y="400" width="344" height="148" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;decayMemories — per-fact outcome&lt;/b&gt;&lt;br&gt;ageDays ≤ 0 → untouched&lt;br&gt;else confidence × 2^(−ageDays / halfLife)&lt;br&gt;&amp;lt; archiveThreshold (0.1) → archived + stale&lt;br&gt;else Δ &amp;gt; 0.001 → updated, otherwise untouched" class="card.invariant" id="card_decay">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="904" y="604" width="344" height="128" as="geometry" />
           </mxCell>
         </object>

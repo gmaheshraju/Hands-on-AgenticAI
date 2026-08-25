@@ -29,57 +29,57 @@
           <mxGeometry x="1372" y="248" width="280" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;driver · 5 scenarios&lt;br&gt;" class="component.entry" id="n_demo">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="264" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Simulated agents&lt;/b&gt;&lt;br&gt;5 event producers&lt;br&gt;(labels, not code)" class="component.mock" id="n_agents">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="344" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;AuditHarness&lt;/b&gt;&lt;br&gt;orchestrator&lt;br&gt;4 public methods&lt;br&gt;logEvent→…→report" class="component.service" id="n_harness">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="344" y="256" width="176" height="160" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;EventLogger&lt;/b&gt;&lt;br&gt;SHA-256 hash chain&lt;br&gt;append-only store" class="component.service" id="n_logger">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="592" y="264" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;ComplianceFramework&lt;/b&gt;&lt;br&gt;12 rules · 3 regs&lt;br&gt;check + risk" class="component.service" id="n_framework">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="832" y="264" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;ComplianceReporter&lt;/b&gt;&lt;br&gt;Markdown report&lt;br&gt;generate()" class="component.service" id="n_reporter">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1072" y="264" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;DecisionReplay&lt;/b&gt;&lt;br&gt;reconstruct + replay&lt;br&gt;drift detect" class="component.service" id="n_replay">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="592" y="408" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;stdout output&lt;/b&gt;&lt;br&gt;Markdown report + export&lt;br&gt;+ replay summary" class="component.artifact" id="n_report">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="264" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;TAMPER-EVIDENT HASH CHAIN — eventLogger.js&lt;/b&gt;&lt;br&gt;11 entry fields, in code order:&lt;br&gt; id·timestamp·agentId·action&lt;br&gt; input·output·decision·rationale&lt;br&gt; metadata·previousHash·hash&lt;br&gt;genesis prevHash = 64×&#x27;0&#x27;&lt;br&gt;hash = SHA-256(prevHash + entry)&lt;br&gt;entries Object.freeze on append&lt;br&gt;verifyChain → brokenAt index&lt;br&gt;redact 12 keys before hashing" class="card.invariant" id="card_chain">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="344" y="592" width="304" height="176" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;12 RULES · 3 REGS — complianceFramework.js&lt;/b&gt;&lt;br&gt;EU AI Act — 4 rules&lt;br&gt; explainability H · audit-trail C&lt;br&gt; human-review H · protected C&lt;br&gt;SOC2 — 4 rules&lt;br&gt; agent-id H · immutable-log C&lt;br&gt; redaction C · config-change M&lt;br&gt;GDPR — 4 rules&lt;br&gt; data-min H · purpose M&lt;br&gt; erasure H · retention M&lt;br&gt;check → score = passed/total&lt;br&gt;H high · C critical · M medium" class="card.invariant" id="card_rules">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="664" y="592" width="304" height="176" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;RISK ESCALATION — complianceFramework.js&lt;/b&gt;&lt;br&gt;overallRisk, first match wins:&lt;br&gt; critical if critical &amp;gt; 0&lt;br&gt; high if high &amp;gt; 1&lt;br&gt; medium if high&amp;gt;0 or medium&amp;gt;1&lt;br&gt; low otherwise&lt;br&gt;fail tally by severity&lt;br&gt;critical → criticalFindings → P0&lt;br&gt;report: summary · tables · matrix&lt;br&gt; · P0/P1/P2 roadmap&lt;br&gt;observed run: 92% · MEDIUM · 0 crit" class="card.failure" id="card_risk">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="984" y="592" width="304" height="176" as="geometry" />
           </mxCell>
         </object>

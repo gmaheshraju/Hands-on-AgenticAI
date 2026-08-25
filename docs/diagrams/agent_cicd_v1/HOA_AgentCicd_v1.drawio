@@ -29,77 +29,77 @@
           <mxGeometry x="1372" y="448" width="280" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;5 scenarios&lt;br&gt;runPipeline &amp;times;3" class="component.entry" id="n_cli">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="272" width="168" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;8 eval cases&lt;/b&gt;&lt;br&gt;tags + weights&lt;br&gt;demo.js" class="component.mock" id="n_cases">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="368" width="168" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;3 scorer fns&lt;/b&gt;&lt;br&gt;faith / safety / cost&lt;br&gt;demo.js" class="component.mock" id="n_scorers">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="448" width="168" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;agentFn (SUT · mock)&lt;/b&gt;&lt;br&gt;good / bad agent&lt;br&gt;demo.js" class="component.agent" id="n_agent">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="528" width="168" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;AgentCICDPipeline&lt;/b&gt;&lt;br&gt;runPipeline()&lt;br&gt;4-stage orchestrator&lt;br&gt;runs[] log" class="component.service" id="n_pipeline">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="336" y="256" width="176" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;&amp;#9312; EvalSuite.run&lt;/b&gt;&lt;br&gt;evalSuite.js&lt;br&gt;agentFn&lt;br&gt;score dims" class="component.service" id="n_eval">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="552" y="272" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;&amp;#9313; compare()&lt;/b&gt;&lt;br&gt;baseline.js&lt;br&gt;regression" class="component.service" id="n_baseline">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="736" y="272" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;&amp;#9314; QualityGate&lt;/b&gt;&lt;br&gt;evaluate()&lt;br&gt;rules &amp;rarr; verdict" class="component.service" id="n_gate">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="920" y="272" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;&amp;#9315; _decide()&lt;/b&gt;&lt;br&gt;pipeline.js&lt;br&gt;promote / block" class="component.service" id="n_promo">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1104" y="272" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;baseline store&lt;/b&gt;&lt;br&gt;Map (in-memory)&lt;br&gt;saveBaseline" class="component.artifact" id="n_store">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="736" y="496" width="160" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;stdout report&lt;/b&gt;&lt;br&gt;generateReport" class="component.artifact" id="n_report">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="472" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;run history&lt;/b&gt;&lt;br&gt;this.runs&lt;br&gt;getRunHistory" class="component.artifact" id="n_history">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="568" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;FOUR STAGES — runPipeline() pipeline.js&lt;/b&gt;&lt;br&gt;1 eval EvalSuite.run &amp;rarr; scores&lt;br&gt;2 baseline compare (skip if none)&lt;br&gt;3 gate QualityGate.evaluate&lt;br&gt;4 promote _decide &amp;rarr; action&lt;br&gt;each stage output feeds the next&lt;br&gt;auto-save baseline only on &#x27;promote&#x27;&lt;br&gt;(never on promote_with_warnings)" class="card.invariant" id="card_stages">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="336" y="616" width="304" height="160" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;PROMOTION LADDER — _decide()&lt;/b&gt;&lt;br&gt;first match wins, in code order:&lt;br&gt;1 BLOCK if gate verdict = BLOCK&lt;br&gt;2 BLOCK if baseline REGRESSION&lt;br&gt;3 BLOCK if cases &amp;lt; minCases(5)&lt;br&gt;4 PROMOTE_WITH_WARNINGS if WARN&lt;br&gt;5 PROMOTE if all clear&lt;br&gt;3 independent block gates, not 1" class="card.failure" id="card_promo">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="656" y="616" width="304" height="160" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;QUALITY GATE — qualityGate.js&lt;/b&gt;&lt;br&gt;rule types (evaluate loop):&lt;br&gt; threshold · regression · custom&lt;br&gt;severity: error blocks, warning notes&lt;br&gt;verdict: BLOCK / WARN / PASS&lt;br&gt;history push &amp;rarr; trend&lt;br&gt;demo rules —&lt;br&gt; safety gte 0.9 err · cost gte 0.7 warn" class="card.primitive" id="card_gate">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="976" y="616" width="304" height="160" as="geometry" />
           </mxCell>
         </object>

@@ -35,77 +35,77 @@
           <mxGeometry x="1220" y="240" width="288" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;scripted 5-step run&lt;br&gt;demo()" class="component.entry" id="n_demo">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="48" y="208" width="160" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;client.js&lt;/b&gt;&lt;br&gt;interactive REPL&lt;br&gt;11 commands" class="component.entry" id="n_cli">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="48" y="292" width="160" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;agent.js&lt;/b&gt;&lt;br&gt;NL question -&amp;gt; plan&lt;br&gt;planToolCalls" class="component.entry" id="n_agent">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="48" y="376" width="160" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Client (MCP SDK)&lt;/b&gt;&lt;br&gt;StdioClientTransport&lt;br&gt;spawns node server.js&lt;br&gt;client.js" class="component.service" id="n_client">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="312" y="272" width="176" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;protocol logger&lt;/b&gt;&lt;br&gt;raw JSON-RPC to stdout&lt;br&gt;client.js" class="component.mock" id="n_log">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="312" y="384" width="176" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;McpServer&lt;/b&gt;&lt;br&gt;&amp;quot;sqlite-explorer&amp;quot; 1.0.0&lt;br&gt;StdioServerTransport&lt;br&gt;server.js" class="component.agent" id="n_mcp">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="624" y="272" width="176" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;TOOL query&lt;/b&gt;&lt;br&gt;read-only SELECT gate&lt;br&gt;4 blocks &amp;middot; server.js" class="component.service" id="n_query">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="896" y="208" width="192" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;TOOLS list_tables&lt;/b&gt;&lt;br&gt;+ describe_table&lt;br&gt;server.js" class="component.service" id="n_meta">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="896" y="288" width="192" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;RESOURCES&lt;/b&gt;&lt;br&gt;db://schema&lt;br&gt;db://stats" class="component.service" id="n_res">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="896" y="384" width="192" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;stderr diagnostics&lt;/b&gt;&lt;br&gt;stdout is reserved&lt;br&gt;for protocol" class="component.mock" id="n_stderr">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="624" y="424" width="176" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;database.js&lt;/b&gt;&lt;br&gt;getDatabase -&amp;gt; create&lt;br&gt;seedDatabase, idempotent&lt;br&gt;5 tables + 4 indexes" class="component.service" id="n_dbmod">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1232" y="272" width="256" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;ecommerce.db&lt;/b&gt;&lt;br&gt;SQLite, WAL &amp;middot; path&lt;br&gt;8 cat, 50 users, 30 products&lt;br&gt;200 orders, 1-5 items each" class="component.artifact" id="n_db">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1232" y="440" width="256" height="80" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;query TOOL — EVERY GUARD, IN CODE ORDER &amp;middot; server.js&lt;/b&gt;&lt;br&gt;trimmed = sql.trim().toUpperCase()&lt;br&gt;1 must start with SELECT — else refusal&lt;br&gt;withoutStrings = literals blanked — checks 2-4 run on this copy&lt;br&gt;2 split on &#x27;;&#x27;, more than one statement — refusal&lt;br&gt;3 17 blocked keywords, anywhere incl. subqueries — refusal&lt;br&gt;4 SQL comments -- or /* — refusal&lt;br&gt;then effectiveLimit = min(limit || 100, 1000)&lt;br&gt; LIMIT appended when the SQL has none&lt;br&gt; db.prepare(execSql).all() -&amp;gt; { rowCount, rows }&lt;br&gt;catch -&amp;gt; { error } + isError — the handler never throws" class="card.invariant" id="card_gate">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="288" y="512" width="456" height="160" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;BLOCKED KEYWORDS — all 17, in regex order &amp;middot; server.js&lt;/b&gt;&lt;br&gt;DROP &amp;middot; ALTER &amp;middot; CREATE &amp;middot; DELETE &amp;middot; INSERT &amp;middot; UPDATE &amp;middot; TRUNCATE&lt;br&gt;REPLACE &amp;middot; EXEC &amp;middot; EXECUTE &amp;middot; GRANT &amp;middot; REVOKE &amp;middot; ATTACH &amp;middot; DETACH&lt;br&gt;PRAGMA &amp;middot; REINDEX &amp;middot; VACUUM case-insensitive, word-boundary&lt;br&gt;4 refusals in query, 1 in describe_table&lt;br&gt;every one is a normal MCP result carrying isError — not an exception" class="card.failure" id="card_deny">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="288" y="688" width="456" height="88" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;MCP SURFACE — the complete declared set &amp;middot; server.js&lt;/b&gt;&lt;br&gt;TOOL query(sql, limit? = 100, capped at 1000)&lt;br&gt;TOOL list_tables() — no params&lt;br&gt;TOOL describe_table(table_name)&lt;br&gt;RES db://schema application/json&lt;br&gt;RES db://stats application/json&lt;br&gt;these 5 and nothing else — no server.prompt() exists in src/&lt;br&gt;client learns them at runtime: listTools, listResources" class="card.primitive" id="card_surface">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="776" y="592" width="456" height="116" as="geometry" />
           </mxCell>
         </object>

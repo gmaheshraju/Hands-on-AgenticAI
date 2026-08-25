@@ -29,77 +29,77 @@
           <mxGeometry x="1372" y="512" width="280" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · default / --e2e&lt;br&gt;/ --verbose" class="component.entry" id="n_cli">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="272" width="168" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Training corpora&lt;/b&gt;&lt;br&gt;5 files · 59 attacks&lt;br&gt;runner.js" class="component.external" id="n_train">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="368" width="168" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Held-out corpora&lt;/b&gt;&lt;br&gt;held-out.json · 29&lt;br&gt;runner.js" class="component.external" id="n_held">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="448" width="168" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;LEGITIMATE_QUERIES&lt;/b&gt;&lt;br&gt;50 control queries&lt;br&gt;defense.js" class="component.mock" id="n_legit">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="528" width="168" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;runAllAttacks()&lt;/b&gt;&lt;br&gt;runner.js&lt;br&gt;88 attacks + 50 queries&lt;br&gt;tagged training/held-out" class="component.service" id="n_runner">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="336" y="256" width="176" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;L1 defend()&lt;/b&gt;&lt;br&gt;scanInput 156 regex&lt;br&gt;block ≥ 0.5 · warn ≥ 0.3" class="component.service" id="n_defend">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="560" y="272" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;simulateNaiveLLM()&lt;/b&gt;&lt;br&gt;runner.js — SIMULATED&lt;br&gt;no API call, 6 branches" class="component.agent" id="n_llm">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="800" y="272" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;L3 validateOutput()&lt;/b&gt;&lt;br&gt;defense.js&lt;br&gt;5 violation checks" class="component.service" id="n_validate">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1040" y="272" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;L2 sandwich prompt&lt;/b&gt;&lt;br&gt;defense.js&lt;br&gt;canary token" class="component.service" id="n_sandwich">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="800" y="384" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;buildSummary()&lt;/b&gt;&lt;br&gt;runner.js&lt;br&gt;bySource split" class="component.service" id="n_summary">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="560" y="520" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;calculateScores()&lt;/b&gt;&lt;br&gt;scorer.js · gaps, p95&lt;br&gt;computeGrade" class="component.service" id="n_scores">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="840" y="520" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;stdout report&lt;/b&gt;&lt;br&gt;printResults runner.js&lt;br&gt;printScoreReport scorer.js" class="component.artifact" id="n_out">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="544" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;scanInput() — 9 checks · normalize&lt;/b&gt;&lt;br&gt;1 direct_override w1.00 · 37 regex&lt;br&gt;2 role_hijacking w1.00 · 33 regex&lt;br&gt;3 extraction w0.95 · 36 regex&lt;br&gt;4 encoding w0.95 · 21 regex&lt;br&gt;5 indirect_inject. w1.00 · 29 regex&lt;br&gt;6 context flooding &amp;gt;2000ch, &amp;gt;20 nl → 0.40&lt;br&gt;7 zero-width chars &amp;gt;3 → 0.70&lt;br&gt;8 base64 decode + rescan → 0.85&lt;br&gt;9 hex decode + rescan → 0.85&lt;br&gt;conf = 0.65 + 0.15/extra match, cap 1.0" class="card.primitive" id="card_scan">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="336" y="616" width="304" height="160" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;THREE LAYERS — defense.js, in call order&lt;/b&gt;&lt;br&gt;L1 input defend() → scanInput&lt;br&gt; block if conf &amp;gt;= 0.5, warn &amp;gt;= 0.3&lt;br&gt; blocked ⇒ target never called&lt;br&gt;L2 prompt buildSandwichedPrompt()&lt;br&gt; USER INPUT START/END markers&lt;br&gt; reminder block + canary&lt;br&gt;L3 output validateOutput()&lt;br&gt; canary · prompt leak n-gram&lt;br&gt; PII 5 kinds · markers&lt;br&gt; topic drift → safe" class="card.invariant" id="card_layers">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="656" y="616" width="304" height="160" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;GRADED ON HELD-OUT ONLY — scorer.js&lt;/b&gt;&lt;br&gt;training 59 — the regexes were tuned on them&lt;br&gt;held-out 29 — never shown&lt;br&gt;both run the SAME defend()&lt;br&gt;split kept apart in buildSummary&lt;br&gt;grade = f(held-out, FP, latency)&lt;br&gt; detect 0-50 · FP 0-30&lt;br&gt; latency 0-20 → A/B/C/D/F&lt;br&gt;verdict gates runner.js&lt;br&gt; held-out &amp;gt;=70% · FP &amp;lt;5% · avg &amp;lt;100ms&lt;br&gt;observed run: 100.0% / 86.2% · 0 FP · 0.25ms" class="card.failure" id="card_grade">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="976" y="616" width="304" height="160" as="geometry" />
           </mxCell>
         </object>

@@ -35,82 +35,82 @@
           <mxGeometry x="1372" y="512" width="288" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;bin/aidev.js&lt;/b&gt;&lt;br&gt;process.argv switch&lt;br&gt;7 verbs + flags" class="component.entry" id="n_cli">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="208" width="176" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;git.js&lt;/b&gt;&lt;br&gt;diff / commit / log&lt;br&gt;exec + execFile" class="component.service" id="n_git">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="336" width="176" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;config.js&lt;/b&gt;&lt;br&gt;~/.aidev.json load/save&lt;br&gt;isDemoMode gate" class="component.service" id="n_config">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="480" width="176" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;commit.js&lt;/b&gt;&lt;br&gt;staged diff" class="component.service" id="n_commit">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="416" y="216" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;review.js&lt;/b&gt;&lt;br&gt;diff · --json" class="component.service" id="n_review">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="416" y="300" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;explain.js&lt;/b&gt;&lt;br&gt;fs.readFileSync" class="component.service" id="n_explain">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="416" y="384" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;llm.js&lt;/b&gt;&lt;br&gt;isDemoMode?&lt;br&gt;callLLM dispatch" class="component.service" id="n_llm">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="664" y="300" width="176" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;mock heuristics&lt;/b&gt;&lt;br&gt;llm.js&lt;br&gt;SIMULATED · cost 0" class="component.mock" id="n_mock">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="904" y="308" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;OpenAI API&lt;/b&gt;&lt;br&gt;api.openai.com&lt;br&gt;/v1/chat/completions" class="component.external" id="n_openai">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="240" width="256" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Anthropic API&lt;/b&gt;&lt;br&gt;api.anthropic.com&lt;br&gt;/v1/messages" class="component.external" id="n_anthropic">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="344" width="256" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;budget.js&lt;/b&gt;&lt;br&gt;recordUsage&lt;br&gt;calculateCost" class="component.service" id="n_budget">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="664" y="496" width="176" height="96" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;~/.aidev.json&lt;/b&gt;&lt;br&gt;config" class="component.artifact" id="n_cfgfile">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="544" width="256" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;~/.aidev-usage.json&lt;/b&gt;&lt;br&gt;30-day cost ledger" class="component.artifact" id="n_usagefile">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="640" width="256" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;GRACEFUL FALLBACK → mock (no network)&lt;/b&gt;&lt;br&gt;isDemoMode = !api_key | provider=mock&lt;br&gt;demo ⇒ mock heuristics, cost 0&lt;br&gt;live + overBudget ⇒ provider=mock&lt;br&gt; commit review explain&lt;br&gt;budget checked ONLY if !demo&lt;br&gt;nearBudget warn &amp;lt;20% · over ≤0" class="card.invariant" id="card_fallback">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="344" y="608" width="304" height="172" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;git SAFETY — execFileSync, no shell&lt;/b&gt;&lt;br&gt;user input ⇒ execFileSync (safe):&lt;br&gt; branchDiff reviewTarget&lt;br&gt; log commit cat files&lt;br&gt;fixed cmd ⇒ execSync (shell)&lt;br&gt; isGitRepo staged unstaged&lt;br&gt; status branch stagedFiles" class="card.primitive" id="card_git">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="664" y="608" width="304" height="172" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;PROVIDERS + 6 PRICED MODELS&lt;/b&gt;&lt;br&gt;callLLM: anthropic ⇒ callAnthropic&lt;br&gt; else ⇒ callOpenAI (default)&lt;br&gt;models config.js:&lt;br&gt; gpt-4o-mini · gpt-4o · gpt-4-turbo&lt;br&gt; claude-haiku-4-5 · sonnet-5 · opus-5&lt;br&gt;mock priced 0/0&lt;br&gt;cost = tok/1M × in/out" class="card.primitive" id="card_providers">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="984" y="608" width="304" height="172" as="geometry" />
           </mxCell>
         </object>

@@ -1,0 +1,69 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_workflow_state_v1" name="18 Workflow Engine — WorkflowRun state machine">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z_sm" value="" style="rounded=1;fillColor=none;strokeColor=#E7157B;dashed=1;dashPattern=8 4;strokeWidth=2;html=1;whiteSpace=wrap;fontSize=10;fontColor=#E7157B;" parent="1" vertex="1">
+          <mxGeometry x="96" y="128" width="1360" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="z_sm_lbl" value="core/state.js — the ONLY writer of run.status" style="text;fontSize=10;fontStyle=1;fontColor=#E7157B;align=left;html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="108" y="136" width="1344" height="16" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;PENDING&lt;/b&gt;&lt;br&gt;constructed, not started" class="state.initial" id="s_pending">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="160" y="264" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;RUNNING&lt;/b&gt;&lt;br&gt;walking the DAG" class="state.active" id="s_running">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="464" y="264" width="176" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;WAITING_APPROVAL&lt;/b&gt;&lt;br&gt;paused at an approval node" class="state.transitional" id="s_wait">
+          <mxCell style="rounded=1;fillColor=#FFF8E1;strokeColor=#F9A825;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="768" y="264" width="192" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;COMPLETED&lt;/b&gt;&lt;br&gt;terminal — no transitions out" class="state.terminal" id="s_done">
+          <mxCell style="rounded=1;fillColor=#ECEFF1;strokeColor=#455A64;strokeWidth=3;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1160" y="200" width="208" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;FAILED&lt;/b&gt;&lt;br&gt;terminal — no transitions out" class="state.terminal" id="s_failed">
+          <mxCell style="rounded=1;fillColor=#ECEFF1;strokeColor=#455A64;strokeWidth=3;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+            <mxGeometry x="1160" y="384" width="208" height="64" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;ENFORCEMENT IS THE TABLE, NOT A CONVENTION&lt;/b&gt;&lt;br&gt;transition() reads VALID_TRANSITIONS[status] and THROWS&lt;br&gt;&quot;Invalid transition: from → to&quot; when the target is absent.&lt;br&gt;An illegal move cannot be performed; it raises.&lt;br&gt;Every accepted move logs a state_change trace with {from, to}." class="card.invariant" id="card_enforce">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="160" y="568" width="528" height="128" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;THE ONE SWALLOWED FAILURE — engine.js:210&lt;/b&gt;&lt;br&gt;try { run.transition(&#x27;FAILED&#x27;) } catch (_) { /* already failed */ }&lt;br&gt;The only transition() call wrapped in a bare catch. FAILED is&lt;br&gt;terminal, so a second failure throws and that throw is discarded.&lt;br&gt;The guard still holds — no illegal state is reached. What is lost&lt;br&gt;is the signal, if it ever fires for another reason." class="card.failure" id="card_swallow">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="736" y="568" width="560" height="144" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="t_start" value="run starts" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="s_pending" target="s_running" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t_wait" value="next node is type &#x27;approval&#x27;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="s_running" target="s_wait" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="t_resume" value="approval node completed" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#E65100;fontColor=#E65100;fontSize=8;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="s_wait" target="s_running" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="864" y="208" /><mxPoint x="552" y="208" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="t_done" value="DAG finished, no unhandled error" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#232F3E;fontColor=#232F3E;fontSize=8;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="s_running" target="s_done" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="596" y="232" /><mxPoint x="1160" y="232" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="t_fail" value="a non-optional node threw" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="s_running" target="s_failed" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="552" y="416" /></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="t_wfail" value="fails while paused" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#C62828;fontColor=#C62828;fontSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="s_wait" target="s_failed" edge="1">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="864" y="504" /><mxPoint x="1264" y="504" /></Array></mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 760" role="img" aria-labelledby="hoa_workflow_state_v1-t hoa_workflow_state_v1-d" class="fts-diagram">
+  <title id="hoa_workflow_state_v1-t">18 Workflow Engine — WorkflowRun state machine</title>
+  <desc id="hoa_workflow_state_v1-d">The complete legal state machine of a workflow run: five states, six permitted transitions, two terminal, enforced by a table that throws on any move it does not contain. Every state and edge cites its call site in FACTS.md.</desc>
+  <defs>
+    <marker id="hoa_workflow_state_v1-a-d-transition-failure" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C62828" class="d-transition-failure-fill"/></marker>
+    <marker id="hoa_workflow_state_v1-a-d-transition-normal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-transition-normal-fill"/></marker>
+    <marker id="hoa_workflow_state_v1-a-d-transition-revert" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E65100" class="d-transition-revert-fill"/></marker>
+  </defs>
+  <g class="d-zone d-boundary-primary">
+    <rect x="96" y="128" width="1360" height="400" rx="8" fill="none" stroke="#E7157B" stroke-width="2" stroke-dasharray="8 4"/>
+    <text x="108" y="148" fill="#E7157B" font-size="12" font-weight="600" class="d-zone-label">core/state.js — the ONLY writer of run.status</text>
+  </g>
+  <g class="d-edge d-transition-normal" data-edge="t_start">
+    <polyline points="336,296.0 464,296.0" fill="none" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_workflow_state_v1-a-d-transition-normal)"/>
+    <text x="400.0" y="290.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">run starts</text>
+  </g>
+  <g class="d-edge d-transition-normal" data-edge="t_wait">
+    <polyline points="640,296.0 768,296.0" fill="none" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_workflow_state_v1-a-d-transition-normal)"/>
+    <text x="704.0" y="290.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">next node is type &#x27;approval&#x27;</text>
+  </g>
+  <g class="d-edge d-transition-revert" data-edge="t_resume">
+    <polyline points="864.0,264 864,208 552,208 552.0,264" fill="none" stroke="#E65100" stroke-width="1.75" marker-end="url(#hoa_workflow_state_v1-a-d-transition-revert)"/>
+    <text x="708.0" y="202.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">approval node completed</text>
+  </g>
+  <g class="d-edge d-transition-normal" data-edge="t_done">
+    <polyline points="596.0,264 596,232 1160,232 1160,232.0" fill="none" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_workflow_state_v1-a-d-transition-normal)"/>
+    <text x="878.0" y="226.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">DAG finished, no unhandled error</text>
+  </g>
+  <g class="d-edge d-transition-failure" data-edge="t_fail">
+    <polyline points="552.0,328 552,416 1160,416.0" fill="none" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_workflow_state_v1-a-d-transition-failure)"/>
+    <text x="856.0" y="410.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">a non-optional node threw</text>
+  </g>
+  <g class="d-edge d-transition-failure" data-edge="t_wfail">
+    <polyline points="864.0,328 864,504 1264,504 1264.0,448" fill="none" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_workflow_state_v1-a-d-transition-failure)"/>
+    <text x="1064.0" y="498.0" text-anchor="middle" fill="#888888" font-size="10" class="d-edge-label">fails while paused</text>
+  </g>
+  <g class="d-node d-state-initial" data-id="s_pending" data-class="state.initial">
+    <rect x="160" y="264" width="176" height="64" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="248.0" y="292.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">PENDING</text>
+    <text x="248.0" y="307.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">constructed, not started</text>
+  </g>
+  <g class="d-node d-state-active" data-id="s_running" data-class="state.active">
+    <rect x="464" y="264" width="176" height="64" rx="6" fill="#C8E6C9" stroke="#2E7D32" stroke-width="2"/>
+    <text x="552.0" y="292.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">RUNNING</text>
+    <text x="552.0" y="307.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">walking the DAG</text>
+  </g>
+  <g class="d-node d-state-transitional" data-id="s_wait" data-class="state.transitional">
+    <rect x="768" y="264" width="192" height="64" rx="6" fill="#FFF8E1" stroke="#F9A825" stroke-width="1.5"/>
+    <text x="864.0" y="292.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">WAITING_APPROVAL</text>
+    <text x="864.0" y="307.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">paused at an approval node</text>
+  </g>
+  <g class="d-node d-state-terminal" data-id="s_done" data-class="state.terminal">
+    <rect x="1160" y="200" width="208" height="64" rx="6" fill="#ECEFF1" stroke="#455A64" stroke-width="3"/>
+    <text x="1264.0" y="228.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">COMPLETED</text>
+    <text x="1264.0" y="243.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">terminal — no transitions out</text>
+  </g>
+  <g class="d-node d-state-terminal" data-id="s_failed" data-class="state.terminal">
+    <rect x="1160" y="384" width="208" height="64" rx="6" fill="#ECEFF1" stroke="#455A64" stroke-width="3"/>
+    <text x="1264.0" y="412.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">FAILED</text>
+    <text x="1264.0" y="427.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">terminal — no transitions out</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_enforce" data-class="card.invariant">
+    <rect x="160" y="568" width="528" height="128" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="168" y="607.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">ENFORCEMENT IS THE TABLE, NOT A CONVENTION</text>
+    <text x="168" y="621.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">transition() reads VALID_TRANSITIONS[status] and THROWS</text>
+    <text x="168" y="635.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">&quot;Invalid transition: from → to&quot; when the target is absent.</text>
+    <text x="168" y="649.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">An illegal move cannot be performed; it raises.</text>
+    <text x="168" y="663.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Every accepted move logs a state_change trace with {from, to}.</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_swallow" data-class="card.failure">
+    <rect x="736" y="568" width="560" height="144" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="744" y="608.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">THE ONE SWALLOWED FAILURE — engine.js:210</text>
+    <text x="744" y="622.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">try { run.transition(&#x27;FAILED&#x27;) } catch (_) { /* already failed */ }</text>
+    <text x="744" y="636.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">The only transition() call wrapped in a bare catch. FAILED is</text>
+    <text x="744" y="650.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">terminal, so a second failure throws and that throw is discarded.</text>
+    <text x="744" y="664.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">The guard still holds — no illegal state is reached. What is lost</text>
+    <text x="744" y="678.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">is the signal, if it ever fires for another reason.</text>
+  </g>
+</svg>

@@ -35,77 +35,77 @@
           <mxGeometry x="1372" y="528" width="280" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;demo.js — npm start&lt;/b&gt;&lt;br&gt;unlink DB first&lt;br&gt;simulate()&lt;br&gt;startDashboard()" class="component.entry" id="n_demo">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="232" width="200" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Tracer&lt;/b&gt; tracer.js&lt;br&gt;DEAD — 0 new sites&lt;br&gt;Span.end() writes&lt;br&gt;camelCase keys" class="component.agent" id="n_tracer">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="336" width="200" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;simulate()&lt;/b&gt;&lt;br&gt;simulator.js&lt;br&gt;500 reqs · 7 days&lt;br&gt;1-4 spans each" class="component.mock" id="n_sim">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="400" y="232" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Store&lt;/b&gt; store.js&lt;br&gt;WAL · FK on&lt;br&gt;only writer API&lt;br&gt;20 methods · 8 dead" class="component.service" id="n_store">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="624" y="232" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;observability.db&lt;/b&gt;&lt;br&gt;SQLite · 7 tables&lt;br&gt;6 ever written&lt;br&gt;wiped each run" class="component.artifact" id="n_db">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="848" y="232" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;startDashboard()&lt;/b&gt;&lt;br&gt;dashboard.js&lt;br&gt;express · 13 routes&lt;br&gt;12 use store.db raw" class="component.service" id="n_dash">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1104" y="232" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;inline drift check&lt;/b&gt;&lt;br&gt;simulator.js&lt;br&gt;pct change, not z&lt;br&gt;3 alerts, 1 agent" class="component.service" id="n_inline">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="400" y="408" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;CostTracker&lt;/b&gt;&lt;br&gt;costTracker.js&lt;br&gt;12 methods · 2 used&lt;br&gt;warn 80% block 100%" class="component.service" id="n_cost">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="624" y="408" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;QualityScorer&lt;/b&gt;&lt;br&gt;qualityScorer.js&lt;br&gt;8 methods · 0 used&lt;br&gt;hash+LCG, no judge" class="component.service" id="n_qual">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="864" y="408" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;DriftDetector&lt;/b&gt;&lt;br&gt;driftDetector.js&lt;br&gt;real z-score&lt;br&gt;5 metrics · 1 route" class="component.service" id="n_drift">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1104" y="408" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;public/index.html&lt;/b&gt; — browser&lt;br&gt;5 tabs · hand-rolled canvas&lt;br&gt;11 fetch() sites&lt;br&gt;KPI auto-refresh 10 s" class="component.external" id="n_ui">
-          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="232" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;stdout summary&lt;/b&gt;&lt;br&gt;demo.js — traces · spans&lt;br&gt;quality scores · drift alerts&lt;br&gt;plus the URL, dashboard.js" class="component.artifact" id="n_stdout">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="552" width="248" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;DRIFT — injected in 4 places, detected by 2&lt;/b&gt;&lt;br&gt;INJECTED — simulator.js, one agent only&lt;br&gt; research-agent last 2 of 7 d&lt;br&gt; 1 prompt+completion tokens x1.4&lt;br&gt; 2 latency x1.6&lt;br&gt; 3 tool-call chance .30 -&amp;gt; .55&lt;br&gt; 4 quality score -0.5&lt;br&gt;DETECTED TWICE, BY DIFFERENT MATH&lt;br&gt; A simulator.js — percent change&lt;br&gt; latency &amp;gt;20% · tokens &amp;gt;20%&lt;br&gt; quality drop &amp;gt;0.2 · 3 alerts max&lt;br&gt; writes pct INTO the z_score column&lt;br&gt; runs on every npm start&lt;br&gt; B driftDetector.js — a real z-score&lt;br&gt; |z|&amp;gt;=2 warn · |z|&amp;gt;=3 critical&lt;br&gt; 5 metrics x each agent x model&lt;br&gt; runs only via dashboard.js" class="card.primitive" id="card_drift">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="376" y="520" width="296" height="248" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;SIX CLASSES — every construction site&lt;/b&gt;&lt;br&gt;Store store.js&lt;br&gt; simulator.js · dashboard.js&lt;br&gt; 20 data methods, 8 with 0 callers&lt;br&gt;CostTracker costTracker.js&lt;br&gt; simulator.js · dashboard.js&lt;br&gt; 12 public, 2 called&lt;br&gt;QualityScorer qualityScorer.js&lt;br&gt; dashboard.js — then NEVER called&lt;br&gt;DriftDetector driftDetector.js&lt;br&gt; dashboard.js · runAllChecks&lt;br&gt;Tracer tracer.js&lt;br&gt; ZERO construction sites in the repo&lt;br&gt;Span · Trace tracer.js&lt;br&gt; reachable only via Tracer&lt;br&gt;metrics_snapshots store.js is the only&lt;br&gt;table with no writer and no reader" class="card.invariant" id="card_wiring">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="688" y="520" width="272" height="248" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;THE PAGE READS FIELDS THE API NEVER SENDS&lt;/b&gt;&lt;br&gt;index.html reads the row carries&lt;br&gt; trace.latencyMs traces has none&lt;br&gt; trace.totalTokens total_tokens&lt;br&gt; trace.costCents total_cost (USD)&lt;br&gt; trace.timestamp started_at&lt;br&gt; span.durationMs latency_ms&lt;br&gt; span.tokens total_tokens&lt;br&gt; span.costCents cost&lt;br&gt; span.toolCalls tool_calls, a string&lt;br&gt; span.children parent_span_id, flat&lt;br&gt; alert.zScore z_score&lt;br&gt; data.metrics dashboard.js&lt;br&gt;Adapted in 2 places only — timeseries,&lt;br&gt;attribution. The rest are read raw.&lt;br&gt;GET /api/traces/:id — dashboard.js filters&lt;br&gt;trace_id; store.js has no such column." class="card.failure" id="card_contract">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="976" y="520" width="304" height="248" as="geometry" />
           </mxCell>
         </object>

@@ -35,77 +35,77 @@
           <mxGeometry x="1372" y="388" width="280" height="16" as="geometry" />
         </mxCell>
         <object label="&lt;b&gt;demo.js&lt;/b&gt;&lt;br&gt;CLI · argv[2]&lt;br&gt;main()" class="component.entry" id="n_demo">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="64" y="296" width="128" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;① Researcher&lt;/b&gt;&lt;br&gt;runResearcher()&lt;br&gt;web_search · fetch_url" class="component.agent" id="n_res">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="448" y="152" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;② Writer&lt;/b&gt;&lt;br&gt;runWriter()&lt;br&gt;no tools · 2 draft fns" class="component.agent" id="n_writer">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="656" y="152" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;③ Editor&lt;/b&gt;&lt;br&gt;runEditor()&lt;br&gt;scoreDraft() — 0-10" class="component.agent" id="n_editor">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="864" y="152" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;④ Fact-Checker&lt;/b&gt;&lt;br&gt;runFactChecker()&lt;br&gt;fetch_url only" class="component.agent" id="n_fc">
-          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1072" y="152" width="176" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;runPipeline() — supervisor.js · the ONLY module that touches the bus&lt;/b&gt;&lt;br&gt;creates the bus · registers all 5 handlers · awaits each agent fn directly&lt;br&gt;MAX_BUDGET $2 · MAX_RETRIES 2 · assembles the report · resolves the Promise" class="component.service" id="n_super">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="424" y="296" width="848" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;createMessageBus() — messageBus.js&lt;/b&gt;&lt;br&gt;publish(msg) — stamps id + timestamp, appends to log, then invokes every handler for msg.to&lt;br&gt;subscribe(channel, handler) — channel is an agent NAME, not a topic · getLog() · printSummary()" class="component.service" id="n_bus">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="424" y="424" width="848" height="64" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Researcher mockTools&lt;/b&gt;&lt;br&gt;web_search(q) — 3 hits&lt;br&gt;fetch_url(u) — canned" class="component.mock" id="n_tool_r">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="120" width="248" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Fact-Checker mockTools&lt;/b&gt;&lt;br&gt;fetch_url(u) only&lt;br&gt;a separate object" class="component.mock" id="n_tool_f">
-          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#F5F5F5;strokeColor=#9E9E9E;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="204" width="248" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Pipeline report&lt;/b&gt;&lt;br&gt;supervisor.js&lt;br&gt;resolve() → demo.js" class="component.artifact" id="n_report">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="412" width="248" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;FINAL → to: &#x27;Output&#x27;&lt;/b&gt;&lt;br&gt;supervisor.js&lt;br&gt;no subscriber — log only" class="component.artifact" id="n_final">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="496" width="248" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;Bus log (ordered)&lt;/b&gt;&lt;br&gt;getLog() · print&lt;br&gt;stdout only — no file" class="component.artifact" id="n_buslog">
-          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#C8E6C9;strokeColor=#2E7D32;strokeWidth=1.5;fontSize=9;fontColor=#232F3E;html=1;whiteSpace=wrap;align=center;" parent="1" vertex="1">
             <mxGeometry x="1384" y="580" width="248" height="56" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;MESSAGE TYPES — all 8, in publish order · every publish() AND every subscribe() lives in supervisor.js, none in src/agents/&lt;/b&gt;&lt;br&gt;1 RESEARCH_REQUEST · Supervisor → Researcher — the kick-off, published LAST, after all five handlers are registered&lt;br&gt;2 RESEARCH_COMPLETE · Researcher → Writer — emitted by the &#x27;Researcher&#x27; handler after it awaits runResearcher()&lt;br&gt;3 DRAFT_COMPLETE · Writer → Editor (attempt 1) and (revision) — two publish sites, one type&lt;br&gt;4 REVIEW_COMPLETE · Editor → Supervisor — carries verdict, score, issues and the draft itself&lt;br&gt;5 REVISION_REQ · Supervisor → Writer — payload is the major-severity issues only, joined at&lt;br&gt;6 FACT_CHECK_REQUEST · Supervisor → FactChecker (on ACCEPT) and (retries exhausted)&lt;br&gt;7 FACT_CHECK_COMPLETE · FactChecker → Supervisor — triggers final assembly&lt;br&gt;8 FINAL · Supervisor → &#x27;Output&#x27; — messageBus.js&#x27;s own header lists a different, stale set of names" class="card.invariant" id="card_msg">
-          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="304" y="520" width="968" height="132" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;BUS CHANNELS — all 5, in code order, all in supervisor.js&lt;/b&gt;&lt;br&gt;1 &#x27;Researcher&#x27; — RESEARCH_REQUEST only&lt;br&gt;2 &#x27;Writer&#x27; — RESEARCH_COMPLETE · REVISION_REQ&lt;br&gt;3 &#x27;Editor&#x27; — DRAFT_COMPLETE only&lt;br&gt;4 &#x27;FactChecker&#x27; — FACT_CHECK_REQUEST only&lt;br&gt;5 &#x27;Supervisor&#x27; — REVIEW_COMPLETE · FACT_CHECK_COMPLETE&lt;br&gt;&#x27;Output&#x27; is published to but never subscribed — log-only hop." class="card.primitive" id="card_chan">
-          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="304" y="668" width="476" height="108" as="geometry" />
           </mxCell>
         </object>
         <object label="&lt;b&gt;SUPERVISOR VERDICT BRANCH — complete, in code order&lt;/b&gt;&lt;br&gt;1 verdict === &#x27;ACCEPT&#x27; → publish FACT_CHECK_REQUEST&lt;br&gt;2 else attempt ≤ MAX_RETRIES(2) → majors → REVISION_REQ&lt;br&gt;3 else → stop revising, fact-check the best draft anyway&lt;br&gt;Budget gate: trackCost() bills every tokenUsage; checkBudget()&lt;br&gt;THROWS above $2 at — called 4× at → demo.js" class="card.failure" id="card_stop">
-          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=1.5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
             <mxGeometry x="796" y="668" width="476" height="108" as="geometry" />
           </mxCell>
         </object>
