@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 1180" role="img" aria-labelledby="hoa_gateway_budget_seq_v1-t hoa_gateway_budget_seq_v1-d" class="fts-diagram">
+  <title id="hoa_gateway_budget_seq_v1-t">24 LLM Gateway — two requests, one budget</title>
+  <desc id="hoa_gateway_budget_seq_v1-d">Both requests read the spend counter before either writes to it, with two awaits in between. The same eight requests spend eight times as much concurrently as they do sequentially, and seven refusals become none. Measured, both orderings.</desc>
+  <defs>
+    <marker id="hoa_gateway_budget_seq_v1-a-d-msg-call" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#232F3E" class="d-msg-call-fill"/></marker>
+    <marker id="hoa_gateway_budget_seq_v1-a-d-msg-failure" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C62828" class="d-msg-failure-fill"/></marker>
+    <marker id="hoa_gateway_budget_seq_v1-a-d-msg-return" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#546E7A" class="d-msg-return-fill"/></marker>
+  </defs>
+  <g class="d-fragment" data-id="f_reads">
+    <rect x="140" y="176" width="1120" height="280" rx="4" fill="none" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="8 4"/>
+    <rect x="140" y="176" width="378.8" height="18" rx="3" fill="#2E7D32" fill-opacity="0.12" stroke="#2E7D32" stroke-width="1"/>
+    <text x="147" y="189" fill="#2E7D32" font-size="11" font-weight="600" class="d-frag-label">both requests read the counters — neither has written yet</text>
+  </g>
+  <g class="d-fragment" data-id="f_gap">
+    <rect x="140" y="464" width="1420" height="132" rx="4" fill="none" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="8 4"/>
+    <rect x="140" y="464" width="302.0" height="18" rx="3" fill="#2E7D32" fill-opacity="0.12" stroke="#2E7D32" stroke-width="1"/>
+    <text x="147" y="477" fill="#2E7D32" font-size="11" font-weight="600" class="d-frag-label">the gap — two awaits, and nothing is reserved</text>
+  </g>
+  <g class="d-fragment" data-id="f_writes">
+    <rect x="140" y="604" width="1120" height="216" rx="4" fill="none" stroke="#2E7D32" stroke-width="1.5" stroke-dasharray="8 4"/>
+    <rect x="140" y="604" width="327.6" height="18" rx="3" fill="#2E7D32" fill-opacity="0.12" stroke="#2E7D32" stroke-width="1"/>
+    <text x="147" y="617" fill="#2E7D32" font-size="11" font-weight="600" class="d-frag-label">both requests write — by now the cap is long gone</text>
+  </g>
+  <g class="d-lifeline d-component-entry" data-id="req_a" data-class="component.entry">
+    <line x1="200" y1="156" x2="200" y2="856" stroke="#E65100" stroke-width="1.5" stroke-dasharray="4 5" class="d-lifeline-stem"/>
+    <rect x="80.0" y="96" width="240" height="60" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="2"/>
+    <text x="200" y="122.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Request A</text>
+    <text x="200" y="137.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">one call to request()</text>
+  </g>
+  <g class="d-lifeline d-component-entry" data-id="req_b" data-class="component.entry">
+    <line x1="520" y1="156" x2="520" y2="856" stroke="#E65100" stroke-width="1.5" stroke-dasharray="4 5" class="d-lifeline-stem"/>
+    <rect x="400.0" y="96" width="240" height="60" rx="6" fill="#FFF3E0" stroke="#E65100" stroke-width="2"/>
+    <text x="520" y="122.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">Request B</text>
+    <text x="520" y="137.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">a second, concurrent</text>
+  </g>
+  <g class="d-lifeline d-component-service" data-id="tracker" data-class="component.service">
+    <line x1="840" y1="156" x2="840" y2="856" stroke="#3F51B5" stroke-width="1.5" stroke-dasharray="4 5" class="d-lifeline-stem"/>
+    <rect x="720.0" y="96" width="240" height="60" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="2"/>
+    <text x="840" y="122.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">CostTracker</text>
+    <text x="840" y="137.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">holds today&#x27;s records</text>
+  </g>
+  <g class="d-lifeline d-component-agent" data-id="limiter" data-class="component.agent">
+    <line x1="1180" y1="156" x2="1180" y2="856" stroke="#7B1FA2" stroke-width="1.5" stroke-dasharray="4 5" class="d-lifeline-stem"/>
+    <rect x="1060.0" y="96" width="240" height="60" rx="6" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="2"/>
+    <text x="1180" y="122.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">RateLimiter</text>
+    <text x="1180" y="137.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">holds the team&#x27;s buckets</text>
+  </g>
+  <g class="d-lifeline d-component-external" data-id="provider" data-class="component.external">
+    <line x1="1500" y1="156" x2="1500" y2="856" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="4 5" class="d-lifeline-stem"/>
+    <rect x="1380.0" y="96" width="240" height="60" rx="6" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/>
+    <text x="1500" y="122.0" text-anchor="middle" font-size="12" fill="#232F3E" font-weight="700" class="d-label d-bold">provider</text>
+    <text x="1500" y="137.0" text-anchor="middle" font-size="12" fill="#232F3E" class="d-label">the awaited model call</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m1">
+    <line x1="200" y1="224" x2="840" y2="224" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_gateway_budget_seq_v1-a-d-msg-call)"/>
+    <text x="520.0" y="217" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">checkBudget(teamId)</text>
+  </g>
+  <g class="d-msg d-msg-return" data-msg="m2">
+    <line x1="840" y1="268" x2="200" y2="268" stroke="#546E7A" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_gateway_budget_seq_v1-a-d-msg-return)"/>
+    <text x="520.0" y="261" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">allowed — spent $0.00</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m3">
+    <line x1="520" y1="312" x2="840" y2="312" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_gateway_budget_seq_v1-a-d-msg-call)"/>
+    <text x="680.0" y="305" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">checkBudget(teamId)</text>
+  </g>
+  <g class="d-msg d-msg-return" data-msg="m4">
+    <line x1="840" y1="356" x2="520" y2="356" stroke="#546E7A" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_gateway_budget_seq_v1-a-d-msg-return)"/>
+    <text x="680.0" y="349" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">allowed — spent $0.00, the same answer A got</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m5">
+    <line x1="200" y1="400" x2="1180" y2="400" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_gateway_budget_seq_v1-a-d-msg-call)"/>
+    <text x="690.0" y="393" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">check(teamId, ESTIMATED tokens)</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m6">
+    <line x1="520" y1="444" x2="1180" y2="444" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_gateway_budget_seq_v1-a-d-msg-call)"/>
+    <text x="850.0" y="437" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">check(teamId, ESTIMATED tokens)</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m7">
+    <line x1="200" y1="488" x2="1500" y2="488" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_gateway_budget_seq_v1-a-d-msg-call)"/>
+    <text x="850.0" y="481" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">await — middleware, then the model call</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m8">
+    <line x1="520" y1="532" x2="1500" y2="532" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_gateway_budget_seq_v1-a-d-msg-call)"/>
+    <text x="1010.0" y="525" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">await — the same two awaits</text>
+  </g>
+  <g class="d-msg d-msg-return" data-msg="m9">
+    <line x1="1500" y1="576" x2="200" y2="576" stroke="#546E7A" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_gateway_budget_seq_v1-a-d-msg-return)"/>
+    <text x="850.0" y="569" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">response + usage</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m10">
+    <line x1="200" y1="620" x2="1180" y2="620" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_gateway_budget_seq_v1-a-d-msg-call)"/>
+    <text x="690.0" y="613" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">consume(ACTUAL tokens)</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m11">
+    <line x1="200" y1="664" x2="840" y2="664" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_gateway_budget_seq_v1-a-d-msg-call)"/>
+    <text x="520.0" y="657" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">record(costUsd) — the cap is crossed here</text>
+  </g>
+  <g class="d-msg d-msg-return" data-msg="m12">
+    <line x1="1500" y1="708" x2="520" y2="708" stroke="#546E7A" stroke-width="1.75" stroke-dasharray="4 4" marker-end="url(#hoa_gateway_budget_seq_v1-a-d-msg-return)"/>
+    <text x="1010.0" y="701" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">response + usage</text>
+  </g>
+  <g class="d-msg d-msg-call" data-msg="m13">
+    <line x1="520" y1="752" x2="1180" y2="752" stroke="#232F3E" stroke-width="1.75" marker-end="url(#hoa_gateway_budget_seq_v1-a-d-msg-call)"/>
+    <text x="850.0" y="745" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">consume(ACTUAL tokens)</text>
+  </g>
+  <g class="d-msg d-msg-failure" data-msg="m14">
+    <line x1="520" y1="796" x2="840" y2="796" stroke="#C62828" stroke-width="1.75" marker-end="url(#hoa_gateway_budget_seq_v1-a-d-msg-failure)"/>
+    <text x="680.0" y="789" text-anchor="middle" fill="#888888" font-size="11" class="d-msg-label">record(costUsd) — B cleared every gate long ago</text>
+  </g>
+  <g class="d-node d-card-failure" data-id="card_measured" data-class="card.failure">
+    <rect x="96" y="896" width="880" height="232" rx="6" fill="#FFEBEE" stroke="#C62828" stroke-width="1.5"/>
+    <text x="104" y="945.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">MEASURED — THE SAME EIGHT REQUESTS, TWO ORDERINGS</text>
+    <text x="104" y="959.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Cap $0.10 a day. One request alone costs $0.18, so the very first one already</text>
+    <text x="104" y="973.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">crosses it.</text>
+    <text x="104" y="987.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">RAN concurrent, n=8 — executed 8, blocked 0, spend $1.44.</text>
+    <text x="104" y="1001.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">RAN sequential, n=8 — executed 1, blocked 7, spend $0.18.</text>
+    <text x="104" y="1015.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">Eight times the spend, and seven refusals turned into none, from interleaving</text>
+    <text x="104" y="1029.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">alone. The dollar figure is not a property of the code — it scales with whatever</text>
+    <text x="104" y="1043.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">the provider reports. The reproducible quantity is the ratio: with n concurrent</text>
+    <text x="104" y="1057.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">requests that each exceed the cap, n execute where one should.</text>
+    <text x="104" y="1071.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">The cap logic itself is CORRECT, and the sequential run is the proof. That is</text>
+    <text x="104" y="1085.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">what makes this an ordering defect and not a legality one.</text>
+  </g>
+  <g class="d-node d-card-invariant" data-id="card_pattern" data-class="card.invariant">
+    <rect x="1008" y="896" width="612" height="232" rx="6" fill="#E8EAF6" stroke="#3F51B5" stroke-width="1.5"/>
+    <text x="1016" y="938.0" text-anchor="start" font-size="11" fill="#232F3E" font-weight="700" class="d-label d-bold">THE SAME SHAPE TWICE, IN ONE FUNCTION</text>
+    <text x="1016" y="952.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">The rate limiter has the identical gap — checked at step two, consumed at step</text>
+    <text x="1016" y="966.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">seven, the same two awaits in between.</text>
+    <text x="1016" y="980.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">RAN, 12,000 tokens a minute with each call using 10,000 —</text>
+    <text x="1016" y="994.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">concurrent n=6: rate-limited 0, executed 6.</text>
+    <text x="1016" y="1008.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">sequential n=6: rate-limited 4, executed 2.</text>
+    <text x="1016" y="1022.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">One asymmetry survives even serialisation: the check is made against an</text>
+    <text x="1016" y="1036.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">ESTIMATE of the tokens, while the debit is the ACTUAL usage the provider</text>
+    <text x="1016" y="1050.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">returned. The amount tested and the amount charged are different numbers by</text>
+    <text x="1016" y="1064.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">construction.</text>
+    <text x="1016" y="1078.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">No fix is drawn. Reserving at check time changes what happens to a request</text>
+    <text x="1016" y="1092.0" text-anchor="start" font-size="11" fill="#232F3E" class="d-label">that fails after reserving, and that is a design decision.</text>
+  </g>
+</svg>

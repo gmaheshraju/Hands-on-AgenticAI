@@ -1,0 +1,138 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="hoa_gateway_budget_seq_v1" name="24 LLM Gateway — two requests, one budget">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="4" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1700" pageHeight="1220" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="f_reads" value="both requests read the counters — neither has written yet" style="shape=umlFrame;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#2E7D32;dashed=1;fontSize=10;fontColor=#2E7D32;align=left;" parent="1" vertex="1">
+          <mxGeometry x="140" y="176" width="1120" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="f_gap" value="the gap — two awaits, and nothing is reserved" style="shape=umlFrame;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#2E7D32;dashed=1;fontSize=10;fontColor=#2E7D32;align=left;" parent="1" vertex="1">
+          <mxGeometry x="140" y="464" width="1420" height="132" as="geometry" />
+        </mxCell>
+        <mxCell id="f_writes" value="both requests write — by now the cap is long gone" style="shape=umlFrame;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#2E7D32;dashed=1;fontSize=10;fontColor=#2E7D32;align=left;" parent="1" vertex="1">
+          <mxGeometry x="140" y="604" width="1120" height="216" as="geometry" />
+        </mxCell>
+        <object label="&lt;b&gt;Request A&lt;/b&gt;&lt;br&gt;one call to request()" class="component.entry" id="req_a">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="80.0" y="96" width="240" height="760" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;Request B&lt;/b&gt;&lt;br&gt;a second, concurrent" class="component.entry" id="req_b">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#FFF3E0;strokeColor=#E65100;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="400.0" y="96" width="240" height="760" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;CostTracker&lt;/b&gt;&lt;br&gt;holds today&#x27;s records" class="component.service" id="tracker">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="720.0" y="96" width="240" height="760" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;RateLimiter&lt;/b&gt;&lt;br&gt;holds the team&#x27;s buckets" class="component.agent" id="limiter">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="1060.0" y="96" width="240" height="760" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;provider&lt;/b&gt;&lt;br&gt;the awaited model call" class="component.external" id="provider">
+          <mxCell style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=0;rounded=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=2;fontSize=10;fontColor=#232F3E;size=60;" parent="1" vertex="1">
+            <mxGeometry x="1380.0" y="96" width="240" height="760" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="m1" value="checkBudget(teamId)" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="224" as="sourcePoint" />
+            <mxPoint x="840" y="224" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m2" value="allowed — spent $0.00" style="html=1;rounded=0;strokeColor=#546E7A;fontColor=#546E7A;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;dashed=1;dashPattern=4 4;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="840" y="268" as="sourcePoint" />
+            <mxPoint x="200" y="268" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m3" value="checkBudget(teamId)" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="312" as="sourcePoint" />
+            <mxPoint x="840" y="312" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m4" value="allowed — spent $0.00, the same answer A got" style="html=1;rounded=0;strokeColor=#546E7A;fontColor=#546E7A;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;dashed=1;dashPattern=4 4;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="840" y="356" as="sourcePoint" />
+            <mxPoint x="520" y="356" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m5" value="check(teamId, ESTIMATED tokens)" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="400" as="sourcePoint" />
+            <mxPoint x="1180" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m6" value="check(teamId, ESTIMATED tokens)" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="444" as="sourcePoint" />
+            <mxPoint x="1180" y="444" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m7" value="await — middleware, then the model call" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="488" as="sourcePoint" />
+            <mxPoint x="1500" y="488" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m8" value="await — the same two awaits" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="532" as="sourcePoint" />
+            <mxPoint x="1500" y="532" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m9" value="response + usage" style="html=1;rounded=0;strokeColor=#546E7A;fontColor=#546E7A;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;dashed=1;dashPattern=4 4;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1500" y="576" as="sourcePoint" />
+            <mxPoint x="200" y="576" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m10" value="consume(ACTUAL tokens)" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="620" as="sourcePoint" />
+            <mxPoint x="1180" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m11" value="record(costUsd) — the cap is crossed here" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="664" as="sourcePoint" />
+            <mxPoint x="840" y="664" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m12" value="response + usage" style="html=1;rounded=0;strokeColor=#546E7A;fontColor=#546E7A;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;dashed=1;dashPattern=4 4;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1500" y="708" as="sourcePoint" />
+            <mxPoint x="520" y="708" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m13" value="consume(ACTUAL tokens)" style="html=1;rounded=0;strokeColor=#232F3E;fontColor=#232F3E;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="752" as="sourcePoint" />
+            <mxPoint x="1180" y="752" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="m14" value="record(costUsd) — B cleared every gate long ago" style="html=1;rounded=0;strokeColor=#C62828;fontColor=#C62828;fontSize=9;edgeStyle=orthogonalEdgeStyle;endArrow=block;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="796" as="sourcePoint" />
+            <mxPoint x="840" y="796" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <object label="&lt;b&gt;MEASURED — THE SAME EIGHT REQUESTS, TWO ORDERINGS&lt;/b&gt;&lt;br&gt;Cap $0.10 a day. One request alone costs $0.18, so the very first one already&lt;br&gt;crosses it.&lt;br&gt;RAN concurrent, n=8 — executed 8, blocked 0, spend $1.44.&lt;br&gt;RAN sequential, n=8 — executed 1, blocked 7, spend $0.18.&lt;br&gt;Eight times the spend, and seven refusals turned into none, from interleaving&lt;br&gt;alone. The dollar figure is not a property of the code — it scales with whatever&lt;br&gt;the provider reports. The reproducible quantity is the ratio: with n concurrent&lt;br&gt;requests that each exceed the cap, n execute where one should.&lt;br&gt;The cap logic itself is CORRECT, and the sequential run is the proof. That is&lt;br&gt;what makes this an ordering defect and not a legality one." class="card.failure" id="card_measured">
+          <mxCell style="rounded=1;fillColor=#FFEBEE;strokeColor=#C62828;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="96" y="896" width="880" height="232" as="geometry" />
+          </mxCell>
+        </object>
+        <object label="&lt;b&gt;THE SAME SHAPE TWICE, IN ONE FUNCTION&lt;/b&gt;&lt;br&gt;The rate limiter has the identical gap — checked at step two, consumed at step&lt;br&gt;seven, the same two awaits in between.&lt;br&gt;RAN, 12,000 tokens a minute with each call using 10,000 —&lt;br&gt;concurrent n=6: rate-limited 0, executed 6.&lt;br&gt;sequential n=6: rate-limited 4, executed 2.&lt;br&gt;One asymmetry survives even serialisation: the check is made against an&lt;br&gt;ESTIMATE of the tokens, while the debit is the ACTUAL usage the provider&lt;br&gt;returned. The amount tested and the amount charged are different numbers by&lt;br&gt;construction.&lt;br&gt;No fix is drawn. Reserving at check time changes what happens to a request&lt;br&gt;that fails after reserving, and that is a design decision." class="card.invariant" id="card_pattern">
+          <mxCell style="rounded=1;fillColor=#E8EAF6;strokeColor=#3F51B5;fontSize=8;fontColor=#232F3E;html=1;whiteSpace=wrap;align=left;spacingLeft=6;opacity=70;" parent="1" vertex="1">
+            <mxGeometry x="1008" y="896" width="612" height="232" as="geometry" />
+          </mxCell>
+        </object>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
