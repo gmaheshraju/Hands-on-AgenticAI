@@ -87,8 +87,8 @@ NOTES = [
   "RAN — four consecutive calls then pick the condemned node FIRST every time,<br>"
   "four out of four, and it completes zero work. Each pass burns one attempt.<br>"
   "RAN — with two condemned nodes and a two-attempt budget, submitWork THROWS<br>"
-  "'no healthy node available' while a healthy idle node was never selected. In<br>"
-  "that case the thrown message is false.", 96, 1000, 880, 232),
+  "'no healthy node available' while a healthy idle node was never selected —<br>"
+  "in that case the message it throws is false.", 96, 1000, 880, 232),
 
  ("note_gate","card.invariant",
   "<b>WHAT STILL HOLDS, AND WHY THE FIX IS NOT 'DELETE THE RE-INCLUDE'</b><br>"
@@ -99,9 +99,8 @@ NOTES = [
   "stop selectNode returning them again inside THIS call, and it has to undo<br>"
   "that so other work can still route to them.<br>"
   "The real defect is that a temporary exclusion and a durable one are kept in<br>"
-  "the SAME set, with no record of who excluded a node or why. Separating those<br>"
-  "two is a design decision, so this diagram states the finding and stops<br>"
-  "there.<br>"
+  "the SAME set, with no record of who excluded a node or why. Separating the<br>"
+  "two is a design decision, so this diagram states the finding and stops there.<br>"
   "A node marked FAILED by the health monitor is unaffected — it fails the<br>"
   "HEALTHY test and is never re-included.", 1008, 1000, 612, 232),
 ]
