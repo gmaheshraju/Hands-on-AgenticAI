@@ -183,6 +183,20 @@ async function main() {
     written += 1;
   }
 
+  // Cloudflare Pages serves dist/404.html for any path that matches no file.
+  // Without it, unknown URLs fell through to index.html at HTTP 200 — a soft
+  // 404 that wasted crawl budget and masked a real bug: /llms.txt returned the
+  // SPA shell for weeks and looked healthy because the status said 200.
+  const notFound = {
+    path: '/404',
+    title: 'Page not found',
+    description: 'No page at this address.',
+  };
+  const notFoundHtml = buildHead(template, notFound)
+    .replace('<div id="root"></div>', `<div id="root">${render('/__not-found__')}</div>`)
+    .replace('</head>', '  <meta name="robots" content="noindex" />\n  </head>');
+  await writeFile(join(distDir, '404.html'), notFoundHtml, 'utf8');
+
   // Sitemap. Blog posts default to 0.9 so the agentic-AI pages outrank the
   // older system-design material when Google picks a representative page.
   const lastmod = new Date().toISOString().slice(0, 10);

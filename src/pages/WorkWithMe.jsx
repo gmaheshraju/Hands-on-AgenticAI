@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import FadeIn from '../components/FadeIn';
 import { TOTALS } from '../data/diagrams';
@@ -6,6 +6,21 @@ import { TOTALS } from '../data/diagrams';
 // Clarity custom events feed the consulting funnel (homepage → this page →
 // contact click). Optional-chained: no-op locally and during prerender.
 const track = (name) => window.clarity?.('event', name);
+
+// A mailto: carries no referrer, so the subject line is the only attribution
+// channel there is — and it answers the question that decides where to spend
+// effort: which surface actually produces inquiries.
+function inquirySubject() {
+  if (typeof window === 'undefined') return 'Project inquiry';
+  if (new URLSearchParams(window.location.search).get('from') === 'post') {
+    return 'Project inquiry (from the playbook)';
+  }
+  const ref = document.referrer || '';
+  if (/linkedin\./i.test(ref)) return 'Project inquiry (via LinkedIn)';
+  if (/\b(x|twitter)\.com/i.test(ref)) return 'Project inquiry (via X)';
+  if (/github\./i.test(ref)) return 'Project inquiry (via GitHub)';
+  return 'Project inquiry';
+}
 
 const EMAIL = 'maheshraju1218@gmail.com';
 const LINKEDIN = 'https://www.linkedin.com/in/gmaheshraju/';
@@ -67,6 +82,8 @@ const proof = [
 ];
 
 export default function WorkWithMe() {
+  const [subject] = useState(inquirySubject);
+
   useEffect(() => {
     track('workwithme_view');
   }, []);
@@ -86,7 +103,7 @@ export default function WorkWithMe() {
         </p>
         <div style={styles.ctaRow}>
           <a
-            href={`mailto:${EMAIL}?subject=Project inquiry`}
+            href={`mailto:${EMAIL}?subject=${encodeURIComponent(subject)}`}
             onClick={() => track('email_cta_click')}
             style={styles.ctaPrimary}
           >
@@ -207,7 +224,7 @@ export default function WorkWithMe() {
         </p>
         <div style={styles.ctaRow}>
           <a
-            href={`mailto:${EMAIL}?subject=Project inquiry`}
+            href={`mailto:${EMAIL}?subject=${encodeURIComponent(subject)}`}
             onClick={() => track('email_cta_click')}
             style={styles.ctaPrimary}
           >

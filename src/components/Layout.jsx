@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Nav from './Nav';
+import PostFooterCTA from './PostFooterCTA';
 
 function ReadingProgress() {
   const [progress, setProgress] = useState(0);
@@ -41,6 +42,7 @@ export default function Layout({ children }) {
       <Nav />
       <main className="layout-main">
         {children}
+        {isBlogPost && <PostFooterCTA />}
       </main>
       <footer className="footer">
         <div className="footer__inner">

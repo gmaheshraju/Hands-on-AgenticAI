@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { ROUTES, fullTitle, canonicalFor } from './seo/routes';
+import { ROUTES, AUTHOR, fullTitle, canonicalFor } from './seo/routes';
 import Layout from './components/Layout';
 import PageTransition from './components/PageTransition';
 import Home from './pages/Home';
@@ -21,6 +21,7 @@ import DistributedSystems from './pages/DistributedSystems';
 import Blog from './pages/Blog';
 import Diagrams from './pages/Diagrams';
 import WorkWithMe from './pages/WorkWithMe';
+import NotFound from './pages/NotFound';
 import AgentSystemDesign from './pages/blog/AgentSystemDesign';
 import AgentMemory from './pages/blog/AgentMemory';
 import AgentHarness from './pages/blog/AgentHarness';
@@ -46,7 +47,12 @@ function useDocumentMeta() {
 
   useEffect(() => {
     const route = ROUTES.find((r) => r.path === pathname);
-    if (!route) return;
+    // No ROUTES entry means the catch-all rendered NotFound. Say so, rather
+    // than leaving the previous page's title on a 404.
+    if (!route) {
+      document.title = `Page not found | ${AUTHOR}`;
+      return;
+    }
 
     document.title = fullTitle(route);
     document
@@ -100,6 +106,7 @@ export default function App() {
         <Route path="/blog/forward-deployed-engineering" element={<ForwardDeployedEngineering />} />
         <Route path="/blog/context-engineering" element={<ContextEngineering />} />
         <Route path="/blog/solo-developer-advantage" element={<SoloDeveloperAdvantage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       </PageTransition>
     </Layout>
