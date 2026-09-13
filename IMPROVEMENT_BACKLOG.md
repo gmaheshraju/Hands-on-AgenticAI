@@ -22,7 +22,7 @@ do it well, check it off in the same commit. One item per day. P0 items were fix
 ## P2 — Content gaps (highest interview value first)
 
 - [ ] **MCP — the #1 site-wide gap** (named once meaningfully across 16 posts). Split across days:
-  - [ ] ToolUseFunctionCalling: "MCP & tool distribution" Decision on Schema Design tab (server vs client, tools/list drift, tool poisoning, confused deputy).
+  - [x] ToolUseFunctionCalling: "MCP & tool distribution" Decision on Schema Design tab (server vs client, tools/list drift, tool poisoning, confused deputy).
   - [ ] AgentSystemDesign: MCP as the tool-interface layer + code-mode/programmatic tool calling in architecture.
   - [ ] MultiAgentSystems: capability cards → MCP discovery / A2A agent cards Decision.
   - [ ] AiGuardrails: MCP supply-chain trust (third-party servers, tool-description poisoning).
