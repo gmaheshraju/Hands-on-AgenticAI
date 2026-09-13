@@ -7,7 +7,7 @@ do it well, check it off in the same commit. One item per day. P0 items were fix
 
 ## P1 — Stale content (2024-era presented as current)
 
-- [ ] **RagDeepDive** embeddings section (~L325-347): `text-embedding-3-large` as "the default choice", Cohere embed-v3, BGE-large. Refresh to current MTEB leaders (gemini-embedding-001, voyage-3-large, voyage-code-3, Qwen3-Embedding, Cohere embed-v4) + note code/multimodal-specific embedders.
+- [x] **RagDeepDive** embeddings section (~L325-347): `text-embedding-3-large` as "the default choice", Cohere embed-v3, BGE-large. Refresh to current MTEB leaders (gemini-embedding-001, voyage-3-large, voyage-code-3, Qwen3-Embedding, Cohere embed-v4) + note code/multimodal-specific embedders.
 - [ ] **RagDeepDive** reranker section (~L435-443): Cohere Rerank pricing stale, "Claude/GPT-4" as LLM-reranker. Refresh to Rerank 3.5, bge-reranker-v2-m3, ColBERT-style late interaction.
 - [ ] **FineTuningVsRag** — stalest post overall: "student can't exceed teacher" (~L554) is wrong in 2026 (distillation + RL beats teacher on narrow tasks); decision tree has no long-context/prompt-caching branch; A100-era hardware; GPT-4o-mini pricing; overstates Anthropic API fine-tuning availability (~L534). No DPO/GRPO coverage.
 - [ ] **AgentMemory** (~L305): "128K-200K tokens for modern models" — 1M windows ship now. Also L554 pricing. Reconcile the soft-delete (L471) vs GDPR hard-delete (L576) contradiction with one clause on tombstoning vs erasure.

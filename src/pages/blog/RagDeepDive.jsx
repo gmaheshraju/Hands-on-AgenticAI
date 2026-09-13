@@ -334,27 +334,39 @@ function EmbeddingsPanel() {
       />
 
       <FadeIn><Decision question="Which embedding model?">
-        <Pill type="green">text-embedding-3-large (OpenAI)</Pill> 3072 dimensions. Best quality for English. $0.13 per million tokens. The default choice unless you have specific constraints.
+        The honest answer in 2026 is that the top of the leaderboard is crowded and the gaps are small. Pick by <em>constraint</em> — modality, language, deployment, dimension budget — not by a single MTEB number. Scores below are MTEB-family snapshots as of mid-2026; MTEB v2 rescored everything, so never compare a v1 number to a v2 number.
         <br /><br />
-        <Pill type="green">Cohere embed-v3</Pill> 1024 dimensions. Competitive quality, better multilingual support. Search-optimized variant available. Good alternative to OpenAI.
+        <Pill type="green">gemini-embedding-001 (Google)</Pill> 3072d with Matryoshka truncation, ~$0.15/M tokens. Leads the English MTEB v2 board (~68 overall) and is strong multilingually. The safest general-purpose default if you are already on Vertex/Gemini.
         <br /><br />
-        <Pill type="amber">BGE-large (open-source)</Pill> 1024 dimensions. Run locally — no API costs. 3-5% lower quality than commercial models. Best for privacy-sensitive use cases or cost-constrained deployments.
+        <Pill type="green">voyage-3-large (Voyage AI)</Pill> 1024d default, Matryoshka down to 256d, plus int8 and binary quantization that cut vector storage 4-32x. Consistently top-tier on retrieval specifically — which is the only MTEB sub-score a RAG system actually cares about.
         <br /><br />
-        <Pill type="red">text-embedding-ada-002 (legacy)</Pill> Don't use. text-embedding-3 is strictly better at the same price.
+        <Pill type="green">Cohere embed-v4</Pill> 1536d default with Matryoshka, long input windows, and native multimodal embedding — it embeds a page <em>image</em> (chart, scanned invoice, slide) into the same space as text. If your corpus is PDFs rather than prose, this changes the architecture: you skip OCR entirely.
         <br /><br />
-        <strong>Critical rule:</strong> Use the SAME model for indexing and querying. Mixing models (embed with OpenAI, query with Cohere) produces garbage results — the vector spaces don't align.
+        <Pill type="green">voyage-code-3</Pill> Domain-specific. On code retrieval, a code-tuned embedder beats a better general model — the general model thinks two functions are similar because they both contain loops and returns. The same logic applies to the law- and finance-tuned variants.
+        <br /><br />
+        <Pill type="amber">Qwen3-Embedding (0.6B / 4B / 8B, Apache 2.0)</Pill> The open-weights answer, and it is no longer a compromise — the 8B ranked first on MMTEB multilingual on release. 0.6B runs on a CPU box; 8B wants a GPU. Choose this when data cannot leave your VPC, or when token volume makes API pricing the dominant cost.
+        <br /><br />
+        <Pill type="amber">text-embedding-3-large (OpenAI)</Pill> 3072d, $0.13/M. No longer the leader but still perfectly serviceable, and it is what a large share of production corpora are already embedded with. Not a reason to migrate on its own.
+        <br /><br />
+        <Pill type="red">text-embedding-ada-002, BGE-large, embed-v3</Pill> Superseded. Fine if already indexed; never the choice for a new build.
+        <br /><br />
+        <strong>Critical rule:</strong> Use the SAME model — and the same <em>snapshot</em> — for indexing and querying. Mixing models produces garbage: the vector spaces don't align. This is also why embedding choice is the highest-switching-cost decision in the stack. Re-embedding 50M chunks is a migration project, not a config change. Budget for it by keeping raw chunk text next to the vectors, so a re-index never requires re-fetching source documents.
+        <br /><br />
+        <strong>Interview framing:</strong> "I'd shortlist two, embed a 1-2k-query slice of our real traffic, and compare recall@10 on <em>our</em> data. MTEB is a tiebreaker, not the decision — public benchmarks are averages over domains that are not mine."
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="Dimensions — bigger isn't always better">
         Higher dimensions capture more nuance but cost more to store and search:
         <br /><br />
-        <strong>3072d (text-embedding-3-large):</strong> Best quality. 12KB per vector. At 1M chunks, that's 12GB of vectors.
+        <strong>3072d (gemini-embedding-001, text-embedding-3-large):</strong> Top quality. 12KB per vector at float32. At 1M chunks, that's 12GB of vectors — and vector indexes want to live in RAM.
         <br /><br />
-        <strong>1536d (text-embedding-3-small or Matryoshka truncation):</strong> 95% of the quality at 50% of the storage. 6GB for 1M chunks.
+        <strong>1024-1536d (voyage-3-large, embed-v4, or Matryoshka truncation):</strong> Roughly 95% of the quality at half the storage. 4-6GB for 1M chunks. This is where most production systems land.
         <br /><br />
-        <strong>256d (Matryoshka at 256):</strong> 85% of the quality. 1GB for 1M chunks. Good for prototyping or cost-constrained deployments.
+        <strong>256d (Matryoshka at 256):</strong> ~85% of the quality, 1GB for 1M chunks. Good for prototyping, or as the first stage of a two-stage retrieve.
         <br /><br />
-        <strong>Matryoshka embeddings</strong> (supported by text-embedding-3) let you truncate the vector to any dimension. Embed at full 3072d, store at 1536d or 256d. Trade quality for cost dynamically.
+        <strong>Matryoshka embeddings</strong> — now standard across gemini-embedding-001, voyage-3-large, embed-v4 and text-embedding-3 — let you truncate the vector to a shorter prefix and keep most of the signal. Embed once at full width, store truncated.
+        <br /><br />
+        <strong>Quantization is the bigger lever in 2026.</strong> int8 cuts storage 4x and binary 32x versus float32, for a few points of recall. The standard pattern: search binary vectors over the whole corpus, then rescore the top ~200 hits with full-precision vectors. You keep near-full recall at a fraction of the memory — the same shape as reranking, applied one layer lower.
       </Decision></FadeIn>
 
       <FadeIn delay={160}><Decision question="Embedding pipeline — batch vs real-time">
