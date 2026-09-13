@@ -314,7 +314,7 @@ function MemoryTypesPanel() {
       <FadeIn><Decision question="Working memory — the context window itself">
         Working memory IS the context window. Everything the LLM can see right now — the system prompt, conversation history, tool results, and retrieved context. It's the most important and the most constrained.
         <br /><br />
-        <strong>Capacity:</strong> 128K-200K tokens for modern models (Claude, GPT-4). Sounds huge — but a single codebase file can be 5K tokens. 20 RAG chunks at 500 tokens each = 10K tokens. Tool results from 3 API calls = 5K tokens. The budget evaporates fast.
+        <strong>Capacity:</strong> 200K is the common baseline in 2026, and 1M-token windows now ship on frontier models. Sounds huge — but a bigger window raises the ceiling, not the quality: recall still degrades with length, and every token is paid for on every turn. And a single codebase file can be 5K tokens. 20 RAG chunks at 500 tokens each = 10K tokens. Tool results from 3 API calls = 5K tokens. The budget evaporates fast.
         <br /><br />
         <strong>The core tradeoff:</strong> More context = more relevant information = better answers. But also: more cost, more latency, more noise for the model to filter through. The art is putting the RIGHT 10K tokens in, not cramming in 100K.
       </Decision></FadeIn>
@@ -563,7 +563,7 @@ function DeepDivePanel() {
 
       <div style={styles.anti}>
         <p style={styles.strike}>"We'd just store everything in the context window."</p>
-        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />Context windows have cost and latency implications. At 200K tokens, you're paying $0.60-$3.00 per query. Selective retrieval of 5-10K relevant tokens is 20x cheaper. Plus, more context = more noise = worse answers (the "lost in the middle" problem).</p>
+        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />Context windows have cost and latency implications. Input cost scales linearly with prompt size, on every turn: at a mid-tier price of ~$3 per million input tokens, a full 200K prompt is ~$0.60 per call, and a 1M prompt is several dollars. Selective retrieval of 5-10K relevant tokens is 20-100x cheaper. Prompt caching softens this for a stable prefix, but it can't help with memory that changes per query. Plus, more context = more noise = worse answers (the "lost in the middle" problem).</p>
       </div>
 
       <div style={styles.anti}>
@@ -585,7 +585,7 @@ function DeepDivePanel() {
         <br /><br />
         (3) <strong>Memory lifecycle:</strong> Old, unused memories should decay. Run a weekly job that scores memories by (last_accessed × importance) and prune the bottom 10%. Users don't notice — but your storage costs halve.
         <br /><br />
-        (4) <strong>Privacy:</strong> Memory deletion must be hard-delete, not soft-delete. GDPR right to be forgotten means removing from the vector store too — which means you need a mapping from user_id → vector_ids.
+        (4) <strong>Privacy:</strong> Two different deletes, don't conflate them. <em>Supersession</em> (the agent decides a fact is outdated) tombstones, so you keep an audit trail and can roll back a bad consolidation. <em>Erasure</em> (the user invokes deletion) must be a hard delete that also purges the tombstones, the consolidated facts derived from the erased memory, and backups within your retention window. GDPR right to be forgotten means removing from the vector store too — which means you need a mapping from user_id → vector_ids.
       </Decision></FadeIn>
 
       <FadeIn><Insight>
