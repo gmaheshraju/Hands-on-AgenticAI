@@ -588,10 +588,10 @@ function ArchPanel() {
       </div>
 
       <div style={styles.systemCard}>
-        <h3 style={styles.systemName}>Kimi Deep Research — Swarm Architecture</h3>
+        <h3 style={styles.systemName}>Deep Research Systems — Swarm Architecture</h3>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Pattern</span>
-          <span style={styles.sysVal}>Swarm (Level 4). A goal agent decomposes the research question, auto-spawns worker agents that search independently, a synthesizer agent clusters and deduplicates findings, then generates a comprehensive report.</span>
+          <span style={styles.sysVal}>Swarm (Level 4). Kimi's Deep Research and Anthropic's multi-agent Research feature share the shape: a lead agent decomposes the research question, spawns worker agents that search independently in parallel, then a synthesis step clusters and deduplicates findings (with a separate citation pass) into one report.</span>
         </div>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Key insight</span>
@@ -599,7 +599,7 @@ function ArchPanel() {
         </div>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>My take</span>
-          <span style={styles.sysVal}>Deep Research narrows and verifies (fears being wrong). Swarms explore in parallel (fear missing something). Teams execute with control. The architecture follows the failure mode you're optimizing against.</span>
+          <span style={styles.sysVal}>Deep Research is a swarm because its failure mode is omission: it explores in parallel (fears missing something). Teams like a coding agent's subagents narrow and verify (fear being wrong). The verification still exists in Deep Research — but it lives in the synthesis step, after breadth is secured. The architecture follows the failure mode you're optimizing against.</span>
         </div>
       </div>
 

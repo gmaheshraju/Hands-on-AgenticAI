@@ -16,7 +16,7 @@ do it well, check it off in the same commit. One item per day. P0 items were fix
 - [ ] **AgentSystemDesign**: GPT-4-as-current in diagram (L289), anti-pattern (L807), parallel-tool-calls claim (L622). Reframe around reasoning-vs-fast tiering.
 - [ ] **ContextEngineering**: "2027" future-tense framing (L616, L638) reads stale-in-reverse; ContextBudgetPanel built on GPT-4 128K example (L408) while another tab discusses 1M. Rebase example on 200K/1M.
 - [ ] **LlmOps**: bare model aliases ('claude-haiku') contradict the post's own pin-your-snapshots advice (L675-686 vs L30/L68/L100/L145); self-hosting math on 8xA100 + Llama 70B (L507-511); 200K hardcoded context for all models (L100).
-- [ ] **MultiAgentSystems**: L590 contradicts L367/L413 on whether Deep-Research-style systems fear missing vs fear being wrong; refresh swarm exemplar to 2026 systems.
+- [x] **MultiAgentSystems**: L590 contradicts L367/L413 on whether Deep-Research-style systems fear missing vs fear being wrong; refresh swarm exemplar to 2026 systems.
 - [ ] **SoloDeveloperAdvantage**: Midjourney "$200M / 40 employees" 2023 stat (L241, L585); AI-team grid names no actual 2026 tooling (Claude Code, Cursor, agent SDKs, MCP).
 
 ## P2 — Content gaps (highest interview value first)
