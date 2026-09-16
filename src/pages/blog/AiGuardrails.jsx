@@ -462,11 +462,12 @@ export default function AiGuardrails() {
         ))}
       </div>
 
-      {tab === 0 && <PromptInjectionPanel />}
-      {tab === 1 && <PIIPanel />}
-      {tab === 2 && <OutputValidationPanel />}
-      {tab === 3 && <ContentModerationPanel />}
-      {tab === 4 && <DefenseInDepthPanel />}
+      {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+      <div hidden={tab !== 0}><PromptInjectionPanel /></div>
+      <div hidden={tab !== 1}><PIIPanel /></div>
+      <div hidden={tab !== 2}><OutputValidationPanel /></div>
+      <div hidden={tab !== 3}><ContentModerationPanel /></div>
+      <div hidden={tab !== 4}><DefenseInDepthPanel /></div>
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Hands-On Project</p>

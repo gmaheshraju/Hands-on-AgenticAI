@@ -198,11 +198,12 @@ export default function ContextEngineering() {
         ))}
       </div>
 
-      {tab === 0 && <ContextBudgetPanel />}
-      {tab === 1 && <SourcePriorityPanel />}
-      {tab === 2 && <AssemblyPatternsPanel />}
-      {tab === 3 && <ProductionPatternsPanel />}
-      {tab === 4 && <DeepDivePanel />}
+      {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+      <div hidden={tab !== 0}><ContextBudgetPanel /></div>
+      <div hidden={tab !== 1}><SourcePriorityPanel /></div>
+      <div hidden={tab !== 2}><AssemblyPatternsPanel /></div>
+      <div hidden={tab !== 3}><ProductionPatternsPanel /></div>
+      <div hidden={tab !== 4}><DeepDivePanel /></div>
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Hands-On Project</p>
@@ -519,7 +520,7 @@ function AssemblyPatternsPanel() {
         <br /><br />
         <Pill type="amber">Summarization</Pill> LLM-powered compression. Feed the source to a fast model (Haiku/GPT-4o-mini) with "summarize the key facts in under 500 tokens." Costs one API call (~$0.001) but can compress 10:1.
         <br /><br />
-        <Pill type="blue">Extraction</Pill> Pull only the relevant sentences from a document. Use the user's query as a filter: "extract sentences relevant to: {query}." More targeted than summarization.
+        <Pill type="blue">Extraction</Pill> Pull only the relevant sentences from a document. Use the user's query as a filter: "extract sentences relevant to: {'{query}'}." More targeted than summarization.
         <br /><br />
         <Pill type="amber">Deduplication</Pill> Remove near-duplicate RAG chunks that waste tokens. Embeddings make this easy — if two chunks have cosine similarity above 0.85, keep the higher-scored one. Common when chunking overlaps.
       </Decision></FadeIn>

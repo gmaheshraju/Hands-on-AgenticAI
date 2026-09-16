@@ -437,11 +437,12 @@ export default function EvalEngineering() {
         ))}
       </div>
 
-      {tab === 0 && <FrameworksPanel />}
-      {tab === 1 && <JudgePanel />}
-      {tab === 2 && <RegressionPanel />}
-      {tab === 3 && <HITLPanel />}
-      {tab === 4 && <MetricsPanel />}
+      {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+      <div hidden={tab !== 0}><FrameworksPanel /></div>
+      <div hidden={tab !== 1}><JudgePanel /></div>
+      <div hidden={tab !== 2}><RegressionPanel /></div>
+      <div hidden={tab !== 3}><HITLPanel /></div>
+      <div hidden={tab !== 4}><MetricsPanel /></div>
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Hands-On Project</p>

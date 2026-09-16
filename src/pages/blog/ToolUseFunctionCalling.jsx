@@ -344,11 +344,12 @@ export default function ToolUseFunctionCalling() {
         ))}
       </div>
 
-      {tab === 0 && <SchemaDesignPanel />}
-      {tab === 1 && <ToolDispatchPanel />}
-      {tab === 2 && <ErrorRecoveryPanel />}
-      {tab === 3 && <PermissionsPanel />}
-      {tab === 4 && <AntiPatternsPanel />}
+      {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+      <div hidden={tab !== 0}><SchemaDesignPanel /></div>
+      <div hidden={tab !== 1}><ToolDispatchPanel /></div>
+      <div hidden={tab !== 2}><ErrorRecoveryPanel /></div>
+      <div hidden={tab !== 3}><PermissionsPanel /></div>
+      <div hidden={tab !== 4}><AntiPatternsPanel /></div>
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Hands-On Project</p>

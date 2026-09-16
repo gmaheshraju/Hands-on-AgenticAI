@@ -40,11 +40,12 @@ export default function SoloDeveloperAdvantage() {
       </nav>
 
       <section style={styles.body}>
-        {active === 'thesis' && <Thesis />}
-        {active === 'playbook' && <Playbook />}
-        {active === 'moats' && <NewMoats />}
-        {active === 'examples' && <Patterns />}
-        {active === 'applied' && <AppliedPatterns />}
+        {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+        <div hidden={active !== 'thesis'}><Thesis /></div>
+        <div hidden={active !== 'playbook'}><Playbook /></div>
+        <div hidden={active !== 'moats'}><NewMoats /></div>
+        <div hidden={active !== 'examples'}><Patterns /></div>
+        <div hidden={active !== 'applied'}><AppliedPatterns /></div>
       </section>
     </article>
   );
@@ -596,7 +597,7 @@ function AppliedPatterns() {
 
       <FadeIn delay={180}>
         <Insight tag="the meta-point">
-          This entire playbook — 16 deep dives, 31 projects, 19 with runnable test suites, architecture diagrams, interactive UI — was built by one engineer with AI.
+          This entire playbook — 16 deep dives, <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-accent)', fontWeight: 500 }}>31 projects</a>, 19 with runnable test suites, architecture diagrams, interactive UI — was built by one engineer with AI.
         </Insight>
       </FadeIn>
 

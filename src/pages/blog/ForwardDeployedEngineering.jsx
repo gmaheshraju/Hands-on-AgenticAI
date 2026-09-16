@@ -143,11 +143,12 @@ export default function ForwardDeployedEngineering() {
         ))}
       </div>
 
-      {tab === 0 && <FDEModelPanel />}
-      {tab === 1 && <TeamStructurePanel />}
-      {tab === 2 && <FDEVsSaaSPanel />}
-      {tab === 3 && <AIPlaybookPanel />}
-      {tab === 4 && <AppliedPatternsPanel />}
+      {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+      <div hidden={tab !== 0}><FDEModelPanel /></div>
+      <div hidden={tab !== 1}><TeamStructurePanel /></div>
+      <div hidden={tab !== 2}><FDEVsSaaSPanel /></div>
+      <div hidden={tab !== 3}><AIPlaybookPanel /></div>
+      <div hidden={tab !== 4}><AppliedPatternsPanel /></div>
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Hands-On Project</p>

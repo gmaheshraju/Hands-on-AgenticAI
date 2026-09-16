@@ -153,11 +153,12 @@ export default function AgentMemory() {
         ))}
       </div>
 
-      {tab === 0 && <MemoryTypesPanel />}
-      {tab === 1 && <ContextWindowPanel />}
-      {tab === 2 && <RetrievalPanel />}
-      {tab === 3 && <ProductionPanel />}
-      {tab === 4 && <DeepDivePanel />}
+      {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+      <div hidden={tab !== 0}><MemoryTypesPanel /></div>
+      <div hidden={tab !== 1}><ContextWindowPanel /></div>
+      <div hidden={tab !== 2}><RetrievalPanel /></div>
+      <div hidden={tab !== 3}><ProductionPanel /></div>
+      <div hidden={tab !== 4}><DeepDivePanel /></div>
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Hands-On Project</p>

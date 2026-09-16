@@ -141,12 +141,13 @@ export default function AgentSystemDesign() {
         ))}
       </div>
 
-      {tab === 0 && <ArchitecturePanel />}
-      {tab === 1 && <RagPanel />}
-      {tab === 2 && <FunctionCallingPanel />}
-      {tab === 3 && <EvalsPanel />}
-      {tab === 4 && <RealSystemsPanel />}
-      {tab === 5 && <AntiPatternsPanel />}
+      {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+      <div hidden={tab !== 0}><ArchitecturePanel /></div>
+      <div hidden={tab !== 1}><RagPanel /></div>
+      <div hidden={tab !== 2}><FunctionCallingPanel /></div>
+      <div hidden={tab !== 3}><EvalsPanel /></div>
+      <div hidden={tab !== 4}><RealSystemsPanel /></div>
+      <div hidden={tab !== 5}><AntiPatternsPanel /></div>
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Hands-On Project</p>

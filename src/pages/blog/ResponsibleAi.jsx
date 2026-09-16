@@ -580,11 +580,12 @@ export default function ResponsibleAi() {
           </button>
         ))}
       </div>
-      {tab === 0 && <Tab1 />}
-      {tab === 1 && <Tab2 />}
-      {tab === 2 && <Tab3 />}
-      {tab === 3 && <Tab4 />}
-      {tab === 4 && <Tab5 />}
+      {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+      <div hidden={tab !== 0}><Tab1 /></div>
+      <div hidden={tab !== 1}><Tab2 /></div>
+      <div hidden={tab !== 2}><Tab3 /></div>
+      <div hidden={tab !== 3}><Tab4 /></div>
+      <div hidden={tab !== 4}><Tab5 /></div>
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Hands-On Project</p>

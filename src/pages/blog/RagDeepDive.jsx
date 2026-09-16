@@ -176,11 +176,14 @@ export default function RagDeepDive() {
         ))}
       </div>
 
-      {tab === 0 && <ChunkingPanel />}
-      {tab === 1 && <EmbeddingsPanel />}
-      {tab === 2 && <HybridSearchPanel />}
-      {tab === 3 && <RerankingPanel />}
-      {tab === 4 && <PitfallsPanel />}
+      {/* All panels are mounted so every tab's content is in the prerendered
+          HTML (crawlable / no-JS); the inactive ones are hidden with the
+          native `hidden` attribute. Toggling visibility, not mounting. */}
+      <div hidden={tab !== 0}><ChunkingPanel /></div>
+      <div hidden={tab !== 1}><EmbeddingsPanel /></div>
+      <div hidden={tab !== 2}><HybridSearchPanel /></div>
+      <div hidden={tab !== 3}><RerankingPanel /></div>
+      <div hidden={tab !== 4}><PitfallsPanel /></div>
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Hands-On Project</p>

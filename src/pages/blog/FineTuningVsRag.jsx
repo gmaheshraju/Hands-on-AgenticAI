@@ -205,11 +205,12 @@ export default function FineTuningVsRag() {
           </button>
         ))}
       </div>
-      {tab === 0 && <DecisionTreePanel />}
-      {tab === 1 && <PromptEngineeringPanel />}
-      {tab === 2 && <RagPanel />}
-      {tab === 3 && <FineTuningPanel />}
-      {tab === 4 && <CombiningPanel />}
+      {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+      <div hidden={tab !== 0}><DecisionTreePanel /></div>
+      <div hidden={tab !== 1}><PromptEngineeringPanel /></div>
+      <div hidden={tab !== 2}><RagPanel /></div>
+      <div hidden={tab !== 3}><FineTuningPanel /></div>
+      <div hidden={tab !== 4}><CombiningPanel /></div>
 
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Hands-On Project</p>
