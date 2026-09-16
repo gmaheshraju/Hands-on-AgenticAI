@@ -532,18 +532,48 @@ function FineTuningPanel() {
       </Decision>
 
       <Decision question="Full fine-tune vs LoRA vs QLoRA">
-        <p><Pill type="red">Full fine-tune</Pill> Update all parameters. $1000+ per run on 70B models,
-          requires 8xA100 or equivalent. Only justified with massive data ({'>'}50K examples) and a
-          dedicated ML team. Most teams never need this.</p>
+        <p><Pill type="red">Full fine-tune</Pill> Update all parameters. You need optimizer state and
+          gradients resident alongside the weights, so a 70B model wants a full 8-GPU node (H100/H200
+          class) even before you think about throughput. Only justified with massive data
+          ({'>'}50K examples) and a dedicated ML team. Most teams never need this.</p>
         <p><Pill type="green">LoRA</Pill> Freeze base model, train small adapter layers (0.1-1% of
-          parameters). 10-100x cheaper. Runs on 1-2 A100s. Gets 90-95% of full fine-tune quality.
-          This is the default choice for self-hosted fine-tuning.</p>
-        <p><Pill type="green">QLoRA</Pill> LoRA on a 4-bit quantized model. Fits on a single A100 or
-          even a 48GB A6000. Best cost/performance ratio for budget-conscious teams. ~5% quality
-          drop vs LoRA on most benchmarks.</p>
-        <p><Pill type="amber">API fine-tuning</Pill> OpenAI, Anthropic, Google &mdash; upload JSONL,
-          wait, get a model endpoint. Zero infra, limited customization. Best for teams without ML
-          engineers. OpenAI GPT-4o-mini: ~$25 to fine-tune 1000 examples.</p>
+          parameters). 10-100x cheaper. A 7-14B adapter trains on a single modern 80GB GPU; you can
+          serve many adapters over one shared base. Gets 90-95% of full fine-tune quality. This is the
+          default choice for self-hosted fine-tuning.</p>
+        <p><Pill type="green">QLoRA</Pill> LoRA on a 4-bit quantized model. Halves or quarters the
+          memory again, which is what lets a mid-size model fit on one consumer-or-workstation card.
+          Best cost/performance ratio for budget-conscious teams. Small quality drop vs LoRA on most
+          benchmarks, larger on reasoning-heavy tasks &mdash; measure, don&apos;t assume.</p>
+        <p><Pill type="amber">API fine-tuning</Pill> Upload JSONL, wait, get a model endpoint. Zero
+          infra, limited customization. Availability is provider-specific and moves &mdash; some frontier
+          models expose a first-party tuning endpoint, others only offer it through a cloud partner,
+          and the newest flagship is usually the last to get it. Confirm against the provider&apos;s
+          current docs before you put it in a design doc; the interview answer that scores is
+          &quot;I&apos;d check what&apos;s tunable today,&quot; not a memorized price.</p>
+      </Decision>
+
+      <Decision question="SFT vs preference optimization (DPO / GRPO) — which knob are you turning?">
+        <p><Pill type="green">SFT (supervised fine-tuning)</Pill> Show the model input/output pairs and
+          it imitates them. This is what people mean by &quot;fine-tuning&quot; by default, and it is the
+          right tool when there is one correct output shape: a schema, a label set, a house format.
+          Its ceiling is your demonstrations &mdash; SFT can only teach the model to do what you already
+          wrote down.</p>
+        <p><Pill type="green">DPO</Pill> Train on <em>pairs</em> &mdash; a chosen response and a rejected
+          one &mdash; and optimize the model to prefer the chosen one directly, with no separate reward
+          model and no RL loop. Use it when &quot;better&quot; is easy to judge but hard to specify:
+          tone, helpfulness, refusal calibration, which of two correct answers a reviewer actually
+          wants. Preference pairs are also cheap to mine &mdash; every time a reviewer edits a draft you
+          have a rejected/chosen pair for free.</p>
+        <p><Pill type="amber">GRPO and RL-on-verifiable-rewards</Pill> Sample a group of candidate
+          answers per prompt, score each with a <em>programmatic</em> verifier (tests pass, the SQL runs
+          and returns the right rows, the JSON validates, the arithmetic checks out), and push the
+          policy toward the above-average samples. This is the recipe behind the reasoning-model wave.
+          It only works where you have a cheap automatic grader &mdash; if a human has to read every
+          sample, the loop is unaffordable.</p>
+        <p><Pill type="red">Don&apos;t skip to the fancy one</Pill> Preference and RL methods assume a
+          model that already produces roughly the right shape. The usual sequence is SFT first to fix
+          format and domain, then DPO/GRPO to fix <em>judgment</em>. Running DPO on a model that
+          can&apos;t yet emit valid JSON just teaches it to prefer one kind of invalid JSON.</p>
       </Decision>
 
       <Insight tag="Real numbers">
@@ -560,9 +590,20 @@ function FineTuningPanel() {
         <p><Pill type="amber">Expert annotation</Pill> Have domain experts (not crowd workers) write
           gold-standard responses. Crowd workers produce grammatically correct nonsense. Domain experts
           produce actually correct outputs. The cost difference is 5x but the quality difference is 50x.</p>
-        <p><Pill type="red">Synthetic data</Pill> Use the base model to generate training data for
-          a smaller model. Works for distillation (GPT-4 {'->'} GPT-4o-mini) but creates a quality ceiling.
-          The student can't exceed the teacher. Only use when expert annotation isn't feasible.</p>
+        <p><Pill type="amber">Synthetic data</Pill> Use a large model to generate training data for a
+          smaller one. The old rule &mdash; &quot;the student can never exceed the teacher&quot; &mdash;
+          is no longer true as stated, and saying it in an interview dates you. Distillation plus
+          <em> filtering</em> routinely beats the teacher on a narrow task: generate many candidates,
+          keep only the ones that pass a verifier (tests, schema, a known answer), and train on the
+          survivors. You are distilling the teacher&apos;s <em>best</em> sampled behavior, not its
+          average. Add a preference or RL stage on verifiable rewards and the student can pass the
+          teacher outright on that slice.</p>
+        <p><Pill type="red">What synthetic data still can&apos;t do</Pill> It cannot invent knowledge the
+          teacher lacks, and unfiltered self-generated data degrades a model across rounds. The ceiling
+          isn&apos;t the teacher &mdash; it&apos;s the quality of your filter. If you have no automatic
+          way to tell a good sample from a bad one, you are back to needing expert annotation. Also
+          check the teacher model&apos;s terms: training a competing model on its outputs is often
+          contractually prohibited.</p>
       </Decision>
 
       <CodeBlock
