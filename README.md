@@ -5,7 +5,7 @@
 > A portfolio of **31 hands-on, production-grade AI engineering projects** — real agents, real RAG pipelines, real LLM infrastructure — each built **from scratch in Node.js/Python with minimal frameworks**, tested, and hardened. Not slideware. Not notebook demos. Runnable systems that show *how* production agentic AI is actually engineered, from the ReAct loop up to observability, cost attribution, guardrails, and self-improvement.
 
 <p align="center">
-  <img src="docs/diagrams/agent-architecture.png" alt="Production AI agent system design architecture — ReAct loop, tool dispatch, RAG, evaluation harness" width="100%">
+  <img src="docs/diagrams/agent-system-design.png" alt="Agent system design architecture: a PR review agent's ReAct loop, tool registry, schema validation, and network boundary, drawn from the source. One of 31 governed diagrams." width="100%">
 </p>
 
 ---

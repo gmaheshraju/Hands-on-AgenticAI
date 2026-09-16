@@ -10,7 +10,7 @@ import { TOTALS } from '../data/diagrams.js';
 export const SITE_URL = 'https://curiousengineers.in';
 export const AUTHOR = 'Mahesh Guntumadugu';
 export const OG_IMAGE =
-  'https://raw.githubusercontent.com/gmaheshraju/Hands-on-AgenticAI/main/docs/diagrams/agent-architecture.png';
+  'https://raw.githubusercontent.com/gmaheshraju/Hands-on-AgenticAI/main/docs/diagrams/agent-system-design.png';
 
 const suffix = ` | ${AUTHOR}`;
 
