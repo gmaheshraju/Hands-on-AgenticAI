@@ -209,7 +209,7 @@ function Playbook() {
           The best solo developers aren't the best <em>coders</em>. They're the best <em>directors</em>. They write clear
           specifications, review AI output with domain expertise, and make judgment calls that no AI can make — "will my users
           actually want this?" That's the skill that scales. If you're spending more than 30% of your time writing code by hand,
-          you're not leveraging AI enough.
+          you're not using AI enough.
         </Insight>
       </FadeIn>
 

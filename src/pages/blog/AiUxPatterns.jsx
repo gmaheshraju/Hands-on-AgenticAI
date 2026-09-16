@@ -717,7 +717,7 @@ function HumanInTheLoopPanel() {
       </FadeIn>
 
       <FadeIn delay={80}><Insight>
-        The best AI UX pattern is the one users never notice. When the AI knows the answer, it responds instantly. When it does not, it seamlessly hands off to a human without the user feeling &quot;downgraded.&quot; The worst pattern: a modal that says &quot;AI could not help. Would you like to talk to a human?&quot; That is admitting failure. Instead: &quot;Let me get someone who specializes in billing to help with this specific issue.&quot; Reframe the handoff as expertise routing, not AI failure. This framing shift — from &quot;I failed&quot; to &quot;I am connecting you with the right expert&quot; — dramatically increases handoff acceptance rates.
+        The best AI UX pattern is the one users never notice. When the AI knows the answer, it responds instantly. When it does not, it hands off to a human without the user feeling &quot;downgraded.&quot; The worst pattern: a modal that says &quot;AI could not help. Would you like to talk to a human?&quot; That is admitting failure. Instead: &quot;Let me get someone who specializes in billing to help with this specific issue.&quot; Reframe the handoff as expertise routing, not AI failure. This framing shift — from &quot;I failed&quot; to &quot;I am connecting you with the right expert&quot; — dramatically increases handoff acceptance rates.
       </Insight></FadeIn>
 
       <FadeIn delay={160}><Insight type="warn" tag="Anti-pattern">

@@ -9,6 +9,7 @@
     "build:spa": "vite build",
     "lint": "oxlint",
     "check:freshness": "node scripts/check-freshness.mjs",
+    "check:slop": "node scripts/check-slop.mjs",
     "preview": "vite preview",
     "verify:diagrams": "python3 docs/diagrams/_harness/selftest.py && python3 docs/diagrams/_harness/build.py --check && python3 docs/diagrams/_harness/verify_facts.py --specs && python3 docs/diagrams/_harness/verify_facts.py --all projects"
   },
