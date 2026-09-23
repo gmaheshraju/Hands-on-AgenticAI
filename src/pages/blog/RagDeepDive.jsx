@@ -460,13 +460,15 @@ function RerankingPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="Which reranker?">
-        <Pill type="green">Cohere Rerank</Pill> API-based. Best quality among commercial options. $1 per 1000 queries. Supports 100+ languages. The default choice for production.
+        <Pill type="green">Hosted cross-encoder API</Pill> Cohere Rerank 3.5, Voyage rerank-2.5 (and its -lite sibling), Jina Reranker v2. Multilingual, long-ish document windows (thousands of tokens per candidate, so a whole chunk fits), no GPU to operate. Priced per search rather than per token — check the current rate sheet before quoting a number, but it lands orders of magnitude below the generation call it feeds. The default for production.
         <br /><br />
-        <Pill type="green">BGE Reranker (open-source)</Pill> Run locally. Competitive quality. No API costs. Requires GPU for acceptable latency (~50ms per query on GPU, ~500ms on CPU).
+        <Pill type="green">Open-weights cross-encoder</Pill> <code>bge-reranker-v2-m3</code> is the workhorse — small, multilingual, competitive with hosted options. The Qwen3-Reranker family (0.6B / 4B / 8B) trades size for quality if you have the GPU. Self-hosting wins when your corpus is regulated, your query volume is high enough that per-search pricing hurts, or you want to fine-tune the reranker on your own click/label data — which is where the biggest gains actually live.
         <br /><br />
-        <Pill type="amber">LLM-as-reranker</Pill> Use Claude/GPT-4 to score relevance. Best quality but 10-100x more expensive per query. Only worth it for high-value queries (legal, medical, financial).
+        <Pill type="amber">Late interaction (ColBERT-style)</Pill> Not quite a reranker — a different retrieval shape. Store one vector per token instead of one per chunk, then score with MaxSim (each query token matched against its best document token). Gets you most of the cross-encoder's token-level precision at index time instead of query time. The cost is index size: per-token vectors are 10-100x larger than a single chunk embedding, which is why PLAID-style compression exists. Worth it for retrieval-heavy workloads where reranking latency is the bottleneck.
         <br /><br />
-        <strong>For most production systems:</strong> Cohere Rerank. The cost is negligible compared to the LLM call that follows, and the quality improvement is significant.
+        <Pill type="amber">LLM-as-reranker</Pill> Prompt a small fast model to score or list-order the candidates. Flexible — you can express relevance criteria the cross-encoder never saw ("prefer the most recent policy version"). But it costs 10-100x more per query and adds a second failure mode. Reserve it for high-value queries, and do not reach for a reasoning model here: extended thinking on a relevance score is pure latency.
+        <br /><br />
+        <strong>Default:</strong> a hosted cross-encoder over top-20 to top-5. Move to open weights when volume, data residency, or fine-tuning forces it.
       </Decision></FadeIn>
 
       <FadeIn delay={160}><Decision question="Reranking latency budget">
