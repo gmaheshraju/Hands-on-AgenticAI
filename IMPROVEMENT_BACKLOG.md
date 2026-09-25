@@ -29,7 +29,7 @@ do it well, check it off in the same commit. One item per day. P0 items were fix
   - [ ] AiGuardrails: MCP supply-chain trust (third-party servers, tool-description poisoning).
 - [ ] **Prompt injection depth** (AiGuardrails + ToolUseFunctionCalling): lethal trifecta (private data + untrusted content + exfiltration channel), indirect injection via tool results, CaMeL/dual-LLM patterns. ToolUse subtitle promises this and never delivers.
 - [ ] **EvalEngineering**: judge biases beyond position (self-enhancement, verbosity); "what if judge = generator" answer; named frameworks (Braintrust, LangSmith, Ragas, DeepEval, Inspect); pin judge model snapshots; reasoning-model-as-judge tradeoff.
-- [ ] **ContextEngineering**: prompt-cache mechanics CodeBlock (breakpoints, TTL, cache-write vs read pricing, frozen prefix + moving tail). ProductionPatternsPanel has no CodeBlock.
+- [x] **ContextEngineering**: prompt-cache mechanics CodeBlock (breakpoints, TTL, cache-write vs read pricing, frozen prefix + moving tail). ProductionPatternsPanel has no CodeBlock. *(2026-09-25: added `prompt-cache.js` — explicit 1h breakpoint on the tools+system prefix plus top-level automatic 5m breakpoint for the conversation tail, `usage.cache_creation` TTL breakdown → cost-vs-uncached reporter; output contrasts a healthy 3-turn run (0.74x) with a `Date.now()`-in-system run (1.92x). Plus an Insight on write premium/TTL choice, minimum prefix, 20-block lookback, 4-breakpoint cap.)*
 - [ ] **CostLatencyEngineering**: Batch API (50% off), cache-write premium + TTL choice, context editing/compaction, distillation levers; `latency-budget.js` CodeBlock for Tab 4; reconcile the three inconsistent headline savings numbers (83%/77%/66%).
 - [ ] **AiUxPatterns**: reasoning-model UX (thinking disclosure, interruptibility), long-running/async agent UX, streaming tool-use UI.
 - [ ] **AgentSystemDesign**: extended-thinking-vs-more-iterations Decision; hybrid-search CodeBlock for RagPanel; LLM-judge rubric CodeBlock for EvalsPanel; cross-link RagDeepDive + EvalEngineering instead of restating them.
@@ -39,6 +39,8 @@ do it well, check it off in the same commit. One item per day. P0 items were fix
 - [ ] **ResponsibleAi**: runtime guardrail stack Decision (NeMo Guardrails, Llama Guard, Guardrails AI, Bedrock/Azure guardrails, OWASP LLM Top 10, NIST AI 600-1) + cross-links to /blog/ai-guardrails.
 - [ ] **MultiAgentSystems**: `checkpointed-orchestrator.js` CodeBlock for the durable-execution Decision.
 - [ ] **SoloDeveloperAdvantage**: cost-model CodeBlock backing the $1M-team vs $2K-stack comparison.
+
+- [ ] **ContextEngineering** ProductionPatternsPanel "Schema dropping" (~L668): claims you can drop tool schemas after the first call because "the model remembers the function signature" — wrong: the API is stateless, and changing the tool list also invalidates the prompt cache (tools render first). Replace with tool search / deferred loading as the real way to shrink schema cost.
 
 ## P3 — Quality polish
 

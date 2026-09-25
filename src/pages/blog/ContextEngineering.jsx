@@ -162,7 +162,77 @@ Final context layout (78,200 tokens):
   │  refund flow example                                       │
   └─────────────────────────────────── effective: 78,200/108K ─┘`;
 
-const TABS = ['Context Budget', 'Source Priority', 'Assembly Patterns', 'Production Patterns', 'Deep Dive'];
+const CACHE_CODE = `import Anthropic from '@anthropic-ai/sdk';
+
+const client = new Anthropic();
+
+// Render order is fixed: tools → system → messages. A cache hit needs a
+// byte-identical prefix up to a breakpoint, so the prompt is ordered from
+// most-stable to least-stable. One changed byte invalidates everything after it.
+const TOOLS = loadToolDefs().sort((a, b) => a.name.localeCompare(b.name)); // deterministic
+
+const SYSTEM = [
+  { type: 'text', text: SYSTEM_PROMPT_V7 },   // versioned — never edited in place
+  { type: 'text', text: FEW_SHOT_EXAMPLES,
+    // Breakpoint 1: caches tools + system together (tools render first).
+    // 1h TTL: this prefix is shared across every user, all day.
+    cache_control: { type: 'ephemeral', ttl: '1h' } },
+];
+
+async function turn(history, userMsg) {
+  const res = await client.messages.create({
+    model: MODEL,          // caches are model-scoped: switching models = cold cache
+    max_tokens: 4096,
+    tools: TOOLS,
+    system: SYSTEM,
+    // Breakpoint 2 (automatic): lands on the last block and moves forward each
+    // turn, so the growing conversation is the "moving tail". Default 5m TTL —
+    // longer TTLs must appear before shorter ones, so the 1h marker comes first.
+    cache_control: { type: 'ephemeral' },
+    messages: [
+      ...history,
+      // Volatile data (timestamps, request IDs) goes HERE, never in SYSTEM.
+      { role: 'user', content: '[now: ' + new Date().toISOString() + ']\\n' + userMsg },
+    ],
+  });
+  report(res.usage);
+  return res;
+}
+
+// Multipliers on the base input price. Writes cost MORE than uncached input;
+// only reads are cheap. A cache you write but never read is a surcharge.
+const MULT = { write5m: 1.25, write1h: 2.0, read: 0.1, fresh: 1.0 };
+
+function report(u) {
+  const w1h  = u.cache_creation?.ephemeral_1h_input_tokens ?? 0;
+  const w5m  = u.cache_creation?.ephemeral_5m_input_tokens ?? 0;
+  const read = u.cache_read_input_tokens;
+  const fresh = u.input_tokens;               // tail after the last breakpoint
+  const total = w1h + w5m + read + fresh;
+  const billed = w1h * MULT.write1h + w5m * MULT.write5m
+               + read * MULT.read + fresh * MULT.fresh;
+  console.log({ w1h, w5m, read, fresh, costVsUncached: (billed / total).toFixed(2) + 'x' });
+}`;
+
+const CACHE_OUTPUT = `Prefix: 3,000 tool-schema + 5,000 system/few-shot tokens (1h breakpoint)
+
+── Healthy pipeline ──────────────────────────────────────────────
+turn 1  { w1h: 8000, w5m: 200, read: 0,    fresh: 0, costVsUncached: '1.98x' }  ← cold write
+turn 2  { w1h: 0,    w5m: 750, read: 8200, fresh: 0, costVsUncached: '0.20x' }
+turn 3  { w1h: 0,    w5m: 680, read: 8950, fresh: 0, costVsUncached: '0.18x' }
+3 turns: 19,752 billed-equivalent vs 26,780 uncached → 0.74x (and falling every turn)
+
+── Same pipeline, Date.now() interpolated into SYSTEM_PROMPT ─────
+turn 1  { w1h: 8000, w5m: 200,  read: 0, fresh: 0, costVsUncached: '1.98x' }
+turn 2  { w1h: 8000, w5m: 950,  read: 0, fresh: 0, costVsUncached: '1.92x' }
+turn 3  { w1h: 8000, w5m: 1630, read: 0, fresh: 0, costVsUncached: '1.87x' }
+3 turns: 51,475 billed-equivalent vs 26,780 uncached → 1.92x
+
+A busted cache is worse than no cache: you pay the write premium every
+turn and never collect a read. No error is raised — the only signal is
+cache_read_input_tokens stuck at 0. Alert on it.`;
+
+const TABS = ['Context Budget','Source Priority', 'Assembly Patterns', 'Production Patterns', 'Deep Dive'];
 
 export default function ContextEngineering() {
   const [tab, setTab] = useState(0);
@@ -569,6 +639,12 @@ function ProductionPatternsPanel() {
         <br /><br />
         <strong>Cache invalidation:</strong> Any change to the cached prefix invalidates the cache. Version your system prompts — don't edit them in place during a conversation.
       </Decision></FadeIn>
+
+      <FadeIn delay={40}><CodeBlock filename="prompt-cache.js" code={CACHE_CODE} output={CACHE_OUTPUT} /></FadeIn>
+
+      <FadeIn delay={60}><Insight tag="Mechanics interviewers probe">
+        Four details separate "I've read about caching" from "I've run it": <strong>(1)</strong> writes carry a premium — 1.25× base input for the 5-minute TTL, 2× for 1-hour — so the 1-hour TTL only pays off when the prefix is reused across gaps longer than 5 minutes (a read refreshes the timer, so steady traffic keeps a 5-minute entry warm indefinitely). <strong>(2)</strong> There is a model-dependent minimum prefix length (hundreds to a few thousand tokens); below it, the marker silently does nothing. <strong>(3)</strong> A breakpoint only looks back a bounded number of blocks (20 on Anthropic's API) for a prior entry, so a single turn that appends a long sequential tool loop can miss the previous cache — add an intermediate breakpoint. <strong>(4)</strong> At most 4 breakpoints per request: spend them on stability boundaries (tools/system, daily-refreshed context, conversation tail), not on every block.
+      </Insight></FadeIn>
 
       <FadeIn delay={80}><Decision question="Multi-turn context management">
         Conversation grows every turn. Without management, a 20-turn conversation can eat 40K tokens of raw history:
