@@ -228,7 +228,7 @@ function DecisionTreePanel() {
     <FadeIn>
       <SectionHead
         title="The Core Decision Framework"
-        desc="Five questions that determine whether you need prompting, RAG, or fine-tuning. Answer them in order — each one narrows the search space."
+        desc="Six questions that determine whether you need prompting, long context, RAG, or fine-tuning. Answer them in order — each one narrows the search space."
       />
 
       <Decision question="What are you trying to change — the model's KNOWLEDGE or its BEHAVIOR?">
@@ -238,6 +238,27 @@ function DecisionTreePanel() {
           The model knows the facts but doesn't do the right thing with them.</p>
         <p><Pill type="green">Neither</Pill> The model already knows enough, just needs direction &rarr; <strong>Prompt engineering</strong>.
           This is the starting point 90% of the time. Try this first.</p>
+      </Decision>
+
+      <Decision question="If it's knowledge: does the whole corpus fit in the context window?">
+        <p><Pill type="green">Yes, comfortably</Pill> <strong>Put it in the prompt and cache it.</strong> Frontier models ship
+          200K-token windows as standard and several reach 1M. A 300-page policy manual, a product&rsquo;s full
+          API reference, or one customer&rsquo;s contract history often fits whole. Put the corpus in a stable prefix
+          (tools &rarr; system &rarr; documents) with a cache breakpoint after it, and the question goes in the moving
+          tail. Cache reads bill at 0.1&times; base input on Anthropic&rsquo;s API; writes carry a 1.25&times; (5-minute) or
+          2&times; (1-hour) premium. So a warm 300K-token prefix costs about what 30K fresh tokens would, per query.
+          You skip chunking, embeddings, the vector store, and the retrieval-miss failure mode.</p>
+        <p><Pill type="amber">Yes, but barely</Pill> Test before you commit. Filling most of the window still has costs:
+          recall on facts buried mid-context degrades as the window fills, time-to-first-token grows with the uncached
+          part of the prompt, and one cache miss (a timestamp in the system prompt, a reordered document) bills the
+          full prefix at the write premium. Build a needle-style eval on <em>your</em> documents at <em>your</em> fill level before
+          trusting it.</p>
+        <p><Pill type="red">No, or it grows without bound</Pill> RAG. Per-query cost scales with corpus size under long
+          context and with top-k under retrieval. That is roughly 30K cached-equivalent tokens against a few thousand
+          retrieved ones in the example above, and the gap widens with every document. Also RAG if different users
+          must see different documents: per-tenant access control belongs in the retrieval filter, not in a shared
+          prefix that every user&rsquo;s query reads. A common path is long context while the corpus is small, then RAG
+          once it outgrows the window. The eval set carries over unchanged.</p>
       </Decision>
 
       <Decision question="How often does the information change?">
@@ -294,29 +315,42 @@ function DecisionTreePanel() {
             <line x1="100" y1="122" x2="100" y2="160" stroke="var(--border)" strokeWidth="1" />
 
             <rect x="20" y="160" width="160" height="28" rx="6" fill="var(--bg-code)" stroke="var(--border)" />
-            <text x="100" y="179" textAnchor="middle" fontSize="11" fontFamily="var(--font-body)" fill="var(--text-p)">How often updated?</text>
+            <text x="100" y="179" textAnchor="middle" fontSize="11" fontFamily="var(--font-body)" fill="var(--text-p)">Fits in context?</text>
 
             <line x1="60" y1="188" x2="60" y2="220" stroke="var(--border)" strokeWidth="1" />
-            <line x1="140" y1="188" x2="140" y2="220" stroke="var(--border)" strokeWidth="1" />
+            <line x1="140" y1="188" x2="180" y2="220" stroke="var(--border)" strokeWidth="1" />
 
-            <rect x="10" y="220" width="100" height="28" rx="14" fill="var(--bg-accent)" />
-            <text x="60" y="239" textAnchor="middle" fontSize="11" fontFamily="var(--font-mono)" fontWeight="600" fill="var(--text-accent)">RAG</text>
-            <text x="60" y="258" textAnchor="middle" fontSize="9" fontFamily="var(--font-body)" fill="var(--text-muted)">Frequently</text>
+            {/* Fits: long context + prompt cache */}
+            <rect x="5" y="220" width="110" height="28" rx="14" fill="var(--bg-accent)" />
+            <text x="60" y="239" textAnchor="middle" fontSize="10" fontFamily="var(--font-mono)" fontWeight="600" fill="var(--text-accent)">Prompt + cache</text>
+            <text x="60" y="258" textAnchor="middle" fontSize="9" fontFamily="var(--font-body)" fill="var(--text-muted)">Yes</text>
+
+            {/* Doesn't fit */}
+            <rect x="125" y="220" width="110" height="28" rx="6" fill="var(--bg-code)" stroke="var(--border)" />
+            <text x="180" y="239" textAnchor="middle" fontSize="10" fontFamily="var(--font-body)" fill="var(--text-p)">How often updated?</text>
+            <text x="180" y="262" textAnchor="middle" fontSize="9" fontFamily="var(--font-body)" fill="var(--text-muted)">No</text>
+
+            <line x1="155" y1="248" x2="140" y2="290" stroke="var(--border)" strokeWidth="1" />
+            <line x1="205" y1="248" x2="250" y2="290" stroke="var(--border)" strokeWidth="1" />
+
+            <rect x="95" y="290" width="90" height="28" rx="14" fill="var(--bg-accent)" />
+            <text x="140" y="309" textAnchor="middle" fontSize="11" fontFamily="var(--font-mono)" fontWeight="600" fill="var(--text-accent)">RAG</text>
+            <text x="140" y="328" textAnchor="middle" fontSize="9" fontFamily="var(--font-body)" fill="var(--text-muted)">Frequently</text>
 
             {/* Rarely branch */}
-            <rect x="120" y="220" width="100" height="28" rx="6" fill="var(--bg-code)" stroke="var(--border)" />
-            <text x="170" y="239" textAnchor="middle" fontSize="10" fontFamily="var(--font-body)" fill="var(--text-p)">Need citations?</text>
+            <rect x="200" y="290" width="100" height="28" rx="6" fill="var(--bg-code)" stroke="var(--border)" />
+            <text x="250" y="309" textAnchor="middle" fontSize="10" fontFamily="var(--font-body)" fill="var(--text-p)">Need citations?</text>
 
-            <line x1="145" y1="248" x2="120" y2="280" stroke="var(--border)" strokeWidth="1" />
-            <line x1="195" y1="248" x2="220" y2="280" stroke="var(--border)" strokeWidth="1" />
+            <line x1="225" y1="318" x2="205" y2="350" stroke="var(--border)" strokeWidth="1" />
+            <line x1="275" y1="318" x2="305" y2="350" stroke="var(--border)" strokeWidth="1" />
 
-            <rect x="70" y="280" width="90" height="28" rx="14" fill="var(--bg-accent)" />
-            <text x="115" y="299" textAnchor="middle" fontSize="11" fontFamily="var(--font-mono)" fontWeight="600" fill="var(--text-accent)">RAG</text>
-            <text x="115" y="317" textAnchor="middle" fontSize="9" fontFamily="var(--font-body)" fill="var(--text-muted)">Yes</text>
+            <rect x="160" y="350" width="90" height="28" rx="14" fill="var(--bg-accent)" />
+            <text x="205" y="369" textAnchor="middle" fontSize="11" fontFamily="var(--font-mono)" fontWeight="600" fill="var(--text-accent)">RAG</text>
+            <text x="205" y="387" textAnchor="middle" fontSize="9" fontFamily="var(--font-body)" fill="var(--text-muted)">Yes</text>
 
-            <rect x="175" y="280" width="100" height="28" rx="14" fill="var(--bg-accent)" />
-            <text x="225" y="299" textAnchor="middle" fontSize="11" fontFamily="var(--font-mono)" fontWeight="600" fill="var(--text-accent)">Fine-tune</text>
-            <text x="225" y="317" textAnchor="middle" fontSize="9" fontFamily="var(--font-body)" fill="var(--text-muted)">No</text>
+            <rect x="260" y="350" width="100" height="28" rx="14" fill="var(--bg-accent)" />
+            <text x="310" y="369" textAnchor="middle" fontSize="11" fontFamily="var(--font-mono)" fontWeight="600" fill="var(--text-accent)">Fine-tune</text>
+            <text x="310" y="387" textAnchor="middle" fontSize="9" fontFamily="var(--font-body)" fill="var(--text-muted)">No</text>
 
             {/* Center: Change behavior */}
             <rect x="290" y="90" width="200" height="32" rx="6" fill="var(--bg-code)" stroke="var(--border)" />
@@ -327,21 +361,21 @@ function DecisionTreePanel() {
             <rect x="300" y="160" width="180" height="28" rx="6" fill="var(--bg-code)" stroke="var(--border)" />
             <text x="390" y="179" textAnchor="middle" fontSize="11" fontFamily="var(--font-body)" fill="var(--text-p)">How many examples?</text>
 
-            <line x1="330" y1="188" x2="310" y2="220" stroke="var(--border)" strokeWidth="1" />
+            <line x1="330" y1="188" x2="295" y2="220" stroke="var(--border)" strokeWidth="1" />
             <line x1="390" y1="188" x2="390" y2="220" stroke="var(--border)" strokeWidth="1" />
-            <line x1="450" y1="188" x2="470" y2="220" stroke="var(--border)" strokeWidth="1" />
+            <line x1="450" y1="188" x2="485" y2="220" stroke="var(--border)" strokeWidth="1" />
 
-            <rect x="260" y="220" width="100" height="28" rx="14" fill="var(--bg-accent)" />
-            <text x="310" y="239" textAnchor="middle" fontSize="11" fontFamily="var(--font-mono)" fontWeight="600" fill="var(--text-accent)">Few-shot</text>
-            <text x="310" y="258" textAnchor="middle" fontSize="9" fontFamily="var(--font-body)" fill="var(--text-muted)">{'<'} 100</text>
+            <rect x="250" y="220" width="90" height="28" rx="14" fill="var(--bg-accent)" />
+            <text x="295" y="239" textAnchor="middle" fontSize="11" fontFamily="var(--font-mono)" fontWeight="600" fill="var(--text-accent)">Few-shot</text>
+            <text x="295" y="258" textAnchor="middle" fontSize="9" fontFamily="var(--font-body)" fill="var(--text-muted)">{'<'} 100</text>
 
-            <rect x="340" y="220" width="100" height="28" rx="14" fill="var(--bg-accent)" />
+            <rect x="345" y="220" width="90" height="28" rx="14" fill="var(--bg-accent)" />
             <text x="390" y="239" textAnchor="middle" fontSize="11" fontFamily="var(--font-mono)" fontWeight="600" fill="var(--text-accent)">Fine-tune</text>
             <text x="390" y="258" textAnchor="middle" fontSize="9" fontFamily="var(--font-body)" fill="var(--text-muted)">100 - 10K</text>
 
-            <rect x="430" y="220" width="100" height="28" rx="14" fill="var(--bg-accent)" />
-            <text x="480" y="239" textAnchor="middle" fontSize="10" fontFamily="var(--font-mono)" fontWeight="600" fill="var(--text-accent)">FT + eval</text>
-            <text x="480" y="258" textAnchor="middle" fontSize="9" fontFamily="var(--font-body)" fill="var(--text-muted)">{'>'}10K</text>
+            <rect x="440" y="220" width="90" height="28" rx="14" fill="var(--bg-accent)" />
+            <text x="485" y="239" textAnchor="middle" fontSize="10" fontFamily="var(--font-mono)" fontWeight="600" fill="var(--text-accent)">FT + eval</text>
+            <text x="485" y="258" textAnchor="middle" fontSize="9" fontFamily="var(--font-body)" fill="var(--text-muted)">{'>'}10K</text>
 
             {/* Right: Just guide it */}
             <rect x="540" y="90" width="200" height="32" rx="6" fill="var(--bg-code)" stroke="var(--border)" />
@@ -353,7 +387,7 @@ function DecisionTreePanel() {
             <text x="640" y="179" textAnchor="middle" fontSize="12" fontFamily="var(--font-mono)" fontWeight="600" fill="var(--text-accent)">Prompt engineering</text>
 
             {/* Legend */}
-            <text x="390" y="400" textAnchor="middle" fontSize="10" fontFamily="var(--font-mono)" fill="var(--text-muted)">
+            <text x="390" y="410" textAnchor="middle" fontSize="10" fontFamily="var(--font-mono)" fill="var(--text-muted)">
               Start here. Answer each question top-down. First leaf you hit is your starting approach.
             </text>
           </svg>
@@ -363,7 +397,8 @@ function DecisionTreePanel() {
       <Insight>
         The real question is whether you'll jump to fine-tuning because it sounds impressive,
         or whether you'll start with the cheapest option that works. The right answer is almost always:
-        start with prompt engineering, add RAG if you need external knowledge, fine-tune only if the
+        start with prompt engineering, add external knowledge (cached in the prompt if it fits, retrieved
+        with RAG if it doesn&rsquo;t), fine-tune only if the
         first two can't get the behavior right. Each step up costs 10x more in engineering time.
       </Insight>
 
