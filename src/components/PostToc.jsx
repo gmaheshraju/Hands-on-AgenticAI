@@ -67,10 +67,12 @@ export default function PostToc() {
         + (page.querySelector(':scope > .post-tabs')?.offsetHeight ?? 0) + 24;
       const rootRect = root.getBoundingClientRect();
       setPos({ left: r.right + 56, show: rootRect.top < window.innerHeight * 0.6 && rootRect.bottom > offset + 80 });
+      // Active = the last entry that has entered the top quarter of the reading area.
+      const line = offset + (window.innerHeight - offset) * 0.25;
       let current = entries[0]?.id;
       for (const e of entries) {
         const el = document.getElementById(e.id);
-        if (el && el.getBoundingClientRect().top - offset < 12) current = e.id;
+        if (el && el.getBoundingClientRect().top < line) current = e.id;
       }
       setActive(current);
     };
