@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/prerender.mjs",
+    "build": "vite build && node scripts/prerender.mjs && node scripts/check-slop.mjs --strict",
     "build:spa": "vite build",
     "lint": "oxlint",
     "check:freshness": "node scripts/check-freshness.mjs",

@@ -5,11 +5,13 @@
 // for AI-tell clichés and reports em-dash density. Run it after `npm run build`.
 //
 //   node scripts/check-slop.mjs            # report
-//   node scripts/check-slop.mjs --strict   # exit 1 if any HIGH-signal cliché is found
+//   node scripts/check-slop.mjs --strict   # exit 1 on a HIGH-signal cliché or em-dash overuse
 //
-// --strict fails ONLY on HIGH-signal clichés (the words a human tech writer does
-// not reach for). Em-dash density and soft words are reported for judgment, never
-// a hard failure — de-em-dashing is a deliberate style decision, not a bug.
+// --strict fails on HIGH-signal clichés (the words a human tech writer does not reach
+// for) and on any post whose em-dash density exceeds EMDASH_PER_1K_MAX. All 16 posts
+// were rewritten to 0.3-6.6/1k on 2026-09-26 (from 11-23/1k); `npm run build` runs
+// this in strict mode so the density cannot creep back unnoticed. Soft words are
+// reported for judgment only.
 
 import { readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -36,8 +38,8 @@ const SOFT = [
   'furthermore', 'moreover', 'holistic', 'synergy', 'paradigm', 'streamline',
 ];
 
-// Em-dash density above this reads as machine-written. Informational only.
-const EMDASH_PER_1K_WARN = 8;
+// Em-dash density above this reads as machine-written. Fails --strict.
+const EMDASH_PER_1K_MAX = 8;
 
 function prose(html) {
   const m = html.match(/<main[\s\S]*?<\/main>/);
@@ -82,7 +84,7 @@ console.log('\nAI-slop scan — dist/blog/*  (HIGH clichés · soft words · em-
 console.log('='.repeat(76));
 console.log('post'.padEnd(32), 'HIGH'.padStart(5), 'soft'.padStart(5), 'em—/1k'.padStart(8));
 for (const r of rows.sort((a, b) => b.hi - a.hi || b.per1k - a.per1k)) {
-  const flag = r.per1k > EMDASH_PER_1K_WARN ? ' *' : '';
+  const flag = r.per1k > EMDASH_PER_1K_MAX ? ' *' : '';
   console.log(r.slug.padEnd(32), String(r.hi).padStart(5), String(r.soft).padStart(5), r.per1k.toFixed(1).padStart(8) + flag);
   if (r.hiHits.length) console.log('     clichés:', r.hiHits.join(', '));
 }
@@ -91,10 +93,14 @@ if (Object.keys(globalHigh).length) {
   console.log('\nHIGH-signal clichés found:');
   Object.entries(globalHigh).sort((a, b) => b[1] - a[1]).forEach(([p, n]) => console.log(`  ${String(n).padStart(3)}  ${p}`));
 }
-console.log(`\n  * em-dash density over ${EMDASH_PER_1K_WARN}/1k words (informational).`);
+console.log(`\n  * em-dash density over ${EMDASH_PER_1K_MAX}/1k words (fails --strict).`);
 console.log(`  HIGH-signal clichés total: ${totalHigh}`);
 
-if (process.argv.includes('--strict') && totalHigh > 0) {
-  console.error(`\ncheck-slop: ${totalHigh} HIGH-signal cliché(s) found (--strict).`);
+const dashy = rows.filter((r) => r.per1k > EMDASH_PER_1K_MAX);
+if (process.argv.includes('--strict') && (totalHigh > 0 || dashy.length)) {
+  if (totalHigh > 0) console.error(`\ncheck-slop: ${totalHigh} HIGH-signal cliché(s) found (--strict).`);
+  for (const r of dashy) {
+    console.error(`check-slop: ${r.slug} has ${r.per1k.toFixed(1)} em-dashes per 1k words (max ${EMDASH_PER_1K_MAX}). Rewrite them as periods, commas, colons or parentheses.`);
+  }
   process.exit(1);
 }
