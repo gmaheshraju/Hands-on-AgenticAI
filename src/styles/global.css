@@ -1108,9 +1108,10 @@ html { scroll-behavior: smooth; }
    BLOG INDEX GRID + VERY WIDE SCREENS
    ═══════════════════════════════════════════ */
 
-/* 32" monitors: let the site use the width. Post pages keep their own column. */
+/* 32" monitors: only the post index is designed to fill the extra width (a card
+   grid). /home, /work-with-me and posts keep the 1400px layout they were built for. */
 @media (min-width: 1800px) {
-  :root { --content-max: 1680px; }
+  :root:has(.layout-main--wide) { --content-max: 1680px; }
 }
 
 .post-grid {

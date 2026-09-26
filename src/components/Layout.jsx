@@ -57,6 +57,7 @@ function useTabScrollReset(enabled) {
 export default function Layout({ children }) {
   const { pathname } = useLocation();
   const isBlogPost = pathname.startsWith('/blog/');
+  const isIndex = pathname === '/' || pathname === '/blog';
   useTabScrollReset(isBlogPost);
 
   return (
@@ -64,7 +65,7 @@ export default function Layout({ children }) {
       {isBlogPost && <ReadingProgress />}
       {isBlogPost && <PostToc />}
       <Nav />
-      <main className={`layout-main${isBlogPost ? ' layout-main--post' : ''}`}>
+      <main className={`layout-main${isBlogPost ? ' layout-main--post' : ''}${isIndex ? ' layout-main--wide' : ''}`}>
         {children}
         {isBlogPost && <PostFooterCTA />}
       </main>
