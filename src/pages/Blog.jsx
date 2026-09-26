@@ -195,7 +195,6 @@ const styles = {
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
     borderBottomColor: 'var(--border)',
-    maxWidth: 1200,
   },
   eyebrow: {
     fontSize: 11,
