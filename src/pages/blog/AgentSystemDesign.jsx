@@ -14,7 +14,7 @@ const REACT_LOOP_CODE = `async function agentLoop(userMessage, tools, maxIterati
     // THINK: call LLM with current context
     const response = await callLLM(messages);
 
-    // CHECK: if no tool calls, we're done — return the response
+    // CHECK: if no tool calls, we're done; return the response
     if (!response.toolCalls?.length) return response.text;
 
     // ACT: execute each tool call
@@ -66,7 +66,7 @@ const tools = {
   },
 };
 
-// The dispatcher — called by the agent loop
+// The dispatcher, called by the agent loop
 async function dispatchTool(toolName, args) {
   const tool = tools[toolName];
   if (!tool) return { error: \`Unknown tool: \${toolName}\` };
@@ -85,7 +85,7 @@ const REACT_LOOP_OUTPUT = `> agentLoop("What's the status of order ORD-28491?", 
 [iteration 2] Tool call: getTrackingDetails({ trackingId: "1Z999AA1" })
   → { carrier: "UPS", estimatedDelivery: "2026-07-12", lastLocation: "Mumbai Hub" }
 
-[iteration 3] No tool calls — returning final response.
+[iteration 3] No tool calls, returning final response.
 
 ✓ "Your order ORD-28491 has shipped via UPS. It's currently at
   the Mumbai Hub with estimated delivery tomorrow (July 12)."
@@ -116,25 +116,25 @@ export default function AgentSystemDesign() {
       <p style={styles.eyebrow}>Post 01</p>
       <h1 style={styles.h1}>AI Agent System Design</h1>
       <p style={styles.subtitle}>
-        How to architect a production AI agent — from data ingestion to response generation.
-        Not "call the OpenAI API" — the full system: RAG pipelines, vector databases,
+        How to architect a production AI agent, from data ingestion to response generation.
+        Not "call the OpenAI API," but the full system: RAG pipelines, vector databases,
         function calling, evaluation loops, and guardrails.
       </p>
 
       <Diagram
       svg={systemDesignSvg}
-      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/01-agent-system-design</code> — the two entry points (demo and live) over one <code>runReActLoop</code>, and the six ways that loop can exit an iteration in the order it checks them: FINISH with unparseable JSON, FINISH with valid output, an unknown tool name, a stalled repeat observation, a response matching neither, and the iteration cap. Each box was placed because a line of source put it there.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/01-agent-system-design</code>: the two entry points (demo and live) over one <code>runReActLoop</code>, and the six ways that loop can exit an iteration in the order it checks them: FINISH with unparseable JSON, FINISH with valid output, an unknown tool name, a stalled repeat observation, a response matching neither, and the iteration cap. Each box was placed because a line of source put it there.</>}
       source="tree/main/projects/01-agent-system-design"
       facts="blob/main/docs/diagrams/system_design_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
       />
 
-      <div style={styles.tabWrap}>
+      <div className="tab-nav post-tabs" role="tablist">
         {TABS.map((t, i) => (
           <button
             key={t}
             onClick={() => setTab(i)}
-            style={{ ...styles.tabBtn, ...(tab === i ? styles.tabActive : {}) }}
+            role="tab" aria-selected={tab === i} className={`tab-nav__btn${tab === i ? ' tab-nav__btn--active' : ''}`}
           >
             {t}
           </button>
@@ -363,7 +363,7 @@ function RagPipelineDiagram() {
           </marker>
         </defs>
 
-        <text x="360" y="22" textAnchor="middle" fontSize="14" fontWeight="400" fill="var(--text-h)" fontFamily="var(--font-display)">RAG Pipeline — Ingestion + Retrieval</text>
+        <text x="360" y="22" textAnchor="middle" fontSize="14" fontWeight="400" fill="var(--text-h)" fontFamily="var(--font-display)">RAG Pipeline: Ingestion + Retrieval</text>
 
         {/* ── TOP ROW: INGESTION ── */}
         <rect x="0" y="40" width="720" height="70" fill="var(--bg-code)" opacity="0.3" />
@@ -453,7 +453,7 @@ function ArchitecturePanel() {
     <div>
       <SectionHead
         title="The 5-layer agent architecture"
-        desc="Every production AI agent has the same bones: input processing, orchestration loop, tools + retrieval, generation, and output guards. The quality difference is in the orchestration loop and the evaluation pipeline — not the LLM."
+        desc="Every production AI agent has the same bones: input processing, orchestration loop, tools + retrieval, generation, and output guards. The quality difference is in the orchestration loop and the evaluation pipeline, not the LLM."
       />
 
       <AgentArchDiagram />
@@ -465,13 +465,13 @@ function ArchitecturePanel() {
           I structure my agent as three specialized agents working together through an <strong>e-Commerce customer support</strong> use case:
         </p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 4 }}>
-          <strong>1. Router Agent</strong> — classifies user intent (product question vs order issue vs complaint) and routes to the right specialist.
+          <strong>1. Router Agent.</strong> Classifies user intent (product question vs order issue vs complaint) and routes to the right specialist.
         </p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 4 }}>
-          <strong>2. Q&A Agent (the "Brain/CEO")</strong> — handles knowledge-grounded responses using RAG over the product catalog and help articles. This is the agent that actually talks to the user.
+          <strong>2. Q&A Agent (the "Brain/CEO").</strong> Handles knowledge-grounded responses using RAG over the product catalog and help articles. This is the agent that actually talks to the user.
         </p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 4 }}>
-          <strong>3. Planner Agent</strong> — decomposes complex multi-step tasks (returns, exchanges, account changes) into executable action sequences with function calls.
+          <strong>3. Planner Agent.</strong> Decomposes complex multi-step tasks (returns, exchanges, account changes) into executable action sequences with function calls.
         </p>
         <p style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.6, marginTop: 8, fontStyle: 'italic' }}>
           This isn't three models. It's three system prompts with different tool sets, potentially running on the same LLM. The architecture decision is about context isolation and tool scoping, not model count.
@@ -482,34 +482,34 @@ function ArchitecturePanel() {
 
 
       <FadeIn><Decision question="What makes this different from 'just calling the API'?">
-        A raw LLM call is stateless, has no tools, no memory, and no guardrails. A production agent adds: (1) an orchestration loop that plans multi-step actions, (2) tool access for real-time data, (3) RAG for domain knowledge, (4) memory across conversations, and (5) input/output guards for safety. The LLM is ~20% of the system — the other 80% is infrastructure.
+        A raw LLM call is stateless, has no tools, no memory, and no guardrails. A production agent adds: (1) an orchestration loop that plans multi-step actions, (2) tool access for real-time data, (3) RAG for domain knowledge, (4) memory across conversations, and (5) input/output guards for safety. The LLM is ~20% of the system; the other 80% is infrastructure.
       </Decision></FadeIn>
 
-      <FadeIn delay={80}><Decision question="ReAct vs Plan-then-Execute — which orchestration pattern?">
+      <FadeIn delay={80}><Decision question="ReAct vs Plan-then-Execute: which orchestration pattern?">
         <Pill type="green">ReAct</Pill> Interleave reasoning and action. Think → Act → Observe → Think. Best for exploratory tasks where the next step depends on what you find. Used by Claude, ChatGPT.
         <br /><br />
-        <Pill type="amber">Plan-then-Execute</Pill> Generate a full plan upfront, then execute steps. Best for well-defined tasks where the steps are predictable. Used by AutoGPT-style agents. Brittle — the plan breaks when reality diverges.
+        <Pill type="amber">Plan-then-Execute</Pill> Generate a full plan upfront, then execute steps. Best for well-defined tasks where the steps are predictable. Used by AutoGPT-style agents. Brittle: the plan breaks when reality diverges.
         <br /><br />
         <strong>Default to ReAct.</strong> Plan-then-Execute only works when the task is highly structured and the tools are deterministic.
         <br /><br />
-        <strong>My key insight:</strong> "AI Agents vs Deterministic Workflows" — don't build an agent when a workflow suffices. If every step is predictable and the logic never branches on LLM output, use a deterministic workflow (Temporal, Step Functions). Agents shine when the next action depends on reasoning about the result of the previous action.
+        <strong>My key insight:</strong> "AI Agents vs Deterministic Workflows." Don't build an agent when a workflow suffices. If every step is predictable and the logic never branches on LLM output, use a deterministic workflow (Temporal, Step Functions). Agents shine when the next action depends on reasoning about the result of the previous action.
       </Decision></FadeIn>
 
       <FadeIn delay={160}><Decision question="How many iterations should the agent loop run?">
-        Cap at 5-10 iterations. Most useful queries resolve in 2-3 tool calls. If the agent is looping more than 5 times, it's likely stuck — add a circuit breaker that escalates to a human or returns a partial answer. Cost scales linearly with iterations (each loop is a full LLM call with growing context).
+        Cap at 5-10 iterations. Most useful queries resolve in 2-3 tool calls. If the agent is looping more than 5 times, it's likely stuck. Add a circuit breaker that escalates to a human or returns a partial answer. Cost scales linearly with iterations (each loop is a full LLM call with growing context).
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "What matters is not that you'd use LangChain. Senior engineers look for reasoning about the tradeoffs: why ReAct over plan-and-execute, why you'd cap iterations at 5, why you need both input and output guards. The framework choice is the last sentence — the architecture reasoning demonstrates depth."
+        "What matters is not that you'd use LangChain. Senior engineers look for reasoning about the tradeoffs: why ReAct over plan-and-execute, why you'd cap iterations at 5, why you need both input and output guards. The framework choice is the last sentence; the architecture reasoning is what shows depth."
       </Insight></FadeIn>
 
       <h3 style={{ fontSize: 17, fontWeight: 600, color: 'var(--text-h)', marginTop: 40, marginBottom: 8, letterSpacing: '-0.01em' }}>The 10 harness primitives</h3>
       <p style={{ fontSize: 13, color: 'var(--text-p)', marginBottom: 16, lineHeight: 1.7 }}>
-        The 5-layer architecture above describes how data flows through an agent. The harness primitives describe what you actually build around the model. Every production agent decomposes into these 10 layers — when something breaks, the fix lives in one of them.
+        The 5-layer architecture above describes how data flows through an agent. The harness primitives describe what you actually build around the model. Every production agent decomposes into these 10 layers, and when something breaks, the fix lives in one of them.
       </p>
 
       <FadeIn><Insight>
-        "The model matters. But when you build real agent workflows, the model is only one part of the machine. Reliability gets built in the system around the model — the harness."
+        "The model matters. But when you build real agent workflows, the model is only one part of the machine. Reliability gets built in the system around the model: the harness."
       </Insight></FadeIn>
 
       <FadeIn><div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '16px 18px', marginBottom: 16 }}>
@@ -531,7 +531,7 @@ function ArchitecturePanel() {
             <span style={{ color: 'var(--text-accent)', fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 600, minWidth: 24, flexShrink: 0, paddingTop: 2 }}>{n}</span>
             <div>
               <span style={{ fontWeight: 600, color: 'var(--text-h)' }}>{name}</span>
-              <span style={{ color: 'var(--text-muted)' }}> — {desc}</span>
+              <span style={{ color: 'var(--text-muted)' }}>: {desc}</span>
             </div>
           </div>
         ))}
@@ -569,7 +569,7 @@ function RagPanel() {
     <div>
       <SectionHead
         title="RAG: retrieval-augmented generation"
-        desc="RAG is how agents access domain knowledge that isn't in the LLM's training data. The pipeline has two phases — ingestion (offline) and retrieval (real-time). Getting retrieval wrong means the LLM hallucinates with confidence."
+        desc="RAG is how agents access domain knowledge that isn't in the LLM's training data. The pipeline has two phases: ingestion (offline) and retrieval (real-time). Getting retrieval wrong means the LLM hallucinates with confidence."
       />
 
       <RagPipelineDiagram />
@@ -579,10 +579,10 @@ function RagPanel() {
         <br /><br />
         <Pill type="amber">Fine-tuning</Pill> When you need to change the model's behavior/style/format, not its knowledge. E.g., making it respond in a specific JSON schema, adopting a brand voice, or learning domain-specific reasoning patterns.
         <br /><br />
-        <strong>They're complementary, not competing.</strong> Fine-tune for behavior, RAG for knowledge. Stripe uses both — fine-tuned model for understanding payment jargon, RAG for retrieving specific API docs.
+        <strong>They're complementary, not competing.</strong> Fine-tune for behavior, RAG for knowledge. Stripe uses both: a fine-tuned model for understanding payment jargon, RAG for retrieving specific API docs.
       </Decision></FadeIn>
 
-      <FadeIn delay={80}><Decision question="Chunking strategy — recursive vs semantic?">
+      <FadeIn delay={80}><Decision question="Chunking strategy: recursive vs semantic?">
         <Pill type="green">Recursive character</Pill> Split by paragraph → sentence → character, respecting natural boundaries. Simple, fast, works for 80% of cases. Use with 512-1024 token chunks and 20% overlap.
         <br /><br />
         <Pill type="amber">Semantic chunking</Pill> Use embeddings to detect topic boundaries. Better for documents with mixed topics (e.g., a long report covering multiple subjects). 2-3x slower to ingest.
@@ -597,7 +597,7 @@ function RagPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "I'd use hybrid search with reranking rather than pure vector similarity. Vector search is great for semantic matching, but it misses exact terms — if a user asks about error code E_TIMEOUT, vector search might return results about 'connection issues' instead of the exact error. BM25 catches those exact matches. The reranker then sorts the combined results by actual relevance to the query, which improves answer quality measurably — hybrid retrieval is a well-established win in the IR literature."
+        "I'd use hybrid search with reranking rather than pure vector similarity. Vector search is great for semantic matching, but it misses exact terms. If a user asks about error code E_TIMEOUT, vector search might return results about 'connection issues' instead of the exact error. BM25 catches those exact matches. The reranker then sorts the combined results by actual relevance to the query, which improves answer quality measurably. Hybrid retrieval is a well-established win in the IR literature."
       </Insight></FadeIn>
     </div>
   );
@@ -608,13 +608,13 @@ function FunctionCallingPanel() {
     <div>
       <SectionHead
         title="Function calling: giving agents hands"
-        desc="Function calling lets the LLM invoke structured tools — APIs, databases, search engines, code execution. The LLM decides WHICH tool to call and WITH WHAT arguments. You execute the tool and return the result."
+        desc="Function calling lets the LLM invoke structured tools: APIs, databases, search engines, code execution. The LLM decides WHICH tool to call and WITH WHAT arguments. You execute the tool and return the result."
       />
 
       <FadeIn><Decision question="How does function calling actually work?">
         You define tools as JSON schemas (name, description, parameters). The LLM's response includes a tool_use block instead of text. You execute the function, return the result, and the LLM incorporates it into its next response.
         <br /><br />
-        <strong>Critical:</strong> The LLM never executes code directly. It outputs structured JSON saying "call this function with these args." Your application layer executes it in a sandbox and returns the result. This is the security boundary.
+        <strong>Key point:</strong> The LLM never executes code directly. It outputs structured JSON saying "call this function with these args." Your application layer executes it in a sandbox and returns the result. This is the security boundary.
       </Decision></FadeIn>
 
       <FadeIn><CodeBlock filename="tool-dispatch.js" code={TOOL_DISPATCH_CODE} output={TOOL_DISPATCH_OUTPUT} /></FadeIn>
@@ -624,21 +624,21 @@ function FunctionCallingPanel() {
         <br /><br />
         <Pill type="red">50+ tools</Pill> Tool selection accuracy drops significantly. The LLM struggles to pick the right tool from a large set.
         <br /><br />
-        <strong>Solutions for many tools:</strong> (1) Two-stage routing — first classify the intent, then load only relevant tools. (2) Tool descriptions matter more than tool count — a well-described tool with clear "when to use" guidance beats 10 poorly described ones.
+        <strong>Solutions for many tools:</strong> (1) Two-stage routing: first classify the intent, then load only relevant tools. (2) Tool descriptions matter more than tool count. A well-described tool with clear "when to use" guidance beats 10 poorly described ones.
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="Parallel vs sequential tool calling?">
-        <Pill type="green">Parallel</Pill> When tools are independent. "Get weather AND stock price" — both can run simultaneously. Reduces latency by 2-5x.
+        <Pill type="green">Parallel</Pill> When tools are independent. "Get weather AND stock price" can run both at once. Reduces latency by 2-5x.
         <br /><br />
         <Pill type="amber">Sequential</Pill> When tool B depends on tool A's result. "Search for user → Get their orders → Calculate total." Must be serial.
         <br /><br />
-        Claude and GPT-4 both support parallel tool calling natively. Always prefer parallel when dependencies allow — users notice the latency difference.
+        Claude and GPT-4 both support parallel tool calling natively. Prefer parallel when dependencies allow; users notice the latency difference.
       </Decision></FadeIn>
 
       <FadeIn delay={160}><Decision question="Error handling in tool calls?">
         Tools fail. APIs timeout, databases return empty, search finds nothing. The agent needs to handle this gracefully:
         <br /><br />
-        (1) Return the error to the LLM — let it decide whether to retry, try a different tool, or inform the user.
+        (1) Return the error to the LLM and let it decide whether to retry, try a different tool, or inform the user.
         <br />
         (2) Set a retry limit (2-3 attempts max) with exponential backoff.
         <br />
@@ -648,7 +648,7 @@ function FunctionCallingPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "The maturity signal is in how you handle the unhappy path. Anyone can describe the happy path — LLM picks tool, tool returns data, LLM answers. Senior engineering perspective: what happens when the tool times out? What if it returns stale data? What if the LLM picks the wrong tool? You need retry logic, circuit breakers, and graceful degradation — the same patterns you'd use in any distributed system."
+        "The maturity signal is in how you handle the unhappy path. Anyone can describe the happy path: LLM picks tool, tool returns data, LLM answers. Senior engineering perspective: what happens when the tool times out? What if it returns stale data? What if the LLM picks the wrong tool? You need retry logic, circuit breakers, and graceful degradation, the same patterns you'd use in any distributed system."
       </Insight></FadeIn>
     </div>
   );
@@ -659,51 +659,47 @@ function EvalsPanel() {
     <div>
       <SectionHead
         title="Evals & guardrails: the quality gate"
-        desc="An AI agent without evals is a demo. Production agents need automated evaluation on every change — model upgrades, prompt edits, tool additions. Guardrails prevent the agent from going off the rails in real-time."
+        desc="An AI agent without evals is a demo. Production agents need automated evaluation on every change: model upgrades, prompt edits, tool additions. Guardrails prevent the agent from going off the rails in real-time."
       />
 
       <FadeIn><Decision question="What should you eval?">
         Five dimensions, in priority order:
         <br /><br />
-        <strong>1. Correctness</strong> — Does the answer actually answer the question? (LLM-as-judge + human spot-check)
+        <strong>1. Correctness.</strong> Does the answer actually answer the question? (LLM-as-judge + human spot-check)
         <br />
-        <strong>2. Groundedness</strong> — Is every claim supported by retrieved context? (Automated: check if answer spans appear in context)
+        <strong>2. Groundedness.</strong> Is every claim supported by retrieved context? (Automated: check if answer spans appear in context)
         <br />
-        <strong>3. Relevance</strong> — Did RAG retrieve the right documents? (Automated: precision@k, recall@k)
+        <strong>3. Relevance.</strong> Did RAG retrieve the right documents? (Automated: precision@k, recall@k)
         <br />
-        <strong>4. Safety</strong> — Does the response violate any policies? (Classifier: toxicity, PII leakage, off-topic)
+        <strong>4. Safety.</strong> Does the response violate any policies? (Classifier: toxicity, PII leakage, off-topic)
         <br />
-        <strong>5. Latency/cost</strong> — Is it fast enough and cheap enough? (Automated: p50/p95 latency, $/query)
+        <strong>5. Latency/cost.</strong> Is it fast enough and cheap enough? (Automated: p50/p95 latency, $/query)
       </Decision></FadeIn>
 
-      <FadeIn delay={80}><Decision question="LLM-as-judge — does it work?">
-        <Pill type="green">Yes, with guardrails</Pill> Use a stronger model to judge a weaker one (a frontier model judging a small model's outputs). Agreement with human evaluators is 80-90% on factual correctness. Use rubrics — don't just ask "is this good?"
+      <FadeIn delay={80}><Decision question="LLM-as-judge: does it work?">
+        <Pill type="green">Yes, with guardrails</Pill> Use a stronger model to judge a weaker one (a frontier model judging a small model's outputs). Agreement with human evaluators is 80-90% on factual correctness. Use rubrics; don't just ask "is this good?"
         <br /><br />
         <strong>The pattern:</strong> Create a golden dataset of 50-100 question-answer pairs with human-verified correct answers. Run your agent on these questions. Use LLM-as-judge to score. Track regression over time. When the score drops, investigate before shipping.
       </Decision></FadeIn>
 
       <FadeIn delay={160}><Decision question="What guardrails do you need in production?">
         <strong>Input guards</strong> (before the LLM sees the query):
-        <br />
-        — PII detection and redaction (names, emails, SSNs)
-        <br />
-        — Prompt injection detection (ignore previous instructions...)
-        <br />
-        — Topic classification (is this in-scope for the agent?)
-        <br /><br />
+        <ul className="decision__list">
+          <li>PII detection and redaction (names, emails, SSNs)</li>
+          <li>Prompt injection detection (ignore previous instructions...)</li>
+          <li>Topic classification (is this in-scope for the agent?)</li>
+        </ul>
         <strong>Output guards</strong> (before the user sees the response):
-        <br />
-        — Hallucination detection (claims not grounded in context)
-        <br />
-        — Tone/brand compliance
-        <br />
-        — Sensitive content filtering
-        <br /><br />
+        <ul className="decision__list">
+          <li>Hallucination detection (claims not grounded in context)</li>
+          <li>Tone/brand compliance</li>
+          <li>Sensitive content filtering</li>
+        </ul>
         Guards add 50-200ms latency. Worth it. A single hallucinated medical or financial claim can destroy trust.
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        Evals and memory are the moats of AI products. Anyone can build a demo agent in a weekend. The production gap is the eval pipeline. My rule: treat evals like CI/CD — no prompt change ships without passing your golden test cases. When you upgrade the model, compare outputs side-by-side. "Add continuous evals" is advice #8 on my list, and it's last because it's the one teams skip — and the one that separates shipped products from abandoned demos.
+        Evals and memory are the moats of AI products. Anyone can build a demo agent in a weekend. The production gap is the eval pipeline. My rule: treat evals like CI/CD. No prompt change ships without passing your golden test cases. When you upgrade the model, compare outputs side-by-side. "Add continuous evals" is advice #8 on my list, and it's last because it's the one teams skip, and the one that separates shipped products from abandoned demos.
       </Insight></FadeIn>
     </div>
   );
@@ -714,14 +710,14 @@ function RealSystemsPanel() {
     <div>
       <SectionHead
         title="Real production agent architectures"
-        desc="How actual companies architect their AI agents — from customer support to code generation. These are the examples that demonstrate production thinking."
+        desc="How actual companies architect their AI agents, from customer support to code generation. These are the examples that demonstrate production thinking."
       />
 
       <div style={styles.systemCard}>
-        <h3 style={styles.systemName}>My e-Commerce Agent — The Reference Architecture</h3>
+        <h3 style={styles.systemName}>My e-Commerce Agent: The Reference Architecture</h3>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Architecture</span>
-          <span style={styles.sysVal}>Three-agent system: Router (intent classification) {'>'} Q&A Agent with RAG over product catalog + help articles {'>'} Planner Agent for multi-step order operations. User Auth Gateway at the entry point. Each agent has scoped tools — the Q&A agent can search but can't modify orders.</span>
+          <span style={styles.sysVal}>Three-agent system: Router (intent classification) {'>'} Q&A Agent with RAG over product catalog + help articles {'>'} Planner Agent for multi-step order operations. User Auth Gateway at the entry point. Each agent has scoped tools: the Q&A agent can search but can't modify orders.</span>
         </div>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Key insight</span>
@@ -729,12 +725,12 @@ function RealSystemsPanel() {
         </div>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>From my build</span>
-          <span style={styles.sysVal}>"When to Loop in Humans" — the Planner Agent has a confidence threshold. Order cancellations above $500 always escalate. Refund requests with shipping disputes always escalate. The agent handles the 80% — humans handle the 20% that needs judgment.</span>
+          <span style={styles.sysVal}>"When to Loop in Humans": the Planner Agent has a confidence threshold. Order cancellations above $500 always escalate. Refund requests with shipping disputes always escalate. The agent handles the 80%; humans handle the 20% that needs judgment.</span>
         </div>
       </div>
 
       <div style={styles.systemCard}>
-        <h3 style={styles.systemName}>Cursor / Claude Code — Code Agent</h3>
+        <h3 style={styles.systemName}>Cursor / Claude Code: Code Agent</h3>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Architecture</span>
           <span style={styles.sysVal}>ReAct loop with file system + terminal tools. Code indexing via tree-sitter for AST-aware retrieval. Embedding-based codebase search + grep fallback (hybrid).</span>
@@ -745,15 +741,15 @@ function RealSystemsPanel() {
         </div>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Tools</span>
-          <span style={styles.sysVal}>Read file, Edit file, Terminal, Search codebase, List directory. ~8 tools total — focused, not sprawling.</span>
+          <span style={styles.sysVal}>Read file, Edit file, Terminal, Search codebase, List directory. ~8 tools total. Focused, not sprawling.</span>
         </div>
       </div>
 
       <div style={styles.systemCard}>
-        <h3 style={styles.systemName}>Perplexity — Research Agent</h3>
+        <h3 style={styles.systemName}>Perplexity: Research Agent</h3>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Architecture</span>
-          <span style={styles.sysVal}>Query → Web search (multiple engines) → Scrape top results → Chunk + embed on-the-fly → Rerank → Generate with citations. Real-time RAG — no pre-built index.</span>
+          <span style={styles.sysVal}>Query → Web search (multiple engines) → Scrape top results → Chunk + embed on-the-fly → Rerank → Generate with citations. Real-time RAG with no pre-built index.</span>
         </div>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Key insight</span>
@@ -761,15 +757,15 @@ function RealSystemsPanel() {
         </div>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Scale</span>
-          <span style={styles.sysVal}>100M+ queries/month. Each query triggers 5-10 web fetches, making the search cost the dominant expense — not the LLM.</span>
+          <span style={styles.sysVal}>100M+ queries/month. Each query triggers 5-10 web fetches, making the search cost, not the LLM, the dominant expense.</span>
         </div>
       </div>
 
       <div style={styles.systemCard}>
-        <h3 style={styles.systemName}>Intercom Fin — Customer Support Agent</h3>
+        <h3 style={styles.systemName}>Intercom Fin: Customer Support Agent</h3>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Architecture</span>
-          <span style={styles.sysVal}>RAG over help center articles + conversation history. Confidence scoring — only auto-responds above threshold, escalates to human below it. Multi-turn memory within a ticket.</span>
+          <span style={styles.sysVal}>RAG over help center articles + conversation history. Confidence scoring: only auto-responds above threshold, escalates to human below it. Multi-turn memory within a ticket.</span>
         </div>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Key insight</span>
@@ -798,17 +794,17 @@ function AntiPatternsPanel() {
 
       <div style={styles.anti}>
         <p style={styles.strike}>"I'd use LangChain to build the agent."</p>
-        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />LangChain is an implementation detail, not an architecture. Describe the components — orchestration loop, tool routing, RAG pipeline, eval system — then mention that LangChain (or LlamaIndex, or custom code) implements them. The framework is the last word.{' '}My framework from the 107k-view video: describe the Router {'>'} Q&A {'>'} Planner agent architecture FIRST, then say "this could be implemented with LangGraph, CrewAI, or raw API calls — the architecture is the same."</p>
+        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />LangChain is an implementation detail, not an architecture. Describe the components (orchestration loop, tool routing, RAG pipeline, eval system), then mention that LangChain (or LlamaIndex, or custom code) implements them. The framework is the last word.{' '}My framework from the 107k-view video: describe the Router {'>'} Q&A {'>'} Planner agent architecture FIRST, then say "this could be implemented with LangGraph, CrewAI, or raw API calls. The architecture is the same."</p>
       </div>
 
       <div style={styles.anti}>
         <p style={styles.strike}>"We'd just increase the context window to fit everything."</p>
-        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />Context windows have cost and latency implications. 200K tokens costs 10-50x more than 10K tokens. RAG retrieves only the relevant 2-3K tokens. This is the "use DynamoDB because it scales" equivalent — reaching for the expensive solution when a targeted one works better.</p>
+        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />Context windows have cost and latency implications. 200K tokens costs 10-50x more than 10K tokens. RAG retrieves only the relevant 2-3K tokens. This is the "use DynamoDB because it scales" equivalent: reaching for the expensive solution when a targeted one works better.</p>
       </div>
 
       <div style={styles.anti}>
-        <p style={styles.strike}>"We don't need evals — we'll test it manually."</p>
-        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />LLM outputs are non-deterministic. Manual testing catches obvious failures but misses regressions. When you change a prompt, you need automated evals on 50-100 test cases to catch subtle quality drops. Treat it like CI/CD — no merge without passing evals.</p>
+        <p style={styles.strike}>"We don't need evals. We'll test it manually."</p>
+        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />LLM outputs are non-deterministic. Manual testing catches obvious failures but misses regressions. When you change a prompt, you need automated evals on 50-100 test cases to catch subtle quality drops. Treat it like CI/CD: no merge without passing evals.</p>
       </div>
 
       <div style={styles.anti}>
@@ -822,7 +818,7 @@ function AntiPatternsPanel() {
       </div>
 
       <FadeIn><Insight>
-        "The meta-pattern is my vertical-first rule. Don't build a 'general agent framework' — build an agent that solves one specific problem perfectly. The e-Commerce customer support agent doesn't need to write code or search the web. It needs to search products, check orders, and process returns. Scope the tools, scope the prompt, scope the eval set. Then reason about constraints: latency budget, cost per query, accuracy threshold. The framework — LangChain, LlamaIndex, custom code — is genuinely the last decision."
+        "The meta-pattern is my vertical-first rule. Don't build a 'general agent framework.' Build an agent that solves one specific problem perfectly. The e-Commerce customer support agent doesn't need to write code or search the web. It needs to search products, check orders, and process returns. Scope the tools, scope the prompt, scope the eval set. Then reason about constraints: latency budget, cost per query, accuracy threshold. The framework (LangChain, LlamaIndex, custom code) is the last decision."
       </Insight></FadeIn>
         </div>
   );
@@ -839,47 +835,13 @@ const styles = {
     letterSpacing: '0.02em',
   },
   eyebrow: { fontSize: 11, fontWeight: 500, color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8, fontFamily: 'var(--font-mono)' },
-  h1: { fontSize: 34, fontWeight: 400, color: 'var(--text-h)', marginBottom: 10, lineHeight: 1.15, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
-  subtitle: { fontSize: 14, color: 'var(--text-p)', marginBottom: 8, lineHeight: 1.75 },
+  h1: { fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 400, color: 'var(--text-h)', lineHeight: 1.08, marginBottom: 16, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
+  subtitle: { fontSize: 'clamp(16px, 1.3vw, 18px)', color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 28, maxWidth: '62ch' },
   source: { fontSize: 12, color: 'var(--text-muted)', marginBottom: '2rem', lineHeight: 1.6 },
   sourceLink: { color: 'var(--text-accent)', textDecoration: 'underline', textUnderlineOffset: '2px' },
 
-  tabWrap: {
-    display: 'flex',
-    gap: 0,
-    marginBottom: '2rem',
-    borderBottomWidth: 1,
-    borderBottomStyle: 'solid',
-    borderBottomColor: 'var(--border)',
-    overflowX: 'auto',
-    scrollbarWidth: 'none',
-  },
-  tabBtn: {
-    background: 'transparent',
-    borderTopWidth: 0,
-    borderRightWidth: 0,
-    borderLeftWidth: 0,
-    borderBottomWidth: 2,
-    borderBottomStyle: 'solid',
-    borderBottomColor: 'transparent',
-    padding: '10px 14px',
-    fontSize: 13,
-    fontWeight: 500,
-    color: 'var(--text-muted)',
-    cursor: 'pointer',
-    transition: 'all var(--dur) var(--ease)',
-    fontFamily: 'inherit',
-    whiteSpace: 'nowrap',
-    letterSpacing: '-0.01em',
-  },
-  tabActive: {
-    color: 'var(--text-h)',
-    fontWeight: 600,
-    borderBottomColor: 'var(--bg-accent-strong)',
-  },
-
-  sh: { fontSize: 17, fontWeight: 600, color: 'var(--text-h)', marginBottom: 8, letterSpacing: '-0.01em' },
-  ss: { fontSize: 13, color: 'var(--text-p)', marginBottom: 16, lineHeight: 1.7 },
+  sh: { fontSize: 'clamp(24px, 2.4vw, 30px)', fontWeight: 400, color: 'var(--text-h)', marginTop: 8, marginBottom: 10, lineHeight: 1.2, fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' },
+  ss: { fontSize: 16, color: 'var(--text-p)', marginBottom: 24, lineHeight: 1.7, maxWidth: '65ch' },
 
   systemCard: {
     background: 'var(--bg-card)',
@@ -921,7 +883,7 @@ const styles = {
     padding: '16px 18px',
     marginBottom: 10,
   },
-  strike: { textDecoration: 'line-through', opacity: 0.5, fontSize: 13, color: 'var(--text-p)', lineHeight: 1.6 },
-  better: { fontSize: 13, color: 'var(--text-h)', fontWeight: 500, lineHeight: 1.6, marginTop: 6 },
+  strike: { textDecoration: 'line-through', opacity: 0.5, fontSize: 15, color: 'var(--text-p)', lineHeight: 1.6 },
+  better: { fontSize: 15, color: 'var(--text-h)', fontWeight: 500, lineHeight: 1.6, marginTop: 6 },
   dot: { display: 'inline-block', width: 7, height: 7, borderRadius: '50%', marginRight: 8, verticalAlign: 'middle' },
 };

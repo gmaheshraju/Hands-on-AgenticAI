@@ -19,11 +19,11 @@ export default function SoloDeveloperAdvantage() {
     <article style={styles.article}>
       <Link to="/blog" style={styles.back}>&larr; AI Engineering</Link>
       <header style={styles.header}>
-        <p style={styles.eyebrow}>AI Engineering Playbook — 16</p>
+        <p style={styles.eyebrow}>AI Engineering Playbook · 16</p>
         <h1 style={styles.h1}>The Solo Developer Advantage</h1>
         <p style={styles.subtitle}>
-          Why one developer with AI beats a team of twenty — and how engineers from anywhere in the world
-          are building products that compete with giants.
+          Why one developer with AI can outbuild a team of twenty, and how engineers from anywhere in the
+          world are building products that compete with much larger companies.
         </p>
       </header>
 
@@ -58,12 +58,12 @@ function Thesis() {
       <FadeIn delay={0}>
         <h2 style={styles.h2}>The Great Equalizer</h2>
         <p style={styles.p}>
-          For decades, software was a game of resources. Building a competitive product required a team of specialists —
+          For decades, software was a game of resources. Building a competitive product required a team of specialists:
           frontend, backend, DevOps, QA, design, product management. A solo developer in Hyderabad or Lagos or São Paulo
           couldn't compete with a 200-person engineering org in San Francisco. The moat was <strong>headcount</strong>.
         </p>
         <p style={styles.p}>
-          AI changed the equation. Not gradually — overnight. The minimum viable team collapsed from 10-15 people to 1-4.
+          AI changed the equation, and fast. The minimum viable team collapsed from 10-15 people to 1-4.
           A single developer with AI coding assistants, cloud infrastructure, and domain expertise can now ship products
           that would have required a full company two years ago.
         </p>
@@ -107,7 +107,7 @@ function Thesis() {
         <Insight tag="the shift">
           The bottleneck moved from <strong>"can we build it?"</strong> to <strong>"do we know what to build?"</strong> When
           AI handles the breadth of skills, the only thing that matters is the depth of your insight. A developer who deeply
-          understands a problem space — and can direct AI to solve it — beats a team that's guessing at requirements.
+          understands a problem space, and can direct AI to solve it, beats a team that's guessing at requirements.
         </Insight>
       </FadeIn>
 
@@ -116,8 +116,8 @@ function Thesis() {
         <div style={styles.forceGrid}>
           {[
             { num: '01', title: 'Infrastructure is free', desc: 'Cloudflare, Vercel, Supabase, Railway. Global deployment for $0-20/month. What cost $50K/month in 2018 costs nothing today.' },
-            { num: '02', title: 'AI closes the skill gap', desc: 'Don\'t know React? AI writes it. Don\'t know DevOps? AI configures it. You no longer hire 8 specialties — you direct them through AI.' },
-            { num: '03', title: 'Speed kills scale', desc: 'You ship a feature in 2 hours. A giant files a JIRA ticket, waits for sprint planning, 3 code reviews, legal review — 6 weeks. You\'ve iterated 30 times by then.' },
+            { num: '02', title: 'AI closes the skill gap', desc: 'Don\'t know React? AI writes it. Don\'t know DevOps? AI configures it. You no longer hire 8 specialties; you direct them through AI.' },
+            { num: '03', title: 'Speed kills scale', desc: 'You ship a feature in 2 hours. A giant files a JIRA ticket, waits for sprint planning, 3 code reviews, legal review: 6 weeks. You\'ve iterated 30 times by then.' },
             { num: '04', title: 'Domain expertise can\'t be hired', desc: 'A developer who spent 10 years in Indian agriculture knows problems no Silicon Valley team can buy access to. AI + that knowledge = an un-copyable product.' },
             { num: '05', title: 'Niches are invisible to giants', desc: 'Big companies build for millions. They can\'t build for 500 farmers in Andhra Pradesh or 2000 physiotherapists in Pune. These niches are deeply profitable for one person.' },
           ].map(f => (
@@ -134,9 +134,9 @@ function Thesis() {
 
       <FadeIn delay={240}>
         <Decision question="But doesn't AI make it easy for everyone? Where's the moat?">
-          This is the most important question, and the answer is counterintuitive. Yes, AI makes building <em>easier</em> for
+          The answer here is counterintuitive. Yes, AI makes building <em>easier</em> for
           everyone. But it doesn't make <strong>knowing what to build</strong> easier. The developer who has lived in a domain
-          for years — who understands the workflows, the pain points, the regulatory quirks, the cultural context — has a moat
+          for years, and understands the workflows, the pain points, the regulatory quirks and the cultural context, has a moat
           that no amount of AI can replicate for a competitor who's just discovered the space.
           <br /><br />
           Put differently: AI commoditized <em>execution</em>. It made <em>taste</em> the scarce resource. The person who knows
@@ -207,7 +207,7 @@ function Playbook() {
       <FadeIn delay={180}>
         <Insight tag="the leverage ratio">
           The best solo developers aren't the best <em>coders</em>. They're the best <em>directors</em>. They write clear
-          specifications, review AI output with domain expertise, and make judgment calls that no AI can make — "will my users
+          specifications, review AI output with domain expertise, and make judgment calls that no AI can make: "will my users
           actually want this?" That's the skill that scales. If you're spending more than 30% of your time writing code by hand,
           you're not using AI enough.
         </Insight>
@@ -227,7 +227,7 @@ function Playbook() {
           Customer support? AI handles tier-1 with your knowledge base, you handle the complex cases that actually teach you something.
           Marketing? AI generates content variations, you pick what matches your voice.
           <br /><br />
-          The pattern is always the same: <strong>AI proposes, you approve</strong>. You're not delegating blindly — you're reviewing
+          The pattern is always the same: <strong>AI proposes, you approve</strong>. You're not delegating blindly. You're reviewing
           with the expertise that comes from being close to every part of your business. A CEO of a 200-person company can't review
           every customer support ticket. You can, and that's an advantage.
         </Decision>
@@ -241,7 +241,7 @@ function Playbook() {
         </p>
         <p style={styles.p}>
           The metric that matters in 2026 isn't ARR or team size. It's <strong>revenue per employee</strong>. Midjourney reportedly
-          generates ~$200M in revenue with ~40 employees — roughly $5M per person. Compare that to traditional tech's $500K per
+          generates ~$200M in revenue with ~40 employees, roughly $5M per person. Compare that to traditional tech's $500K per
           employee. The best solo developers are pushing this ratio even further.
         </p>
       </FadeIn>
@@ -257,14 +257,14 @@ function NewMoats() {
         <h2 style={styles.h2}>The New Moats</h2>
         <p style={styles.p}>
           If AI commoditized execution, what's left to defend? The moats have shifted from technical barriers to
-          human ones — and they're actually <em>stronger</em> for solo developers than for big companies.
+          human ones, and they're actually <em>stronger</em> for solo developers than for big companies.
         </p>
       </FadeIn>
 
       <FadeIn delay={60}>
-        <Decision question="1. Domain depth — the 10,000-hour moat">
-          A developer who has spent years in a specific industry — education in rural India, logistics in Southeast Asia,
-          agriculture in sub-Saharan Africa — has accumulated knowledge that can't be replicated by a well-funded startup
+        <Decision question="1. Domain depth: the 10,000-hour moat">
+          A developer who has spent years in a specific industry (education in rural India, logistics in Southeast Asia,
+          agriculture in sub-Saharan Africa) has accumulated knowledge that can't be replicated by a well-funded startup
           doing 2 weeks of "customer discovery." They know which regulations actually get enforced. They know which workflows
           people say they want automated vs. which ones they'll actually adopt. They know the WhatsApp group where the real
           decisions happen.
@@ -276,32 +276,32 @@ function NewMoats() {
       </FadeIn>
 
       <FadeIn delay={120}>
-        <Decision question="2. Trust and relationships — the human moat">
-          Software is increasingly sold through trust, not features. A solo developer who is active in their community — answering
-          questions, sharing insights, building in public — accumulates trust that no marketing budget can buy. When someone in a
+        <Decision question="2. Trust and relationships: the human moat">
+          Software is increasingly sold through trust, not features. A solo developer who is active in their community (answering
+          questions, sharing insights, building in public) accumulates trust that no marketing budget can buy. When someone in a
           Telegram group for Indian stock traders says "I use this tool and it works," that's worth more than a $10M ad campaign.
           <br /><br />
           Big companies can't do this. They can't have their CEO personally respond to a user's WhatsApp message at 10 PM. You can.
-          And in many markets — especially emerging ones — that personal connection is the entire buying decision.
+          And in many markets, especially emerging ones, that personal connection is the entire buying decision.
         </Decision>
       </FadeIn>
 
       <FadeIn delay={180}>
-        <Decision question="3. Speed of iteration — the compound interest moat">
+        <Decision question="3. Speed of iteration: the compound interest moat">
           Every day you ship, you learn. Every day a competitor sits in sprint planning, they don't. Over a year, a solo developer
           who ships daily has made ~250 informed iterations. A team that ships biweekly has made ~25. That's a 10x learning advantage,
           and it compounds. By month six, you've explored corners of the problem space that your competitor doesn't even know exist.
           <br /><br />
-          This is why solo developers often build products that feel "weirdly specific and perfect" — they've iterated so many times
+          This is why solo developers often build products that feel "weirdly specific and perfect": they've iterated so many times
           that every feature reflects a real user need, not a PM's hypothesis.
         </Decision>
       </FadeIn>
 
       <FadeIn delay={240}>
-        <Decision question="4. Cost structure — the pricing moat">
+        <Decision question="4. Cost structure: the pricing moat">
           Your marginal cost is close to zero. No salaries, no office, no benefits, no middle management. You can price a product
-          at $10/month that a VC-funded startup needs to charge $99/month to hit their revenue targets. In price-sensitive markets —
-          which is most of the world — this is an unbeatable advantage.
+          at $10/month that a VC-funded startup needs to charge $99/month to hit their revenue targets. In price-sensitive markets,
+          which is most of the world, that is a hard advantage to beat.
           <br /><br />
           And here's the kicker: your $10/month product with 500 users generates $60K/year. That's life-changing money in most of
           the world, but it's a rounding error for a VC-funded company. They literally cannot compete in your niche because it's
@@ -315,7 +315,7 @@ function NewMoats() {
           understand markets that SF engineers don't. Your cost of living means $5K/month is financial freedom, not poverty.
           You have cultural context that can't be hired. The developer in Lagos who builds a tool for Nollywood producers, the
           developer in Jaipur who builds inventory management for textile merchants, the developer in Manila who builds scheduling
-          for BPO shift workers — these aren't "emerging market plays." They're the future of software.
+          for BPO shift workers: these aren't "emerging market plays." They're the future of software.
         </Insight>
       </FadeIn>
     </>
@@ -344,7 +344,7 @@ function Patterns() {
           <strong style={styles.exampleTitle}>Why it works:</strong>
           <p style={styles.p}>
             Horizontal AI tools (ChatGPT, Claude) solve everything mediocrely. A vertical tool that understands your
-            specific data format, your regulatory requirements, your industry jargon — that solves one thing brilliantly.
+            specific data format, your regulatory requirements, your industry jargon solves one thing well.
             A lawyer doesn't want "an AI assistant." They want a tool that reads a 400-page contract and flags clauses
             that conflict with their client's standard terms. That specificity is worth $200/month.
           </p>
@@ -374,10 +374,10 @@ function Patterns() {
         <div style={styles.exampleBox}>
           <strong style={styles.exampleTitle}>Examples:</strong>
           <ul style={styles.ul}>
-            <li>A solo "agency" doing SEO audits — AI crawls and analyzes, you deliver the strategy</li>
-            <li>A one-person data analytics consultancy — AI processes the data, you interpret and present</li>
-            <li>A freelance security auditor — AI scans for vulnerabilities, you prioritize and write the report</li>
-            <li>A solo recruiter — AI screens 500 resumes, you evaluate the top 20</li>
+            <li>A solo "agency" doing SEO audits: AI crawls and analyzes, you deliver the strategy</li>
+            <li>A one-person data analytics consultancy: AI processes the data, you interpret and present</li>
+            <li>A freelance security auditor: AI scans for vulnerabilities, you prioritize and write the report</li>
+            <li>A solo recruiter: AI screens 500 resumes, you evaluate the top 20</li>
           </ul>
         </div>
       </FadeIn>
@@ -399,7 +399,7 @@ function Patterns() {
       <FadeIn delay={240}>
         <h3 style={styles.h3}>Pattern 4: Autonomous Operations</h3>
         <p style={styles.p}>
-          The most advanced solo developers are building systems that run autonomously — AI agents that monitor, respond, and
+          The most advanced solo developers are building systems that run autonomously: AI agents that monitor, respond, and
           escalate without human intervention. Not fully autonomous (that's irresponsible), but <strong>"AI proposes, rules
           approve, human audits"</strong>.
         </p>
@@ -423,7 +423,7 @@ function Patterns() {
             ))}
           </div>
           <p style={styles.p}>
-            Most solo developers are at L2-L3. The ones generating the most revenue per hour are pushing toward L4 — their
+            Most solo developers are at L2-L3. The ones generating the most revenue per hour are pushing toward L4. Their
             systems handle the routine while they focus on the strategic decisions that actually grow the business.
           </p>
         </div>
@@ -434,15 +434,15 @@ function Patterns() {
         <p style={styles.p}>
           "AI proposes, rules approve, human audits" sounds like a slogan until you write it down. The concrete shape is a
           three-stage pipeline where the <strong>model never touches the side effect directly</strong>. It emits a typed
-          proposal; a deterministic policy layer accepts, downgrades, or rejects it; and every decision — including the
-          rejections — lands in an append-only log that you read the next morning.
+          proposal; a deterministic policy layer accepts, downgrades, or rejects it; and every decision, including the
+          rejections, lands in an append-only log that you read the next morning.
         </p>
         <CodeBlock filename="autonomy-loop.js" code={AUTONOMY_LOOP_CODE} output={AUTONOMY_LOOP_OUTPUT} />
       </FadeIn>
 
       <FadeIn delay={360}>
         <Insight tag="audit the rejections">
-          Everyone reads the actions their system took. Almost nobody reads the ones it <em>refused</em> to take — and that's
+          Everyone reads the actions their system took. Almost nobody reads the ones it <em>refused</em> to take, and that's
           where the signal lives. A policy rule that fires constantly is either doing real work or is mis-calibrated, and you
           cannot tell which from the accepted actions alone. Log rejections with the same fidelity as executions, and put a
           count of each rule's firings in your daily digest. Rules that never fire are dead weight; rules that fire on 40% of
@@ -454,14 +454,14 @@ function Patterns() {
         <Decision question="What actually stops a solo system from moving L3 → L4?">
           Not model quality. The blocker is almost always <strong>reversibility</strong>. L3 works because a human reviews
           within a day, so the cost of a bad action is bounded by how much damage accrues in that window. Moving to L4 means
-          accepting the damage of an unreviewed action — so the only actions that can safely graduate are the ones you can
+          accepting the damage of an unreviewed action, so the only actions that can safely graduate are the ones you can
           undo, retry, or cap. Sending an email is irreversible; drafting one into a queue is not. Charging a card is
           irreversible; issuing a credit is bounded.
           <br /><br />
           The practical migration path is per-action, not per-system. Take one action type, instrument it for 30 days at L3,
           and measure two numbers: how often you overrode the proposal, and what the worst single override would have cost if
           it had gone through. If the override rate is under ~2% and the worst case is bounded and reversible, that action
-          type graduates to L4 — with the policy layer unchanged and the audit log still recording everything. Everything
+          type graduates to L4, with the policy layer unchanged and the audit log still recording everything. Everything
           else stays at L3. A system at "L4" is really a system where 80% of action types earned it individually.
           <Pill type="amber">Graduate actions, not systems</Pill>
         </Decision>
@@ -488,13 +488,13 @@ const POLICY = [
 ];
 
 async function runAutonomyCycle(context, state, audit) {
-  // 1. PROPOSE — model output is data, not a command. Validate the shape.
+  // 1. PROPOSE: model output is data, not a command. Validate the shape.
   const proposal = await model.proposeAction(context);   // { action, args, value, confidence, rationale }
   if (!proposal || typeof proposal.action !== 'string') {
     return audit.write({ stage: 'propose', outcome: 'malformed', raw: proposal });
   }
 
-  // 2. APPROVE — deterministic. Every rule runs; collect ALL failures, not the first.
+  // 2. APPROVE: deterministic. Every rule runs; collect ALL failures, not the first.
   const blocks = POLICY
     .map(rule => ({ rule: rule.name, reason: rule.check(proposal, state) }))
     .filter(r => r.reason !== null);
@@ -504,7 +504,7 @@ async function runAutonomyCycle(context, state, audit) {
     return audit.write({ stage: 'approve', outcome: 'rejected', proposal, blocks });
   }
 
-  // 3. EXECUTE — idempotency key means a crash-and-retry can't double-fire.
+  // 3. EXECUTE: idempotency key means a crash-and-retry can't double-fire.
   const key = \`\${proposal.action}:\${context.entityId}:\${context.cycleId}\`;
   if (await audit.hasExecuted(key)) {
     return audit.write({ stage: 'execute', outcome: 'deduped', key });
@@ -521,7 +521,7 @@ async function runAutonomyCycle(context, state, audit) {
   }
 }
 
-// 4. AUDIT — the part people skip. Read it every morning, rejections included.
+// 4. AUDIT: the part people skip. Read it every morning, rejections included.
 async function dailyDigest(audit, day) {
   const events = await audit.since(day);
   const byOutcome = events.reduce((acc, e) => {
@@ -561,8 +561,8 @@ function AppliedPatterns() {
       <FadeIn delay={60}>
         <Decision question="Why does this matter at a big company?">
           Because every company is trying to figure out how to do more with fewer people. When you demonstrate that you've
-          built production systems solo with AI assistance — handling architecture, implementation, testing, deployment,
-          monitoring, and iteration — you're showing exactly the leverage that companies want from their senior engineers.
+          built production systems solo with AI assistance (architecture, implementation, testing, deployment,
+          monitoring, and iteration), you're showing exactly the leverage that companies want from their senior engineers.
           <br /><br />
           The staff+ engineer who can direct AI to multiply their output by 10x is more valuable than the one who writes
           beautiful code at 1x speed. Companies know this. They're looking for people who've already made the transition.
@@ -576,7 +576,7 @@ function AppliedPatterns() {
           {[
             {
               q: '"Tell me about a complex system you\'ve built"',
-              a: '"I built a full production system — 1000+ tests, dozens of scheduled jobs, third-party API integrations, real-time monitoring — as a solo developer using AI as my engineering team. I can walk you through the architecture decisions, the failure modes I designed for, and how I maintained velocity without a team."',
+              a: '"I built a full production system (1000+ tests, dozens of scheduled jobs, third-party API integrations, real-time monitoring) as a solo developer using AI as my engineering team. I can walk you through the architecture decisions, the failure modes I designed for, and how I maintained velocity without a team."',
             },
             {
               q: '"How do you think about team productivity?"',
@@ -597,7 +597,7 @@ function AppliedPatterns() {
 
       <FadeIn delay={180}>
         <Insight tag="the meta-point">
-          This entire playbook — 16 deep dives, <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-accent)', fontWeight: 500 }}>31 projects</a>, 19 with runnable test suites, architecture diagrams, interactive UI — was built by one engineer with AI.
+          This entire playbook (16 deep dives, <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-accent)', fontWeight: 500 }}>31 projects</a>, 19 with runnable test suites, architecture diagrams, interactive UI) was built by one engineer with AI.
         </Insight>
       </FadeIn>
 
@@ -617,13 +617,13 @@ function AppliedPatterns() {
 
       <FadeIn delay={300}>
         <Decision question="Is the solo developer advantage permanent, or will big companies catch up?">
-          Big companies will get better at using AI — they already are. But the structural advantages of solo/small teams
+          Big companies will get better at using AI; they already are. But the structural advantages of solo/small teams
           are durable: lower cost structure, faster iteration, deeper domain knowledge, direct customer relationships, ability
           to serve niches that are too small for venture-backed companies.
           <br /><br />
-          The real question isn't whether big companies will catch up in AI usage. It's whether they can match the
+          The question isn't whether big companies will catch up in AI usage. It's whether they can match the
           <strong> speed × domain depth × cost structure</strong> combination that solo developers have. History suggests they
-          can't — big companies are optimized for scale, not speed. And in the AI era, speed compounds faster than scale.
+          can't, because big companies are optimized for scale, not speed. And in the AI era, speed compounds faster than scale.
         </Decision>
       </FadeIn>
     </>
@@ -635,8 +635,8 @@ const styles = {
   article: { maxWidth: 860, margin: '0 auto' },
   header: { marginBottom: 32, paddingBottom: 24, borderBottom: '1px solid var(--border)' },
   eyebrow: { fontSize: 11, fontWeight: 600, color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', fontFamily: 'var(--font-mono)', marginBottom: 8 },
-  h1: { fontSize: 40, fontWeight: 700, color: 'var(--text-h)', lineHeight: 1.1, fontFamily: 'var(--font-display)', marginBottom: 12, letterSpacing: '-0.02em' },
-  subtitle: { fontSize: 16, color: 'var(--text-p)', lineHeight: 1.7 },
+  h1: { fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 400, color: 'var(--text-h)', lineHeight: 1.08, marginBottom: 16, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
+  subtitle: { fontSize: 'clamp(16px, 1.3vw, 18px)', color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 28, maxWidth: '62ch' },
   tabBar: { display: 'flex', gap: 4, marginBottom: 32, flexWrap: 'wrap', borderBottom: '1px solid var(--border)', paddingBottom: 0 },
   tab: { padding: '10px 18px', fontSize: 13, fontWeight: 500, color: 'var(--text-muted)', background: 'none', border: 'none', borderBottom: '2px solid transparent', cursor: 'pointer', fontFamily: 'var(--font-mono)', transition: 'all 0.15s ease', marginBottom: -1 },
   tabActive: { color: 'var(--text-accent)', borderBottomColor: 'var(--text-accent)' },

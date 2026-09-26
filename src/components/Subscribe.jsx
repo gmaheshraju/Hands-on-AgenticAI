@@ -42,7 +42,7 @@ export default function Subscribe() {
   if (state === 'done') {
     return (
       <p style={styles.done}>
-        Check your inbox to confirm — the first email has the checklist in it.
+        Check your inbox to confirm. The first email has the checklist in it.
       </p>
     );
   }

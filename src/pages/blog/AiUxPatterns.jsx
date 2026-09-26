@@ -536,20 +536,20 @@ export default function AiUxPatterns() {
       <h1 style={styles.h1}>AI UX Patterns</h1>
       <p style={styles.subtitle}>
         Streaming, confidence indicators, human-in-the-loop flows, progressive disclosure,
-        and error states — the product engineering that makes AI feel trustworthy instead of magical.
+        and error states: the product engineering that makes AI feel trustworthy instead of magical.
       </p>
 
       <Diagram
       svg={aiUxSvg}
-      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/12-ai-ux</code> — the complete set of eight SSE event types in the order <code>server.js</code> first emits them (<code>stream_start</code> through <code>error</code>), the HITL park that keeps one connection open on a resolver stashed in <code>pendingApprovals</code>, and the single durable artifact in the whole system: one <code>localStorage</code> key, browser-side. Drawn from the source, not from the documentation.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/12-ai-ux</code>: the complete set of eight SSE event types in the order <code>server.js</code> first emits them (<code>stream_start</code> through <code>error</code>), the HITL park that keeps one connection open on a resolver stashed in <code>pendingApprovals</code>, and the single durable artifact in the whole system: one <code>localStorage</code> key, browser-side. Drawn from the source, not from the documentation.</>}
       source="tree/main/projects/12-ai-ux"
       facts="blob/main/docs/diagrams/ai_ux_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
       />
 
-      <div style={styles.tabWrap}>
+      <div className="tab-nav post-tabs" role="tablist">
         {TABS.map((t, i) => (
-          <button key={t} onClick={() => setTab(i)} style={{ ...styles.tabBtn, ...(tab === i ? styles.tabActive : {}) }}>{t}</button>
+          <button key={t} onClick={() => setTab(i)} role="tab" aria-selected={tab === i} className={`tab-nav__btn${tab === i ? ' tab-nav__btn--active' : ''}`}>{t}</button>
         ))}
       </div>
 
@@ -588,19 +588,19 @@ function StreamingPanel() {
       />
 
       <FadeIn><Decision question="When to stream vs buffer the LLM response?">
-        <Pill type="green">Stream always for conversational UI</Pill> User sees tokens appear in real-time. Perceived wait drops from 4s to 200ms (time to first token). This is the ChatGPT/Claude pattern. Streaming dramatically reduces perceived latency complaints despite zero change to actual generation time — users judge responsiveness by when they see the first token, not when the last one arrives.
+        <Pill type="green">Stream always for conversational UI</Pill> User sees tokens appear in real-time. Perceived wait drops from 4s to 200ms (time to first token). This is the ChatGPT/Claude pattern. Streaming sharply reduces perceived latency complaints despite zero change to actual generation time, because users judge responsiveness by when they see the first token, not when the last one arrives.
         <br /><br />
-        <Pill type="amber">Buffer for structured output</Pill> If you need to validate, format, or filter the response before showing it — content moderation, JSON schema validation, tool call parsing — buffer until validation passes. Showing the user a half-formed JSON blob or a response that gets yanked back after moderation is worse than a 2-second wait.
+        <Pill type="amber">Buffer for structured output</Pill> If you need to validate, format, or filter the response before showing it (content moderation, JSON schema validation, tool call parsing), buffer until validation passes. Showing the user a half-formed JSON blob or a response that gets yanked back after moderation is worse than a 2-second wait.
         <br /><br />
         <Pill type="green">Hybrid: stream text, buffer tool results</Pill> &quot;Let me look that up for you...&quot; (streamed) then a loading spinner while the tool executes, then &quot;Found 3 matching orders&quot; (buffered after tool completes). The user sees progress at every stage. This is how Claude, ChatGPT, and Copilot all handle tool use.
         <br /><br />
-        <strong>Key distinction:</strong> Know the difference between Server-Sent Events (SSE) and WebSockets for streaming. SSE is unidirectional, simpler, works through CDNs, and is what OpenAI/Anthropic APIs use. WebSockets are bidirectional — overkill for streaming LLM responses but needed if the user can interrupt/cancel mid-stream.
+        <strong>Key distinction:</strong> Know the difference between Server-Sent Events (SSE) and WebSockets for streaming. SSE is unidirectional, simpler, works through CDNs, and is what OpenAI/Anthropic APIs use. WebSockets are bidirectional: overkill for streaming LLM responses but needed if the user can interrupt/cancel mid-stream.
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="How to handle streaming UX states?">
-        <Pill type="green">4-state machine: idle, thinking, streaming, complete</Pill> Each state needs distinct visual treatment. Idle: empty or last message. Thinking: typing indicator (dots or pulsing ring) — this appears during the TTFT window (200-500ms). Streaming: tokens appearing with a blinking cursor/caret at the end. Complete: cursor disappears, action buttons (copy, share, edit, regenerate) fade in.
+        <Pill type="green">4-state machine: idle, thinking, streaming, complete</Pill> Each state needs distinct visual treatment. Idle: empty or last message. Thinking: typing indicator (dots or pulsing ring), which appears during the TTFT window (200-500ms). Streaming: tokens appearing with a blinking cursor/caret at the end. Complete: cursor disappears, action buttons (copy, share, edit, regenerate) fade in.
         <br /><br />
-        <Pill type="red">Never show action buttons while streaming</Pill> If you show a &quot;copy&quot; button while tokens are still arriving, the user copies an incomplete response. If you show &quot;regenerate&quot; mid-stream, clicking it fires a second API call before the first finishes — wasted tokens. Actions appear only on state === &apos;complete&apos;.
+        <Pill type="red">Never show action buttons while streaming</Pill> If you show a &quot;copy&quot; button while tokens are still arriving, the user copies an incomplete response. If you show &quot;regenerate&quot; mid-stream, clicking it fires a second API call before the first finishes, wasting tokens. Actions appear only on state === &apos;complete&apos;.
         <br /><br />
         <Pill type="amber">Tool execution as a 5th state</Pill> When the model calls a tool (search, API lookup, code execution), show a specific spinner with a label: &quot;Searching your order history...&quot; not just a generic loading indicator. Users tolerate 3-5 seconds of tool execution if they understand what is happening.
       </Decision></FadeIn>
@@ -608,9 +608,9 @@ function StreamingPanel() {
       <FadeIn delay={160}><Decision question="Progressive content reveal patterns?">
         <Pill type="green">Token-by-token</Pill> The standard ChatGPT/Claude pattern. Words appear as generated. Natural for conversation. Implementation: SSE stream where each event contains 1-5 tokens. Client appends to a string and re-renders via React state.
         <br /><br />
-        <Pill type="amber">Chunk-by-chunk</Pill> Buffer 2-3 sentences, reveal as a block. Better for structured content — lists, tables, code blocks. Less jarring than word-by-word for non-conversation UI. Notion AI uses this pattern. Implementation: accumulate tokens until you hit a sentence boundary or newline, then flush.
+        <Pill type="amber">Chunk-by-chunk</Pill> Buffer 2-3 sentences, reveal as a block. Better for structured content: lists, tables, code blocks. Less jarring than word-by-word for non-conversation UI. Notion AI uses this pattern. Implementation: accumulate tokens until you hit a sentence boundary or newline, then flush.
         <br /><br />
-        <Pill type="green">Section-by-section</Pill> For long-form content. &quot;Summary&quot; section appears first, then &quot;Details&quot; can expand on click. User gets the answer in 1-2 seconds, full detail is optional. Perplexity uses this — the answer appears immediately, sources expand below. Implementation: stream normally but collapse sections behind accordion UI after completion.
+        <Pill type="green">Section-by-section</Pill> For long-form content. &quot;Summary&quot; section appears first, then &quot;Details&quot; can expand on click. User gets the answer in 1-2 seconds, full detail is optional. Perplexity uses this: the answer appears immediately, sources expand below. Implementation: stream normally but collapse sections behind accordion UI after completion.
       </Decision></FadeIn>
 
       <FadeIn>
@@ -636,7 +636,7 @@ function ConfidencePanel() {
       <FadeIn><Decision question="How to surface confidence to users?">
         <Pill type="green">{'>'}0.9: direct statement, no hedging</Pill> &quot;Your order ships tomorrow.&quot; No qualifiers. High confidence means the answer came from a verified source (database lookup, confirmed RAG chunk with cosine similarity {'>'}0.85). The user sees a clean, authoritative answer.
         <br /><br />
-        <Pill type="amber">0.7-0.9: soft qualifiers with source attribution</Pill> &quot;Based on the information I found, your order should ship tomorrow.&quot; Subtle language shift. Show expandable sources so the user can verify. This is the &quot;qualified trust&quot; zone — the answer is probably right but came from fuzzy matching or inference.
+        <Pill type="amber">0.7-0.9: soft qualifiers with source attribution</Pill> &quot;Based on the information I found, your order should ship tomorrow.&quot; Subtle language shift. Show expandable sources so the user can verify. This is the &quot;qualified trust&quot; zone: the answer is probably right but came from fuzzy matching or inference.
         <br /><br />
         <Pill type="amber">0.4-0.7: explicit uncertainty with human option</Pill> &quot;I am not entirely sure, but it looks like your order ships tomorrow. You may want to check the tracking page for confirmation.&quot; Offer a &quot;connect to human&quot; button. The user should not have to guess that the AI is unsure.
         <br /><br />
@@ -644,13 +644,13 @@ function ConfidencePanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="Visual confidence indicators -- what works?">
-        <Pill type="green">Source attribution</Pill> &quot;According to your order history...&quot; or &quot;Based on our refund policy (Section 4.2)...&quot; Confidence through traceability. This is Perplexity&apos;s core UX innovation — every statement is grounded in a visible source. Users who want to verify can click through. Users who trust can ignore.
+        <Pill type="green">Source attribution</Pill> &quot;According to your order history...&quot; or &quot;Based on our refund policy (Section 4.2)...&quot; Confidence through traceability. This is Perplexity&apos;s core UX innovation: every statement is grounded in a visible source. Users who want to verify can click through. Users who trust can ignore.
         <br /><br />
         <Pill type="amber">Footnotes/citations</Pill> [1][2][3] with expandable sources. Works well for knowledge-base products and research tools. Google&apos;s AI Overviews use this pattern. Implementation: the LLM outputs citation markers, your UI maps them to source chunks from RAG retrieval.
         <br /><br />
-        <Pill type="red">Confidence percentages</Pill> Never show &quot;87% confident&quot; to end users. It creates false precision — the model&apos;s logprob-derived confidence is not calibrated the way humans expect. &quot;87%&quot; does not mean &quot;right 87 out of 100 times.&quot; It means &quot;the next token probability distribution peaked here.&quot; These numbers mislead more than they inform. Reserve them for internal dashboards and eval pipelines.
+        <Pill type="red">Confidence percentages</Pill> Never show &quot;87% confident&quot; to end users. It creates false precision; the model&apos;s logprob-derived confidence is not calibrated the way humans expect. &quot;87%&quot; does not mean &quot;right 87 out of 100 times.&quot; It means &quot;the next token probability distribution peaked here.&quot; These numbers mislead more than they inform. Reserve them for internal dashboards and eval pipelines.
         <br /><br />
-        <Pill type="amber">Color-coded badges</Pill> Green/amber/red confidence bands. Works for dashboards, data analysis, and structured output (e.g., anomaly detection results). Too alarming for conversational UI — a red badge on a chat message feels like an error, not a confidence signal.
+        <Pill type="amber">Color-coded badges</Pill> Green/amber/red confidence bands. Works for dashboards, data analysis, and structured output (e.g., anomaly detection results). Too alarming for conversational UI: a red badge on a chat message feels like an error, not a confidence signal.
       </Decision></FadeIn>
 
       <FadeIn delay={160}><Decision question="Handling ambiguous user queries?">
@@ -666,7 +666,7 @@ function ConfidencePanel() {
       </FadeIn>
 
       <FadeIn delay={80}><Insight>
-        Most AI products fail at the edges of confidence. They are great when confident and terrible when uncertain — either silent (showing nothing) or overconfident (showing wrong answers as facts). The right approach: design the uncertainty UX FIRST. If your product is trustworthy when it is wrong, users will trust it when it is right. Trust research consistently shows that a single confidently wrong answer destroys trust far faster than correct answers rebuild it — the asymmetry is severe, and it is the core reason why abstaining when uncertain is always better than guessing.
+        Most AI products fail at the edges of confidence. They are great when confident and terrible when uncertain: either silent (showing nothing) or overconfident (showing wrong answers as facts). The right approach: design the uncertainty UX FIRST. If your product is trustworthy when it is wrong, users will trust it when it is right. Trust research consistently shows that a single confidently wrong answer destroys trust far faster than correct answers rebuild it. The asymmetry is severe, and it is the core reason why abstaining when uncertain is always better than guessing.
       </Insight></FadeIn>
 
       <FadeIn delay={160}><Insight type="warn" tag="Calibration gotcha">
@@ -685,19 +685,19 @@ function HumanInTheLoopPanel() {
       />
 
       <FadeIn><Decision question="When to escalate to a human?">
-        <Pill type="green">Confidence below threshold</Pill> The AI does not know the answer. Route to human support. Set the threshold based on your domain — customer support might tolerate 0.6, medical triage should require 0.95+. The threshold is a product decision, not an engineering one.
+        <Pill type="green">Confidence below threshold</Pill> The AI does not know the answer. Route to human support. Set the threshold based on your domain: customer support might tolerate 0.6, medical triage should require 0.95+. The threshold is a product decision, not an engineering one.
         <br /><br />
         <Pill type="green">High-stakes actions</Pill> Financial transactions, account deletion, medical advice, legal guidance. Always confirm with the user, optionally route to a human specialist. The cost of a false positive (asking unnecessarily) is 5 seconds of user time. The cost of a false negative (executing wrongly) is a lawsuit or lost money.
         <br /><br />
         <Pill type="amber">Repeated failures</Pill> User has asked 3 times and the AI still cannot help. Auto-escalate before the user gets angry. Track &quot;frustration signals&quot;: rephrased questions, shorter messages, punctuation patterns (!!!), explicit complaints. Three failed attempts = automatic handoff.
         <br /><br />
-        <Pill type="red">Emotional/crisis detection</Pill> User is frustrated, angry, or mentions self-harm. Immediate human handoff with full context transfer. No confirmation dialog — just route. Response time SLA for crisis: under 60 seconds to a human. This is non-negotiable for any consumer-facing AI product.
+        <Pill type="red">Emotional/crisis detection</Pill> User is frustrated, angry, or mentions self-harm. Immediate human handoff with full context transfer. No confirmation dialog; just route. Response time SLA for crisis: under 60 seconds to a human. This is non-negotiable for any consumer-facing AI product.
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="Approval flow patterns for AI actions?">
-        <Pill type="green">Inline confirmation for simple actions</Pill> &quot;I will cancel your order (#456, Rs.8,999). Confirm?&quot; with [Confirm] [Cancel] buttons. For reversible, single-step actions. The confirmation shows exactly what will happen — amount, target, consequence. No vague &quot;Are you sure?&quot;
+        <Pill type="green">Inline confirmation for simple actions</Pill> &quot;I will cancel your order (#456, Rs.8,999). Confirm?&quot; with [Confirm] [Cancel] buttons. For reversible, single-step actions. The confirmation shows exactly what will happen: amount, target, consequence. No vague &quot;Are you sure?&quot;
         <br /><br />
-        <Pill type="green">Review-and-edit for content creation</Pill> AI generates a draft (email, report, code). User reviews, edits, then sends. GitHub Copilot, Notion AI, and Gmail Smart Compose all use this. The AI proposes, the human disposes. Key: make editing frictionless — inline editing, not a separate modal.
+        <Pill type="green">Review-and-edit for content creation</Pill> AI generates a draft (email, report, code). User reviews, edits, then sends. GitHub Copilot, Notion AI, and Gmail Smart Compose all use this. The AI proposes, the human disposes. Key: make editing frictionless, with inline editing rather than a separate modal.
         <br /><br />
         <Pill type="amber">Staged execution for multi-step workflows</Pill> AI shows a plan: &quot;Step 1: fetch data. Step 2: calculate totals. Step 3: send report to team.&quot; User approves each stage or approves the full plan. Claude&apos;s computer use and Devin use this pattern. The user stays in control of the overall trajectory while the AI handles execution details.
         <br /><br />
@@ -717,11 +717,11 @@ function HumanInTheLoopPanel() {
       </FadeIn>
 
       <FadeIn delay={80}><Insight>
-        The best AI UX pattern is the one users never notice. When the AI knows the answer, it responds instantly. When it does not, it hands off to a human without the user feeling &quot;downgraded.&quot; The worst pattern: a modal that says &quot;AI could not help. Would you like to talk to a human?&quot; That is admitting failure. Instead: &quot;Let me get someone who specializes in billing to help with this specific issue.&quot; Reframe the handoff as expertise routing, not AI failure. This framing shift — from &quot;I failed&quot; to &quot;I am connecting you with the right expert&quot; — dramatically increases handoff acceptance rates.
+        The best AI UX pattern is the one users never notice. When the AI knows the answer, it responds instantly. When it does not, it hands off to a human without the user feeling &quot;downgraded.&quot; The worst pattern: a modal that says &quot;AI could not help. Would you like to talk to a human?&quot; That is admitting failure. Instead: &quot;Let me get someone who specializes in billing to help with this specific issue.&quot; Reframe the handoff as expertise routing, not AI failure. This framing shift, from &quot;I failed&quot; to &quot;I am connecting you with the right expert,&quot; noticeably increases handoff acceptance rates.
       </Insight></FadeIn>
 
       <FadeIn delay={160}><Insight type="warn" tag="Anti-pattern">
-        The &quot;confirmation fatigue&quot; trap: requiring confirmation for everything. If the AI asks &quot;Are you sure?&quot; for every action, users stop reading the confirmations and click &quot;yes&quot; reflexively — the same phenomenon as cookie banner blindness. Reserve confirmations for genuinely high-risk actions. Low-risk actions should auto-execute with an undo option (the Gmail &quot;undo send&quot; pattern). Risk-score the action, do not default to asking.
+        The &quot;confirmation fatigue&quot; trap: requiring confirmation for everything. If the AI asks &quot;Are you sure?&quot; for every action, users stop reading the confirmations and click &quot;yes&quot; reflexively, the same phenomenon as cookie banner blindness. Reserve confirmations for genuinely high-risk actions. Low-risk actions should auto-execute with an undo option (the Gmail &quot;undo send&quot; pattern). Risk-score the action, do not default to asking.
       </Insight></FadeIn>
     </div>
   );
@@ -732,7 +732,7 @@ function ErrorStatesPanel() {
     <div>
       <SectionHead
         title="What users see when AI breaks"
-        desc="AI systems fail in unique ways that traditional error handling doesn't cover. Model timeouts, rate limits, hallucination detection, content filtering, tool failures — each needs a specific recovery pattern. The goal: the user should never see a raw error."
+        desc="AI systems fail in unique ways that traditional error handling doesn't cover. Model timeouts, rate limits, hallucination detection, content filtering, tool failures: each needs a specific recovery pattern. The goal: the user should never see a raw error."
       />
 
       <FadeIn><Decision question="Error taxonomy for AI products?">
@@ -744,7 +744,7 @@ function ErrorStatesPanel() {
         <br /><br />
         <Pill type="amber">Hallucination detected post-generation</Pill> &quot;I want to make sure I give you accurate information. Let me verify this...&quot; Trigger a fact-check step transparently. Implementation: run the response through a grounding check against your knowledge base. If grounding score is below threshold, regenerate with explicit grounding instructions.
         <br /><br />
-        <Pill type="green">Tool failure</Pill> &quot;I was not able to look up your order right now. Would you like to try again, or should I connect you with support?&quot; Give options, never dead-end. If the tool failure is transient, auto-retry once before showing the error. If persistent, degrade gracefully — answer from model knowledge with a caveat.
+        <Pill type="green">Tool failure</Pill> &quot;I was not able to look up your order right now. Would you like to try again, or should I connect you with support?&quot; Give options, never dead-end. If the tool failure is transient, auto-retry once before showing the error. If persistent, degrade gracefully: answer from model knowledge with a caveat.
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="Recovery patterns -- what to do when the primary path fails?">
@@ -752,7 +752,7 @@ function ErrorStatesPanel() {
         <br /><br />
         <Pill type="green">Graceful degradation</Pill> Tool fails? Answer from the model&apos;s knowledge with a caveat. &quot;Based on general policy, refunds take 5-7 days, but I was not able to check your specific order. Want me to try again?&quot; A partial answer with a disclaimer is better than no answer.
         <br /><br />
-        <Pill type="amber">Intelligent retry</Pill> A retry button that does something different — retry with a different model, modified prompt, or different tools. Same input to the same model equals the same output. A &quot;retry&quot; button that replays the exact same request is theater, not engineering.
+        <Pill type="amber">Intelligent retry</Pill> A retry button that does something different: retry with a different model, modified prompt, or different tools. Same input to the same model equals the same output. A &quot;retry&quot; button that replays the exact same request is theater, not engineering.
         <br /><br />
         <Pill type="red">Cache-based fallback</Pill> All models down? Serve a cached response from a similar previous query. Label it clearly: &quot;Based on a similar question we answered previously...&quot; This is the last resort, not the first. Only implement if you have a semantic cache (not exact-match).
       </Decision></FadeIn>
@@ -760,11 +760,11 @@ function ErrorStatesPanel() {
       <FadeIn delay={160}><Decision question="Loading states that build trust vs destroy it?">
         <Pill type="green">Phase 1 (0-500ms): nothing visible</Pill> Most TTFT windows complete here. Showing a loader for a 300ms operation creates visual noise. Only trigger loading UI after 500ms. Implementation: setTimeout with a ref to cancel if the response arrives first.
         <br /><br />
-        <Pill type="green">Phase 2 (500ms-2s): subtle typing indicator</Pill> Dots, cursor, or &quot;Thinking...&quot; label. Minimal but present. The user knows the system received their input. No progress bar — you cannot estimate LLM completion time accurately.
+        <Pill type="green">Phase 2 (500ms-2s): subtle typing indicator</Pill> Dots, cursor, or &quot;Thinking...&quot; label. Minimal but present. The user knows the system received their input. No progress bar, since you cannot estimate LLM completion time accurately.
         <br /><br />
-        <Pill type="amber">Phase 3 (2-5s): contextual progress message</Pill> &quot;Searching your order history...&quot; or &quot;Analyzing the document...&quot; Tell the user what is happening. Map tool calls to human-readable descriptions. This is where most AI-assisted search products live — Perplexity shows &quot;Reading 5 sources...&quot;
+        <Pill type="amber">Phase 3 (2-5s): contextual progress message</Pill> &quot;Searching your order history...&quot; or &quot;Analyzing the document...&quot; Tell the user what is happening. Map tool calls to human-readable descriptions. This is where most AI-assisted search products live. Perplexity shows &quot;Reading 5 sources...&quot;
         <br /><br />
-        <Pill type="red">Phase 4 (5s+): step progress with cancel option</Pill> &quot;Checked 3 of 5 sources...&quot; plus a cancel button. Never a spinner with no context at this duration. A dead spinner for more than 5 seconds is the #1 trust killer in AI UX. Users who see a contextless spinner at this duration are far more likely to abandon permanently than users who see a progress message — the difference between &quot;it is working&quot; and &quot;it is broken&quot; is entirely in the feedback.
+        <Pill type="red">Phase 4 (5s+): step progress with cancel option</Pill> &quot;Checked 3 of 5 sources...&quot; plus a cancel button. Never a spinner with no context at this duration. A dead spinner for more than 5 seconds is the #1 trust killer in AI UX. Users who see a contextless spinner at this duration are far more likely to abandon permanently than users who see a progress message. The difference between &quot;it is working&quot; and &quot;it is broken&quot; is entirely in the feedback.
       </Decision></FadeIn>
 
       <FadeIn>
@@ -772,7 +772,7 @@ function ErrorStatesPanel() {
       </FadeIn>
 
       <FadeIn delay={80}><Insight type="warn" tag="The cardinal sin">
-        The infinite spinner. No progress indicator, no status message, no timeout, no cancel button. User stares at a loading animation for 15 seconds, then refreshes the page. They have now lost their conversation context AND their trust. Set a hard timeout per model tier (Haiku: 5s, Sonnet: 10s, Opus: 30s). If the response is not ready, show what you have and explain that more is coming. Always include a cancel button after 3 seconds. Always show what the system is doing after 2 seconds. These are not guidelines — they are requirements.
+        The infinite spinner. No progress indicator, no status message, no timeout, no cancel button. User stares at a loading animation for 15 seconds, then refreshes the page. They have now lost their conversation context AND their trust. Set a hard timeout per model tier (Haiku: 5s, Sonnet: 10s, Opus: 30s). If the response is not ready, show what you have and explain that more is coming. Always include a cancel button after 3 seconds. Always show what the system is doing after 2 seconds. These are not guidelines. They are requirements.
       </Insight></FadeIn>
     </div>
   );
@@ -787,9 +787,9 @@ function TrustPatternsPanel() {
       />
 
       <FadeIn><Decision question="Transparency patterns -- how to show the AI's work?">
-        <Pill type="green">Source attribution</Pill> &quot;I found this in your order history&quot; plus an expandable source panel. Users trust verifiable answers. Perplexity built a $3B company primarily on this UX innovation — same underlying models as everyone else, but every statement is traceable to a source. Implementation: RAG chunks become footnotes. Each footnote expands to show the source title, a snippet, and a link.
+        <Pill type="green">Source attribution</Pill> &quot;I found this in your order history&quot; plus an expandable source panel. Users trust verifiable answers. Perplexity built a $3B company primarily on this UX innovation: same underlying models as everyone else, but every statement is traceable to a source. Implementation: RAG chunks become footnotes. Each footnote expands to show the source title, a snippet, and a link.
         <br /><br />
-        <Pill type="green">Explain limitations upfront</Pill> &quot;I can help with billing and orders. For technical support, I will connect you with our engineering team.&quot; Setting expectations upfront reduces disappointment. Klarna&apos;s AI assistant prominently states what it can and cannot do — setting scope upfront significantly reduces &quot;wrong channel&quot; escalations.
+        <Pill type="green">Explain limitations upfront</Pill> &quot;I can help with billing and orders. For technical support, I will connect you with our engineering team.&quot; Setting expectations upfront reduces disappointment. Klarna&apos;s AI assistant prominently states what it can and cannot do, and setting scope upfront significantly reduces &quot;wrong channel&quot; escalations.
         <br /><br />
         <Pill type="amber">Version/freshness awareness</Pill> &quot;I have information updated as of [date].&quot; For knowledge-base products, tell users how fresh the data is. A 6-month-old answer about API pricing is likely wrong. Show a &quot;stale data&quot; warning when sources are older than your domain&apos;s freshness threshold (e.g., 30 days for support docs, 1 day for pricing).
         <br /><br />
@@ -797,17 +797,17 @@ function TrustPatternsPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="Personalization vs privacy -- the memory dilemma?">
-        <Pill type="green">Explicit memory: always ask first</Pill> &quot;Would you like me to remember your preferences?&quot; Let users opt in. Never silently remember. ChatGPT&apos;s memory feature asks before storing. Users can view, edit, and delete individual memories. This is not just good UX — GDPR Article 17 (right to erasure) and India&apos;s DPDPA Section 12 legally require it for any personal data processing.
+        <Pill type="green">Explicit memory: always ask first</Pill> &quot;Would you like me to remember your preferences?&quot; Let users opt in. Never silently remember. ChatGPT&apos;s memory feature asks before storing. Users can view, edit, and delete individual memories. This is not just good UX: GDPR Article 17 (right to erasure) and India&apos;s DPDPA Section 12 legally require it for any personal data processing.
         <br /><br />
         <Pill type="green">Session-only context</Pill> Context within a conversation, forgotten after. Safest default for most products. No persistence equals no privacy risk, no compliance burden, no data breach surface. The trade-off: users re-explain preferences every session. For most products, this is acceptable.
         <br /><br />
         <Pill type="amber">Cross-session with full control</Pill> &quot;I remember you prefer dark roast. Change preferences?&quot; Users can see, edit, and delete everything the AI knows about them. This requires a &quot;memory management&quot; UI: a settings page listing all stored preferences with edit/delete buttons. Non-trivial engineering cost (~2-3 weeks for a solid implementation) but high user satisfaction when done right.
         <br /><br />
-        <Pill type="red">Silent profiling</Pill> Silently building a user profile and personalizing without disclosure. Even if it makes the product objectively better, it destroys trust when discovered. The Cambridge Analytica effect is the cautionary tale: users who discover they were profiled without consent react with disproportionate anger — churn spikes, reviews tank, and the brand damage outlasts the product benefit by years.
+        <Pill type="red">Silent profiling</Pill> Silently building a user profile and personalizing without disclosure. Even if it makes the product objectively better, it destroys trust when discovered. The Cambridge Analytica effect is the cautionary tale: users who discover they were profiled without consent react with disproportionate anger: churn spikes, reviews tank, and the brand damage outlasts the product benefit by years.
       </Decision></FadeIn>
 
       <FadeIn delay={160}><Decision question="When should the AI say 'I don't know'?">
-        <Pill type="green">No relevant sources found</Pill> Always say &quot;I do not know&quot; instead of guessing. Users respect honesty. Research consistently shows that users rate AI systems that admit uncertainty as more trustworthy than systems that always attempt an answer — even when the always-answer system is right more often overall. Honesty about limitations builds more trust than accuracy alone.
+        <Pill type="green">No relevant sources found</Pill> Always say &quot;I do not know&quot; instead of guessing. Users respect honesty. Research consistently shows that users rate AI systems that admit uncertainty as more trustworthy than systems that always attempt an answer, even when the always-answer system is right more often overall. Honesty about limitations builds more trust than accuracy alone.
         <br /><br />
         <Pill type="green">Medical, legal, or financial advice</Pill> Always add a disclaimer. &quot;I can share general information, but please consult a professional for advice specific to your situation.&quot; This is not just UX. It is legal liability protection. AI companies that provide unlicensed financial or medical advice face regulatory action in India (SEBI, MCI guidelines).
         <br /><br />
@@ -821,11 +821,11 @@ function TrustPatternsPanel() {
       </FadeIn>
 
       <FadeIn delay={80}><Insight>
-        The trust equation for AI: Trust = (Reliability x Transparency) / (Risk x Surprise). Map every UX decision to these four levers. Source attribution increases transparency. Confirmation dialogs decrease risk. Consistent response formatting increases reliability. Never auto-executing a destructive action decreases surprise. The companies winning in AI UX — Perplexity, Linear, Notion — optimize all four simultaneously. The companies losing — generic chatbot wrappers with no attribution, no error handling, no confidence signals — optimize none.
+        The trust equation for AI: Trust = (Reliability x Transparency) / (Risk x Surprise). Map every UX decision to these four levers. Source attribution increases transparency. Confirmation dialogs decrease risk. Consistent response formatting increases reliability. Never auto-executing a destructive action decreases surprise. The companies winning in AI UX (Perplexity, Linear, Notion) optimize all four at once. The companies losing, generic chatbot wrappers with no attribution, no error handling and no confidence signals, optimize none.
       </Insight></FadeIn>
 
       <FadeIn delay={160}><Insight tag="Engineering perspective">
-        When discussing AI UX in a design review, structure your answer around the trust equation. &quot;The technical challenge of AI UX is not rendering tokens. It is building calibrated trust. Users should trust the system exactly as much as it deserves to be trusted: highly when it is confident and grounded, cautiously when it is uncertain, and not at all when it does not know. Every UX pattern — streaming, confidence bands, source attribution, error recovery — exists to calibrate that trust signal. The product that gets this right wins, regardless of which underlying model it uses.&quot;
+        When discussing AI UX in a design review, structure your answer around the trust equation. &quot;The technical challenge of AI UX is not rendering tokens. It is building calibrated trust. Users should trust the system exactly as much as it deserves to be trusted: highly when it is confident and grounded, cautiously when it is uncertain, and not at all when it does not know. Every UX pattern (streaming, confidence bands, source attribution, error recovery) exists to calibrate that trust signal. The product that gets this right wins, regardless of which underlying model it uses.&quot;
       </Insight></FadeIn>
         </div>
   );
@@ -834,11 +834,8 @@ function TrustPatternsPanel() {
 const styles = {
   back: { fontSize: 12, color: 'var(--text-muted)', textDecoration: 'none', fontFamily: 'var(--font-mono)' },
   eyebrow: { fontSize: 11, fontWeight: 500, color: 'var(--text-accent)', letterSpacing: '0.08em', marginBottom: 8, textTransform: 'uppercase', fontFamily: 'var(--font-mono)' },
-  h1: { fontSize: 'clamp(28px, 5vw, 44px)', fontWeight: 400, color: 'var(--text-h)', lineHeight: 1.12, marginBottom: 16, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
-  subtitle: { fontSize: 15, color: 'var(--text-p)', lineHeight: 1.75, marginBottom: 32 },
-  tabWrap: { display: 'flex', flexWrap: 'wrap', gap: 4, marginBottom: 28, borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', paddingBottom: 12 },
-  tabBtn: { fontSize: 12, fontWeight: 500, color: 'var(--text-muted)', background: 'none', border: 'none', padding: '6px 14px', borderRadius: 'var(--radius-full)', cursor: 'pointer', transition: 'all var(--dur) var(--ease)', fontFamily: 'var(--font-body)' },
-  tabActive: { color: 'var(--text-accent)', background: 'var(--bg-accent)' },
-  sh: { fontSize: 20, fontWeight: 600, color: 'var(--text-h)', marginBottom: 8, fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' },
-  ss: { fontSize: 14, color: 'var(--text-p)', lineHeight: 1.7, marginBottom: 20 },
+  h1: { fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 400, color: 'var(--text-h)', lineHeight: 1.08, marginBottom: 16, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
+  subtitle: { fontSize: 'clamp(16px, 1.3vw, 18px)', color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 28, maxWidth: '62ch' },
+  sh: { fontSize: 'clamp(24px, 2.4vw, 30px)', fontWeight: 400, color: 'var(--text-h)', marginTop: 8, marginBottom: 10, lineHeight: 1.2, fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' },
+  ss: { fontSize: 16, color: 'var(--text-p)', marginBottom: 24, lineHeight: 1.7, maxWidth: '65ch' },
 };

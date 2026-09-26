@@ -79,8 +79,8 @@ const HYBRID_SEARCH_CODE = `async function hybridSearch(query, { topK = 5, retri
     textIndex.search(query, { limit: retrieveK }),  // BM25 via Elasticsearch/pg full-text
   ]);
 
-  // Reciprocal Rank Fusion (RRF) — combine rankings
-  // Score = 1/(k + rank). k=60 is standard — dampens top-rank dominance
+  // Reciprocal Rank Fusion (RRF): combine rankings
+  // Score = 1/(k + rank). k=60 is standard; dampens top-rank dominance
   const scores = new Map();
   const K = 60;
 
@@ -157,22 +157,22 @@ export default function RagDeepDive() {
       <p style={styles.eyebrow}>Post 05</p>
       <h1 style={styles.h1}>RAG Pipeline Deep Dive</h1>
       <p style={styles.subtitle}>
-        The engineering details that make RAG actually work in production — chunking
+        The engineering details that make RAG actually work in production: chunking
         strategies, embedding model selection, hybrid search, reranking, and the
         pitfalls that cause silent quality degradation.
       </p>
 
       <Diagram
       svg={ragPipelineSvg}
-      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/05-rag-pipeline</code> — seven tuning knobs read in one constructor block, narrowing the candidate funnel 20 BM25 + 20 vector → 15 survivors of RRF → 5 chunks that reach the answer prompt. Every element traces to a line in that source tree.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/05-rag-pipeline</code>: seven tuning knobs read in one constructor block, narrowing the candidate funnel 20 BM25 + 20 vector → 15 survivors of RRF → 5 chunks that reach the answer prompt. Every element traces to a line in that source tree.</>}
       source="tree/main/projects/05-rag-pipeline"
       facts="blob/main/docs/diagrams/rag_pipeline_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
       />
 
-      <div style={styles.tabWrap}>
+      <div className="tab-nav post-tabs" role="tablist">
         {TABS.map((t, i) => (
-          <button key={t} onClick={() => setTab(i)} style={{ ...styles.tabBtn, ...(tab === i ? styles.tabActive : {}) }}>{t}</button>
+          <button key={t} onClick={() => setTab(i)} role="tab" aria-selected={tab === i} className={`tab-nav__btn${tab === i ? ' tab-nav__btn--active' : ''}`}>{t}</button>
         ))}
       </div>
 
@@ -274,8 +274,8 @@ function ChunkingPanel() {
   return (
     <div>
       <SectionHead
-        title="Chunking — the foundation of RAG quality"
-        desc={<>Chunking determines what units of information your RAG pipeline can retrieve. My first rule: <strong>"Smart defaults over infinite customization."</strong> Don't offer 15 chunking options — pick recursive splitting at 512 tokens as the default and validate it works. Get it wrong and even perfect search returns garbage.</>}
+        title="Chunking: the foundation of RAG quality"
+        desc={<>Chunking determines what units of information your RAG pipeline can retrieve. My first rule: <strong>"Smart defaults over infinite customization."</strong> Don't offer 15 chunking options. Pick recursive splitting at 512 tokens as the default and validate it works. Get it wrong and even perfect search returns garbage.</>}
       />
 
       <ChunkComparisonDiagram />
@@ -293,27 +293,23 @@ function ChunkingPanel() {
         <strong>Start with recursive. Measure retrieval quality. Switch to semantic only if retrieval quality is provably poor.</strong>
       </Decision></FadeIn>
 
-      <FadeIn delay={80}><Decision question="Chunk size — the critical parameter">
+      <FadeIn delay={80}><Decision question="Chunk size: the parameter that matters most">
         <strong>Small chunks (256-512 tokens):</strong>
-        <br />
-        + More precise retrieval — each chunk is one focused idea
-        <br />
-        + Better for Q&A where the answer is a single fact
-        <br />
-        − May lack context — "the protein" without knowing which protein
-        <br /><br />
+        <ul className="decision__list">
+          <li>+ More precise retrieval: each chunk is one focused idea</li>
+          <li>+ Better for Q&A where the answer is a single fact</li>
+          <li>− May lack context: "the protein" without knowing which protein</li>
+        </ul>
         <strong>Large chunks (1024-2048 tokens):</strong>
-        <br />
-        + More context per chunk — the LLM gets the full picture
-        <br />
-        + Better for summarization or complex explanations
-        <br />
-        − Includes irrelevant content that dilutes relevance
-        <br /><br />
+        <ul className="decision__list">
+          <li>+ More context per chunk, so the LLM gets the full picture</li>
+          <li>+ Better for summarization or complex explanations</li>
+          <li>− Includes irrelevant content that dilutes relevance</li>
+        </ul>
         <strong>The sweet spot:</strong> 512-1024 tokens for most use cases. Smaller for factual Q&A, larger for analysis tasks. Test both with your actual queries and measure answer quality.
       </Decision></FadeIn>
 
-      <FadeIn delay={160}><Decision question="Overlap — preventing information loss at boundaries">
+      <FadeIn delay={160}><Decision question="Overlap: preventing information loss at boundaries">
         Without overlap, information that spans two chunks is split and neither chunk is retrievable for queries about that information.
         <br /><br />
         <strong>Recommended:</strong> 10-20% overlap. A 512-token chunk overlaps by 50-100 tokens with the next chunk.
@@ -322,7 +318,7 @@ function ChunkingPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "My first rule: smart defaults over infinite customization. Chunking is the perfect example — don't build a settings panel with 15 chunking strategies. Pick recursive splitting at 512 tokens with 20% overlap as the default. Then validate by manually checking 50 retrievals. The senior engineering perspective starts with: 'The first question is how we chunk. If the answer spans two chunks, no amount of search quality saves us.' Then describe your validation process — that's what separates builders from readers."
+        "My first rule: smart defaults over infinite customization. Chunking is the clearest example: don't build a settings panel with 15 chunking strategies. Pick recursive splitting at 512 tokens with 20% overlap as the default. Then validate by manually checking 50 retrievals. The senior engineering perspective starts with: 'The first question is how we chunk. If the answer spans two chunks, no amount of search quality saves us.' Then describe your validation process. That's what separates builders from readers."
       </Insight></FadeIn>
     </div>
   );
@@ -332,58 +328,58 @@ function EmbeddingsPanel() {
   return (
     <div>
       <SectionHead
-        title="Embedding models — choosing and using"
-        desc="Embeddings convert text to vectors for similarity search. The model choice affects retrieval quality, cost, latency, and storage. It's also the hardest thing to change later — migrating embeddings means re-embedding your entire corpus."
+        title="Embedding models: choosing and using"
+        desc="Embeddings convert text to vectors for similarity search. The model choice affects retrieval quality, cost, latency, and storage. It's also the hardest thing to change later, because migrating embeddings means re-embedding your entire corpus."
       />
 
       <FadeIn><Decision question="Which embedding model?">
-        The honest answer in 2026 is that the top of the leaderboard is crowded and the gaps are small. Pick by <em>constraint</em> — modality, language, deployment, dimension budget — not by a single MTEB number. Scores below are MTEB-family snapshots as of mid-2026; MTEB v2 rescored everything, so never compare a v1 number to a v2 number.
+        In 2026 the top of the leaderboard is crowded and the gaps are small. Pick by <em>constraint</em> (modality, language, deployment, dimension budget), not by a single MTEB number. Scores below are MTEB-family snapshots as of mid-2026; MTEB v2 rescored everything, so never compare a v1 number to a v2 number.
         <br /><br />
         <Pill type="green">gemini-embedding-001 (Google)</Pill> 3072d with Matryoshka truncation, ~$0.15/M tokens. Leads the English MTEB v2 board (~68 overall) and is strong multilingually. The safest general-purpose default if you are already on Vertex/Gemini.
         <br /><br />
-        <Pill type="green">voyage-3-large (Voyage AI)</Pill> 1024d default, Matryoshka down to 256d, plus int8 and binary quantization that cut vector storage 4-32x. Consistently top-tier on retrieval specifically — which is the only MTEB sub-score a RAG system actually cares about.
+        <Pill type="green">voyage-3-large (Voyage AI)</Pill> 1024d default, Matryoshka down to 256d, plus int8 and binary quantization that cut vector storage 4-32x. Consistently top-tier on retrieval specifically, which is the only MTEB sub-score a RAG system actually cares about.
         <br /><br />
-        <Pill type="green">Cohere embed-v4</Pill> 1536d default with Matryoshka, long input windows, and native multimodal embedding — it embeds a page <em>image</em> (chart, scanned invoice, slide) into the same space as text. If your corpus is PDFs rather than prose, this changes the architecture: you skip OCR entirely.
+        <Pill type="green">Cohere embed-v4</Pill> 1536d default with Matryoshka, long input windows, and native multimodal embedding: it embeds a page <em>image</em> (chart, scanned invoice, slide) into the same space as text. If your corpus is PDFs rather than prose, this changes the architecture: you skip OCR entirely.
         <br /><br />
-        <Pill type="green">voyage-code-3</Pill> Domain-specific. On code retrieval, a code-tuned embedder beats a better general model — the general model thinks two functions are similar because they both contain loops and returns. The same logic applies to the law- and finance-tuned variants.
+        <Pill type="green">voyage-code-3</Pill> Domain-specific. On code retrieval, a code-tuned embedder beats a better general model, because the general model thinks two functions are similar because they both contain loops and returns. The same logic applies to the law- and finance-tuned variants.
         <br /><br />
-        <Pill type="amber">Qwen3-Embedding (0.6B / 4B / 8B, Apache 2.0)</Pill> The open-weights answer, and it is no longer a compromise — the 8B ranked first on MMTEB multilingual on release. 0.6B runs on a CPU box; 8B wants a GPU. Choose this when data cannot leave your VPC, or when token volume makes API pricing the dominant cost.
+        <Pill type="amber">Qwen3-Embedding (0.6B / 4B / 8B, Apache 2.0)</Pill> The open-weights answer, and it is no longer a compromise: the 8B ranked first on MMTEB multilingual on release. 0.6B runs on a CPU box; 8B wants a GPU. Choose this when data cannot leave your VPC, or when token volume makes API pricing the dominant cost.
         <br /><br />
         <Pill type="amber">text-embedding-3-large (OpenAI)</Pill> 3072d, $0.13/M. No longer the leader but still perfectly serviceable, and it is what a large share of production corpora are already embedded with. Not a reason to migrate on its own.
         <br /><br />
         <Pill type="red">text-embedding-ada-002, BGE-large, embed-v3</Pill> Superseded. Fine if already indexed; never the choice for a new build.
         <br /><br />
-        <strong>Critical rule:</strong> Use the SAME model — and the same <em>snapshot</em> — for indexing and querying. Mixing models produces garbage: the vector spaces don't align. This is also why embedding choice is the highest-switching-cost decision in the stack. Re-embedding 50M chunks is a migration project, not a config change. Budget for it by keeping raw chunk text next to the vectors, so a re-index never requires re-fetching source documents.
+        <strong>Hard rule:</strong> Use the SAME model, and the same <em>snapshot</em>, for indexing and querying. Mixing models produces garbage: the vector spaces don't align. This is also why embedding choice is the highest-switching-cost decision in the stack. Re-embedding 50M chunks is a migration project, not a config change. Budget for it by keeping raw chunk text next to the vectors, so a re-index never requires re-fetching source documents.
         <br /><br />
-        <strong>Interview framing:</strong> "I'd shortlist two, embed a 1-2k-query slice of our real traffic, and compare recall@10 on <em>our</em> data. MTEB is a tiebreaker, not the decision — public benchmarks are averages over domains that are not mine."
+        <strong>Interview framing:</strong> "I'd shortlist two, embed a 1-2k-query slice of our real traffic, and compare recall@10 on <em>our</em> data. MTEB is a tiebreaker, not the decision. Public benchmarks are averages over domains that are not mine."
       </Decision></FadeIn>
 
-      <FadeIn delay={80}><Decision question="Dimensions — bigger isn't always better">
+      <FadeIn delay={80}><Decision question="Dimensions: bigger isn't always better">
         Higher dimensions capture more nuance but cost more to store and search:
         <br /><br />
-        <strong>3072d (gemini-embedding-001, text-embedding-3-large):</strong> Top quality. 12KB per vector at float32. At 1M chunks, that's 12GB of vectors — and vector indexes want to live in RAM.
+        <strong>3072d (gemini-embedding-001, text-embedding-3-large):</strong> Top quality. 12KB per vector at float32. At 1M chunks, that's 12GB of vectors, and vector indexes want to live in RAM.
         <br /><br />
         <strong>1024-1536d (voyage-3-large, embed-v4, or Matryoshka truncation):</strong> Roughly 95% of the quality at half the storage. 4-6GB for 1M chunks. This is where most production systems land.
         <br /><br />
         <strong>256d (Matryoshka at 256):</strong> ~85% of the quality, 1GB for 1M chunks. Good for prototyping, or as the first stage of a two-stage retrieve.
         <br /><br />
-        <strong>Matryoshka embeddings</strong> — now standard across gemini-embedding-001, voyage-3-large, embed-v4 and text-embedding-3 — let you truncate the vector to a shorter prefix and keep most of the signal. Embed once at full width, store truncated.
+        <strong>Matryoshka embeddings</strong> (now standard across gemini-embedding-001, voyage-3-large, embed-v4 and text-embedding-3) let you truncate the vector to a shorter prefix and keep most of the signal. Embed once at full width, store truncated.
         <br /><br />
-        <strong>Quantization is the bigger lever in 2026.</strong> int8 cuts storage 4x and binary 32x versus float32, for a few points of recall. The standard pattern: search binary vectors over the whole corpus, then rescore the top ~200 hits with full-precision vectors. You keep near-full recall at a fraction of the memory — the same shape as reranking, applied one layer lower.
+        <strong>Quantization is the bigger lever in 2026.</strong> int8 cuts storage 4x and binary 32x versus float32, for a few points of recall. The standard pattern: search binary vectors over the whole corpus, then rescore the top ~200 hits with full-precision vectors. You keep near-full recall at a fraction of the memory. It is the same shape as reranking, applied one layer lower.
       </Decision></FadeIn>
 
-      <FadeIn delay={160}><Decision question="Embedding pipeline — batch vs real-time">
-        <strong>Ingestion (offline):</strong> Batch embed all documents. Use the async/batch API for 50% cost savings. Process in parallel — 1000 documents can be embedded in minutes.
+      <FadeIn delay={160}><Decision question="Embedding pipeline: batch vs real-time">
+        <strong>Ingestion (offline):</strong> Batch embed all documents. Use the async/batch API for 50% cost savings. Process in parallel; 1000 documents can be embedded in minutes.
         <br /><br />
-        <strong>Query (real-time):</strong> Embed the user's query synchronously. Must be fast — target under 20ms. Cache frequently asked queries.
+        <strong>Query (real-time):</strong> Embed the user's query synchronously. Must be fast: target under 20ms. Cache frequently asked queries.
         <br /><br />
         <strong>Updates:</strong> When a document changes, re-embed only that document's chunks. Don't re-embed the entire corpus.
         <br /><br />
-        <strong>Versioning:</strong> When you switch embedding models, you must re-embed everything. Plan for this — keep the original text stored alongside the vectors so you can re-embed without re-ingesting from source.
+        <strong>Versioning:</strong> When you switch embedding models, you must re-embed everything. Plan for this: keep the original text stored alongside the vectors so you can re-embed without re-ingesting from source.
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "The common pitfall is fixating on the embedding model choice. My vertical-first rule applies here. Don't build a 'universal RAG platform' — build one that works perfectly for your specific document type. An e-Commerce product catalog needs different chunking, metadata, and retrieval strategies than a legal document corpus. The real engineering challenge is the pipeline: batch ingestion, incremental updates, model versioning. Mention the migration cost explicitly — 'choosing an embedding model is a one-way door because migration means re-embedding our entire corpus' — and senior engineers know you've done this for real."
+        "The common pitfall is fixating on the embedding model choice. My vertical-first rule applies here. Don't build a 'universal RAG platform.' Build one that works perfectly for your specific document type. An e-Commerce product catalog needs different chunking, metadata, and retrieval strategies than a legal document corpus. The harder engineering is the pipeline: batch ingestion, incremental updates, model versioning. Mention the migration cost explicitly: 'choosing an embedding model is a one-way door because migration means re-embedding our entire corpus' — and senior engineers know you've done this for real."
       </Insight></FadeIn>
     </div>
   );
@@ -393,28 +389,26 @@ function HybridSearchPanel() {
   return (
     <div>
       <SectionHead
-        title="Hybrid search — vector + keyword"
-        desc="Vector search alone misses exact matches. Keyword search alone misses semantic meaning. Hybrid search combines both — and it's the standard for production RAG."
+        title="Hybrid search: vector + keyword"
+        desc="Vector search alone misses exact matches. Keyword search alone misses semantic meaning. Hybrid search combines both, and it's the standard for production RAG."
       />
 
       <FadeIn><CodeBlock filename="hybrid-search.js" code={HYBRID_SEARCH_CODE} output={HYBRID_SEARCH_OUTPUT} /></FadeIn>
 
 
       <FadeIn><Decision question="Why not just vector search?">
-        Vector search finds semantically similar content — great for "how do I handle authentication?" → retrieves docs about auth flows even if they don't contain the word "authentication."
+        Vector search finds semantically similar content. It works well for "how do I handle authentication?" → retrieves docs about auth flows even if they don't contain the word "authentication."
         <br /><br />
         <strong>But it fails on:</strong>
-        <br />
-        — Exact terms: error code "E_AUTH_TIMEOUT" → vector search returns generic timeout docs
-        <br />
-        — Proper nouns: "What did Jane say in the Q3 report?" → vector search finds any Q3 content
-        <br />
-        — Acronyms and jargon: "RBAC permissions" → might retrieve docs about "access control" but miss the RBAC-specific docs
-        <br /><br />
+        <ul className="decision__list">
+          <li>Exact terms: error code "E_AUTH_TIMEOUT" → vector search returns generic timeout docs</li>
+          <li>Proper nouns: "What did Jane say in the Q3 report?" → vector search finds any Q3 content</li>
+          <li>Acronyms and jargon: "RBAC permissions" → might retrieve docs about "access control" but miss the RBAC-specific docs</li>
+        </ul>
         These are exactly the queries where users are most frustrated when the agent gets them wrong.
       </Decision></FadeIn>
 
-      <FadeIn delay={80}><Decision question="BM25 — the keyword search component">
+      <FadeIn delay={80}><Decision question="BM25: the keyword search component">
         BM25 is the standard keyword ranking algorithm (used by Elasticsearch, Lucene). It scores documents by term frequency and inverse document frequency.
         <br /><br />
         <strong>Strengths:</strong> Exact matches, rare terms (IDs, error codes, names), boolean-style queries.
@@ -435,7 +429,7 @@ function HybridSearchPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "Hybrid search is the answer to 'but what about exact matches?' I cover this in my Agent System Design video under the RAG + Vector DB chapter — vector search alone misses exact terms like product SKUs, error codes, and customer IDs. My e-Commerce example: a customer asks about order #ORD-28491 — vector search returns general order FAQ, but BM25 catches the exact order ID. Every production RAG system uses hybrid. The RRF formula is the specific signal: 'I'd combine results using reciprocal rank fusion with k=60. It's rank-based so I don't need to normalize scores.'"
+        "Hybrid search is the answer to 'but what about exact matches?' I cover this in my Agent System Design video under the RAG + Vector DB chapter. Vector search alone misses exact terms like product SKUs, error codes, and customer IDs. My e-Commerce example: a customer asks about order #ORD-28491; vector search returns general order FAQ, but BM25 catches the exact order ID. Every production RAG system uses hybrid. The RRF formula is the specific signal: 'I'd combine results using reciprocal rank fusion with k=60. It's rank-based so I don't need to normalize scores.'"
       </Insight></FadeIn>
     </div>
   );
@@ -445,8 +439,8 @@ function RerankingPanel() {
   return (
     <div>
       <SectionHead
-        title="Reranking — the quality multiplier"
-        desc="Retrieval gets you candidates. Reranking sorts them by actual relevance to the query. It's the single biggest improvement you can make to RAG quality — 15-30% better answers with one additional step."
+        title="Reranking: the quality multiplier"
+        desc="Retrieval gets you candidates. Reranking sorts them by actual relevance to the query. It's the single biggest improvement you can make to RAG quality: 15-30% better answers with one additional step."
       />
 
       <FadeIn><Decision question="How does reranking work?">
@@ -460,13 +454,13 @@ function RerankingPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="Which reranker?">
-        <Pill type="green">Hosted cross-encoder API</Pill> Cohere Rerank 3.5, Voyage rerank-2.5 (and its -lite sibling), Jina Reranker v2. Multilingual, long-ish document windows (thousands of tokens per candidate, so a whole chunk fits), no GPU to operate. Priced per search rather than per token — check the current rate sheet before quoting a number, but it lands orders of magnitude below the generation call it feeds. The default for production.
+        <Pill type="green">Hosted cross-encoder API</Pill> Cohere Rerank 3.5, Voyage rerank-2.5 (and its -lite sibling), Jina Reranker v2. Multilingual, long-ish document windows (thousands of tokens per candidate, so a whole chunk fits), no GPU to operate. Priced per search rather than per token. Check the current rate sheet before quoting a number, but it lands orders of magnitude below the generation call it feeds. The default for production.
         <br /><br />
-        <Pill type="green">Open-weights cross-encoder</Pill> <code>bge-reranker-v2-m3</code> is the workhorse — small, multilingual, competitive with hosted options. The Qwen3-Reranker family (0.6B / 4B / 8B) trades size for quality if you have the GPU. Self-hosting wins when your corpus is regulated, your query volume is high enough that per-search pricing hurts, or you want to fine-tune the reranker on your own click/label data — which is where the biggest gains actually live.
+        <Pill type="green">Open-weights cross-encoder</Pill> <code>bge-reranker-v2-m3</code> is the workhorse: small, multilingual, competitive with hosted options. The Qwen3-Reranker family (0.6B / 4B / 8B) trades size for quality if you have the GPU. Self-hosting wins when your corpus is regulated, your query volume is high enough that per-search pricing hurts, or you want to fine-tune the reranker on your own click/label data, which is where the biggest gains live.
         <br /><br />
-        <Pill type="amber">Late interaction (ColBERT-style)</Pill> Not quite a reranker — a different retrieval shape. Store one vector per token instead of one per chunk, then score with MaxSim (each query token matched against its best document token). Gets you most of the cross-encoder's token-level precision at index time instead of query time. The cost is index size: per-token vectors are 10-100x larger than a single chunk embedding, which is why PLAID-style compression exists. Worth it for retrieval-heavy workloads where reranking latency is the bottleneck.
+        <Pill type="amber">Late interaction (ColBERT-style)</Pill> Not quite a reranker, but a different retrieval shape. Store one vector per token instead of one per chunk, then score with MaxSim (each query token matched against its best document token). Gets you most of the cross-encoder's token-level precision at index time instead of query time. The cost is index size: per-token vectors are 10-100x larger than a single chunk embedding, which is why PLAID-style compression exists. Worth it for retrieval-heavy workloads where reranking latency is the bottleneck.
         <br /><br />
-        <Pill type="amber">LLM-as-reranker</Pill> Prompt a small fast model to score or list-order the candidates. Flexible — you can express relevance criteria the cross-encoder never saw ("prefer the most recent policy version"). But it costs 10-100x more per query and adds a second failure mode. Reserve it for high-value queries, and do not reach for a reasoning model here: extended thinking on a relevance score is pure latency.
+        <Pill type="amber">LLM-as-reranker</Pill> Prompt a small fast model to score or list-order the candidates. Flexible: you can express relevance criteria the cross-encoder never saw ("prefer the most recent policy version"). But it costs 10-100x more per query and adds a second failure mode. Reserve it for high-value queries, and do not reach for a reasoning model here: extended thinking on a relevance score is pure latency.
         <br /><br />
         <strong>Default:</strong> a hosted cross-encoder over top-20 to top-5. Move to open weights when volume, data residency, or fine-tuning forces it.
       </Decision></FadeIn>
@@ -475,24 +469,20 @@ function RerankingPanel() {
         Reranking adds 50-150ms to the retrieval pipeline. This matters for real-time agents:
         <br /><br />
         <strong>Full pipeline latency:</strong>
-        <br />
-        — Embed query: 15-25ms
-        <br />
-        — Hybrid search: 30-60ms
-        <br />
-        — Rerank 20 → 5: 50-150ms
-        <br />
-        — Total retrieval: 100-250ms
-        <br />
-        — LLM generation: 1000-5000ms
-        <br /><br />
+        <ul className="decision__list">
+          <li>Embed query: 15-25ms</li>
+          <li>Hybrid search: 30-60ms</li>
+          <li>Rerank 20 → 5: 50-150ms</li>
+          <li>Total retrieval: 100-250ms</li>
+          <li>LLM generation: 1000-5000ms</li>
+        </ul>
         <strong>Retrieval is &lt;5% of total latency.</strong> The reranking cost (50-150ms) is invisible next to the LLM call (1-5 seconds). The quality gain is 15-30%. It's almost always worth it.
       </Decision></FadeIn>
 
       <FadeIn delay={240}><Decision question="When to skip reranking">
-        (1) Extremely latency-sensitive applications (&lt;200ms total target — but then you probably can't afford an LLM call either).
+        (1) Hard latency budgets (&lt;200ms total target, though then you probably can't afford an LLM call either).
         <br /><br />
-        (2) Homogeneous corpus where all chunks are similarly relevant (rare — if this is true, you probably don't need RAG at all).
+        (2) Homogeneous corpus where all chunks are similarly relevant (rare; if this is true, you probably don't need RAG at all).
         <br /><br />
         (3) Very small corpus (&lt;100 chunks). Vector search is accurate enough when the search space is tiny.
         <br /><br />
@@ -500,7 +490,7 @@ function RerankingPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "Reranking is the answer to 'how would you improve retrieval quality?' in a design review. Retrieve 20 with hybrid search, rerank to 5 with a cross-encoder. The 15-30% improvement costs 50-150ms and pennies per query. Knowing this pattern — and the specific latency numbers — demonstrates depth with production RAG pipelines, not just theoretical knowledge."
+        "Reranking is the answer to 'how would you improve retrieval quality?' in a design review. Retrieve 20 with hybrid search, rerank to 5 with a cross-encoder. The 15-30% improvement costs 50-150ms and pennies per query. Knowing this pattern, with the specific latency numbers, demonstrates depth with production RAG pipelines, not just theoretical knowledge."
       </Insight></FadeIn>
     </div>
   );
@@ -531,56 +521,54 @@ function PitfallsPanel() {
 
       <div style={styles.anti}>
         <p style={styles.strike}>"Retrieval works for some queries but fails for domain-specific terms."</p>
-        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} /><strong>Embedding model doesn't know your jargon.</strong> General embedding models struggle with domain-specific terms (medical codes, financial instruments, internal acronyms). Solution: hybrid search (BM25 catches exact terms). Or fine-tune an embedding model on your domain data — this is one case where fine-tuning the embedder (not the LLM) pays off.</p>
+        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} /><strong>Embedding model doesn't know your jargon.</strong> General embedding models struggle with domain-specific terms (medical codes, financial instruments, internal acronyms). Solution: hybrid search (BM25 catches exact terms). Or fine-tune an embedding model on your domain data. This is one case where fine-tuning the embedder (not the LLM) pays off.</p>
       </div>
 
       <div style={styles.anti}>
         <p style={styles.strike}>"We can't tell if RAG is helping or hurting the answers."</p>
-        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} /><strong>No retrieval evaluation.</strong> You need metrics: precision@k (are the retrieved chunks relevant?), recall@k (did we miss relevant chunks?), answer correctness (does the final answer match the expected answer?). Without these, you're flying blind — a broken retriever looks identical to a working one from the outside.</p>
+        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} /><strong>No retrieval evaluation.</strong> You need metrics: precision@k (are the retrieved chunks relevant?), recall@k (did we miss relevant chunks?), answer correctness (does the final answer match the expected answer?). Without these, you're flying blind: a broken retriever looks identical to a working one from the outside.</p>
       </div>
 
       <FadeIn><Decision question="The RAG evaluation framework">
         <strong>Three metrics, in order of importance:</strong>
         <br /><br />
-        <strong>1. Context relevance</strong> — Are the retrieved chunks actually relevant to the query? Measure: have an LLM judge rate each chunk's relevance (1-5). Target: top-5 chunks average {'>'} 3.5.
+        <strong>1. Context relevance.</strong> Are the retrieved chunks actually relevant to the query? Measure: have an LLM judge rate each chunk's relevance (1-5). Target: top-5 chunks average {'>'} 3.5.
         <br /><br />
-        <strong>2. Groundedness</strong> — Does the answer only contain information from the retrieved context? Measure: check if each claim in the answer can be traced to a specific chunk. Target: {'>'} 90% of claims are grounded.
+        <strong>2. Groundedness.</strong> Does the answer only contain information from the retrieved context? Measure: check if each claim in the answer can be traced to a specific chunk. Target: {'>'} 90% of claims are grounded.
         <br /><br />
-        <strong>3. Answer correctness</strong> — Is the answer factually correct? Measure: compare against golden answers for a test set of 50-100 queries. Target: {'>'} 85% correctness.
+        <strong>3. Answer correctness.</strong> Is the answer factually correct? Measure: compare against golden answers for a test set of 50-100 queries. Target: {'>'} 85% correctness.
         <br /><br />
         Run this evaluation on every change to chunking strategy, embedding model, search parameters, or prompt template. This is your RAG CI/CD.
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="My vertical-first rule for RAG">
-        My vertical-first rule: go vertical-first. Don't build a "universal RAG platform" — build one that works perfectly for one domain.
+        My vertical-first rule: don't build a "universal RAG platform." Build one that works perfectly for one domain.
         <br /><br />
         <strong>Why it matters for RAG:</strong>
-        <br />
-        — An e-Commerce product catalog needs: structured metadata (price, category, size), short chunks (one product per chunk), BM25-heavy hybrid search (exact SKUs and product names).
-        <br />
-        — A legal document corpus needs: large chunks (preserve clause context), semantic chunking (respect section boundaries), citation-aware retrieval (link back to exact paragraphs).
-        <br />
-        — A codebase needs: AST-aware chunking (functions and classes as natural units), language-specific tokenization, hybrid search heavy on keyword (function names, variable names).
-        <br /><br />
-        <strong>The trap:</strong> Building a RAG pipeline that "handles any document type" before you've proven it works for ONE type. Start vertical. Nail the quality. Then generalize by extracting the configurable parts — chunking strategy, metadata schema, retrieval weights.
+        <ul className="decision__list">
+          <li>An e-Commerce product catalog needs structured metadata (price, category, size), short chunks (one product per chunk), and BM25-heavy hybrid search (exact SKUs and product names).</li>
+          <li>A legal document corpus needs large chunks (preserve clause context), semantic chunking (respect section boundaries), and citation-aware retrieval (link back to exact paragraphs).</li>
+          <li>A codebase needs AST-aware chunking (functions and classes as natural units), language-specific tokenization, and hybrid search heavy on keyword (function names, variable names).</li>
+        </ul>
+        <strong>The trap:</strong> Building a RAG pipeline that "handles any document type" before you've proven it works for ONE type. Start vertical. Nail the quality. Then generalize by extracting the configurable parts: chunking strategy, metadata schema, retrieval weights.
         <br /><br />
         This is advice #4 too: "Examples must be carefully balanced." Your golden test set should represent the specific domain, not generic Q&A. 50 domain-specific test cases beat 500 generic ones.
       </Decision></FadeIn>
 
-      <FadeIn delay={160}><Decision question="Agentic RAG — when single-shot retrieval isn't enough">
-        Everything above describes <strong>single-shot RAG</strong>: embed the query once, retrieve once, generate once. That's the right default. But by 2026 the frontier question in RAG interviews is: "What do you do when one retrieval pass can't answer the query?" The answer is <strong>agentic RAG</strong> — the LLM controls retrieval as a tool inside a loop, rather than retrieval being a fixed preprocessing step.
+      <FadeIn delay={160}><Decision question="Agentic RAG: when single-shot retrieval isn't enough">
+        Everything above describes <strong>single-shot RAG</strong>: embed the query once, retrieve once, generate once. That's the right default. But by 2026 the frontier question in RAG interviews is: "What do you do when one retrieval pass can't answer the query?" The answer is <strong>agentic RAG</strong>: the LLM controls retrieval as a tool inside a loop, rather than retrieval being a fixed preprocessing step.
         <br /><br />
         <Pill type="green">Query decomposition</Pill> "Compare our refund policy to our competitor's SLA terms" is really two retrievals over two sub-corpora. A planner LLM splits the query, retrieves for each sub-question independently, then synthesizes. Single-shot embeds the whole thing and retrieves a muddled average of both topics.
         <br /><br />
-        <Pill type="green">Multi-hop retrieval</Pill> "Which engineer owns the service that logged error E_AUTH_TIMEOUT?" needs hop 1 (error → service) then hop 2 (service → owner). The output of the first retrieval becomes the query for the second. No amount of chunking or reranking fixes this — the second query literally doesn't exist until the first completes.
+        <Pill type="green">Multi-hop retrieval</Pill> "Which engineer owns the service that logged error E_AUTH_TIMEOUT?" needs hop 1 (error → service) then hop 2 (service → owner). The output of the first retrieval becomes the query for the second. No amount of chunking or reranking fixes this, because the second query doesn't exist until the first completes.
         <br /><br />
-        <Pill type="amber">Self-correcting retrieval (CRAG / self-RAG)</Pill> After retrieving, a grader LLM asks "is this context sufficient and relevant?" If not, it rewrites the query, broadens to web search, or asks the user to clarify — then retrieves again. This is what turns "the retriever returned junk and the LLM hallucinated anyway" into a graceful "I couldn't find that."
+        <Pill type="amber">Self-correcting retrieval (CRAG / self-RAG)</Pill> After retrieving, a grader LLM asks "is this context sufficient and relevant?" If not, it rewrites the query, broadens to web search, or asks the user to clarify, then retrieves again. This is what turns "the retriever returned junk and the LLM hallucinated anyway" into a graceful "I couldn't find that."
         <br /><br />
-        <strong>The cost you must name:</strong> agentic RAG multiplies latency and token spend by the number of loops — a 3-hop query is 3× the retrieval calls plus a planner and a grader call. Single-shot is ~250ms; an agentic loop is often 3-8 seconds. So the senior framing is: <em>"Default to single-shot. Add a decomposition/grading loop only for the query classes that provably need it — and route to it conditionally, not on every query."</em> Classify the query first (is it multi-part? does it reference an entity you'd have to look up?) and only pay the agentic tax when the cheap path can't answer.
+        <strong>The cost you must name:</strong> agentic RAG multiplies latency and token spend by the number of loops: a 3-hop query is 3× the retrieval calls plus a planner and a grader call. Single-shot is ~250ms; an agentic loop is often 3-8 seconds. So the senior framing is: <em>"Default to single-shot. Add a decomposition/grading loop only for the query classes that provably need it, and route to it conditionally, not on every query."</em> Classify the query first (is it multi-part? does it reference an entity you'd have to look up?) and only pay the agentic tax when the cheap path can't answer.
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "My rule: add continuous evals. The production pitfalls are invisible without them — stale embeddings, lost-in-the-middle, domain vocabulary gaps all look like 'the agent works' from the outside. You need precision@k, groundedness, and answer correctness running on every change. My rule: 'Evals + Memory are the moats of AI products.' The eval pipeline IS the product quality. Without it, you're flying blind — and in practice, understanding these failure modes with specific metrics shifts you from 'has read about RAG' to 'has operated a RAG pipeline at scale.'"
+        "My rule: add continuous evals. The production pitfalls are invisible without them: stale embeddings, lost-in-the-middle, domain vocabulary gaps all look like 'the agent works' from the outside. You need precision@k, groundedness, and answer correctness running on every change. My rule: 'Evals + Memory are the moats of AI products.' The eval pipeline IS the product quality. Without it, you're flying blind. In practice, understanding these failure modes with specific metrics shifts you from 'has read about RAG' to 'has operated a RAG pipeline at scale.'"
       </Insight></FadeIn>
         </div>
   );
@@ -589,17 +577,14 @@ function PitfallsPanel() {
 const styles = {
   back: { fontSize: 12, color: 'var(--text-muted)', textDecoration: 'none', display: 'inline-block', marginBottom: 16, fontFamily: 'var(--font-mono)', letterSpacing: '0.02em' },
   eyebrow: { fontSize: 11, fontWeight: 500, color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8, fontFamily: 'var(--font-mono)' },
-  h1: { fontSize: 34, fontWeight: 400, color: 'var(--text-h)', marginBottom: 10, lineHeight: 1.15, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
-  subtitle: { fontSize: 14, color: 'var(--text-p)', marginBottom: 8, lineHeight: 1.75 },
+  h1: { fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 400, color: 'var(--text-h)', lineHeight: 1.08, marginBottom: 16, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
+  subtitle: { fontSize: 'clamp(16px, 1.3vw, 18px)', color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 28, maxWidth: '62ch' },
   source: { fontSize: 12, color: 'var(--text-muted)', marginBottom: '2rem', lineHeight: 1.6 },
   sourceLink: { color: 'var(--text-accent)', textDecoration: 'underline', textUnderlineOffset: '2px' },
-  tabWrap: { display: 'flex', gap: 0, marginBottom: '2rem', borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', overflowX: 'auto', scrollbarWidth: 'none' },
-  tabBtn: { background: 'transparent', borderTopWidth: 0, borderRightWidth: 0, borderLeftWidth: 0, borderBottomWidth: 2, borderBottomStyle: 'solid', borderBottomColor: 'transparent', padding: '10px 14px', fontSize: 13, fontWeight: 500, color: 'var(--text-muted)', cursor: 'pointer', transition: 'all var(--dur) var(--ease)', fontFamily: 'inherit', whiteSpace: 'nowrap', letterSpacing: '-0.01em' },
-  tabActive: { color: 'var(--text-h)', fontWeight: 600, borderBottomColor: 'var(--bg-accent-strong)' },
-  sh: { fontSize: 17, fontWeight: 600, color: 'var(--text-h)', marginBottom: 8, letterSpacing: '-0.01em' },
-  ss: { fontSize: 13, color: 'var(--text-p)', marginBottom: 16, lineHeight: 1.7 },
+  sh: { fontSize: 'clamp(24px, 2.4vw, 30px)', fontWeight: 400, color: 'var(--text-h)', marginTop: 8, marginBottom: 10, lineHeight: 1.2, fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' },
+  ss: { fontSize: 16, color: 'var(--text-p)', marginBottom: 24, lineHeight: 1.7, maxWidth: '65ch' },
   anti: { background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '16px 18px', marginBottom: 10 },
-  strike: { textDecoration: 'line-through', opacity: 0.5, fontSize: 13, color: 'var(--text-p)', lineHeight: 1.6 },
-  better: { fontSize: 13, color: 'var(--text-h)', fontWeight: 500, lineHeight: 1.6, marginTop: 6 },
+  strike: { textDecoration: 'line-through', opacity: 0.5, fontSize: 15, color: 'var(--text-p)', lineHeight: 1.6 },
+  better: { fontSize: 15, color: 'var(--text-h)', fontWeight: 500, lineHeight: 1.6, marginTop: 6 },
   dot: { display: 'inline-block', width: 7, height: 7, borderRadius: '50%', marginRight: 8, verticalAlign: 'middle' },
 };

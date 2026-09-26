@@ -22,13 +22,13 @@ const MODEL_ROUTER_CODE = `async function routeToModel(query, { costCap = 0.01 }
   }
 
   // Complex: Opus 5: ~$5/1M input tokens
-  // But verify the response — expensive model isn't always right
+  // But verify the response: expensive model isn't always right
   const response = await callModel('claude-opus-5', query);
   return response;
 }
 
 async function classifyComplexity(query) {
-  // Use the cheap model to classify — meta-routing
+  // Use the cheap model to classify (meta-routing)
   const result = await callModel('claude-haiku',
     \`Classify this query complexity as simple/medium/complex.
      Simple: factual lookup, short answer.
@@ -41,11 +41,11 @@ async function classifyComplexity(query) {
 }`;
 
 const MODEL_ROUTER_OUTPUT = `> routeToModel("What's the capital of France?")
-  -> Routed to claude-haiku (simple) — 0.3ms classify, 180ms generate
+  -> Routed to claude-haiku (simple)  0.3ms classify, 180ms generate
   -> Cost: $0.000003 | "The capital of France is Paris."
 
 > routeToModel("Design a rate limiter for a distributed system")
-  -> Routed to claude-opus (complex) — 0.4ms classify, 2100ms generate
+  -> Routed to claude-opus (complex)  0.4ms classify, 2100ms generate
   -> Cost: $0.0018 | [detailed system design response...]
 
 Cost savings: 94% on simple queries vs always using Opus`;
@@ -66,7 +66,7 @@ const TOKEN_BUDGET_CODE = `class TokenBudgetManager {
     const estimatedCost = this._estimateCost(model, inputTokens, opts.maxTokens || 1024);
 
     if (this.todaySpend + estimatedCost > this.dailyBudgetUsd) {
-      // Budget exceeded — try a cheaper model or reject
+      // Budget exceeded: try a cheaper model or reject
       if (model !== 'claude-haiku') {
         console.warn(\`Budget guard: downgrading \${model} -> haiku\`);
         return this.call('claude-haiku', messages, opts);
@@ -184,14 +184,14 @@ const RESILIENT_CLIENT_CODE = `class ResilientLLMClient {
             throw err;
           }
 
-          // Rate limited — respect Retry-After header
+          // Rate limited: respect Retry-After header
           if (err.status === 429) {
             const wait = parseInt(err.headers?.['retry-after'] || '5') * 1000;
             await sleep(wait);
             continue;
           }
 
-          // Server error or timeout — backoff then retry
+          // Server error or timeout: backoff then retry
           const backoff = Math.min(1000 * Math.pow(2, attempt), 30000);
           const jitter = Math.random() * backoff * 0.1;
           console.warn(\`\${model} attempt \${attempt + 1} failed: \${err.message}. Retrying in \${backoff}ms\`);
@@ -199,7 +199,7 @@ const RESILIENT_CLIENT_CODE = `class ResilientLLMClient {
         }
       }
 
-      // All retries exhausted — open circuit breaker for this model
+      // All retries exhausted: open circuit breaker for this model
       cb.failures++;
       if (cb.failures >= 3) {
         cb.openUntil = Date.now() + 60000; // open for 60s
@@ -207,7 +207,7 @@ const RESILIENT_CLIENT_CODE = `class ResilientLLMClient {
       }
     }
 
-    // All models failed — return cached response or graceful error
+    // All models failed: return cached response or graceful error
     const cached = await responseCache.get(hashMessages(messages));
     if (cached) return { ...cached, fromCache: true, stale: true };
 
@@ -248,7 +248,7 @@ const OBSERVABILITY_CODE = `function createLLMTracer(config = {}) {
       const response = await callModel(model, messages, opts);
       const latencyMs = performance.now() - startTime;
 
-      // Log EVERYTHING — you'll thank yourself during an incident
+      // Log EVERYTHING; you'll thank yourself during an incident
       const trace = {
         traceId,
         timestamp: new Date().toISOString(),
@@ -263,7 +263,7 @@ const OBSERVABILITY_CODE = `function createLLMTracer(config = {}) {
         costUsd: calculateCost(model, response.usage),
         status: 'success',
         stopReason: response.stop_reason,       // end_turn | max_tokens | tool_use
-        // DO NOT log full prompt/response in prod — token hashes only
+        // DO NOT log full prompt/response in prod: token hashes only
         inputPreview: messages[messages.length - 1]?.content?.slice(0, 100),
       };
 
@@ -275,7 +275,7 @@ const OBSERVABILITY_CODE = `function createLLMTracer(config = {}) {
       if (trace.cacheHit) metrics.counter('llm.cache.hits', 1, { model });
       if (trace.stopReason === 'max_tokens') metrics.counter('llm.truncated', 1, { model });
 
-      // Async write — don't block the response
+      // Async write: don't block the response
       setImmediate(() => traceStore.write(trace));
 
       return response;
@@ -346,24 +346,24 @@ export default function LlmOps() {
     <div className="page-content">
       <Link to="/blog" style={styles.back}>&larr; AI Engineering</Link>
       <p style={styles.eyebrow}>Post 06</p>
-      <h1 style={styles.h1}>LLMOps &mdash; Production LLM Infrastructure</h1>
+      <h1 style={styles.h1}>LLMOps: Production LLM Infrastructure</h1>
       <p style={styles.subtitle}>
-        Model serving, cost routing, token budgeting, latency SLOs &mdash; the infrastructure
+        Model serving, cost routing, token budgeting, and latency SLOs: the infrastructure
         that turns an LLM prototype into a system that handles 10M requests/day without
         bankrupting your company.
       </p>
 
       <Diagram
       svg={llmopsSvg}
-      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/06-llmops</code> — the complete <code>ROUTING_TABLE</code>, three chains in code order (<code>simple</code> ▸ haiku, sonnet, opus; <code>medium</code> ▸ sonnet, opus; <code>complex</code> ▸ opus alone, with no fallback left), and the finding that 2 of the 5 models in <code>MODEL_CONFIG</code> are priced but unroutable. Drawn from the source, not from the documentation.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/06-llmops</code>: the complete <code>ROUTING_TABLE</code>, three chains in code order (<code>simple</code> ▸ haiku, sonnet, opus; <code>medium</code> ▸ sonnet, opus; <code>complex</code> ▸ opus alone, with no fallback left), and the finding that 2 of the 5 models in <code>MODEL_CONFIG</code> are priced but unroutable. Drawn from the source, not from the documentation.</>}
       source="tree/main/projects/06-llmops"
       facts="blob/main/docs/diagrams/llmops_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
       />
 
-      <div style={styles.tabWrap}>
+      <div className="tab-nav post-tabs" role="tablist">
         {TABS.map((t, i) => (
-          <button key={t} onClick={() => setTab(i)} style={{ ...styles.tabBtn, ...(tab === i ? styles.tabActive : {}) }}>{t}</button>
+          <button key={t} onClick={() => setTab(i)} role="tab" aria-selected={tab === i} className={`tab-nav__btn${tab === i ? ' tab-nav__btn--active' : ''}`}>{t}</button>
         ))}
       </div>
 
@@ -555,10 +555,10 @@ function CostEngineeringPanel() {
         desc="LLM costs scale linearly with usage unless you actively engineer against it. At 10M requests/day, a 10% cost reduction saves $30K-$100K/year. This is the difference between a sustainable product and a money pit."
       />
 
-      <FadeIn><Decision question="Prompt caching — the single biggest cost lever">
+      <FadeIn><Decision question="Prompt caching: the single biggest cost lever">
         <Pill type="green">System prompt caching (mandatory)</Pill> If your system prompt is &gt;1024 tokens and repeated across requests, caching gives you 90% discount on those tokens. Claude caches automatically for identical prefixes. A 2000-token system prompt across 1M requests/day: without caching = $6/day on input alone (Sonnet). With caching = $0.60/day. At scale this is the difference between viable and bankrupt.
         <br /><br />
-        <Pill type="amber">Semantic caching (high-volume patterns)</Pill> Cache entire responses for semantically similar queries. Hash the prompt, check Redis before calling the API. Hit rate depends on query distribution — FAQ-style products see 30-50% cache hit rates. Conversational products see &lt;5%. Only worth building if you measure first.
+        <Pill type="amber">Semantic caching (high-volume patterns)</Pill> Cache entire responses for semantically similar queries. Hash the prompt, check Redis before calling the API. Hit rate depends on query distribution. FAQ-style products see 30-50% cache hit rates. Conversational products see &lt;5%. Only worth building if you measure first.
         <br /><br />
         <strong>Real pricing (Anthropic first-party API, mid-2026):</strong>
         <br /><br />
@@ -600,10 +600,10 @@ function CostEngineeringPanel() {
         </div>
       </Decision></FadeIn>
 
-      <FadeIn delay={80}><Decision question="Token budgeting — preventing runaway costs">
+      <FadeIn delay={80}><Decision question="Token budgeting: preventing runaway costs">
         <Pill type="green">Per-request + daily budget caps (mandatory)</Pill> Set max_tokens on every call. Enforce a daily spend limit with automatic model downgrade. A single agentic loop without a cost cap can burn $500+ in an hour. Real incident: a recursive summarization pipeline hit an edge case and made 4,000 Opus calls in 40 minutes. Cost: $12,000. A $200 daily cap would have caught it at call #50.
         <br /><br />
-        <Pill type="amber">Context window management</Pill> Long conversations accumulate tokens. A 50-message conversation with a 2000-token system prompt easily hits 30K tokens per call. Solutions: (1) sliding window — keep last N messages, (2) summarize older messages into a compressed context, (3) hybrid — keep last 5 messages verbatim + summarize the rest. Option 3 preserves recent detail while capping costs.
+        <Pill type="amber">Context window management</Pill> Long conversations accumulate tokens. A 50-message conversation with a 2000-token system prompt easily hits 30K tokens per call. Solutions: (1) sliding window: keep last N messages, (2) summarize older messages into a compressed context, (3) hybrid: keep last 5 messages verbatim + summarize the rest. Option 3 preserves recent detail while capping costs.
         <br /><br />
         <Pill type="amber">Batch processing for non-urgent work</Pill> Nightly batch jobs (report generation, bulk classification, content moderation queues) can use the Batch API for 50% discount on some providers. Claude's Message Batches API processes up to 100K requests with results within 24 hours at half price.
       </Decision></FadeIn>
@@ -611,7 +611,7 @@ function CostEngineeringPanel() {
       <FadeIn><CodeBlock filename="token-budget-manager.js" code={TOKEN_BUDGET_CODE} output={TOKEN_BUDGET_OUTPUT} /></FadeIn>
 
       <FadeIn delay={160}><Decision question="When is output cost more important than input cost?">
-        Output tokens cost 3-5x more than input tokens across all providers. For workloads that generate long outputs (code generation, content writing, detailed analysis), output costs dominate. A code generation task averaging 2000 output tokens on Sonnet costs $0.03 per request — 83% of that is output.
+        Output tokens cost 3-5x more than input tokens across all providers. For workloads that generate long outputs (code generation, content writing, detailed analysis), output costs dominate. A code generation task averaging 2000 output tokens on Sonnet costs $0.03 per request, and 83% of that is output.
         <br /><br />
         <Pill type="green">Control output length</Pill> Set max_tokens appropriately. Use system prompt instructions: "Be concise. Limit response to 3 paragraphs." For classification tasks, instruct the model to return only the label, not an explanation.
         <br /><br />
@@ -630,7 +630,7 @@ function LatencyReliabilityPanel() {
     <div>
       <SectionHead
         title="Latency and reliability at scale"
-        desc="LLM APIs are the slowest dependency in your stack. A database query takes 5ms. An LLM call takes 1-15 seconds. Everything about your architecture must account for this — streaming, timeouts, fallbacks, and circuit breakers."
+        desc="LLM APIs are the slowest dependency in your stack. A database query takes 5ms. An LLM call takes 1-15 seconds. Everything about your architecture must account for this: streaming, timeouts, fallbacks, and circuit breakers."
       />
 
       <FadeIn><Decision question="Streaming vs non-streaming?">
@@ -647,16 +647,16 @@ function LatencyReliabilityPanel() {
         Background/batch: no TTFT requirement, optimize for throughput
       </Decision></FadeIn>
 
-      <FadeIn delay={80}><Decision question="Retry strategy — which errors to retry and how?">
-        <Pill type="green">Retry: 429 (rate limit), 500/502/503 (server errors), timeouts</Pill> Use exponential backoff with jitter. Start at 1s, cap at 30s. For 429s, respect the Retry-After header — the provider is telling you exactly when to retry. Max 3 retries per request.
+      <FadeIn delay={80}><Decision question="Retry strategy: which errors to retry and how?">
+        <Pill type="green">Retry: 429 (rate limit), 500/502/503 (server errors), timeouts</Pill> Use exponential backoff with jitter. Start at 1s, cap at 30s. For 429s, respect the Retry-After header; the provider is telling you exactly when to retry. Max 3 retries per request.
         <br /><br />
         <Pill type="red">Never retry: 400 (bad request), 401 (auth), 404</Pill> These are deterministic errors. Retrying a malformed prompt 3 times just wastes time and money. 400 errors need code fixes, not retries.
         <br /><br />
         <Pill type="amber">Circuit breaker pattern for cascading failures</Pill> After 3 consecutive failures to a model, open the circuit for 60 seconds (skip that model entirely). This prevents a downed provider from adding retry latency to every request. Half-open after 60s: try one request, close circuit if it succeeds.
       </Decision></FadeIn>
 
-      <FadeIn delay={160}><Decision question="Fallback chains — graceful degradation">
-        <Pill type="green">Multi-model fallback (recommended)</Pill> Primary: Sonnet. Fallback 1: Haiku (lower quality but available). Fallback 2: cached response (stale but instant). Fallback 3: graceful error message. Never show users a raw API error. The fallback chain should be invisible — the user gets a response, maybe slightly lower quality, but never a blank screen.
+      <FadeIn delay={160}><Decision question="Fallback chains: graceful degradation">
+        <Pill type="green">Multi-model fallback (recommended)</Pill> Primary: Sonnet. Fallback 1: Haiku (lower quality but available). Fallback 2: cached response (stale but instant). Fallback 3: graceful error message. Never show users a raw API error. The fallback chain should be invisible: the user gets a response, maybe slightly lower quality, but never a blank screen.
         <br /><br />
         <strong>Real latency budget for a chat request:</strong>
         <br />
@@ -678,25 +678,25 @@ function LatencyReliabilityPanel() {
       <FadeIn><CodeBlock filename="resilient-llm-client.js" code={RESILIENT_CLIENT_CODE} output={RESILIENT_CLIENT_OUTPUT} /></FadeIn>
 
       <FadeIn><Insight>
-        The production answer to "how do you handle LLM reliability?" isn't "we retry." It's: "We have a three-layer defense. Layer 1: retries with exponential backoff for transient errors. Layer 2: circuit breakers that skip a model after 3 consecutive failures, so we don't add 30 seconds of retry latency to every request during an outage. Layer 3: response cache as the last resort — stale data beats no data. We monitor which layer caught the failure. If Layer 3 activates more than 0.1% of the time, that's an incident."
+        The production answer to "how do you handle LLM reliability?" isn't "we retry." It's: "We have a three-layer defense. Layer 1: retries with exponential backoff for transient errors. Layer 2: circuit breakers that skip a model after 3 consecutive failures, so we don't add 30 seconds of retry latency to every request during an outage. Layer 3: response cache as the last resort, because stale data beats no data. We monitor which layer caught the failure. If Layer 3 activates more than 0.1% of the time, that's an incident."
       </Insight></FadeIn>
 
       <FadeIn delay={80}><Insight type="warn" tag="Latency trap">
         Agentic loops multiply latency. A 5-iteration agent loop where each iteration calls the LLM once takes 5-25 seconds. If each iteration also calls tools that call LLMs (e.g., a search-then-summarize tool), you're looking at 30-60 seconds total. Set iteration caps, parallelize independent tool calls, and show progressive results. The user should see something useful within 2 seconds even if the full agent loop takes 30.
       </Insight></FadeIn>
 
-      <FadeIn delay={160}><Decision question="Model deprecation — do you pin a version or float on an alias?">
+      <FadeIn delay={160}><Decision question="Model deprecation: do you pin a version or float on an alias?">
         This is the reliability question nobody asks until it bites them. Every provider ships two kinds of identifier: a floating alias that always resolves to the newest revision of a model line, and a dated snapshot pinned to one specific set of weights. Choosing between them is a real tradeoff, not a best practice you can copy.
         <br /><br />
         <Pill type="green">Pin snapshots for anything you've evaluated</Pill> If you tuned prompts against a model, ran an eval suite, and calibrated a judge threshold, that work is bound to those weights. A floating alias can move under you between deploys, and the failure is silent: no error, no version bump, just your extraction accuracy drifting three points because the new revision is more literal about instructions. Pin the snapshot, treat it as a dependency, and upgrade deliberately.
         <br /><br />
-        <Pill type="amber">Float on aliases for exploratory and internal work</Pill> Prototypes, internal tools, and anything with a human in the loop reviewing every output can ride the alias and get improvements for free. The cost of a silent behavior change is a shrug, not an incident. Just be honest about which bucket a system is in — plenty of "internal tools" quietly become load-bearing.
+        <Pill type="amber">Float on aliases for exploratory and internal work</Pill> Prototypes, internal tools, and anything with a human in the loop reviewing every output can ride the alias and get improvements for free. The cost of a silent behavior change is a shrug, not an incident. Just be honest about which bucket a system is in; plenty of "internal tools" quietly become load-bearing.
         <br /><br />
-        <Pill type="red">The trap: pinning without a migration process</Pill> A pinned snapshot is not permanent. Providers deprecate models on a published schedule, and a retired model ID stops resolving — your requests start returning 404, which your retry logic will correctly refuse to retry. Pinning buys you control over <em>when</em> you migrate, not whether you do. If you pin and never revisit, you've converted a gradual quality drift into a hard outage on a date somebody else picked.
+        <Pill type="red">The trap: pinning without a migration process</Pill> A pinned snapshot is not permanent. Providers deprecate models on a published schedule, and a retired model ID stops resolving. Your requests start returning 404, which your retry logic will correctly refuse to retry. Pinning buys you control over <em>when</em> you migrate, not whether you do. If you pin and never revisit, you've converted a gradual quality drift into a hard outage on a date somebody else picked.
         <br /><br />
-        <strong>What a real migration process looks like:</strong> keep model IDs in config, never inlined at call sites, so a migration is one change rather than a grep. Subscribe to the provider's deprecation feed and open a ticket the day a model you use is deprecated, not the week it retires. Run your eval suite against the new model before switching, and read the provider's migration notes for breaking parameter changes — request shapes do change across model generations, and a parameter that was merely deprecated on one release often hard-errors on the next. Then shadow the new model on a slice of live traffic, diff the outputs against the old one, and cut over once the diff is boring.
+        <strong>What a real migration process looks like:</strong> keep model IDs in config, never inlined at call sites, so a migration is one change rather than a grep. Subscribe to the provider's deprecation feed and open a ticket the day a model you use is deprecated, not the week it retires. Run your eval suite against the new model before switching, and read the provider's migration notes for breaking parameter changes. Request shapes do change across model generations, and a parameter that was merely deprecated on one release often hard-errors on the next. Then shadow the new model on a slice of live traffic, diff the outputs against the old one, and cut over once the diff is boring.
         <br /><br />
-        The senior answer names the second-order cost: a model migration is a prompt migration. Prompts accumulate workarounds for a specific model's failure modes — emphasis added because an older model under-triggered a tool, step-by-step scaffolding added because it planned poorly. Newer models follow instructions more literally, so that leftover text doesn't just waste tokens, it actively misfires. Budget prompt re-tuning into every migration instead of treating it as a string swap.
+        The senior answer names the second-order cost: a model migration is a prompt migration. Prompts accumulate workarounds for a specific model's failure modes: emphasis added because an older model under-triggered a tool, step-by-step scaffolding added because it planned poorly. Newer models follow instructions more literally, so that leftover text doesn't just waste tokens, it actively misfires. Budget prompt re-tuning into every migration instead of treating it as a string swap.
       </Decision></FadeIn>
     </div>
   );
@@ -710,18 +710,18 @@ function MonitoringPanel() {
         desc="LLM failures are silent. The model doesn't crash. It returns a confident wrong answer. Traditional monitoring (uptime, error rate, latency) catches infrastructure failures but misses quality degradation. You need a different observability stack."
       />
 
-      <FadeIn><Decision question="What to monitor — the essential metrics">
+      <FadeIn><Decision question="What to monitor: the metrics that matter">
         <strong>Infrastructure metrics (standard):</strong>
         <br />
-        - Latency: p50, p95, p99 by model — detect provider degradation
+        - Latency: p50, p95, p99 by model (detects provider degradation)
         <br />
-        - Error rate: by error code (429, 500, timeout) — detect outages
+        - Error rate: by error code, 429/500/timeout (detects outages)
         <br />
-        - Token usage: input/output per request — detect prompt bloat
+        - Token usage: input/output per request (detects prompt bloat)
         <br />
-        - Cost: per query, per user, per feature — detect runaway costs
+        - Cost: per query, per user, per feature (detects runaway costs)
         <br /><br />
-        <strong>Quality metrics (LLM-specific — this is where most teams fail):</strong>
+        <strong>Quality metrics (LLM-specific; this is where most teams fail):</strong>
         <br />
         - Cache hit rate: measures prompt consistency. Drops = someone changed a prompt
         <br />
@@ -734,14 +734,14 @@ function MonitoringPanel() {
         <Pill type="green">Monitor all of the above</Pill> Infrastructure metrics catch outages. Quality metrics catch the silent failures that degrade your product over weeks without anyone noticing.
       </Decision></FadeIn>
 
-      <FadeIn delay={80}><Decision question="Trace logging — what to capture per LLM call">
+      <FadeIn delay={80}><Decision question="Trace logging: what to capture per LLM call">
         <strong>Log these fields for every call:</strong>
         <br />
         - Trace ID (for distributed tracing)
         <br />
         - Model name and version
         <br />
-        - Prompt hash (NOT the full prompt in production — PII risk)
+        - Prompt hash (NOT the full prompt in production: PII risk)
         <br />
         - Input/output token counts
         <br />
@@ -760,10 +760,10 @@ function MonitoringPanel() {
 
       <FadeIn><CodeBlock filename="llm-observability.js" code={OBSERVABILITY_CODE} output={OBSERVABILITY_OUTPUT} /></FadeIn>
 
-      <FadeIn delay={160}><Decision question="Detecting prompt regression — the hardest debugging problem">
+      <FadeIn delay={160}><Decision question="Detecting prompt regression: the hardest debugging problem">
         When a prompt change degrades output quality, there's no stack trace. The model still returns 200 OK with confident text. Detection requires:
         <br /><br />
-        <Pill type="green">A/B test prompt changes</Pill> Route 10% of traffic to the new prompt, compare quality metrics. Never roll out a prompt change to 100% without data. Treat prompts like code deploys — canary first.
+        <Pill type="green">A/B test prompt changes</Pill> Route 10% of traffic to the new prompt, compare quality metrics. Never roll out a prompt change to 100% without data. Treat prompts like code deploys: canary first.
         <br /><br />
         <Pill type="green">Golden test set</Pill> Maintain 50-200 test cases with expected outputs. Run every prompt change against the golden set and measure: (1) exact match rate for structured output, (2) LLM-as-judge for free-form output (have a separate model grade quality 1-5), (3) manual spot-check of 10 random outputs.
         <br /><br />
@@ -771,7 +771,7 @@ function MonitoringPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        The debugging superpower in LLM systems is the prompt hash. When a user reports "the AI gave me a wrong answer," you search by trace ID, find the prompt hash, and immediately answer: "This prompt template has been called 47,000 times with a 94% satisfaction rate. This specific input hit an edge case in our context window truncation — the relevant document was in position 12 of 15 and got cut." That's a 5-minute diagnosis instead of a 2-hour investigation. Build the observability before you need it.
+        The debugging superpower in LLM systems is the prompt hash. When a user reports "the AI gave me a wrong answer," you search by trace ID, find the prompt hash, and immediately answer: "This prompt template has been called 47,000 times with a 94% satisfaction rate. This specific input hit an edge case in our context window truncation: the relevant document was in position 12 of 15 and got cut." That's a 5-minute diagnosis instead of a 2-hour investigation. Build the observability before you need it.
       </Insight></FadeIn>
     </div>
   );
@@ -788,11 +788,11 @@ function AntiPatternsPanel() {
       <FadeIn>
         <div style={styles.anti}>
           <p style={styles.strike}>
-            "We don't need cost monitoring — our LLM usage is small."
+            "We don't need cost monitoring. Our LLM usage is small."
           </p>
           <p style={styles.better}>
             <span style={{ ...styles.dot, background: '#E7157B' }} />
-            <strong>The $100K/month surprise.</strong> A company shipped an agentic feature without token limits. An edge case caused a recursive loop: the agent would call the LLM, parse the response, decide it needed more context, and call again — 200+ iterations per user request. One engineer's Friday deploy, a quiet weekend with no alerts, Monday morning: $42,000 in API charges from a single weekend. The fix was a 3-line cost cap that should have been there from day one. Every LLM call needs a max_tokens parameter. Every pipeline needs a per-request and daily budget. No exceptions.
+            <strong>The $100K/month surprise.</strong> A company shipped an agentic feature without token limits. An edge case caused a recursive loop: the agent would call the LLM, parse the response, decide it needed more context, and call again: 200+ iterations per user request. One engineer's Friday deploy, a quiet weekend with no alerts, Monday morning: $42,000 in API charges from a single weekend. The fix was a 3-line cost cap that should have been there from day one. Every LLM call needs a max_tokens parameter. Every pipeline needs a per-request and daily budget. No exceptions.
           </p>
         </div>
       </FadeIn>
@@ -804,7 +804,7 @@ function AntiPatternsPanel() {
           </p>
           <p style={styles.better}>
             <span style={{ ...styles.dot, background: '#ED7100' }} />
-            <strong>The mega-prompt trap.</strong> A team kept adding instructions to their system prompt until it hit 50K tokens. "Always respond in formal English." "Never use bullet points." "If the user mentions pricing, include this disclaimer..." 847 rules. The model started contradicting itself, ignoring instructions buried in the middle (the "lost in the middle" phenomenon is real — models attend less to information in the center of long contexts), and generating worse output than a 2K-token prompt. The fix: distill to the 10 instructions that actually matter, move reference data to retrieval, and A/B test that the shorter prompt produces equal or better output. It did. By a measurable margin.
+            <strong>The mega-prompt trap.</strong> A team kept adding instructions to their system prompt until it hit 50K tokens. "Always respond in formal English." "Never use bullet points." "If the user mentions pricing, include this disclaimer..." 847 rules. The model started contradicting itself, ignoring instructions buried in the middle (the "lost in the middle" phenomenon is real; models attend less to information in the center of long contexts), and generating worse output than a 2K-token prompt. The fix: distill to the 10 instructions that actually matter, move reference data to retrieval, and A/B test that the shorter prompt produces equal or better output. It did. By a measurable margin.
           </p>
         </div>
       </FadeIn>
@@ -812,11 +812,11 @@ function AntiPatternsPanel() {
       <FadeIn delay={120}>
         <div style={styles.anti}>
           <p style={styles.strike}>
-            "We should use GPT-4/Opus for everything — quality matters."
+            "We should use GPT-4/Opus for everything. Quality matters."
           </p>
           <p style={styles.better}>
             <span style={{ ...styles.dot, background: '#C925D1' }} />
-            <strong>The "always use the best model" fallacy.</strong> A support chatbot used Opus for every query. 70% of queries were "what's my order status?" or "how do I reset my password?" — tasks where Haiku produces identical output at 1/60th the cost. The remaining 30% were genuinely complex queries where Opus added value. After implementing model routing, they cut costs from $180K/month to $28K/month while user satisfaction stayed flat. The classifier itself (Haiku) cost $400/month. ROI: 550x on the routing investment.
+            <strong>The "always use the best model" fallacy.</strong> A support chatbot used Opus for every query. 70% of queries were "what's my order status?" or "how do I reset my password?", tasks where Haiku produces identical output at 1/60th the cost. The remaining 30% were genuinely complex queries where Opus added value. After implementing model routing, they cut costs from $180K/month to $28K/month while user satisfaction stayed flat. The classifier itself (Haiku) cost $400/month. ROI: 550x on the routing investment.
           </p>
         </div>
       </FadeIn>
@@ -824,11 +824,11 @@ function AntiPatternsPanel() {
       <FadeIn delay={180}>
         <div style={styles.anti}>
           <p style={styles.strike}>
-            "Caching doesn't work for LLMs — every conversation is unique."
+            "Caching doesn't work for LLMs. Every conversation is unique."
           </p>
           <p style={styles.better}>
             <span style={{ ...styles.dot, background: '#3949AB' }} />
-            <strong>The no-caching waste.</strong> System prompts are NOT unique — they're identical across all users. A 3000-token system prompt sent 500K times/day on Sonnet without caching costs $4,500/day on input tokens alone. With prompt caching (same prefix = cached), that drops to $450/day. Even for "unique" conversations, semantic deduplication catches 15-30% of queries in FAQ-heavy products. A Redis cache with 1-hour TTL and prompt hashing is a weekend project that pays for itself in 48 hours.
+            <strong>The no-caching waste.</strong> System prompts are NOT unique; they're identical across all users. A 3000-token system prompt sent 500K times/day on Sonnet without caching costs $4,500/day on input tokens alone. With prompt caching (same prefix = cached), that drops to $450/day. Even for "unique" conversations, semantic deduplication catches 15-30% of queries in FAQ-heavy products. A Redis cache with 1-hour TTL and prompt hashing is a weekend project that pays for itself in 48 hours.
           </p>
         </div>
       </FadeIn>
@@ -848,17 +848,17 @@ function AntiPatternsPanel() {
       <FadeIn delay={300}>
         <div style={styles.anti}>
           <p style={styles.strike}>
-            "We test prompts manually — a few examples is enough."
+            "We test prompts manually. A few examples is enough."
           </p>
           <p style={styles.better}>
             <span style={{ ...styles.dot, background: '#E7157B' }} />
-            <strong>The untested prompt deploy.</strong> A team changed one word in their extraction prompt — "extract" to "identify" — and deployed to production. Extraction accuracy dropped from 94% to 71% on edge cases. Nobody noticed for 2 weeks because the happy-path examples still worked. The prompt had no automated test suite, no golden test set, no canary deployment. Treat prompts as code: version control them, test them against 50+ cases covering edge cases, deploy with canary rollout, and monitor output distributions for regression. A prompt change should go through the same rigor as a code change to a payment system.
+            <strong>The untested prompt deploy.</strong> A team changed one word in their extraction prompt ("extract" to "identify") and deployed to production. Extraction accuracy dropped from 94% to 71% on edge cases. Nobody noticed for 2 weeks because the happy-path examples still worked. The prompt had no automated test suite, no golden test set, no canary deployment. Treat prompts as code: version control them, test them against 50+ cases covering edge cases, deploy with canary rollout, and monitor output distributions for regression. A prompt change should go through the same rigor as a code change to a payment system.
           </p>
         </div>
       </FadeIn>
 
       <FadeIn><Insight>
-        In practice, describing anti-patterns with specific dollar amounts and incident timelines is worth more than describing the correct architecture. "We had a recursive agent loop that cost $42K over a weekend, which led us to implement per-request cost caps, daily budget limits with automatic model downgrading, and a Slack alert that fires when hourly spend exceeds 2x the rolling average" tells people you've been in the trenches, not just read the blog posts. The fix is obvious — the story of how you learned it the hard way is what separates operators from theorists.
+        In practice, describing anti-patterns with specific dollar amounts and incident timelines is worth more than describing the correct architecture. "We had a recursive agent loop that cost $42K over a weekend, which led us to implement per-request cost caps, daily budget limits with automatic model downgrading, and a Slack alert that fires when hourly spend exceeds 2x the rolling average" tells people you've been in the trenches, not just read the blog posts. The fix is obvious; the story of how you learned it the hard way is what separates operators from theorists.
       </Insight></FadeIn>
         </div>
   );
@@ -867,15 +867,12 @@ function AntiPatternsPanel() {
 const styles = {
   back: { fontSize: 12, color: 'var(--text-muted)', textDecoration: 'none', display: 'inline-block', marginBottom: 16, fontFamily: 'var(--font-mono)', letterSpacing: '0.02em' },
   eyebrow: { fontSize: 11, fontWeight: 500, color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8, fontFamily: 'var(--font-mono)' },
-  h1: { fontSize: 'clamp(28px, 5vw, 44px)', fontWeight: 400, color: 'var(--text-h)', lineHeight: 1.12, marginBottom: 16, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
-  subtitle: { fontSize: 15, color: 'var(--text-p)', lineHeight: 1.75, marginBottom: 32 },
-  tabWrap: { display: 'flex', gap: 0, marginBottom: '2rem', borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', overflowX: 'auto', scrollbarWidth: 'none' },
-  tabBtn: { background: 'transparent', borderTopWidth: 0, borderRightWidth: 0, borderLeftWidth: 0, borderBottomWidth: 2, borderBottomStyle: 'solid', borderBottomColor: 'transparent', padding: '10px 14px', fontSize: 13, fontWeight: 500, color: 'var(--text-muted)', cursor: 'pointer', transition: 'all var(--dur) var(--ease)', fontFamily: 'inherit', whiteSpace: 'nowrap', letterSpacing: '-0.01em' },
-  tabActive: { color: 'var(--text-h)', fontWeight: 600, borderBottomColor: 'var(--bg-accent-strong)' },
-  sh: { fontSize: 20, fontWeight: 600, color: 'var(--text-h)', marginBottom: 8, fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' },
-  ss: { fontSize: 14, color: 'var(--text-p)', lineHeight: 1.7, marginBottom: 20 },
+  h1: { fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 400, color: 'var(--text-h)', lineHeight: 1.08, marginBottom: 16, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
+  subtitle: { fontSize: 'clamp(16px, 1.3vw, 18px)', color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 28, maxWidth: '62ch' },
+  sh: { fontSize: 'clamp(24px, 2.4vw, 30px)', fontWeight: 400, color: 'var(--text-h)', marginTop: 8, marginBottom: 10, lineHeight: 1.2, fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' },
+  ss: { fontSize: 16, color: 'var(--text-p)', marginBottom: 24, lineHeight: 1.7, maxWidth: '65ch' },
   anti: { background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '16px 18px', marginBottom: 10 },
-  strike: { textDecoration: 'line-through', opacity: 0.5, fontSize: 13, color: 'var(--text-p)', lineHeight: 1.6 },
-  better: { fontSize: 13, color: 'var(--text-h)', fontWeight: 500, lineHeight: 1.6, marginTop: 6 },
+  strike: { textDecoration: 'line-through', opacity: 0.5, fontSize: 15, color: 'var(--text-p)', lineHeight: 1.6 },
+  better: { fontSize: 15, color: 'var(--text-h)', fontWeight: 500, lineHeight: 1.6, marginTop: 6 },
   dot: { display: 'inline-block', width: 7, height: 7, borderRadius: '50%', marginRight: 8, verticalAlign: 'middle' },
 };

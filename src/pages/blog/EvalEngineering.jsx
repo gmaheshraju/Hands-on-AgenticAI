@@ -53,7 +53,7 @@ Scores by dimension:
   relevance:    0.79  ███████▏   ← weakest dimension
 
 7 critical failures (score < 0.3 on any dimension):
-  #42  faithfulness: 0.12  "Claimed product has feature X — not in docs"
+  #42  faithfulness: 0.12  "Claimed product has feature X, not in docs"
   #89  correctness:  0.08  "Returned pricing from 2023, not current"
   #103 relevance:    0.21  "Answered a different question entirely"
   ...`;
@@ -86,7 +86,7 @@ const FAITHFULNESS_RUBRIC = \`
 5: Every claim in the answer is directly supported by the provided context.
    No additions, no extrapolations, no external knowledge used.
 4: Core answer is fully supported. One minor detail could be inferred
-   but isn't explicitly stated — does not mislead the user.
+   but isn't explicitly stated; does not mislead the user.
 3: Main claim is supported but the answer adds unsupported elaboration
    that could be true or false. User might be misled.
 2: Answer mixes supported and unsupported claims roughly equally.
@@ -99,7 +99,7 @@ const CORRECTNESS_RUBRIC = \`
    all key points. No errors.
 4: Answer is correct on the main point. Missing one minor detail
    that doesn't change the user's action.
-3: Partially correct — right direction but missing important nuance
+3: Partially correct. Right direction but missing important nuance
    or a secondary error that could cause problems.
 2: Contains a significant factual error alongside some correct information.
 1: Fundamentally wrong. Would cause the user to take incorrect action.\`;`;
@@ -111,7 +111,7 @@ const LLM_JUDGE_OUTPUT = `> await llmJudge(
     { rubric: FAITHFULNESS_RUBRIC }
   )
 
-{ score: 1.0, reasoning: "5 — Both claims (30-day window, full refund)
+{ score: 1.0, reasoning: "5: Both claims (30-day window, full refund)
   are directly stated in the context. No unsupported additions." }
 
 > await llmJudge(
@@ -121,7 +121,7 @@ const LLM_JUDGE_OUTPUT = `> await llmJudge(
     { rubric: FAITHFULNESS_RUBRIC }
   )
 
-{ score: 0.2, reasoning: "1 — Two hallucinations: says 60 days (context
+{ score: 0.2, reasoning: "1: Two hallucinations: says 60 days (context
   says 30), claims free return shipping (not mentioned in context)." }`;
 
 const POSITION_BIAS_CODE = `// Position bias fix: run A/B comparisons twice with swapped positions
@@ -136,7 +136,7 @@ async function debiasedCompare(question, answerA, answerB, rubric) {
     \`Option 1: \${answerB}\\n\\nOption 2: \${answerA}\`,
     null, { rubric });
 
-  // Average scores — cancels out position preference
+  // Average scores: cancels out position preference
   const scoreA = (run1.scoreForOption1 + run2.scoreForOption2) / 2;
   const scoreB = (run1.scoreForOption2 + run2.scoreForOption1) / 2;
 
@@ -177,16 +177,16 @@ Run 2 (B first): preferred Option 1 (B)  score: 0.78
 
 Debiased scores:  A: 0.72   B: 0.80
 Winner: B (the short accurate answer)
-Agreement: false — raw judge had position bias, debiasing flipped the result
+Agreement: false (raw judge had position bias, debiasing flipped the result)
 
 > await judgePanel(question, answer, context, FAITHFULNESS_RUBRIC, { n: 3 })
 {
   score: 0.73,
   confidence: "high",     // variance: 0.007
   judges: [
-    { score: 0.8, reasoning: "4 — Mostly grounded, one minor inference" },
-    { score: 0.6, reasoning: "3 — Adds some unsupported elaboration" },
-    { score: 0.8, reasoning: "4 — Core claims supported by context" },
+    { score: 0.8, reasoning: "4: Mostly grounded, one minor inference" },
+    { score: 0.6, reasoning: "3: Adds some unsupported elaboration" },
+    { score: 0.8, reasoning: "4: Core claims supported by context" },
   ]
 }`;
 
@@ -248,7 +248,7 @@ correctness    0.87      0.89       +0.02  ✓
 faithfulness   0.91      0.84       -0.07  ✘ REGRESSION
 relevance      0.79      0.81       +0.02  ✓
 
-RECOMMENDATION: BLOCK — faithfulness dropped 7%
+RECOMMENDATION: BLOCK (faithfulness dropped 7%)
 
 3 regressions found (score delta > -0.3):
   #67: "What's the enterprise pricing?"
@@ -314,15 +314,15 @@ Category breakdown:
    4 random       (baseline calibration)
 
 Top priority reviews:
-  #42: scores [0.9, 0.1, 0.8] — faithfulness judge disagrees with others
-  #89: scores [0.6, 0.7, 0.8] — borderline pass, correctness uncertain
-  #15: scores [0.5, 0.5, 0.5] — every judge unsure
+  #42: scores [0.9, 0.1, 0.8]  faithfulness judge disagrees with others
+  #89: scores [0.6, 0.7, 0.8]  borderline pass, correctness uncertain
+  #15: scores [0.5, 0.5, 0.5]  every judge unsure
 
 > cohensKappa(annotatorA, annotatorB)
 0.74  ← "good" agreement (>0.6 = reliable labels)
 
 > cohensKappa(annotatorA, annotatorC)
-0.43  ← "moderate" — review labeling guidelines, annotators diverging`;
+0.43  ← "moderate": review labeling guidelines, annotators diverging`;
 
 const METRICS_CODE = `// Eval SLO monitor: track quality metrics like you track uptime
 class EvalSLOMonitor {
@@ -416,22 +416,22 @@ export default function EvalEngineering() {
       <p style={styles.eyebrow}>Post 08</p>
       <h1 style={styles.h1}>Evaluation Engineering</h1>
       <p style={styles.subtitle}>
-        LLM-as-judge, golden datasets, regression testing, human-in-the-loop &mdash; how to know
+        LLM-as-judge, golden datasets, regression testing, and human-in-the-loop: how to know
         if your AI system actually works, and catch when it silently breaks.
       </p>
 
       <Diagram
       svg={evalEngineeringSvg}
-      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/08-eval-engineering</code> &mdash; the nine steps of <code>runEval()</code> in code order, the three weighted dimensions (faithfulness 0.4, relevance 0.3, completeness 0.3), and the two judge backends the run can be pointed at. Nothing on it is drawn from the README — only from the code.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/08-eval-engineering</code>: the nine steps of <code>runEval()</code> in code order, the three weighted dimensions (faithfulness 0.4, relevance 0.3, completeness 0.3), and the two judge backends the run can be pointed at. Nothing on it is drawn from the README, only from the code.</>}
       source="tree/main/projects/08-eval-engineering"
       facts="blob/main/docs/diagrams/eval_engineering_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
       />
 
-      <div style={styles.tabWrap}>
+      <div className="tab-nav post-tabs" role="tablist">
         {TABS.map((t, i) => (
           <button key={t} onClick={() => setTab(i)}
-            style={{ ...styles.tabBtn, ...(tab === i ? styles.tabActive : {}) }}>
+            role="tab" aria-selected={tab === i} className={`tab-nav__btn${tab === i ? ' tab-nav__btn--active' : ''}`}>
             {t}
           </button>
         ))}
@@ -603,7 +603,7 @@ function FrameworksPanel() {
       <ConceptNote />
 
       <FadeIn><Decision question="What dimensions should you evaluate? (It's NOT just correctness)">
-        <Pill type="green">Correctness</Pill> Does the answer match ground truth? The obvious one. But useless in isolation &mdash; a correct answer buried in three paragraphs of hallucinated context scores high on correctness and zero on faithfulness.
+        <Pill type="green">Correctness</Pill> Does the answer match ground truth? The obvious one. But useless in isolation: a correct answer buried in three paragraphs of hallucinated context scores high on correctness and zero on faithfulness.
         <br /><br />
         <Pill type="green">Faithfulness</Pill> Is the answer grounded in the provided context? This catches hallucination. A RAG system that invents features not in the docs is unfaithful even if the invented feature happens to exist. This is the dimension most teams under-measure.
         <br /><br />
@@ -615,17 +615,17 @@ function FrameworksPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={100}><Insight tag="Production reality">
-        In practice, faithfulness and correctness together catch 80% of production issues. Add relevance as your third dimension. Harmlessness and helpfulness matter but are harder to automate &mdash; start with the first three and add the others when you have the eval infrastructure running.
+        In practice, faithfulness and correctness together catch 80% of production issues. Add relevance as your third dimension. Harmlessness and helpfulness matter but are harder to automate. Start with the first three and add the others when you have the eval infrastructure running.
       </Insight></FadeIn>
 
       <FadeIn delay={150}><Decision question="Reference-based vs reference-free evals?">
-        <Pill type="green">Reference-based (you have ground truth)</Pill> You have known-correct answers to compare against. Options ranked by quality: LLM-as-judge (best correlation with humans, ~$0.01/eval), semantic similarity via embeddings (fast, cheap, ~0.7 correlation), BLEU/ROUGE (terrible for generative AI &mdash; penalizes correct paraphrases). Always prefer LLM-as-judge when you can afford it.
+        <Pill type="green">Reference-based (you have ground truth)</Pill> You have known-correct answers to compare against. Options ranked by quality: LLM-as-judge (best correlation with humans, ~$0.01/eval), semantic similarity via embeddings (fast, cheap, ~0.7 correlation), BLEU/ROUGE (terrible for generative AI because it penalizes correct paraphrases). Always prefer LLM-as-judge when you can afford it.
         <br /><br />
-        <Pill type="amber">Reference-free (no ground truth)</Pill> No gold-standard answers. Options: LLM-as-judge with a rubric (can still score faithfulness, relevance without ground truth), human review (gold standard but expensive and slow), proxy metrics (user thumbs up/down, follow-up question rate, session abandonment). Most real systems use a mix &mdash; reference-based for your golden dataset, reference-free for live traffic.
+        <Pill type="amber">Reference-free (no ground truth)</Pill> No gold-standard answers. Options: LLM-as-judge with a rubric (can still score faithfulness, relevance without ground truth), human review (gold standard but expensive and slow), proxy metrics (user thumbs up/down, follow-up question rate, session abandonment). Most real systems use a mix: reference-based for your golden dataset, reference-free for live traffic.
       </Decision></FadeIn>
 
-      <FadeIn delay={200}><Decision question="Offline vs online evals &mdash; when do you run each?">
-        <Pill type="green">Offline evals (pre-deploy gate)</Pill> Run on your golden dataset before any deployment. Catches regressions from prompt changes, model upgrades, or RAG index updates. Fast feedback loop &mdash; minutes, not days. Every CI/CD pipeline for AI should include this.
+      <FadeIn delay={200}><Decision question="Offline vs online evals: when do you run each?">
+        <Pill type="green">Offline evals (pre-deploy gate)</Pill> Run on your golden dataset before any deployment. Catches regressions from prompt changes, model upgrades, or RAG index updates. Fast feedback loop: minutes, not days. Every CI/CD pipeline for AI should include this.
         <br /><br />
         <Pill type="green">Online evals (production monitoring)</Pill> Sample 5-10% of live traffic, run through the same judges asynchronously. Catches distribution shift (users asking questions your golden dataset doesn't cover), real-world edge cases, and gradual quality degradation. This is your smoke detector.
         <br /><br />
@@ -641,12 +641,12 @@ function FrameworksPanel() {
 
       <FadeIn delay={350}><Decision question="Agents: evaluate the trajectory or just the final answer?">
         <p style={{ fontSize: 13, lineHeight: 1.7, color: 'var(--text-p)' }}>
-          Everything above assumes a single input &rarr; single output. Agents break that assumption: a research agent might make 8 tool calls, retry twice, and re-plan once before answering. Scoring only the final answer hides where and why it went wrong &mdash; and lets you pass a run that got the right answer for the wrong reasons.
+          Everything above assumes a single input &rarr; single output. Agents break that assumption: a research agent might make 8 tool calls, retry twice, and re-plan once before answering. Scoring only the final answer hides where and why it went wrong, and lets you pass a run that got the right answer for the wrong reasons.
         </p>
         <br />
-        <Pill type="green">Outcome eval (did it end correctly?)</Pill> Score the final answer against ground truth, same as any RAG eval. Necessary but insufficient. It can't tell you that the agent called a paid API 40 times to answer a question one call should have solved, or that it landed on the right answer by luck after a wrong turn. Cheap to run, and the only thing that maps directly to user-visible quality &mdash; so keep it as your headline metric.
+        <Pill type="green">Outcome eval (did it end correctly?)</Pill> Score the final answer against ground truth, same as any RAG eval. Necessary but insufficient. It can't tell you that the agent called a paid API 40 times to answer a question one call should have solved, or that it landed on the right answer by luck after a wrong turn. Cheap to run, and the only thing that maps directly to user-visible quality, so keep it as your headline metric.
         <br /><br />
-        <Pill type="green">Trajectory eval (was the path sane?)</Pill> Score the sequence of steps: did it pick the right tools, in a reasonable order, with valid arguments, and stop when it had enough? Two useful flavors &mdash; <em>reference trajectory</em> (compare against a human-authored ideal path; brittle because many paths are valid) and <em>rubric-on-trace</em> (an LLM judge reads the full trace and scores efficiency, tool-choice, and recovery). The second scales; the first is worth it only for a small golden set of critical flows.
+        <Pill type="green">Trajectory eval (was the path sane?)</Pill> Score the sequence of steps: did it pick the right tools, in a reasonable order, with valid arguments, and stop when it had enough? Two useful flavors: <em>reference trajectory</em> (compare against a human-authored ideal path; brittle because many paths are valid) and <em>rubric-on-trace</em> (an LLM judge reads the full trace and scores efficiency, tool-choice, and recovery). The second scales; the first is worth it only for a small golden set of critical flows.
         <br /><br />
         <Pill type="amber">Component evals (isolate each capability)</Pill> Unit-test the pieces that trajectory eval blurs together: tool-selection accuracy (given this state, is the chosen tool correct?), argument correctness (are the parameters well-formed and grounded?), and stop-decision quality (did it halt too early or loop?). When end-to-end pass rate drops, component evals tell you <em>which</em> capability regressed instead of just that <em>something</em> did.
         <br /><br />
@@ -654,7 +654,7 @@ function FrameworksPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={400}><Insight tag="Interview signal">
-        When asked "how would you evaluate an agent?", the weak answer is "check if the final output is correct." The strong answer names all three layers &mdash; outcome, trajectory, and component &mdash; and then says which one you'd reach for first: start with outcome eval because it's cheapest and maps to user value, add trajectory eval when cost or latency regresses without the answer changing, and add component evals once you need to localize <em>which</em> capability broke. Knowing the layers is table stakes; knowing the order to add them is the Staff+ signal.
+        When asked "how would you evaluate an agent?", the weak answer is "check if the final output is correct." The strong answer names all three layers (outcome, trajectory, and component) and then says which one you'd reach for first: start with outcome eval because it's cheapest and maps to user value, add trajectory eval when cost or latency regresses without the answer changing, and add component evals once you need to localize <em>which</em> capability broke. Knowing the layers is table stakes; knowing the order to add them is the Staff+ signal.
       </Insight></FadeIn>
     </div>
   );
@@ -666,7 +666,7 @@ function JudgePanel() {
   return (
     <div>
       <SectionHead
-        title="LLM-as-Judge &mdash; the most important eval technique"
+        title="LLM-as-Judge: the eval technique you'll use most"
         desc="Humans can't review 10K outputs per week. BLEU/ROUGE correlate poorly with actual quality (0.3-0.4 with human judgment). A calibrated LLM judge correlates 0.8-0.9 with humans at $0.01 per evaluation. This is not optional for production AI."
       />
 
@@ -679,7 +679,7 @@ function JudgePanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={100}><Insight tag="Key insight">
-        The rubric IS the eval. A prompt that says "rate this answer 1-5" gives noise. A rubric with concrete examples for each score level &mdash; "5 means every claim is directly supported by context, 1 means major claims are fabricated" &mdash; gives signal. Spend 80% of your eval engineering time on rubric design.
+        The rubric IS the eval. A prompt that says "rate this answer 1-5" gives noise. A rubric with concrete examples for each score level ("5 means every claim is directly supported by context, 1 means major claims are fabricated") gives signal. Spend 80% of your eval engineering time on rubric design.
       </Insight></FadeIn>
 
       <FadeIn delay={150}><CodeBlock filename="llm-judge.js" code={LLM_JUDGE_CODE} output={LLM_JUDGE_OUTPUT} /></FadeIn>
@@ -689,7 +689,7 @@ function JudgePanel() {
         <br /><br />
         <Pill type="amber">Panel of 3 (high-stakes)</Pill> Three independent LLM calls, take the majority vote or average. Catches cases where one judge misreads the rubric. Costs 3x but reduces evaluation variance by ~40%. Use for: golden dataset creation, model selection decisions, and any eval that gates a deployment.
         <br /><br />
-        <Pill type="red">Panel of 5+ (diminishing returns)</Pill> Going beyond 3 judges rarely improves agreement. If 3 judges disagree, the task is likely underspecified &mdash; fix the rubric, don't add more judges.
+        <Pill type="red">Panel of 5+ (diminishing returns)</Pill> Going beyond 3 judges rarely improves agreement. If 3 judges disagree, the task is likely underspecified. Fix the rubric; don't add more judges.
       </Decision></FadeIn>
 
       <FadeIn delay={250}><Decision question="How do you handle position bias?">
@@ -717,18 +717,18 @@ function RegressionPanel() {
   return (
     <div>
       <SectionHead
-        title="Regression testing &mdash; catch breaks before users do"
+        title="Regression testing: catch breaks before users do"
         desc="A one-word prompt change can drop accuracy by 15%. A model version bump can change behavior on edge cases you never tested. Without regression testing, you're deploying blind."
       />
 
-      <FadeIn><Decision question="Golden datasets &mdash; how to build them right">
-        <Pill type="green">Start with 50, grow to 500+</Pill> You don't need 10K test cases on day one. 50 well-chosen cases covering your main use cases, edge cases, and known failure modes is enough to catch most regressions. Add cases every time you find a production bug &mdash; that bug becomes a regression test.
+      <FadeIn><Decision question="Golden datasets: how to build them right">
+        <Pill type="green">Start with 50, grow to 500+</Pill> You don't need 10K test cases on day one. 50 well-chosen cases covering your main use cases, edge cases, and known failure modes is enough to catch most regressions. Add cases every time you find a production bug; that bug becomes a regression test.
         <br /><br />
         <Pill type="green">Cover the distribution, not just happy paths</Pill> If 30% of your production traffic is ambiguous questions, 30% of your golden dataset should be ambiguous questions. If you only test clean, well-formed queries, you'll miss the failures that actually hurt users.
         <br /><br />
         <Pill type="amber">Include adversarial cases</Pill> Prompt injections, off-topic queries, queries in unexpected languages, queries that reference information not in your knowledge base. These are the cases that fail silently.
         <br /><br />
-        <Pill type="red">Auto-generated test cases only</Pill> Using an LLM to generate your golden dataset creates a circular evaluation &mdash; the LLM tests what another LLM thinks is important, not what your users actually ask. Always seed with real production queries.
+        <Pill type="red">Auto-generated test cases only</Pill> Using an LLM to generate your golden dataset creates a circular evaluation: the LLM tests what another LLM thinks is important, not what your users actually ask. Always seed with real production queries.
       </Decision></FadeIn>
 
       <FadeIn delay={100}><Insight tag="Key insight">
@@ -746,11 +746,11 @@ function RegressionPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={200}><Decision question="Handling non-determinism in evals">
-        <Pill type="green">Temperature 0 for eval runs</Pill> Set temperature to 0 (or as low as possible) for reproducibility. This doesn't eliminate non-determinism entirely &mdash; batching, quantization, and routing can still cause variation &mdash; but it reduces it dramatically.
+        <Pill type="green">Temperature 0 for eval runs</Pill> Set temperature to 0 (or as low as possible) for reproducibility. This doesn't eliminate non-determinism entirely (batching, quantization, and routing can still cause variation), but it reduces it a lot.
         <br /><br />
         <Pill type="amber">Run 3-5 times, majority vote</Pill> For cases where you need temperature &gt; 0 (creative tasks, diverse outputs), run each test case multiple times and use majority vote for pass/fail. If 3/5 runs pass, the test case passes. This tolerates acceptable variation.
         <br /><br />
-        <Pill type="amber">Track variance, not just mean</Pill> A test case that passes 100% of the time is stable. One that passes 60% of the time is flaky &mdash; and flaky evals are worse than no evals because they teach the team to ignore failures.
+        <Pill type="amber">Track variance, not just mean</Pill> A test case that passes 100% of the time is stable. One that passes 60% of the time is flaky, and flaky evals are worse than no evals because they teach the team to ignore failures.
       </Decision></FadeIn>
 
       <FadeIn delay={250}><CodeBlock filename="prompt-regression.js" code={REGRESSION_CODE} output={REGRESSION_OUTPUT} /></FadeIn>
@@ -768,24 +768,24 @@ function HITLPanel() {
   return (
     <div>
       <SectionHead
-        title="Human-in-the-loop &mdash; when machines aren't enough"
+        title="Human-in-the-loop: when machines aren't enough"
         desc="LLM judges are good but not perfect. You need humans for calibrating judges, building golden datasets, and reviewing edge cases where automated evals give low confidence."
       />
 
       <FadeIn><Decision question="When do you need human review?">
         <Pill type="green">Calibrating LLM judges</Pill> Before you trust an LLM judge, have humans score the same 100 cases. Compute correlation (Pearson or Spearman). If it's below 0.75, your rubric needs work. Re-calibrate every time you change the rubric or the judge model.
         <br /><br />
-        <Pill type="green">Building golden datasets</Pill> The expected outputs in your golden dataset should be human-verified. An LLM-generated "correct" answer that's subtly wrong poisons your entire eval pipeline &mdash; every future eval measures against a wrong standard.
+        <Pill type="green">Building golden datasets</Pill> The expected outputs in your golden dataset should be human-verified. An LLM-generated "correct" answer that's subtly wrong poisons your entire eval pipeline: every future eval measures against a wrong standard.
         <br /><br />
         <Pill type="green">Low-confidence cases</Pill> When the LLM judge scores spread wide (one judge says 0.9, another says 0.3), the case is ambiguous. Route these to human review instead of guessing.
         <br /><br />
-        <Pill type="amber">High-stakes domains</Pill> Medical, legal, financial &mdash; where a wrong answer has real consequences. LLM judges lack domain expertise to catch subtle errors that a domain expert would flag immediately.
+        <Pill type="amber">High-stakes domains</Pill> Medical, legal, financial: domains where a wrong answer has real consequences. LLM judges lack domain expertise to catch subtle errors that a domain expert would flag immediately.
       </Decision></FadeIn>
 
       <FadeIn delay={100}><Decision question="How to design annotation protocols">
         <Pill type="green">Clear labeling guidelines with examples</Pill> "Is this answer good?" is not a labeling task. "Score faithfulness 1-5 using this rubric, here are 3 examples of each score level" is a labeling task. The more specific your guidelines, the higher your inter-annotator agreement.
         <br /><br />
-        <Pill type="green">Measure inter-annotator agreement</Pill> Cohen's kappa above 0.7 means your annotators agree reliably. Below 0.4 means your task is underspecified &mdash; fix the guidelines before collecting more labels. Paying for labels with kappa 0.3 is literally wasting money.
+        <Pill type="green">Measure inter-annotator agreement</Pill> Cohen's kappa above 0.7 means your annotators agree reliably. Below 0.4 means your task is underspecified. Fix the guidelines before collecting more labels. Paying for labels with kappa 0.3 is literally wasting money.
         <br /><br />
         <Pill type="amber">Dual annotation on a subset</Pill> Have two annotators label the same 20% of cases. Use agreement on this overlap to monitor quality. If agreement drops, retrain annotators before they corrupt more data.
       </Decision></FadeIn>
@@ -796,7 +796,7 @@ function HITLPanel() {
 
       <FadeIn delay={200}><CodeBlock filename="human-review.js" code={HITL_CODE} output={HITL_OUTPUT} /></FadeIn>
 
-      <FadeIn delay={250}><Decision question="Annotation costs &mdash; real numbers">
+      <FadeIn delay={250}><Decision question="Annotation costs: real numbers">
         <Pill type="green">Crowd workers ($0.10-0.50 per judgment)</Pill> Platforms like Scale, Surge, or Labelbox. Good for: straightforward quality judgments, relevance scoring, harmlessness checks. Not reliable for: domain-specific correctness, subtle factual errors, nuanced rubrics.
         <br /><br />
         <Pill type="amber">Domain experts ($5-20 per judgment)</Pill> In-house or contracted specialists. Good for: medical/legal/financial accuracy, complex rubric evaluation, golden dataset creation. Expensive but irreplaceable for high-stakes domains.
@@ -817,58 +817,58 @@ function MetricsPanel() {
   return (
     <div>
       <SectionHead
-        title="Metrics that matter &mdash; and SLOs that bite"
+        title="Metrics that matter, and SLOs that bite"
         desc="You don't need 50 metrics. You need 5 good ones with thresholds that page someone at 3am when quality drops. Treat AI quality like you treat uptime."
       />
 
       <FadeIn><Decision question="What to track on your eval dashboard">
-        <Pill type="green">Accuracy / pass rate (trending over time)</Pill> Not just the current number &mdash; the trend. A pass rate that drops from 88% to 84% over two weeks is a slow leak that no single alert catches. Plot it daily, set a 7-day moving average, alert on sustained decline.
+        <Pill type="green">Accuracy / pass rate (trending over time)</Pill> Not just the current number, but the trend. A pass rate that drops from 88% to 84% over two weeks is a slow leak that no single alert catches. Plot it daily, set a 7-day moving average, alert on sustained decline.
         <br /><br />
-        <Pill type="green">Faithfulness score (per RAG index version)</Pill> Track faithfulness separately from correctness. When you update your RAG index, faithfulness can drop even if correctness stays flat &mdash; the model starts hallucinating from poorly chunked new documents. Tag each eval with the index version.
+        <Pill type="green">Faithfulness score (per RAG index version)</Pill> Track faithfulness separately from correctness. When you update your RAG index, faithfulness can drop even if correctness stays flat, because the model starts hallucinating from poorly chunked new documents. Tag each eval with the index version.
         <br /><br />
-        <Pill type="green">Latency p50/p95/p99 (by model and route)</Pill> AI latency is bimodal &mdash; most queries fast, some extremely slow (long outputs, complex tool chains). p50 hides the pain. p95 shows what 1-in-20 users experience. Break down by model tier so you know when to route to a faster model.
+        <Pill type="green">Latency p50/p95/p99 (by model and route)</Pill> AI latency is bimodal: most queries are fast, some very slow (long outputs, complex tool chains). p50 hides the pain. p95 shows what 1-in-20 users experience. Break down by model tier so you know when to route to a faster model.
         <br /><br />
         <Pill type="amber">Cost per query (by model tier)</Pill> Track input tokens, output tokens, and judge eval cost separately. A prompt change that improves quality but 3x's token usage might not be worth it. Set a budget per query tier and alert when it's exceeded.
         <br /><br />
-        <Pill type="amber">User feedback signals</Pill> Thumbs up/down, follow-up question rate (proxy for "first answer didn't help"), session abandonment after AI response (proxy for "gave up"). These are noisy but catch issues that automated evals miss &mdash; like the answer being technically correct but confusingly worded.
+        <Pill type="amber">User feedback signals</Pill> Thumbs up/down, follow-up question rate (proxy for "first answer didn't help"), session abandonment after AI response (proxy for "gave up"). These are noisy but catch issues that automated evals miss, like the answer being technically correct but confusingly worded.
       </Decision></FadeIn>
 
       <FadeIn delay={100}><Decision question="Setting SLOs for AI systems">
         <p style={{ fontSize: 13, lineHeight: 1.7, color: 'var(--text-p)' }}>
-          SLOs turn vague quality goals into concrete alerts. These thresholds are calibrated from real production systems &mdash; adjust based on your domain:
+          SLOs turn vague quality goals into concrete alerts. These thresholds are calibrated from real production systems. Adjust them for your domain:
         </p>
         <br />
         <Pill type="green">Accuracy &gt; 85% on golden dataset</Pill> Below 85%, users notice errors frequently enough to lose trust. For user-facing chat, aim for 90%+. For internal tools with expert users who can verify, 80% may be acceptable.
         <br /><br />
-        <Pill type="green">Faithfulness &gt; 90% (hallucination rate &lt; 10%)</Pill> This is the hardest SLO to maintain. A 10% hallucination rate means 1-in-10 answers contains fabricated information. For RAG systems, most hallucinations come from poor retrieval, not the LLM &mdash; fix your chunking before tuning your prompt.
+        <Pill type="green">Faithfulness &gt; 90% (hallucination rate &lt; 10%)</Pill> This is the hardest SLO to maintain. A 10% hallucination rate means 1-in-10 answers contains fabricated information. For RAG systems, most hallucinations come from poor retrieval, not the LLM. Fix your chunking before tuning your prompt.
         <br /><br />
-        <Pill type="amber">p95 latency &lt; 3s for user-facing</Pill> Users start abandoning after 3 seconds. For streaming responses, time-to-first-token matters more than total latency &mdash; set TTFT SLO at 500ms.
+        <Pill type="amber">p95 latency &lt; 3s for user-facing</Pill> Users start abandoning after 3 seconds. For streaming responses, time-to-first-token matters more than total latency; set the TTFT SLO at 500ms.
         <br /><br />
         <Pill type="amber">Cost per query &lt; $0.01 for tier-1 traffic</Pill> Tier-1 is your high-volume, low-complexity traffic (FAQ, simple lookups). Use cheaper models (Haiku, GPT-4o-mini) with prompt caching. Tier-2 (complex reasoning, multi-step) can be $0.05-0.10 per query.
       </Decision></FadeIn>
 
       <FadeIn delay={150}><Insight type="warn">
-        Set a p5 floor, not just an average SLO. Average faithfulness of 0.90 can hide a tail where 5% of responses score below 0.30 &mdash; pure hallucination. The average looks healthy while 1-in-20 users gets dangerously wrong information. A p5 floor of 0.60 catches tail collapse that averages miss.
+        Set a p5 floor, not just an average SLO. Average faithfulness of 0.90 can hide a tail where 5% of responses score below 0.30, which is pure hallucination. The average looks healthy while 1-in-20 users gets dangerously wrong information. A p5 floor of 0.60 catches tail collapse that averages miss.
       </Insight></FadeIn>
 
       <FadeIn delay={200}><CodeBlock filename="eval-slo-monitor.js" code={METRICS_CODE} output={METRICS_OUTPUT} /></FadeIn>
 
-      <FadeIn delay={250}><Decision question="A/B testing AI systems &mdash; how it's different from traditional A/B">
+      <FadeIn delay={250}><Decision question="A/B testing AI systems: how it's different from traditional A/B">
         <Pill type="green">Need ~1000 queries for statistical significance</Pill> Quality metrics are noisier than click-through rates. You need more data points to distinguish "prompt B is 3% better" from random variation. Run for at least a week to cover weekday/weekend traffic distribution differences.
         <br /><br />
         <Pill type="amber">Split by session, not by query</Pill> A user who gets good answers on 9 queries and a hallucinated answer on the 10th has a bad experience. Split by user/session so each user gets a consistent experience. Mixing within a session makes quality metrics unreliable.
         <br /><br />
-        <Pill type="amber">Track cost alongside quality</Pill> Prompt B might score 2% higher on faithfulness but cost 40% more in tokens. Run both cost and quality metrics &mdash; the winner is the one with the best quality-per-dollar, not the highest absolute quality.
+        <Pill type="amber">Track cost alongside quality</Pill> Prompt B might score 2% higher on faithfulness but cost 40% more in tokens. Run both cost and quality metrics. The winner is the one with the best quality-per-dollar, not the highest absolute quality.
         <br /><br />
         <Pill type="red">A/B test without automated evals</Pill> If you're A/B testing based on user thumbs-up/down alone, you need 10K+ data points per variant because the signal is so noisy. Automated eval scores give you significance in 1/10th the traffic.
       </Decision></FadeIn>
 
       <FadeIn delay={300}><Insight tag="Key insight">
-        The eval system is a product, not a one-time project. Dedicate 15-20% of your AI engineering bandwidth to eval infrastructure &mdash; improving rubrics, growing the golden dataset, calibrating judges, building dashboards. Teams that treat evals as a checkbox end up with a false sense of security. Teams that treat evals as a living system catch regressions the same day they're introduced.
+        The eval system is a product, not a one-time project. Dedicate 15-20% of your AI engineering bandwidth to eval infrastructure: improving rubrics, growing the golden dataset, calibrating judges, building dashboards. Teams that treat evals as a checkbox end up with a false sense of security. Teams that treat evals as a living system catch regressions the same day they're introduced.
       </Insight></FadeIn>
 
       <FadeIn delay={350}><Insight tag="2026 engineering signal">
-        The eval gap is becoming THE differentiator. Anyone can get an agent to write code &mdash; cursor tab, Claude Code, Copilot, Codex. Knowing whether that code is correct? Building the test harnesses, rubrics, guardrails, monitoring pipelines that catch silent regressions before users do? That's the scarce skill. In 2026, "I built an eval harness that caught a 12% faithfulness drop on deploy day" beats "I built an agent" every single time. The person who can evaluate AI output is more valuable than the person who can generate it.
+        The eval gap is becoming THE differentiator. Anyone can get an agent to write code with Cursor tab, Claude Code, Copilot, or Codex. Knowing whether that code is correct? Building the test harnesses, rubrics, guardrails, monitoring pipelines that catch silent regressions before users do? That's the scarce skill. In 2026, "I built an eval harness that caught a 12% faithfulness drop on deploy day" beats "I built an agent" every single time. The person who can evaluate AI output is more valuable than the person who can generate it.
       </Insight></FadeIn>
         </div>
   );
@@ -877,11 +877,8 @@ function MetricsPanel() {
 const styles = {
   back: { fontSize: 12, color: 'var(--text-muted)', textDecoration: 'none', fontFamily: 'var(--font-mono)' },
   eyebrow: { fontSize: 11, fontWeight: 500, color: 'var(--text-accent)', letterSpacing: '0.08em', marginBottom: 8, textTransform: 'uppercase', fontFamily: 'var(--font-mono)' },
-  h1: { fontSize: 'clamp(28px, 5vw, 44px)', fontWeight: 400, color: 'var(--text-h)', lineHeight: 1.12, marginBottom: 16, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
-  subtitle: { fontSize: 15, color: 'var(--text-p)', lineHeight: 1.75, marginBottom: 32 },
-  tabWrap: { display: 'flex', flexWrap: 'wrap', gap: 4, marginBottom: 28, borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', paddingBottom: 12 },
-  tabBtn: { fontSize: 12, fontWeight: 500, color: 'var(--text-muted)', background: 'none', border: 'none', padding: '6px 14px', borderRadius: 'var(--radius-full)', cursor: 'pointer', transition: 'all var(--dur) var(--ease)', fontFamily: 'var(--font-body)' },
-  tabActive: { color: 'var(--text-accent)', background: 'var(--bg-accent)' },
-  sh: { fontSize: 20, fontWeight: 600, color: 'var(--text-h)', marginBottom: 8, fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' },
-  ss: { fontSize: 14, color: 'var(--text-p)', lineHeight: 1.7, marginBottom: 20 },
+  h1: { fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 400, color: 'var(--text-h)', lineHeight: 1.08, marginBottom: 16, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
+  subtitle: { fontSize: 'clamp(16px, 1.3vw, 18px)', color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 28, maxWidth: '62ch' },
+  sh: { fontSize: 'clamp(24px, 2.4vw, 30px)', fontWeight: 400, color: 'var(--text-h)', marginTop: 8, marginBottom: 10, lineHeight: 1.2, fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' },
+  ss: { fontSize: 16, color: 'var(--text-p)', marginBottom: 24, lineHeight: 1.7, maxWidth: '65ch' },
 };

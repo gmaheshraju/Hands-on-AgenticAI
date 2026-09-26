@@ -1,38 +1,55 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useLayoutEffect } from 'react';
 
+// useLayoutEffect warns during the prerender pass; there is no layout to read there anyway.
+const useIsoLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
+
+// Reveal-on-scroll that never hides content the reader can already see.
+//
+// Phases: 'static' (visible, no transition) → 'hidden' → 'in'.
+// Every element starts 'static', so the prerendered HTML and the first paint
+// show real content. After hydration, only elements that are still below the
+// fold are hidden (before paint, so nothing visible flickers) and revealed as
+// they approach the viewport. Reduced-motion users stay 'static'.
 export default function FadeIn({ children, delay = 0, className }) {
   const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
+  const [phase, setPhase] = useState('static');
+
+  useIsoLayoutEffect(() => {
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+    if (el.getBoundingClientRect().top < window.innerHeight) return;
+    setPhase('hidden');
+  }, []);
 
   useEffect(() => {
+    if (phase !== 'hidden') return;
     const el = ref.current;
-    if (!el) return;
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVisible(true);
-          observer.unobserve(el);
+          setPhase('in');
+          observer.disconnect();
         }
       },
-      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+      // Start slightly before the element enters, so fast scrolling never lands on a blank gap.
+      { rootMargin: '0px 0px 12% 0px' }
     );
-
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [phase]);
+
+  const style =
+    phase === 'static' ? undefined
+    : phase === 'hidden' ? { opacity: 0, transform: 'translateY(12px)' }
+    : {
+        opacity: 1,
+        transform: 'none',
+        transition: `opacity 0.45s var(--ease) ${Math.min(delay, 240)}ms, transform 0.45s var(--ease) ${Math.min(delay, 240)}ms`,
+      };
 
   return (
-    <div
-      ref={ref}
-      className={className}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(16px)',
-        transition: `opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1) ${delay}ms, transform 0.5s cubic-bezier(0.23, 1, 0.32, 1) ${delay}ms`,
-        willChange: visible ? 'auto' : 'opacity, transform',
-      }}
-    >
+    <div ref={ref} className={className} style={style}>
       {children}
     </div>
   );

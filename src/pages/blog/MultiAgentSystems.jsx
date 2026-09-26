@@ -8,7 +8,7 @@ import Diagram, { ConceptNote } from '../../components/Diagram';
 import multiAgentSvg from '../../../docs/diagrams/multi_agent_v1/multi-agent.svg?raw';
 
 const SUPERVISOR_CODE = `async function supervisorAgent(userMessage, specialists) {
-  // Step 1: Router — classify intent and pick specialist
+  // Step 1: Router: classify intent and pick specialist
   const routing = await callLLM([
     { role: 'system', content: \`You are a router. Classify the user's intent and pick
 the best specialist. Available: \${Object.keys(specialists).join(', ')}.
@@ -23,7 +23,7 @@ Respond with JSON: { "specialist": "name", "task": "what to do" }\` },
   // Step 2: Delegate to specialist with scoped tools
   const result = await agent.run(task);
 
-  // Step 3: Synthesize — the supervisor formats the final response
+  // Step 3: Synthesize: the supervisor formats the final response
   const synthesis = await callLLM([
     { role: 'system', content: 'Synthesize this specialist result into a helpful response for the user.' },
     { role: 'user', content: userMessage },
@@ -33,7 +33,7 @@ Respond with JSON: { "specialist": "name", "task": "what to do" }\` },
   return synthesis.text;
 }
 
-// Specialists — each has its own system prompt and tool set
+// Specialists: each has its own system prompt and tool set
 const specialists = {
   researcher: {
     run: (task) => agentLoop(task, { tools: { webSearch, readUrl } }),
@@ -142,7 +142,7 @@ async function buildFeatureBad(spec) {
   return merge(ui, api);  // two agents, two incompatible worldviews
 }
 
-// ✅ FIX 1 — Full-trajectory handoff (Anthropic's multi-agent research pattern).
+// ✅ FIX 1: Full-trajectory handoff (Anthropic's multi-agent research pattern).
 // The supervisor passes the ENTIRE decision history, not just the sub-task.
 // Sub-agents inherit shared decisions, so their choices stay compatible.
 async function buildFeatureGood(spec) {
@@ -159,7 +159,7 @@ async function buildFeatureGood(spec) {
   return merge(ui, api);
 }
 
-// ✅ FIX 2 — When you MUST parallelize, compress the trajectory, don't drop it.
+// ✅ FIX 2: When you MUST parallelize, compress the trajectory, don't drop it.
 // A verbatim history blows the context window; a lossy summary loses the
 // binding decisions. Pass a structured digest of just the load-bearing facts.
 function contextDigest(trajectory) {
@@ -182,7 +182,7 @@ const CONTEXT_HANDOFF_OUTPUT = `> await buildFeatureBad("user profile page")
 [supervisor] shared contract: { apiStyle: REST, naming: camelCase, auth: JWT }
 [api-agent]  built REST /api/users, camelCase  (inherited contract)
 [ui-agent]   built client against /api/users, reads user.firstName
-[merge] ✓ UI and API agree — same contract, same worldview
+[merge] ✓ UI and API agree: same contract, same worldview
    → coherent by construction, not by luck`;
 
 const TABS = ['Patterns', 'Coordination', 'Architecture', 'When to Use', 'Anti-patterns'];
@@ -196,21 +196,21 @@ export default function MultiAgentSystems() {
       <p style={styles.eyebrow}>Post 04</p>
       <h1 style={styles.h1}>Multi-Agent Systems</h1>
       <p style={styles.subtitle}>
-        When one agent isn't enough — delegation patterns, shared memory, supervisor architectures,
+        When one agent isn't enough: delegation patterns, shared memory, supervisor architectures,
         and the honest truth about when single-agent beats multi-agent.
       </p>
 
       <Diagram
       svg={multiAgentSvg}
-      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/04-multi-agent-systems</code> — all eight message types in the order the supervisor publishes them, and all five bus channels, keyed by agent name rather than by topic. It also shows what the project's own README gets wrong: every one of the 5 <code>bus.subscribe</code> and 10 <code>bus.publish</code> calls lives in <code>supervisor.js</code>, the four agent modules contain zero bus references, and so no agent-to-agent edge exists. Every label here survived a check against the file it names.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/04-multi-agent-systems</code>: all eight message types in the order the supervisor publishes them, and all five bus channels, keyed by agent name rather than by topic. It also shows what the project's own README gets wrong: every one of the 5 <code>bus.subscribe</code> and 10 <code>bus.publish</code> calls lives in <code>supervisor.js</code>, the four agent modules contain zero bus references, and so no agent-to-agent edge exists. Every label here survived a check against the file it names.</>}
       source="tree/main/projects/04-multi-agent-systems"
       facts="blob/main/docs/diagrams/multi_agent_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
       />
 
-      <div style={styles.tabWrap}>
+      <div className="tab-nav post-tabs" role="tablist">
         {TABS.map((t, i) => (
-          <button key={t} onClick={() => setTab(i)} style={{ ...styles.tabBtn, ...(tab === i ? styles.tabActive : {}) }}>{t}</button>
+          <button key={t} onClick={() => setTab(i)} role="tab" aria-selected={tab === i} className={`tab-nav__btn${tab === i ? ' tab-nav__btn--active' : ''}`}>{t}</button>
         ))}
       </div>
 
@@ -367,16 +367,16 @@ function PatternsPanel() {
       <div style={{ background: 'var(--bg-code)', borderTopWidth: 1, borderTopStyle: 'solid', borderTopColor: 'var(--border)', borderRightWidth: 1, borderRightStyle: 'solid', borderRightColor: 'var(--border)', borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', borderLeftWidth: 3, borderLeftStyle: 'solid', borderLeftColor: 'var(--bg-accent-strong)', borderRadius: 'var(--radius-md)', padding: '14px 16px', marginBottom: 16 }}>
         <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-accent)', marginBottom: 6, fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>MAHESH'S EVOLUTION FRAMEWORK</p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 6 }}>
-          <strong>Level 1: Single Agent</strong> — One LLM with tools. Handles 80% of use cases. ChatGPT, basic Claude conversations.
+          <strong>Level 1: Single Agent.</strong> One LLM with tools. Handles 80% of use cases. ChatGPT, basic Claude conversations.
         </p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 6 }}>
-          <strong>Level 2: Sequential Agents</strong> — Pipeline: Agent A {'>'} Agent B {'>'} Agent C. Each specializes. Like Unix pipes.
+          <strong>Level 2: Sequential Agents.</strong> Pipeline: Agent A {'>'} Agent B {'>'} Agent C. Each specializes. Like Unix pipes.
         </p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 6 }}>
-          <strong>Level 3: Agent Teams</strong> — Predefined roles, a leader delegates tasks, agents report back. "Fears being wrong" — narrows and verifies before responding. Claude Code's subagent system is here.
+          <strong>Level 3: Agent Teams.</strong> Predefined roles, a leader delegates tasks, agents report back. "Fears being wrong," so it narrows and verifies before responding. Claude Code's subagent system is here.
         </p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 6 }}>
-          <strong>Level 4: Agent Swarm</strong> — A goal agent auto-spawns workers, a synthesizer clusters findings. "Fears missing something" — explores in parallel. Kimi's Deep Research is here.
+          <strong>Level 4: Agent Swarm.</strong> A goal agent auto-spawns workers, a synthesizer clusters findings. "Fears missing something," so it explores in parallel. Kimi's Deep Research is here.
         </p>
         <p style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.6, marginTop: 8, fontStyle: 'italic' }}>
           My warning: "Multi-agent systems can burn tokens fast unless you constrain agent count + tool usage." Most teams should stay at Level 2-3.
@@ -389,7 +389,7 @@ function PatternsPanel() {
       <FadeIn><Decision question="1. Supervisor pattern (hierarchical)">
         <Pill type="green">Most common</Pill> One supervisor agent routes tasks to specialist agents, collects results, and synthesizes the final response. The supervisor is the only agent that talks to the user.
         <br /><br />
-        <strong>Pros:</strong> Clear control flow. Easy to debug (trace supervisor's routing decisions). Natural error handling — supervisor can retry with a different agent.
+        <strong>Pros:</strong> Clear control flow. Easy to debug (trace supervisor's routing decisions). Natural error handling: the supervisor can retry with a different agent.
         <br /><br />
         <strong>Cons:</strong> Supervisor is a bottleneck. If the supervisor misroutes, everything fails. Adding new specialists requires updating the supervisor's routing logic.
         <br /><br />
@@ -397,7 +397,7 @@ function PatternsPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="2. Pipeline pattern (sequential)">
-        Agents arranged in a chain — output of agent A becomes input of agent B. Like a Unix pipe: <code style={{ fontFamily: 'var(--font-mono)', fontSize: 12 }}>research | draft | review | edit</code>
+        Agents arranged in a chain: the output of agent A becomes the input of agent B. Like a Unix pipe: <code style={{ fontFamily: 'var(--font-mono)', fontSize: 12 }}>research | draft | review | edit</code>
         <br /><br />
         <strong>Pros:</strong> Simple mental model. Each agent has a single responsibility. Easy to test each stage independently.
         <br /><br />
@@ -421,29 +421,29 @@ function PatternsPanel() {
         <br /><br />
         <strong>Pros:</strong> Most flexible. No single point of failure. Can scale to many agents.
         <br /><br />
-        <strong>Cons:</strong> Extremely hard to debug. Emergent behavior is unpredictable. Coordination overhead grows quadratically with agent count. Race conditions.
+        <strong>Cons:</strong> Very hard to debug. Emergent behavior is unpredictable. Coordination overhead grows quadratically with agent count. Race conditions.
         <br /><br />
-        <strong>My distinction:</strong> Swarms "fear missing something" — they explore every angle in parallel, then a synthesizer clusters the findings. Contrast with Teams, which "fear being wrong" — they narrow, verify, then respond with confidence. Deep Research (OpenAI, Kimi) uses the swarm pattern because breadth matters more than precision. Coding agents use teams because correctness matters more than coverage. Match the pattern to your failure mode.
+        <strong>My distinction:</strong> Swarms "fear missing something": they explore every angle in parallel, then a synthesizer clusters the findings. Contrast with Teams, which "fear being wrong": they narrow, verify, then respond with confidence. Deep Research (OpenAI, Kimi) uses the swarm pattern because breadth matters more than precision. Coding agents use teams because correctness matters more than coverage. Match the pattern to your failure mode.
       </Decision></FadeIn>
 
       <FadeIn delay={320}><Decision question="5. How do you coordinate 5-10 agents running in parallel without them stepping on each other?">
-        This is the real production question. Fan-out is easy to draw on a whiteboard. Making it work when 8 agents are hitting shared state, competing for the same resources, and occasionally failing — that's engineering.
+        This is where production gets hard. Fan-out is easy to draw on a whiteboard. Making it work when 8 agents are hitting shared state, competing for the same resources, and occasionally failing is engineering.
         <br /><br />
         <strong>Capability cards:</strong> Each agent publishes a structured card: skills it can handle, cost per call, latency estimate, max concurrency, and who it escalates to on failure. The coordinator never hardcodes routing. It discovers agents at runtime. Add a new agent type without touching the coordinator.
         <br /><br />
-        <strong>Load-aware routing:</strong> When 3 agents all have the "code" skill, don't round-robin. Track current load per agent, route to the one with the lowest queue depth. This prevents hot-spotting — one agent drowning while others idle.
+        <strong>Load-aware routing:</strong> When 3 agents all have the "code" skill, don't round-robin. Track current load per agent, route to the one with the lowest queue depth. This prevents hot-spotting, where one agent drowns while others idle.
         <br /><br />
         <strong>Wave-based execution:</strong> Group tasks by priority level. Priority 1 tasks (design) complete before priority 2 tasks (implement) start. But within a wave, all tasks run concurrently via <code>Promise.allSettled</code>. This gives you parallelism without data dependency bugs.
         <br /><br />
         <strong>Escalation chains:</strong> Junior-dev fails at "code" task → retry with another agent → all retries exhausted → follow the <code>escalatesTo</code> pointer in the capability card to senior-dev. The chain is declared in data, not hardcoded in the coordinator.
         <br /><br />
-        <strong>Message bus as audit trail:</strong> Every lifecycle event (TASK_REQUEST, TASK_RESULT, TASK_FAILED, ESCALATION) flows through a typed pub/sub bus. Replay the bus history to debug any coordination issue — you get distributed tracing for free.
+        <strong>Message bus as audit trail:</strong> Every lifecycle event (TASK_REQUEST, TASK_RESULT, TASK_FAILED, ESCALATION) flows through a typed pub/sub bus. Replay the bus history to debug any coordination issue. You get distributed tracing for free.
         <br /><br />
-        <Pill type="green">See Project 21</Pill> The <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/tree/main/projects/21-multi-agent-coordinator" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-accent)' }}>Multi-Agent Coordinator</a> implements all five patterns: capability registry, load-aware routing, wave-based parallelism, escalation chains, and a message bus — in ~400 lines of JavaScript.
+        <Pill type="green">See Project 21</Pill> The <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/tree/main/projects/21-multi-agent-coordinator" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-accent)' }}>Multi-Agent Coordinator</a> implements all five patterns: capability registry, load-aware routing, wave-based parallelism, escalation chains, and a message bus, in ~400 lines of JavaScript.
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "In practice, use my evolution framework: Single {'>'} Sequential {'>'} Teams {'>'} Swarm. Start by saying 'this is a Level 1 problem — single agent with good tools.' If the problem demands more, upgrade: 'At this scale, I'd move to Level 3 — Agent Teams with a supervisor, because we fear being wrong more than we fear missing something.' That framing — Teams vs Swarms as different fear modes — is the maturity signal. It shows you reason about system design tradeoffs, not just memorize patterns."
+        "In practice, use my evolution framework: Single {'>'} Sequential {'>'} Teams {'>'} Swarm. Start by saying 'this is a Level 1 problem: single agent with good tools.' If the problem demands more, upgrade: 'At this scale, I'd move to Level 3, Agent Teams with a supervisor, because we fear being wrong more than we fear missing something.' That framing (Teams vs Swarms as different fear modes) is the maturity signal. It shows you reason about system design tradeoffs, not just memorize patterns."
       </Insight></FadeIn>
     </div>
   );
@@ -454,11 +454,11 @@ function CoordinationPanel() {
     <div>
       <SectionHead
         title="Agent coordination"
-        desc="Multiple agents need to share state, avoid conflicts, and produce coherent results. These are distributed systems problems — the same patterns from microservices apply."
+        desc="Multiple agents need to share state, avoid conflicts, and produce coherent results. These are distributed systems problems, and the same patterns from microservices apply."
       />
 
       <FadeIn><Decision question="Shared state management">
-        Agents need to read and write shared state — the current document, discovered facts, intermediate results. Three approaches:
+        Agents need to read and write shared state: the current document, discovered facts, intermediate results. Three approaches:
         <br /><br />
         <Pill type="green">Centralized state store</Pill> A single source of truth (Redis, a shared file, a database). Agents read and write to it. Simple but needs conflict resolution.
         <br /><br />
@@ -469,7 +469,7 @@ function CoordinationPanel() {
         <strong>Default to centralized state store.</strong> Message passing adds latency. Event sourcing adds complexity. A shared document/artifact that agents read and append to covers 90% of cases.
       </Decision></FadeIn>
 
-      <FadeIn delay={80}><Decision question="Conflict resolution — when agents disagree">
+      <FadeIn delay={80}><Decision question="Conflict resolution: when agents disagree">
         Two agents review the same code and give conflicting feedback. How do you resolve it?
         <br /><br />
         <strong>Voting:</strong> If 2 of 3 reviewers say it's a bug, it's a bug. Simple majority. Works for classification tasks.
@@ -484,67 +484,67 @@ function CoordinationPanel() {
       <FadeIn delay={160}><Decision question="Error handling in multi-agent systems">
         What happens when one agent in a 5-agent pipeline fails?
         <br /><br />
-        (1) <strong>Retry with backoff</strong> — Same agent, same input. Works for transient failures (API timeout).
+        (1) <strong>Retry with backoff.</strong> Same agent, same input. Works for transient failures (API timeout).
         <br />
-        (2) <strong>Fallback agent</strong> — Different agent, same task. "If the code agent fails, try the simpler code agent."
+        (2) <strong>Fallback agent.</strong> Different agent, same task. "If the code agent fails, try the simpler code agent."
         <br />
-        (3) <strong>Graceful degradation</strong> — Skip the failed step, continue with partial results. "Review completed: security ✓, performance ✗ (agent failed), correctness ✓."
+        (3) <strong>Graceful degradation.</strong> Skip the failed step, continue with partial results. "Review completed: security ✓, performance ✗ (agent failed), correctness ✓."
         <br />
-        (4) <strong>Circuit breaker</strong> — If an agent fails 3x in 5 minutes, stop routing to it entirely. Prevents cascade failures.
+        (4) <strong>Circuit breaker.</strong> If an agent fails 3x in 5 minutes, stop routing to it entirely. Prevents cascade failures.
         <br /><br />
         <strong>Always surface failures.</strong> "3 of 4 checks completed" is more trustworthy than silently skipping the failed one.
       </Decision></FadeIn>
 
-      <FadeIn delay={240}><Decision question="Why do multi-agent systems produce incoherent output — and how do you fix it?">
-        <Pill type="red">Critical design question</Pill> This is the critique behind Cognition's widely-cited "Don't Build Multi-Agents" (2025): the failure mode isn't parallelism, it's <strong>dispersed decision-making</strong>. When you fan out sub-agents and hand each one only its sub-task, they make binding decisions in isolation — one picks REST, another picks GraphQL — and the merge step inherits two incompatible worldviews.
+      <FadeIn delay={240}><Decision question="Why do multi-agent systems produce incoherent output, and how do you fix it?">
+        <Pill type="red">Core design question</Pill> This is the critique behind Cognition's widely-cited "Don't Build Multi-Agents" (2025): the failure mode isn't parallelism, it's <strong>dispersed decision-making</strong>. When you fan out sub-agents and hand each one only its sub-task, they make binding decisions in isolation (one picks REST, another picks GraphQL), and the merge step inherits two incompatible worldviews.
         <br /><br />
         <strong>The root cause:</strong> context, not coordination. Each agent acted rationally given what it saw. Nobody was wrong; they just never shared the ground truth that would have made their choices compatible.
         <br /><br />
-        <strong>Fix 1 — decide the shared contract first, then delegate.</strong> The supervisor resolves the load-bearing decisions (API style, naming, auth, error format) up front and passes them into every sub-agent's context. Sub-agents inherit the contract, so coherence is guaranteed by construction, not by luck. This is why sequential often beats parallel: the UI agent can see the API the API agent built.
+        <strong>Fix 1: decide the shared contract first, then delegate.</strong> The supervisor resolves the load-bearing decisions (API style, naming, auth, error format) up front and passes them into every sub-agent's context. Sub-agents inherit the contract, so coherence is guaranteed by construction, not by luck. This is why sequential often beats parallel: the UI agent can see the API the API agent built.
         <br /><br />
-        <strong>Fix 2 — full-trajectory handoff (Anthropic's multi-agent research pattern).</strong> When you must parallelize, don't hand off just the task string. Pass a structured digest of the trajectory: every binding decision verbatim, constraints never summarized away, and only the recent prose compressed. The mistake is lossy summarization that drops exactly the decisions that bind the agents together.
+        <strong>Fix 2: full-trajectory handoff (Anthropic's multi-agent research pattern).</strong> When you must parallelize, don't hand off just the task string. Pass a structured digest of the trajectory: every binding decision verbatim, constraints never summarized away, and only the recent prose compressed. The mistake is lossy summarization that drops exactly the decisions that bind the agents together.
       </Decision></FadeIn>
 
       <FadeIn delay={320}><Decision question="A 20-minute multi-agent run crashes at minute 18. How do you not lose the work?">
-        <Pill type="red">2026 production reality</Pill> Once agent workflows run for tens of minutes and cost dollars per run, an in-memory <code>for</code> loop over agents is a liability: a pod restart, an OOM kill, or a rate-limit blip at minute 18 throws away 17 minutes of tool calls and tokens. The systems answer is <strong>durable execution</strong> — the same pattern Temporal, Restate, and LangGraph checkpointers bring to agents.
+        <Pill type="red">2026 production reality</Pill> Once agent workflows run for tens of minutes and cost dollars per run, an in-memory <code>for</code> loop over agents is a liability: a pod restart, an OOM kill, or a rate-limit blip at minute 18 throws away 17 minutes of tool calls and tokens. The systems answer is <strong>durable execution</strong>, the same pattern Temporal, Restate, and LangGraph checkpointers bring to agents.
         <br /><br />
-        <strong>The core idea: separate the orchestration state from the process.</strong> After every agent step, persist a checkpoint — which agents have completed, their outputs, and the shared contract — to durable storage (a DB row, an event log). The orchestrator becomes a pure function of that state: on restart, it reloads the last checkpoint and resumes at the next incomplete step instead of from the top. Crash recovery falls out for free.
+        <strong>The core idea: separate the orchestration state from the process.</strong> After every agent step, persist a checkpoint (which agents have completed, their outputs, and the shared contract) to durable storage (a DB row, an event log). The orchestrator becomes a pure function of that state: on restart, it reloads the last checkpoint and resumes at the next incomplete step instead of from the top. Crash recovery falls out for free.
         <br /><br />
-        <strong>The hard constraint: agent steps must be idempotent, or replay double-charges you.</strong> If step 3 already placed an order or sent an email, re-running it on resume is a real-world bug, not just wasted tokens. Wrap side-effecting tool calls in an idempotency key (dedupe on a request ID) so replaying a completed step is a no-op. This is exactly the exactly-once problem from distributed messaging — agents don't get a pass on it.
+        <strong>The hard constraint: agent steps must be idempotent, or replay double-charges you.</strong> If step 3 already placed an order or sent an email, re-running it on resume is a real-world bug, not just wasted tokens. Wrap side-effecting tool calls in an idempotency key (dedupe on a request ID) so replaying a completed step is a no-op. This is the exactly-once problem from distributed messaging, and agents don't get a pass on it.
         <br /><br />
-        <strong>What to say in an interview:</strong> "I'd model the workflow as a state machine persisted after each step, make tool calls idempotent, and let the orchestrator be crash-recoverable by construction — not retry logic bolted on after the fact." That reframes reliability from a prompt problem into a distributed-systems problem, which is the level the question is testing.
+        <strong>What to say in an interview:</strong> "I'd model the workflow as a state machine persisted after each step, make tool calls idempotent, and let the orchestrator be crash-recoverable by construction, not retry logic bolted on after the fact." That reframes reliability from a prompt problem into a distributed-systems problem, which is the level the question is testing.
       </Decision></FadeIn>
 
       <FadeIn delay={400}><Decision question="A multi-agent run gives a great answer on Monday and a wrong one on Tuesday with the same input. How do you debug and evaluate it?">
         <Pill type="amber">The hardest operational question</Pill> Non-determinism is the tax you pay for multi-agent systems. The same prompt produces different routing, different sub-agent decompositions, and different merges across runs. You cannot debug this with a stack trace, and you cannot evaluate it with a single golden output. Interviewers ask this to see whether you treat agents as software (observable, testable) or as magic (re-run and hope).
         <br /><br />
-        <strong>1 — Trace the trajectory, not just the output.</strong> Emit a structured span for every step: the router's decision and why, each sub-agent's inputs/tools/outputs, and the merge. Use OpenTelemetry's GenAI conventions (or LangSmith/Langfuse/Braintrust) so one <code>trace_id</code> ties the whole run together. When Tuesday's answer is wrong, you diff Monday's trace against Tuesday's and the divergence point is visible — usually the router picked a different specialist, or one sub-agent got a truncated handoff.
+        <strong>1. Trace the trajectory, not just the output.</strong> Emit a structured span for every step: the router's decision and why, each sub-agent's inputs/tools/outputs, and the merge. Use OpenTelemetry's GenAI conventions (or LangSmith/Langfuse/Braintrust) so one <code>trace_id</code> ties the whole run together. When Tuesday's answer is wrong, you diff Monday's trace against Tuesday's and the divergence point is visible. Usually the router picked a different specialist, or one sub-agent got a truncated handoff.
         <br /><br />
-        <strong>2 — Evaluate at two levels: outcome and trajectory.</strong> Outcome eval asks "was the final answer right?" — necessary but blunt, because a right answer can come from a broken process that won't generalize. Trajectory eval asks "did each agent do its job?" — did the router pick the correct specialist, did the sub-agent call the right tool, was the handoff lossless? Grade steps independently so you know <em>which</em> agent regressed, not just that the system did.
+        <strong>2. Evaluate at two levels: outcome and trajectory.</strong> Outcome eval asks "was the final answer right?" That is necessary but blunt, because a right answer can come from a broken process that won't generalize. Trajectory eval asks "did each agent do its job?": did the router pick the correct specialist, did the sub-agent call the right tool, was the handoff lossless? Grade steps independently so you know <em>which</em> agent regressed, not just that the system did.
         <br /><br />
-        <strong>3 — Pin the variance you can, measure the rest.</strong> Set <code>temperature: 0</code> and seed where the API allows it to shrink the search space, but accept that tool results, retrieval order, and model updates still make runs differ. So run each eval case N times and score the <em>distribution</em>: pass@k and variance matter more than a single pass/fail. A setup that's correct 6/10 times is a reliability bug even when today's run looks fine — that's exactly the Monday/Tuesday gap.
+        <strong>3. Pin the variance you can, measure the rest.</strong> Set <code>temperature: 0</code> and seed where the API allows it to shrink the search space, but accept that tool results, retrieval order, and model updates still make runs differ. So run each eval case N times and score the <em>distribution</em>: pass@k and variance matter more than a single pass/fail. A setup that's correct 6/10 times is a reliability bug even when today's run looks fine. That's the Monday/Tuesday gap.
         <br /><br />
-        <strong>What to say:</strong> "I'd make the system observable before I make it smarter — structured traces per step, trajectory-level evals graded per agent, and each case run N times so I'm measuring a reliability distribution, not a lucky sample. Then non-determinism becomes a metric I can drive down, not a mystery I re-run."
+        <strong>What to say:</strong> "I'd make the system observable before I make it smarter: structured traces per step, trajectory-level evals graded per agent, and each case run N times so I'm measuring a reliability distribution, not a lucky sample. Then non-determinism becomes a metric I can drive down, not a mystery I re-run."
       </Decision></FadeIn>
 
-      <FadeIn delay={480}><Decision question="A sub-agent reports 'done' — do you trust it?">
-        <Pill type="red">The most underrated failure mode</Pill> No. An agent's self-report is a claim, not evidence. LLMs are trained to produce plausible completions, and "I have fixed the bug and all tests pass" is a very plausible completion — whether or not any test ran. In production multi-agent systems, silent non-work is more dangerous than loud failure: a crashed agent gets retried; a lying agent gets merged.
+      <FadeIn delay={480}><Decision question="A sub-agent reports 'done.' Do you trust it?">
+        <Pill type="red">An underrated failure mode</Pill> No. An agent's self-report is a claim, not evidence. LLMs are trained to produce plausible completions, and "I have fixed the bug and all tests pass" is a plausible completion whether or not any test ran. In production multi-agent systems, silent non-work is more dangerous than loud failure: a crashed agent gets retried; a lying agent gets merged.
         <br /><br />
-        <strong>1 — Demand artifacts, not assertions.</strong> Define what physical evidence "done" produces: a diff, a file path, a test log, a written report with line references. The orchestrator gates on the artifact existing and being non-trivial — an agent that claims success but produced no diff is treated as failed, automatically. This is a cheap structural check that catches the majority of phantom completions before any LLM judges anything.
+        <strong>1. Demand artifacts, not assertions.</strong> Define what physical evidence "done" produces: a diff, a file path, a test log, a written report with line references. The orchestrator gates on the artifact existing and being non-trivial. An agent that claims success but produced no diff is treated as failed, automatically. This is a cheap structural check that catches the majority of phantom completions before any LLM judges anything.
         <br /><br />
-        <strong>2 — Verify with a check the worker didn't write.</strong> Re-run the test suite yourself in the orchestrator (deterministic, ideal), or run a verifier agent whose only job is to refute the claim: "Here is the claim and the artifact. Try to prove it false." Asking a fresh context to refute is much more reliable than asking the original agent "are you sure?" — the original will defend its own work with the same confidence it fabricated it.
+        <strong>2. Verify with a check the worker didn't write.</strong> Re-run the test suite yourself in the orchestrator (deterministic, ideal), or run a verifier agent whose only job is to refute the claim: "Here is the claim and the artifact. Try to prove it false." Asking a fresh context to refute is much more reliable than asking the original agent "are you sure?" The original will defend its own work with the same confidence it fabricated it.
         <br /><br />
-        <strong>3 — Make the default distrust, scaled by blast radius.</strong> Read-only research output can ship on artifact checks alone. Code changes need a deterministic re-verification (build + tests). Anything that mutates external state should require evidence <em>before</em> the mutation, not an apology after. The design smell to name in an interview: any pipeline where one agent's unverified claim is another agent's ground truth.
+        <strong>3. Make the default distrust, scaled by blast radius.</strong> Read-only research output can ship on artifact checks alone. Code changes need a deterministic re-verification (build + tests). Anything that mutates external state should require evidence <em>before</em> the mutation, not an apology after. The design smell to name in an interview: any pipeline where one agent's unverified claim is another agent's ground truth.
       </Decision></FadeIn>
 
       <FadeIn delay={560}><Insight tag="Handoff contracts">
-        The complement of verifying claims is constraining outputs. Free-text handoffs between agents fail in two quiet ways: unparseable output (the next agent chokes) and empty-but-well-formed output (an empty findings array reads as "all clear" when it actually means "the finder died"). Enforce a JSON Schema on every agent boundary — validate at the seam, retry the producing agent on violation, and treat "valid but empty" as its own signal that needs an explicit reason field: <code>{`{ findings: [], reason: "searched 40 files, pattern absent" }`}</code> is verifiable; a bare <code>[]</code> is indistinguishable from a crash.
+        The complement of verifying claims is constraining outputs. Free-text handoffs between agents fail in two quiet ways: unparseable output (the next agent chokes) and empty-but-well-formed output (an empty findings array reads as "all clear" when it actually means "the finder died"). Enforce a JSON Schema on every agent boundary: validate at the seam, retry the producing agent on violation, and treat "valid but empty" as its own signal that needs an explicit reason field: <code>{`{ findings: [], reason: "searched 40 files, pattern absent" }`}</code> is verifiable; a bare <code>[]</code> is indistinguishable from a crash.
       </Insight></FadeIn>
 
       <FadeIn><CodeBlock filename="context-handoff.js" code={CONTEXT_HANDOFF_CODE} output={CONTEXT_HANDOFF_OUTPUT} /></FadeIn>
 
       <FadeIn><Insight>
-        "This is where your distributed systems experience shines. Multi-agent coordination IS microservice orchestration — shared state, conflict resolution, circuit breakers, graceful degradation. What matters is whether you can apply systems patterns to a new domain, not whether you've memorized agent frameworks."
+        "This is where your distributed systems experience shines. Multi-agent coordination IS microservice orchestration: shared state, conflict resolution, circuit breakers, graceful degradation. What matters is whether you can apply systems patterns to a new domain, not whether you've memorized agent frameworks."
       </Insight></FadeIn>
     </div>
   );
@@ -555,20 +555,20 @@ function ArchPanel() {
     <div>
       <SectionHead
         title="Production multi-agent architectures"
-        desc="How real systems organize multiple agents — from code generation to content creation to customer operations."
+        desc="How real systems organize multiple agents, from code generation to content creation to customer operations."
       />
 
       <FadeIn><CodeBlock filename="fan-out-review.js" code={FANOUT_CODE} output={FANOUT_OUTPUT} /></FadeIn>
 
       <div style={styles.systemCard}>
-        <h3 style={styles.systemName}>Claude Code — Subagent Architecture</h3>
+        <h3 style={styles.systemName}>Claude Code: Subagent Architecture</h3>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Pattern</span>
           <span style={styles.sysVal}>Supervisor with specialized subagents. Main loop handles conversation, delegates to Explorer (read-only search), general-purpose (complex tasks), and Plan agents. Each subagent gets isolated tools and context.</span>
         </div>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Key insight</span>
-          <span style={styles.sysVal}>My analysis: subagents protect the main context window. Instead of the main agent reading 50 files, a search subagent does it and returns just the answer. This is Level 3 (Teams) — predefined roles, supervisor delegates. The Hermes Agent takes this further: sub-agents calling Claude Code CLI, with shared memory as the coordination layer.</span>
+          <span style={styles.sysVal}>My analysis: subagents protect the main context window. Instead of the main agent reading 50 files, a search subagent does it and returns just the answer. This is Level 3 (Teams): predefined roles, supervisor delegates. The Hermes Agent takes this further: sub-agents calling Claude Code CLI, with shared memory as the coordination layer.</span>
         </div>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Coordination</span>
@@ -577,7 +577,7 @@ function ArchPanel() {
       </div>
 
       <div style={styles.systemCard}>
-        <h3 style={styles.systemName}>Devin — Coding Agent</h3>
+        <h3 style={styles.systemName}>Devin: Coding Agent</h3>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Pattern</span>
           <span style={styles.sysVal}>Pipeline with feedback loops. Plan → Code → Test → Fix → Review. If tests fail, loops back to Code. If review finds issues, loops back to Plan. Multi-step with conditional branching.</span>
@@ -589,7 +589,7 @@ function ArchPanel() {
       </div>
 
       <div style={styles.systemCard}>
-        <h3 style={styles.systemName}>Deep Research Systems — Swarm Architecture</h3>
+        <h3 style={styles.systemName}>Deep Research Systems: Swarm Architecture</h3>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Pattern</span>
           <span style={styles.sysVal}>Swarm (Level 4). Kimi's Deep Research and Anthropic's multi-agent Research feature share the shape: a lead agent decomposes the research question, spawns worker agents that search independently in parallel, then a synthesis step clusters and deduplicates findings (with a separate citation pass) into one report.</span>
@@ -600,15 +600,15 @@ function ArchPanel() {
         </div>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>My take</span>
-          <span style={styles.sysVal}>Deep Research is a swarm because its failure mode is omission: it explores in parallel (fears missing something). Teams like a coding agent's subagents narrow and verify (fear being wrong). The verification still exists in Deep Research — but it lives in the synthesis step, after breadth is secured. The architecture follows the failure mode you're optimizing against.</span>
+          <span style={styles.sysVal}>Deep Research is a swarm because its failure mode is omission: it explores in parallel (fears missing something). Teams like a coding agent's subagents narrow and verify (fear being wrong). The verification still exists in Deep Research, but it lives in the synthesis step, after breadth is secured. The architecture follows the failure mode you're optimizing against.</span>
         </div>
       </div>
 
       <div style={styles.systemCard}>
-        <h3 style={styles.systemName}>Content Generation — Editorial Pipeline</h3>
+        <h3 style={styles.systemName}>Content Generation: Editorial Pipeline</h3>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Pattern</span>
-          <span style={styles.sysVal}>Pipeline: Researcher → Writer → Editor → Fact-Checker → Publisher. Each stage has a different model — Researcher uses a web-enabled model, Writer uses a creative model, Fact-Checker uses a grounded model.</span>
+          <span style={styles.sysVal}>Pipeline: Researcher → Writer → Editor → Fact-Checker → Publisher. Each stage has a different model: Researcher uses a web-enabled model, Writer uses a creative model, Fact-Checker uses a grounded model.</span>
         </div>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Key insight</span>
@@ -664,13 +664,13 @@ function WhenToUsePanel() {
         <br /><br />
         <strong>Fan-out of 5 agents:</strong> 6+ LLM calls (parallel). ~$0.06-0.60 per query. 4-15 seconds (wall-clock).
         <br /><br />
-        <strong>Rule of thumb:</strong> Multi-agent costs 3-10x more per query. Only worth it when the quality improvement justifies the cost — code generation (saves developer hours), content creation (saves editor hours), compliance review (avoids legal risk).
+        <strong>Rule of thumb:</strong> Multi-agent costs 3-10x more per query. Only worth it when the quality improvement justifies the cost: code generation (saves developer hours), content creation (saves editor hours), compliance review (avoids legal risk).
         <br /><br />
         <strong>My token warning:</strong> "Multi-agent systems can burn tokens fast unless you constrain agent count + tool usage." Set hard limits: max 5 sub-agents per query, max 3 tool calls per sub-agent, total cost cap per query. Without these constraints, a swarm exploring a broad question can easily hit $10-50 per query.
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "The right move is recommending single-agent first and articulating exactly when you'd graduate to multi-agent. Anyone can draw a fancy multi-agent diagram. The engineering signal is saying: 'For this use case, a single agent with good tool selection handles 90% of queries. I'd add a specialist subagent only for the 10% that overflow the context window — and here's how I'd detect that overflow condition.'"
+        "The right move is recommending single-agent first and articulating exactly when you'd graduate to multi-agent. Anyone can draw a fancy multi-agent diagram. The engineering signal is saying: 'For this use case, a single agent with good tool selection handles 90% of queries. I'd add a specialist subagent only for the 10% that overflow the context window, and here's how I'd detect that overflow condition.'"
       </Insight></FadeIn>
     </div>
   );
@@ -691,7 +691,7 @@ function AntiPatternsPanel() {
 
       <div style={styles.anti}>
         <p style={styles.strike}>"The agents will coordinate themselves."</p>
-        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />Self-organizing agents sound elegant but are debugging nightmares. You need explicit coordination — a supervisor, a pipeline, or a defined protocol. "Emergent behavior" in production means "unpredictable behavior that wakes you up at 3 AM."</p>
+        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />Self-organizing agents sound elegant but are debugging nightmares. You need explicit coordination: a supervisor, a pipeline, or a defined protocol. "Emergent behavior" in production means "unpredictable behavior that wakes you up at 3 AM."</p>
       </div>
 
       <div style={styles.anti}>
@@ -706,11 +706,11 @@ function AntiPatternsPanel() {
 
       <div style={styles.anti}>
         <p style={styles.strike}>"We need a swarm of autonomous agents."</p>
-        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />My framework: Swarms are Level 4 — only when you "fear missing something" more than you fear cost or complexity. Deep Research uses swarms because comprehensiveness justifies the 10-50x token cost. Your customer support bot does not. Start at Level 1 (single agent), upgrade only when you can name the specific failure mode that requires it.</p>
+        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />My framework: Swarms are Level 4, only for when you "fear missing something" more than you fear cost or complexity. Deep Research uses swarms because comprehensiveness justifies the 10-50x token cost. Your customer support bot does not. Start at Level 1 (single agent), upgrade only when you can name the specific failure mode that requires it.</p>
       </div>
 
       <FadeIn><Insight>
-        "Use my evolution levels as your design framework. Level 1: 'This is a single-agent problem — one LLM with 5 focused tools.' Level 2: 'If we need pipeline processing, chain agents sequentially.' Level 3: 'For quality-critical tasks, a supervisor with specialist teams — they fear being wrong, so they verify.' Level 4: 'Only for exhaustive research where we fear missing something.' Starting at Level 4 and working down is a common pitfall. Starting at Level 1 and articulating exactly when to upgrade — that shows mastery."
+        "Use my evolution levels as your design framework. Level 1: 'This is a single-agent problem: one LLM with 5 focused tools.' Level 2: 'If we need pipeline processing, chain agents sequentially.' Level 3: 'For quality-critical tasks, a supervisor with specialist teams. They fear being wrong, so they verify.' Level 4: 'Only for exhaustive research where we fear missing something.' Starting at Level 4 and working down is a common pitfall. Starting at Level 1 and articulating exactly when to upgrade shows mastery."
       </Insight></FadeIn>
         </div>
   );
@@ -719,22 +719,19 @@ function AntiPatternsPanel() {
 const styles = {
   back: { fontSize: 12, color: 'var(--text-muted)', textDecoration: 'none', display: 'inline-block', marginBottom: 16, fontFamily: 'var(--font-mono)', letterSpacing: '0.02em' },
   eyebrow: { fontSize: 11, fontWeight: 500, color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8, fontFamily: 'var(--font-mono)' },
-  h1: { fontSize: 34, fontWeight: 400, color: 'var(--text-h)', marginBottom: 10, lineHeight: 1.15, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
-  subtitle: { fontSize: 14, color: 'var(--text-p)', marginBottom: 8, lineHeight: 1.75 },
+  h1: { fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 400, color: 'var(--text-h)', lineHeight: 1.08, marginBottom: 16, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
+  subtitle: { fontSize: 'clamp(16px, 1.3vw, 18px)', color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 28, maxWidth: '62ch' },
   source: { fontSize: 12, color: 'var(--text-muted)', marginBottom: '2rem', lineHeight: 1.6 },
   sourceLink: { color: 'var(--text-accent)', textDecoration: 'underline', textUnderlineOffset: '2px' },
-  tabWrap: { display: 'flex', gap: 0, marginBottom: '2rem', borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', overflowX: 'auto', scrollbarWidth: 'none' },
-  tabBtn: { background: 'transparent', borderTopWidth: 0, borderRightWidth: 0, borderLeftWidth: 0, borderBottomWidth: 2, borderBottomStyle: 'solid', borderBottomColor: 'transparent', padding: '10px 14px', fontSize: 13, fontWeight: 500, color: 'var(--text-muted)', cursor: 'pointer', transition: 'all var(--dur) var(--ease)', fontFamily: 'inherit', whiteSpace: 'nowrap', letterSpacing: '-0.01em' },
-  tabActive: { color: 'var(--text-h)', fontWeight: 600, borderBottomColor: 'var(--bg-accent-strong)' },
-  sh: { fontSize: 17, fontWeight: 600, color: 'var(--text-h)', marginBottom: 8, letterSpacing: '-0.01em' },
-  ss: { fontSize: 13, color: 'var(--text-p)', marginBottom: 16, lineHeight: 1.7 },
+  sh: { fontSize: 'clamp(24px, 2.4vw, 30px)', fontWeight: 400, color: 'var(--text-h)', marginTop: 8, marginBottom: 10, lineHeight: 1.2, fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' },
+  ss: { fontSize: 16, color: 'var(--text-p)', marginBottom: 24, lineHeight: 1.7, maxWidth: '65ch' },
   systemCard: { background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '16px 18px', marginBottom: 12 },
   systemName: { fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 10, fontFamily: 'var(--font-display)' },
   systemDetail: { display: 'flex', gap: 12, marginBottom: 8, fontSize: 13, lineHeight: 1.6 },
   sysLabel: { color: 'var(--text-accent)', minWidth: 80, flexShrink: 0, fontWeight: 600, fontSize: 11, fontFamily: 'var(--font-mono)', letterSpacing: '0.02em', paddingTop: 2 },
   sysVal: { color: 'var(--text-p)' },
   anti: { background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', padding: '16px 18px', marginBottom: 10 },
-  strike: { textDecoration: 'line-through', opacity: 0.5, fontSize: 13, color: 'var(--text-p)', lineHeight: 1.6 },
-  better: { fontSize: 13, color: 'var(--text-h)', fontWeight: 500, lineHeight: 1.6, marginTop: 6 },
+  strike: { textDecoration: 'line-through', opacity: 0.5, fontSize: 15, color: 'var(--text-p)', lineHeight: 1.6 },
+  better: { fontSize: 15, color: 'var(--text-h)', fontWeight: 500, lineHeight: 1.6, marginTop: 6 },
   dot: { display: 'inline-block', width: 7, height: 7, borderRadius: '50%', marginRight: 8, verticalAlign: 'middle' },
 };

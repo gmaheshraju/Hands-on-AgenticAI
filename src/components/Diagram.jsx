@@ -45,6 +45,6 @@ export default function Diagram({ svg, caption, source, facts, repo = 'https://g
  * In 07-guardrails the concept art shows SIX layers while the code has THREE;
  * neither is wrong, but only one is a claim about this repo. This says which.
  */
-export function ConceptNote({ children = 'Conceptual — the general pattern, not this codebase.' }) {
+export function ConceptNote({ children = 'Conceptual: the general pattern, not this codebase.' }) {
   return <p className="diagram__concept-note">{children}</p>;
 }

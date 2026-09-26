@@ -10,7 +10,7 @@ export default function PostFooterCTA() {
         <span style={styles.mark}>MG</span>
         <p style={styles.bio}>
           Written by <strong style={styles.name}>Mahesh Guntumadugu</strong>. I build AI agent
-          systems that run in production unattended — including one that trades real money every
+          systems that run in production unattended, including one that trades real money every
           market day. Most of the work is not the model: it is context assembly, verification,
           recovery paths and cost control.
         </p>

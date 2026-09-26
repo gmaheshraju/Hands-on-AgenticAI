@@ -10,7 +10,7 @@ import forwardDeployedSvg from '../../../docs/diagrams/forward_deployed_v1/forwa
 const TABS = ['The FDE Model', 'Team Structure', 'FDE vs SaaS', 'The AI Playbook', 'In Practice'];
 
 const LEVERAGE_CODE = `// Product leverage: is FDE #N delivering faster than FDE #1?
-// Each engagement logs effort split — hand-built vs configured on-platform.
+// Each engagement logs effort split: hand-built vs configured on-platform.
 const engagements = [
   { customer: 'A', weeksToValue: 14, customLoc: 9200, platformLoc: 400 },
   { customer: 'B', weeksToValue: 11, customLoc: 6100, platformLoc: 3100 },
@@ -42,8 +42,8 @@ const paving = last.configuredShare > first.configuredShare;
 const leverage = (first.weeksToValue / last.weeksToValue).toFixed(1);
 console.log(\`Latest FDE ships \${leverage}x faster than the first.\`);
 console.log(paving
-  ? 'VERDICT: healthy — custom work is hardening into product.'
-  : 'VERDICT: stuck on gravel — every account is still bespoke.');`;
+  ? 'VERDICT: healthy. Custom work is hardening into product.'
+  : 'VERDICT: stuck on gravel. Every account is still bespoke.');`;
 
 const SEAM_CODE = `// The capability seam: every FDE customization is REGISTERED, not forked.
 // Each engagement overrides named capabilities instead of editing platform code.
@@ -85,12 +85,12 @@ const rows = [...byCapability.entries()].map(([cap, picks]) => {
 rows.sort((a, b) => b.converged - a.converged || b.customers - a.customers);
 console.table(rows.map(({ distinctImpls, ...r }) => r));
 
-// Divergence is a different signal than convergence — and easy to misread.
+// Divergence is a different signal than convergence, and easy to misread.
 const configSurfaces = rows.filter(
   (r) => r.verdict === 'hold' && r.customers > 1 && r.distinctImpls === r.customers
 );
 for (const r of configSurfaces) {
-  console.log(\`CONFIG SURFACE: \${r.capability} — \${r.customers} customers, \${r.distinctImpls} impls.\`);
+  console.log(\`CONFIG SURFACE: \${r.capability} (\${r.customers} customers, \${r.distinctImpls} impls)\`);
 }`;
 
 const SEAM_OUTPUT = `┌────────────────┬───────────┬──────────────────┬───────────┬─────────┐
@@ -102,7 +102,7 @@ const SEAM_OUTPUT = `┌────────────────┬─�
 │ route.approval │     1     │ two-step-cfo     │     1     │ hold    │
 │ ocr.scan       │     1     │ tesseract-lowdpi │     1     │ hold    │
 └────────────────┴───────────┴──────────────────┴───────────┴─────────┘
-CONFIG SURFACE: auth.sso — 2 customers, 2 impls.`;
+CONFIG SURFACE: auth.sso (2 customers, 2 impls)`;
 
 const LEVERAGE_OUTPUT = `┌─────────┬───────┬────────────┬─────────┐
 │ customer│ weeks │ configured │ speedup │
@@ -113,7 +113,7 @@ const LEVERAGE_OUTPUT = `┌─────────┬───────�
 │   D     │   4   │   86%      │  3.50x  │
 └─────────┴───────┴────────────┴─────────┘
 Latest FDE ships 3.5x faster than the first.
-VERDICT: healthy — custom work is hardening into product.`;
+VERDICT: healthy. Custom work is hardening into product.`;
 
 export default function ForwardDeployedEngineering() {
   const [tab, setTab] = useState(0);
@@ -124,22 +124,22 @@ export default function ForwardDeployedEngineering() {
       <p style={styles.eyebrow}>Post 14</p>
       <h1 style={styles.h1}>Forward Deployed Engineering</h1>
       <p style={styles.subtitle}>
-        The engineering model pioneered by Palantir that&rsquo;s reshaping how AI companies deliver value &mdash;
+        The engineering model pioneered by Palantir that&rsquo;s reshaping how AI companies deliver value:
         embedded engineers, rapid prototyping, and the &ldquo;gravel road to paved highway&rdquo; playbook
         that turned non-scalable work into a competitive moat.
       </p>
 
       <Diagram
       svg={forwardDeployedSvg}
-      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/14-forward-deployed-engineering</code> &mdash; the same enterprise document pilot, with the eval builder and the domain adapter drawn as siblings consuming the same processed corpus rather than a chain, and all nine deployment-readiness checks in the order <code>run()</code> evaluates them. The card contents are the real enumerations, in the order the code runs them.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/14-forward-deployed-engineering</code>: the same enterprise document pilot, with the eval builder and the domain adapter drawn as siblings consuming the same processed corpus rather than a chain, and all nine deployment-readiness checks in the order <code>run()</code> evaluates them. The card contents are the real enumerations, in the order the code runs them.</>}
       source="tree/main/projects/14-forward-deployed-engineering"
       facts="blob/main/docs/diagrams/forward_deployed_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
       />
 
-      <div style={styles.tabWrap}>
+      <div className="tab-nav post-tabs" role="tablist">
         {TABS.map((t, i) => (
-          <button key={t} onClick={() => setTab(i)} style={{ ...styles.tabBtn, ...(tab === i ? styles.tabActive : {}) }}>{t}</button>
+          <button key={t} onClick={() => setTab(i)} role="tab" aria-selected={tab === i} className={`tab-nav__btn${tab === i ? ' tab-nav__btn--active' : ''}`}>{t}</button>
         ))}
       </div>
 
@@ -257,7 +257,7 @@ function FDEModelPanel() {
 
       <FadeIn>
         <Insight tag="Bob McGrew (ex-OpenAI Chief Research Officer)">
-          &ldquo;Unlike traditional software engineers who create single capabilities for many customers, FDEs focus on enabling many capabilities for a single customer.&rdquo; This inverts the normal leverage equation &mdash; depth per account instead of breadth across accounts.
+          &ldquo;Unlike traditional software engineers who create single capabilities for many customers, FDEs focus on enabling many capabilities for a single customer.&rdquo; This inverts the normal leverage equation: depth per account instead of breadth across accounts.
         </Insight>
       </FadeIn>
 
@@ -284,7 +284,7 @@ function TeamStructurePanel() {
     <div>
       <SectionHead
         title="Echo and Delta teams"
-        desc="Palantir's FDE model runs on two complementary team types &mdash; like a miniature startup embedded inside each customer."
+        desc="Palantir's FDE model runs on two complementary team types, like a miniature startup embedded inside each customer."
       />
 
       <FadeIn>
@@ -311,7 +311,7 @@ function TeamStructurePanel() {
           <text x="565" y="92" textAnchor="middle" fill="var(--text-muted)" fontSize="10" fontFamily="var(--font-mono)">rapid prototypers &bull; &ldquo;pain eaters&rdquo;</text>
 
           <text x="420" y="120" fill="var(--text-p)" fontSize="11" fontFamily="var(--font-body)">&#8227; Highly efficient software engineers</text>
-          <text x="420" y="140" fill="var(--text-p)" fontSize="11" fontFamily="var(--font-body)">&#8227; &ldquo;Doers&rdquo; not &ldquo;artisans&rdquo; &mdash; speed over perfection</text>
+          <text x="420" y="140" fill="var(--text-p)" fontSize="11" fontFamily="var(--font-body)">&#8227; &ldquo;Doers&rdquo; not &ldquo;artisans&rdquo;: speed over perfection</text>
           <text x="420" y="160" fill="var(--text-p)" fontSize="11" fontFamily="var(--font-body)">&#8227; Turn Echo needs into functional solutions</text>
           <text x="420" y="180" fill="var(--text-p)" fontSize="11" fontFamily="var(--font-body)">&#8227; Deliver under imperfect conditions</text>
           <text x="420" y="200" fill="var(--text-p)" fontSize="11" fontFamily="var(--font-body)">&#8227; Accustomed to &ldquo;eating a lot of pain&rdquo;</text>
@@ -336,9 +336,9 @@ function TeamStructurePanel() {
       </FadeIn>
 
       <FadeIn><Decision question="How do Echo and Delta teams collaborate?">
-        <Pill type="green">Echo finds the problem</Pill> Echo team members have lived the client&rsquo;s reality. A former military intelligence officer knows exactly which analyst workflows are broken. A former hospital administrator knows which patient data flows are manual. They&rsquo;re hired because they&rsquo;re domain rebels &mdash; people who see what&rsquo;s broken and believe technology can fix it.
+        <Pill type="green">Echo finds the problem</Pill> Echo team members have lived the client&rsquo;s reality. A former military intelligence officer knows exactly which analyst workflows are broken. A former hospital administrator knows which patient data flows are manual. They&rsquo;re hired because they&rsquo;re domain rebels: people who see what&rsquo;s broken and believe technology can fix it.
         <br /><br />
-        <Pill type="amber">Delta builds the solution</Pill> Delta engineers take Echo&rsquo;s insights and build functional prototypes fast. Not beautiful code &mdash; working code. A demo in days, not months. The prototype proves value to the executive sponsor, which funds deeper engagement.
+        <Pill type="amber">Delta builds the solution</Pill> Delta engineers take Echo&rsquo;s insights and build functional prototypes fast. Working code, not beautiful code. A demo in days, not months. The prototype proves value to the executive sponsor, which funds deeper engagement.
         <br /><br />
         <Pill type="green">Together: a startup inside the customer</Pill> Echo handles the &ldquo;what&rdquo; and &ldquo;why.&rdquo; Delta handles the &ldquo;how&rdquo; and &ldquo;when.&rdquo; Initial results arrive within months, not the multi-year timelines of traditional enterprise software.
       </Decision></FadeIn>
@@ -350,7 +350,7 @@ function TeamStructurePanel() {
       </FadeIn>
 
       <FadeIn><Decision question="What makes a great FDE hire?">
-        <Pill type="green">For Echo roles</Pill> Former practitioners from the target domain who are technically curious. Ex-military intelligence analysts. Healthcare data scientists. Financial compliance officers. They must be &ldquo;heretics&rdquo; &mdash; people who are frustrated with the status quo and believe in technology-driven change.
+        <Pill type="green">For Echo roles</Pill> Former practitioners from the target domain who are technically curious. Ex-military intelligence analysts. Healthcare data scientists. Financial compliance officers. They must be &ldquo;heretics&rdquo;: people who are frustrated with the status quo and believe in technology-driven change.
         <br /><br />
         <Pill type="green">For Delta roles</Pill> Strong engineers who thrive in ambiguity. They write working code fast, not perfect code slowly. Comfortable with imperfect requirements, shifting priorities, and demo-driven development. High pain tolerance for messy customer environments.
         <br /><br />
@@ -359,7 +359,7 @@ function TeamStructurePanel() {
 
       <FadeIn>
         <Insight type="warn" tag="Hiring trap">
-          FDE roles attract senior engineers who want customer-facing work, but many underestimate the &ldquo;pain-eating&rdquo; aspect. Working in a customer&rsquo;s legacy infrastructure, with incomplete data, on a changing problem &mdash; this breaks engineers who need clean environments. Screen for resilience, not just skill.
+          FDE roles attract senior engineers who want customer-facing work, but many underestimate the &ldquo;pain-eating&rdquo; aspect. Working in a customer&rsquo;s legacy infrastructure, with incomplete data, on a changing problem. This breaks engineers who need clean environments. Screen for resilience, not just skill.
         </Insight>
       </FadeIn>
     </div>
@@ -372,7 +372,7 @@ function FDEVsSaaSPanel() {
     <div>
       <SectionHead
         title="FDE vs traditional SaaS"
-        desc="Two fundamentally different go-to-market motions. Not better or worse &mdash; different tools for different market conditions."
+        desc="Two very different go-to-market motions. Neither is better; they are tools for different market conditions."
       />
 
       <FadeIn>
@@ -414,7 +414,7 @@ function FDEVsSaaSPanel() {
       </FadeIn>
 
       <FadeIn><Decision question="Services-first or product-first for an AI startup?">
-        <Pill type="green">FDE-first (most AI startups)</Pill> If your AI product needs to capture complex business logic, handle domain-specific edge cases, or integrate with messy enterprise data &mdash; start with FDEs. You don&rsquo;t yet know what the product should look like. Let FDEs discover it.
+        <Pill type="green">FDE-first (most AI startups)</Pill> If your AI product needs to capture complex business logic, handle domain-specific edge cases, or integrate with messy enterprise data, start with FDEs. You don&rsquo;t yet know what the product should look like. Let FDEs discover it.
         <br /><br />
         <Pill type="amber">Product-first (clear PMF)</Pill> If the problem is well-understood and the solution is standardized (think: email marketing, project management, basic chatbots), skip FDEs. Build the product, ship it, iterate from usage data.
         <br /><br />
@@ -423,7 +423,7 @@ function FDEVsSaaSPanel() {
 
       <FadeIn>
         <Insight tag="Key insight">
-          The key metric in the FDE model: &ldquo;product leverage.&rdquo; Track how much more value each FDE can deliver as the platform matures. Early on, an FDE builds everything from scratch. As the platform absorbs patterns, the same FDE delivers dramatically more by configuring instead of coding. If leverage isn&rsquo;t growing, you&rsquo;re stuck on gravel.
+          The key metric in the FDE model: &ldquo;product leverage.&rdquo; Track how much more value each FDE can deliver as the platform matures. Early on, an FDE builds everything from scratch. As the platform absorbs patterns, the same FDE delivers far more by configuring instead of coding. If leverage isn&rsquo;t growing, you&rsquo;re stuck on gravel.
         </Insight>
       </FadeIn>
 
@@ -432,7 +432,7 @@ function FDEVsSaaSPanel() {
         <br /><br />
         <Pill type="amber">Contract value expansion</Pill> Healthy FDE engagements grow. First contract: solve one problem. Second: solve three more. Shrinking contract value means the FDE isn&rsquo;t demonstrating enough value, or the customer is pulling the work in-house.
         <br /><br />
-        <Pill type="amber">Time to initial value</Pill> FDEs should deliver a working prototype within weeks, not months. If it takes 6 months to show anything, the model isn&rsquo;t working &mdash; either the FDE isn&rsquo;t empowered, or the problem is wrong for this approach.
+        <Pill type="amber">Time to initial value</Pill> FDEs should deliver a working prototype within weeks, not months. If it takes 6 months to show anything, the model isn&rsquo;t working. Either the FDE isn&rsquo;t empowered, or the problem is wrong for this approach.
         <br /><br />
         <Pill type="green">Scalability transition rate</Pill> What percentage of custom solutions become product features? This is the ultimate measure of whether the gravel-to-highway pipeline is functioning. If very few custom patterns are making it into the product, the feedback loop is broken.
       </Decision></FadeIn>
@@ -451,7 +451,7 @@ function AIPlaybookPanel() {
   return (
     <div>
       <SectionHead
-        title="Why AI makes FDEs essential"
+        title="Why AI makes FDEs necessary"
         desc="AI products fail generic. Every enterprise has unique data, workflows, and edge cases that off-the-shelf AI can't handle. FDEs bridge the gap between 'AI demo' and 'AI in production.'"
       />
 
@@ -465,7 +465,7 @@ function AIPlaybookPanel() {
 
       <FadeIn>
         <Insight tag="Key insight">
-          In any system design for AI companies, always address the deployment model. &ldquo;How does this AI system actually get into the customer&rsquo;s hands?&rdquo; is a question most engineers skip. Bringing up FDE as a deployment strategy &mdash; especially for enterprise AI &mdash; signals that you think beyond the model architecture.
+          In any system design for AI companies, always address the deployment model. &ldquo;How does this AI system actually get into the customer&rsquo;s hands?&rdquo; is a question most engineers skip. Bringing up FDE as a deployment strategy, especially for enterprise AI, signals that you think beyond the model architecture.
         </Insight>
       </FadeIn>
 
@@ -481,7 +481,7 @@ function AIPlaybookPanel() {
 
       <FadeIn>
         <Insight tag="The Palantir lesson">
-          Palantir started in counter-terrorism intelligence. No amount of product-led growth would have worked. The data was classified, the workflows were classified, the edge cases were life-or-death. FDEs with security clearances, embedded in intelligence agencies, building custom solutions &mdash; that was the only viable path. AI startups in healthcare, defense, and finance face the same dynamic today.
+          Palantir started in counter-terrorism intelligence. No amount of product-led growth would have worked. The data was classified, the workflows were classified, the edge cases were life-or-death. FDEs with security clearances, embedded in intelligence agencies, building custom solutions. That was the only viable path. AI startups in healthcare, defense, and finance face the same dynamic today.
         </Insight>
       </FadeIn>
 
@@ -509,7 +509,7 @@ function AIPlaybookPanel() {
       <FadeIn delay={180}>
         <Insight tag="Convergence vs divergence">
           Two customers overriding the same capability with <em>different</em> implementations is the opposite signal from
-          three landing on the same one. Convergence means you found a missing default &mdash; ship it into the platform.
+          three landing on the same one. Convergence means you found a missing default. Ship it into the platform.
           Divergence means you found a <em>config surface</em>: the capability is genuinely customer-specific, and the right
           product move is a clean extension point, not a built-in. Teams that only count override frequency promote the
           divergent ones too, and end up shipping an opinionated default that every future account immediately overrides.
@@ -537,7 +537,7 @@ function AppliedPatternsPanel() {
       <FadeIn><Decision question="System design: 'Design an AI system for enterprise document processing'">
         <Pill type="green">Bring up FDE deployment</Pill> &ldquo;For enterprise document processing, I&rsquo;d recommend an FDE-first deployment. The reason: every enterprise has different document formats, compliance requirements, and integration points. An FDE embedded at the customer site builds the initial pipeline against real data, identifies edge cases, and creates the evaluation set from actual documents.&rdquo;
         <br /><br />
-        <Pill type="amber">Address the scaling path</Pill> &ldquo;As we onboard customers, FDEs will discover common patterns &mdash; similar document types, similar extraction needs. We productize those into the platform. The metric I&rsquo;d track is product leverage: how much faster can FDE #10 deliver versus FDE #1? If it&rsquo;s not significantly faster, our gravel-to-highway pipeline is broken.&rdquo;
+        <Pill type="amber">Address the scaling path</Pill> &ldquo;As we onboard customers, FDEs will discover common patterns: similar document types, similar extraction needs. We productize those into the platform. The metric I&rsquo;d track is product leverage: how much faster can FDE #10 deliver versus FDE #1? If it&rsquo;s not significantly faster, our gravel-to-highway pipeline is broken.&rdquo;
         <br /><br />
         <Pill type="green">Show you understand unit economics</Pill> &ldquo;FDE cost is high per customer, but it&rsquo;s actually R&amp;D spend disguised as services. Each engagement teaches us what the product should become. The investment pays off when product leverage means one FDE can serve five accounts instead of one.&rdquo;
       </Decision></FadeIn>
@@ -552,7 +552,7 @@ function AppliedPatternsPanel() {
       <FadeIn delay={60}>
         <p style={{ fontSize: 14, color: 'var(--text-p)', lineHeight: 1.7, marginBottom: 4, marginTop: 24 }}>
           &ldquo;Product leverage&rdquo; sounds abstract until you make it a number. In an interview, don&rsquo;t just name the
-          metric &mdash; show how you&rsquo;d instrument it. Log the effort split per engagement (hand-built vs configured on
+          metric; show how you&rsquo;d instrument it. Log the effort split per engagement (hand-built vs configured on
           the platform) and two signals fall out: <strong>speedup</strong> (is FDE&nbsp;#N faster than #1?) and{' '}
           <strong>configured share</strong> (is the product absorbing the custom work?). Rising both = the gravel road is
           paving itself.
@@ -566,25 +566,25 @@ function AppliedPatternsPanel() {
       <FadeIn delay={180}>
         <Insight tag="Why this lands in an interview">
           Speedup without rising configured-share is a trap: an FDE can ship faster just by cutting corners or reusing their
-          own scripts &mdash; that&rsquo;s personal skill, not <em>product</em> leverage, and it doesn&rsquo;t transfer to FDE&nbsp;#11.
-          The compounding signal is configured-share climbing across accounts, because that means the platform &mdash; not the
-          individual &mdash; is doing more of the work each time. Watching both together is what separates &ldquo;we&rsquo;re getting
+          own scripts. That&rsquo;s personal skill, not <em>product</em> leverage, and it doesn&rsquo;t transfer to FDE&nbsp;#11.
+          The compounding signal is configured-share climbing across accounts, because that means the platform, not the
+          individual, is doing more of the work each time. Watching both together is what separates &ldquo;we&rsquo;re getting
           faster&rdquo; from &ldquo;we&rsquo;re building a moat.&rdquo;
         </Insight>
       </FadeIn>
 
       <FadeIn><Decision question="Org design: 'How would you structure an AI engineering team?'">
-        <Pill type="green">Reference Echo/Delta</Pill> &ldquo;I&rsquo;d consider Palantir&rsquo;s Echo/Delta model. Echo team members are domain experts from the customer&rsquo;s field &mdash; they know what problems are worth solving. Delta engineers are rapid prototypers who build working solutions fast. Together they operate like a mini startup inside the customer.&rdquo;
+        <Pill type="green">Reference Echo/Delta</Pill> &ldquo;I&rsquo;d consider Palantir&rsquo;s Echo/Delta model. Echo team members are domain experts from the customer&rsquo;s field; they know what problems are worth solving. Delta engineers are rapid prototypers who build working solutions fast. Together they operate like a mini startup inside the customer.&rdquo;
         <br /><br />
-        <Pill type="amber">Address the feedback loop</Pill> &ldquo;Critical: there must be a product team back at HQ whose job is to absorb patterns from FDE engagements. Without this, you&rsquo;re running a consulting firm. With it, every customer engagement makes the product better for all customers.&rdquo;
+        <Pill type="amber">Address the feedback loop</Pill> &ldquo;Key point: there must be a product team back at HQ whose job is to absorb patterns from FDE engagements. Without this, you&rsquo;re running a consulting firm. With it, every customer engagement makes the product better for all customers.&rdquo;
         <br /><br />
         <Pill type="green">Success metrics</Pill> &ldquo;I&rsquo;d measure three things: time-to-initial-value (weeks, not months), product leverage growth (FDE efficiency per engagement), and scalability transition rate (what percentage of custom work becomes product features).&rdquo;
       </Decision></FadeIn>
 
       <FadeIn><Decision question="Go-to-market: 'Should we build a self-serve AI product or go enterprise?'">
-        <Pill type="green">Frame it as a spectrum</Pill> &ldquo;It depends on how well we understand the problem space. If we&rsquo;re entering a domain where we don&rsquo;t yet know what the product should look like &mdash; healthcare AI, legal AI, defense AI &mdash; FDE-first is the right call. We need to discover the product at the customer site.&rdquo;
+        <Pill type="green">Frame it as a spectrum</Pill> &ldquo;It depends on how well we understand the problem space. If we&rsquo;re entering a domain where we don&rsquo;t yet know what the product should look like (healthcare AI, legal AI, defense AI), FDE-first is the right call. We need to discover the product at the customer site.&rdquo;
         <br /><br />
-        <Pill type="amber">The evolution path</Pill> &ldquo;Most successful AI companies start FDE-heavy and gradually shift to product-heavy. Palantir pioneered this. The ratio should evolve over time &mdash; early on it&rsquo;s almost all custom work, and over the years the product absorbs more and more of what FDEs used to build by hand. If the ratio isn&rsquo;t shifting, something is wrong with the productization pipeline.&rdquo;
+        <Pill type="amber">The evolution path</Pill> &ldquo;Most successful AI companies start FDE-heavy and gradually shift to product-heavy. Palantir pioneered this. The ratio should evolve over time: early on it&rsquo;s almost all custom work, and over the years the product absorbs more and more of what FDEs used to build by hand. If the ratio isn&rsquo;t shifting, something is wrong with the productization pipeline.&rdquo;
         <br /><br />
         <Pill type="red">Red flag answer</Pill> &ldquo;We&rsquo;ll just build the product and iterate based on usage data.&rdquo; This works for consumer apps. For enterprise AI, you need someone in the room with the customer&rsquo;s data to understand why the model fails on their specific cases.
       </Decision></FadeIn>
@@ -600,7 +600,7 @@ function AppliedPatternsPanel() {
         <br /><br />
         <Pill type="green">&ldquo;Product leverage&rdquo;</Pill> How much more value each FDE delivers as the platform matures. The metric that proves the model is working.
         <br /><br />
-        <Pill type="green">&ldquo;Doing things that don&rsquo;t scale, at scale&rdquo;</Pill> The FDE philosophy. Non-scalable, deeply customized work &mdash; but systematized across many customers.
+        <Pill type="green">&ldquo;Doing things that don&rsquo;t scale, at scale&rdquo;</Pill> The FDE philosophy. Non-scalable, deeply customized work, but systematized across many customers.
         <br /><br />
         <Pill type="amber">&ldquo;Demo-driven development&rdquo;</Pill> Build the demo first, then harden it. Opposite of spec-driven development. Optimizes for time-to-value.
         <br /><br />
@@ -609,7 +609,7 @@ function AppliedPatternsPanel() {
 
       <FadeIn>
         <Insight type="warn" tag="Don&rsquo;t oversell">
-          FDE is not a silver bullet. It&rsquo;s expensive, hard to hire for, and creates organizational complexity. Use it when the market demands it (new domains, complex AI, enterprise) &mdash; not because it sounds sophisticated. In practice, showing when NOT to use FDE is as important as knowing when to use it.
+          FDE is not a silver bullet. It&rsquo;s expensive, hard to hire for, and creates organizational complexity. Use it when the market demands it (new domains, complex AI, enterprise), not because it sounds sophisticated. In practice, showing when NOT to use FDE is as important as knowing when to use it.
         </Insight>
       </FadeIn>
         </div>
@@ -619,11 +619,8 @@ function AppliedPatternsPanel() {
 const styles = {
   back: { fontSize: 12, color: 'var(--text-muted)', textDecoration: 'none', fontFamily: 'var(--font-mono)' },
   eyebrow: { fontSize: 11, fontWeight: 500, color: 'var(--text-accent)', letterSpacing: '0.08em', marginBottom: 8, textTransform: 'uppercase', fontFamily: 'var(--font-mono)' },
-  h1: { fontSize: 'clamp(28px, 5vw, 44px)', fontWeight: 400, color: 'var(--text-h)', lineHeight: 1.12, marginBottom: 16, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
-  subtitle: { fontSize: 15, color: 'var(--text-p)', lineHeight: 1.75, marginBottom: 32 },
-  tabWrap: { display: 'flex', flexWrap: 'wrap', gap: 4, marginBottom: 28, borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', paddingBottom: 12 },
-  tabBtn: { fontSize: 12, fontWeight: 500, color: 'var(--text-muted)', background: 'none', border: 'none', padding: '6px 14px', borderRadius: 'var(--radius-full)', cursor: 'pointer', transition: 'all var(--dur) var(--ease)', fontFamily: 'var(--font-body)' },
-  tabActive: { color: 'var(--text-accent)', background: 'var(--bg-accent)' },
-  sh: { fontSize: 20, fontWeight: 600, color: 'var(--text-h)', marginBottom: 8, fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' },
-  ss: { fontSize: 14, color: 'var(--text-p)', lineHeight: 1.7, marginBottom: 20 },
+  h1: { fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 400, color: 'var(--text-h)', lineHeight: 1.08, marginBottom: 16, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
+  subtitle: { fontSize: 'clamp(16px, 1.3vw, 18px)', color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 28, maxWidth: '62ch' },
+  sh: { fontSize: 'clamp(24px, 2.4vw, 30px)', fontWeight: 400, color: 'var(--text-h)', marginTop: 8, marginBottom: 10, lineHeight: 1.2, fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' },
+  ss: { fontSize: 16, color: 'var(--text-p)', marginBottom: 24, lineHeight: 1.7, maxWidth: '65ch' },
 };

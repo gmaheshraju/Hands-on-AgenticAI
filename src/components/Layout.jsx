@@ -1,46 +1,68 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import Nav from './Nav';
 import PostFooterCTA from './PostFooterCTA';
 
+// Scroll progress for long posts. Written straight to the DOM once per frame
+// (transform, not width) so scrolling never re-renders React or triggers layout.
 function ReadingProgress() {
-  const [progress, setProgress] = useState(0);
+  const barRef = useRef(null);
 
   useEffect(() => {
-    const onScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0);
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const p = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+      if (barRef.current) barRef.current.style.transform = `scaleX(${p})`;
     };
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
+    update();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      cancelAnimationFrame(frame);
+    };
   }, []);
 
-  if (progress < 1) return null;
+  return <div ref={barRef} className="reading-progress" aria-hidden="true" />;
+}
 
-  return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      width: `${progress}%`,
-      height: 2,
-      background: 'var(--bg-accent-strong)',
-      zIndex: 200,
-      transition: 'width 0.1s linear',
-    }} />
-  );
+// Post tabs are sticky. When a reader switches tabs from further down the page,
+// bring the start of the new tab into view instead of leaving them mid-content.
+function useTabScrollReset(enabled) {
+  useEffect(() => {
+    if (!enabled) return;
+    const onClick = (e) => {
+      const tabs = e.target.closest?.('.post-tabs');
+      if (!tabs || !e.target.closest('button')) return;
+      // Wait one frame so React has swapped the visible panel.
+      requestAnimationFrame(() => {
+        let panel = tabs.nextElementSibling;
+        while (panel && panel.hidden) panel = panel.nextElementSibling;
+        if (!panel) return;
+        const offset = (document.querySelector('.nav')?.offsetHeight ?? 0) + tabs.offsetHeight + 12;
+        const top = panel.getBoundingClientRect().top;
+        if (top < offset) window.scrollTo({ top: window.scrollY + top - offset, behavior: 'smooth' });
+      });
+    };
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, [enabled]);
 }
 
 export default function Layout({ children }) {
   const { pathname } = useLocation();
   const isBlogPost = pathname.startsWith('/blog/');
+  useTabScrollReset(isBlogPost);
 
   return (
     <>
       {isBlogPost && <ReadingProgress />}
       <Nav />
-      <main className="layout-main">
+      <main className={`layout-main${isBlogPost ? ' layout-main--post' : ''}`}>
         {children}
         {isBlogPost && <PostFooterCTA />}
       </main>
@@ -48,7 +70,7 @@ export default function Layout({ children }) {
         <div className="footer__inner">
           <span className="footer__mark">MG</span>
           <p className="footer__text">
-            Built by Mahesh Guntumadugu — decision frameworks from real-world production systems.
+            Built by Mahesh Guntumadugu. Decision frameworks from real production systems.
           </p>
         </div>
       </footer>

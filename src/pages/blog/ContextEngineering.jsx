@@ -12,11 +12,11 @@ const BUDGET_CODE = `function allocateTokenBudget(maxTokens, options = {}) {
   const safetyMargin = 512;                            // never cut it close
   const available = maxTokens - outputBuffer - safetyMargin;
 
-  // Fixed reserves — these never get dropped
+  // Fixed reserves: these never get dropped
   const systemPrompt = options.systemPromptTokens || 2000;
   const remaining = available - systemPrompt;
 
-  // Dynamic allocation — trade off based on what's available
+  // Dynamic allocation: trade off based on what's available
   const allocations = {
     systemPrompt,
     conversationHistory: Math.floor(remaining * 0.30),  // sliding window
@@ -42,18 +42,18 @@ safetyMargin:        512
 effectiveWindow: 108,288
 
 allocations:
-  systemPrompt:        3,000   (fixed — never dropped)
+  systemPrompt:        3,000   (fixed, never dropped)
   conversationHistory: 31,586  (30% of remaining)
   ragChunks:           36,850  (35% of remaining)
   toolResults:         21,057  (20% of remaining)
-  fewShotExamples:     10,528  (10% — dropped first)
+  fewShotExamples:     10,528  (10%, dropped first)
   reserved:             5,264  (5%)
 
 dropOrder: examples → tools → RAG → conversation
   128K window ≠ 128K usable. Effective budget: ~108K tokens.`;
 
 const PRIORITY_CODE = `function prioritizeSources(sources, budgetByType) {
-  // Tier 1: Fixed — never dropped
+  // Tier 1: Fixed, never dropped
   const fixed = sources.filter(s => s.tier === 'fixed');
 
   // Tier 2-5: Score by relevance × recency, then fit to budget
@@ -119,7 +119,7 @@ const ASSEMBLER_CODE = `function assembleContext(sources, budget, strategy = 'ba
   });
 
   // Step 3: Order for attention optimization
-  // "Lost in the middle" — put critical content at start and end
+  // "Lost in the middle": put critical content at start and end
   const ordered = [
     ...compressed.filter(s => s.tier === 'fixed'),        // system prompt first
     ...compressed.filter(s => s.type === 'rag')           // RAG early (high attention)
@@ -172,7 +172,7 @@ const client = new Anthropic();
 const TOOLS = loadToolDefs().sort((a, b) => a.name.localeCompare(b.name)); // deterministic
 
 const SYSTEM = [
-  { type: 'text', text: SYSTEM_PROMPT_V7 },   // versioned — never edited in place
+  { type: 'text', text: SYSTEM_PROMPT_V7 },   // versioned, never edited in place
   { type: 'text', text: FEW_SHOT_EXAMPLES,
     // Breakpoint 1: caches tools + system together (tools render first).
     // 1h TTL: this prefix is shared across every user, all day.
@@ -186,7 +186,7 @@ async function turn(history, userMsg) {
     tools: TOOLS,
     system: SYSTEM,
     // Breakpoint 2 (automatic): lands on the last block and moves forward each
-    // turn, so the growing conversation is the "moving tail". Default 5m TTL —
+    // turn, so the growing conversation is the "moving tail". Default 5m TTL;
     // longer TTLs must appear before shorter ones, so the 1h marker comes first.
     cache_control: { type: 'ephemeral' },
     messages: [
@@ -229,7 +229,7 @@ turn 3  { w1h: 8000, w5m: 1630, read: 0, fresh: 0, costVsUncached: '1.87x' }
 3 turns: 51,475 billed-equivalent vs 26,780 uncached → 1.92x
 
 A busted cache is worse than no cache: you pay the write premium every
-turn and never collect a read. No error is raised — the only signal is
+turn and never collect a read. No error is raised; the only signal is
 cache_read_input_tokens stuck at 0. Alert on it.`;
 
 const TABS = ['Context Budget','Source Priority', 'Assembly Patterns', 'Production Patterns', 'Deep Dive'];
@@ -243,25 +243,25 @@ export default function ContextEngineering() {
       <p style={styles.eyebrow}>Post 15</p>
       <h1 style={styles.h1}>Context Engineering</h1>
       <p style={styles.subtitle}>
-        The discipline replacing prompt engineering — what goes into the context window,
+        The discipline replacing prompt engineering: what goes into the context window,
         in what order, with what token budget, and why getting it wrong silently kills
         your agent's performance.
       </p>
 
       <Diagram
       svg={contextEngineeringSvg}
-      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/22-context-engineering</code> — nine modules whose real fitting contract is the four outcomes <code>allocate()</code> checks in code order: budget exhausted, fits whole, truncated to fit, insufficient remaining, with priority-0 sources admitted before the budget is consulted at all. Every label here survived a check against the file it names.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/22-context-engineering</code>: nine modules whose real fitting contract is the four outcomes <code>allocate()</code> checks in code order: budget exhausted, fits whole, truncated to fit, insufficient remaining, with priority-0 sources admitted before the budget is consulted at all. Every label here survived a check against the file it names.</>}
       source="tree/main/projects/22-context-engineering"
       facts="blob/main/docs/diagrams/context_eng_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
       />
 
-      <div style={styles.tabWrap}>
+      <div className="tab-nav post-tabs" role="tablist">
         {TABS.map((t, i) => (
           <button
             key={t}
             onClick={() => setTab(i)}
-            style={{ ...styles.tabBtn, ...(tab === i ? styles.tabActive : {}) }}
+            role="tab" aria-selected={tab === i} className={`tab-nav__btn${tab === i ? ' tab-nav__btn--active' : ''}`}
           >
             {t}
           </button>
@@ -278,7 +278,7 @@ export default function ContextEngineering() {
       <FadeIn><div style={{ marginTop: 48, padding: '24px 28px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)' }}>
         <p style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8 }}>Hands-On Project</p>
         <p style={{ fontSize: 15, fontWeight: 600, color: 'var(--text-h)', marginBottom: 6 }}>Context Window Optimizer</p>
-        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Design a context assembly pipeline with token budgeting, source prioritization, prompt caching, and compression — then measure its impact with evals.</p>
+        <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 12 }}>Build the real thing. Design a context assembly pipeline with token budgeting, source prioritization, prompt caching, and compression, then measure its impact with evals.</p>
         <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/tree/main/projects/22-context-engineering" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>View project brief on GitHub →</a>
       </div></FadeIn>
     </div>
@@ -439,7 +439,7 @@ function ContextBudgetPanel() {
   return (
     <div>
       <SectionHead
-        title="Token budgets — the constraint that shapes everything"
+        title="Token budgets: the constraint that shapes everything"
         desc="A 128K context window doesn't mean 128K usable tokens. Output buffer, safety margins, and the model's effective attention window all shrink the real budget. Context engineering starts with understanding the constraint."
       />
 
@@ -463,7 +463,7 @@ function ContextBudgetPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="Fixed vs dynamic allocation">
-        <Pill type="green">Fixed reserves</Pill> guarantee critical content is always present. The system prompt gets a fixed budget. It's always in, no matter what. This is your non-negotiable baseline.
+        <Pill type="green">Fixed reserves</Pill> guarantee must-have content is always present. The system prompt gets a fixed budget. It's always in, no matter what. This is your non-negotiable baseline.
         <br /><br />
         <Pill type="amber">Dynamic allocation</Pill> lets you trade between source types based on the current request. A retrieval-heavy query? Shrink the example budget and give more tokens to RAG chunks. A multi-turn conversation? Grow the conversation window and drop examples entirely.
         <br /><br />
@@ -480,7 +480,7 @@ function ContextBudgetPanel() {
       <FadeIn delay={320}><Decision question="What to do when everything doesn't fit">
         Three strategies, in order of preference:
         <br /><br />
-        <Pill type="green">Drop lowest priority</Pill> Remove entire sources by tier. Examples go first, then stale tool results, then low-relevance RAG chunks. Cleanest approach — no information corruption.
+        <Pill type="green">Drop lowest priority</Pill> Remove entire sources by tier. Examples go first, then stale tool results, then low-relevance RAG chunks. Cleanest approach, with no information corruption.
         <br /><br />
         <Pill type="amber">Truncate from middle</Pill> Keep the start and end of a source, cut the middle. Research shows LLMs attend most to the beginning and end of long sequences. Used for conversation history and long documents.
         <br /><br />
@@ -498,22 +498,22 @@ function SourcePriorityPanel() {
   return (
     <div>
       <SectionHead
-        title="Source hierarchy — not all context is equal"
+        title="Source hierarchy: not all context is equal"
         desc="When you have 6 different source types competing for the same window, you need a priority stack. Not everything can fit. The question is: what do you drop, and in what order?"
       />
 
       <FadeIn><Decision question="The priority stack (highest to lowest)">
-        <Pill type="green">Tier 0 — System Prompt</Pill> Never dropped. Your agent's core instructions, persona, and constraints. If this gets truncated, the agent breaks.
+        <Pill type="green">Tier 0: System Prompt</Pill> Never dropped. Your agent's core instructions, persona, and constraints. If this gets truncated, the agent breaks.
         <br /><br />
-        <Pill type="green">Tier 1 — Recent Conversation</Pill> Sliding window of the last 5-10 turns. The user expects the agent to remember what was just said.
+        <Pill type="green">Tier 1: Recent Conversation</Pill> Sliding window of the last 5-10 turns. The user expects the agent to remember what was just said.
         <br /><br />
-        <Pill type="blue">Tier 2 — Retrieved Context (RAG)</Pill> Relevance-scored chunks from your knowledge base. This is what grounds the agent's answers in facts.
+        <Pill type="blue">Tier 2: Retrieved Context (RAG)</Pill> Relevance-scored chunks from your knowledge base. This is what grounds the agent's answers in facts.
         <br /><br />
-        <Pill type="amber">Tier 3 — Agent Memory / Facts</Pill> Persistent facts about the user or domain. Lower priority than RAG because these are less request-specific.
+        <Pill type="amber">Tier 3: Agent Memory / Facts</Pill> Persistent facts about the user or domain. Lower priority than RAG because these are less request-specific.
         <br /><br />
-        <Pill type="amber">Tier 4 — Tool Call Results</Pill> Results from function calls. Important when fresh, but stale results from 5 turns ago can be dropped.
+        <Pill type="amber">Tier 4: Tool Call Results</Pill> Results from function calls. Important when fresh, but stale results from 5 turns ago can be dropped.
         <br /><br />
-        <Pill type="amber">Tier 5 — Few-shot Examples</Pill> Demonstrate the desired output format. Helpful but expendable — the system prompt can describe the format in fewer tokens.
+        <Pill type="amber">Tier 5: Few-shot Examples</Pill> Demonstrate the desired output format. Helpful but expendable: the system prompt can describe the format in fewer tokens.
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="Relevance scoring within tiers">
@@ -525,15 +525,15 @@ function SourcePriorityPanel() {
         <br /><br />
         <strong>Tool results:</strong> Rank by how recently the tool was called. Results from the current turn always beat results from 3 turns ago.
         <br /><br />
-        Relevance scoring turns a flat priority stack into a priority queue — the right data structure for context engineering.
+        Relevance scoring turns a flat priority stack into a priority queue, the right data structure for context engineering.
       </Decision></FadeIn>
 
-      <FadeIn delay={160}><Decision question="Conversation history — how far back?">
+      <FadeIn delay={160}><Decision question="Conversation history: how far back?">
         Last 5-10 turns is usually sufficient. Beyond that, use a sliding window with summarization:
         <br /><br />
         <strong>Window strategy:</strong> Summarize turns 1 through N into a 500-token summary. Keep turns N+1 to current verbatim. This costs one LLM call per compaction but saves thousands of tokens per subsequent request.
         <br /><br />
-        <strong>When to compact:</strong> When conversation history exceeds 30% of your effective budget, trigger compaction. Don't wait until you hit the wall — compact proactively.
+        <strong>When to compact:</strong> When conversation history exceeds 30% of your effective budget, trigger compaction. Don't wait until you hit the wall; compact proactively.
         <br /><br />
         <strong>What to preserve:</strong> Always keep the first user message (establishes intent) and the last 3-5 turns (current thread of conversation). Everything in between can be summarized.
       </Decision></FadeIn>
@@ -551,7 +551,7 @@ function AssemblyPatternsPanel() {
   return (
     <div>
       <SectionHead
-        title="Context assembly — turning sources into a coherent window"
+        title="Context assembly: turning sources into a coherent window"
         desc="You've budgeted the tokens and prioritized the sources. Now you need to assemble them into a single context window that maximizes the LLM's ability to use the information."
       />
 
@@ -568,15 +568,15 @@ function AssemblyPatternsPanel() {
       <FadeIn delay={80}><Decision question="Ordering within the assembled context">
         Position in the context window matters. Research shows LLMs attend most to the beginning and end, with significant degradation in the middle:
         <br /><br />
-        <strong>Position 1: System prompt</strong> — always first. Sets the frame for everything that follows.
+        <strong>Position 1: System prompt.</strong> Always first. Sets the frame for everything that follows.
         <br /><br />
-        <strong>Position 2: Highest-relevance RAG chunks</strong> — put your best retrieved content early, where attention is highest.
+        <strong>Position 2: Highest-relevance RAG chunks.</strong> Put your best retrieved content early, where attention is highest.
         <br /><br />
-        <strong>Middle: Conversation history</strong> — chronological order within this section. The model uses positional cues to understand conversation flow.
+        <strong>Middle: Conversation history.</strong> Chronological order within this section. The model uses positional cues to understand conversation flow.
         <br /><br />
-        <strong>Position N-1: Tool results</strong> — recent results near the end get good attention.
+        <strong>Position N-1: Tool results.</strong> Recent results near the end get good attention.
         <br /><br />
-        <strong>Position N: Few-shot examples</strong> — right before the user's current message. Primes the output format.
+        <strong>Position N: Few-shot examples.</strong> Right before the user's current message. Primes the output format.
         <br /><br />
         The "lost in the middle" effect is real. Don't bury your most important content at position 50K in a 100K context.
       </Decision></FadeIn>
@@ -592,7 +592,7 @@ function AssemblyPatternsPanel() {
         <br /><br />
         <Pill type="blue">Extraction</Pill> Pull only the relevant sentences from a document. Use the user's query as a filter: "extract sentences relevant to: {'{query}'}." More targeted than summarization.
         <br /><br />
-        <Pill type="amber">Deduplication</Pill> Remove near-duplicate RAG chunks that waste tokens. Embeddings make this easy — if two chunks have cosine similarity above 0.85, keep the higher-scored one. Common when chunking overlaps.
+        <Pill type="amber">Deduplication</Pill> Remove near-duplicate RAG chunks that waste tokens. Embeddings make this easy: if two chunks have cosine similarity above 0.85, keep the higher-scored one. Common when chunking overlaps.
       </Decision></FadeIn>
 
       <FadeIn delay={320}><CodeBlock filename="context-assembler.js" code={ASSEMBLER_CODE} output={ASSEMBLER_OUTPUT} /></FadeIn>
@@ -602,21 +602,21 @@ function AssemblyPatternsPanel() {
       </Insight></FadeIn>
 
       <FadeIn delay={480}><Decision question="The four moves of context engineering (Lance Martin / LangChain)">
-        Every context pipeline reduces to four fundamental operations. You do them manually at first, then automate them as the system matures:
+        Every context pipeline reduces to four operations. You do them manually at first, then automate them as the system matures:
         <br /><br />
         <Pill type="green">Select</Pill> Pull only the slice this turn needs. Two sub-decisions compound here: <strong>what</strong> goes into the window (retrieval, filtering, scoring) and <strong>where</strong> it sits (the lost-in-the-middle effect means position is a second lever, not just inclusion).
         <br /><br />
-        <Pill type="blue">Compress</Pill> Summarize running history, trim what is no longer load-bearing. The goal is to preserve the facts the agent still needs while freeing tokens for new material. Lossy by definition — the skill is knowing what to lose.
+        <Pill type="blue">Compress</Pill> Summarize running history, trim what is no longer load-bearing. The goal is to preserve the facts the agent still needs while freeing tokens for new material. Lossy by definition; the skill is knowing what to lose.
         <br /><br />
-        <Pill type="amber">Write</Pill> Write confirmed findings to disk outside the context window so they survive compaction. Scratchpads, memory files, structured notes — anything that persists beyond the current window. Without this move, every compaction risks destroying work the agent already completed.
+        <Pill type="amber">Write</Pill> Write confirmed findings to disk outside the context window so they survive compaction. Scratchpads, memory files, structured notes: anything that persists beyond the current window. Without this move, every compaction risks destroying work the agent already completed.
         <br /><br />
-        <Pill type="green">Isolate</Pill> Split work across multiple windows (subagents), bring back only the result. A 200-file codebase search does not belong in the same window as the user conversation. Isolate the subtask, let it run in its own context, and merge the conclusion — not the raw output — back into the parent.
+        <Pill type="green">Isolate</Pill> Split work across multiple windows (subagents), bring back only the result. A 200-file codebase search does not belong in the same window as the user conversation. Isolate the subtask, let it run in its own context, and merge the conclusion, not the raw output, back into the parent.
         <br /><br />
         Select and Compress manage what is in the window right now. Write and Isolate manage what is outside it. Production systems need all four.
       </Decision></FadeIn>
 
       <FadeIn delay={560}><Insight type="warn">
-        Modern models cache the prompt prefix. If you reshuffle context every turn, you blow the cache and pay full price — up to 90% discount lost. Freeze a stable prefix, let only the tail move.
+        Modern models cache the prompt prefix. If you reshuffle context every turn, you blow the cache and pay full price, losing up to a 90% discount. Freeze a stable prefix, let only the tail move.
       </Insight></FadeIn>
     </div>
   );
@@ -626,7 +626,7 @@ function ProductionPatternsPanel() {
   return (
     <div>
       <SectionHead
-        title="Production context engineering — where theory meets reality"
+        title="Production context engineering: where theory meets reality"
         desc="In production, your context pipeline handles thousands of requests per minute, each with different source combinations and budget pressures. These patterns handle that scale reliably."
       />
 
@@ -637,25 +637,25 @@ function ProductionPatternsPanel() {
         <br /><br />
         <strong>Design implication:</strong> Structure your context so the cacheable prefix is as large and stable as possible. System prompt, tool schemas, and few-shot examples should be at the top. User-specific and request-specific content should be at the bottom.
         <br /><br />
-        <strong>Cache invalidation:</strong> Any change to the cached prefix invalidates the cache. Version your system prompts — don't edit them in place during a conversation.
+        <strong>Cache invalidation:</strong> Any change to the cached prefix invalidates the cache. Version your system prompts; don't edit them in place during a conversation.
       </Decision></FadeIn>
 
       <FadeIn delay={40}><CodeBlock filename="prompt-cache.js" code={CACHE_CODE} output={CACHE_OUTPUT} /></FadeIn>
 
       <FadeIn delay={60}><Insight tag="Mechanics interviewers probe">
-        Four details separate "I've read about caching" from "I've run it": <strong>(1)</strong> writes carry a premium — 1.25× base input for the 5-minute TTL, 2× for 1-hour — so the 1-hour TTL only pays off when the prefix is reused across gaps longer than 5 minutes (a read refreshes the timer, so steady traffic keeps a 5-minute entry warm indefinitely). <strong>(2)</strong> There is a model-dependent minimum prefix length (hundreds to a few thousand tokens); below it, the marker silently does nothing. <strong>(3)</strong> A breakpoint only looks back a bounded number of blocks (20 on Anthropic's API) for a prior entry, so a single turn that appends a long sequential tool loop can miss the previous cache — add an intermediate breakpoint. <strong>(4)</strong> At most 4 breakpoints per request: spend them on stability boundaries (tools/system, daily-refreshed context, conversation tail), not on every block.
+        Four details separate "I've read about caching" from "I've run it": <strong>(1)</strong> writes carry a premium (1.25× base input for the 5-minute TTL, 2× for 1-hour), so the 1-hour TTL only pays off when the prefix is reused across gaps longer than 5 minutes (a read refreshes the timer, so steady traffic keeps a 5-minute entry warm indefinitely). <strong>(2)</strong> There is a model-dependent minimum prefix length (hundreds to a few thousand tokens); below it, the marker silently does nothing. <strong>(3)</strong> A breakpoint only looks back a bounded number of blocks (20 on Anthropic's API) for a prior entry, so a single turn that appends a long sequential tool loop can miss the previous cache. Add an intermediate breakpoint. <strong>(4)</strong> At most 4 breakpoints per request: spend them on stability boundaries (tools/system, daily-refreshed context, conversation tail), not on every block.
       </Insight></FadeIn>
 
       <FadeIn delay={80}><Decision question="Multi-turn context management">
         Conversation grows every turn. Without management, a 20-turn conversation can eat 40K tokens of raw history:
         <br /><br />
-        <Pill type="green">Sliding window</Pill> Drop the oldest turns. Simple but lossy — the agent forgets early context entirely.
+        <Pill type="green">Sliding window</Pill> Drop the oldest turns. Simple but lossy: the agent forgets early context entirely.
         <br /><br />
         <Pill type="blue">Summarize-and-compact</Pill> Periodically compress older turns into a summary. Every 5-10 turns, summarize turns 1-N into a paragraph and keep N+1 onward verbatim. Best balance of cost and quality.
         <br /><br />
         <Pill type="amber">Relevance-based pruning</Pill> Drop turns unrelated to the current topic. Requires a relevance model to score each turn against the current query. Sophisticated but fragile.
         <br /><br />
-        <strong>Best practice:</strong> Hybrid approach — summarize old turns, keep recent turns verbatim, and always preserve the first turn (establishes the original intent).
+        <strong>Best practice:</strong> A hybrid approach. Summarize old turns, keep recent turns verbatim, and always preserve the first turn (establishes the original intent).
       </Decision></FadeIn>
 
       <FadeIn delay={160}><Decision question="Context for tool-using agents">
@@ -665,25 +665,25 @@ function ProductionPatternsPanel() {
         <br /><br />
         <strong>Result summarization:</strong> After the agent extracts what it needs from a tool result, summarize the result before re-injecting into context. A 1500-token JSON response often contains 100 tokens of relevant data.
         <br /><br />
-        <strong>Schema dropping:</strong> After the first tool call, the model has seen the schema. You can drop tool schemas from subsequent turns and save tokens — the model remembers the function signature.
+        <strong>Schema dropping:</strong> After the first tool call, the model has seen the schema. You can drop tool schemas from subsequent turns and save tokens, since the model remembers the function signature.
       </Decision></FadeIn>
 
       <FadeIn delay={240}><Insight type="warn">
-        Real incident: An agent made 12 tool calls in one session. Each tool result was ~1500 tokens. That's 18K tokens of tool context — pushing the actual user query and RAG results out of the effective attention window. The agent started hallucinating because it couldn't "see" the retrieved documents buried under tool results. Fix: summarize tool results after use, keep only the data the agent extracted.
+        Real incident: An agent made 12 tool calls in one session. Each tool result was ~1500 tokens. That's 18K tokens of tool context, pushing the actual user query and RAG results out of the effective attention window. The agent started hallucinating because it couldn't "see" the retrieved documents buried under tool results. Fix: summarize tool results after use, keep only the data the agent extracted.
       </Insight></FadeIn>
 
       <FadeIn delay={320}><Decision question="Context engineering for RAG">
         Chunk size directly affects your context budget. At 512-token chunks, you can fit 8 chunks in a 4K RAG budget versus 4 chunks with 1024-token chunks. More chunks means better coverage but less context per chunk.
         <br /><br />
-        <strong>Metadata overhead:</strong> Include source URL, document title, section heading, and date with each chunk. Costs ~50 tokens per chunk but dramatically improves faithfulness — the model can cite its sources and calibrate confidence.
+        <strong>Metadata overhead:</strong> Include source URL, document title, section heading, and date with each chunk. Costs ~50 tokens per chunk but clearly improves faithfulness: the model can cite its sources and calibrate confidence.
         <br /><br />
         <strong>Retrieval score injection:</strong> Prepend the relevance score to each chunk: <code>[relevance: 0.92]</code>. This gives the model a confidence signal. It should weight a 0.92 chunk higher than a 0.65 chunk.
         <br /><br />
-        <strong>Practical guideline:</strong> 5-8 chunks of 512 tokens with metadata is the sweet spot for most RAG systems. That's ~3K-5K tokens of retrieved context — enough for grounding without drowning the attention mechanism.
+        <strong>Practical guideline:</strong> 5-8 chunks of 512 tokens with metadata is the sweet spot for most RAG systems. That's ~3K-5K tokens of retrieved context, enough for grounding without drowning the attention mechanism.
       </Decision></FadeIn>
 
-      <FadeIn delay={400}><Insight tag="Context rot — the 2026 gotcha">
-        "Lost in the middle" is about <em>position</em>. Context rot is about <em>length</em> — and it's the trap interviewers now spring with "the window is 1M tokens, why not just stuff everything in?" Chroma's 2025 <strong>Context Rot</strong> study ran 18 models (including the frontier long-context ones) on tasks as trivial as repeating a word or a single-fact lookup, and found accuracy <strong>decays as total input grows even when the relevant content sits at the top and the task never gets harder</strong>. Non-uniformly, too: add a few semantically-similar distractors and the curve falls off a cliff. The takeaway for design — the advertised window is a <em>ceiling, not a budget</em>. A 200K or 1M window does not mean 1M usable tokens; the <strong>effective window</strong> where reliability holds is often a small fraction of it. So the discipline doesn't disappear as windows grow — retrieval, compression, and aggressive pruning matter <em>more</em>, because now you can fit enough junk to quietly poison the answer without ever hitting a hard limit or throwing an error.
+      <FadeIn delay={400}><Insight tag="Context rot: the 2026 gotcha">
+        "Lost in the middle" is about <em>position</em>. Context rot is about <em>length</em>, and it's the trap interviewers now spring with "the window is 1M tokens, why not just stuff everything in?" Chroma's 2025 <strong>Context Rot</strong> study ran 18 models (including the frontier long-context ones) on tasks as trivial as repeating a word or a single-fact lookup, and found accuracy <strong>decays as total input grows even when the relevant content sits at the top and the task never gets harder</strong>. Non-uniformly, too: add a few semantically-similar distractors and the curve falls off a cliff. The takeaway for design: the advertised window is a <em>ceiling, not a budget</em>. A 200K or 1M window does not mean 1M usable tokens; the <strong>effective window</strong> where reliability holds is often a small fraction of it. So the discipline doesn't disappear as windows grow. Retrieval, compression, and aggressive pruning matter <em>more</em>, because now you can fit enough junk to quietly poison the answer without ever hitting a hard limit or throwing an error.
       </Insight></FadeIn>
     </div>
   );
@@ -693,22 +693,22 @@ function DeepDivePanel() {
   return (
     <div>
       <SectionHead
-        title="Context engineering as a critical production discipline"
+        title="Context engineering as a production discipline"
         desc="Context engineering is the new frontier of AI systems design. Here's how to frame your knowledge for senior engineering discussions."
       />
 
       <FadeIn><Decision question="Why context engineering is replacing prompt engineering">
         Prompt engineering = crafting one system prompt. Context engineering = designing the entire information pipeline into the LLM.
         <br /><br />
-        As agents get more complex (RAG + tools + memory + multi-turn), the system prompt is less than 5% of what's in the context window. The other 95% — retrieved documents, tool results, conversation history, examples — needs engineering too.
+        As agents get more complex (RAG + tools + memory + multi-turn), the system prompt is less than 5% of what's in the context window. The other 95% (retrieved documents, tool results, conversation history, examples) needs engineering too.
         <br /><br />
-        <strong>The shift:</strong> "Write a better prompt" was 2024 advice. "Design a context pipeline that maximizes signal-to-noise ratio across 6 source types under a hard token budget" — that's 2027.
+        <strong>The shift:</strong> "Write a better prompt" was 2024 advice. "Design a context pipeline that maximizes signal-to-noise ratio across 6 source types under a hard token budget" is 2027 advice.
         <br /><br />
         Prompt engineering is a subset of context engineering. The system prompt is one source among many.
       </Decision></FadeIn>
 
-      <FadeIn delay={80}><Decision question="The critical question: 'Walk me through the context pipeline for an agent with RAG, tools, memory, and multi-turn conversation'">
-        This is THE critical context engineering design question. Walk through the full pipeline:
+      <FadeIn delay={80}><Decision question="The big one: 'Walk me through the context pipeline for an agent with RAG, tools, memory, and multi-turn conversation'">
+        This is THE context engineering design question. Walk through the full pipeline:
         <br /><br />
         <strong>1. Budget allocation:</strong> 128K window → 108K effective. Fixed reserves for system prompt (3K). Dynamic allocation across conversation (30%), RAG (35%), tools (20%), examples (10%), reserve (5%).
         <br /><br />
@@ -724,11 +724,11 @@ function DeepDivePanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={160}><Insight>
-        Context engineering is to 2027 what prompt engineering was to 2024. Prompt engineering got you a junior role. Context engineering — understanding token budgets, source prioritization, assembly strategies, caching, and compression — that's the senior-level skill. It's the difference between "I can write a good prompt" and "I can architect an information pipeline that makes an agent reliably intelligent."
+        Context engineering is to 2027 what prompt engineering was to 2024. Prompt engineering got you a junior role. Context engineering (token budgets, source prioritization, assembly strategies, caching, and compression) is the senior-level skill. It's the difference between "I can write a good prompt" and "I can architect an information pipeline that makes an agent reliably intelligent."
       </Insight></FadeIn>
 
       <FadeIn delay={240}><Decision question="Common pitfalls in context pipeline design">
-        <Pill type="amber">1. Treating context window as unlimited</Pill> "Just dump everything in the 128K window." This reveals shallow thinking — you've never built a production system. Performance degrades long before you hit the token limit.
+        <Pill type="amber">1. Treating context window as unlimited</Pill> "Just dump everything in the 128K window." This reveals shallow thinking: you've never built a production system. Performance degrades long before you hit the token limit.
         <br /><br />
         <Pill type="amber">2. Not knowing about "lost in the middle"</Pill> If you can't explain why position in the context matters, you haven't read the research. This is foundational.
         <br /><br />
@@ -742,15 +742,15 @@ function DeepDivePanel() {
       <FadeIn delay={320}><div style={{ marginBottom: 16 }}>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 8 }}>
           <strong>Related project:</strong>{' '}
-          <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/tree/main/projects/22-context-engineering" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>Project 22 — Context Window Optimizer</a>{' '}
-          — build a full context assembly pipeline with token budgeting, priority scoring, and eval-driven optimization.
+          <a href="https://github.com/gmaheshraju/Hands-on-AgenticAI/tree/main/projects/22-context-engineering" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-accent)', textDecoration: 'none', fontWeight: 500 }}>Project 22: Context Window Optimizer</a>.{' '}
+          Build a full context assembly pipeline with token budgeting, priority scoring, and eval-driven optimization.
         </p>
       </div></FadeIn>
 
       <FadeIn delay={400}><Decision question="The four failure modes of context (Drew Breunig)">
         Context does not just fail by being absent. It fails by being wrong, noisy, contradictory, or overwhelming. Each mode requires a different fix:
         <br /><br />
-        <Pill type="amber">Poisoning</Pill> A wrong fact enters the context and keeps getting referenced as true. An early hallucination or a stale retrieval result becomes the foundation for all subsequent reasoning. The model treats everything in context as ground truth — one poisoned sentence can corrupt an entire chain of thought. Fix: validate facts at insertion time, version your memory, and add provenance metadata so the model can weigh source reliability.
+        <Pill type="amber">Poisoning</Pill> A wrong fact enters the context and keeps getting referenced as true. An early hallucination or a stale retrieval result becomes the foundation for all subsequent reasoning. The model treats everything in context as ground truth, so one poisoned sentence can corrupt an entire chain of thought. Fix: validate facts at insertion time, version your memory, and add provenance metadata so the model can weigh source reliability.
         <br /><br />
         <Pill type="amber">Distraction</Pill> Context so long that the model over-focuses on window content instead of drawing on its training. When you dump 80K tokens of raw documents into the window, the model stops reasoning and starts pattern-matching against the blob. It becomes a parrot of the context instead of a thinker that uses context. Fix: compress aggressively, keep signal density high, and test with shorter context to see if quality actually improves.
         <br /><br />
@@ -760,11 +760,11 @@ function DeepDivePanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={480}><Insight type="warn">
-        When an agent underperforms, run these four diagnostics before blaming the model: (1) Did it ever have the right information, or was the answer buried in low-attention positions? (2) Did the summary throw away a key detail during compaction? (3) Did it lose work it should have parked on disk — a finding that got compacted away because nobody wrote it to a scratchpad? (4) Did one giant context drown a subtask that deserved its own window? Most "the model is bad" complaints trace back to one of these four.
+        When an agent underperforms, run these four diagnostics before blaming the model: (1) Did it ever have the right information, or was the answer buried in low-attention positions? (2) Did the summary throw away a key detail during compaction? (3) Did it lose work it should have parked on disk, such as a finding that got compacted away because nobody wrote it to a scratchpad? (4) Did one giant context drown a subtask that deserved its own window? Most "the model is bad" complaints trace back to one of these four.
       </Insight></FadeIn>
 
       <FadeIn delay={560}><Insight>
-        The meta-insight: every other topic in this playbook feeds into context engineering. RAG (Post 05) determines what gets retrieved. Memory (Post 02) determines what gets remembered. Cost engineering (Post 11) determines the budget. Eval (Post 08) measures whether your context pipeline works. Context engineering is the integration layer — the skill that ties everything together.
+        The meta-insight: every other topic in this playbook feeds into context engineering. RAG (Post 05) determines what gets retrieved. Memory (Post 02) determines what gets remembered. Cost engineering (Post 11) determines the budget. Eval (Post 08) measures whether your context pipeline works. Context engineering is the integration layer that ties everything together.
       </Insight></FadeIn>
     </div>
   );
@@ -781,43 +781,9 @@ const styles = {
     letterSpacing: '0.02em',
   },
   eyebrow: { fontSize: 11, fontWeight: 500, color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8, fontFamily: 'var(--font-mono)' },
-  h1: { fontSize: 34, fontWeight: 400, color: 'var(--text-h)', marginBottom: 10, lineHeight: 1.15, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
-  subtitle: { fontSize: 14, color: 'var(--text-p)', marginBottom: 8, lineHeight: 1.75 },
+  h1: { fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 400, color: 'var(--text-h)', lineHeight: 1.08, marginBottom: 16, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
+  subtitle: { fontSize: 'clamp(16px, 1.3vw, 18px)', color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 28, maxWidth: '62ch' },
 
-  tabWrap: {
-    display: 'flex',
-    gap: 0,
-    marginBottom: '2rem',
-    borderBottomWidth: 1,
-    borderBottomStyle: 'solid',
-    borderBottomColor: 'var(--border)',
-    overflowX: 'auto',
-    scrollbarWidth: 'none',
-  },
-  tabBtn: {
-    background: 'transparent',
-    borderTopWidth: 0,
-    borderRightWidth: 0,
-    borderLeftWidth: 0,
-    borderBottomWidth: 2,
-    borderBottomStyle: 'solid',
-    borderBottomColor: 'transparent',
-    padding: '10px 14px',
-    fontSize: 13,
-    fontWeight: 500,
-    color: 'var(--text-muted)',
-    cursor: 'pointer',
-    transition: 'all var(--dur) var(--ease)',
-    fontFamily: 'inherit',
-    whiteSpace: 'nowrap',
-    letterSpacing: '-0.01em',
-  },
-  tabActive: {
-    color: 'var(--text-h)',
-    fontWeight: 600,
-    borderBottomColor: 'var(--bg-accent-strong)',
-  },
-
-  sh: { fontSize: 17, fontWeight: 600, color: 'var(--text-h)', marginBottom: 8, letterSpacing: '-0.01em' },
-  ss: { fontSize: 13, color: 'var(--text-p)', marginBottom: 16, lineHeight: 1.7 },
+  sh: { fontSize: 'clamp(24px, 2.4vw, 30px)', fontWeight: 400, color: 'var(--text-h)', marginTop: 8, marginBottom: 10, lineHeight: 1.2, fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' },
+  ss: { fontSize: 16, color: 'var(--text-p)', marginBottom: 24, lineHeight: 1.7, maxWidth: '65ch' },
 };

@@ -81,7 +81,7 @@ const HARNESS_OUTPUT = `> await runAgent("Find and fix the failing test in auth.
 [iter 4] Tool: runTests({ file: "auth.test.js" })
   → 12 passed, 0 failed ✓
 
-[iter 5] No tool calls — returning response.
+[iter 5] No tool calls, returning response.
 
 { text: "Fixed the failing test. The issue was a missing await
   on validateToken() at line 47 of auth.js.",
@@ -172,22 +172,22 @@ export default function AgentHarness() {
       <p style={styles.eyebrow}>Post 03</p>
       <h1 style={styles.h1}>Agent Harness & Loop Engineering</h1>
       <p style={styles.subtitle}>
-        The orchestration loop is the beating heart of every agent. How to build loops
-        that are observable, recoverable, and self-improving — the infrastructure that
-        turns a prompt into a reliable system.
+        The orchestration loop sits at the center of every agent. This post covers how to
+        build loops that are observable, recoverable, and self-improving: the infrastructure
+        that turns a prompt into a reliable system.
       </p>
 
       <Diagram
       svg={harnessSvg}
-      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/03-agent-harness</code> — four stop conditions in the order the loop actually checks them, the tool surface, and the two files a run writes. Every element traces to a line in that source tree.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/03-agent-harness</code>: four stop conditions in the order the loop actually checks them, the tool surface, and the two files a run writes. Every element traces to a line in that source tree.</>}
       source="tree/main/projects/03-agent-harness"
       facts="blob/main/docs/diagrams/agent_harness_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
       />
 
-      <div style={styles.tabWrap}>
+      <div className="tab-nav post-tabs" role="tablist">
         {TABS.map((t, i) => (
-          <button key={t} onClick={() => setTab(i)} style={{ ...styles.tabBtn, ...(tab === i ? styles.tabActive : {}) }}>{t}</button>
+          <button key={t} onClick={() => setTab(i)} role="tab" aria-selected={tab === i} className={`tab-nav__btn${tab === i ? ' tab-nav__btn--active' : ''}`}>{t}</button>
         ))}
       </div>
 
@@ -233,7 +233,7 @@ function AgentLoopDiagram() {
           </marker>
         </defs>
 
-        <text x="360" y="22" textAnchor="middle" fontSize="14" fontWeight="400" fill="var(--text-h)" fontFamily="var(--font-display)">Agent Loop — The Core Execution Cycle</text>
+        <text x="360" y="22" textAnchor="middle" fontSize="14" fontWeight="400" fill="var(--text-h)" fontFamily="var(--font-display)">Agent Loop: The Core Execution Cycle</text>
 
         {/* Main loop box */}
         <rect x="40" y="44" width="640" height="220" rx="12" fill="var(--text-accent)" opacity="0.04" stroke="var(--text-accent)" strokeWidth="1.2" strokeDasharray="8 4" />
@@ -312,7 +312,7 @@ function LoopPanel() {
     <div>
       <SectionHead
         title="The agent loop: observe → think → act → evaluate"
-        desc={<>My metaphor: <strong>"A harness is what keeps the horse on course."</strong> The LLM is the horse — powerful but directionless without structure. The harness is the loop that constrains, observes, and corrects. Every agent runs the same cycle. The quality difference is in the harness engineering — termination conditions, memory injection, and the evaluation gate.</>}
+        desc={<>My metaphor: <strong>"A harness is what keeps the horse on course."</strong> The LLM is the horse: powerful, but directionless without structure. The harness is the loop that constrains, observes, and corrects. Every agent runs the same cycle, so the quality difference comes from the harness engineering: termination conditions, memory injection, and the evaluation gate.</>}
       />
 
       <AgentLoopDiagram />
@@ -324,50 +324,48 @@ function LoopPanel() {
           The harness isn't just a loop. It's the complete runtime that wraps the LLM. I break it into layers:
         </p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 4 }}>
-          <strong>1. Memory System</strong> — Procedural (SKILL.md), Semantic (vector DB), Episodic (conversation log). Injected into context at the Observe step.
+          <strong>1. Memory System.</strong> Procedural (SKILL.md), Semantic (vector DB), Episodic (conversation log). Injected into context at the Observe step.
         </p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 4 }}>
-          <strong>2. Tool Execution Layer</strong> — Sandboxed function calls with timeout and retry logic. The harness executes tools, not the LLM.
+          <strong>2. Tool Execution Layer.</strong> Sandboxed function calls with timeout and retry logic. The harness executes tools, not the LLM.
         </p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 4 }}>
-          <strong>3. Evaluation Gate</strong> — "Ship the fix or fix the bug." After each iteration, the harness checks: did this action move us closer to the goal? If not, inject corrective context and re-run.
+          <strong>3. Evaluation Gate.</strong> "Ship the fix or fix the bug." After each iteration, the harness checks: did this action move us closer to the goal? If not, inject corrective context and re-run.
         </p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 4 }}>
-          <strong>4. Observability Layer</strong> — Traces, metrics, cost tracking. I specifically call out Langfuse and LangSmith for LLM-specific tracing.
+          <strong>4. Observability Layer.</strong> Traces, metrics, cost tracking. I specifically call out Langfuse and LangSmith for LLM-specific tracing.
         </p>
       </div>
 
       <FadeIn><CodeBlock filename="agent-harness.js" code={HARNESS_CODE} output={HARNESS_OUTPUT} /></FadeIn>
 
 
-      <FadeIn><Decision question="Observe — what goes into the context?">
+      <FadeIn><Decision question="Observe: what goes into the context?">
         The observe step assembles the context window: system prompt + conversation history + retrieved memories + tool results from the last iteration.
         <br /><br />
         <strong>Key engineering decisions:</strong>
-        <br />
-        — How much conversation history to include (all? last N? summarized?)
-        <br />
-        — Whether to retrieve memories/RAG context (always? only when needed?)
-        <br />
-        — How to format tool results (raw JSON? summarized? truncated?)
-        <br /><br />
+        <ul className="decision__list">
+          <li>How much conversation history to include (all? last N? summarized?)</li>
+          <li>Whether to retrieve memories/RAG context (always? only when needed?)</li>
+          <li>How to format tool results (raw JSON? summarized? truncated?)</li>
+        </ul>
         The observe step is the most underrated part of the loop. Bad context assembly = bad reasoning, regardless of how good the LLM is.
         <br /><br />
-        <strong>My memory injection pattern:</strong> The Observe step is where memory meets the loop. Load procedural memory (SKILL.md — how to do this task) into the system prompt. Retrieve semantic memory (relevant facts) via RAG. Append recent episodic memory (what happened in this session). This is the "Context RAM" — the working memory that the LLM reasons over.
+        <strong>My memory injection pattern:</strong> The Observe step is where memory meets the loop. Load procedural memory (SKILL.md: how to do this task) into the system prompt. Retrieve semantic memory (relevant facts) via RAG. Append recent episodic memory (what happened in this session). This is the "Context RAM," the working memory the LLM reasons over.
       </Decision></FadeIn>
 
-      <FadeIn delay={80}><Decision question="Think — the LLM inference step">
+      <FadeIn delay={80}><Decision question="Think: the LLM inference step">
         The LLM receives the assembled context and produces either: (a) a tool call (continue looping), or (b) a final text response (exit the loop).
         <br /><br />
         <strong>ReAct pattern:</strong> The LLM explicitly generates a "Thought" before each action. "I need to find the user's account → I should search the database → Let me call the search_users tool." This is more expensive (extra tokens for reasoning) but more debuggable.
         <br /><br />
-        <strong>Direct tool calling:</strong> The LLM directly outputs a tool call without explicit reasoning. Faster and cheaper. Less debuggable — you can't see WHY it chose that tool.
+        <strong>Direct tool calling:</strong> The LLM directly outputs a tool call without explicit reasoning. Faster and cheaper. Less debuggable, because you can't see WHY it chose that tool.
         <br /><br />
         <strong>Production choice:</strong> Use extended thinking / chain-of-thought for complex tasks (code generation, multi-step reasoning). Use direct tool calling for simple tasks (FAQ, data lookup).
       </Decision></FadeIn>
 
-      <FadeIn delay={160}><Decision question="Termination conditions — when to stop looping">
-        The most critical engineering decision. Without proper termination, agents loop forever (burning money) or stop too early (incomplete answers).
+      <FadeIn delay={160}><Decision question="Termination conditions: when to stop looping">
+        This decision matters more than any other in the loop. Without proper termination, agents loop forever (burning money) or stop too early (incomplete answers).
         <br /><br />
         <strong>Natural termination:</strong> The LLM decides to respond with text instead of a tool call. Works 90% of the time.
         <br /><br />
@@ -383,11 +381,11 @@ function LoopPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "A harness is what keeps the horse on course" — My metaphor. The LLM is the horse — powerful, fast, but it will wander without constraint. The harness is the termination conditions, the cost caps, the convergence detection. Senior engineers immediately ask: 'What's the gate? What triggers escalation? What's the cost cap?' The harness engineering — not the LLM choice — is what makes agents production-safe. My rule: if you can't explain the harness, you haven't built an agent — you've built a demo.
+        "A harness is what keeps the horse on course" is my metaphor. The LLM is the horse: powerful and fast, but it will wander without constraint. The harness is the termination conditions, the cost caps, the convergence detection. Senior engineers immediately ask: 'What's the gate? What triggers escalation? What's the cost cap?' The harness engineering, not the LLM choice, is what makes agents production-safe. My rule: if you can't explain the harness, you haven't built an agent. You've built a demo.
       </Insight></FadeIn>
 
       <FadeIn delay={80}><Insight>
-        A tool is a verb — a function plus a schema. A skill is a procedure — how we cut a release, how we deploy. The difference between knowing what to do and knowing how.
+        A tool is a verb: a function plus a schema. A skill is a procedure: how we cut a release, how we deploy. The difference between knowing what to do and knowing how.
       </Insight></FadeIn>
     </div>
   );
@@ -398,39 +396,32 @@ function TracingPanel() {
     <div>
       <SectionHead
         title="Tracing & observability"
-        desc="You can't improve what you can't observe. Agent traces are the equivalent of distributed tracing in microservices — they let you see exactly what happened, why, and where it went wrong."
+        desc="You can't improve what you can't observe. Agent traces are the equivalent of distributed tracing in microservices. They show exactly what happened, why, and where it went wrong."
       />
 
       <FadeIn><Decision question="What to trace in every agent call?">
         <strong>Per-iteration trace:</strong>
-        <br />
-        — Iteration number and timestamp
-        <br />
-        — Input context size (tokens)
-        <br />
-        — LLM model used and parameters (temperature, max_tokens)
-        <br />
-        — Tool called (name, arguments, truncated result)
-        <br />
-        — LLM reasoning (if using chain-of-thought)
-        <br />
-        — Latency breakdown: context assembly | LLM inference | tool execution
-        <br />
-        — Token usage: prompt tokens | completion tokens | total cost
-        <br /><br />
+        <ul className="decision__list">
+          <li>Iteration number and timestamp</li>
+          <li>Input context size (tokens)</li>
+          <li>LLM model used and parameters (temperature, max_tokens)</li>
+          <li>Tool called (name, arguments, truncated result)</li>
+          <li>LLM reasoning (if using chain-of-thought)</li>
+          <li>Latency breakdown: context assembly | LLM inference | tool execution</li>
+          <li>Token usage: prompt tokens | completion tokens | total cost</li>
+        </ul>
         <strong>Per-query trace (spans the full loop):</strong>
-        <br />
-        — Total iterations, total cost, total latency
-        <br />
-        — Termination reason (natural | iteration cap | cost cap | error)
-        <br />
-        — User satisfaction signal (if available)
+        <ul className="decision__list">
+          <li>Total iterations, total cost, total latency</li>
+          <li>Termination reason (natural | iteration cap | cost cap | error)</li>
+          <li>User satisfaction signal (if available)</li>
+        </ul>
       </Decision></FadeIn>
 
       <FadeIn><CodeBlock filename="agent-tracer.js" code={TRACING_CODE} output={TRACING_OUTPUT} /></FadeIn>
 
-      <FadeIn delay={80}><Decision question="Tracing tools — what do teams actually use?">
-        <Pill type="green">LangSmith</Pill> Purpose-built for LLM tracing. I demonstrate this in my harness video — visualizes the full agent loop as a tree of spans. Best DX for debugging "why did the agent pick that tool?" Integrates with LangChain but also works standalone.
+      <FadeIn delay={80}><Decision question="Tracing tools: what do teams actually use?">
+        <Pill type="green">LangSmith</Pill> Purpose-built for LLM tracing. I demonstrate this in my harness video. It visualizes the full agent loop as a tree of spans. Best DX for debugging "why did the agent pick that tool?" Integrates with LangChain but also works standalone.
         <br /><br />
         <Pill type="green">Langfuse</Pill> Open-source alternative I also cover. Self-hostable. Traces, evals, and prompt management in one tool. Good for teams that want full control over their observability data. Growing fast in the agent community.
         <br /><br />
@@ -442,17 +433,17 @@ function TracingPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={160}><Decision question="The 5 metrics every agent needs">
-        <strong>1. Success rate</strong> — % of queries that produce a useful response (not an error, not "I don't know"). Target: {'>'} 95%.
+        <strong>1. Success rate.</strong> % of queries that produce a useful response (not an error, not "I don't know"). Target: {'>'} 95%.
         <br /><br />
-        <strong>2. Latency p50/p95</strong> — How long users wait. p50 should be under 5 seconds for interactive agents. p95 under 15 seconds.
+        <strong>2. Latency p50/p95.</strong> How long users wait. p50 should be under 5 seconds for interactive agents. p95 under 15 seconds.
         <br /><br />
-        <strong>3. Cost per query</strong> — Total API cost including all iterations and tool calls. Track mean and p99 (outliers are expensive).
+        <strong>3. Cost per query.</strong> Total API cost including all iterations and tool calls. Track mean and p99 (outliers are expensive).
         <br /><br />
-        <strong>4. Iterations per query</strong> — How many loops the agent takes. High average = inefficient prompts or poor tool selection. Track distribution, not just mean.
+        <strong>4. Iterations per query.</strong> How many loops the agent takes. High average = inefficient prompts or poor tool selection. Track distribution, not just mean.
         <br /><br />
-        <strong>5. Tool error rate</strong> — % of tool calls that fail. Rising error rate = external API degradation. Alert threshold: {'>'} 5%.
+        <strong>5. Tool error rate.</strong> % of tool calls that fail. Rising error rate = external API degradation. Alert threshold: {'>'} 5%.
         <br /><br />
-        <strong>My eval pattern — LLM-as-judge:</strong> Use a stronger model to evaluate a weaker model's outputs. Create a rubric: "Rate this response on correctness (1-5), completeness (1-5), and helpfulness (1-5)." Run this on a sample of production queries. The judge model's scores correlate 80-90% with human evaluators — good enough for automated regression detection, cheap enough to run on every deploy.
+        <strong>My eval pattern, LLM-as-judge:</strong> Use a stronger model to evaluate a weaker model's outputs. Create a rubric: "Rate this response on correctness (1-5), completeness (1-5), and helpfulness (1-5)." Run this on a sample of production queries. The judge model's scores correlate 80-90% with human evaluators. That is good enough for automated regression detection and cheap enough to run on every deploy.
       </Decision></FadeIn>
 
       <FadeIn><Insight>
@@ -473,9 +464,9 @@ function ErrorPanel() {
       <FadeIn><Decision question="Retry with exponential backoff">
         The simplest recovery. Tool call failed? Wait 1s, try again. Still failed? Wait 2s. Then 4s. Max 3 retries.
         <br /><br />
-        <strong>When to use:</strong> Transient failures — API rate limits, network timeouts, temporary service outages.
+        <strong>When to use:</strong> Transient failures: API rate limits, network timeouts, temporary service outages.
         <br /><br />
-        <strong>When NOT to use:</strong> Deterministic failures — wrong tool arguments, missing permissions, invalid queries. Retrying these wastes money.
+        <strong>When NOT to use:</strong> Deterministic failures: wrong tool arguments, missing permissions, invalid queries. Retrying these wastes money.
         <br /><br />
         <strong>Implementation:</strong> Check the error type. 429 (rate limit) and 503 (service unavailable) → retry. 400 (bad request) and 403 (forbidden) → don't retry, tell the LLM the error so it can adjust.
       </Decision></FadeIn>
@@ -484,22 +475,20 @@ function ErrorPanel() {
         Primary tool fails → try a secondary tool for the same task. Like DNS fallback or CDN failover.
         <br /><br />
         <strong>Examples:</strong>
-        <br />
-        — Web search fails → Try a different search engine
-        <br />
-        — Database query times out → Try a cached version
-        <br />
-        — Code execution fails → Ask the LLM to reason about the code instead
-        <br /><br />
-        <strong>Pattern:</strong> Define fallback chains per tool category: <code style={{ fontFamily: 'var(--font-mono)', fontSize: 12 }}>search: [tavily, serper, brave]</code>. The harness tries each in order. Log which fallback was used — if the primary tool fails {'>'} 10% of the time, investigate.
+        <ul className="decision__list">
+          <li>Web search fails → Try a different search engine</li>
+          <li>Database query times out → Try a cached version</li>
+          <li>Code execution fails → Ask the LLM to reason about the code instead</li>
+        </ul>
+        <strong>Pattern:</strong> Define fallback chains per tool category: <code style={{ fontFamily: 'var(--font-mono)', fontSize: 12 }}>search: [tavily, serper, brave]</code>. The harness tries each in order. Log which fallback was used. If the primary tool fails {'>'} 10% of the time, investigate.
       </Decision></FadeIn>
 
-      <FadeIn delay={160}><Decision question="Graceful degradation — partial answers">
+      <FadeIn delay={160}><Decision question="Graceful degradation: partial answers">
         Sometimes the agent can't fully answer the question. A partial answer is better than no answer.
         <br /><br />
         <strong>Pattern:</strong> Track which subtasks succeeded and which failed. Return what you have with explicit gaps:
         <br /><br />
-        "I found your account details and recent transactions. I couldn't access the billing API to check your current invoice — you may need to check that directly at billing.example.com."
+        "I found your account details and recent transactions. I couldn't access the billing API to check your current invoice, so you may need to check that directly at billing.example.com."
         <br /><br />
         <strong>Never silently skip.</strong> If a tool failed, say so. Users trust agents that admit limitations more than agents that confidently provide incomplete information.
       </Decision></FadeIn>
@@ -521,7 +510,7 @@ function ErrorPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "Error recovery is where the 'systems engineer building AI' beats the 'ML engineer building a product.' The patterns are identical to what you'd use in a distributed system — retries with backoff, fallback chains, circuit breakers, graceful degradation. What matters here isn't AI knowledge. It's whether you build resilient systems."
+        "Error recovery is where the 'systems engineer building AI' beats the 'ML engineer building a product.' The patterns are identical to what you'd use in a distributed system: retries with backoff, fallback chains, circuit breakers, graceful degradation. What matters here isn't AI knowledge. It's whether you build resilient systems."
       </Insight></FadeIn>
     </div>
   );
@@ -532,19 +521,19 @@ function SelfImprovePanel() {
     <div>
       <SectionHead
         title="Self-improvement loops"
-        desc="The best agents get better over time — not through retraining, but through prompt optimization, example curation, and feedback loops that require no ML expertise."
+        desc="The best agents get better over time. Not through retraining, but through prompt optimization, example curation, and feedback loops that require no ML expertise."
       />
 
       <FadeIn><Decision question="Human feedback → prompt optimization">
         Users provide implicit feedback: thumbs up/down, rephrasing a question (the original answer was wrong), abandoning the conversation (frustration).
         <br /><br />
-        <strong>Pattern:</strong> Log every query + response + feedback signal. Weekly, review the bottom 10% (worst-rated or abandoned queries). Identify patterns — "The agent fails on date calculations" or "Users rephrase whenever the agent gives code in Python instead of JavaScript."
+        <strong>Pattern:</strong> Log every query + response + feedback signal. Weekly, review the bottom 10% (worst-rated or abandoned queries). Identify patterns, such as "The agent fails on date calculations" or "Users rephrase whenever the agent gives code in Python instead of JavaScript."
         <br /><br />
         <strong>Fix:</strong> Update the system prompt with explicit instructions addressing the pattern. "When the user's codebase is JavaScript, always provide code examples in JavaScript, not Python."
         <br /><br />
         This isn't ML. It's product iteration powered by data. And it works better than fine-tuning for most use cases.
         <br /><br />
-        <strong>My real-world example — Claude Code hooks:</strong> Claude Code lets you define hooks — shell commands that run before or after tool calls. A pre-commit hook that runs linting, a post-edit hook that runs tests. This is harness-level self-improvement: the agent's behavior adapts not through prompt changes but through environmental feedback. The harness constrains the horse — hooks are the guardrails on the track.
+        <strong>My real-world example, Claude Code hooks:</strong> Claude Code lets you define hooks: shell commands that run before or after tool calls. A pre-commit hook that runs linting, a post-edit hook that runs tests. This is harness-level self-improvement: the agent's behavior adapts not through prompt changes but through environmental feedback. The harness constrains the horse; hooks are the guardrails on the track.
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="Few-shot example curation">
@@ -564,7 +553,7 @@ function SelfImprovePanel() {
         <br />
         1. Change the prompt to fix a known issue
         <br />
-        2. Run the eval suite — all 100 test cases
+        2. Run the eval suite (all 100 test cases)
         <br />
         3. If pass rate drops, investigate which cases regressed
         <br />
@@ -575,36 +564,36 @@ function SelfImprovePanel() {
         <strong>This is CI/CD for prompts.</strong> No prompt change ships without passing evals. Period.
       </Decision></FadeIn>
 
-      <FadeIn delay={240}><Decision question="Loop Engineering — improving the harness, not the model">
+      <FadeIn delay={240}><Decision question="Loop Engineering: improving the harness, not the model">
         The practice of improving the harness rather than the model. The harness keeps improving even after you stop changing the model.
         <br /><br />
         <strong>The Five-Level Ladder:</strong> Each level up is a bigger, riskier change. Know where you are before climbing.
         <br /><br />
-        <strong>Level 1: Improve the prompt</strong> — System prompt, instructions, few-shot examples. Cheapest change, lowest risk. Most teams never leave this level (and that's often fine).
+        <strong>Level 1: Improve the prompt.</strong> System prompt, instructions, few-shot examples. Cheapest change, lowest risk. Most teams never leave this level (and that's often fine).
         <br /><br />
-        <strong>Level 2: Improve the context</strong> — The material fed alongside instructions. Better RAG retrieval, smarter memory injection, more relevant tool results. The model stays the same; it just gets better inputs.
+        <strong>Level 2: Improve the context.</strong> The material fed alongside instructions. Better RAG retrieval, smarter memory injection, more relevant tool results. The model stays the same; it just gets better inputs.
         <br /><br />
-        <strong>Level 3: Improve the workflow</strong> — The steps the agent takes. Reorder tool calls, add verification steps, parallelize independent actions. This is where you start changing the loop itself.
+        <strong>Level 3: Improve the workflow.</strong> The steps the agent takes. Reorder tool calls, add verification steps, parallelize independent actions. This is where you start changing the loop itself.
         <br /><br />
-        <strong>Level 4: Improve the harness code</strong> — Termination conditions, retry logic, convergence detection, cost controls. Changes to the infrastructure that wraps the LLM. Higher risk — a bug here affects every query.
+        <strong>Level 4: Improve the harness code.</strong> Termination conditions, retry logic, convergence detection, cost controls. Changes to the infrastructure that wraps the LLM. Higher risk: a bug here affects every query.
         <br /><br />
-        <strong>Level 5: Improve the thing that does the improving</strong> — Meta-level. Automated eval pipelines, self-optimizing prompts, weakness mining loops that feed back into Levels 1-4. This is where the system starts compounding on itself.
+        <strong>Level 5: Improve the thing that does the improving.</strong> Meta-level. Automated eval pipelines, self-optimizing prompts, weakness mining loops that feed back into Levels 1-4. This is where the system starts compounding on itself.
       </Decision></FadeIn>
 
       <FadeIn delay={320}><Insight>
         Your agent gets better on your schedule, not on the model provider's. Every improvement is a change you can read, test, and undo.
       </Insight></FadeIn>
 
-      <FadeIn delay={400}><Decision question="Skill Anatomy — what makes a good skill?">
+      <FadeIn delay={400}><Decision question="Skill Anatomy: what makes a good skill?">
         A skill is a packaged procedure the harness loads when a specific situation arises. Seven components make a skill reliable:
         <br /><br />
-        <strong>Trigger:</strong> When should the harness load this skill? Be specific — "when the user asks to deploy" not "when the user mentions infrastructure."
+        <strong>Trigger:</strong> When should the harness load this skill? Be specific: "when the user asks to deploy" not "when the user mentions infrastructure."
         <br /><br />
         <strong>Non-trigger:</strong> When should it explicitly NOT load? Just as important. A code-review skill should not trigger on a documentation edit.
         <br /><br />
         <strong>Inputs:</strong> What data does the skill need? File paths, configuration, environment variables, previous results.
         <br /><br />
-        <strong>Process:</strong> Step-by-step procedure. Not vague guidance — concrete steps. "Run lint. If lint fails, fix the issues. Run lint again. If lint passes, run tests."
+        <strong>Process:</strong> Step-by-step procedure. Concrete steps, not vague guidance. "Run lint. If lint fails, fix the issues. Run lint again. If lint passes, run tests."
         <br /><br />
         <strong>Preferred tools:</strong> Which tools should the agent use? A deploy skill uses Bash + file read. A research skill uses web search + web fetch. Constraining tools prevents wandering.
         <br /><br />
@@ -616,13 +605,13 @@ function SelfImprovePanel() {
       <FadeIn delay={480}><Decision question="When to make a skill">
         Not everything needs a skill. Four conditions that justify the investment:
         <br /><br />
-        <Pill type="green">The task is repeating</Pill> If you've done it once, it's a task. If you've done it five times, it's a candidate. Skills pay off on repetition — the upfront cost of writing a good skill amortizes across every future invocation.
+        <Pill type="green">The task is repeating</Pill> If you've done it once, it's a task. If you've done it five times, it's a candidate. Skills pay off on repetition: the upfront cost of writing a good skill amortizes across every future invocation.
         <br /><br />
-        <Pill type="green">The procedure matters</Pill> Some tasks have a right way and a wrong way. Deploys, releases, database migrations — the order of operations matters, and skipping a step has consequences. If "just figure it out" routinely leads to mistakes, the procedure needs to be encoded.
+        <Pill type="green">The procedure matters</Pill> Some tasks have a right way and a wrong way. In deploys, releases, and database migrations the order of operations matters, and skipping a step has consequences. If "just figure it out" routinely leads to mistakes, the procedure needs to be encoded.
         <br /><br />
         <Pill type="amber">The mistakes are expensive</Pill> A wrong code review comment wastes 30 seconds. A wrong deploy takes down production for an hour. The more expensive the failure mode, the more value a skill provides. Skills are guardrails for high-stakes procedures.
         <br /><br />
-        <Pill type="amber">The right behavior isn't obvious from the prompt</Pill> If a fresh model instance with just the system prompt would do the wrong thing, you need a skill. The skill encodes the institutional knowledge — the "how we do it here" that isn't in any documentation.
+        <Pill type="amber">The right behavior isn't obvious from the prompt</Pill> If a fresh model instance with just the system prompt would do the wrong thing, you need a skill. The skill encodes the institutional knowledge, the "how we do it here" that isn't in any documentation.
       </Decision></FadeIn>
 
       <FadeIn delay={560}><Insight type="warn">
@@ -630,7 +619,7 @@ function SelfImprovePanel() {
       </Insight></FadeIn>
 
       <FadeIn><Insight>
-        "Self-improvement without retraining is the most underrated topic in agent engineering. Fine-tuning is expensive, slow, and often unnecessary. Prompt optimization + few-shot curation + eval regression testing gets you 80% of the benefit at 5% of the cost. In practice, this demonstrates depth across the full lifecycle — not just building the agent, but operating and improving it."
+        "Self-improvement without retraining is an underrated topic in agent engineering. Fine-tuning is expensive, slow, and often unnecessary. Prompt optimization + few-shot curation + eval regression testing gets you 80% of the benefit at 5% of the cost. In practice, this demonstrates depth across the full lifecycle: not just building the agent, but operating and improving it."
       </Insight></FadeIn>
     </div>
   );
@@ -644,8 +633,8 @@ function ProdOpsPanel() {
         desc="Running an agent in production is more like running a microservice than deploying a model. You need deployment strategies, rollback plans, and on-call procedures."
       />
 
-      <FadeIn><Decision question="Deployment strategy — canary releases for prompts">
-        A prompt change can dramatically alter agent behavior. Deploy like you'd deploy code:
+      <FadeIn><Decision question="Deployment strategy: canary releases for prompts">
+        A prompt change can alter agent behavior as much as a code change. Deploy like you'd deploy code:
         <br /><br />
         <strong>1. Shadow mode:</strong> Run new prompt alongside old prompt. Compare outputs. No user impact.
         <br />
@@ -658,8 +647,8 @@ function ProdOpsPanel() {
         <strong>Key:</strong> Prompts are configuration, not code. Store them in a versioned config system (LaunchDarkly, custom feature flags), not in the codebase. This lets you rollback without a code deploy.
       </Decision></FadeIn>
 
-      <FadeIn delay={80}><Decision question="Cost management — preventing budget blowouts">
-        A single runaway agent query can cost $50+ if it loops with a large context window. Cost controls are essential:
+      <FadeIn delay={80}><Decision question="Cost management: preventing budget blowouts">
+        A single runaway agent query can cost $50+ if it loops with a large context window. You need cost controls:
         <br /><br />
         <strong>Per-query cost cap:</strong> Kill the query if it exceeds $X (typically $0.50-2.00 for consumer, $5-20 for enterprise).
         <br /><br />
@@ -670,34 +659,34 @@ function ProdOpsPanel() {
         <strong>Alert thresholds:</strong> Alert at 2x normal average cost. Page at 5x. Kill switch at 10x.
       </Decision></FadeIn>
 
-      <FadeIn delay={160}><Decision question="On-call for AI agents — what's different?">
+      <FadeIn delay={160}><Decision question="On-call for AI agents: what's different?">
         Traditional on-call: the service is up or down. Agent on-call: the service is up but the answers might be wrong. New failure modes:
         <br /><br />
         <strong>Quality degradation:</strong> The agent is responding but answers are worse. Could be: model provider changed behavior, a dependent API returned different data, context window hit capacity. Hard to detect with uptime monitoring alone.
         <br /><br />
         <strong>Cost spike:</strong> A new query pattern triggers expensive loops. The service is "working" but burning 10x normal budget.
         <br /><br />
-        <strong>Safety incident:</strong> The agent said something harmful, leaked PII, or hallucinated a dangerous instruction. This is a P0 — immediate response required.
+        <strong>Safety incident:</strong> The agent said something harmful, leaked PII, or hallucinated a dangerous instruction. This is a P0 and needs an immediate response.
         <br /><br />
         <strong>Mitigation:</strong> Automated quality sampling (eval 1% of queries in real-time), cost anomaly detection, output safety classifier running on every response. Alert the human, don't just log it.
       </Decision></FadeIn>
 
-      <FadeIn delay={240}><Decision question="Weakness Mining Pipeline — systematic failure-driven improvement">
+      <FadeIn delay={240}><Decision question="Weakness Mining Pipeline: systematic failure-driven improvement">
         Agents fail in production. The question is whether you learn from those failures systematically or one-off. The weakness mining pipeline turns failures into improvements:
         <br /><br />
-        <strong>Step 1: Run the agent, let it fail.</strong> Don't try to prevent all failures upfront. Ship, observe, collect. You need real failure data — synthetic failures miss the distribution of problems users actually hit.
+        <strong>Step 1: Run the agent, let it fail.</strong> Don't try to prevent all failures upfront. Ship, observe, collect. You need real failure data, because synthetic failures miss the distribution of problems users actually hit.
         <br /><br />
         <strong>Step 2: Group failures into clusters.</strong> Not every failure is worth investigating. Group failures that share a provable cause. "The agent misinterprets date formats" is a cluster. "The agent gave a weird answer on Tuesday" is not.
         <br /><br />
-        <strong>Step 3: Only work on clusters, not one-off flaky slips.</strong> A single failure could be noise — model stochasticity, an unusual input, a transient API issue. Clusters are signal. If 12 out of 200 failures share the same root cause, that's worth fixing. If 1 out of 200 fails in a unique way, log it and move on.
+        <strong>Step 3: Only work on clusters, not one-off flaky slips.</strong> A single failure could be noise: model stochasticity, an unusual input, a transient API issue. Clusters are signal. If 12 out of 200 failures share the same root cause, that's worth fixing. If 1 out of 200 fails in a unique way, log it and move on.
         <br /><br />
         <strong>Step 4: Use held-in / held-out split to test fixes.</strong> Take your failure cluster. Split it: half for developing the fix (held-in), half for validating the fix (held-out). This prevents overfitting your prompt to specific examples.
         <br /><br />
-        <strong>Step 5: A fix must pass a strict bar.</strong> The fix must be at least as good across both the held-in and held-out sets AND strictly better in at least one. If your fix improves the held-in set but regresses the held-out set, you've overfit — try again. No partial credit.
+        <strong>Step 5: A fix must pass a strict bar.</strong> The fix must be at least as good across both the held-in and held-out sets AND strictly better in at least one. If your fix improves the held-in set but regresses the held-out set, you've overfit. Try again. No partial credit.
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "Production ops for agents is the topic that separates senior from staff. My rule: 'Write workflows as explicit natural-language specs' — your agent's behavior should be documented as clearly as an API contract. Advice #6: 'Add human-in-the-loop correction loops' — not as a fallback, but as a deliberate quality signal. Anyone can build an agent. Running one with canary deployments, cost caps, and an incident response plan — that's what companies pay 2Cr+ for."
+        "Production ops for agents is the topic that separates senior from staff. My rule: 'Write workflows as explicit natural-language specs.' Your agent's behavior should be documented as clearly as an API contract. Advice #6: 'Add human-in-the-loop correction loops,' not as a fallback but as a deliberate quality signal. Anyone can build an agent. Running one with canary deployments, cost caps, and an incident response plan is what companies pay 2Cr+ for."
       </Insight></FadeIn>
         </div>
   );
@@ -706,13 +695,10 @@ function ProdOpsPanel() {
 const styles = {
   back: { fontSize: 12, color: 'var(--text-muted)', textDecoration: 'none', display: 'inline-block', marginBottom: 16, fontFamily: 'var(--font-mono)', letterSpacing: '0.02em' },
   eyebrow: { fontSize: 11, fontWeight: 500, color: 'var(--text-accent)', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 8, fontFamily: 'var(--font-mono)' },
-  h1: { fontSize: 34, fontWeight: 400, color: 'var(--text-h)', marginBottom: 10, lineHeight: 1.15, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
-  subtitle: { fontSize: 14, color: 'var(--text-p)', marginBottom: 8, lineHeight: 1.75 },
+  h1: { fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 400, color: 'var(--text-h)', lineHeight: 1.08, marginBottom: 16, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
+  subtitle: { fontSize: 'clamp(16px, 1.3vw, 18px)', color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 28, maxWidth: '62ch' },
   source: { fontSize: 12, color: 'var(--text-muted)', marginBottom: '2rem', lineHeight: 1.6 },
   sourceLink: { color: 'var(--text-accent)', textDecoration: 'underline', textUnderlineOffset: '2px' },
-  tabWrap: { display: 'flex', gap: 0, marginBottom: '2rem', borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', overflowX: 'auto', scrollbarWidth: 'none' },
-  tabBtn: { background: 'transparent', borderTopWidth: 0, borderRightWidth: 0, borderLeftWidth: 0, borderBottomWidth: 2, borderBottomStyle: 'solid', borderBottomColor: 'transparent', padding: '10px 14px', fontSize: 13, fontWeight: 500, color: 'var(--text-muted)', cursor: 'pointer', transition: 'all var(--dur) var(--ease)', fontFamily: 'inherit', whiteSpace: 'nowrap', letterSpacing: '-0.01em' },
-  tabActive: { color: 'var(--text-h)', fontWeight: 600, borderBottomColor: 'var(--bg-accent-strong)' },
-  sh: { fontSize: 17, fontWeight: 600, color: 'var(--text-h)', marginBottom: 8, letterSpacing: '-0.01em' },
-  ss: { fontSize: 13, color: 'var(--text-p)', marginBottom: 16, lineHeight: 1.7 },
+  sh: { fontSize: 'clamp(24px, 2.4vw, 30px)', fontWeight: 400, color: 'var(--text-h)', marginTop: 8, marginBottom: 10, lineHeight: 1.2, fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' },
+  ss: { fontSize: 16, color: 'var(--text-p)', marginBottom: 24, lineHeight: 1.7, maxWidth: '65ch' },
 };

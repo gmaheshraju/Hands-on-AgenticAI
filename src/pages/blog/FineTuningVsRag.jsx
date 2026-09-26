@@ -59,7 +59,7 @@ const RAG_PIPELINE_CODE = `async function ragQuery(question, { topK = 5, minScor
     await embed(question), { limit: topK }
   );
 
-  // 2. Quality gate — if best chunk score is too low, abstain
+  // 2. Quality gate: if best chunk score is too low, abstain
   if (chunks[0].score < minScore) {
     return {
       answer: "I don't have enough information to answer this accurately.",
@@ -167,10 +167,10 @@ Stats:
   Eval set:           62
 
 Top rejection reasons:
-  "Output contains hallucinated ICD code"     — 89 examples
-  "Input too short for meaningful training"    — 67 examples
-  "Output format doesn't match schema"        — 44 examples
-  "Duplicate of existing example"             — 35 examples
+  "Output contains hallucinated ICD code"     89 examples
+  "Input too short for meaningful training"    67 examples
+  "Output format doesn't match schema"        44 examples
+  "Duplicate of existing example"             35 examples
 
 Ready for upload: train.jsonl (550 examples, 1.2M tokens)
 Estimated cost: $9.60 (GPT-4o-mini fine-tuning)`;
@@ -185,22 +185,21 @@ export default function FineTuningVsRag() {
       <p style={styles.eyebrow}>Post 09</p>
       <h1 style={styles.h1}>Fine-tuning vs Prompting vs RAG</h1>
       <p style={styles.subtitle}>
-        The decision framework every AI architect needs &mdash; when to prompt engineer,
-        when to retrieve, when to fine-tune, and when to combine them. Get this wrong and
-        you waste 3 months building the wrong thing.
+        A decision framework for when to prompt engineer, when to retrieve, when to fine-tune,
+        and when to combine them. Picking wrong can cost months of building the wrong thing.
       </p>
       <Diagram
       svg={finetuneVsRagSvg}
-      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/09-fine-tuning-vs-rag</code> &mdash; <strong>four</strong> approaches, not three, dispatched in the order <code>runEvaluation</code> runs them (zero-shot, few-shot, RAG, fine-tuned) over the same 30-ticket held-out set, with the fine-tuned box marked MOCK because nothing is ever trained. Each box was placed because a line of source put it there.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/09-fine-tuning-vs-rag</code>: <strong>four</strong> approaches, not three, dispatched in the order <code>runEvaluation</code> runs them (zero-shot, few-shot, RAG, fine-tuned) over the same 30-ticket held-out set, with the fine-tuned box marked MOCK because nothing is ever trained. Each box was placed because a line of source put it there.</>}
       source="tree/main/projects/09-fine-tuning-vs-rag"
       facts="blob/main/docs/diagrams/finetune_vs_rag_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
       />
 
-      <div style={styles.tabWrap}>
+      <div className="tab-nav post-tabs" role="tablist">
         {TABS.map((t, i) => (
           <button key={t} onClick={() => setTab(i)}
-            style={{ ...styles.tabBtn, ...(tab === i ? styles.tabActive : {}) }}>
+            role="tab" aria-selected={tab === i} className={`tab-nav__btn${tab === i ? ' tab-nav__btn--active' : ''}`}>
             {t}
           </button>
         ))}
@@ -228,10 +227,10 @@ function DecisionTreePanel() {
     <FadeIn>
       <SectionHead
         title="The Core Decision Framework"
-        desc="Six questions that determine whether you need prompting, long context, RAG, or fine-tuning. Answer them in order — each one narrows the search space."
+        desc="Six questions that determine whether you need prompting, long context, RAG, or fine-tuning. Answer them in order; each one narrows the search space."
       />
 
-      <Decision question="What are you trying to change — the model's KNOWLEDGE or its BEHAVIOR?">
+      <Decision question="What are you trying to change: the model's KNOWLEDGE or its BEHAVIOR?">
         <p><Pill type="green">Knowledge</Pill> Facts, docs, data that changes over time &rarr; <strong>RAG</strong>.
           The model needs information it was never trained on or that has changed since training.</p>
         <p><Pill type="amber">Behavior</Pill> Output format, tone, reasoning style, domain-specific patterns &rarr; <strong>Fine-tuning</strong>.
@@ -262,16 +261,16 @@ function DecisionTreePanel() {
       </Decision>
 
       <Decision question="How often does the information change?">
-        <p><Pill type="green">Daily or weekly</Pill> RAG. Fine-tuning can't keep up &mdash; retraining takes hours to days, and you need fresh eval data each time.
+        <p><Pill type="green">Daily or weekly</Pill> RAG. Fine-tuning can't keep up: retraining takes hours to days, and you need fresh eval data each time.
           Product catalogs, pricing, support docs, compliance policies.</p>
         <p><Pill type="amber">Rarely or never</Pill> Fine-tuning is viable. Medical coding standards change yearly. Legal precedent is stable.
           Tax rules update annually.</p>
         <p><Pill type="red">Real-time</Pill> RAG + live API tool calls. Stock prices, weather, inventory levels.
-          No static approach works here &mdash; you need a retrieval layer that hits live data sources.</p>
+          No static approach works here; you need a retrieval layer that hits live data sources.</p>
       </Decision>
 
       <Decision question="Do you need citations and attribution?">
-        <p><Pill type="green">Yes</Pill> RAG is the only option. Fine-tuning bakes knowledge into model weights &mdash;
+        <p><Pill type="green">Yes</Pill> RAG is the only option. Fine-tuning bakes knowledge into model weights, and
           the model can't tell you which training example informed its answer. RAG retrieves specific
           documents and can cite them: &quot;Based on section 4.2 of the refund policy...&quot;</p>
         <p><Pill type="amber">No</Pill> Either approach works. But consider: even if you don't need citations
@@ -284,7 +283,7 @@ function DecisionTreePanel() {
         <p><Pill type="amber">{'<'} 2 seconds</Pill> RAG is fine. Most production RAG systems run 800ms-1.5s end-to-end.
           Users tolerate this for search, support, and knowledge-base queries.</p>
         <p><Pill type="green">Batch or async</Pill> Anything works. Document processing, nightly reports,
-          email classification &mdash; latency doesn't matter.</p>
+          email classification. Latency doesn't matter.</p>
       </Decision>
 
       <Decision question="What's your data volume?">
@@ -395,8 +394,8 @@ function DecisionTreePanel() {
       </FadeIn>
 
       <Insight>
-        The real question is whether you'll jump to fine-tuning because it sounds impressive,
-        or whether you'll start with the cheapest option that works. The right answer is almost always:
+        The trap is jumping to fine-tuning because it sounds impressive instead of starting with
+        the cheapest option that works. The right order is almost always:
         start with prompt engineering, add external knowledge (cached in the prompt if it fits, retrieved
         with RAG if it doesn&rsquo;t), fine-tune only if the
         first two can't get the behavior right. Each step up costs 10x more in engineering time.
@@ -411,7 +410,7 @@ function PromptEngineeringPanel() {
   return (
     <FadeIn>
       <SectionHead
-        title="Prompt Engineering — The Cheapest Wins"
+        title="Prompt Engineering: The Cheapest Wins"
         desc="This is your baseline. It takes hours, not weeks. If you skip this and go straight to fine-tuning, you're optimizing for resume lines, not product velocity."
       />
 
@@ -422,7 +421,7 @@ function PromptEngineeringPanel() {
           zero-shot classification tasks.</p>
         <p><Pill type="amber">Few-shot</Pill> 3-5 examples in the prompt. Works when the task is clear
           but the output format is specific. Each example costs ~50-100 tokens. At $3/1M input tokens (Claude Sonnet),
-          5 examples add $0.0015 per request &mdash; negligible at any scale.</p>
+          5 examples add $0.0015 per request, which is negligible at any scale.</p>
         <p><Pill type="green">Chain-of-thought</Pill> &quot;Think step by step.&quot; Adds ~30% latency
           and ~2x output tokens, but improves accuracy on math, logic, and multi-step reasoning from
           ~60% to ~85%+. The cost/accuracy tradeoff is almost always worth it for reasoning tasks.</p>
@@ -432,7 +431,7 @@ function PromptEngineeringPanel() {
         <p><Pill type="green">System prompt</Pill> Persistent behavior instructions: tone, format constraints,
           persona, output schema, safety rules. This is your &quot;base model config&quot;. It stays the same across requests. Cached system prompts on Claude/GPT-4 reduce input costs by 90%.</p>
         <p><Pill type="amber">User prompt</Pill> Per-request context and instructions. The variable input
-          that changes every call. Keep task-specific data here &mdash; the document to summarize, the ticket
+          that changes every call. Keep task-specific data here: the document to summarize, the ticket
           to classify, the code to review.</p>
       </Decision>
 
@@ -450,14 +449,14 @@ function PromptEngineeringPanel() {
 
       <Decision question="When is prompt engineering NOT enough?">
         <p><Pill type="red">Edge case consistency</Pill> You need consistent structured output across
-          thousands of edge cases. Prompts degrade on the long tail &mdash; the 95th percentile input
+          thousands of edge cases. Prompts degrade on the long tail, the 95th percentile input
           that your 5 examples don't cover.</p>
         <p><Pill type="red">Missing domain knowledge</Pill> The task requires domain-specific reasoning
           the base model genuinely doesn't have. Rare with GPT-4/Claude, but real for niche domains
           like semiconductor yield analysis or exotic derivatives pricing.</p>
         <p><Pill type="red">Prompt cost at scale</Pill> Repeating 50 few-shot examples on every request
-          becomes a real cost problem at 1M+ requests/day. Fine-tuning bakes those examples into weights &mdash;
-          zero per-request overhead.</p>
+          becomes a real cost problem at 1M+ requests/day. Fine-tuning bakes those examples into weights,
+          with zero per-request overhead.</p>
         <p><Pill type="red">Latency constraints</Pill> Long prompts = more time-to-first-token.
           If you need {'<'} 100ms response times, you can't afford a 2000-token system prompt.</p>
       </Decision>
@@ -476,7 +475,7 @@ function RagPanel() {
   return (
     <FadeIn>
       <SectionHead
-        title="RAG — When the Model Needs Knowledge It Doesn't Have"
+        title="RAG: When the Model Needs Knowledge It Doesn't Have"
         desc="Retrieval-Augmented Generation bridges the gap between what the model was trained on and what your users need answers about. It's the workhorse of enterprise AI."
       />
 
@@ -485,17 +484,17 @@ function RagPanel() {
           policies. Re-indexing takes minutes; retraining takes hours. A nightly re-index pipeline
           costs ~$5-20/month on most vector DBs.</p>
         <p><Pill type="green">You need citations</Pill> &quot;Based on section 4.2 of the policy...&quot;
-          RAG naturally provides source attribution. Fine-tuning cannot &mdash; knowledge is compressed
+          RAG naturally provides source attribution. Fine-tuning cannot: knowledge is compressed
           into weight updates with no traceability back to training examples.</p>
         <p><Pill type="green">Data is too large</Pill> Millions of documents, terabytes of text.
           You can't fit this in training data, but you can index and retrieve from it. Vector DBs scale
           to billions of embeddings.</p>
         <p><Pill type="green">Access control matters</Pill> User A sees different docs than User B.
           RAG applies per-query metadata filters at retrieval time. Fine-tuning bakes everything
-          into one model &mdash; no per-user access control possible.</p>
+          into one model, so per-user access control is impossible.</p>
       </Decision>
 
-      <Decision question="RAG pitfalls — when retrieval fails silently">
+      <Decision question="RAG pitfalls: when retrieval fails silently">
         <p><Pill type="red">Bad chunking</Pill> Your 512-token chunks split a table in half, cut a code
           block mid-function, or separate a question from its answer. Chunk boundaries are the #1
           RAG failure mode. Use semantic chunking or overlap of 10-20%.</p>
@@ -524,7 +523,7 @@ function RagPanel() {
         output={RAG_PIPELINE_OUTPUT}
       />
 
-      <Decision question="The quality gate pattern — why it matters">
+      <Decision question="The quality gate pattern: why it matters">
         <p><Pill type="green">Abstain over hallucinate</Pill> When the best retrieved chunk scores below
           your threshold (0.7 is a solid default), return &quot;I don't know&quot; instead of guessing.
           A confident wrong answer is worse than no answer. This single pattern prevents 80% of RAG
@@ -549,7 +548,7 @@ function FineTuningPanel() {
   return (
     <FadeIn>
       <SectionHead
-        title="Fine-tuning — Changing How the Model Thinks"
+        title="Fine-tuning: Changing How the Model Thinks"
         desc="Fine-tuning modifies model weights to shift behavior. It's the most powerful technique and the most expensive to get wrong. Reach for it last, not first."
       />
 
@@ -579,32 +578,32 @@ function FineTuningPanel() {
         <p><Pill type="green">QLoRA</Pill> LoRA on a 4-bit quantized model. Halves or quarters the
           memory again, which is what lets a mid-size model fit on one consumer-or-workstation card.
           Best cost/performance ratio for budget-conscious teams. Small quality drop vs LoRA on most
-          benchmarks, larger on reasoning-heavy tasks &mdash; measure, don&apos;t assume.</p>
+          benchmarks, larger on reasoning-heavy tasks. Measure, don&apos;t assume.</p>
         <p><Pill type="amber">API fine-tuning</Pill> Upload JSONL, wait, get a model endpoint. Zero
-          infra, limited customization. Availability is provider-specific and moves &mdash; some frontier
+          infra, limited customization. Availability is provider-specific and moves: some frontier
           models expose a first-party tuning endpoint, others only offer it through a cloud partner,
           and the newest flagship is usually the last to get it. Confirm against the provider&apos;s
           current docs before you put it in a design doc; the interview answer that scores is
           &quot;I&apos;d check what&apos;s tunable today,&quot; not a memorized price.</p>
       </Decision>
 
-      <Decision question="SFT vs preference optimization (DPO / GRPO) — which knob are you turning?">
+      <Decision question="SFT vs preference optimization (DPO / GRPO): which knob are you turning?">
         <p><Pill type="green">SFT (supervised fine-tuning)</Pill> Show the model input/output pairs and
           it imitates them. This is what people mean by &quot;fine-tuning&quot; by default, and it is the
           right tool when there is one correct output shape: a schema, a label set, a house format.
-          Its ceiling is your demonstrations &mdash; SFT can only teach the model to do what you already
+          Its ceiling is your demonstrations: SFT can only teach the model to do what you already
           wrote down.</p>
-        <p><Pill type="green">DPO</Pill> Train on <em>pairs</em> &mdash; a chosen response and a rejected
-          one &mdash; and optimize the model to prefer the chosen one directly, with no separate reward
+        <p><Pill type="green">DPO</Pill> Train on <em>pairs</em> (a chosen response and a rejected
+          one) and optimize the model to prefer the chosen one directly, with no separate reward
           model and no RL loop. Use it when &quot;better&quot; is easy to judge but hard to specify:
           tone, helpfulness, refusal calibration, which of two correct answers a reviewer actually
-          wants. Preference pairs are also cheap to mine &mdash; every time a reviewer edits a draft you
+          wants. Preference pairs are also cheap to mine: every time a reviewer edits a draft you
           have a rejected/chosen pair for free.</p>
         <p><Pill type="amber">GRPO and RL-on-verifiable-rewards</Pill> Sample a group of candidate
           answers per prompt, score each with a <em>programmatic</em> verifier (tests pass, the SQL runs
           and returns the right rows, the JSON validates, the arithmetic checks out), and push the
           policy toward the above-average samples. This is the recipe behind the reasoning-model wave.
-          It only works where you have a cheap automatic grader &mdash; if a human has to read every
+          It only works where you have a cheap automatic grader. If a human has to read every
           sample, the loop is unaffordable.</p>
         <p><Pill type="red">Don&apos;t skip to the fancy one</Pill> Preference and RL methods assume a
           model that already produces roughly the right shape. The usual sequence is SFT first to fix
@@ -614,7 +613,7 @@ function FineTuningPanel() {
 
       <Insight tag="Real numbers">
         You need minimum 100 high-quality examples. 500-1000 is the practical sweet spot.
-        Diminishing returns after ~5000 examples &mdash; spend effort on data quality, not quantity.
+        Diminishing returns after ~5000 examples; spend effort on data quality, not quantity.
         200 expert-written gold-standard examples beats 5000 noisy crowd-sourced ones every time.
         Measure on a held-out eval set, not vibes.
       </Insight>
@@ -622,12 +621,12 @@ function FineTuningPanel() {
       <Decision question="How to build a fine-tuning dataset">
         <p><Pill type="green">Start with production logs</Pill> Real user queries + ideal responses
           curated by domain experts. This is your highest-signal data source. Filter for cases where
-          the base model struggled &mdash; easy cases don't improve fine-tuning.</p>
+          the base model struggled. Easy cases don't improve fine-tuning.</p>
         <p><Pill type="amber">Expert annotation</Pill> Have domain experts (not crowd workers) write
           gold-standard responses. Crowd workers produce grammatically correct nonsense. Domain experts
           produce actually correct outputs. The cost difference is 5x but the quality difference is 50x.</p>
         <p><Pill type="amber">Synthetic data</Pill> Use a large model to generate training data for a
-          smaller one. The old rule &mdash; &quot;the student can never exceed the teacher&quot; &mdash;
+          smaller one. The old rule, &quot;the student can never exceed the teacher,&quot;
           is no longer true as stated, and saying it in an interview dates you. Distillation plus
           <em> filtering</em> routinely beats the teacher on a narrow task: generate many candidates,
           keep only the ones that pass a verifier (tests, schema, a known answer), and train on the
@@ -636,7 +635,7 @@ function FineTuningPanel() {
           teacher outright on that slice.</p>
         <p><Pill type="red">What synthetic data still can&apos;t do</Pill> It cannot invent knowledge the
           teacher lacks, and unfiltered self-generated data degrades a model across rounds. The ceiling
-          isn&apos;t the teacher &mdash; it&apos;s the quality of your filter. If you have no automatic
+          isn&apos;t the teacher; it&apos;s the quality of your filter. If you have no automatic
           way to tell a good sample from a bad one, you are back to needing expert annotation. Also
           check the teacher model&apos;s terms: training a competing model on its outputs is often
           contractually prohibited.</p>
@@ -649,7 +648,7 @@ function FineTuningPanel() {
       />
 
       <Insight type="warn">
-        Fine-tuning is NOT a shortcut. It's the most expensive option in engineering time &mdash;
+        Fine-tuning is NOT a shortcut. It's the most expensive option in engineering time:
         you need data collection, cleaning, training, evaluation, and ongoing monitoring for drift.
         Most teams that jump to fine-tuning could have solved their problem with better prompts or
         RAG. Fine-tune only when you've proven prompt engineering hits a ceiling and you can point
@@ -664,11 +663,11 @@ function CombiningPanel() {
   return (
     <FadeIn>
       <SectionHead
-        title="Combining Techniques — What Production Systems Actually Do"
+        title="Combining Techniques: What Production Systems Actually Do"
         desc="Real systems rarely use just one technique. The art is knowing which combinations solve your problem without overengineering."
       />
 
-      <Decision question="RAG + Prompt Engineering — the 80% combo">
+      <Decision question="RAG + Prompt Engineering: the 80% combo">
         <p><Pill type="green">Most common in production</Pill> RAG retrieves the knowledge, prompt
           engineering shapes the output. Customer support bots, internal knowledge bases, documentation
           assistants. This combination covers 80% of enterprise AI use cases.</p>
@@ -676,9 +675,9 @@ function CombiningPanel() {
           One backend engineer can build and maintain this. No ML expertise required.</p>
       </Decision>
 
-      <Decision question="RAG + Fine-tuning — the power combo">
+      <Decision question="RAG + Fine-tuning: the power combo">
         <p><Pill type="amber">Highest quality, highest cost</Pill> Fine-tune for domain-specific
-          reasoning and behavior. RAG for up-to-date knowledge. Example: medical diagnosis &mdash;
+          reasoning and behavior. RAG for up-to-date knowledge. Example: in medical diagnosis, a
           fine-tuned model understands clinical reasoning patterns, RAG provides latest guidelines
           and drug interactions.</p>
         <p>Setup time: 4-8 weeks. Monthly cost: $1000-10000. Requires at least one ML engineer
@@ -705,16 +704,16 @@ function CombiningPanel() {
         Each step up is a 5-10x jump in total cost of ownership. Justify each escalation with data.
       </Insight>
 
-      <Decision question="The iteration pattern — the approach that demonstrates mastery">
+      <Decision question="The iteration pattern: how production teams actually get there">
         <p><Pill type="green">Week 1</Pill> Ship with prompt engineering. Build a golden eval dataset
           of 50-100 examples. Measure accuracy, latency, and cost. This is your baseline. If accuracy
           is above your threshold, stop here. You're done.</p>
         <p><Pill type="amber">Week 2-3</Pill> If accuracy {'<'} 85%, analyze failure modes. If failures
-          are &quot;model doesn't know X&quot; &mdash; add RAG. If failures are &quot;model knows but
-          outputs wrong format/style&quot; &mdash; that's a prompting problem first, fine-tuning second.</p>
+          are &quot;model doesn't know X,&quot; add RAG. If failures are &quot;model knows but
+          outputs wrong format/style,&quot; that's a prompting problem first, fine-tuning second.</p>
         <p><Pill type="amber">Month 2</Pill> If behavior is still inconsistent after prompt optimization,
           collect 500 production examples of correct behavior and fine-tune. Measure the delta on your
-          golden dataset. If the improvement is {'<'} 5%, the fine-tuning wasn't worth it &mdash; go back
+          golden dataset. If the improvement is {'<'} 5%, the fine-tuning wasn't worth it. Go back
           to prompt engineering.</p>
         <p><Pill type="red">Never</Pill> Skip straight to fine-tuning before trying the cheaper options.
           &quot;We fine-tuned a model&quot; sounds impressive but &quot;we solved it with a 200-token
@@ -744,11 +743,8 @@ function SectionHead({ title, desc }) {
 const styles = {
   back: { fontSize: 12, color: 'var(--text-muted)', textDecoration: 'none', fontFamily: 'var(--font-mono)' },
   eyebrow: { fontSize: 11, fontWeight: 500, color: 'var(--text-accent)', letterSpacing: '0.08em', marginBottom: 8, textTransform: 'uppercase', fontFamily: 'var(--font-mono)' },
-  h1: { fontSize: 'clamp(28px, 5vw, 44px)', fontWeight: 400, color: 'var(--text-h)', lineHeight: 1.12, marginBottom: 16, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
-  subtitle: { fontSize: 15, color: 'var(--text-p)', lineHeight: 1.75, marginBottom: 32 },
-  tabWrap: { display: 'flex', flexWrap: 'wrap', gap: 4, marginBottom: 28, borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', paddingBottom: 12 },
-  tabBtn: { fontSize: 12, fontWeight: 500, color: 'var(--text-muted)', background: 'none', border: 'none', padding: '6px 14px', borderRadius: 'var(--radius-full)', cursor: 'pointer', transition: 'all var(--dur) var(--ease)', fontFamily: 'var(--font-body)' },
-  tabActive: { color: 'var(--text-accent)', background: 'var(--bg-accent)' },
-  sh: { fontSize: 20, fontWeight: 600, color: 'var(--text-h)', marginBottom: 8, fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' },
-  ss: { fontSize: 14, color: 'var(--text-p)', lineHeight: 1.7, marginBottom: 20 },
+  h1: { fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 400, color: 'var(--text-h)', lineHeight: 1.08, marginBottom: 16, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
+  subtitle: { fontSize: 'clamp(16px, 1.3vw, 18px)', color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 28, maxWidth: '62ch' },
+  sh: { fontSize: 'clamp(24px, 2.4vw, 30px)', fontWeight: 400, color: 'var(--text-h)', marginTop: 8, marginBottom: 10, lineHeight: 1.2, fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' },
+  ss: { fontSize: 16, color: 'var(--text-p)', marginBottom: 24, lineHeight: 1.7, maxWidth: '65ch' },
 };

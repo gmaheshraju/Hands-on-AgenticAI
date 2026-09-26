@@ -24,7 +24,7 @@ async function routeRequest(messages, tools, tierOverride) {
     max_tokens: tier.maxTokens,
   });
 
-  // Quality check — cascade up if confidence is low.
+  // Quality check: cascade up if confidence is low.
   // Pass the higher tier explicitly: re-classifying the same input
   // would pick the same tier and recurse forever.
   if (response.confidence < 0.7 && complexity !== 'complex') {
@@ -314,7 +314,7 @@ function Tab3() {
       />
 
       <Insight tag="Architecture signal">
-        The critical design question behind caching: &quot;How do you handle cache invalidation for AI responses?&quot; The answer: TTL-based expiry (1-4 hours for most support use cases), plus event-driven invalidation when the underlying data changes (product update, policy change). Tag cached responses with the source document version. When the source updates, invalidate all cache entries derived from it. This is the same pattern as CDN cache invalidation -- the hard part is tracking provenance, not the cache itself.
+        The design question behind caching: &quot;How do you handle cache invalidation for AI responses?&quot; The answer: TTL-based expiry (1-4 hours for most support use cases), plus event-driven invalidation when the underlying data changes (product update, policy change). Tag cached responses with the source document version. When the source updates, invalidate all cache entries derived from it. This is the same pattern as CDN cache invalidation -- the hard part is tracking provenance, not the cache itself.
       </Insight>
     </FadeIn>
   );
@@ -421,16 +421,16 @@ export default function CostLatencyEngineering() {
 
       <Diagram
       svg={costLatencySvg}
-      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/11-cost-latency</code> &mdash; the seven steps of <code>runOptimizedPipeline</code> in the order the code runs them, with the semantic cache first, so a hit short-circuits and that turn is never compressed, never routed, never truncated. Every element traces to a line in that source tree.</>}
+      caption={<><strong>This is the architecture of the working code</strong> in <code>projects/11-cost-latency</code>: the seven steps of <code>runOptimizedPipeline</code> in the order the code runs them, with the semantic cache first, so a hit short-circuits and that turn is never compressed, never routed, never truncated. Every element traces to a line in that source tree.</>}
       source="tree/main/projects/11-cost-latency"
       facts="blob/main/docs/diagrams/cost_latency_v1/FACTS.md"
       repo="https://github.com/gmaheshraju/Hands-on-AgenticAI"
       />
 
-      <div style={styles.tabWrap}>
+      <div className="tab-nav post-tabs" role="tablist">
         {TABS.map((t, i) => (
           <button key={t} onClick={() => setTab(i)}
-            style={{ ...styles.tabBtn, ...(tab === i ? styles.tabActive : {}) }}>
+            role="tab" aria-selected={tab === i} className={`tab-nav__btn${tab === i ? ' tab-nav__btn--active' : ''}`}>
             {t}
           </button>
         ))}
@@ -456,11 +456,8 @@ export default function CostLatencyEngineering() {
 const styles = {
   back: { fontSize: 12, color: 'var(--text-muted)', textDecoration: 'none', fontFamily: 'var(--font-mono)' },
   eyebrow: { fontSize: 11, fontWeight: 500, color: 'var(--text-accent)', letterSpacing: '0.08em', marginBottom: 8, textTransform: 'uppercase', fontFamily: 'var(--font-mono)' },
-  h1: { fontSize: 'clamp(28px, 5vw, 44px)', fontWeight: 400, color: 'var(--text-h)', lineHeight: 1.12, marginBottom: 16, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
-  subtitle: { fontSize: 15, color: 'var(--text-p)', lineHeight: 1.75, marginBottom: 32 },
-  tabWrap: { display: 'flex', flexWrap: 'wrap', gap: 4, marginBottom: 28, borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', paddingBottom: 12 },
-  tabBtn: { fontSize: 12, fontWeight: 500, color: 'var(--text-muted)', background: 'none', border: 'none', padding: '6px 14px', borderRadius: 'var(--radius-full)', cursor: 'pointer', transition: 'all var(--dur) var(--ease)', fontFamily: 'var(--font-body)' },
-  tabActive: { color: 'var(--text-accent)', background: 'var(--bg-accent)' },
-  sh: { fontSize: 20, fontWeight: 600, color: 'var(--text-h)', marginBottom: 8, fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' },
-  ss: { fontSize: 14, color: 'var(--text-p)', lineHeight: 1.7, marginBottom: 20 },
+  h1: { fontSize: 'clamp(32px, 5vw, 48px)', fontWeight: 400, color: 'var(--text-h)', lineHeight: 1.08, marginBottom: 16, fontFamily: 'var(--font-display)', letterSpacing: '-0.02em' },
+  subtitle: { fontSize: 'clamp(16px, 1.3vw, 18px)', color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 28, maxWidth: '62ch' },
+  sh: { fontSize: 'clamp(24px, 2.4vw, 30px)', fontWeight: 400, color: 'var(--text-h)', marginTop: 8, marginBottom: 10, lineHeight: 1.2, fontFamily: 'var(--font-display)', letterSpacing: '-0.01em' },
+  ss: { fontSize: 16, color: 'var(--text-p)', marginBottom: 24, lineHeight: 1.7, maxWidth: '65ch' },
 };
