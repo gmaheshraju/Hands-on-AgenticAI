@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import Nav from './Nav';
 import PostFooterCTA from './PostFooterCTA';
+import PostToc from './PostToc';
 
 // Scroll progress for long posts. Written straight to the DOM once per frame
 // (transform, not width) so scrolling never re-renders React or triggers layout.
@@ -61,6 +62,7 @@ export default function Layout({ children }) {
   return (
     <>
       {isBlogPost && <ReadingProgress />}
+      {isBlogPost && <PostToc />}
       <Nav />
       <main className={`layout-main${isBlogPost ? ' layout-main--post' : ''}`}>
         {children}
