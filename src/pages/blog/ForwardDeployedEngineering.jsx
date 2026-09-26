@@ -54,7 +54,7 @@ const overrides = {
                 'route.approval': 'two-step-cfo' },
   cindermill: { 'extract.tables': 'pdfplumber-grid', 'redact.pii': 'presidio-multi',
                 'ocr.scan': 'tesseract-lowdpi' },
-  delta:      { 'redact.pii': 'presidio-en', 'auth.sso': 'entra-oidc' },
+  dunmore:    { 'redact.pii': 'presidio-en', 'auth.sso': 'entra-oidc' },
 };
 
 // Invert the registry: capability -> which impl each customer chose.
@@ -283,13 +283,13 @@ function TeamStructurePanel() {
   return (
     <div>
       <SectionHead
-        title="Echo and Delta teams"
+        title="The two-team model: domain + engineering"
         desc="Palantir's FDE model runs on two complementary team types, like a miniature startup embedded inside each customer."
       />
 
       <FadeIn>
         <svg viewBox="0 0 760 280" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', marginBottom: 24, borderRadius: 'var(--radius-md)', background: 'var(--bg-code)', padding: 20 }}>
-          <text x="380" y="24" textAnchor="middle" fill="var(--text-muted)" fontSize="11" fontFamily="var(--font-mono)">ECHO + ANTHROPIC TEAM MODEL</text>
+          <text x="380" y="24" textAnchor="middle" fill="var(--text-muted)" fontSize="11" fontFamily="var(--font-mono)">DOMAIN + ENGINEERING TEAM MODEL</text>
 
           {/* Echo Team */}
           <rect x="30" y="50" width="330" height="200" rx="12" fill="var(--bg-card)" stroke="var(--text-accent)" strokeWidth="1.5" />
@@ -305,9 +305,9 @@ function TeamStructurePanel() {
           <rect x="50" y="218" width="290" height="22" rx="4" fill="var(--bg-accent)" />
           <text x="195" y="233" textAnchor="middle" fill="var(--text-accent)" fontSize="10" fontWeight="600" fontFamily="var(--font-mono)">IDENTIFIES WHERE VALUE LIVES</text>
 
-          {/* Delta Team */}
+          {/* Engineering Team */}
           <rect x="400" y="50" width="330" height="200" rx="12" fill="var(--bg-card)" stroke="var(--border)" strokeWidth="1.5" />
-          <text x="565" y="74" textAnchor="middle" fill="var(--text-h)" fontSize="13" fontWeight="600" fontFamily="var(--font-display)">Delta Team</text>
+          <text x="565" y="74" textAnchor="middle" fill="var(--text-h)" fontSize="13" fontWeight="600" fontFamily="var(--font-display)">Engineering Team</text>
           <text x="565" y="92" textAnchor="middle" fill="var(--text-muted)" fontSize="10" fontFamily="var(--font-mono)">rapid prototypers &bull; &ldquo;pain eaters&rdquo;</text>
 
           <text x="420" y="120" fill="var(--text-p)" fontSize="11" fontFamily="var(--font-body)">&#8227; Highly efficient software engineers</text>
@@ -335,24 +335,24 @@ function TeamStructurePanel() {
         </svg>
       </FadeIn>
 
-      <FadeIn><Decision question="How do Echo and Delta teams collaborate?">
+      <FadeIn><Decision question="How do the domain and engineering teams collaborate?">
         <Pill type="green">Echo finds the problem</Pill> Echo team members have lived the client&rsquo;s reality. A former military intelligence officer knows exactly which analyst workflows are broken. A former hospital administrator knows which patient data flows are manual. They&rsquo;re hired because they&rsquo;re domain rebels: people who see what&rsquo;s broken and believe technology can fix it.
         <br /><br />
-        <Pill type="amber">Delta builds the solution</Pill> Delta engineers take Echo&rsquo;s insights and build functional prototypes fast. Working code, not beautiful code. A demo in days, not months. The prototype proves value to the executive sponsor, which funds deeper engagement.
+        <Pill type="amber">Engineering builds the solution</Pill> The engineers take Echo&rsquo;s insights and build functional prototypes fast. Working code, not beautiful code. A demo in days, not months. The prototype proves value to the executive sponsor, which funds deeper engagement.
         <br /><br />
-        <Pill type="green">Together: a startup inside the customer</Pill> Echo handles the &ldquo;what&rdquo; and &ldquo;why.&rdquo; Delta handles the &ldquo;how&rdquo; and &ldquo;when.&rdquo; Initial results arrive within months, not the multi-year timelines of traditional enterprise software.
+        <Pill type="green">Together: a startup inside the customer</Pill> Echo handles the &ldquo;what&rdquo; and &ldquo;why.&rdquo; The engineering team handles the &ldquo;how&rdquo; and &ldquo;when.&rdquo; Initial results arrive within months, not the multi-year timelines of traditional enterprise software.
       </Decision></FadeIn>
 
       <FadeIn>
         <Insight tag="Key insight">
-          Reference this model when discussing how to structure customer-engineering teams. The Echo/Delta split is a concrete alternative to &ldquo;we assign a solutions engineer.&rdquo; It shows you understand that domain discovery and rapid engineering are different skills that work best as separate, paired roles.
+          Reference this model when discussing how to structure customer-engineering teams. The domain/engineering split is a concrete alternative to &ldquo;we assign a solutions engineer.&rdquo; It shows you understand that domain discovery and rapid engineering are different skills that work best as separate, paired roles.
         </Insight>
       </FadeIn>
 
       <FadeIn><Decision question="What makes a great FDE hire?">
         <Pill type="green">For Echo roles</Pill> Former practitioners from the target domain who are technically curious. Ex-military intelligence analysts. Healthcare data scientists. Financial compliance officers. They must be &ldquo;heretics&rdquo;: people who are frustrated with the status quo and believe in technology-driven change.
         <br /><br />
-        <Pill type="green">For Delta roles</Pill> Strong engineers who thrive in ambiguity. They write working code fast, not perfect code slowly. Comfortable with imperfect requirements, shifting priorities, and demo-driven development. High pain tolerance for messy customer environments.
+        <Pill type="green">For engineering roles</Pill> Strong engineers who thrive in ambiguity. They write working code fast, not perfect code slowly. Comfortable with imperfect requirements, shifting priorities, and demo-driven development. High pain tolerance for messy customer environments.
         <br /><br />
         <Pill type="red">Anti-pattern</Pill> Engineers who optimize for code quality over speed. Someone who wants a clear spec before writing line one won&rsquo;t survive the FDE environment. Also: engineers who can&rsquo;t communicate with non-technical stakeholders.
       </Decision></FadeIn>
@@ -574,7 +574,7 @@ function AppliedPatternsPanel() {
       </FadeIn>
 
       <FadeIn><Decision question="Org design: 'How would you structure an AI engineering team?'">
-        <Pill type="green">Reference Echo/Delta</Pill> &ldquo;I&rsquo;d consider Palantir&rsquo;s Echo/Delta model. Echo team members are domain experts from the customer&rsquo;s field; they know what problems are worth solving. Delta engineers are rapid prototypers who build working solutions fast. Together they operate like a mini startup inside the customer.&rdquo;
+        <Pill type="green">Reference the two-team model</Pill> &ldquo;I&rsquo;d consider Palantir&rsquo;s two-team model. Echo team members are domain experts from the customer&rsquo;s field; they know what problems are worth solving. Paired engineers are rapid prototypers who build working solutions fast. Together they operate like a mini startup inside the customer.&rdquo;
         <br /><br />
         <Pill type="amber">Address the feedback loop</Pill> &ldquo;Key point: there must be a product team back at HQ whose job is to absorb patterns from FDE engagements. Without this, you&rsquo;re running a consulting firm. With it, every customer engagement makes the product better for all customers.&rdquo;
         <br /><br />

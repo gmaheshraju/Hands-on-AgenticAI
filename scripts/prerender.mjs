@@ -24,7 +24,7 @@ import {
   ROUTES,
   SITE_URL,
   AUTHOR,
-  OG_IMAGE,
+  ogImageFor,
   fullTitle,
   canonicalFor,
 } from '../src/seo/routes.js';
@@ -52,6 +52,7 @@ function buildHead(html, route) {
   const description = escapeAttr(route.description);
   const canonical = canonicalFor(route);
   const isPost = route.path.startsWith('/blog/');
+  const image = ogImageFor(route);
 
   let out = html;
   out = replaceTag(out, /<title>[^<]*<\/title>/, `<title>${title}</title>`);
@@ -96,6 +97,17 @@ function buildHead(html, route) {
     `<meta name="twitter:description" content="${description}" />`,
   );
 
+  out = replaceTag(
+    out,
+    /<meta\s+property="og:image"[^>]*>/,
+    `<meta property="og:image" content="${image}" />\n    <meta property="og:image:width" content="1200" />\n    <meta property="og:image:height" content="630" />`,
+  );
+  out = replaceTag(
+    out,
+    /<meta\s+name="twitter:image"[^>]*>/,
+    `<meta name="twitter:image" content="${image}" />`,
+  );
+
   // Article schema on posts, so each one can stand alone in search results
   // rather than inheriting only the site-level Person schema.
   if (isPost) {
@@ -105,7 +117,7 @@ function buildHead(html, route) {
       headline: route.title,
       description: route.description,
       url: canonical,
-      image: OG_IMAGE,
+      image,
       author: { '@type': 'Person', name: AUTHOR, url: SITE_URL },
       publisher: { '@type': 'Person', name: AUTHOR, url: SITE_URL },
       mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
