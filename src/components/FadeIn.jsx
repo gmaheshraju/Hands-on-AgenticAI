@@ -32,8 +32,8 @@ export default function FadeIn({ children, delay = 0, className }) {
           observer.disconnect();
         }
       },
-      // Start slightly before the element enters, so fast scrolling never lands on a blank gap.
-      { rootMargin: '0px 0px 12% 0px' }
+      // Start well before the element enters (40% of a screen), so a fast wheel flick never lands on a blank gap.
+      { rootMargin: '0px 0px 40% 0px' }
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -45,7 +45,7 @@ export default function FadeIn({ children, delay = 0, className }) {
     : {
         opacity: 1,
         transform: 'none',
-        transition: `opacity 0.45s var(--ease) ${Math.min(delay, 240)}ms, transform 0.45s var(--ease) ${Math.min(delay, 240)}ms`,
+        transition: `opacity 0.35s var(--ease) ${Math.min(delay, 120)}ms, transform 0.35s var(--ease) ${Math.min(delay, 120)}ms`,
       };
 
   return (
