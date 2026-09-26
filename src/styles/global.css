@@ -1103,3 +1103,30 @@ html { scroll-behavior: smooth; }
   color: var(--text-accent);
   border-left-color: var(--bg-accent-strong);
 }
+
+/* ═══════════════════════════════════════════
+   BLOG INDEX GRID + VERY WIDE SCREENS
+   ═══════════════════════════════════════════ */
+
+/* 32" monitors: let the site use the width. Post pages keep their own column. */
+@media (min-width: 1800px) {
+  :root { --content-max: 1680px; }
+}
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+  gap: 16px;
+}
+.post-grid__cell { display: flex; }
+.post-grid__cell > .post-card { flex: 1; }
+
+.post-card:hover {
+  border-color: var(--border-strong) !important;
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.post-card:hover .post-card__arrow {
+  color: var(--text-accent) !important;
+  transform: translateX(4px);
+}

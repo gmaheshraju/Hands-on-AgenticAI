@@ -1,12 +1,16 @@
 import { Link } from 'react-router-dom';
 import FadeIn from '../components/FadeIn';
+import { ROUTES } from '../seo/routes';
+
+// Card descriptions come from the same place as each post's meta description,
+// so the index can never drift from what search results and link previews say.
+const descriptionFor = (slug) => ROUTES.find((r) => r.path === `/blog/${slug}`)?.description;
 
 const posts = [
   {
     slug: 'ai-agent-system-design',
     number: '01',
     title: 'AI Agent System Design',
-    subtitle: 'RAG pipelines, vector databases, function calling, evaluation loops — the full architecture of a production AI agent from ingestion to response.',
     tags: ['RAG', 'Vector DB', 'Function Calling', 'Evals', 'LLM Ops'],
     ready: true,
   },
@@ -14,7 +18,6 @@ const posts = [
     slug: 'agent-memory-architecture',
     number: '02',
     title: 'Agent Memory Architecture',
-    subtitle: 'Semantic vs episodic memory, context window management, retrieval patterns — how agents remember across sessions.',
     tags: ['Semantic Memory', 'Episodic', 'Context Window', 'Retrieval'],
     ready: true,
   },
@@ -22,7 +25,6 @@ const posts = [
     slug: 'agent-harness-loop-engineering',
     number: '03',
     title: 'Agent Harness & Loop Engineering',
-    subtitle: 'Orchestration loops, tracing, self-improvement, error recovery — the infrastructure that turns a prompt into a reliable agent.',
     tags: ['LLM Ops', 'Eval', 'Tracing', 'Loop Engineering'],
     ready: true,
   },
@@ -30,7 +32,6 @@ const posts = [
     slug: 'multi-agent-systems',
     number: '04',
     title: 'Multi-Agent Systems',
-    subtitle: 'Agent teams vs swarms, delegation patterns, shared memory, when single-agent beats multi-agent and vice versa.',
     tags: ['Agent Teams', 'Swarms', 'Delegation', 'Coordination'],
     ready: true,
   },
@@ -38,15 +39,13 @@ const posts = [
     slug: 'rag-pipeline-deep-dive',
     number: '05',
     title: 'RAG Pipeline Deep Dive',
-    subtitle: 'Chunking strategies, embedding models, hybrid search, reranking — building retrieval that actually works in production.',
     tags: ['Chunking', 'Embeddings', 'Hybrid Search', 'Reranking'],
     ready: true,
   },
   {
     slug: 'llm-ops',
     number: '06',
-    title: 'LLMOps — Production LLM Infrastructure',
-    subtitle: 'Model serving, cost routing, token budgeting, latency SLOs — the infrastructure that turns an LLM prototype into a system that handles 10M requests/day.',
+    title: 'LLMOps: Production LLM Infrastructure',
     tags: ['Model Serving', 'Cost Routing', 'Latency', 'Caching', 'Monitoring'],
     ready: true,
   },
@@ -54,7 +53,6 @@ const posts = [
     slug: 'ai-guardrails',
     number: '07',
     title: 'AI Guardrails & Safety',
-    subtitle: 'Prompt injection defense, PII filtering, output validation, content moderation — the security layer that separates a demo from production.',
     tags: ['Prompt Injection', 'PII', 'Content Moderation', 'Defense in Depth'],
     ready: true,
   },
@@ -62,7 +60,6 @@ const posts = [
     slug: 'evaluation-engineering',
     number: '08',
     title: 'Evaluation Engineering',
-    subtitle: 'LLM-as-judge, golden datasets, regression testing, human-in-the-loop — how to know if your AI system actually works, and catch when it silently breaks.',
     tags: ['LLM-as-Judge', 'Golden Datasets', 'Regression', 'SLOs', 'HITL'],
     ready: true,
   },
@@ -70,7 +67,6 @@ const posts = [
     slug: 'fine-tuning-vs-rag',
     number: '09',
     title: 'Fine-tuning vs Prompting vs RAG',
-    subtitle: 'The decision framework every AI architect needs — when to prompt engineer, when to retrieve, when to fine-tune, and when to combine them.',
     tags: ['Fine-tuning', 'RAG', 'Prompt Engineering', 'LoRA', 'Cost Routing'],
     ready: true,
   },
@@ -78,7 +74,6 @@ const posts = [
     slug: 'tool-use-function-calling',
     number: '10',
     title: 'Tool Use & Function Calling Patterns',
-    subtitle: 'The engineering of reliable tool dispatch — schema design, validation, retry logic, permission models, and sandboxing.',
     tags: ['Tool Use', 'Function Calling', 'Sandboxing', 'Permissions', 'Error Recovery'],
     ready: true,
   },
@@ -86,7 +81,6 @@ const posts = [
     slug: 'cost-latency-engineering',
     number: '11',
     title: 'Cost & Latency Engineering',
-    subtitle: 'Your agent costs $2 per conversation. Your boss wants $0.15. Model routing, semantic caching, prompt compression, and the metrics that matter.',
     tags: ['Model Routing', 'Caching', 'Token Budgets', 'Latency', 'Cost Optimization'],
     ready: true,
   },
@@ -94,7 +88,6 @@ const posts = [
     slug: 'ai-ux-patterns',
     number: '12',
     title: 'AI UX Patterns',
-    subtitle: 'Streaming, confidence indicators, human-in-the-loop flows, error states — the product engineering that makes AI feel trustworthy.',
     tags: ['Streaming', 'Confidence', 'HITL', 'Trust', 'Error Recovery'],
     ready: true,
   },
@@ -102,7 +95,6 @@ const posts = [
     slug: 'responsible-ai',
     number: '13',
     title: 'Responsible AI & Governance',
-    subtitle: 'Bias detection, fairness metrics, red-teaming, model cards, EU AI Act — the governance that lets you ship AI without legal landmines.',
     tags: ['Bias', 'Fairness', 'Red-teaming', 'EU AI Act', 'Governance'],
     ready: true,
   },
@@ -110,15 +102,13 @@ const posts = [
     slug: 'forward-deployed-engineering',
     number: '14',
     title: 'Forward Deployed Engineering',
-    subtitle: 'The Palantir-pioneered model reshaping AI delivery — embedded engineers, Echo/Anthropic teams, demo-driven development, and the gravel-to-highway playbook.',
-    tags: ['FDE', 'Palantir', 'AI Delivery', 'Echo/Anthropic', 'Go-to-Market'],
+    tags: ['FDE', 'Palantir', 'AI Delivery', 'Two-Team Model', 'Go-to-Market'],
     ready: true,
   },
   {
     slug: 'context-engineering',
     number: '15',
     title: 'Context Engineering',
-    subtitle: 'The discipline replacing prompt engineering — what goes into the context window, in what order, with what token budget, and why getting it wrong silently kills performance.',
     tags: ['Token Budget', 'Source Priority', 'Assembly', 'Caching', 'Lost in the Middle'],
     ready: true,
   },
@@ -126,7 +116,6 @@ const posts = [
     slug: 'solo-developer-advantage',
     number: '16',
     title: 'The Solo Developer Advantage',
-    subtitle: 'Why one developer with AI beats a team of twenty — and how engineers from anywhere in the world are building products that compete with giants.',
     tags: ['Solo Dev', 'AI Leverage', 'New Moats', 'Revenue/Employee', 'Career Strategy'],
     ready: true,
   },
@@ -142,7 +131,7 @@ export default function Blog() {
           <em style={styles.h1em}>Playbook</em>
         </h1>
         <p style={styles.tagline}>
-          Production architecture patterns for AI agents, RAG pipelines, and LLM systems — with real-world architecture diagrams and decision frameworks.
+          Production architecture patterns for AI agents, RAG pipelines, and LLM systems, with real-world architecture diagrams and decision frameworks.
         </p>
         <p style={styles.heroCta}>
           Building something with AI agents?{' '}
@@ -158,9 +147,9 @@ export default function Blog() {
 
       <section style={styles.postsSection}>
         <h2 style={styles.sectionTitle}>Posts</h2>
-        <div style={styles.grid}>
+        <div className="post-grid">
           {posts.map((p, i) => (
-            <FadeIn key={p.slug} delay={i * 60}>
+            <FadeIn key={p.slug} delay={(i % 4) * 40} className="post-grid__cell">
               <PostCard {...p} />
             </FadeIn>
           ))}
@@ -170,12 +159,12 @@ export default function Blog() {
   );
 }
 
-function PostCard({ slug, number, title, subtitle, tags, ready }) {
+function PostCard({ slug, number, title, tags, ready }) {
   const Wrapper = ready ? Link : 'div';
   const wrapperProps = ready ? { to: `/blog/${slug}` } : {};
 
   return (
-    <Wrapper {...wrapperProps} style={{ ...styles.card, opacity: ready ? 1 : 0.5 }}>
+    <Wrapper {...wrapperProps} className="post-card" style={{ ...styles.card, opacity: ready ? 1 : 0.5 }}>
       <div style={styles.accent} />
       <div style={styles.content}>
         <div style={styles.header}>
@@ -183,7 +172,7 @@ function PostCard({ slug, number, title, subtitle, tags, ready }) {
           <h3 style={styles.title}>{title}</h3>
           {!ready && <span style={styles.soon}>Coming</span>}
         </div>
-        <p style={styles.subtitle}>{subtitle}</p>
+        <p style={styles.subtitle}>{descriptionFor(slug)}</p>
         <div style={styles.meta}>
           {tags && (
             <div style={styles.tags}>
@@ -194,7 +183,7 @@ function PostCard({ slug, number, title, subtitle, tags, ready }) {
           )}
         </div>
       </div>
-      {ready && <span style={styles.arrow}>&rarr;</span>}
+      {ready && <span className="post-card__arrow" style={styles.arrow}>&rarr;</span>}
     </Wrapper>
   );
 }
@@ -218,7 +207,7 @@ const styles = {
     fontFamily: 'var(--font-mono)',
   },
   h1: {
-    fontSize: 48,
+    fontSize: 'clamp(40px, 4.6vw, 64px)',
     fontWeight: 400,
     color: 'var(--text-h)',
     lineHeight: 1.08,
@@ -231,10 +220,11 @@ const styles = {
     color: 'var(--text-accent)',
   },
   tagline: {
-    fontSize: 15,
+    fontSize: 'clamp(16px, 1.25vw, 19px)',
     color: 'var(--text-p)',
-    lineHeight: 1.75,
+    lineHeight: 1.65,
     marginBottom: 16,
+    maxWidth: '62ch',
   },
   link: {
     color: 'var(--text-accent)',
@@ -263,11 +253,6 @@ const styles = {
     marginBottom: 16,
     fontFamily: 'var(--font-mono)',
   },
-  grid: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 10,
-  },
   card: {
     display: 'flex',
     alignItems: 'stretch',
@@ -287,14 +272,16 @@ const styles = {
   },
   content: {
     flex: 1,
-    padding: '18px 20px',
+    padding: '22px 44px 20px 22px',
     minWidth: 0,
+    display: 'flex',
+    flexDirection: 'column',
   },
   header: {
     display: 'flex',
-    alignItems: 'baseline',
-    gap: 10,
-    marginBottom: 6,
+    flexDirection: 'column',
+    gap: 6,
+    marginBottom: 10,
   },
   number: {
     fontSize: 11,
@@ -305,8 +292,8 @@ const styles = {
     flexShrink: 0,
   },
   title: {
-    fontSize: 17,
-    fontWeight: 600,
+    fontSize: 23,
+    fontWeight: 400,
     color: 'var(--text-h)',
     lineHeight: 1.3,
     fontFamily: 'var(--font-display)',
@@ -321,15 +308,16 @@ const styles = {
     flexShrink: 0,
   },
   subtitle: {
-    fontSize: 13,
+    fontSize: 14.5,
     color: 'var(--text-p)',
-    lineHeight: 1.65,
-    marginBottom: 12,
+    lineHeight: 1.6,
+    marginBottom: 16,
   },
   meta: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginTop: 'auto',
   },
   tags: {
     display: 'flex',
@@ -347,9 +335,9 @@ const styles = {
     letterSpacing: '0.01em',
   },
   arrow: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0 16px',
+    position: 'absolute',
+    top: 20,
+    right: 18,
     fontSize: 16,
     color: 'var(--text-muted)',
     transition: 'transform var(--dur) var(--ease)',
