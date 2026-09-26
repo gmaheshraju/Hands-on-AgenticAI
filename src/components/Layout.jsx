@@ -38,7 +38,12 @@ function useTabScrollReset(enabled) {
     if (!enabled) return;
     const onClick = (e) => {
       const tabs = e.target.closest?.('.post-tabs');
-      if (!tabs || !e.target.closest('button')) return;
+      const btn = e.target.closest?.('button');
+      if (!tabs || !btn) return;
+      // On phones the tab row scrolls sideways: keep the chosen tab fully in view.
+      if (tabs.scrollWidth > tabs.clientWidth) {
+        tabs.scrollTo({ left: btn.offsetLeft - tabs.clientWidth / 2 + btn.offsetWidth / 2, behavior: 'smooth' });
+      }
       // Wait one frame so React has swapped the visible panel.
       requestAnimationFrame(() => {
         let panel = tabs.nextElementSibling;

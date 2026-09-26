@@ -1017,6 +1017,14 @@ html { scroll-behavior: smooth; }
 @media (min-width: 900px) {
   .post-tabs { margin-inline: 0; padding-inline: 0; }
 }
+/* On phones the tab row scrolls sideways; fade the right edge so hidden tabs are discoverable. */
+@media (max-width: 899px) {
+  .post-tabs {
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 48px), transparent);
+            mask-image: linear-gradient(90deg, #000 calc(100% - 48px), transparent);
+    padding-right: 48px;
+  }
+}
 
 .reading-progress {
   position: fixed;
