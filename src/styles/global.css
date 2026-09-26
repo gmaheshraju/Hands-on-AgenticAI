@@ -1009,9 +1009,8 @@ html { scroll-behavior: smooth; }
   position: sticky;
   top: 56px;
   z-index: 50;
-  background: var(--bg-nav);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  /* Opaque: text scrolling underneath must never show through the labels. */
+  background: var(--bg);
   margin-inline: calc(-1 * var(--page-gutter));
   padding-inline: var(--page-gutter);
 }
