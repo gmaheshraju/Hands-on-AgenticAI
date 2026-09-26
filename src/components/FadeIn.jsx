@@ -32,8 +32,8 @@ export default function FadeIn({ children, delay = 0, className }) {
           observer.disconnect();
         }
       },
-      // Start well before the element enters (40% of a screen), so a fast wheel flick never lands on a blank gap.
-      { rootMargin: '0px 0px 40% 0px' }
+      // Start well before the element enters (60% of a screen).
+      { rootMargin: '0px 0px 60% 0px' }
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -41,7 +41,8 @@ export default function FadeIn({ children, delay = 0, className }) {
 
   const style =
     phase === 'static' ? undefined
-    : phase === 'hidden' ? { opacity: 0, transform: 'translateY(12px)' }
+    // Never fully invisible: a scroll jump that outruns the observer lands on faint text, not a blank page.
+    : phase === 'hidden' ? { opacity: 0.3, transform: 'translateY(10px)' }
     : {
         opacity: 1,
         transform: 'none',
