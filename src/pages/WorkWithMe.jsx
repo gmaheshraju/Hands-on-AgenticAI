@@ -31,28 +31,28 @@ const services = [
     number: '01',
     title: 'AI Agent & RAG System Design',
     subtitle:
-      'Architecture and hands-on build of production agent systems — retrieval pipelines, tool use, memory, evaluation loops. From blank page to a system your team can run and extend.',
+      'Architecture and hands-on build of production agent systems: retrieval pipelines, tool use, memory, evaluation loops. From blank page to a system your team can run and extend.',
     tags: ['Agents', 'RAG', 'Tool Use', 'Memory', 'Evals'],
   },
   {
     number: '02',
     title: 'LLM System Review & Hardening',
     subtitle:
-      'Your prototype works in the demo and breaks in production. I audit the full stack — evals, guardrails, cost, latency, failure modes — and hand you a prioritized, concrete fix list.',
+      'Your prototype works in the demo and breaks in production. I audit the full stack (evals, guardrails, cost, latency, failure modes) and hand you a prioritized, concrete fix list.',
     tags: ['Architecture Review', 'Guardrails', 'Evaluation', 'Failure Modes'],
   },
   {
     number: '03',
     title: 'Cost & Latency Engineering',
     subtitle:
-      'Model routing, semantic caching, prompt compression, token budgeting. The same conversation at a fraction of the cost — with the metrics to prove it held.',
+      'Model routing, semantic caching, prompt compression, token budgeting. The same conversation at a fraction of the cost, with the metrics to prove it held.',
     tags: ['Model Routing', 'Caching', 'Token Budgets', 'Monitoring'],
   },
   {
     number: '04',
     title: 'Team Enablement',
     subtitle:
-      'Working sessions that move your engineers from prompt-and-pray to production discipline — context engineering, eval harnesses, agent loops — built on your codebase, not toy examples.',
+      'Working sessions that move your engineers from prompt-and-pray to production discipline (context engineering, eval harnesses, agent loops), built on your codebase, not toy examples.',
     tags: ['Workshops', 'Context Engineering', 'Eval Harnesses', 'Pairing'],
   },
 ];
@@ -61,7 +61,7 @@ const steps = [
   {
     number: '1',
     title: 'Intro call',
-    text: 'Thirty minutes, free. You describe the system or the problem; I tell you honestly whether I can help — and if I can’t, who might.',
+    text: 'Thirty minutes, free. You describe the system or the problem; I tell you honestly whether I can help, and if I can’t, who might.',
   },
   {
     number: '2',
@@ -71,7 +71,7 @@ const steps = [
   {
     number: '3',
     title: 'Build, review, hand off',
-    text: 'Working code, eval coverage, and architecture diagrams where every box cites the line of code it came from — so the documentation cannot quietly rot after I leave. Your team owns the system, not a dependency on me.',
+    text: 'Working code, eval coverage, and architecture diagrams where every box cites the line of code it came from, so the documentation cannot quietly rot after I leave. Your team owns the system, not a dependency on me.',
   },
 ];
 
@@ -80,6 +80,25 @@ const proof = [
   { stat: TOTALS.citations.toLocaleString(), label: `Cited elements across ${TOTALS.count} governed diagrams`, href: '/diagrams' },
   { stat: '24/5', label: 'Live production systems I run myself', href: null },
 ];
+
+// mailto: silently does nothing for visitors with no mail app configured (common on
+// work laptops), so the address is always one click from the clipboard as well.
+function CopyEmail() {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      track('email_copy_click');
+      setTimeout(() => setCopied(false), 2000);
+    } catch { /* clipboard blocked: the address is still visible on the page */ }
+  };
+  return (
+    <button type="button" onClick={copy} style={styles.ctaSecondary} aria-live="polite">
+      {copied ? 'Copied ✓' : 'Copy email'}
+    </button>
+  );
+}
 
 export default function WorkWithMe() {
   const [subject] = useState(inquirySubject);
@@ -97,8 +116,8 @@ export default function WorkWithMe() {
           <em style={styles.h1em}>survive production</em>
         </h1>
         <p style={styles.tagline}>
-          I design, build, and harden agentic AI systems — agents, RAG pipelines,
-          LLMOps — for teams that need them to work when real users show up.
+          I design, build, and harden agentic AI systems (agents, RAG pipelines,
+          LLMOps) for teams that need them to work when real users show up.
           Everything I recommend, I&rsquo;ve run in production myself.
         </p>
         <div style={styles.ctaRow}>
@@ -125,7 +144,7 @@ export default function WorkWithMe() {
         <h2 style={styles.sectionTitle}>What I Do</h2>
         <div style={styles.grid}>
           {services.map((s, i) => (
-            <FadeIn key={s.number} delay={i * 60}>
+            <FadeIn key={s.number} delay={i * 60} className="grid-cell">
               <div style={styles.card}>
                 <div style={styles.accent} />
                 <div style={styles.content}>
@@ -150,7 +169,7 @@ export default function WorkWithMe() {
         <h2 style={styles.sectionTitle}>Why Me</h2>
         <div style={styles.proofRow}>
           {proof.map((p, i) => (
-            <FadeIn key={p.label} delay={i * 60}>
+            <FadeIn key={p.label} delay={i * 60} className="grid-cell">
               {p.href ? (
                 <a
                   href={p.href}
@@ -191,7 +210,7 @@ export default function WorkWithMe() {
           </figure>
         </FadeIn>
         <p style={styles.proofNote}>
-          The playbook on this site isn&rsquo;t theory I collected — it&rsquo;s the
+          The playbook on this site isn&rsquo;t theory I collected. It&rsquo;s the
           decision frameworks behind systems I operate every day. You get the
           engineer who wrote it, embedded in your problem.
         </p>
@@ -201,7 +220,7 @@ export default function WorkWithMe() {
         <h2 style={styles.sectionTitle}>How It Works</h2>
         <div style={styles.stepsGrid}>
           {steps.map((s, i) => (
-            <FadeIn key={s.number} delay={i * 60}>
+            <FadeIn key={s.number} delay={i * 60} className="grid-cell">
               <div style={styles.stepCard}>
                 <span style={styles.stepNumber}>{s.number}</span>
                 <div>
@@ -219,8 +238,8 @@ export default function WorkWithMe() {
           Building something with <em style={styles.h1em}>AI agents?</em>
         </h2>
         <p style={styles.closerText}>
-          Tell me what you&rsquo;re trying to ship and where it hurts.
-          I read every message and reply within two working days.
+          Tell me what you&rsquo;re building, where it breaks today, and your timeline.
+          A few sentences is plenty. I read every message and reply within two working days.
         </p>
         <div style={styles.ctaRow}>
           <a
@@ -230,6 +249,7 @@ export default function WorkWithMe() {
           >
             {EMAIL}
           </a>
+          <CopyEmail />
           <a
             href={LINKEDIN}
             target="_blank"
@@ -271,7 +291,6 @@ const styles = {
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
     borderBottomColor: 'var(--border)',
-    maxWidth: 1200,
   },
   eyebrow: {
     fontSize: 11,
@@ -283,7 +302,7 @@ const styles = {
     fontFamily: 'var(--font-mono)',
   },
   h1: {
-    fontSize: 48,
+    fontSize: 'clamp(40px, 4.6vw, 60px)',
     fontWeight: 400,
     color: 'var(--text-h)',
     lineHeight: 1.08,
@@ -296,11 +315,11 @@ const styles = {
     color: 'var(--text-accent)',
   },
   tagline: {
-    fontSize: 15,
+    fontSize: 'clamp(16px, 1.25vw, 19px)',
     color: 'var(--text-p)',
-    lineHeight: 1.75,
-    marginBottom: 24,
-    maxWidth: 640,
+    lineHeight: 1.65,
+    marginBottom: 28,
+    maxWidth: '60ch',
   },
   ctaRow: {
     display: 'flex',
@@ -310,11 +329,11 @@ const styles = {
   },
   ctaPrimary: {
     display: 'inline-block',
-    padding: '10px 20px',
+    padding: '12px 22px',
     background: 'var(--bg-accent-strong)',
     color: 'var(--text-on-accent)',
     borderRadius: 'var(--radius-full)',
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: 600,
     textDecoration: 'none',
     letterSpacing: '0.01em',
@@ -322,16 +341,18 @@ const styles = {
   },
   ctaSecondary: {
     display: 'inline-block',
-    padding: '9px 20px',
+    padding: '11px 22px',
     background: 'transparent',
     color: 'var(--text-h)',
     border: '1px solid var(--border-strong)',
     borderRadius: 'var(--radius-full)',
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: 500,
     textDecoration: 'none',
     letterSpacing: '0.01em',
     transition: 'all var(--dur) var(--ease)',
+    cursor: 'pointer',
+    fontFamily: 'inherit',
   },
   section: {
     marginBottom: '3.5rem',
@@ -346,9 +367,9 @@ const styles = {
     fontFamily: 'var(--font-mono)',
   },
   grid: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 10,
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 420px), 1fr))',
+    gap: 16,
   },
   card: {
     display: 'flex',
@@ -358,6 +379,7 @@ const styles = {
     borderRadius: 'var(--radius-md)',
     position: 'relative',
     overflow: 'hidden',
+    flex: 1,
   },
   accent: {
     width: 3,
@@ -367,14 +389,16 @@ const styles = {
   },
   content: {
     flex: 1,
-    padding: '18px 20px',
+    padding: '24px 26px',
     minWidth: 0,
+    display: 'flex',
+    flexDirection: 'column',
   },
   header: {
     display: 'flex',
-    alignItems: 'baseline',
-    gap: 10,
-    marginBottom: 6,
+    flexDirection: 'column',
+    gap: 6,
+    marginBottom: 10,
   },
   number: {
     fontSize: 11,
@@ -385,20 +409,21 @@ const styles = {
     flexShrink: 0,
   },
   title: {
-    fontSize: 17,
-    fontWeight: 600,
+    fontSize: 24,
+    fontWeight: 400,
     color: 'var(--text-h)',
     lineHeight: 1.3,
     fontFamily: 'var(--font-display)',
     letterSpacing: '-0.01em',
   },
   subtitle: {
-    fontSize: 13,
+    fontSize: 15,
     color: 'var(--text-p)',
     lineHeight: 1.65,
-    marginBottom: 12,
+    marginBottom: 18,
   },
   tags: {
+    marginTop: 'auto',
     display: 'flex',
     flexWrap: 'wrap',
     gap: 5,
@@ -426,27 +451,27 @@ const styles = {
     background: 'var(--bg-card)',
     border: '1px solid var(--border)',
     borderRadius: 'var(--radius-md)',
-    padding: '18px 20px',
-    height: '100%',
+    padding: '22px 24px',
+    flex: 1,
   },
   proofStat: {
-    fontSize: 32,
+    fontSize: 40,
     fontWeight: 400,
     color: 'var(--text-accent)',
     fontFamily: 'var(--font-display)',
     lineHeight: 1,
   },
   proofLabel: {
-    fontSize: 12,
+    fontSize: 14,
     color: 'var(--text-p)',
     lineHeight: 1.5,
   },
   proofNote: {
-    fontSize: 13,
-    color: 'var(--text-muted)',
+    fontSize: 15,
+    color: 'var(--text-p)',
     lineHeight: 1.7,
-    fontStyle: 'italic',
-    maxWidth: 640,
+    maxWidth: '65ch',
+    marginTop: 20,
   },
   stepsGrid: {
     display: 'grid',
@@ -459,11 +484,11 @@ const styles = {
     background: 'var(--bg-card)',
     border: '1px solid var(--border)',
     borderRadius: 'var(--radius-md)',
-    padding: '18px 20px',
-    height: '100%',
+    padding: '22px 24px',
+    flex: 1,
   },
   stepNumber: {
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: 400,
     color: 'var(--text-accent)',
     fontFamily: 'var(--font-display)',
@@ -471,14 +496,14 @@ const styles = {
     flexShrink: 0,
   },
   stepTitle: {
-    fontSize: 15,
-    fontWeight: 600,
+    fontSize: 20,
+    fontWeight: 400,
     color: 'var(--text-h)',
     fontFamily: 'var(--font-display)',
     marginBottom: 4,
   },
   stepText: {
-    fontSize: 13,
+    fontSize: 14.5,
     color: 'var(--text-p)',
     lineHeight: 1.65,
   },
@@ -486,12 +511,11 @@ const styles = {
     background: 'var(--bg-accent)',
     border: '1px solid var(--border)',
     borderRadius: 'var(--radius-lg)',
-    padding: '32px 28px',
+    padding: 'clamp(28px, 4vw, 48px)',
     marginBottom: '3.5rem',
-    maxWidth: 1200,
   },
   closerTitle: {
-    fontSize: 28,
+    fontSize: 'clamp(28px, 3vw, 40px)',
     fontWeight: 400,
     color: 'var(--text-h)',
     fontFamily: 'var(--font-display)',
@@ -499,10 +523,10 @@ const styles = {
     marginBottom: 10,
   },
   closerText: {
-    fontSize: 14,
+    fontSize: 16,
     color: 'var(--text-p)',
     lineHeight: 1.7,
-    marginBottom: 20,
-    maxWidth: 560,
+    marginBottom: 24,
+    maxWidth: '60ch',
   },
 };
