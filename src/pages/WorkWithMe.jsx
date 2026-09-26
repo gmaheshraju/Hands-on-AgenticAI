@@ -83,19 +83,38 @@ const proof = [
 
 // mailto: silently does nothing for visitors with no mail app configured (common on
 // work laptops), so the address is always one click from the clipboard as well.
+function legacyCopy(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.setAttribute('readonly', '');
+  ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
+  document.body.appendChild(ta);
+  ta.select();
+  let ok = false;
+  try { ok = document.execCommand('copy'); } catch { ok = false; }
+  ta.remove();
+  return ok;
+}
+
 function CopyEmail() {
-  const [copied, setCopied] = useState(false);
+  // 'idle' | 'copied' | 'manual' (both clipboard paths refused: show the address to copy by hand)
+  const [state, setState] = useState('idle');
   const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(EMAIL);
-      setCopied(true);
-      track('email_copy_click');
-      setTimeout(() => setCopied(false), 2000);
-    } catch { /* clipboard blocked: the address is still visible on the page */ }
+    track('email_copy_click');
+    let ok = false;
+    try { await navigator.clipboard.writeText(EMAIL); ok = true; } catch { ok = legacyCopy(EMAIL); }
+    setState(ok ? 'copied' : 'manual');
+    if (ok) setTimeout(() => setState('idle'), 2000);
   };
+  const label = state === 'copied' ? 'Copied ✓' : state === 'manual' ? EMAIL : 'Copy email';
   return (
-    <button type="button" onClick={copy} style={styles.ctaSecondary} aria-live="polite">
-      {copied ? 'Copied ✓' : 'Copy email'}
+    <button
+      type="button"
+      onClick={copy}
+      style={{ ...styles.ctaSecondary, userSelect: state === 'manual' ? 'all' : 'none' }}
+      aria-live="polite"
+    >
+      {label}
     </button>
   );
 }
@@ -368,7 +387,7 @@ const styles = {
   },
   grid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 420px), 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 480px), 1fr))',
     gap: 16,
   },
   card: {
