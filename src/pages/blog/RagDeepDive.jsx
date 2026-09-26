@@ -229,8 +229,8 @@ function ChunkComparisonDiagram() {
 
         <text x="36" y="220" fontSize="8" fontWeight="600" fill="var(--text-success)" fontFamily={f}>+ Simple, predictable size</text>
         <text x="36" y="235" fontSize="8" fontWeight="600" fill="var(--text-success)" fontFamily={f}>+ Uniform embedding quality</text>
-        <text x="36" y="255" fontSize="8" fontWeight="600" fill="var(--text-error)" fontFamily={f}>− Breaks semantic units</text>
-        <text x="36" y="270" fontSize="8" fontWeight="600" fill="var(--text-error)" fontFamily={f}>− Lost context at boundaries</text>
+        <text x="36" y="255" fontSize="8" fontWeight="600" fill="var(--text-danger)" fontFamily={f}>− Breaks semantic units</text>
+        <text x="36" y="270" fontSize="8" fontWeight="600" fill="var(--text-danger)" fontFamily={f}>− Lost context at boundaries</text>
 
         {/* Recursive */}
         <rect x="255" y="50" width="210" height="240" rx="10" fill="var(--bg-card)" stroke="var(--border)" strokeWidth="0.8" />
@@ -246,8 +246,8 @@ function ChunkComparisonDiagram() {
 
         <text x="271" y="220" fontSize="8" fontWeight="600" fill="var(--text-success)" fontFamily={f}>+ Respects natural boundaries</text>
         <text x="271" y="235" fontSize="8" fontWeight="600" fill="var(--text-success)" fontFamily={f}>+ Best general-purpose choice</text>
-        <text x="271" y="255" fontSize="8" fontWeight="600" fill="var(--text-error)" fontFamily={f}>− Variable chunk sizes</text>
-        <text x="271" y="270" fontSize="8" fontWeight="600" fill="var(--text-error)" fontFamily={f}>− Long paragraphs still split</text>
+        <text x="271" y="255" fontSize="8" fontWeight="600" fill="var(--text-danger)" fontFamily={f}>− Variable chunk sizes</text>
+        <text x="271" y="270" fontSize="8" fontWeight="600" fill="var(--text-danger)" fontFamily={f}>− Long paragraphs still split</text>
 
         {/* Semantic */}
         <rect x="490" y="50" width="210" height="240" rx="10" fill="var(--bg-card)" stroke="var(--border)" strokeWidth="0.8" />
@@ -263,8 +263,8 @@ function ChunkComparisonDiagram() {
 
         <text x="506" y="220" fontSize="8" fontWeight="600" fill="var(--text-success)" fontFamily={f}>+ Best retrieval quality</text>
         <text x="506" y="235" fontSize="8" fontWeight="600" fill="var(--text-success)" fontFamily={f}>+ Topic-coherent chunks</text>
-        <text x="506" y="255" fontSize="8" fontWeight="600" fill="var(--text-error)" fontFamily={f}>− 2-3x slower to ingest</text>
-        <text x="506" y="270" fontSize="8" fontWeight="600" fill="var(--text-error)" fontFamily={f}>− Highly variable sizes</text>
+        <text x="506" y="255" fontSize="8" fontWeight="600" fill="var(--text-danger)" fontFamily={f}>− 2-3x slower to ingest</text>
+        <text x="506" y="270" fontSize="8" fontWeight="600" fill="var(--text-danger)" fontFamily={f}>− Highly variable sizes</text>
       </svg>
     </div>
   );

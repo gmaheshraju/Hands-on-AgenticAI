@@ -77,7 +77,7 @@ function Thesis() {
             <text x="170" y="52" textAnchor="middle" fill="var(--text-h)" fontSize="14" fontWeight="700" fontFamily="var(--font-display)">2022: Building a SaaS Product</text>
             {['Frontend Dev ($120K)', 'Backend Dev ($140K)', 'DevOps ($130K)', 'Designer ($110K)', 'PM ($130K)', 'QA Engineer ($100K)', 'Data Engineer ($135K)', 'Security ($140K)'].map((role, i) => (
               <g key={role}>
-                <rect x="40" y={68 + i * 28} width="260" height="22" rx="4" fill="var(--bg-accent-subtle)" />
+                <rect x="40" y={68 + i * 28} width="260" height="22" rx="4" fill="var(--bg-accent)" />
                 <text x="170" y={83 + i * 28} textAnchor="middle" fill="var(--text-p)" fontSize="11" fontFamily="var(--font-mono)">{role}</text>
               </g>
             ))}
@@ -90,7 +90,7 @@ function Thesis() {
             {/* 2026 side */}
             <rect x="380" y="20" width="300" height="280" rx="12" fill="var(--bg-code)" stroke="var(--text-accent)" strokeWidth="2" />
             <text x="530" y="52" textAnchor="middle" fill="var(--text-h)" fontSize="14" fontWeight="700" fontFamily="var(--font-display)">2026: Same Product</text>
-            <rect x="400" y="72" width="260" height="40" rx="8" fill="var(--bg-accent-subtle)" />
+            <rect x="400" y="72" width="260" height="40" rx="8" fill="var(--bg-accent)" />
             <text x="530" y="96" textAnchor="middle" fill="var(--text-accent)" fontSize="13" fontWeight="600" fontFamily="var(--font-display)">You (Domain Expert)</text>
             {['AI Coding Assistant', 'AI Code Review & QA', 'AI DevOps & Infra', 'AI Design & Copy', 'Cloud Platform ($20/mo)'].map((tool, i) => (
               <g key={tool}>
