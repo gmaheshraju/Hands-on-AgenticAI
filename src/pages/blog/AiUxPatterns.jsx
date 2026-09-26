@@ -88,14 +88,18 @@ User perception: "Fast -- I saw it working the whole time"
 Reality: 2.8s total, but zero dead time.
 
 Key metric: Time To First Token (TTFT)
-  GPT-4o:       ~300ms
-  Claude 3.5:   ~400ms
-  Gemini 1.5:   ~350ms
-  Self-hosted Llama 3: ~100ms (but slower total)
+Budget it by tier and mode, not by model name
+(names change every quarter; measure your own p50/p95):
+  Small/fast tier, thinking off:  lowest TTFT
+  Frontier tier, thinking off:    higher; grows with prompt length
+  Any tier, thinking on:          first ANSWER token can be seconds
+                                  to minutes out; stream status or
+                                  a thinking summary meanwhile
+  Long prompt, cache hit:         cached prefix cuts TTFT a lot
 
-Rule of thumb: if TTFT < 500ms and you stream,
-users rate the experience "instant" regardless of
-total generation time (even 10s+).`;
+Rule of thumb: if the first VISIBLE event lands < 500ms
+and you keep streaming, users rate the experience
+"instant" regardless of total generation time (even 10s+).`;
 
 const CONFIDENCE_FORMATTER_CODE = `function formatResponse(answer, confidence, sources) {
   // High confidence: direct statement, no hedging
@@ -299,7 +303,7 @@ const ERROR_RECOVERY_CODE = `class AIErrorRecovery {
         const controller = new AbortController();
         const timeout = setTimeout(
           () => controller.abort(),
-          model.timeout  // primary: 10s, fallback: 15s
+          timeoutFor(model, request)  // tier x thinking, not a per-model constant
         );
 
         const result = await model.complete(request, {
@@ -355,11 +359,23 @@ const ERROR_RECOVERY_CODE = `class AIErrorRecovery {
   }
 }
 
+// Timeouts come from the request's shape. The same model answering
+// a lookup with thinking off and a planning task at high effort can
+// differ by minutes, so a single number per model is wrong for one
+// of them. Seed these from your own p95 latency per route.
+const BASE_MS = { fast: 8_000, frontier: 20_000, cache: 1_000 };
+const THINKING_MS = { low: 15_000, medium: 45_000, high: 120_000 };
+
+function timeoutFor(model, request) {
+  const thinking = request.thinkingOn ? THINKING_MS[request.effort] ?? 0 : 0;
+  return BASE_MS[model.tier] + thinking;
+}
+
 const recovery = new AIErrorRecovery({
   models: [
-    { name: 'claude-sonnet-5', timeout: 10000 },
-    { name: 'claude-haiku-4-5', timeout: 15000 },
-    { name: 'cached-responses', timeout: 1000 },
+    { name: 'claude-sonnet-5',  tier: 'frontier' },
+    { name: 'claude-haiku-4-5', tier: 'fast' },
+    { name: 'cached-responses', tier: 'cache' },
   ],
 });`;
 
@@ -368,14 +384,18 @@ const ERROR_RECOVERY_OUTPUT = `Scenario 1: Primary model succeeds
   Result: full quality response
 
 Scenario 2: Primary times out, fallback succeeds
-  attempt 0: claude-sonnet-5 -> TIMEOUT (10s)
+  attempt 0: claude-sonnet-5 (thinking off) -> TIMEOUT (20s)
   attempt 1: claude-haiku-4-5 -> 200 OK (2.1s)
-  Result: slightly lower quality, but user waited 12s total
+  Result: slightly lower quality, but user waited ~22s total
   UX: "Taking a moment..." shown at 2s mark
 
+Scenario 2b: Same model, thinking on at medium effort
+  timeout = 20s + 45s = 65s, so a 40s answer is NOT an error
+  UX: thinking summary / step status streamed the whole time
+
 Scenario 3: Rate limited, retry works
-  attempt 0: claude-sonnet-5 -> 429 (rate limited)
-  backoff: 1s wait
+  attempt 0: claude-sonnet-5 -> 429 (retry-after: 1)
+  backoff: honour retry-after (1s)
   attempt 0 (retry): claude-sonnet-5 -> 200 OK (1.8s)
   Result: full quality, user waited ~3s total
   UX: "High demand, your request is queued..."
@@ -630,7 +650,7 @@ function ConfidencePanel() {
     <div>
       <SectionHead
         title="Confidence communication -- when the AI is wrong"
-        desc="Foundation models are wrong 10-20% of the time on factual queries. GPT-4 hallucinates at ~3-5% on grounded tasks, 15-20% on open-ended ones. Your UX needs to communicate that honestly instead of presenting every answer with equal authority."
+        desc="Every model is sometimes wrong, and the error rate differs several-fold between grounded tasks (answer from a supplied document) and open-ended recall. A public leaderboard number for someone else's task tells you little; measure yours on your own eval set. Your UX needs to communicate that honestly instead of presenting every answer with equal authority."
       />
 
       <FadeIn><Decision question="How to surface confidence to users?">
@@ -736,9 +756,9 @@ function ErrorStatesPanel() {
       />
 
       <FadeIn><Decision question="Error taxonomy for AI products?">
-        <Pill type="amber">Model timeout (10-30s)</Pill> &quot;Taking longer than expected. Still working...&quot; plus auto-retry with a faster model. Never show &quot;504 Gateway Timeout&quot; or &quot;AbortError.&quot; Claude Opus times out at ~30s on complex reasoning; if your UI assumes 5s max, you will show errors for perfectly valid requests. Set timeout per model: Haiku 5s, Sonnet 10s, Opus 30s.
+        <Pill type="amber">Model timeout</Pill> &quot;Taking longer than expected. Still working...&quot; plus auto-retry with a faster model. Never show &quot;504 Gateway Timeout&quot; or &quot;AbortError.&quot; Derive the timeout from the request, not the model name: tier times thinking mode times effort. A frontier model with thinking on at high effort can legitimately run for minutes on a hard task, while the same model with thinking off answers a lookup in seconds. A per-model constant is wrong for one of those. Better still, stream and time out on silence (no event for N seconds) rather than on total wall-clock, so a long but visibly progressing answer is never killed.
         <br /><br />
-        <Pill type="amber">Rate limited (429)</Pill> &quot;We are experiencing high demand. Your request is queued. Estimated wait: 30 seconds.&quot; Show position in queue if possible. Implement client-side token bucket to prevent hitting the rate limit in the first place. Anthropic rate limits: 60 RPM on Sonnet for Tier 1, 1000 RPM on Tier 4.
+        <Pill type="amber">Rate limited (429)</Pill> &quot;We are experiencing high demand. Your request is queued. Estimated wait: 30 seconds.&quot; Show position in queue if possible. Provider limits are per usage tier and usually on several axes at once: requests per minute plus input and output tokens per minute, so a few huge prompts can trip the limit at low RPM. Read the limits for your tier from the provider console instead of hardcoding them, honour the <code>retry-after</code> header on the 429, and run a client-side token bucket sized from those limits so you rarely hit it at all.
         <br /><br />
         <Pill type="green">Content filtered</Pill> &quot;I cannot help with that specific request. Here is what I can help with: [alternatives].&quot; Never say &quot;content policy violation&quot; to the user. It sounds like you are accusing them of doing something wrong. Frame it as capability limitation, not user fault.
         <br /><br />
@@ -772,7 +792,7 @@ function ErrorStatesPanel() {
       </FadeIn>
 
       <FadeIn delay={80}><Insight type="warn" tag="The cardinal sin">
-        The infinite spinner. No progress indicator, no status message, no timeout, no cancel button. User stares at a loading animation for 15 seconds, then refreshes the page. They have now lost their conversation context AND their trust. Set a hard timeout per model tier (Haiku: 5s, Sonnet: 10s, Opus: 30s). If the response is not ready, show what you have and explain that more is coming. Always include a cancel button after 3 seconds. Always show what the system is doing after 2 seconds. These are not guidelines. They are requirements.
+        The infinite spinner. No progress indicator, no status message, no timeout, no cancel button. User stares at a loading animation for 15 seconds, then refreshes the page. They have now lost their conversation context AND their trust. Set a hard timeout for every request, sized from its tier and thinking mode and seeded from your measured p95. If the response is not ready, show what you have and explain that more is coming. Always include a cancel button after 3 seconds. Always show what the system is doing after 2 seconds. These are not guidelines. They are requirements.
       </Insight></FadeIn>
     </div>
   );
