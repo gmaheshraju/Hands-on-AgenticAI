@@ -647,6 +647,24 @@ function FunctionCallingPanel() {
         <strong>Never silently swallow tool errors.</strong> A hallucinated answer from a failed tool call is worse than admitting the failure.
       </Decision></FadeIn>
 
+      <FadeIn delay={220}><Decision question="Where does MCP sit in this architecture, and when should the tool router become a code sandbox?">
+        In the diagram on the Architecture tab, MCP replaces the box labelled Tool Router. The orchestrator becomes an MCP <em>host</em>, the router holds one client connection per server, and the fan-out of tools becomes a set of servers that other teams own and deploy on their own schedule. The protocol details and the trust problems (tool poisoning, confused deputy) are covered in <Link to="/blog/tool-use-function-calling">Tool Use &amp; Function Calling</Link>. At the system-design level, the change to call out is that the tool inventory stops being a constant in your code. A server can add, rename or re-describe a tool between two of your requests and announce it with <code>notifications/tools/list_changed</code>. Three design consequences follow:
+        <ul className="decision__list">
+          <li><strong>Snapshot the tool list per session.</strong> Resolve <code>tools/list</code> once at session start and keep it fixed for that conversation. Tool definitions render at the front of the prompt, so a mid-session change also invalidates the prompt cache.</li>
+          <li><strong>Pin server versions like dependencies.</strong> An upstream server that rewrites a tool description has changed your agent's behavior without a commit in your repo.</li>
+          <li><strong>Put a hash of the resolved tool list in every trace.</strong> When the eval score drops on a Tuesday, you need to tell "someone edited the prompt" apart from "the CRM team shipped their server".</li>
+        </ul>
+        MCP also makes the 50-tool problem from above routine. Connect five company servers and the agent has 80 tools before your team has written one. Static two-stage routing still works, but the intent classifier is one more component that can be wrong. The newer option is deferred loading: you mark most tools with <code>defer_loading: true</code>, the model starts with a search tool, and it pulls in full definitions only for the tools it decides it needs. In Anthropic's published tests this cut tool-definition tokens by about 85% and raised tool-selection accuracy on a large tool library (Opus 4.5 went from 79.5% to 88.1%). Treat those as vendor numbers on vendor workloads and measure the change on your own eval set before you rely on it.
+        <br /><br />
+        The third step is to stop routing individual calls at all and let the model write code against the tools:
+        <br /><br />
+        <Pill type="green">Keep JSON tool calls</Pill> When the task takes a few steps, each result needs the model's judgement before the next call, or the tools write data. Every call passes through your router, which is where you log it, rate-limit it and ask a human to approve a refund.
+        <br /><br />
+        <Pill type="amber">Move to a code sandbox</Pill> When the work is many chained reads, the intermediate results are large (10,000 rows that get filtered down to 5), or the model has to loop over items. With programmatic tool calling the model writes one script that calls tools as functions, and only the final output returns to the context window. Anthropic reported 37% fewer tokens on complex research tasks with programmatic calling (opted in per tool via <code>allowed_callers</code>), and its code-execution-with-MCP write-up showed one workflow drop from 150,000 tokens to 2,000 by presenting each server as a directory of typed function files that the model reads only when it needs them.
+        <br /><br />
+        <strong>The interview answer:</strong> moving to a sandbox moves your control points. Per-call approval, audit logging and argument validation used to sit in the router, where every tool call was a separate model output you could inspect. Inside a sandbox the calls happen in model-written code, so those checks have to live in the function stubs the sandbox exposes, and the sandbox itself (no network by default, CPU and memory caps, read-only credentials) becomes part of the security boundary. Say where each control lives before and after the change, and you have shown that you understand the architecture and not only the token savings.
+      </Decision></FadeIn>
+
       <FadeIn><Insight>
         "The maturity signal is in how you handle the unhappy path. Anyone can describe the happy path: LLM picks tool, tool returns data, LLM answers. Senior engineering perspective: what happens when the tool times out? What if it returns stale data? What if the LLM picks the wrong tool? You need retry logic, circuit breakers, and graceful degradation, the same patterns you'd use in any distributed system."
       </Insight></FadeIn>

@@ -24,7 +24,7 @@ do it well, check it off in the same commit. One item per day. P0 items were fix
 
 - [ ] **MCP — the #1 site-wide gap** (named once meaningfully across 16 posts). Split across days:
   - [x] ToolUseFunctionCalling: "MCP & tool distribution" Decision on Schema Design tab (server vs client, tools/list drift, tool poisoning, confused deputy).
-  - [ ] AgentSystemDesign: MCP as the tool-interface layer + code-mode/programmatic tool calling in architecture.
+  - [x] AgentSystemDesign: MCP as the tool-interface layer + code-mode/programmatic tool calling in architecture. *(2026-10-03: added a Function Calling Decision placing MCP at the Tool Router box: tool inventory becomes runtime state (`tools/list_changed`), so snapshot per session for cache stability, pin server versions, hash the tool list into traces; MCP makes 50+ tools routine, so static routing vs `defer_loading` tool search (Anthropic: ~85% fewer definition tokens, Opus 4.5 79.5%→88.1%); JSON calls vs code sandbox pills (`allowed_callers`, 37% / 150K→2K vendor figures); interview answer on where approval/audit/validation move when calls run inside the sandbox. Cross-links ToolUse rather than restating server-vs-function.)*
   - [ ] MultiAgentSystems: capability cards → MCP discovery / A2A agent cards Decision.
   - [ ] AiGuardrails: MCP supply-chain trust (third-party servers, tool-description poisoning).
 - [ ] **Prompt injection depth** (AiGuardrails + ToolUseFunctionCalling): lethal trifecta (private data + untrusted content + exfiltration channel), indirect injection via tool results, CaMeL/dual-LLM patterns. ToolUse subtitle promises this and never delivers.
