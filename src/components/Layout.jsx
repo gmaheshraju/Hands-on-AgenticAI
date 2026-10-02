@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Nav from './Nav';
 import PostFooterCTA from './PostFooterCTA';
 import PostToc from './PostToc';
+import { AUTHOR_NAME, EMAIL, GITHUB, LINKEDIN, PROJECTS_REPO } from '../data/contact';
 
 // Scroll progress for long posts. Written straight to the DOM once per frame
 // (transform, not width) so scrolling never re-renders React or triggers layout.
@@ -74,14 +75,60 @@ export default function Layout({ children }) {
         {children}
         {isBlogPost && <PostFooterCTA />}
       </main>
-      <footer className="footer">
-        <div className="footer__inner">
-          <span className="footer__mark">MG</span>
-          <p className="footer__text">
-            Built by Mahesh Guntumadugu. Decision frameworks from real production systems.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </>
+  );
+}
+
+function Footer() {
+  const ext = { target: '_blank', rel: 'noopener noreferrer' };
+  return (
+    <footer className="footer">
+      <div className="footer__inner">
+        <div className="footer__grid">
+          <div className="footer__who">
+            <span className="nav__monogram" aria-hidden="true">M</span>
+            <div>
+              <p className="footer__name">{AUTHOR_NAME}</p>
+              <p className="footer__text">
+                I build AI agent systems that run in production unattended, and write down
+                the decisions behind them here.
+              </p>
+              <Link
+                to="/work-with-me"
+                className="link-draw"
+                onClick={() => window.clarity?.('event', 'footer_workwithme_click')}
+              >
+                Work with me &rarr;
+              </Link>
+            </div>
+          </div>
+
+          <nav aria-label="Read">
+            <p className="footer__heading">Read</p>
+            <ul className="footer__links">
+              <li><Link to="/">Agentic AI Playbook</Link></li>
+              <li><Link to="/home">System Design Playbook</Link></li>
+              <li><Link to="/diagrams">Architecture diagrams</Link></li>
+              <li><a href={PROJECTS_REPO} {...ext}>31 projects on GitHub</a></li>
+            </ul>
+          </nav>
+
+          <nav aria-label="Connect">
+            <p className="footer__heading">Connect</p>
+            <ul className="footer__links">
+              <li><a href={`mailto:${EMAIL}`}>Email</a></li>
+              <li><a href={LINKEDIN} {...ext}>LinkedIn</a></li>
+              <li><a href={GITHUB} {...ext}>GitHub</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <div className="footer__bottom">
+          <span>&copy; {new Date().getFullYear()} {AUTHOR_NAME}</span>
+          <span>Decision frameworks from real production systems.</span>
+        </div>
+      </div>
+    </footer>
   );
 }

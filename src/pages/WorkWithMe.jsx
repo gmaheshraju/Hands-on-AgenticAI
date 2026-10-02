@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import FadeIn from '../components/FadeIn';
 import { TOTALS } from '../data/diagrams';
+import { EMAIL, GITHUB, LINKEDIN } from '../data/contact';
 
 // Clarity custom events feed the consulting funnel (homepage → this page →
 // contact click). Optional-chained: no-op locally and during prerender.
@@ -21,10 +22,6 @@ function inquirySubject() {
   if (/github\./i.test(ref)) return 'Project inquiry (via GitHub)';
   return 'Project inquiry';
 }
-
-const EMAIL = 'maheshraju1218@gmail.com';
-const LINKEDIN = 'https://www.linkedin.com/in/gmaheshraju/';
-const GITHUB = 'https://github.com/gmaheshraju';
 
 const services = [
   {
@@ -111,7 +108,8 @@ function CopyEmail() {
     <button
       type="button"
       onClick={copy}
-      style={{ ...styles.ctaSecondary, userSelect: state === 'manual' ? 'all' : 'none' }}
+      className="btn btn--ghost"
+      style={{ userSelect: state === 'manual' ? 'all' : 'none' }}
       aria-live="polite"
     >
       {label}
@@ -143,16 +141,16 @@ export default function WorkWithMe() {
           <a
             href={`mailto:${EMAIL}?subject=${encodeURIComponent(subject)}`}
             onClick={() => track('email_cta_click')}
-            style={styles.ctaPrimary}
+            className="btn btn--primary"
           >
-            Email me &rarr;
+            Email me <span className="btn__arrow" aria-hidden="true">&rarr;</span>
           </a>
           <a
             href={LINKEDIN}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => track('linkedin_cta_click')}
-            style={styles.ctaSecondary}
+            className="btn btn--ghost"
           >
             Message on LinkedIn
           </a>
@@ -164,7 +162,7 @@ export default function WorkWithMe() {
         <div style={styles.grid}>
           {services.map((s, i) => (
             <FadeIn key={s.number} delay={i * 60} className="grid-cell">
-              <div style={styles.card}>
+              <div className="lift" style={styles.card}>
                 <div style={styles.accent} />
                 <div style={styles.content}>
                   <div style={styles.header}>
@@ -195,6 +193,7 @@ export default function WorkWithMe() {
                   {...(p.href.startsWith('http')
                     ? { target: '_blank', rel: 'noopener noreferrer' }
                     : {})}
+                  className="lift"
                   style={{ ...styles.proofCard, textDecoration: 'none' }}
                 >
                   <span style={styles.proofStat}>{p.stat}</span>
@@ -240,7 +239,7 @@ export default function WorkWithMe() {
         <div style={styles.stepsGrid}>
           {steps.map((s, i) => (
             <FadeIn key={s.number} delay={i * 60} className="grid-cell">
-              <div style={styles.stepCard}>
+              <div className="lift" style={styles.stepCard}>
                 <span style={styles.stepNumber}>{s.number}</span>
                 <div>
                   <h3 style={styles.stepTitle}>{s.title}</h3>
@@ -264,7 +263,7 @@ export default function WorkWithMe() {
           <a
             href={`mailto:${EMAIL}?subject=${encodeURIComponent(subject)}`}
             onClick={() => track('email_cta_click')}
-            style={styles.ctaPrimary}
+            className="btn btn--primary"
           >
             {EMAIL}
           </a>
@@ -274,7 +273,7 @@ export default function WorkWithMe() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => track('linkedin_cta_click')}
-            style={styles.ctaSecondary}
+            className="btn btn--ghost"
           >
             LinkedIn
           </a>
@@ -345,33 +344,6 @@ const styles = {
     flexWrap: 'wrap',
     gap: 10,
     alignItems: 'center',
-  },
-  ctaPrimary: {
-    display: 'inline-block',
-    padding: '12px 22px',
-    background: 'var(--bg-accent-strong)',
-    color: 'var(--text-on-accent)',
-    borderRadius: 'var(--radius-full)',
-    fontSize: 14,
-    fontWeight: 600,
-    textDecoration: 'none',
-    letterSpacing: '0.01em',
-    transition: 'all var(--dur) var(--ease)',
-  },
-  ctaSecondary: {
-    display: 'inline-block',
-    padding: '11px 22px',
-    background: 'transparent',
-    color: 'var(--text-h)',
-    border: '1px solid var(--border-strong)',
-    borderRadius: 'var(--radius-full)',
-    fontSize: 14,
-    fontWeight: 500,
-    textDecoration: 'none',
-    letterSpacing: '0.01em',
-    transition: 'all var(--dur) var(--ease)',
-    cursor: 'pointer',
-    fontFamily: 'inherit',
   },
   section: {
     marginBottom: '3.5rem',

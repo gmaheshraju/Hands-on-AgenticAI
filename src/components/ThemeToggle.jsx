@@ -1,4 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+
+function applyTheme(dark) {
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch { /* private mode: theme just won't persist */ }
+}
 
 export default function ThemeToggle() {
   // Guarded because this initializer runs during render, including the
@@ -8,18 +13,24 @@ export default function ThemeToggle() {
     document.documentElement.getAttribute('data-theme') === 'dark'
   );
 
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-    localStorage.setItem('theme', dark ? 'dark' : 'light');
-  }, [dark]);
+  const toggle = () => {
+    const next = !dark;
+    // The attribute flips inside the transition callback, so the browser can
+    // snapshot both themes and crossfade between them instead of snapping.
+    const swap = () => { applyTheme(next); setDark(next); };
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (document.startViewTransition && !reduce) document.startViewTransition(swap);
+    else swap();
+  };
 
   return (
     <button
-      onClick={() => setDark(d => !d)}
+      onClick={toggle}
       aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+      className="theme-toggle"
       style={styles.btn}
     >
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <svg key={dark ? 'sun' : 'moon'} className="theme-toggle__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
         {dark ? (
           <>
             <circle cx="12" cy="12" r="5" />
@@ -45,10 +56,10 @@ const styles = {
     background: 'transparent',
     border: 'none',
     cursor: 'pointer',
-    padding: '6px',
+    padding: '7px',
     borderRadius: 'var(--radius-sm)',
     color: 'var(--text-muted)',
-    transition: 'color var(--dur) var(--ease)',
+    transition: 'color var(--dur) var(--ease), background-color var(--dur) var(--ease)',
     lineHeight: 0,
     display: 'flex',
     alignItems: 'center',

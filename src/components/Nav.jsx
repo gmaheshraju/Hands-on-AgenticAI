@@ -1,12 +1,19 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
+import { AUTHOR_NAME } from '../data/contact';
 
+// Routes stay where they are (search engines and old links know them); only
+// the labels changed. "/" is the AI playbook, "/home" is the system design one.
 const links = [
-  { to: '/home', label: 'Home' },
-  { to: '/', label: 'AI Engineering' },
-  { to: '/work-with-me', label: 'Work With Me' },
+  { to: '/', label: 'Playbook', short: 'Playbook' },
+  { to: '/home', label: 'System Design', short: 'Systems' },
 ];
+
+function isActive(to, pathname) {
+  if (to === '/') return pathname === '/' || pathname.startsWith('/blog');
+  return pathname === to || pathname.startsWith(to + '/');
+}
 
 export default function Nav() {
   const { pathname } = useLocation();
@@ -18,12 +25,14 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const onWorkWithMe = pathname === '/work-with-me';
+
   return (
     <nav className={`nav${scrolled ? ' nav--scrolled' : ''}`}>
       <div className="nav__inner">
         <Link to="/" className="nav__brand">
           <span className="nav__monogram">M</span>
-          <span className="nav__brand-text">AI Engineering</span>
+          <span className="nav__brand-text">{AUTHOR_NAME}</span>
         </Link>
 
         <div className="nav__links">
@@ -31,16 +40,20 @@ export default function Nav() {
             <Link
               key={l.to}
               to={l.to}
-              className={`nav__link${
-                l.to === '/'
-                  ? (pathname === '/' || pathname.startsWith('/blog') ? ' nav__link--active' : '')
-                  : (pathname === l.to || pathname.startsWith(l.to + '/')
-                    ? ' nav__link--active' : '')
-              }`}
+              className={`nav__link${isActive(l.to, pathname) ? ' nav__link--active' : ''}`}
             >
-              {l.label}
+              <span className="nav__label-long">{l.label}</span>
+              <span className="nav__label-short">{l.short}</span>
             </Link>
           ))}
+          <Link
+            to="/work-with-me"
+            className={`btn btn--sm nav__cta ${onWorkWithMe ? 'btn--ghost' : 'btn--primary'}`}
+            aria-current={onWorkWithMe ? 'page' : undefined}
+            onClick={() => window.clarity?.('event', 'nav_workwithme_click')}
+          >
+            Work with me
+          </Link>
           <div className="nav__divider" />
           <ThemeToggle />
         </div>

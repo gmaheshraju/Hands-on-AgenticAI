@@ -23,6 +23,8 @@
   --syn-comment: #9CA3AF;
   --syn-punct: #78716C;
   --bg-accent-strong: #E05A2B;
+  --accent-hover: #C94A1E;
+  --accent-glow: rgba(224, 90, 43, 0.38);
   --bg-success: #E8F5E9;
   --bg-warning: #FFF3E0;
   --bg-danger: #FFEBEE;
@@ -83,6 +85,8 @@
   --syn-comment: #6B7280;
   --syn-punct: #9CA3AF;
   --bg-accent-strong: #FF7A4D;
+  --accent-hover: #FF916A;
+  --accent-glow: rgba(255, 122, 77, 0.32);
   --bg-success: #1B3A1F;
   --bg-warning: #2D1E0A;
   --bg-danger: #2D0F0F;
@@ -95,7 +99,8 @@
   --text-success: #81C784;
   --text-warning: #FFB74D;
   --text-danger: #EF9A9A;
-  --text-on-accent: #FFFFFF;
+  /* White on #FF7A4D is ~2.6:1 (fails WCAG AA); near-black on it is ~7:1. */
+  --text-on-accent: #161618;
 
   --border: #2A2A2E;
   --border-strong: #3A3A3F;
@@ -224,7 +229,8 @@ img { max-width: 100%; display: block; }
   color: var(--text-h);
   letter-spacing: -0.01em;
 }
-@media (max-width: 479px) {
+/* The full name plus three nav items needs ~720px; below that the monogram carries the brand. */
+@media (max-width: 719px) {
   .nav__brand-text { display: none; }
 }
 
@@ -707,30 +713,69 @@ img { max-width: 100%; display: block; }
 
 .footer {
   border-top: 1px solid var(--border);
-  padding: 2rem var(--page-gutter);
+  padding: 3.5rem var(--page-gutter) 2rem;
+  margin-top: 2rem;
 }
 
 .footer__inner {
   max-width: var(--content-max);
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  justify-content: center;
 }
 
-.footer__mark {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text-accent);
-  letter-spacing: 0.06em;
-  font-family: var(--font-mono);
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+@media (min-width: 720px) {
+  .footer__grid { grid-template-columns: minmax(0, 1.6fr) repeat(2, minmax(0, 1fr)); }
 }
 
+.footer__who { display: flex; gap: 14px; align-items: flex-start; max-width: 46ch; }
+.footer__name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--text-h);
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
 .footer__text {
-  font-size: 13px;
+  font-size: 14px;
+  color: var(--text-p);
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+
+.footer__heading {
+  font: 600 11px var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--text-muted);
-  line-height: 1.5;
+  margin-bottom: 14px;
+}
+.footer__links { list-style: none; display: grid; gap: 10px; }
+.footer__links a {
+  font-size: 14px;
+  color: var(--text-p);
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: color var(--dur) var(--ease), background-size 0.3s var(--ease);
+}
+.footer__links a:hover { color: var(--text-h); background-size: 100% 1px; }
+
+.footer__bottom {
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  font-size: 12.5px;
+  color: var(--text-muted);
 }
 
 /* ═══════════════════════════════════════════
@@ -1143,3 +1188,229 @@ html { scroll-behavior: smooth; }
 /* Grid cells wrapped in FadeIn: let the card inside fill the row height. */
 .grid-cell { display: flex; }
 .grid-cell > * { flex: 1; }
+
+/* ═══════════════════════════════════════════
+   BUTTONS
+   Inline styles cannot express :hover/:active/:focus, so every call to
+   action uses these classes instead of a style object.
+   ═══════════════════════════════════════════ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  font: 600 14px/1.2 var(--font-body);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    transform 0.2s var(--ease),
+    box-shadow 0.25s var(--ease),
+    background-color 0.2s var(--ease),
+    border-color 0.2s var(--ease),
+    color 0.2s var(--ease);
+}
+.btn:active { transform: translateY(0) scale(0.98); transition-duration: 0.08s; }
+
+.btn--primary {
+  background: var(--bg-accent-strong);
+  color: var(--text-on-accent);
+  box-shadow: 0 1px 2px rgba(27, 27, 30, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+.btn--primary:hover {
+  background: var(--accent-hover);
+  color: var(--text-on-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px -8px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-h);
+  border-color: var(--border-strong);
+  font-weight: 500;
+}
+.btn--ghost:hover {
+  color: var(--text-h);
+  background: var(--bg-card);
+  border-color: var(--text-muted);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn--sm { padding: 7px 14px; font-size: 13px; }
+
+.btn__arrow { display: inline-block; transition: transform 0.25s var(--ease); }
+.btn:hover .btn__arrow { transform: translateX(3px); }
+
+/* Underlined text link that draws its underline in on hover. */
+.link-draw {
+  color: var(--text-accent);
+  text-decoration: none;
+  font-weight: 500;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 2px;
+  transition: background-size 0.3s var(--ease), color var(--dur) var(--ease);
+}
+.link-draw:hover { background-size: 0% 1px; background-position: 100% 100%; }
+
+/* ═══════════════════════════════════════════
+   ENTRANCE MOTION
+   Hero content rises in once, staggered by --i. CSS-only, so the
+   prerendered HTML is complete and no-JS readers see everything.
+   ═══════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 0.7s var(--ease) both;
+    animation-delay: calc(var(--i, 0) * 70ms);
+  }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Hand-drawn stroke under the hero's italic word. */
+.swash { position: relative; display: inline-block; }
+.swash__line {
+  position: absolute;
+  left: -2%;
+  bottom: -0.08em;
+  width: 104%;
+  height: 0.28em;
+  overflow: visible;
+  pointer-events: none;
+}
+.swash__line path {
+  fill: none;
+  stroke: var(--bg-accent-strong);
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0.55;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .swash__line path {
+    stroke-dasharray: 320;
+    stroke-dashoffset: 320;
+    animation: draw 0.9s 0.45s var(--ease) forwards;
+  }
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+/* ═══════════════════════════════════════════
+   NAV: call to action + short labels on phones
+   ═══════════════════════════════════════════ */
+
+.nav__cta { margin-left: 6px; }
+.nav__cta::after { display: none; }
+.nav__label-short { display: none; }
+@media (max-width: 479px) {
+  .nav__label-long { display: none; }
+  .nav__label-short { display: inline; }
+  .nav__cta { margin-left: 2px; padding: 7px 12px; font-size: 12.5px; }
+}
+
+.theme-toggle:hover { color: var(--text-h) !important; background: var(--bg-accent) !important; }
+@media (prefers-reduced-motion: no-preference) {
+  .theme-toggle__icon { animation: spin-in 0.45s var(--ease); }
+}
+@keyframes spin-in {
+  from { opacity: 0; transform: rotate(-90deg) scale(0.6); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ═══════════════════════════════════════════
+   FRONT DOOR (post index hero)
+   ═══════════════════════════════════════════ */
+
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px 5px 10px;
+  margin-bottom: 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--bg-card);
+  font-size: 12.5px;
+  color: var(--text-p);
+  text-decoration: none;
+  transition: border-color var(--dur) var(--ease), box-shadow 0.25s var(--ease), color var(--dur) var(--ease);
+}
+.hero-pill:hover { color: var(--text-h); border-color: var(--border-strong); box-shadow: var(--shadow-sm); }
+.hero-pill__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--bg-accent-strong);
+  box-shadow: 0 0 0 3px var(--bg-accent);
+}
+
+.hero-by {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 4px 0 28px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.hero-by strong { color: var(--text-h); font-weight: 600; }
+
+.hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+
+.proof-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 640px;
+  border-top: 1px solid var(--border);
+}
+.proof-strip__item {
+  padding: 16px 16px 0 0;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.proof-strip__item + .proof-strip__item { padding-left: 16px; border-left: 1px solid var(--border); }
+.proof-strip__num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 38px);
+  line-height: 1;
+  color: var(--text-h);
+  margin-bottom: 6px;
+  transition: color var(--dur) var(--ease);
+}
+.proof-strip__label { display: block; font-size: 12.5px; line-height: 1.45; color: var(--text-muted); }
+a.proof-strip__item:hover .proof-strip__num { color: var(--text-accent); }
+
+.post-card__start {
+  align-self: flex-start;
+  font: 600 10px var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-accent);
+  background: var(--bg-accent);
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+}
+
+/* Cards that lift on hover (service cards, proof cards). */
+.lift {
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+.lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong) !important;
+}
+.hero-pill .btn__arrow { color: var(--text-accent); }
+.hero-pill:hover .btn__arrow { transform: translateX(3px); }
