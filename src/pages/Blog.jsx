@@ -137,7 +137,7 @@ export default function Blog() {
           onClick={() => track('home_pill_workwithme_click')}
         >
           <span className="hero-pill__dot" aria-hidden="true" />
-          Consulting on agent systems that survive production
+          Consulting on production agent systems
           <span className="btn__arrow" aria-hidden="true">&rarr;</span>
         </Link>
         <h1 className="rise" style={{ ...styles.h1, '--i': 1 }}>
@@ -179,7 +179,7 @@ export default function Blog() {
           </a>
           <a href={PROJECTS_REPO} target="_blank" rel="noopener noreferrer" className="proof-strip__item">
             <span className="proof-strip__num">31</span>
-            <span className="proof-strip__label">open-source projects with tests</span>
+            <span className="proof-strip__label">open-source agent projects on GitHub</span>
           </a>
           <Link to="/diagrams" className="proof-strip__item">
             <span className="proof-strip__num">{TOTALS.count}</span>

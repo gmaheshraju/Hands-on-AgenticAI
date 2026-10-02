@@ -19,8 +19,13 @@ export default function ThemeToggle() {
     // snapshot both themes and crossfade between them instead of snapping.
     const swap = () => { applyTheme(next); setDark(next); };
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    if (document.startViewTransition && !reduce) document.startViewTransition(swap);
-    else swap();
+    if (document.startViewTransition && !reduce) {
+      // A transition is aborted (rejecting these promises) when the tab is hidden or
+      // another one starts; the theme still swaps, so the rejection is just noise.
+      const t = document.startViewTransition(swap);
+      t.ready.catch(() => {});
+      t.finished.catch(() => {});
+    } else swap();
   };
 
   return (

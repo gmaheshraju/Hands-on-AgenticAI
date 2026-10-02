@@ -714,7 +714,6 @@ img { max-width: 100%; display: block; }
 .footer {
   border-top: 1px solid var(--border);
   padding: 3.5rem var(--page-gutter) 2rem;
-  margin-top: 2rem;
 }
 
 .footer__inner {
