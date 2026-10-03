@@ -9,7 +9,7 @@ import { EMAIL, LINKEDIN, PROJECTS_REPO } from '../data/contact';
 const track = (name) => window.clarity?.('event', name);
 
 // A mailto: carries no referrer, so the subject line is the only attribution
-// channel there is — and it answers the question that decides where to spend
+// channel there is, and it answers the question that decides where to spend
 // effort: which surface actually produces inquiries.
 function inquirySubject() {
   if (typeof window === 'undefined') return 'Project inquiry';

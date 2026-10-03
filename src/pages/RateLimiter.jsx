@@ -36,16 +36,16 @@ function WhyPanel() {
   return (
     <div>
       <h2 className="page-section-title">Start with "what are you protecting?"</h2>
-      <p className="page-body">Most engineers jump to "token bucket." Staff engineers ask why you need a rate limiter at all — the answer shapes every subsequent decision.</p>
+      <p className="page-body">Most engineers jump to "token bucket." Staff engineers ask why you need a rate limiter at all: the answer shapes every subsequent decision.</p>
 
       <Decision question="Protecting backend services from overload?">
-        You need server-side rate limiting. The goal is stability, not fairness. Shed load aggressively — a 429 is cheaper than a cascading failure. This is the most common use case.
+        You need server-side rate limiting. The goal is stability, not fairness. Shed load aggressively: a 429 is cheaper than a cascading failure. This is the most common use case.
       </Decision>
-      <Decision question="Preventing abuse — scraping, brute force, spam?">
+      <Decision question="Preventing abuse: scraping, brute force, spam?">
         You need per-identity limiting (API key, user ID, IP). The goal is fairness and security. Consider combining with exponential backoff on the client and CAPTCHA for repeat offenders.
       </Decision>
-      <Decision question="Enforcing paid tier quotas — free vs pro vs enterprise?">
-        You need metered rate limiting with accurate counting. The goal is billing correctness. Eventual consistency is not acceptable — you need precise counts. Stripe and AWS use this model.
+      <Decision question="Enforcing paid tier quotas: free vs pro vs enterprise?">
+        You need metered rate limiting with accurate counting. The goal is billing correctness. Eventual consistency is not acceptable: you need precise counts. Stripe and AWS use this model.
       </Decision>
       <Decision question="Smoothing bursty traffic to a downstream dependency?">
         You need traffic shaping, not rate limiting. The goal is a steady output rate regardless of input burstiness. Leaky bucket or a queue with a fixed consumer rate fits here.
@@ -66,17 +66,17 @@ function AlgorithmsPanel() {
       name: 'Token bucket',
       tldr: 'Allows controlled bursts. The most widely used algorithm in production.',
       how: 'A bucket holds up to B tokens. Tokens are added at rate R per second. Each request consumes one token. If the bucket is empty, the request is rejected. Tokens that would exceed B are discarded.',
-      burst: 'Yes — up to B requests can fire instantly if the bucket is full. This is a feature, not a bug. Real traffic is bursty.',
-      memory: 'O(1) per key — just two values: current token count and last refill timestamp.',
+      burst: 'Yes: up to B requests can fire instantly if the bucket is full. This is a feature, not a bug. Real traffic is bursty.',
+      memory: 'O(1) per key: just two values, the current token count and the last refill timestamp.',
       precision: 'Approximate. A request arriving just after a refill gets a token even if the "true" rate was exceeded by microseconds. In practice this doesn\'t matter.',
       used: 'AWS API Gateway, Stripe API, Linux tc (traffic control), Go\'s golang.org/x/time/rate, Nginx limit_req with burst parameter.',
-      gotcha: 'Refill calculation must be atomic in distributed settings. Naive implementations using separate GET + SET in Redis have a race condition — use a Lua script or Redis cell module.',
+      gotcha: 'Refill calculation must be atomic in distributed settings. Naive implementations using separate GET + SET in Redis have a race condition: use a Lua script or Redis cell module.',
     },
     {
       name: 'Sliding window log',
       tldr: 'Precise counting but expensive on memory. Good for low-volume, high-accuracy needs.',
       how: 'Store the timestamp of every request in a sorted set (e.g., Redis ZSET). For each new request, remove entries older than the window, then count remaining entries. If count >= limit, reject.',
-      burst: 'No burst tolerance — the window slides continuously, so the count is always exact over the trailing window.',
+      burst: 'No burst tolerance: the window slides continuously, so the count is always exact over the trailing window.',
       memory: 'O(N) per key where N = number of requests in the window. At 1000 req/s with a 60s window, that\'s 60,000 entries per key. This gets expensive fast.',
       precision: 'Exact. No approximation. Every request is individually tracked.',
       used: 'Useful for audit-grade rate limiting where you need to prove exact counts (billing, compliance). Rarely used for high-throughput API rate limiting due to memory cost.',
@@ -86,8 +86,8 @@ function AlgorithmsPanel() {
       name: 'Sliding window counter',
       tldr: 'Best balance of precision and efficiency. Used by Cloudflare.',
       how: 'Combine two fixed windows: the current window\'s count and the previous window\'s count. Weight the previous window by the overlap fraction. Example: 70% into the current window → effective count = current_count + previous_count × 0.30.',
-      burst: 'Minimal — the weighted average smooths out boundary bursts. Cloudflare measured <0.003% false positive rate with this approach.',
-      memory: 'O(1) per key — just two counters and a window timestamp. Same as token bucket.',
+      burst: 'Minimal: the weighted average smooths out boundary bursts. Cloudflare measured <0.003% false positive rate with this approach.',
+      memory: 'O(1) per key: just two counters and a window timestamp. Same as token bucket.',
       precision: 'Approximate but very good in practice. The error is bounded by the window size. Cloudflare\'s analysis showed it\'s accurate enough for production rate limiting at massive scale.',
       used: 'Cloudflare (their blog post on rate limiting describes this exact algorithm), Kong API Gateway.',
       gotcha: 'The approximation under-counts at the start of a new window (when previous_count is 0). This means the first window after a quiet period allows a brief burst. Acceptable for most use cases.',
@@ -97,26 +97,26 @@ function AlgorithmsPanel() {
       tldr: 'Simplest to implement. The boundary-burst problem makes it unsuitable for strict rate limiting.',
       how: 'Divide time into fixed windows (e.g., 60-second intervals). Increment a counter per window. If counter >= limit, reject. Reset counter at the start of each window.',
       burst: 'Severe boundary problem: a client can send limit requests at the end of window N and limit requests at the start of window N+1, effectively doubling the rate in a short period.',
-      memory: 'O(1) per key — single counter and window ID.',
+      memory: 'O(1) per key: single counter and window ID.',
       precision: 'Poor at window boundaries. A client sending 100 requests in the last second of one window and 100 in the first second of the next effectively gets 200/2s = 100/s against a 100/60s limit.',
       used: 'Simple internal systems where the boundary burst is acceptable. Not used for customer-facing rate limiting at scale.',
-      gotcha: 'The Redis INCR command is atomic, making this trivially implementable — but the boundary problem means you\'re not actually enforcing the rate you think you are.',
+      gotcha: 'The Redis INCR command is atomic, making this trivially implementable, but the boundary problem means you\'re not actually enforcing the rate you think you are.',
     },
     {
       name: 'Leaky bucket (as a queue)',
       tldr: 'Smooths output to a fixed rate. Best for traffic shaping, not rate limiting.',
       how: 'Requests enter a FIFO queue with fixed capacity. A processor drains the queue at a constant rate. If the queue is full, new requests are dropped. The output rate is perfectly smooth regardless of input burstiness.',
-      burst: 'No bursts on output — that\'s the entire point. Input bursts are absorbed by the queue up to its capacity. This is fundamentally different from token bucket, which allows output bursts.',
-      memory: 'O(queue_capacity) — you\'re storing the actual queued requests.',
+      burst: 'No bursts on output: that\'s the entire point. Input bursts are absorbed by the queue up to its capacity. This is fundamentally different from token bucket, which allows output bursts.',
+      memory: 'O(queue_capacity): you\'re storing the actual queued requests.',
       precision: 'Exact output rate. The drip rate is deterministic.',
       used: 'Network traffic shaping (Cisco QoS, Linux tc qdisc), Shopify\'s API rate limiter (they use leaky bucket semantics for smoothing merchant API calls).',
-      gotcha: 'Adds latency — requests sit in the queue waiting to be processed. For real-time APIs where latency matters, token bucket is better because it serves requests immediately if tokens are available. Leaky bucket trades latency for smoothness.',
+      gotcha: 'Adds latency: requests sit in the queue waiting to be processed. For real-time APIs where latency matters, token bucket is better because it serves requests immediately if tokens are available. Leaky bucket trades latency for smoothness.',
     },
   ];
 
   return (
     <div>
-      <h2 className="page-section-title">Five algorithms — know when each fits</h2>
+      <h2 className="page-section-title">Five algorithms: know when each fits</h2>
       <p className="page-body">Don't memorize implementations. Understand the tradeoff: burst tolerance vs precision vs memory vs latency. That's what matters in practice.</p>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -145,7 +145,7 @@ function AlgorithmsPanel() {
       </div>
 
       <Insight>
-        "For this API gateway, I'd use token bucket — it handles real-world bursty traffic naturally, uses O(1) memory per key, and is the algorithm behind AWS API Gateway and Stripe. I'd only reach for sliding window counter if I need tighter boundary precision, like Cloudflare does for their WAF."
+        "For this API gateway, I'd use token bucket: it handles real-world bursty traffic naturally, uses O(1) memory per key, and is the algorithm behind AWS API Gateway and Stripe. I'd only reach for sliding window counter if I need tighter boundary precision, like Cloudflare does for their WAF."
       </Insight>
     </div>
   );
@@ -277,7 +277,7 @@ function SimulatorPanel() {
       </div>
 
       <Insight>
-        Try this: set token bucket to 5/s with bucket size 10, send a burst of 8. The first 8 pass (tokens were full). Then send another burst immediately — most get rejected. Now wait 2 seconds and try again. That's the burst-then-recover behavior that makes token bucket practical for real APIs.
+        Try this: set token bucket to 5/s with bucket size 10, send a burst of 8. The first 8 pass (tokens were full). Then send another burst immediately: most get rejected. Now wait 2 seconds and try again. That's the burst-then-recover behavior that makes token bucket practical for real APIs.
       </Insight>
     </div>
   );
@@ -286,17 +286,17 @@ function SimulatorPanel() {
 function DistributedPanel() {
   return (
     <div>
-      <h2 className="page-section-title">Distributed rate limiting — the hard part</h2>
+      <h2 className="page-section-title">Distributed rate limiting: the hard part</h2>
       <p className="page-body">Single-node rate limiting is trivial. The real challenge is coordination across multiple servers. This is where engineers often miss the complexity.</p>
 
       <Decision question="Why not just rate-limit per server?">
-        If you have N servers and a limit of 100/s, each server allows 100/N per second. This breaks when traffic isn't evenly distributed — sticky sessions, hot users, and autoscaling all cause skew. In practice, per-server limits either over-restrict (wasting capacity) or under-restrict (allowing abuse).
+        If you have N servers and a limit of 100/s, each server allows 100/N per second. This breaks when traffic isn't evenly distributed: sticky sessions, hot users, and autoscaling all cause skew. In practice, per-server limits either over-restrict (wasting capacity) or under-restrict (allowing abuse).
       </Decision>
       <Decision question="Centralized counter with Redis">
         The standard approach. Use Redis INCR with EXPIRE for fixed window, or a Lua script for token bucket. Redis single-threaded execution model guarantees atomicity without explicit locks. Latency cost: one Redis RTT per request (typically 0.5–2ms within the same availability zone).
       </Decision>
       <Decision question="What about Redis failing?">
-        <Pill type="red">critical</Pill> Two strategies: (1) Fail open — allow all requests when Redis is down. Protects availability but sacrifices rate limiting. Used when rate limiting is a nice-to-have. (2) Fail closed — reject all requests. Used when rate limiting is a security boundary (brute force protection). Most production systems fail open with a local in-memory fallback at a conservative rate.
+        <Pill type="red">critical</Pill> Two strategies: (1) Fail open: allow all requests when Redis is down. Protects availability but sacrifices rate limiting. Used when rate limiting is a nice-to-have. (2) Fail closed: reject all requests. Used when rate limiting is a security boundary (brute force protection). Most production systems fail open with a local in-memory fallback at a conservative rate.
       </Decision>
       <Decision question="Race condition in naive Redis implementations">
         <Pill type="red">gotcha</Pill> GET tokens → check → SET tokens is NOT atomic. Between GET and SET, another server can GET the same value. Solution: use a single Lua script that does the entire check-and-decrement atomically. Redis executes Lua scripts atomically because it's single-threaded. Alternative: use the Redis Cell module (GCRA algorithm, single command).
@@ -306,7 +306,7 @@ function DistributedPanel() {
       </Decision>
 
       <Insight>
-        "I'd use Redis with a Lua script for atomicity. The script does EVAL with the token bucket logic — read current tokens, calculate refill based on elapsed time, decrement if allowed, return the result. Single Redis RTT, zero race conditions. If Redis goes down, I'd fail open with a local in-memory token bucket at 80% of the normal rate as a safety net."
+        "I'd use Redis with a Lua script for atomicity. The script does EVAL with the token bucket logic: read current tokens, calculate refill based on elapsed time, decrement if allowed, return the result. Single Redis RTT, zero race conditions. If Redis goes down, I'd fail open with a local in-memory token bucket at 80% of the normal rate as a safety net."
       </Insight>
     </div>
   );
@@ -319,7 +319,7 @@ function PlacementPanel() {
       <p className="page-body">Placement changes what you can key on, what latency you add, and what traffic you can shed. This is a design decision, not an implementation detail.</p>
 
       <Decision question="At the API Gateway / Load Balancer">
-        Catches traffic before it hits your application servers. Good for: IP-based throttling, global rate limits, DDoS mitigation. AWS API Gateway, Kong, Nginx, Envoy all support this natively. Limitation: you only have access to transport-level info (IP, headers, URL path) — no application-level context like user tier or account ID unless it's in a header.
+        Catches traffic before it hits your application servers. Good for: IP-based throttling, global rate limits, DDoS mitigation. AWS API Gateway, Kong, Nginx, Envoy all support this natively. Limitation: you only have access to transport-level info (IP, headers, URL path), with no application-level context like user tier or account ID unless it's in a header.
       </Decision>
       <Decision question="In application middleware">
         Runs inside your service code (Express middleware, Spring filter, gRPC interceptor). Good for: per-user limits, per-endpoint limits, business-logic-aware throttling (e.g., different limits for read vs write operations). Adds latency to every request (the Redis RTT). Most production systems use this layer.
@@ -328,11 +328,11 @@ function PlacementPanel() {
         Istio, Linkerd, Envoy sidecar can rate-limit at the mesh level. Good for: service-to-service rate limiting in microservices. Prevents one service from overwhelming another. The configuration lives in infrastructure, not application code. Downside: less flexibility for business-logic-aware limits.
       </Decision>
       <Decision question="Client-side rate limiting">
-        The client throttles itself before sending. Good for: preventing accidental overload from batch jobs, SDK-level protection. AWS SDKs implement client-side throttling with exponential backoff. This is a complement to server-side limiting, never a replacement — you can't trust the client.
+        The client throttles itself before sending. Good for: preventing accidental overload from batch jobs, SDK-level protection. AWS SDKs implement client-side throttling with exponential backoff. This is a complement to server-side limiting, never a replacement: you can't trust the client.
       </Decision>
 
       <Insight>
-        "I'd use two layers: the API gateway handles IP-level DDoS protection and global rate limits — that's infrastructure config, not application code. The application middleware handles per-user, per-endpoint limits using the user's API key from the auth token. Two layers, two different concerns, two different keying strategies."
+        "I'd use two layers: the API gateway handles IP-level DDoS protection and global rate limits; that's infrastructure config, not application code. The application middleware handles per-user, per-endpoint limits using the user's API key from the auth token. Two layers, two different concerns, two different keying strategies."
       </Insight>
     </div>
   );
@@ -364,14 +364,14 @@ function RealSystemsPanel() {
     },
     {
       name: 'Shopify',
-      detail: 'Leaky bucket for their REST API, cost-based for GraphQL. REST: 40 requests in the bucket, drains at 2/s. If the bucket is full, you get 429. GraphQL: each query has a calculated cost based on fields requested; you get 1,000 cost points that refill at 50/s. The GraphQL approach is more sophisticated — a simple query costs 1 point, a query fetching 250 products costs 252 points. This prevents expensive queries from starving simple ones.',
+      detail: 'Leaky bucket for their REST API, cost-based for GraphQL. REST: 40 requests in the bucket, drains at 2/s. If the bucket is full, you get 429. GraphQL: each query has a calculated cost based on fields requested; you get 1,000 cost points that refill at 50/s. The GraphQL approach is more sophisticated: a simple query costs 1 point, a query fetching 250 products costs 252 points. This prevents expensive queries from starving simple ones.',
     },
   ];
 
   return (
     <div>
       <h2 className="page-section-title">How real systems do it</h2>
-      <p className="page-body">Citing a real system's approach — with the specific algorithm, limits, and headers — is the strongest engineering signal. It proves you've read the docs, not just the textbooks.</p>
+      <p className="page-body">Citing a real system's approach (with the specific algorithm, limits, and headers) is the strongest engineering signal. It proves you've read the docs, not just the textbooks.</p>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         {systems.map((sys, i) => {
@@ -389,7 +389,7 @@ function RealSystemsPanel() {
       </div>
 
       <Insight>
-        "Stripe uses token bucket because they need burst tolerance for legitimate API traffic — a merchant's checkout page fires 5 API calls simultaneously. Shopify uses leaky bucket for REST but cost-based for GraphQL — because GraphQL query cost varies 250x depending on fields. The algorithm follows from the use case."
+        "Stripe uses token bucket because they need burst tolerance for legitimate API traffic: a merchant's checkout page fires 5 API calls simultaneously. Shopify uses leaky bucket for REST but cost-based for GraphQL, because GraphQL query cost varies 250x depending on fields. The algorithm follows from the use case."
       </Insight>
     </div>
   );
@@ -400,11 +400,11 @@ function AntiPatternsPanel() {
     { bad: 'I\'ll use a token bucket because it\'s the best algorithm.',
       good: 'Token bucket fits here because we need burst tolerance for legitimate checkout traffic, and O(1) memory per key since we\'re tracking 10M API keys.' },
     { bad: 'I\'ll rate limit by IP address.',
-      good: 'IP-based limiting fails behind NAT and CDNs — a single corporate IP can represent 10,000 users. I\'d use the API key from the auth header for per-tenant limits, and IP only as a fallback for unauthenticated endpoints.' },
+      good: 'IP-based limiting fails behind NAT and CDNs: a single corporate IP can represent 10,000 users. I\'d use the API key from the auth header for per-tenant limits, and IP only as a fallback for unauthenticated endpoints.' },
     { bad: 'I\'ll store the rate limit state in the application database.',
-      good: 'Rate limit checks happen on every request — that\'s read+write on every API call. I\'d use Redis because it\'s in-memory and the operations (INCR, EVAL) are O(1). Putting this in Postgres adds 5-10ms per request and creates a hot row.' },
+      good: 'Rate limit checks happen on every request: that\'s read+write on every API call. I\'d use Redis because it\'s in-memory and the operations (INCR, EVAL) are O(1). Putting this in Postgres adds 5-10ms per request and creates a hot row.' },
     { bad: 'When rate limited, I\'ll return a 403 Forbidden.',
-      good: '429 Too Many Requests is the correct status code — it was created specifically for rate limiting (RFC 6585). Include Retry-After header so well-behaved clients know when to retry. 403 means "you don\'t have permission" which is a different problem.' },
+      good: '429 Too Many Requests is the correct status code: it was created specifically for rate limiting (RFC 6585). Include Retry-After header so well-behaved clients know when to retry. 403 means "you don\'t have permission" which is a different problem.' },
     { bad: 'I\'ll use Redis and it\'ll just work across regions.',
       good: 'Redis replication is async, so a write in us-east isn\'t immediately visible in eu-west. For global rate limiting, I\'d either accept eventual consistency with per-region limits that sum to the global limit, or route all rate limit checks to a single region and accept the latency.' },
   ];

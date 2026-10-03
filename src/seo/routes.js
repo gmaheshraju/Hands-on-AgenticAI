@@ -267,7 +267,7 @@ export const ROUTES = [
 // every SERP entry still carries the name being searched for.
 export function fullTitle(route) {
   return route.path === '/'
-    ? `${AUTHOR} — Agentic AI Engineer | 31 Production LLM & Agent Projects`
+    ? `${AUTHOR} — Agentic AI Engineer | 31 Open-Source LLM & Agent Projects`
     : `${route.title}${suffix}`;
 }
 

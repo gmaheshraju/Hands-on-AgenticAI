@@ -14,7 +14,7 @@ export default function DistributedSystems() {
       <h1 className="page-title">Distributed Systems</h1>
       <p className="page-subtitle">
         Distributed systems fail in ways that monoliths never will. The network is unreliable,
-        clocks drift, nodes crash mid-operation, and messages arrive out of order — or not at all.
+        clocks drift, nodes crash mid-operation, and messages arrive out of order, or not at all.
         The job isn't to prevent failure. It's to design systems that remain correct when failure
         is the norm. Every choice here is a tradeoff, and staff+ engineers are expected to
         articulate exactly what they're trading away.
@@ -49,7 +49,7 @@ function CAPPanel() {
         <Pill type="red">critical</Pill> CAP says: in a distributed data store, when a network
         partition occurs, you must choose between Consistency (every read gets the most recent
         write or an error) and Availability (every request gets a non-error response, without
-        guaranteeing the most recent write). Partition tolerance isn't a choice — partitions
+        guaranteeing the most recent write). Partition tolerance isn't a choice: partitions
         happen whether you like it or not. So the real decision is: during a partition, do you
         return stale data (AP) or return errors (CP)?
       </Decision>
@@ -59,26 +59,26 @@ function CAPPanel() {
         (normal operation), choose Latency or Consistency. This captures the everyday tradeoff
         that CAP misses. Dynamo chose PA/EL (available during partitions, low latency normally).
         Spanner chose PC/EC (consistent always, but pays latency via TrueTime). Most real systems
-        live in the "else" branch 99.99% of the time — that's where your design decisions
+        live in the "else" branch 99.99% of the time: that's where your design decisions
         actually matter.
       </Decision>
 
       <Decision question="What are the consistency models and when do you pick each?">
         <Pill type="amber">nuanced</Pill> Strong consistency (linearizability): every operation
-        appears to take effect at a single instant. Expensive — requires coordination.
+        appears to take effect at a single instant. Expensive: requires coordination.
         Eventual consistency: replicas converge eventually. Cheap but confusing for users.
         Causal consistency: preserves cause-effect ordering (if A causes B, everyone sees A
         before B). Good middle ground. Read-your-writes: you always see your own updates.
-        Essential for user-facing apps — a user who updates their profile must see the update
+        Essential for user-facing apps: a user who updates their profile must see the update
         immediately, even if other users see it later.
       </Decision>
 
-      <Decision question="Linearizability vs. serializability — what's the difference?">
+      <Decision question="Linearizability vs. serializability: what's the difference?">
         This trips up even experienced engineers. Linearizability is a recency guarantee on
         single operations: once a write completes, all subsequent reads see it. It's about
         real-time ordering. Serializability is a transaction isolation level: the result of
         executing transactions is equivalent to some serial order. They operate on different
-        axes. Strict serializability (Spanner) gives you both — it's the gold standard and
+        axes. Strict serializability (Spanner) gives you both: it's the gold standard and
         the most expensive option.
       </Decision>
 
@@ -93,7 +93,7 @@ function CAPPanel() {
 
       <Insight>
         "For this user-facing service, I'd use read-your-writes consistency. The user who
-        updates their email address must see the change immediately — showing them the old
+        updates their email address must see the change immediately: showing them the old
         email after they just changed it is a bug. But other users can see the update with
         a few seconds of delay. I'd implement this by routing the updating user's reads to
         the primary for 5 seconds after a write, then falling back to replicas. This gives
@@ -108,7 +108,7 @@ function CAPPanel() {
 function ConsensusPanel() {
   return (
     <div>
-      <h2 className="page-section-title">Why consensus is hard — and when you need it</h2>
+      <h2 className="page-section-title">Why consensus is hard, and when you need it</h2>
       <p className="page-body">
         Consensus means getting a group of unreliable nodes to agree on a single value.
         It sounds simple. It's proven to be one of the hardest problems in computer science.
@@ -120,11 +120,11 @@ function ConsensusPanel() {
 
       <Decision question="How does Raft achieve consensus?">
         <Pill type="green">essential</Pill> Raft breaks consensus into three sub-problems:
-        Leader election (nodes vote for a leader using randomized timeouts — the randomization
+        Leader election (nodes vote for a leader using randomized timeouts: the randomization
         breaks the FLP impossibility), log replication (leader accepts client requests, appends
         them to its log, replicates to followers, commits when a majority acknowledge), and
         safety (a node can only be elected leader if its log is at least as up-to-date as a
-        majority of nodes — this prevents committed entries from being lost). Raft is designed
+        majority of nodes: this prevents committed entries from being lost). Raft is designed
         to be understandable, unlike Paxos.
       </Decision>
 
@@ -134,17 +134,16 @@ function ConsensusPanel() {
         Accept (if a majority promise, proposer sends the value), Learn (once a majority accept,
         the value is chosen). Multi-Paxos optimizes for a sequence of values by using a stable
         leader to skip the Prepare phase for most rounds. Paxos is correct but notoriously hard
-        to implement — Google's Chubby paper says "there are significant gaps between the
+        to implement: Google's Chubby paper says "there are significant gaps between the
         description of the Paxos algorithm and the needs of a real-world system."
       </Decision>
 
-      <Decision question="ZooKeeper vs. etcd — when do you pick each?">
+      <Decision question="ZooKeeper vs. etcd: when do you pick each?">
         Both are consensus-backed coordination services. ZooKeeper (ZAB protocol) is battle-tested
-        in the Hadoop/Kafka ecosystem — it provides ephemeral nodes, watches, and sequential
-        znodes for leader election. etcd (Raft protocol) is the Kubernetes control plane's brain —
-        simpler API (key-value with MVCC), gRPC-based, better for cloud-native stacks. Pick
+        in the Hadoop/Kafka ecosystem: it provides ephemeral nodes, watches, and sequential
+        znodes for leader election. etcd (Raft protocol) is the Kubernetes control plane's brain: simpler API (key-value with MVCC), gRPC-based, better for cloud-native stacks. Pick
         ZooKeeper if you're in the JVM/Hadoop world. Pick etcd if you're Kubernetes-native.
-        Don't run either yourself if you can avoid it — use a managed service.
+        Don't run either yourself if you can avoid it: use a managed service.
       </Decision>
 
       <Decision question="When do you actually need consensus?">
@@ -161,17 +160,17 @@ function ConsensusPanel() {
         Consensus requires a network round-trip to a majority of nodes for every decision.
         At a minimum, that's one round-trip for Raft/Multi-Paxos with a stable leader, or two
         for basic Paxos. Cross-datacenter consensus adds 50-150ms per operation (speed of light).
-        This is why Spanner uses TrueTime instead of consensus for read-only transactions — GPS
+        This is why Spanner uses TrueTime instead of consensus for read-only transactions: GPS
         and atomic clocks are faster than cross-datacenter network calls. The lesson: consensus
         is expensive. Use it for metadata and coordination, not for every data operation.
       </Decision>
 
       <Insight>
-        "I'd use etcd for leader election and shard assignment — that's a low-frequency,
+        "I'd use etcd for leader election and shard assignment: that's a low-frequency,
         high-importance coordination problem that justifies the cost of consensus. But I
         would not route user data through a consensus protocol. Instead, the consensus layer
         tells each node which shard it owns, and then each node handles its shard's reads
-        and writes directly against the database. Keep the consensus path narrow — it's a
+        and writes directly against the database. Keep the consensus path narrow: it's a
         coordination mechanism, not a data path."
       </Insight>
     </div>
@@ -183,13 +182,12 @@ function ConsensusPanel() {
 function TransactionsPanel() {
   return (
     <div>
-      <h2 className="page-section-title">Distributed transactions — the options and their costs</h2>
+      <h2 className="page-section-title">Distributed transactions: the options and their costs</h2>
       <p className="page-body">
         ACID transactions are straightforward in a single database. The moment data spans
         multiple services or databases, everything gets harder. Two-phase commit works but
         blocks. Sagas work but require compensating actions. The outbox pattern bridges the
-        gap between database writes and event publishing. Every approach trades off something
-        — the question is which tradeoff fits your business requirements.
+        gap between database writes and event publishing. Every approach trades off something: the question is which tradeoff fits your business requirements.
       </p>
 
       <Decision question="Why is 2PC slow and fragile?">
@@ -219,8 +217,8 @@ function TransactionsPanel() {
         order (compensate: cancel order) → reserve inventory (compensate: release inventory) →
         charge payment (compensate: refund). If step 3 fails, you run compensating actions in
         reverse. Two orchestration styles: choreography (each service emits events, next service
-        listens — simple but hard to trace) and orchestration (a central orchestrator drives
-        the sequence — easier to reason about, single point of coordination). Use orchestration
+        listens: simple but hard to trace) and orchestration (a central orchestrator drives
+        the sequence: easier to reason about, single point of coordination). Use orchestration
         for complex sagas with many steps; choreography for 2-3 step flows.
       </Decision>
 
@@ -248,8 +246,7 @@ function TransactionsPanel() {
       <Insight>
         "For this order processing system, I'd use a saga with an orchestrator. The orchestrator
         manages the create-order → reserve-inventory → charge-payment flow and handles
-        compensations if any step fails. For event publishing, I'd use the outbox pattern —
-        write the order event to an outbox table in the same transaction as the order, and use
+        compensations if any step fails. For event publishing, I'd use the outbox pattern: write the order event to an outbox table in the same transaction as the order, and use
         Debezium CDC to publish it to Kafka. This gives me atomic business-data-plus-event
         writes without 2PC. I'd run an hourly reconciliation job to catch any edge cases where
         the saga and the actual state drift apart."
@@ -263,19 +260,19 @@ function TransactionsPanel() {
 function IdempotencyPanel() {
   return (
     <div>
-      <h2 className="page-section-title">Idempotency — the foundation of reliable distributed systems</h2>
+      <h2 className="page-section-title">Idempotency: the foundation of reliable distributed systems</h2>
       <p className="page-body">
         In a distributed system, any request can be retried. The network can duplicate
         packets, load balancers can retry on timeout, clients can resend on failure, and
         message queues deliver at-least-once. If your operations aren't idempotent, every
-        retry is a potential data corruption. Idempotency is not a nice-to-have — it's a
+        retry is a potential data corruption. Idempotency is not a nice-to-have: it's a
         structural requirement.
       </p>
 
       <Decision question="Why is idempotency non-negotiable?">
         <Pill type="red">critical</Pill> Consider: a client sends a payment request, the
         server processes it, but the response is lost in the network. The client retries.
-        Without idempotency, the customer is charged twice. This isn't a hypothetical — it
+        Without idempotency, the customer is charged twice. This isn't a hypothetical: it
         happens in production constantly. At-least-once delivery is the only practical
         guarantee most systems can provide. Combined with idempotent operations, at-least-once
         becomes effectively exactly-once. The formula is simple: at-least-once delivery +
@@ -288,25 +285,24 @@ function IdempotencyPanel() {
         a mapping of idempotency key → response. On duplicate requests, the server returns
         the stored response without re-executing the operation. Key design decisions: (1) scope
         the key to a user or account to prevent cross-user collisions, (2) set a TTL on stored
-        keys (24-72 hours is typical — retries after that are new requests), (3) handle
+        keys (24-72 hours is typical; retries after that are new requests), (3) handle
         concurrent duplicate requests with a database unique constraint on the idempotency key,
         and (4) store the full response so retries return the same result.
       </Decision>
 
       <Decision question="Which HTTP methods are naturally idempotent?">
         GET, PUT, DELETE are idempotent by design. GET returns data without side effects. PUT
-        replaces a resource — putting the same data twice leaves the resource in the same state.
-        DELETE removes a resource — deleting an already-deleted resource is a no-op (return 404
-        or 204, not an error). POST is NOT idempotent — posting the same order twice creates two
+        replaces a resource: putting the same data twice leaves the resource in the same state.
+        DELETE removes a resource: deleting an already-deleted resource is a no-op (return 404
+        or 204, not an error). POST is NOT idempotent: posting the same order twice creates two
         orders. To make POST idempotent, use an idempotency key header
         (Idempotency-Key: abc-123). Stripe does this for payment creation. PATCH is also not
-        inherently idempotent — "increment counter by 1" applied twice gives a different result
+        inherently idempotent: "increment counter by 1" applied twice gives a different result
         than applied once.
       </Decision>
 
       <Decision question="What deduplication strategies exist beyond idempotency keys?">
-        <Pill type="amber">nuanced</Pill> Bloom filters: probabilistic set membership — "is
-        this message ID one we've seen?" Fast and memory-efficient but has false positives
+        <Pill type="amber">nuanced</Pill> Bloom filters answer a probabilistic set-membership question: "is this message ID one we've seen?" Fast and memory-efficient but has false positives
         (might say "seen" when it hasn't). Good for high-volume event streams where occasional
         duplicate processing is acceptable. Idempotency stores (Redis SET with NX): exact
         deduplication with a TTL. Use for payment processing where false positives are
@@ -322,7 +318,7 @@ function IdempotencyPanel() {
         dedup fails. Always have a unique constraint on your natural key (e.g., order_id +
         line_item_id), not just the surrogate key. Conditional updates: UPDATE ... WHERE
         version = expected_version. The update only applies if the row hasn't been modified
-        since you read it. This is optimistic locking — it makes concurrent updates safe
+        since you read it. This is optimistic locking: it makes concurrent updates safe
         without explicit locks.
       </Decision>
 
@@ -330,7 +326,7 @@ function IdempotencyPanel() {
         "Every mutation endpoint in this API will require an Idempotency-Key header. The server
         stores the key in Redis with a 48-hour TTL. The first request executes normally and
         stores the response keyed by the idempotency key. Duplicate requests within 48 hours
-        return the stored response with a 200 status — the client can't distinguish a retry
+        return the stored response with a 200 status: the client can't distinguish a retry
         from a fresh response, which is exactly the behavior we want. For the payment service
         specifically, I'd also add a unique constraint on (account_id, idempotency_key) in
         Postgres as a second line of defense, because charging someone twice is the one failure
@@ -347,7 +343,7 @@ function AntiPatternsPanel() {
     <div>
       <h2 className="page-section-title">Anti-patterns vs. production-tested approaches</h2>
       <p className="page-body">
-        The difference between a senior and a production-grade answer isn't more buzzwords — it's
+        The difference between a senior and a production-grade answer isn't more buzzwords: it's
         demonstrating that you understand the tradeoffs, have opinions about defaults,
         and can articulate what you're giving up with each choice.
       </p>
@@ -361,7 +357,7 @@ function AntiPatternsPanel() {
           <span style={{ ...styles.dot, background: 'var(--text-success)' }} />
           "Strong consistency has a latency and availability cost. I'd use it for the payment
           ledger where correctness is non-negotiable, but use read-your-writes consistency
-          for user profiles — the updating user sees their change immediately, other users
+          for user profiles: the updating user sees their change immediately, other users
           can tolerate a few seconds of staleness. This lets me use read replicas for 95%
           of profile reads."
         </p>
@@ -374,7 +370,7 @@ function AntiPatternsPanel() {
         </p>
         <p style={styles.better}>
           <span style={{ ...styles.dot, background: 'var(--text-success)' }} />
-          "2PC across microservices is fragile — a coordinator crash blocks all participants.
+          "2PC across microservices is fragile: a coordinator crash blocks all participants.
           I'd use a saga with an orchestrator for the order flow, and the outbox pattern
           for reliable event publishing. Each service maintains ACID locally, and the saga
           provides eventual consistency across services with explicit compensating actions
@@ -389,7 +385,7 @@ function AntiPatternsPanel() {
         </p>
         <p style={styles.better}>
           <span style={{ ...styles.dot, background: 'var(--text-success)' }} />
-          "True exactly-once delivery is impossible in a distributed system — the Two Generals
+          "True exactly-once delivery is impossible in a distributed system: the Two Generals
           Problem proves this. What we actually provide is at-least-once delivery combined with
           idempotent consumers. Every consumer operation uses an idempotency key stored in Redis
           with a 48-hour TTL. The net effect is exactly-once processing semantics, even though
@@ -404,11 +400,10 @@ function AntiPatternsPanel() {
         </p>
         <p style={styles.better}>
           <span style={{ ...styles.dot, background: 'var(--text-success)' }} />
-          "Paxos is proven correct but notoriously difficult to implement. For our use case —
-          leader election and shard assignment — I'd use etcd, which implements Raft. Raft
+          "Paxos is proven correct but notoriously difficult to implement. For our use case (leader election and shard assignment), I'd use etcd, which implements Raft. Raft
           provides the same safety guarantees as Paxos but is designed for understandability,
           which matters when you're debugging a production incident at 3 AM. We don't need
-          to implement consensus ourselves — we need to use a battle-tested implementation
+          to implement consensus ourselves: we need to use a battle-tested implementation
           correctly."
         </p>
       </div>
@@ -416,7 +411,7 @@ function AntiPatternsPanel() {
       {/* Anti-pattern 5 */}
       <div style={styles.anti}>
         <p style={styles.strike}>
-          "We'll handle failures with retries and timeouts — the standard approach."
+          "We'll handle failures with retries and timeouts: the standard approach."
         </p>
         <p style={styles.better}>
           <span style={{ ...styles.dot, background: 'var(--text-success)' }} />
@@ -438,18 +433,18 @@ function AntiPatternsPanel() {
         <p style={styles.better}>
           <span style={{ ...styles.dot, background: 'var(--text-success)' }} />
           "That's the common simplification, but it's misleading. Partition tolerance isn't
-          a choice — partitions will happen. CAP really says: during a partition, pick
+          a choice: partitions will happen. CAP really says: during a partition, pick
           consistency (return errors rather than stale data) or availability (return stale
           data rather than errors). And most of the time there's no partition, so PACELC
-          is more useful — it adds the normal-operation tradeoff of latency vs. consistency.
-          Dynamo chose PA/EL — available and fast. Spanner chose PC/EC — consistent always,
+          is more useful: it adds the normal-operation tradeoff of latency vs. consistency.
+          Dynamo chose PA/EL: available and fast. Spanner chose PC/EC: consistent always,
           paying latency with TrueTime."
         </p>
       </div>
 
       <Insight>
         "The key differentiator in distributed systems questions isn't knowing the
-        theorems — it's showing that you understand the tradeoff space well enough to make
+        theorems: it's showing that you understand the tradeoff space well enough to make
         a defensible choice for a specific system. Don't recite CAP. Say what your system
         needs, what you're choosing, and what the cost of that choice is. What matters is
         judgment, not definitions."

@@ -18,7 +18,7 @@ export default function Diagrams() {
       <p style={S.eyebrow}>Architecture</p>
       <h1 style={S.h1}>{TOTALS.projects} systems, drawn from source</h1>
       <p style={S.sub}>
-        Every box on these diagrams cites the line of code it came from — {TOTALS.citations.toLocaleString()} citations
+        Every box on these diagrams cites the line of code it came from: {TOTALS.citations.toLocaleString()} citations
         across {TOTALS.count} diagrams, each one machine-checked against that project's own source. A
         diagram that cannot be checked is decoration.
       </p>
@@ -27,8 +27,7 @@ export default function Diagrams() {
         <p style={S.noteP}>
           <strong>On method.</strong> Each diagram was built from the code, not from the README. Where a
           project's own documentation described the system, that description was treated as a claim and
-          verified. In <strong>24 of the 31</strong>, at least one documented claim did not survive the reading —
-          a README describing subscriptions that lived elsewhere, layer counts that no longer matched, an
+          verified. In <strong>24 of the 31</strong>, at least one documented claim did not survive the reading: a README describing subscriptions that lived elsewhere, layer counts that no longer matched, an
           audit surface undercounted by six. Six projects contained code that could not be reached at all.
         </p>
         <p style={S.noteP}>
@@ -38,9 +37,9 @@ export default function Diagrams() {
 
       <p style={S.legend}>
         Three altitudes, because one picture cannot answer three questions.
-        <strong> L1</strong> is space — where things live, what talks to what.
-        <strong> L2</strong> is legality — which state transitions exist, which are guarded, where the
-        machine can stop. <strong>L2b</strong> is time — what happens in what order, and where the order
+        <strong> L1</strong> is space: where things live, what talks to what.
+        <strong> L2</strong> is legality, which state transitions exist, which are guarded, where the
+        machine can stop. <strong>L2b</strong> is time: what happens in what order, and where the order
         itself is the defect. The higher altitudes are drawn only where the code earns them: a real
         transition table rather than a status label assigned once, a real ordering hazard rather than a
         sequence of calls that could not go wrong.
@@ -76,7 +75,7 @@ export default function Diagrams() {
       </div>
 
       <p style={S.foot}>
-        I do this as consulting work — architecture recovered from code, for systems that outgrew their
+        I do this as consulting work: architecture recovered from code, for systems that outgrew their
         documentation. If yours needs it, <a href="/work-with-me" style={S.a}>the details are here</a>.
       </p>
     </div>
@@ -84,9 +83,9 @@ export default function Diagrams() {
 }
 
 const ALT_TITLE = {
-  L1: 'Space — where things live, and what talks to what',
-  L2: 'Legality — which state transitions exist, and which are guarded',
-  L2b: 'Time — what happens in what order, and where the order is the defect',
+  L1: 'Space: where things live, and what talks to what',
+  L2: 'Legality, which state transitions exist, and which are guarded',
+  L2b: 'Time: what happens in what order, and where the order is the defect',
 };
 
 const S = {

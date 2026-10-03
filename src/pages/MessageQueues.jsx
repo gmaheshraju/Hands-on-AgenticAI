@@ -38,20 +38,20 @@ function WhyPanel() {
       <p className="page-body">A queue adds operational complexity, delivery semantics to reason about, and a failure mode that didn't exist before. Name the specific problem it solves.</p>
 
       <Decision question="Decoupling producers from consumers?">
-        The producer doesn't need to know who consumes the message or when. This enables independent deployment, scaling, and failure isolation. The most common reason. Example: order service publishes "order.placed" — inventory, billing, and notification services each consume independently.
+        The producer doesn't need to know who consumes the message or when. This enables independent deployment, scaling, and failure isolation. The most common reason. Example: order service publishes "order.placed", and inventory, billing, and notification services each consume independently.
       </Decision>
       <Decision question="Absorbing traffic spikes (load leveling)?">
         The queue buffers burst traffic so downstream services process at their own pace. Without a queue, a 10x traffic spike either drops requests or crashes the downstream service. With a queue, the spike is absorbed and processed over time. Example: flash sale traffic buffered for the inventory service.
       </Decision>
       <Decision question="Guaranteeing delivery despite failures?">
-        If the consumer is down, the message waits in the queue until the consumer recovers. Without a queue, the producer must implement retry logic, dead-letter handling, and persistence — effectively building a queue. Example: payment webhooks that must eventually be processed even if the handler is temporarily down.
+        If the consumer is down, the message waits in the queue until the consumer recovers. Without a queue, the producer must implement retry logic, dead-letter handling, and persistence: effectively building a queue. Example: payment webhooks that must eventually be processed even if the handler is temporarily down.
       </Decision>
       <Decision question="Event-driven architecture / event sourcing?">
-        Events as the source of truth. Multiple consumers react to the same event independently. The event log is replayable. This is where Kafka's log-based model shines over traditional queues — the log is persistent and consumers track their own offsets. Example: user actions published to Kafka, consumed by analytics, search indexing, and recommendations independently.
+        Events as the source of truth. Multiple consumers react to the same event independently. The event log is replayable. This is where Kafka's log-based model shines over traditional queues: the log is persistent and consumers track their own offsets. Example: user actions published to Kafka, consumed by analytics, search indexing, and recommendations independently.
       </Decision>
 
       <Insight>
-        "I need a queue here for two reasons: load leveling (the payment processor handles 50 TPS but we see 500 TPS bursts during checkout) and delivery guarantee (a failed payment must be retried, not dropped). SQS with a dead-letter queue fits — I don't need ordering or fan-out."
+        "I need a queue here for two reasons: load leveling (the payment processor handles 50 TPS but we see 500 TPS bursts during checkout) and delivery guarantee (a failed payment must be retried, not dropped). SQS with a dead-letter queue fits: I don't need ordering or fan-out."
       </Insight>
     </div>
   );
@@ -60,24 +60,24 @@ function WhyPanel() {
 function GuaranteesPanel() {
   return (
     <div>
-      <h2 className="page-section-title">Delivery guarantees — the real decision</h2>
-      <p className="page-body">The delivery guarantee determines the technology. This is the most important section in this framework — get this wrong and the rest doesn't matter.</p>
+      <h2 className="page-section-title">Delivery guarantees: the real decision</h2>
+      <p className="page-body">The delivery guarantee determines the technology. This is the most important section in this framework: get this wrong and the rest doesn't matter.</p>
 
       <Decision question="At-most-once delivery">
         Message is delivered zero or one times. If delivery fails, the message is lost. Fastest and simplest. Used when: losing a message is acceptable (metrics, logs, analytics events). Implementation: fire-and-forget, no acknowledgment. UDP of the messaging world.
       </Decision>
       <Decision question="At-least-once delivery">
-        <Pill type="amber">most common</Pill> Message is delivered one or more times. Duplicates are possible. The consumer must be idempotent — processing the same message twice must produce the same result. This is the default for SQS, RabbitMQ, and Kafka. Most production systems use this because exactly-once is expensive and at-most-once loses messages.
+        <Pill type="amber">most common</Pill> Message is delivered one or more times. Duplicates are possible. The consumer must be idempotent: processing the same message twice must produce the same result. This is the default for SQS, RabbitMQ, and Kafka. Most production systems use this because exactly-once is expensive and at-most-once loses messages.
       </Decision>
       <Decision question="Exactly-once delivery">
-        <Pill type="red">hard</Pill> Message is delivered exactly one time. In distributed systems, true exactly-once is impossible across system boundaries (the Two Generals Problem). What systems call "exactly-once" is really "at-least-once delivery + idempotent processing" or "at-least-once + transactional deduplication." Kafka Streams achieves exactly-once within Kafka using transactional producers and idempotent writes — but only within the Kafka ecosystem, not to external systems.
+        <Pill type="red">hard</Pill> Message is delivered exactly one time. In distributed systems, true exactly-once is impossible across system boundaries (the Two Generals Problem). What systems call "exactly-once" is really "at-least-once delivery + idempotent processing" or "at-least-once + transactional deduplication." Kafka Streams achieves exactly-once within Kafka using transactional producers and idempotent writes, but only within the Kafka ecosystem, not to external systems.
       </Decision>
       <Decision question="Ordering guarantees">
-        Global ordering (all messages in total order) is expensive — it means single partition, single consumer, no parallelism. Partition-level ordering (messages with the same key are ordered) is the practical choice. Kafka guarantees order within a partition. SQS FIFO guarantees order within a message group. RabbitMQ guarantees order per queue with a single consumer. Ask: "does message B depend on message A having been processed first?" If yes, they need the same partition/group key.
+        Global ordering (all messages in total order) is expensive: it means single partition, single consumer, no parallelism. Partition-level ordering (messages with the same key are ordered) is the practical choice. Kafka guarantees order within a partition. SQS FIFO guarantees order within a message group. RabbitMQ guarantees order per queue with a single consumer. Ask: "does message B depend on message A having been processed first?" If yes, they need the same partition/group key.
       </Decision>
 
       <Insight>
-        "For payment processing, I need at-least-once delivery — losing a payment event is unacceptable. The payment handler must be idempotent: I'd use the payment ID as an idempotency key and check 'already processed' before executing. For analytics events, at-most-once is fine — a missing page view doesn't break the business."
+        "For payment processing, I need at-least-once delivery: losing a payment event is unacceptable. The payment handler must be idempotent: I'd use the payment ID as an idempotency key and check 'already processed' before executing. For analytics events, at-most-once is fine: a missing page view doesn't break the business."
       </Insight>
     </div>
   );
@@ -95,7 +95,7 @@ function ProfilesPanel() {
       ordering: 'Guaranteed within a partition only. Messages with the same key go to the same partition. Global ordering requires a single partition (kills parallelism).',
       delivery: 'At-least-once by default. Exactly-once within Kafka using idempotent producers + transactional APIs (Kafka Streams). Consumer offset commit is the deduplication mechanism.',
       ops: 'High. ZooKeeper (being replaced by KRaft), broker management, partition rebalancing, consumer group coordination. Managed options (Confluent Cloud, Amazon MSK) reduce this significantly.',
-      when: 'Event streaming, log aggregation, CDC (change data capture), event sourcing. When you need replay, multiple consumer groups, or very high throughput. NOT for simple task queues — it\'s overkill.',
+      when: 'Event streaming, log aggregation, CDC (change data capture), event sourcing. When you need replay, multiple consumer groups, or very high throughput. NOT for simple task queues: it\'s overkill.',
     },
     {
       name: 'Amazon SQS',
@@ -132,17 +132,17 @@ function ProfilesPanel() {
       tldr: 'Lightweight log-like queue built into Redis. Good for simple streaming without Kafka overhead.',
       model: 'Append-only log data structure in Redis. Consumer groups track individual consumer offsets (similar to Kafka). XADD writes, XREADGROUP reads. Messages persist until explicitly trimmed.',
       throughput: 'Hundreds of thousands of messages/sec on a single Redis node. Limited by Redis being single-threaded. Not suitable for Kafka-scale workloads.',
-      ordering: 'Guaranteed within a single stream. No partitioning — a single stream is on a single Redis node.',
+      ordering: 'Guaranteed within a single stream. No partitioning: a single stream is on a single Redis node.',
       delivery: 'At-least-once with consumer group acknowledgment (XACK). Pending entries list tracks unacknowledged messages for redelivery. No built-in exactly-once.',
-      ops: 'Low if you already run Redis. Redis persistence caveats apply — if Redis restarts between snapshots, messages can be lost. Redis Cluster can shard streams across nodes.',
+      ops: 'Low if you already run Redis. Redis persistence caveats apply: if Redis restarts between snapshots, messages can be lost. Redis Cluster can shard streams across nodes.',
       when: 'When you already have Redis and need a lightweight event stream without the operational cost of Kafka. Activity feeds, real-time notifications, simple event sourcing. Not for mission-critical message processing where durability matters.',
     },
   ];
 
   return (
     <div>
-      <h2 className="page-section-title">Queue profiles — know what each is built for</h2>
-      <p className="page-body">Click any card for the full breakdown — throughput, ordering, delivery guarantees, and operational cost.</p>
+      <h2 className="page-section-title">Queue profiles: know what each is built for</h2>
+      <p className="page-body">Click any card for the full breakdown: throughput, ordering, delivery guarantees, and operational cost.</p>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         {queues.map((q, i) => {
@@ -170,7 +170,7 @@ function ProfilesPanel() {
       </div>
 
       <Insight>
-        "Kafka is a distributed log — it's designed for event streaming with replay and multiple consumer groups. SQS is a task queue — it's designed for reliable point-to-point delivery with zero ops. Using Kafka as a task queue is like using Postgres as a cache — it works, but you're paying for capabilities you don't need."
+        "Kafka is a distributed log: it's designed for event streaming with replay and multiple consumer groups. SQS is a task queue: it's designed for reliable point-to-point delivery with zero ops. Using Kafka as a task queue is like using Postgres as a cache: it works, but you're paying for capabilities you don't need."
       </Insight>
     </div>
   );
@@ -179,7 +179,7 @@ function ProfilesPanel() {
 function PatternsPanel() {
   return (
     <div>
-      <h2 className="page-section-title">Messaging patterns — the architecture shapes</h2>
+      <h2 className="page-section-title">Messaging patterns: the architecture shapes</h2>
       <p className="page-body">The pattern determines the queue topology. Name the pattern before the technology.</p>
 
       <Decision question="Point-to-point (task queue)">
@@ -192,14 +192,14 @@ function PatternsPanel() {
         Producer sends a request message with a correlation ID and reply-to address. Consumer processes and sends response to the reply queue. Used for: async RPC, when you want queue benefits (load leveling, retry) with request-response semantics. RabbitMQ has first-class support. Kafka can do it but it's awkward.
       </Decision>
       <Decision question="Competing consumers">
-        Multiple consumers read from the same queue. Each message goes to one consumer. Used for: horizontal scaling of processing. Add more consumers to process faster. The queue acts as a load balancer. Kafka partitions are the unit of parallelism — max consumers per group = number of partitions.
+        Multiple consumers read from the same queue. Each message goes to one consumer. Used for: horizontal scaling of processing. Add more consumers to process faster. The queue acts as a load balancer. Kafka partitions are the unit of parallelism: max consumers per group = number of partitions.
       </Decision>
       <Decision question="Dead-letter queue (DLQ)">
         Messages that fail processing N times are moved to a separate queue for inspection. Every production queue system needs a DLQ. Without it, poison messages (messages that always fail) block the queue forever. SQS has built-in DLQ support. Kafka requires manual implementation (consumer catches exception, publishes to error topic).
       </Decision>
 
       <Insight>
-        "The order processing system needs fan-out — inventory, billing, and notifications all react to 'order.placed' independently. In AWS, I'd use SNS to fan out to three SQS queues, each with its own DLQ. Each service scales its consumers independently. If I'm on Kafka, three consumer groups on the same topic achieve the same fan-out."
+        "The order processing system needs fan-out: inventory, billing, and notifications all react to 'order.placed' independently. In AWS, I'd use SNS to fan out to three SQS queues, each with its own DLQ. Each service scales its consumers independently. If I'm on Kafka, three consumer groups on the same topic achieve the same fan-out."
       </Insight>
     </div>
   );
@@ -208,27 +208,27 @@ function PatternsPanel() {
 function FailuresPanel() {
   return (
     <div>
-      <h2 className="page-section-title">Failure modes — what goes wrong with queues</h2>
+      <h2 className="page-section-title">Failure modes: what goes wrong with queues</h2>
       <p className="page-body">Queues shift failures from synchronous (caller sees an error) to asynchronous (failures are silent until you look). This is the hidden cost of async processing.</p>
 
       <Decision question="Poison messages">
-        <Pill type="red">P0 risk</Pill> A message that always fails processing (malformed data, triggering a bug). Without a DLQ, the message is retried forever, blocking the queue. With a DLQ, it's moved aside after N retries. But you need monitoring on the DLQ — a growing DLQ means you're silently losing work. Set alerts on DLQ depth.
+        <Pill type="red">P0 risk</Pill> A message that always fails processing (malformed data, triggering a bug). Without a DLQ, the message is retried forever, blocking the queue. With a DLQ, it's moved aside after N retries. But you need monitoring on the DLQ: a growing DLQ means you're silently losing work. Set alerts on DLQ depth.
       </Decision>
       <Decision question="Consumer lag">
-        Consumers process messages slower than producers publish. The queue grows. Eventually, messages are delayed by minutes or hours. In Kafka, consumer lag is measured in offsets — a growing lag means you need more partitions or faster consumers. In SQS, the "ApproximateNumberOfMessages" metric shows queue depth. Monitor this as a leading indicator.
+        Consumers process messages slower than producers publish. The queue grows. Eventually, messages are delayed by minutes or hours. In Kafka, consumer lag is measured in offsets: a growing lag means you need more partitions or faster consumers. In SQS, the "ApproximateNumberOfMessages" metric shows queue depth. Monitor this as a leading indicator.
       </Decision>
       <Decision question="Message ordering violations">
-        Even with "ordered" queues, retries can cause ordering violations. Message A fails, message B succeeds, message A is retried — now B was processed before A. Solutions: idempotent consumers that can handle out-of-order processing, or sequential processing (single consumer, no parallelism — slow but ordered).
+        Even with "ordered" queues, retries can cause ordering violations. Message A fails, message B succeeds, message A is retried: now B was processed before A. Solutions: idempotent consumers that can handle out-of-order processing, or sequential processing (single consumer, no parallelism: slow but ordered).
       </Decision>
       <Decision question="Duplicate processing">
-        At-least-once delivery means duplicates happen. A consumer processes a message, the ack is lost (network blip), the message is redelivered. If the consumer isn't idempotent, the work is done twice. For payments, this means double-charging. Solution: idempotency key stored in the database — check before processing, mark after processing, in the same transaction.
+        At-least-once delivery means duplicates happen. A consumer processes a message, the ack is lost (network blip), the message is redelivered. If the consumer isn't idempotent, the work is done twice. For payments, this means double-charging. Solution: an idempotency key stored in the database, checked before processing and marked after processing in the same transaction.
       </Decision>
       <Decision question="Backpressure propagation">
-        When the consumer is overwhelmed, how does the producer know to slow down? Kafka: producers get errors when broker disk is full. SQS: no backpressure — the queue grows until it hits the retention limit (14 days). RabbitMQ: producer flow control kicks in when memory is high. Design for backpressure: set queue size limits, monitor depth, and have a plan for when the queue is full (reject, drop oldest, apply backpressure to upstream).
+        When the consumer is overwhelmed, how does the producer know to slow down? Kafka: producers get errors when broker disk is full. SQS: no backpressure: the queue grows until it hits the retention limit (14 days). RabbitMQ: producer flow control kicks in when memory is high. Design for backpressure: set queue size limits, monitor depth, and have a plan for when the queue is full (reject, drop oldest, apply backpressure to upstream).
       </Decision>
 
       <Insight>
-        "The most dangerous queue failure is a silently growing DLQ. The system looks healthy — no errors, no alerts, messages are flowing — but 5% of orders are landing in the DLQ and nobody knows. I'd set an alert on DLQ depth &gt; 0 as a P1 and require every DLQ to have a documented remediation playbook."
+        "The most dangerous queue failure is a silently growing DLQ. The system looks healthy (no errors, no alerts, messages are flowing) but 5% of orders are landing in the DLQ and nobody knows. I'd set an alert on DLQ depth &gt; 0 as a P1 and require every DLQ to have a documented remediation playbook."
       </Insight>
     </div>
   );
@@ -239,11 +239,11 @@ function AntiPatternsPanel() {
     { bad: 'I\'ll use Kafka because it\'s the industry standard.',
       good: 'The use case is a background job queue processing 50 messages/sec with no ordering requirement. SQS handles this with zero operational cost. Kafka\'s partition management, ZooKeeper, and consumer group coordination add complexity with no benefit here.' },
     { bad: 'I\'ll use a queue to make the system faster.',
-      good: 'A queue doesn\'t make processing faster — it makes the response async. The user gets a 202 Accepted instead of waiting. Total processing time is the same or slightly higher (queue overhead). The benefit is responsiveness and resilience, not speed.' },
+      good: 'A queue doesn\'t make processing faster: it makes the response async. The user gets a 202 Accepted instead of waiting. Total processing time is the same or slightly higher (queue overhead). The benefit is responsiveness and resilience, not speed.' },
     { bad: 'I\'ll guarantee exactly-once delivery.',
       good: 'True exactly-once across system boundaries is impossible in distributed systems. I\'d use at-least-once delivery with idempotent consumers. The payment handler checks the idempotency key before processing, so a duplicate message is a no-op.' },
     { bad: 'Messages will be processed in order because I\'m using a FIFO queue.',
-      good: 'FIFO ordering is per message group (SQS) or per partition (Kafka), not global. If I need ordering for messages from the same user, I\'d use user_id as the partition/group key. Messages from different users can be processed in any order — that\'s where parallelism comes from.' },
+      good: 'FIFO ordering is per message group (SQS) or per partition (Kafka), not global. If I need ordering for messages from the same user, I\'d use user_id as the partition/group key. Messages from different users can be processed in any order: that\'s where parallelism comes from.' },
     { bad: 'If the queue goes down, we\'ll just retry from the producer.',
       good: 'If the queue is the single point of failure, I need multi-AZ deployment (SQS is multi-AZ by default, Kafka needs cross-AZ replication configured). For Kafka, I\'d set replication factor ≥ 3 and min.insync.replicas = 2 so no single broker failure causes message loss.' },
   ];

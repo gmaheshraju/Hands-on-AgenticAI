@@ -11,39 +11,39 @@ const DBS = [
     breaks: 'Write-heavy at extreme scale (>50K TPS), horizontal sharding is manual and painful (Citus helps), vacuum overhead on update-heavy tables',
     ops: 'Low. Mature tooling, well-understood. RDS/Aurora reduce most operational burden.',
     take: 'Start here. Move data out only when you hit a specific bottleneck you can name.' },
-  { name: 'DynamoDB', tldr: 'Predictable latency at any scale — if you know your access patterns cold.',
+  { name: 'DynamoDB', tldr: 'Predictable latency at any scale: if you know your access patterns cold.',
     shines: 'Single-digit ms at any scale, auto-scaling, zero ops overhead, partition + sort key access patterns',
     breaks: 'Ad-hoc queries, joins, transactions across partitions, hot partitions, changing access patterns after launch',
-    ops: 'Very low infra ops. Very high design-time cost — data modeling mistakes are expensive to fix.',
+    ops: 'Very low infra ops. Very high design-time cost: data modeling mistakes are expensive to fix.',
     take: 'DynamoDB punishes you for not knowing your queries upfront. Only use it when access patterns are stable and you need guaranteed latency.' },
-  { name: 'MongoDB', tldr: 'Document-shaped access with flexible schema — not a relational escape hatch.',
+  { name: 'MongoDB', tldr: 'Document-shaped access with flexible schema, not a relational escape hatch.',
     shines: 'Self-contained documents fetched by ID, rapid schema iteration, embedded arrays/objects that avoid joins',
     breaks: 'Cross-document joins (doing them in app code is an anti-pattern at scale), unbounded array growth, weak transactional guarantees',
     ops: 'Medium. Atlas reduces ops, but schema evolution and data modeling mistakes compound silently.',
     take: 'MongoDB works when the document IS the query result. If you\'re ever joining across collections in application code, you picked the wrong store.' },
-  { name: 'Redis', tldr: 'Sub-ms reads — cache, counters, sessions, rate limiting. Not your source of truth.',
+  { name: 'Redis', tldr: 'Sub-ms reads: cache, counters, sessions, rate limiting. Not your source of truth.',
     shines: 'Cache, session store, rate limiting (INCR + TTL), leaderboards (sorted sets), pub/sub, queues (streams)',
-    breaks: 'As primary source of truth — AOF/RDB persistence is not the same as durability. Memory cost scales linearly.',
-    ops: 'Low for cache use. High if you\'re relying on persistence — you now own failover, backup, and memory management.',
+    breaks: 'As primary source of truth: AOF/RDB persistence is not the same as durability. Memory cost scales linearly.',
+    ops: 'Low for cache use. High if you\'re relying on persistence: you now own failover, backup, and memory management.',
     take: 'Redis is a performance layer, not a storage layer. Every key in Redis should have a source-of-truth backing it somewhere else.' },
-  { name: 'Cassandra', tldr: 'Write-heavy, time-ordered, globally distributed — with significant operational cost.',
+  { name: 'Cassandra', tldr: 'Write-heavy, time-ordered, globally distributed: with significant operational cost.',
     shines: 'Append-heavy writes, time-series by partition key + clustering key, multi-region replication, linear horizontal scaling',
     breaks: 'Reads across partitions, ad-hoc queries, lightweight transactions are limited, tombstone management, compaction storms',
     ops: 'High. JVM tuning, compaction strategy, repair cycles, tombstone cleanup. This is a team-level decision.',
-    take: 'Cassandra\'s operational cost is real. Only reach for it when you need write throughput and availability that Postgres replicas can\'t serve — and you have the team to run it.' },
-  { name: 'Elasticsearch', tldr: 'Search, ranking, and analytics on text — always backed by a primary store.',
+    take: 'Cassandra\'s operational cost is real. Only reach for it when you need write throughput and availability that Postgres replicas can\'t serve, and you have the team to run it.' },
+  { name: 'Elasticsearch', tldr: 'Search, ranking, and analytics on text: always backed by a primary store.',
     shines: 'Full-text search with relevance ranking, log aggregation, faceted search, autocomplete, analytics on semi-structured data',
-    breaks: 'As source of truth — eventual consistency, split-brain risk, no transactions. Index corruption requires full reindex.',
+    breaks: 'As source of truth: eventual consistency, split-brain risk, no transactions. Index corruption requires full reindex.',
     ops: 'High. Cluster management, shard rebalancing, mapping explosions, heap tuning.',
-    take: 'ES is a search index, not a database. Always have a pipeline that rebuilds the index from the source of truth. If the index dies, you rebuild — you don\'t restore from backup.' },
+    take: 'ES is a search index, not a database. Always have a pipeline that rebuilds the index from the source of truth. If the index dies, you rebuild: you don\'t restore from backup.' },
 ];
 
 const ANTIS = [
   { bad: 'I\'ll use DynamoDB because it scales.', good: 'At this scale, Postgres handles it. If we grow past [specific threshold], I\'d migrate the [specific table] to DynamoDB because [specific access pattern].' },
-  { bad: 'I\'ll use MongoDB because the schema is flexible.', good: 'The user profile is a natural document — self-contained, fetched by ID, rarely joined. MongoDB fits here. The order-to-inventory relationship needs joins, so that stays relational.' },
+  { bad: 'I\'ll use MongoDB because the schema is flexible.', good: 'The user profile is a natural document: self-contained, fetched by ID, rarely joined. MongoDB fits here. The order-to-inventory relationship needs joins, so that stays relational.' },
   { bad: 'I\'ll add Redis for caching.', good: 'The read-to-write ratio here is ~500:1 with a 95th percentile latency budget of 50ms. I\'d cache the [specific query] in Redis with a TTL of [duration] and invalidate on [specific write event].' },
-  { bad: 'We need strong consistency for everything.', good: 'The payment ledger needs serializable isolation. The user\'s order history can tolerate 5 seconds of staleness — I\'d serve it from a read replica.' },
-  { bad: 'Let\'s use a microservice per entity with its own database.', good: 'I\'d start with a single Postgres instance. If we later need to split, the [specific bounded context] is the natural seam — it has no joins to the rest.' },
+  { bad: 'We need strong consistency for everything.', good: 'The payment ledger needs serializable isolation. The user\'s order history can tolerate 5 seconds of staleness: I\'d serve it from a read replica.' },
+  { bad: 'Let\'s use a microservice per entity with its own database.', good: 'I\'d start with a single Postgres instance. If we later need to split, the [specific bounded context] is the natural seam: it has no joins to the rest.' },
 ];
 
 export default function DatabaseSelection() {
@@ -56,7 +56,7 @@ export default function DatabaseSelection() {
       <h1 className="page-title">Database Selection</h1>
       <p className="page-subtitle">
         The 6-question decision tree that reflects deep systems understanding. Start from the
-        top — each question narrows the field before you ever name a technology.
+        top: each question narrows the field before you ever name a technology.
       </p>
 
       <TabNav tabs={TABS} active={tab} onChange={setTab} />
@@ -80,7 +80,7 @@ function ScalePanel() {
       <h2 className="page-section-title">Calibrate scale before choosing</h2>
       <p className="page-body">Most engineers jump to DynamoDB or Cassandra for problems that Postgres handles trivially. Naming a distributed system for a small-scale problem signals inexperience.</p>
       <Decision question="How much data? How many QPS?">
-        <Pill type="green">small</Pill> Under 10M rows, under 1K QPS — single Postgres handles everything. The database choice barely matters. Say this out loud.
+        <Pill type="green">small</Pill> Under 10M rows, under 1K QPS: single Postgres handles everything. The database choice barely matters. Say this out loud.
       </Decision>
       <Decision question="10M–1B rows, 1K–100K QPS?">
         <Pill type="amber">medium</Pill> Postgres with read replicas + Redis cache covers most cases. Shard only if you can identify the partition key clearly.
@@ -88,7 +88,7 @@ function ScalePanel() {
       <Decision question="Beyond 1B rows or 100K+ QPS?">
         <Pill type="red">large</Pill> Now the database choice is load-bearing. DynamoDB, Cassandra, or purpose-built stores earn their complexity. Justify the operational cost.
       </Decision>
-      <Insight>"At this scale, Postgres with proper indexing and a read replica handles it. I'd only reach for DynamoDB if we're looking at 100K+ QPS with a clear partition key — the operational overhead isn't free."</Insight>
+      <Insight>"At this scale, Postgres with proper indexing and a read replica handles it. I'd only reach for DynamoDB if we're looking at 100K+ QPS with a clear partition key: the operational overhead isn't free."</Insight>
     </div>
   );
 }
@@ -100,11 +100,11 @@ function AccessPanel() {
       <p className="page-body">The access pattern determines the engine. Name the query shape first, then the technology that serves it.</p>
       <Decision question="Point lookup by ID?">Any engine with a primary key index. At small scale, Postgres. At massive scale with single-digit-ms latency, DynamoDB or Redis.</Decision>
       <Decision question="Range query by time?">Postgres B-tree index, DynamoDB sort key, Cassandra clustering key, or purpose-built time-series (TimescaleDB, InfluxDB) at scale.</Decision>
-      <Decision question="Full-text or relevance-ranked search?">Elasticsearch / OpenSearch with an inverted index. Postgres GIN + tsvector works for simpler cases — mention both.</Decision>
+      <Decision question="Full-text or relevance-ranked search?">Elasticsearch / OpenSearch with an inverted index. Postgres GIN + tsvector works for simpler cases: mention both.</Decision>
       <Decision question="Location / proximity search?">PostGIS, geospatial indexes, or a dedicated geospatial service. Mention the query shape: "find all within radius" vs. "nearest K."</Decision>
-      <Decision question="Large blobs — files, images, video?">Object storage (S3). Store the metadata pointer in your primary DB. Never store blobs in your transactional database.</Decision>
-      <Decision question="Graph traversal — friends-of-friends, recommendations?">Neo4j or a graph layer. Recursive SQL joins degrade past 2–3 hops. Mention when relational is good enough and when it breaks.</Decision>
-      <Insight>"Real systems are polyglot — Uber uses Postgres + Redis + Kafka + S3 + Elasticsearch together. The question isn't which DB. It's which store for which access pattern."</Insight>
+      <Decision question="Large blobs: files, images, video?">Object storage (S3). Store the metadata pointer in your primary DB. Never store blobs in your transactional database.</Decision>
+      <Decision question="Graph traversal: friends-of-friends, recommendations?">Neo4j or a graph layer. Recursive SQL joins degrade past 2–3 hops. Mention when relational is good enough and when it breaks.</Decision>
+      <Insight>"Real systems are polyglot: Uber uses Postgres + Redis + Kafka + S3 + Elasticsearch together. The question isn't which DB. It's which store for which access pattern."</Insight>
     </div>
   );
 }
@@ -114,10 +114,10 @@ function JoinsPanel() {
     <div>
       <h2 className="page-section-title">The join question</h2>
       <p className="page-body">This is the single biggest fork in the decision tree that most engineers miss. It separates relational from document/KV thinking.</p>
-      <Decision question="Do you need joins across entities?">Strong signal toward relational (Postgres, MySQL). Joins in application code at scale is a well-known anti-pattern — it multiplies latency and breaks under load.</Decision>
+      <Decision question="Do you need joins across entities?">Strong signal toward relational (Postgres, MySQL). Joins in application code at scale is a well-known anti-pattern: it multiplies latency and breaks under load.</Decision>
       <Decision question="Is each entity self-contained?">If "fetch one document by ID" gives you everything you need (user profile, product listing), document stores (MongoDB, DynamoDB) work naturally.</Decision>
-      <Decision question="Mixed — some joins, some self-contained?">Use relational for the core transactional model. Denormalize into a document store or cache for the read-heavy, self-contained access patterns.</Decision>
-      <Insight>"MongoDB is great when each document is the complete unit of access. It falls apart when you start needing cross-document queries that look like joins — that's when you're fighting the engine instead of using it."</Insight>
+      <Decision question="Mixed: some joins, some self-contained?">Use relational for the core transactional model. Denormalize into a document store or cache for the read-heavy, self-contained access patterns.</Decision>
+      <Insight>"MongoDB is great when each document is the complete unit of access. It falls apart when you start needing cross-document queries that look like joins: that's when you're fighting the engine instead of using it."</Insight>
     </div>
   );
 }
@@ -125,13 +125,13 @@ function JoinsPanel() {
 function ConsistencyPanel() {
   return (
     <div>
-      <h2 className="page-section-title">Consistency — what breaks if data is stale?</h2>
-      <p className="page-body">Don't cite the CAP theorem abstractly. Ground it in business impact — that's what separates theory from engineering judgment.</p>
+      <h2 className="page-section-title">Consistency: what breaks if data is stale?</h2>
+      <p className="page-body">Don't cite the CAP theorem abstractly. Ground it in business impact: that's what separates theory from engineering judgment.</p>
       <Decision question='"What happens if this data is stale for 5 seconds?"'>This one question replaces the CAP theorem slide. Ask it for every entity in your design.</Decision>
-      <Decision question="Nothing serious — profile photo, feed ranking">Eventual consistency. Optimize for availability and horizontal scale. Caches, read replicas, async replication.</Decision>
-      <Decision question="Money, trust, or legal — balance, payment, inventory">Strong consistency. Single-leader writes, synchronous replication, or serializable isolation. Mention the latency tradeoff you're accepting.</Decision>
-      <Decision question="Correctness with recovery — payment status, order state">You need idempotency + reconciliation, not just strong consistency. Mention idempotency keys, exactly-once delivery patterns, and async reconciliation jobs.</Decision>
-      <Insight>"For the payment ledger, I'd use Postgres with serializable isolation on the write path. For the user's order history view, I'd read from a denormalized replica with eventual consistency — stale-by-seconds is fine there. Same data, two consistency models, chosen per access pattern."</Insight>
+      <Decision question="Nothing serious: profile photo, feed ranking">Eventual consistency. Optimize for availability and horizontal scale. Caches, read replicas, async replication.</Decision>
+      <Decision question="Money, trust, or legal: balance, payment, inventory">Strong consistency. Single-leader writes, synchronous replication, or serializable isolation. Mention the latency tradeoff you're accepting.</Decision>
+      <Decision question="Correctness with recovery: payment status, order state">You need idempotency + reconciliation, not just strong consistency. Mention idempotency keys, exactly-once delivery patterns, and async reconciliation jobs.</Decision>
+      <Insight>"For the payment ledger, I'd use Postgres with serializable isolation on the write path. For the user's order history view, I'd read from a denormalized replica with eventual consistency: stale-by-seconds is fine there. Same data, two consistency models, chosen per access pattern."</Insight>
     </div>
   );
 }
@@ -139,14 +139,14 @@ function ConsistencyPanel() {
 function WritesPanel() {
   return (
     <div>
-      <h2 className="page-section-title">Write patterns — where most designs silently break</h2>
+      <h2 className="page-section-title">Write patterns: where most designs silently break</h2>
       <p className="page-body">Engineers obsess over reads. Staff engineers know that bad write patterns cause outages. Name the write shape before the read shape.</p>
-      <Decision question="Append-only — logs, events, analytics">LSM-based stores (Cassandra, RocksDB), Kafka for streaming, S3 for cold storage. Append-only is the easiest write pattern to scale.</Decision>
-      <Decision question="Frequent updates to the same row — counters, status">Hot rows cause lock contention. Solutions: write-behind with Redis, sharded counters, or CRDT-based merging. Name the specific contention risk.</Decision>
-      <Decision question="High write fan-out — social feeds, notifications">Fan-out-on-write vs fan-out-on-read is a design decision, not a database decision. Name the tradeoff: write amplification vs read latency.</Decision>
-      <Decision question="Multi-entity transactions — transfers, bookings">Relational DB is the safer first choice. Distributed transactions (2PC, Saga) add complexity — only reach for them when entities must live in different stores.</Decision>
+      <Decision question="Append-only: logs, events, analytics">LSM-based stores (Cassandra, RocksDB), Kafka for streaming, S3 for cold storage. Append-only is the easiest write pattern to scale.</Decision>
+      <Decision question="Frequent updates to the same row: counters, status">Hot rows cause lock contention. Solutions: write-behind with Redis, sharded counters, or CRDT-based merging. Name the specific contention risk.</Decision>
+      <Decision question="High write fan-out: social feeds, notifications">Fan-out-on-write vs fan-out-on-read is a design decision, not a database decision. Name the tradeoff: write amplification vs read latency.</Decision>
+      <Decision question="Multi-entity transactions: transfers, bookings">Relational DB is the safer first choice. Distributed transactions (2PC, Saga) add complexity: only reach for them when entities must live in different stores.</Decision>
       <Decision question="Read/write ratio">1000:1 read-heavy (timeline) → optimize reads with caching + denormalization. 1:1 balanced (chat) → optimize for write throughput. 1:100 write-heavy (IoT) → append-only stores.</Decision>
-      <Insight>"The counter update is a hot-row problem. I'd buffer writes in Redis with periodic flush to Postgres, accepting eventual consistency on the displayed count. The alternative — sharded counters in the DB — works but adds read-time aggregation cost."</Insight>
+      <Insight>"The counter update is a hot-row problem. I'd buffer writes in Redis with periodic flush to Postgres, accepting eventual consistency on the displayed count. The alternative (sharded counters in the DB) works but adds read-time aggregation cost."</Insight>
     </div>
   );
 }
@@ -155,7 +155,7 @@ function ProfilesPanel({ expandedDb, setExpandedDb }) {
   return (
     <div>
       <h2 className="page-section-title">Database profiles</h2>
-      <p className="page-body">Click any card to see the staff-level nuance — when it shines, when it breaks, and the operational cost most engineers overlook.</p>
+      <p className="page-body">Click any card to see the staff-level nuance: when it shines, when it breaks, and the operational cost most engineers overlook.</p>
       <div style={styles.dbGrid}>
         {DBS.map((db, i) => {
           const ex = expandedDb === i;
@@ -196,7 +196,7 @@ function AntiPatternsPanel() {
   return (
     <div>
       <h2 className="page-section-title">Common misconceptions</h2>
-      <p className="page-body">These are the answers that get you passed over. The fix isn't more knowledge — it's showing engineering judgment.</p>
+      <p className="page-body">These are the answers that get you passed over. The fix isn't more knowledge: it's showing engineering judgment.</p>
       {ANTIS.map((ap, i) => (
         <div key={i} style={styles.anti}>
           <p style={{ marginBottom: 8 }}>
@@ -350,7 +350,7 @@ function DesignProblemPanel() {
       <h2 className="page-section-title">Design Problem: URL Shortener</h2>
       <p className="page-body">
         Classic system design question. The database decision here is the core of the
-        architecture — everything else follows from it. Walk through the 6-question
+        architecture: everything else follows from it. Walk through the 6-question
         framework to arrive at the answer.
       </p>
 
@@ -368,12 +368,12 @@ function DesignProblemPanel() {
       <UrlShortenerDiagram />
 
       <Decision question="Why DynamoDB over Postgres?">
-        At 100M rows and 10K QPS, Postgres handles it. But the access pattern is pure key-value — partition key lookup, no joins, no transactions, no complex queries. DynamoDB gives single-digit ms latency with zero operational overhead (no vacuum, no connection pooling, no replica lag). The data model is one table with one access pattern — this is DynamoDB's sweet spot.
+        At 100M rows and 10K QPS, Postgres handles it. But the access pattern is pure key-value: partition key lookup, no joins, no transactions, no complex queries. DynamoDB gives single-digit ms latency with zero operational overhead (no vacuum, no connection pooling, no replica lag). The data model is one table with one access pattern: this is DynamoDB's sweet spot.
       </Decision>
 
       <Decision question="Why Redis in front?">
         <Pill type="amber">20:1 read/write ratio</Pill>
-        URL access follows a Zipf distribution — the top 20% of URLs serve 80% of traffic. Caching hot URLs in Redis drops DynamoDB reads from 10K/sec to ~2K/sec (80% cache hit rate), reducing cost and latency. TTL of 24h, cache-aside pattern. Redis is the performance layer, DynamoDB is the truth.
+        URL access follows a Zipf distribution: the top 20% of URLs serve 80% of traffic. Caching hot URLs in Redis drops DynamoDB reads from 10K/sec to ~2K/sec (80% cache hit rate), reducing cost and latency. TTL of 24h, cache-aside pattern. Redis is the performance layer, DynamoDB is the truth.
       </Decision>
 
       <Decision question="Why CloudFront?">
@@ -381,11 +381,11 @@ function DesignProblemPanel() {
       </Decision>
 
       <Decision question="What about the short code generation?">
-        Counter-based (auto-increment) is simple but creates a single point of serialization. For 500 writes/sec, pre-generate batches of short codes — a Lambda generates 10K codes ahead of time, stores them in a "codes" table, and the write Lambda pops one atomically (DynamoDB conditional write). No collisions, no coordination, horizontally scalable.
+        Counter-based (auto-increment) is simple but creates a single point of serialization. For 500 writes/sec, pre-generate batches of short codes: a Lambda generates 10K codes ahead of time, stores them in a "codes" table, and the write Lambda pops one atomically (DynamoDB conditional write). No collisions, no coordination, horizontally scalable.
       </Decision>
 
       <Insight>
-        "I'd start with DynamoDB for the URL mappings — the access pattern is pure key-value lookup by short code, no joins, eventual consistency is fine since URLs don't change after creation. I'd put ElastiCache in front because URL access follows Zipf — the top 20% of URLs will serve 80% of reads. And CloudFront caches the 301 redirects at the edge, so popular URLs resolve in single-digit milliseconds without hitting compute at all. The total DynamoDB cost at 100M items with 2K effective reads/sec after caching is about $50/month."
+        "I'd start with DynamoDB for the URL mappings: the access pattern is pure key-value lookup by short code, no joins, eventual consistency is fine since URLs don't change after creation. I'd put ElastiCache in front because URL access follows Zipf: the top 20% of URLs will serve 80% of reads. And CloudFront caches the 301 redirects at the edge, so popular URLs resolve in single-digit milliseconds without hitting compute at all. The total DynamoDB cost at 100M items with 2K effective reads/sec after caching is about $50/month."
       </Insight>
     </div>
   );

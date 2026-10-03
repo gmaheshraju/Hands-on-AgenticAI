@@ -7,15 +7,15 @@ const TABS = ['State Machines', 'Workflow Orchestration', 'Distributed State', '
 
 const ANTIS = [
   { bad: 'I\'ll use a status field with string values and check it everywhere.',
-    good: 'I\'d define an explicit state machine with a transition table. Each state lists its allowed next states and the guard conditions. Any transition not in the table is rejected at the boundary — no scattered if-checks.' },
+    good: 'I\'d define an explicit state machine with a transition table. Each state lists its allowed next states and the guard conditions. Any transition not in the table is rejected at the boundary: no scattered if-checks.' },
   { bad: 'We\'ll use a saga for everything since we have microservices.',
-    good: 'For the payment + inventory reservation, I\'d use orchestration (Temporal) because the compensation logic is complex and needs to be centrally visible. For the notification fanout after order confirmation, choreography is fine — it\'s fire-and-forget with no rollback.' },
+    good: 'For the payment + inventory reservation, I\'d use orchestration (Temporal) because the compensation logic is complex and needs to be centrally visible. For the notification fanout after order confirmation, choreography is fine: it\'s fire-and-forget with no rollback.' },
   { bad: 'I\'ll add a distributed lock so only one instance processes this.',
-    good: 'I\'d use a fencing token with the lock. The lock itself only provides best-effort mutual exclusion — a stale holder can still write after the lock expires. The fencing token ensures the storage layer rejects writes from expired holders.' },
+    good: 'I\'d use a fencing token with the lock. The lock itself only provides best-effort mutual exclusion: a stale holder can still write after the lock expires. The fencing token ensures the storage layer rejects writes from expired holders.' },
   { bad: 'We need to handle all the state transitions in the API layer.',
-    good: 'State transitions happen in exactly one place — the state machine gateway. The API layer requests a transition, the gateway validates it against the transition table, applies guards, emits events, and persists atomically. No other code path can mutate order state.' },
-  { bad: 'I\'ll use a boolean flag for each status — isPaid, isShipped, isDelivered.',
-    good: 'Boolean flags create 2^n possible states, most of which are illegal (isPaid=false, isDelivered=true). An explicit enum state with a transition table makes illegal states unrepresentable — you can\'t reach DELIVERED without passing through SHIPPED.' },
+    good: 'State transitions happen in exactly one place: the state machine gateway. The API layer requests a transition, the gateway validates it against the transition table, applies guards, emits events, and persists atomically. No other code path can mutate order state.' },
+  { bad: 'I\'ll use a boolean flag for each status: isPaid, isShipped, isDelivered.',
+    good: 'Boolean flags create 2^n possible states, most of which are illegal (isPaid=false, isDelivered=true). An explicit enum state with a transition table makes illegal states unrepresentable: you can\'t reach DELIVERED without passing through SHIPPED.' },
 ];
 
 export default function StateMachines() {
@@ -29,7 +29,7 @@ export default function StateMachines() {
         Every production outage you remember involved state. A payment stuck in
         "processing," an order both "cancelled" and "shipped," a workflow that
         retried forever. Explicit state machines are how staff engineers prevent
-        entire categories of bugs — not by being more careful, but by making
+        entire categories of bugs, not by being more careful, but by making
         illegal states structurally impossible.
       </p>
 
@@ -53,13 +53,13 @@ function StateMachinesPanel() {
       <p className="page-body">
         A boolean flag is a 1-bit state machine you forgot to design. Two booleans
         give you four states. Three give you eight. Most combinations are illegal,
-        but nothing enforces that — until production finds the impossible state at
+        but nothing enforces that: until production finds the impossible state at
         3 AM.
       </p>
 
-      <Decision question="Boolean flags vs. enum state — when does it matter?">
+      <Decision question="Boolean flags vs. enum state: when does it matter?">
         <Pill type="red">flags</Pill> With N boolean flags you get 2^N possible states.
-        An order with isPaid, isShipped, isCancelled has 8 combinations — at least 4
+        An order with isPaid, isShipped, isCancelled has 8 combinations: at least 4
         are illegal (cancelled + shipped, unpaid + delivered). Nothing prevents these
         at the type level. An enum state field with a transition table has exactly the
         states you defined, and transitions are validated at a single boundary. The
@@ -68,8 +68,8 @@ function StateMachinesPanel() {
 
       <Decision question="What belongs in a state transition table?">
         A transition table maps (current_state, event) to (next_state, guard, side_effects).
-        The guard is a pure predicate — "is payment confirmed?" The side effects are
-        actions triggered on transition — "send confirmation email," "reserve inventory."
+        The guard is a pure predicate: "is payment confirmed?" The side effects are
+        actions triggered on transition: "send confirmation email," "reserve inventory."
         Separating guards from side effects is critical: guards are synchronous and
         determine whether the transition is allowed; side effects are often async and
         must not block the transition decision.
@@ -86,18 +86,18 @@ function StateMachinesPanel() {
         <Pill type="green">structural safety</Pill> In typed languages, use discriminated
         unions or tagged enums where each state variant carries only the data relevant
         to that state. A SHIPPED order carries a tracking_id; a PLACED order does not.
-        You cannot access tracking_id on a PLACED order — the compiler prevents it.
+        You cannot access tracking_id on a PLACED order: the compiler prevents it.
         In dynamic languages, the state machine gateway is the enforcement layer:
         all state mutations go through one function that validates the transition
         against the table before persisting. No direct updates to the state field
         from anywhere else in the codebase.
       </Decision>
 
-      <Decision question="Where should the state machine live — application or database?">
+      <Decision question="Where should the state machine live: application or database?">
         Both. The application layer holds the transition table and validates transitions.
         The database enforces the current state with an atomic compare-and-swap:
         UPDATE orders SET state = 'CONFIRMED' WHERE id = ? AND state = 'PLACED'.
-        If the WHERE clause matches zero rows, the transition was contested — another
+        If the WHERE clause matches zero rows, the transition was contested: another
         process already moved the state. This gives you optimistic concurrency control
         without distributed locks. The application decides what transitions are valid;
         the database decides who wins the race.
@@ -108,15 +108,14 @@ function StateMachinesPanel() {
         PLACED → PAYMENT_PENDING → CONFIRMED. PAYMENT_PENDING is a waiting state
         with a timeout. If the payment gateway does not respond within T seconds, a
         scheduled job transitions PAYMENT_PENDING → PAYMENT_FAILED. This makes the
-        "waiting for external system" state visible, monitorable, and recoverable —
-        instead of an order stuck in PLACED with a silent hope that a webhook arrives.
+        "waiting for external system" state visible, monitorable, and recoverable: instead of an order stuck in PLACED with a silent hope that a webhook arrives.
       </Decision>
 
       <Insight>
         "Every boolean flag in your data model is a state machine you haven't drawn
         yet. I'd start by listing every combination of those flags that's actually
         valid, realize it's 4 out of 16, and replace them with an explicit enum.
-        The transition table becomes the contract — QA tests it, monitoring alerts
+        The transition table becomes the contract: QA tests it, monitoring alerts
         on unexpected transitions, and the on-call engineer can read it at 3 AM."
       </Insight>
     </div>
@@ -131,25 +130,24 @@ function WorkflowOrchestrationPanel() {
       <p className="page-body">
         Orchestration means a central coordinator tells services what to do and when.
         Choreography means services react to events independently. The choice is not
-        philosophical — it depends on whether you need to see the whole workflow in
+        philosophical: it depends on whether you need to see the whole workflow in
         one place, and whether compensation (rollback) is complex.
       </p>
 
       <Decision question="When does orchestration beat choreography?">
         <Pill type="green">orchestration wins</Pill> When the workflow has compensation
-        logic — if step 3 fails, undo steps 2 and 1 in a specific order. When you need
+        logic: if step 3 fails, undo steps 2 and 1 in a specific order. When you need
         a single place to see "where is this order in the pipeline?" When the workflow
         has timeouts, retries, and human approval steps. Temporal and AWS Step Functions
         give you durable execution: the workflow state survives process crashes, and you
-        can replay from the last checkpoint. The tradeoff is a central dependency —
-        the orchestrator is a single point of failure (mitigated by the platform's own
+        can replay from the last checkpoint. The tradeoff is a central dependency: the orchestrator is a single point of failure (mitigated by the platform's own
         replication).
       </Decision>
 
       <Decision question="When does choreography beat orchestration?">
         <Pill type="amber">choreography wins</Pill> When the downstream reactions are
         independent and don't need rollback. "Order confirmed" triggers: send email,
-        update analytics, notify warehouse. Each consumer is independent — if email
+        update analytics, notify warehouse. Each consumer is independent: if email
         fails, analytics still works. No central coordinator needed. The tradeoff is
         visibility: when something goes wrong, you're grep-ing across 5 services'
         logs to reconstruct what happened. Add a correlation ID to every event to
@@ -161,22 +159,22 @@ function WorkflowOrchestrationPanel() {
         charged → compensate with refund. Inventory reserved → compensate with release.
         Shipping label created → compensate with cancellation. The orchestrator
         executes compensations in reverse order when a step fails. This is the Saga
-        pattern — but the key insight is that compensations are not always symmetric.
-        A refund is not "undo payment" — it is a new forward action with its own
+        pattern, but the key insight is that compensations are not always symmetric.
+        A refund is not "undo payment": it is a new forward action with its own
         failure modes. Design compensations as first-class operations, not afterthoughts.
       </Decision>
 
       <Decision question="How do you version long-running workflows?">
         A workflow started on version 1 might run for days. You deploy version 2.
-        Temporal handles this with workflow versioning — you branch on a version flag
+        Temporal handles this with workflow versioning: you branch on a version flag
         inside the workflow code, so in-flight v1 workflows continue on the old path
         while new workflows take the v2 path. The alternative is the "two-deployment"
         pattern: run v1 and v2 side by side, drain v1 over time. Never mutate a
-        running workflow's definition in place — that is the #1 cause of workflow
+        running workflow's definition in place: that is the #1 cause of workflow
         corruption.
       </Decision>
 
-      <Decision question="Timeouts and deadlines — what most teams get wrong?">
+      <Decision question="Timeouts and deadlines: what most teams get wrong?">
         Every waiting state needs a timeout. Every timeout needs a fallback. "Wait
         for payment confirmation" without a deadline means an order can sit in
         PAYMENT_PENDING forever. Set a deadline (e.g., 30 minutes), define the
@@ -189,10 +187,10 @@ function WorkflowOrchestrationPanel() {
 
       <Insight>
         "I'd use Temporal for the order fulfillment workflow because the compensation
-        chain is 4 steps deep — payment refund, inventory release, shipping
+        chain is 4 steps deep: payment refund, inventory release, shipping
         cancellation, coupon restoration. I need that compensation logic in one
         place, testable as a unit. For the notification fanout after delivery, I'd
-        use choreography — email, SMS, and push are independent, no rollback needed,
+        use choreography: email, SMS, and push are independent, no rollback needed,
         and I don't want the notification system coupled to the orchestrator."
       </Insight>
     </div>
@@ -206,15 +204,15 @@ function DistributedStatePanel() {
       <h2 className="page-section-title">Managing state across distributed systems</h2>
       <p className="page-body">
         The moment state lives on more than one machine, you are in coordination
-        territory. Every tool here — locks, leader election, CRDTs — is a different
+        territory. Every tool here (locks, leader election, CRDTs) is a different
         answer to the same question: who is allowed to mutate this state right now?
       </p>
 
-      <Decision question="Distributed locks — Redis SETNX vs. ZooKeeper?">
+      <Decision question="Distributed locks: Redis SETNX vs. ZooKeeper?">
         <Pill type="amber">tradeoffs</Pill> Redis SETNX with TTL is simple and fast
         but fundamentally unsafe without fencing. The lock holder can pause (GC, network),
         the TTL expires, another process acquires the lock, and now two processes think
-        they hold it. ZooKeeper uses ephemeral nodes with session heartbeats — if the
+        they hold it. ZooKeeper uses ephemeral nodes with session heartbeats: if the
         holder dies, the session expires and the lock releases. More reliable, but
         operationally heavier. The right answer: if the lock protects an operation
         that must be mutually exclusive for correctness (not just efficiency), you
@@ -227,47 +225,46 @@ function DistributedStatePanel() {
         (database, object store) rejects any write with a token lower than the
         highest token it has seen. Even if a stale lock holder wakes up and tries
         to write, its old token is rejected. Without fencing, distributed locks
-        provide mutual exclusion only in the happy path — which is exactly when
+        provide mutual exclusion only in the happy path, which is exactly when
         you don't need them.
       </Decision>
 
-      <Decision question="Optimistic vs. pessimistic locking — which and when?">
+      <Decision question="Optimistic vs. pessimistic locking, which and when?">
         Optimistic locking: read the current version, do your work, write with a
         version check (UPDATE ... WHERE version = X). If it fails, retry. Best when
-        contention is low — most attempts succeed on the first try. Pessimistic locking:
+        contention is low: most attempts succeed on the first try. Pessimistic locking:
         acquire a lock before reading, hold it through the write. Best when contention
         is high and retries are expensive (e.g., a complex computation you don't want
-        to redo). The mistake is using pessimistic locking everywhere "to be safe" —
-        you trade throughput for safety you may not need.
+        to redo). The mistake is using pessimistic locking everywhere "to be safe": you trade throughput for safety you may not need.
       </Decision>
 
-      <Decision question="CRDTs — when do they actually help?">
+      <Decision question="CRDTs: when do they actually help?">
         CRDTs (Conflict-free Replicated Data Types) let multiple replicas accept writes
-        independently and merge deterministically — no coordination needed. G-Counters,
+        independently and merge deterministically: no coordination needed. G-Counters,
         LWW-Registers, OR-Sets. They shine in multi-region setups where you cannot
         afford cross-region latency on every write: collaborative editing, distributed
         counters, shopping cart merging. The limitation is that not every data structure
-        has a natural CRDT. Order state machines are not CRDTs — state transitions have
+        has a natural CRDT. Order state machines are not CRDTs: state transitions have
         preconditions that require coordination.
       </Decision>
 
-      <Decision question="Leader election — when do you need it?">
+      <Decision question="Leader election: when do you need it?">
         When exactly one process must own a responsibility: running the cron scheduler,
         processing a specific partition, performing leader-only maintenance. Use
         ZooKeeper recipes, etcd lease-based election, or the database itself (row lock
         with heartbeat). The critical design: every leader-elected process must handle
         the "I was leader, now I'm not" transition gracefully. If the leader loses
-        its lease mid-operation, it must stop writing — not finish its current batch.
+        its lease mid-operation, it must stop writing, not finish its current batch.
         This is where fencing tokens reappear.
       </Decision>
 
       <Insight>
         "I wouldn't use a distributed lock here. The inventory decrement can use an
-        atomic compare-and-swap in the database — UPDATE inventory SET qty = qty - 1
+        atomic compare-and-swap in the database: UPDATE inventory SET qty = qty - 1
         WHERE product_id = ? AND qty {'>'} 0. If the row update returns zero affected
         rows, the item is out of stock. No lock, no coordination, no TTL to tune.
         Distributed locks are for when the operation spans multiple stores or takes
-        significant time — not for single-row updates."
+        significant time, not for single-row updates."
       </Insight>
     </div>
   );
@@ -280,7 +277,7 @@ function DesignProblemPanel() {
       <h2 className="page-section-title">Design Problem: Order Management System</h2>
       <p className="page-body">
         Design an order management system with explicit states: CREATED,
-        PAYMENT_PENDING, CONFIRMED, PICKING, SHIPPED, DELIVERED — with cancellation
+        PAYMENT_PENDING, CONFIRMED, PICKING, SHIPPED, DELIVERED: with cancellation
         possible from multiple states. This is the canonical state machine design
         problem.
       </p>
@@ -308,8 +305,7 @@ function DesignProblemPanel() {
         <Pill type="green">single entry point</Pill> All state mutations go through
         one function: transitionOrder(orderId, event, payload). This function: (1) loads
         the current order state, (2) looks up the transition in the table for
-        (currentState, event), (3) evaluates the guard — e.g., for cancel from CONFIRMED,
-        check that picking has not started, (4) performs an atomic compare-and-swap in
+        (currentState, event), (3) evaluates the guard (for a cancel from CONFIRMED, check that picking has not started), (4) performs an atomic compare-and-swap in
         the database: UPDATE orders SET state = nextState, version = version + 1
         WHERE id = ? AND state = currentState AND version = currentVersion,
         (5) if the update succeeds, executes side effects (emit events, send notifications),
@@ -323,7 +319,7 @@ function DesignProblemPanel() {
         CONFIRMED: release reserved inventory + initiate refund. The key insight: the
         state determines the compensation, not a generic "cancel" function that tries
         to figure out what needs undoing. This is why PICKING and SHIPPED are not
-        cancellable — once physical work begins, cancellation becomes a return flow,
+        cancellable: once physical work begins, cancellation becomes a return flow,
         which is a different state machine entirely.
       </Decision>
 
@@ -333,33 +329,32 @@ function DesignProblemPanel() {
         succeed and the order is both CANCELLED and SHIPPED. The atomic compare-and-swap
         prevents this: both attempt UPDATE ... WHERE state = 'CONFIRMED'. Exactly
         one succeeds. The loser gets zero rows affected and must re-read the state
-        to decide what to do. This is optimistic concurrency — no distributed locks,
+        to decide what to do. This is optimistic concurrency: no distributed locks,
         no blocking, just atomic writes with preconditions.
       </Decision>
 
       <Decision question="What does the audit trail look like?">
         Every transition appends to an immutable audit log: order_id, from_state,
         to_state, event, actor (user_id or system), timestamp, metadata (payment_id,
-        tracking_number, etc.). This log is append-only — never update or delete
-        entries. It serves three purposes: (1) debugging — reconstruct exactly what
-        happened to any order, (2) compliance — who authorized the refund and when,
-        (3) analytics — how long do orders spend in each state, where do they get
+        tracking_number, etc.). This log is append-only: never update or delete
+        entries. It serves three purposes: (1) debugging: reconstruct exactly what
+        happened to any order, (2) compliance: who authorized the refund and when,
+        (3) analytics: how long do orders spend in each state, where do they get
         stuck? Store it in the same transaction as the state change for consistency.
       </Decision>
 
       <Decision question="How would you scale this to 100K orders/day?">
-        The state machine pattern scales naturally because each order is independent —
-        there is no cross-order coordination. Shard by order_id. The compare-and-swap
+        The state machine pattern scales naturally because each order is independent: there is no cross-order coordination. Shard by order_id. The compare-and-swap
         operates on a single row, so it does not create contention across orders.
         The side effects (email, inventory) are emitted as events and processed
-        asynchronously by consumers. The bottleneck, if any, is the event bus — use
+        asynchronously by consumers. The bottleneck, if any, is the event bus: use
         Kafka partitioned by order_id to maintain per-order ordering while parallelizing
         across orders. The state machine gateway itself is stateless and horizontally
         scalable.
       </Decision>
 
       <Insight>
-        "I'd put the entire transition table in one module — 30 lines of config that
+        "I'd put the entire transition table in one module: 30 lines of config that
         anyone can read. When the PM asks 'can we cancel a shipped order?' I point
         to the table: SHIPPED has no cancel transition. Adding it means defining the
         compensation (return label, refund, restock). That conversation happens in
@@ -393,7 +388,7 @@ function OrderStateDiagram() {
         <text x="350" y="20" textAnchor="middle" fontSize="13" fontWeight="400" fill="var(--text-h)" fontFamily="var(--font-display)">Order State Machine</text>
         <text x="350" y="34" textAnchor="middle" fontSize="9" fill="var(--text-muted)" fontFamily={fm}>happy path (blue) + cancellation (red)</text>
 
-        {/* State boxes — happy path */}
+        {/* State boxes: happy path */}
         {[
           { x: 20,  y: 60,  label: 'CREATED',          sub: 'cart submitted' },
           { x: 130, y: 60,  label: 'PAYMENT_PENDING',   sub: 'awaiting gateway' },
@@ -481,7 +476,7 @@ function AntiPatternsPanel() {
       <Insight type="warn" tag="The meta-pattern">
         Every weak answer treats state as a passive field to read and write. Every
         strong answer treats state as a controlled transition with preconditions,
-        side effects, and atomic persistence. The difference is not knowledge — it's
+        side effects, and atomic persistence. The difference is not knowledge: it's
         whether you've been woken up at 3 AM by an order stuck in an impossible
         state and vowed never again.
       </Insight>
