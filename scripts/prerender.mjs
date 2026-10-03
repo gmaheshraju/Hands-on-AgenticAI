@@ -40,11 +40,17 @@ const escapeAttr = (s) =>
     .replace(/"/g, '&quot;');
 
 // `[^>]*` spans newlines, so these match the multi-line tags in index.html.
+// Every dynamic insertion uses a replacer FUNCTION, never a replacement string:
+// String.replace treats `$$`, `$&`, `$'` and `$\`` in a replacement string as
+// patterns, so page text such as a code sample's `$${cost}` lost a `$` in the
+// static HTML (and the client then failed to hydrate that page).
+const literal = (text) => () => text;
+
 const replaceTag = (html, pattern, replacement) => {
   if (!pattern.test(html)) {
     throw new Error(`prerender: no match for ${pattern} — index.html changed shape`);
   }
-  return html.replace(pattern, replacement);
+  return html.replace(pattern, literal(replacement));
 };
 
 function buildHead(html, route) {
@@ -124,7 +130,7 @@ function buildHead(html, route) {
     };
     out = out.replace(
       '</head>',
-      `  <script type="application/ld+json">\n${JSON.stringify(articleLd, null, 2)}\n    </script>\n  </head>`,
+      literal(`  <script type="application/ld+json">\n${JSON.stringify(articleLd, null, 2)}\n    </script>\n  </head>`),
     );
   }
 
@@ -173,7 +179,7 @@ async function main() {
 
     const html = buildHead(template, route).replace(
       '<div id="root"></div>',
-      `<div id="root">${body}</div>`,
+      literal(`<div id="root">${body}</div>`),
     );
 
     if (route.path === '/') {
@@ -205,7 +211,7 @@ async function main() {
     description: 'No page at this address.',
   };
   const notFoundHtml = buildHead(template, notFound)
-    .replace('<div id="root"></div>', `<div id="root">${render('/__not-found__')}</div>`)
+    .replace('<div id="root"></div>', literal(`<div id="root">${render('/__not-found__')}</div>`))
     .replace('</head>', '  <meta name="robots" content="noindex" />\n  </head>');
   await writeFile(join(distDir, '404.html'), notFoundHtml, 'utf8');
 

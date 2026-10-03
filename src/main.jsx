@@ -1,9 +1,9 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import './styles/global.css'
 import App from './App.jsx'
-import { loadPage, pageForPath } from './routes/pages'
+import { loadPage, pageForPath, NOT_FOUND_PAGE } from './routes/pages'
 
 let saved = null;
 try { saved = localStorage.getItem('theme'); } catch { /* storage blocked: fall back to the OS setting */ }
@@ -24,17 +24,30 @@ document.addEventListener('pointerover', prefetch, { passive: true });
 document.addEventListener('focusin', prefetch);
 document.addEventListener('touchstart', prefetch, { passive: true });
 
-const render = () =>
-  createRoot(document.getElementById('root')).render(
-    <StrictMode>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </StrictMode>,
-  );
+const app = (
+  <StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </StrictMode>
+);
+
+// Hydrate the prerendered HTML instead of replacing it. Replacing it (createRoot)
+// rebuilt every element once the bundle arrived, so entrance animations played a
+// second time and images were re-decoded; hydration adopts the existing DOM.
+//
+// Unknown URLs are the exception: the host answers them with the front page's HTML
+// (SPA fallback), which cannot match the 404 page React renders, so those get a
+// fresh render instead of a hydration mismatch.
+const page = pageForPath(window.location.pathname);
+const render = () => {
+  const root = document.getElementById('root');
+  if (root.firstElementChild && page !== NOT_FOUND_PAGE) hydrateRoot(root, app);
+  else createRoot(root).render(app);
+};
 
 // Load the landing page's chunk before the first render: React then renders the
 // same content the prerendered HTML already shows, with no loading state between.
 // If it cannot load, do not render at all: the prerendered page stays fully readable,
 // which beats replacing it with an error. (loadPage already retried via one reload.)
-loadPage(pageForPath(window.location.pathname)).then(render, () => {});
+loadPage(page).then(render, () => {});

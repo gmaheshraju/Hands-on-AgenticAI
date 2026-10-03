@@ -129,7 +129,8 @@ function Footer() {
         </div>
 
         <div className="footer__bottom">
-          <span>&copy; {new Date().getFullYear()} {AUTHOR_NAME}</span>
+          {/* Build year in the prerender; a January visit to a December build would differ. */}
+          <span suppressHydrationWarning>&copy; {new Date().getFullYear()} {AUTHOR_NAME}</span>
           <span>Decision frameworks from real production systems.</span>
         </div>
       </div>

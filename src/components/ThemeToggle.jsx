@@ -1,4 +1,16 @@
-import { useState } from 'react';
+import { useSyncExternalStore } from 'react';
+
+// The theme lives on <html data-theme>, set before first paint by the inline script
+// in index.html. Reading it through useSyncExternalStore keeps hydration exact: the
+// server snapshot (light) matches the prerendered HTML, then React re-renders with
+// the real value. A useState initializer that read the DOM would mismatch.
+const subscribe = (onChange) => {
+  const mo = new MutationObserver(onChange);
+  mo.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  return () => mo.disconnect();
+};
+const getSnapshot = () => document.documentElement.getAttribute('data-theme') === 'dark';
+const getServerSnapshot = () => false;
 
 function applyTheme(dark) {
   document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
@@ -8,18 +20,13 @@ function applyTheme(dark) {
 }
 
 export default function ThemeToggle() {
-  // Guarded because this initializer runs during render, including the
-  // build-time prerender where there is no document.
-  const [dark, setDark] = useState(() =>
-    typeof document !== 'undefined' &&
-    document.documentElement.getAttribute('data-theme') === 'dark'
-  );
+  const dark = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const toggle = () => {
     const next = !dark;
     // The attribute flips inside the transition callback, so the browser can
     // snapshot both themes and crossfade between them instead of snapping.
-    const swap = () => { applyTheme(next); setDark(next); };
+    const swap = () => applyTheme(next); // the attribute change re-renders this via the store
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     if (document.startViewTransition && !reduce) {
       // A transition is aborted (rejecting these promises) when the tab is hidden or

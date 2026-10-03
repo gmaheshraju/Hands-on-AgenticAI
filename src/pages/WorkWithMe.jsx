@@ -118,9 +118,12 @@ function CopyEmail() {
 }
 
 export default function WorkWithMe() {
-  const [subject] = useState(inquirySubject);
+  // Computed after hydration: it reads the URL and referrer, which the prerender
+  // cannot know, and a render-time read would make the mailto href mismatch.
+  const [subject, setSubject] = useState('Project inquiry');
 
   useEffect(() => {
+    setSubject(inquirySubject());
     track('workwithme_view');
   }, []);
 
