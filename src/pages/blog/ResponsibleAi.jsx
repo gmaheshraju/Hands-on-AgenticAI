@@ -4,6 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import PostMeta from '../../components/PostMeta';
 import Diagram from '../../components/Diagram';
 import responsibleAiSvg from '../../../docs/diagrams/responsible_ai_v1/responsible-ai.svg?raw';
 
@@ -566,7 +567,7 @@ export default function ResponsibleAi() {
   return (
     <div className="page-content">
       <Link to="/" className="back-link" style={styles.back}><span className="back-link__arrow" aria-hidden="true">&larr;</span> Agentic AI Playbook</Link>
-      <p style={styles.eyebrow}>Post 13</p>
+      <p style={styles.eyebrow}>Post 13<PostMeta /></p>
       <h1 style={styles.h1}>Responsible AI &amp; Governance</h1>
       <p style={styles.subtitle}>
         Bias detection, fairness metrics, model cards, red-teaming, EU AI Act compliance,

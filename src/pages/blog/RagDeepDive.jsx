@@ -4,6 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import PostMeta from '../../components/PostMeta';
 import Diagram, { ConceptNote } from '../../components/Diagram';
 import ragPipelineSvg from '../../../docs/diagrams/rag_pipeline_v1/rag-pipeline.svg?raw';
 
@@ -154,7 +155,7 @@ export default function RagDeepDive() {
   return (
     <div className="page-content">
       <Link to="/" className="back-link" style={styles.back}><span className="back-link__arrow" aria-hidden="true">&larr;</span> Agentic AI Playbook</Link>
-      <p style={styles.eyebrow}>Post 05</p>
+      <p style={styles.eyebrow}>Post 05<PostMeta /></p>
       <h1 style={styles.h1}>RAG Pipeline Deep Dive</h1>
       <p style={styles.subtitle}>
         The engineering details that make RAG actually work in production: chunking

@@ -4,6 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import PostMeta from '../../components/PostMeta';
 import Diagram, { ConceptNote } from '../../components/Diagram';
 import evalEngineeringSvg from '../../../docs/diagrams/eval_engineering_v1/eval-engineering.svg?raw';
 
@@ -413,7 +414,7 @@ export default function EvalEngineering() {
   return (
     <div className="page-content">
       <Link to="/" className="back-link" style={styles.back}><span className="back-link__arrow" aria-hidden="true">&larr;</span> Agentic AI Playbook</Link>
-      <p style={styles.eyebrow}>Post 08</p>
+      <p style={styles.eyebrow}>Post 08<PostMeta /></p>
       <h1 style={styles.h1}>Evaluation Engineering</h1>
       <p style={styles.subtitle}>
         LLM-as-judge, golden datasets, regression testing, and human-in-the-loop: how to know

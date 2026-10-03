@@ -4,6 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import PostMeta from '../../components/PostMeta';
 import Diagram, { ConceptNote } from '../../components/Diagram';
 import guardrailsSvg from '../../../docs/diagrams/guardrails_v1/guardrails.svg?raw';
 
@@ -440,7 +441,7 @@ export default function AiGuardrails() {
   return (
     <div className="page-content">
       <Link to="/" className="back-link" style={styles.back}><span className="back-link__arrow" aria-hidden="true">&larr;</span> Agentic AI Playbook</Link>
-      <p style={styles.eyebrow}>Post 07</p>
+      <p style={styles.eyebrow}>Post 07<PostMeta /></p>
       <h1 style={styles.h1}>AI Guardrails & Safety</h1>
       <p style={styles.subtitle}>
         Prompt injection defense, PII filtering, output validation, and content moderation:

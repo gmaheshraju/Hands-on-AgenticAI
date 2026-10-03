@@ -4,6 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import PostMeta from '../../components/PostMeta';
 import Diagram, { ConceptNote } from '../../components/Diagram';
 import toolUseSvg from '../../../docs/diagrams/tool_use_v1/tool-use.svg?raw';
 
@@ -323,7 +324,7 @@ export default function ToolUseFunctionCalling() {
   return (
     <div className="page-content">
       <Link to="/" className="back-link" style={styles.back}><span className="back-link__arrow" aria-hidden="true">&larr;</span> Agentic AI Playbook</Link>
-      <p style={styles.eyebrow}>Post 10</p>
+      <p style={styles.eyebrow}>Post 10<PostMeta /></p>
       <h1 style={styles.h1}>Tool Use &amp; Function Calling Patterns</h1>
       <p style={styles.subtitle}>
         The engineering of reliable tool dispatch: schema design, validation, retry logic,

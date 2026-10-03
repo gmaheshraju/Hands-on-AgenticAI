@@ -4,6 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import PostMeta from '../../components/PostMeta';
 import Diagram, { ConceptNote } from '../../components/Diagram';
 import harnessSvg from '../../../docs/diagrams/agent_harness_v1/agent-harness.svg?raw';
 
@@ -169,7 +170,7 @@ export default function AgentHarness() {
   return (
     <div className="page-content">
       <Link to="/" className="back-link" style={styles.back}><span className="back-link__arrow" aria-hidden="true">&larr;</span> Agentic AI Playbook</Link>
-      <p style={styles.eyebrow}>Post 03</p>
+      <p style={styles.eyebrow}>Post 03<PostMeta /></p>
       <h1 style={styles.h1}>Agent Harness & Loop Engineering</h1>
       <p style={styles.subtitle}>
         The orchestration loop sits at the center of every agent. This post covers how to

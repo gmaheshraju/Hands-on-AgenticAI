@@ -4,6 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import PostMeta from '../../components/PostMeta';
 import Diagram, { ConceptNote } from '../../components/Diagram';
 import multiAgentSvg from '../../../docs/diagrams/multi_agent_v1/multi-agent.svg?raw';
 
@@ -193,7 +194,7 @@ export default function MultiAgentSystems() {
   return (
     <div className="page-content">
       <Link to="/" className="back-link" style={styles.back}><span className="back-link__arrow" aria-hidden="true">&larr;</span> Agentic AI Playbook</Link>
-      <p style={styles.eyebrow}>Post 04</p>
+      <p style={styles.eyebrow}>Post 04<PostMeta /></p>
       <h1 style={styles.h1}>Multi-Agent Systems</h1>
       <p style={styles.subtitle}>
         When one agent isn't enough: delegation patterns, shared memory, supervisor architectures,

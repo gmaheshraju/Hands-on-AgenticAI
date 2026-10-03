@@ -4,6 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import PostMeta from '../../components/PostMeta';
 import Diagram from '../../components/Diagram';
 import aiUxSvg from '../../../docs/diagrams/ai_ux_v1/ai-ux.svg?raw';
 
@@ -552,7 +553,7 @@ export default function AiUxPatterns() {
   return (
     <div className="page-content">
       <Link to="/" className="back-link" style={styles.back}><span className="back-link__arrow" aria-hidden="true">&larr;</span> Agentic AI Playbook</Link>
-      <p style={styles.eyebrow}>Post 12</p>
+      <p style={styles.eyebrow}>Post 12<PostMeta /></p>
       <h1 style={styles.h1}>AI UX Patterns</h1>
       <p style={styles.subtitle}>
         Streaming, confidence indicators, human-in-the-loop flows, progressive disclosure,

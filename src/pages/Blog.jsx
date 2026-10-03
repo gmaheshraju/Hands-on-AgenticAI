@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import FadeIn from '../components/FadeIn';
+import HeroDiagram from '../components/HeroDiagram';
+import { metaText } from '../components/PostMeta';
 import { ROUTES } from '../seo/routes';
 import { TOTALS } from '../data/diagrams';
 import { AUTHOR_NAME, PROJECTS_REPO } from '../data/contact';
@@ -188,6 +190,8 @@ export default function Blog() {
         </div>
       </section>
 
+      <HeroDiagram />
+
       <section style={styles.postsSection}>
         <h2 id="posts" style={{ ...styles.sectionTitle, scrollMarginTop: 88 }}>Posts</h2>
         <div className="post-grid">
@@ -218,6 +222,7 @@ function PostCard({ slug, number, title, tags, ready, start }) {
           <h3 style={styles.title}>{title}</h3>
           {!ready && <span style={styles.soon}>Coming</span>}
         </div>
+        {metaText(slug) && <p className="post-card__meta">{metaText(slug)}</p>}
         <p style={styles.subtitle}>{descriptionFor(slug)}</p>
         <div style={styles.meta}>
           {tags && (

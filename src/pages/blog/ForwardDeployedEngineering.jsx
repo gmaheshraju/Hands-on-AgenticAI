@@ -4,6 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import PostMeta from '../../components/PostMeta';
 import Diagram from '../../components/Diagram';
 import forwardDeployedSvg from '../../../docs/diagrams/forward_deployed_v1/forward-deployed.svg?raw';
 
@@ -121,7 +122,7 @@ export default function ForwardDeployedEngineering() {
   return (
     <div className="page-content">
       <Link to="/" className="back-link" style={styles.back}><span className="back-link__arrow" aria-hidden="true">&larr;</span> Agentic AI Playbook</Link>
-      <p style={styles.eyebrow}>Post 14</p>
+      <p style={styles.eyebrow}>Post 14<PostMeta /></p>
       <h1 style={styles.h1}>Forward Deployed Engineering</h1>
       <p style={styles.subtitle}>
         The engineering model pioneered by Palantir that&rsquo;s reshaping how AI companies deliver value:

@@ -1442,3 +1442,64 @@ main:focus { outline: none; }
 .code-btn:hover { color: var(--text-h) !important; border-color: var(--border-strong) !important; }
 .code-btn--run:hover { color: var(--text-on-accent) !important; background: var(--accent-hover) !important; }
 .code-btn:active { transform: scale(0.96); }
+
+/* ═══════════════════════════════════════════
+   FRONT PAGE: SELF-DRAWING DIAGRAM
+   ═══════════════════════════════════════════ */
+
+.hero-diagram { margin: 0 0 3.5rem; }
+.hero-diagram__frame {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: clamp(10px, 2vw, 24px);
+  overflow-x: auto;
+  box-shadow: var(--shadow-sm);
+}
+/* Phones scroll the diagram sideways rather than shrinking labels to nothing. */
+.hero-diagram__frame svg { width: 100%; height: auto; display: block; min-width: 640px; }
+.hero-diagram__caption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+.hero-diagram__caption strong { color: var(--text-h); font-weight: 600; }
+.hero-diagram__links { display: flex; gap: 18px; white-space: nowrap; }
+
+/* Draw-in on load: groups carry --d (from x position), solid edges carry pathLength="1". */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-diagram .d-zone,
+  .hero-diagram .d-edge {
+    animation: hd-fade 0.6s var(--ease) both;
+    animation-delay: calc(var(--d, 0ms) + 350ms);
+  }
+  .hero-diagram .d-node {
+    animation: hd-node 0.6s var(--ease) both;
+    animation-delay: calc(var(--d, 0ms) + 350ms);
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .hero-diagram .d-edge polyline[pathLength] {
+    stroke-dasharray: 1;
+    animation: hd-draw 0.8s var(--ease) both;
+    animation-delay: calc(var(--d, 0ms) + 350ms);
+  }
+}
+@keyframes hd-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes hd-node { from { opacity: 0; transform: translateY(8px) scale(0.97); } to { opacity: 1; transform: none; } }
+@keyframes hd-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+
+/* Reading time + updated date, inline after a post's eyebrow and under post-card titles. */
+.post-meta { color: var(--text-muted); }
+.post-card__meta {
+  font: 500 11px var(--font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}

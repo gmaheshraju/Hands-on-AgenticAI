@@ -4,6 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import PostMeta from '../../components/PostMeta';
 
 const tabs = [
   { key: 'thesis', label: 'The Thesis' },
@@ -19,7 +20,7 @@ export default function SoloDeveloperAdvantage() {
     <article style={styles.article}>
       <Link to="/" className="back-link" style={styles.back}><span className="back-link__arrow" aria-hidden="true">&larr;</span> Agentic AI Playbook</Link>
       <header style={styles.header}>
-        <p style={styles.eyebrow}>AI Engineering Playbook · 16</p>
+        <p style={styles.eyebrow}>AI Engineering Playbook · 16<PostMeta /></p>
         <h1 style={styles.h1}>The Solo Developer Advantage</h1>
         <p style={styles.subtitle}>
           Why one developer with AI can outbuild a team of twenty, and how engineers from anywhere in the

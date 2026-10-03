@@ -1,0 +1,66 @@
+{
+  "ai-agent-system-design": {
+    "minutes": 16,
+    "updated": "2026-10-03"
+  },
+  "agent-memory-architecture": {
+    "minutes": 18,
+    "updated": "2026-09-26"
+  },
+  "agent-harness-loop-engineering": {
+    "minutes": 16,
+    "updated": "2026-09-26"
+  },
+  "multi-agent-systems": {
+    "minutes": 17,
+    "updated": "2026-09-26"
+  },
+  "rag-pipeline-deep-dive": {
+    "minutes": 15,
+    "updated": "2026-09-26"
+  },
+  "llm-ops": {
+    "minutes": 16,
+    "updated": "2026-09-26"
+  },
+  "ai-guardrails": {
+    "minutes": 17,
+    "updated": "2026-09-26"
+  },
+  "evaluation-engineering": {
+    "minutes": 16,
+    "updated": "2026-09-26"
+  },
+  "fine-tuning-vs-rag": {
+    "minutes": 15,
+    "updated": "2026-09-26"
+  },
+  "tool-use-function-calling": {
+    "minutes": 16,
+    "updated": "2026-09-26"
+  },
+  "cost-latency-engineering": {
+    "minutes": 13,
+    "updated": "2026-09-26"
+  },
+  "ai-ux-patterns": {
+    "minutes": 18,
+    "updated": "2026-09-26"
+  },
+  "responsible-ai": {
+    "minutes": 12,
+    "updated": "2026-09-26"
+  },
+  "forward-deployed-engineering": {
+    "minutes": 14,
+    "updated": "2026-09-26"
+  },
+  "context-engineering": {
+    "minutes": 16,
+    "updated": "2026-09-26"
+  },
+  "solo-developer-advantage": {
+    "minutes": 14,
+    "updated": "2026-09-26"
+  }
+}

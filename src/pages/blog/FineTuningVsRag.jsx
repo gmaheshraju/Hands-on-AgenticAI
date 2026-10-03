@@ -4,6 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import PostMeta from '../../components/PostMeta';
 import Diagram from '../../components/Diagram';
 import finetuneVsRagSvg from '../../../docs/diagrams/finetune_vs_rag_v1/finetune-vs-rag.svg?raw';
 
@@ -182,7 +183,7 @@ export default function FineTuningVsRag() {
   return (
     <div className="page-content">
       <Link to="/" className="back-link" style={styles.back}><span className="back-link__arrow" aria-hidden="true">&larr;</span> Agentic AI Playbook</Link>
-      <p style={styles.eyebrow}>Post 09</p>
+      <p style={styles.eyebrow}>Post 09<PostMeta /></p>
       <h1 style={styles.h1}>Fine-tuning vs Prompting vs RAG</h1>
       <p style={styles.subtitle}>
         A decision framework for when to prompt engineer, when to retrieve, when to fine-tune,

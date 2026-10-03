@@ -4,6 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import PostMeta from '../../components/PostMeta';
 import Diagram from '../../components/Diagram';
 import costLatencySvg from '../../../docs/diagrams/cost_latency_v1/cost-latency.svg?raw';
 
@@ -411,7 +412,7 @@ export default function CostLatencyEngineering() {
   return (
     <div className="page-content">
       <Link to="/" className="back-link" style={styles.back}><span className="back-link__arrow" aria-hidden="true">&larr;</span> Agentic AI Playbook</Link>
-      <p style={styles.eyebrow}>Post 11</p>
+      <p style={styles.eyebrow}>Post 11<PostMeta /></p>
       <h1 style={styles.h1}>Cost &amp; Latency Engineering</h1>
       <p style={styles.subtitle}>
         Your agent costs $2 per conversation. Your boss wants $0.15. Here is the engineering

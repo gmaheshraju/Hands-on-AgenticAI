@@ -4,6 +4,7 @@ import Decision, { Pill } from '../../components/Decision';
 import Insight from '../../components/Insight';
 import CodeBlock from '../../components/CodeBlock';
 import FadeIn from '../../components/FadeIn';
+import PostMeta from '../../components/PostMeta';
 import Diagram, { ConceptNote } from '../../components/Diagram';
 import llmopsSvg from '../../../docs/diagrams/llmops_v1/llmops.svg?raw';
 
@@ -345,7 +346,7 @@ export default function LlmOps() {
   return (
     <div className="page-content">
       <Link to="/" className="back-link" style={styles.back}><span className="back-link__arrow" aria-hidden="true">&larr;</span> Agentic AI Playbook</Link>
-      <p style={styles.eyebrow}>Post 06</p>
+      <p style={styles.eyebrow}>Post 06<PostMeta /></p>
       <h1 style={styles.h1}>LLMOps: Production LLM Infrastructure</h1>
       <p style={styles.subtitle}>
         Model serving, cost routing, token budgeting, and latency SLOs: the infrastructure
