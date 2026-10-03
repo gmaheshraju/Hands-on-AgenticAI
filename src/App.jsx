@@ -1,43 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { ROUTES, AUTHOR, fullTitle, canonicalFor } from './seo/routes';
 import Layout from './components/Layout';
 import PageTransition from './components/PageTransition';
-import Home from './pages/Home';
-import DatabaseSelection from './pages/DatabaseSelection';
-import RateLimiter from './pages/RateLimiter';
-import Caching from './pages/Caching';
-import MessageQueues from './pages/MessageQueues';
-import Scaling from './pages/Scaling';
-import EventDriven from './pages/EventDriven';
-import StateMachines from './pages/StateMachines';
-import ApiDesign from './pages/ApiDesign';
-import Resilience from './pages/Resilience';
-import Observability from './pages/Observability';
-import AuthArchitecture from './pages/AuthArchitecture';
-import DeploymentStrategies from './pages/DeploymentStrategies';
-import Concurrency from './pages/Concurrency';
-import DistributedSystems from './pages/DistributedSystems';
-import Blog from './pages/Blog';
-import Diagrams from './pages/Diagrams';
-import WorkWithMe from './pages/WorkWithMe';
-import NotFound from './pages/NotFound';
-import AgentSystemDesign from './pages/blog/AgentSystemDesign';
-import AgentMemory from './pages/blog/AgentMemory';
-import AgentHarness from './pages/blog/AgentHarness';
-import MultiAgentSystems from './pages/blog/MultiAgentSystems';
-import RagDeepDive from './pages/blog/RagDeepDive';
-import LlmOps from './pages/blog/LlmOps';
-import AiGuardrails from './pages/blog/AiGuardrails';
-import EvalEngineering from './pages/blog/EvalEngineering';
-import FineTuningVsRag from './pages/blog/FineTuningVsRag';
-import ToolUseFunctionCalling from './pages/blog/ToolUseFunctionCalling';
-import CostLatencyEngineering from './pages/blog/CostLatencyEngineering';
-import AiUxPatterns from './pages/blog/AiUxPatterns';
-import ResponsibleAi from './pages/blog/ResponsibleAi';
-import ForwardDeployedEngineering from './pages/blog/ForwardDeployedEngineering';
-import ContextEngineering from './pages/blog/ContextEngineering';
-import SoloDeveloperAdvantage from './pages/blog/SoloDeveloperAdvantage';
+import { PAGE_ROUTES, NOT_FOUND_PAGE, Page } from './routes/pages';
+import PageErrorBoundary from './components/PageErrorBoundary';
 
 // The prerendered HTML carries the right tags on first load, but client-side
 // navigation never re-reads the head — without this the tab title and canonical
@@ -66,48 +33,24 @@ function useDocumentMeta() {
 
 export default function App() {
   useDocumentMeta();
+  const { pathname } = useLocation();
 
   return (
     <Layout>
       <PageTransition>
+      {/* Pages are code-split (src/routes/pages.jsx). The fallback only shows on a
+          client navigation to a page whose chunk has not arrived yet; it holds the
+          page height so the footer does not jump up. */}
+      <PageErrorBoundary resetKey={pathname}>
+      <Suspense fallback={<div style={{ minHeight: '70vh' }} aria-busy="true" />}>
       <Routes>
-        <Route path="/" element={<Blog />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/database-selection" element={<DatabaseSelection />} />
-        <Route path="/rate-limiter" element={<RateLimiter />} />
-        <Route path="/caching" element={<Caching />} />
-        <Route path="/message-queues" element={<MessageQueues />} />
-        <Route path="/scaling" element={<Scaling />} />
-        <Route path="/event-driven" element={<EventDriven />} />
-        <Route path="/state-machines" element={<StateMachines />} />
-        <Route path="/api-design" element={<ApiDesign />} />
-        <Route path="/resilience" element={<Resilience />} />
-        <Route path="/observability" element={<Observability />} />
-        <Route path="/auth" element={<AuthArchitecture />} />
-        <Route path="/deployment" element={<DeploymentStrategies />} />
-        <Route path="/concurrency" element={<Concurrency />} />
-        <Route path="/distributed-systems" element={<DistributedSystems />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/diagrams" element={<Diagrams />} />
-        <Route path="/work-with-me" element={<WorkWithMe />} />
-        <Route path="/blog/ai-agent-system-design" element={<AgentSystemDesign />} />
-        <Route path="/blog/agent-memory-architecture" element={<AgentMemory />} />
-        <Route path="/blog/agent-harness-loop-engineering" element={<AgentHarness />} />
-        <Route path="/blog/multi-agent-systems" element={<MultiAgentSystems />} />
-        <Route path="/blog/rag-pipeline-deep-dive" element={<RagDeepDive />} />
-        <Route path="/blog/llm-ops" element={<LlmOps />} />
-        <Route path="/blog/ai-guardrails" element={<AiGuardrails />} />
-        <Route path="/blog/evaluation-engineering" element={<EvalEngineering />} />
-        <Route path="/blog/fine-tuning-vs-rag" element={<FineTuningVsRag />} />
-        <Route path="/blog/tool-use-function-calling" element={<ToolUseFunctionCalling />} />
-        <Route path="/blog/cost-latency-engineering" element={<CostLatencyEngineering />} />
-        <Route path="/blog/ai-ux-patterns" element={<AiUxPatterns />} />
-        <Route path="/blog/responsible-ai" element={<ResponsibleAi />} />
-        <Route path="/blog/forward-deployed-engineering" element={<ForwardDeployedEngineering />} />
-        <Route path="/blog/context-engineering" element={<ContextEngineering />} />
-        <Route path="/blog/solo-developer-advantage" element={<SoloDeveloperAdvantage />} />
-        <Route path="*" element={<NotFound />} />
+        {PAGE_ROUTES.map((r) => (
+          <Route key={r.path} path={r.path} element={<Page page={r.page} />} />
+        ))}
+        <Route path="*" element={<Page page={NOT_FOUND_PAGE} />} />
       </Routes>
+      </Suspense>
+      </PageErrorBoundary>
       </PageTransition>
     </Layout>
   );
