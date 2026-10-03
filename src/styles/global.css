@@ -16,13 +16,15 @@
   --bg-code-header: #E8E7E1;
   --bg-accent: rgba(224, 90, 43, 0.07);
 
-  --syn-keyword: #8B5CF6;
-  --syn-builtin: #D97706;
-  --syn-func: #2563EB;
-  --syn-string: #059669;
-  --syn-number: #DC2626;
-  --syn-comment: #9CA3AF;
-  --syn-punct: #78716C;
+  /* Syntax colours: each >= 4.5:1 on --bg-code (#EFEEE8). The previous palette
+     measured 2.2-4.5:1 (comments 2.18, builtins 2.74). */
+  --syn-keyword: #6D28D9;
+  --syn-builtin: #92400E;
+  --syn-func: #1D4ED8;
+  --syn-string: #047857;
+  --syn-number: #B91C1C;
+  --syn-comment: #5F6672;
+  --syn-punct: #57534E;
   --bg-accent-strong: #E05A2B;
   --accent-hover: #C94A1E;
   --accent-glow: rgba(224, 90, 43, 0.38);
@@ -32,11 +34,13 @@
 
   --text-h: #1B1B1E;
   --text-p: #44444A;
-  --text-muted: #8E8E96;
-  --text-accent: #D04A1F;
+  /* Muted and accent text are tuned to pass WCAG AA (4.5:1) on bg, card, code and
+     bg-accent surfaces; the previous #8E8E96 / #D04A1F measured 2.8-3.3 / 3.8-4.5. */
+  --text-muted: #66666E;
+  --text-accent: #BC4119;
   --text-accent-light: #E05A2B;
   --text-success: #2E7D32;
-  --text-warning: #E65100;
+  --text-warning: #B84000; /* was #E65100: 3.5:1 on --bg-warning */
   --text-danger: #C62828;
   --text-on-accent: #FFFFFF;
 
@@ -83,7 +87,7 @@
   --syn-func: #60A5FA;
   --syn-string: #34D399;
   --syn-number: #FB7185;
-  --syn-comment: #6B7280;
+  --syn-comment: #8A919C; /* was #6B7280: 3.4:1 on --bg-code */
   --syn-punct: #9CA3AF;
   --bg-accent-strong: #FF7A4D;
   --accent-hover: #FF916A;
@@ -94,7 +98,7 @@
 
   --text-h: #EDEDEB;
   --text-p: #A0A0A6;
-  --text-muted: #636369;
+  --text-muted: #8B8B93; /* was #636369: 2.8-3.0:1 on dark surfaces */
   --text-accent: #FF7A4D;
   --text-accent-light: #FF9B75;
   --text-success: #81C784;
@@ -816,22 +820,13 @@ img { max-width: 100%; display: block; }
    PAGE TRANSITIONS
    ═══════════════════════════════════════════ */
 
-.page-transition {
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-.page-transition--enter {
-  opacity: 1;
-  transform: translateY(0);
-  animation: pageEnter 0.35s var(--ease) forwards;
-}
-.page-transition--exit {
-  opacity: 0;
-  transform: translateY(6px);
+@media (prefers-reduced-motion: no-preference) {
+  .page-transition { animation: pageEnter 0.3s var(--ease); }
 }
 
 @keyframes pageEnter {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
 }
 
 /* ═══════════════════════════════════════════
@@ -1435,3 +1430,15 @@ main:focus { outline: none; }
 
 /* Headings jumped to from the outline land below the sticky nav + tab row. */
 .layout-main--post h2[id], .layout-main--post .decision__q[id] { scroll-margin-top: 120px; }
+
+/* Post back link: inline styles set its resting colour, so hover must win with !important. */
+.back-link { transition: color var(--dur) var(--ease); }
+.back-link:hover { color: var(--text-accent) !important; }
+.back-link__arrow { display: inline-block; transition: transform 0.25s var(--ease); }
+.back-link:hover .back-link__arrow { transform: translateX(-3px); }
+
+/* Code block header buttons (inline-styled, so hover needs !important). */
+.code-btn { transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease), background-color var(--dur) var(--ease), transform 0.15s var(--ease); }
+.code-btn:hover { color: var(--text-h) !important; border-color: var(--border-strong) !important; }
+.code-btn--run:hover { color: var(--text-on-accent) !important; background: var(--accent-hover) !important; }
+.code-btn:active { transform: scale(0.96); }

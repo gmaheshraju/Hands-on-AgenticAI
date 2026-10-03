@@ -192,7 +192,7 @@ export default function MultiAgentSystems() {
 
   return (
     <div className="page-content">
-      <Link to="/blog" style={styles.back}>&larr; AI Engineering</Link>
+      <Link to="/" className="back-link" style={styles.back}><span className="back-link__arrow" aria-hidden="true">&larr;</span> Agentic AI Playbook</Link>
       <p style={styles.eyebrow}>Post 04</p>
       <h1 style={styles.h1}>Multi-Agent Systems</h1>
       <p style={styles.subtitle}>

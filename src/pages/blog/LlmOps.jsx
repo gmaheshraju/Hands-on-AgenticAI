@@ -344,7 +344,7 @@ export default function LlmOps() {
 
   return (
     <div className="page-content">
-      <Link to="/blog" style={styles.back}>&larr; AI Engineering</Link>
+      <Link to="/" className="back-link" style={styles.back}><span className="back-link__arrow" aria-hidden="true">&larr;</span> Agentic AI Playbook</Link>
       <p style={styles.eyebrow}>Post 06</p>
       <h1 style={styles.h1}>LLMOps: Production LLM Infrastructure</h1>
       <p style={styles.subtitle}>

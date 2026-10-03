@@ -181,7 +181,7 @@ export default function FineTuningVsRag() {
   const [tab, setTab] = useState(0);
   return (
     <div className="page-content">
-      <Link to="/blog" style={styles.back}>&larr; AI Engineering</Link>
+      <Link to="/" className="back-link" style={styles.back}><span className="back-link__arrow" aria-hidden="true">&larr;</span> Agentic AI Playbook</Link>
       <p style={styles.eyebrow}>Post 09</p>
       <h1 style={styles.h1}>Fine-tuning vs Prompting vs RAG</h1>
       <p style={styles.subtitle}>

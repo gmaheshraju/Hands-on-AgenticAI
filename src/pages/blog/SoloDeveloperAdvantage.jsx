@@ -17,7 +17,7 @@ export default function SoloDeveloperAdvantage() {
   const [active, setActive] = useState('thesis');
   return (
     <article style={styles.article}>
-      <Link to="/blog" style={styles.back}>&larr; AI Engineering</Link>
+      <Link to="/" className="back-link" style={styles.back}><span className="back-link__arrow" aria-hidden="true">&larr;</span> Agentic AI Playbook</Link>
       <header style={styles.header}>
         <p style={styles.eyebrow}>AI Engineering Playbook · 16</p>
         <h1 style={styles.h1}>The Solo Developer Advantage</h1>

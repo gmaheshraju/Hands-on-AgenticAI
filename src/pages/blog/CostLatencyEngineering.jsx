@@ -410,7 +410,7 @@ export default function CostLatencyEngineering() {
 
   return (
     <div className="page-content">
-      <Link to="/blog" style={styles.back}>&larr; AI Engineering</Link>
+      <Link to="/" className="back-link" style={styles.back}><span className="back-link__arrow" aria-hidden="true">&larr;</span> Agentic AI Playbook</Link>
       <p style={styles.eyebrow}>Post 11</p>
       <h1 style={styles.h1}>Cost &amp; Latency Engineering</h1>
       <p style={styles.subtitle}>

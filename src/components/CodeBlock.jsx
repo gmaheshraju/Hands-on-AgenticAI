@@ -201,7 +201,7 @@ export default function CodeBlock({ code, filename, language = 'javascript', out
         </div>
         <div style={{ display: 'flex', gap: 6 }}>
           {output && (
-            <button onClick={handleRun} style={{
+            <button onClick={handleRun} className="code-btn code-btn--run" style={{
               ...styles.runBtn,
               ...(running ? styles.runBtnRunning : {}),
             }}>
@@ -212,7 +212,7 @@ export default function CodeBlock({ code, filename, language = 'javascript', out
               )}
             </button>
           )}
-          <button onClick={handleCopy} style={styles.copyBtn}>
+          <button onClick={handleCopy} className="code-btn" style={styles.copyBtn}>
             {copied ? 'Copied!' : 'Copy'}
           </button>
         </div>
@@ -314,7 +314,7 @@ const styles = {
   runBtn: {
     fontSize: 10,
     fontWeight: 600,
-    color: '#fff',
+    color: 'var(--text-on-accent)', // #fff on the dark-theme accent was ~2.6:1
     background: 'var(--bg-accent-strong)',
     borderWidth: 1,
     borderStyle: 'solid',
@@ -349,13 +349,17 @@ const styles = {
     overflowX: 'auto',
     WebkitOverflowScrolling: 'touch',
   },
+  // Font size and line height live on the <pre> blocks, identical for gutter and code.
+  // An inline <code> cannot shrink its parent block's line box, so setting them only on
+  // <code> left the code at the page's 25.6px strut and the numbers at 18px: by line 26
+  // the gutter had drifted ~190px out of step.
   lineNums: {
     margin: 0,
     padding: '14px 0 14px 16px',
     textAlign: 'right',
     userSelect: 'none',
-    fontSize: 11,
-    lineHeight: 1.65,
+    fontSize: 12,
+    lineHeight: '20px',
     fontFamily: 'var(--font-mono)',
     color: 'var(--text-muted)',
     opacity: 0.4,
@@ -367,10 +371,12 @@ const styles = {
     padding: '14px 16px 14px 12px',
     flex: 1,
     minWidth: 0,
+    fontSize: 12,
+    lineHeight: '20px',
   },
   code: {
-    fontSize: 12,
-    lineHeight: 1.65,
+    fontSize: 'inherit',
+    lineHeight: 'inherit',
     fontFamily: 'var(--font-mono)',
     color: 'var(--text-p)',
     whiteSpace: 'pre',
@@ -399,6 +405,8 @@ const styles = {
   outputPre: {
     margin: 0,
     padding: '10px 16px',
+    fontSize: 11,
+    lineHeight: 1.6,
     overflowX: 'auto',
     maxHeight: 220,
     overflowY: 'auto',

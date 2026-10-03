@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import FadeIn from '../components/FadeIn';
 import { TOTALS } from '../data/diagrams';
-import { EMAIL, GITHUB, LINKEDIN } from '../data/contact';
+import { EMAIL, LINKEDIN, PROJECTS_REPO } from '../data/contact';
 
 // Clarity custom events feed the consulting funnel (homepage → this page →
 // contact click). Optional-chained: no-op locally and during prerender.
@@ -73,7 +73,7 @@ const steps = [
 ];
 
 const proof = [
-  { stat: '31', label: 'Production LLM & agent projects', href: GITHUB },
+  { stat: '31', label: 'Open-source LLM & agent projects', href: PROJECTS_REPO },
   { stat: TOTALS.citations.toLocaleString(), label: `Cited elements across ${TOTALS.count} governed diagrams`, href: '/diagrams' },
   { stat: '24/5', label: 'Live production systems I run myself', href: null },
 ];
@@ -127,17 +127,22 @@ export default function WorkWithMe() {
   return (
     <div>
       <section style={styles.hero}>
-        <p style={styles.eyebrow}>Work With Me</p>
-        <h1 style={styles.h1}>
+        <p className="rise" style={{ ...styles.eyebrow, '--i': 0 }}>Work With Me</p>
+        <h1 className="rise" style={{ ...styles.h1, '--i': 1 }}>
           Ship AI systems that<br />
-          <em style={styles.h1em}>survive production</em>
+          <em className="swash" style={styles.h1em}>
+            survive production
+            <svg className="swash__line" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M3 8.5 C 48 3, 118 2.5, 197 6.5" />
+            </svg>
+          </em>
         </h1>
-        <p style={styles.tagline}>
+        <p className="rise" style={{ ...styles.tagline, '--i': 2 }}>
           I design, build, and harden agentic AI systems (agents, RAG pipelines,
           LLMOps) for teams that need them to work when real users show up.
           Everything I recommend, I&rsquo;ve run in production myself.
         </p>
-        <div style={styles.ctaRow}>
+        <div className="rise" style={{ ...styles.ctaRow, '--i': 3 }}>
           <a
             href={`mailto:${EMAIL}?subject=${encodeURIComponent(subject)}`}
             onClick={() => track('email_cta_click')}
@@ -503,7 +508,6 @@ const styles = {
     border: '1px solid var(--border)',
     borderRadius: 'var(--radius-lg)',
     padding: 'clamp(28px, 4vw, 48px)',
-    marginBottom: '3.5rem',
   },
   closerTitle: {
     fontSize: 'clamp(28px, 3vw, 40px)',

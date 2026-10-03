@@ -1,33 +1,24 @@
-import { useRef, useEffect, useState } from 'react';
+import { useLayoutEffect, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+// useLayoutEffect warns during the prerender pass; there is no scroll position there anyway.
+const useIsoLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
+
+// New page renders immediately and eases in. There is deliberately no exit
+// animation: holding the old page on screen for a fade-out made every click
+// wait ~180ms before anything changed, which reads as slow, not smooth.
 export default function PageTransition({ children }) {
-  const location = useLocation();
-  const [displayChildren, setDisplayChildren] = useState(children);
-  const [stage, setStage] = useState('enter');
-  const prevPath = useRef(location.pathname);
+  const { pathname, hash } = useLocation();
 
-  useEffect(() => {
-    if (location.pathname === prevPath.current) return;
-    prevPath.current = location.pathname;
-    setStage('exit');
-
-    const timer = setTimeout(() => {
-      setDisplayChildren(children);
-      window.scrollTo(0, 0);
-      setStage('enter');
-    }, 180);
-
-    return () => clearTimeout(timer);
-  }, [location.pathname, children]);
-
-  useEffect(() => {
-    setDisplayChildren(children);
-  }, [children]);
+  // Start each new page at the top, before paint. 'instant' overrides the
+  // global smooth scrolling, which would otherwise visibly scroll up the old height.
+  useIsoLayoutEffect(() => {
+    if (!hash) window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [pathname, hash]);
 
   return (
-    <div className={`page-transition page-transition--${stage}`}>
-      {displayChildren}
+    <div key={pathname} className="page-transition">
+      {children}
     </div>
   );
 }
