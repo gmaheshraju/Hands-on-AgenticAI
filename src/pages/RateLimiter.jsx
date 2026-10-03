@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import TabNav from '../components/TabNav';
-import TabTransition from '../components/TabTransition';
 import Decision, { Pill } from '../components/Decision';
 import Insight from '../components/Insight';
 
@@ -21,16 +20,14 @@ export default function RateLimiter() {
 
       <TabNav tabs={TABS} active={tab} onChange={setTab} />
 
-      <TabTransition activeKey={tab}>
-
-      {tab === 0 && <WhyPanel />}
-      {tab === 1 && <AlgorithmsPanel />}
-      {tab === 2 && <SimulatorPanel />}
-      {tab === 3 && <DistributedPanel />}
-      {tab === 4 && <PlacementPanel />}
-      {tab === 5 && <RealSystemsPanel />}
-      {tab === 6 && <AntiPatternsPanel />}
-      </TabTransition>
+      {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+      <div hidden={tab !== 0}><WhyPanel /></div>
+      <div hidden={tab !== 1}><AlgorithmsPanel /></div>
+      <div hidden={tab !== 2}><SimulatorPanel /></div>
+      <div hidden={tab !== 3}><DistributedPanel /></div>
+      <div hidden={tab !== 4}><PlacementPanel /></div>
+      <div hidden={tab !== 5}><RealSystemsPanel /></div>
+      <div hidden={tab !== 6}><AntiPatternsPanel /></div>
     </div>
   );
 }

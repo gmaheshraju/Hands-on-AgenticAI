@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import TabNav from '../components/TabNav';
-import TabTransition from '../components/TabTransition';
 import Decision, { Pill } from '../components/Decision';
 import Insight from '../components/Insight';
 
@@ -21,15 +20,13 @@ export default function MessageQueues() {
 
       <TabNav tabs={TABS} active={tab} onChange={setTab} />
 
-      <TabTransition activeKey={tab}>
-
-      {tab === 0 && <WhyPanel />}
-      {tab === 1 && <GuaranteesPanel />}
-      {tab === 2 && <ProfilesPanel />}
-      {tab === 3 && <PatternsPanel />}
-      {tab === 4 && <FailuresPanel />}
-      {tab === 5 && <AntiPatternsPanel />}
-      </TabTransition>
+      {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+      <div hidden={tab !== 0}><WhyPanel /></div>
+      <div hidden={tab !== 1}><GuaranteesPanel /></div>
+      <div hidden={tab !== 2}><ProfilesPanel /></div>
+      <div hidden={tab !== 3}><PatternsPanel /></div>
+      <div hidden={tab !== 4}><FailuresPanel /></div>
+      <div hidden={tab !== 5}><AntiPatternsPanel /></div>
     </div>
   );
 }

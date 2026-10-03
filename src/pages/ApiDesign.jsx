@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import TabNav from '../components/TabNav';
-import TabTransition from '../components/TabTransition';
 import Decision, { Pill } from '../components/Decision';
 import Insight from '../components/Insight';
 
@@ -22,14 +21,12 @@ export default function ApiDesign() {
 
       <TabNav tabs={TABS} active={tab} onChange={setTab} />
 
-      <TabTransition activeKey={tab}>
-
-      {tab === 0 && <ApiFirstPanel />}
-      {tab === 1 && <ProtocolPanel />}
-      {tab === 2 && <VersioningPanel />}
-      {tab === 3 && <PaginationPanel />}
-      {tab === 4 && <AntiPatternsPanel />}
-      </TabTransition>
+      {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+      <div hidden={tab !== 0}><ApiFirstPanel /></div>
+      <div hidden={tab !== 1}><ProtocolPanel /></div>
+      <div hidden={tab !== 2}><VersioningPanel /></div>
+      <div hidden={tab !== 3}><PaginationPanel /></div>
+      <div hidden={tab !== 4}><AntiPatternsPanel /></div>
     </div>
   );
 }

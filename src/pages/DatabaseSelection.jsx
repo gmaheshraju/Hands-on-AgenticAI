@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import TabNav from '../components/TabNav';
-import TabTransition from '../components/TabTransition';
 import Decision, { Pill } from '../components/Decision';
 import Insight from '../components/Insight';
 
@@ -62,17 +61,15 @@ export default function DatabaseSelection() {
 
       <TabNav tabs={TABS} active={tab} onChange={setTab} />
 
-      <TabTransition activeKey={tab}>
-
-      {tab === 0 && <ScalePanel />}
-      {tab === 1 && <AccessPanel />}
-      {tab === 2 && <JoinsPanel />}
-      {tab === 3 && <ConsistencyPanel />}
-      {tab === 4 && <WritesPanel />}
-      {tab === 5 && <ProfilesPanel expandedDb={expandedDb} setExpandedDb={setExpandedDb} />}
-      {tab === 6 && <AntiPatternsPanel />}
-      {tab === 7 && <DesignProblemPanel />}
-      </TabTransition>
+      {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+      <div hidden={tab !== 0}><ScalePanel /></div>
+      <div hidden={tab !== 1}><AccessPanel /></div>
+      <div hidden={tab !== 2}><JoinsPanel /></div>
+      <div hidden={tab !== 3}><ConsistencyPanel /></div>
+      <div hidden={tab !== 4}><WritesPanel /></div>
+      <div hidden={tab !== 5}><ProfilesPanel expandedDb={expandedDb} setExpandedDb={setExpandedDb} /></div>
+      <div hidden={tab !== 6}><AntiPatternsPanel /></div>
+      <div hidden={tab !== 7}><DesignProblemPanel /></div>
     </div>
   );
 }

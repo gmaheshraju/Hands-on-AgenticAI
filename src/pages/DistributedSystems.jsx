@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import TabNav from '../components/TabNav';
-import TabTransition from '../components/TabTransition';
 import Decision, { Pill } from '../components/Decision';
 import Insight from '../components/Insight';
 
@@ -23,14 +22,12 @@ export default function DistributedSystems() {
 
       <TabNav tabs={TABS} active={tab} onChange={setTab} />
 
-      <TabTransition activeKey={tab}>
-
-      {tab === 0 && <CAPPanel />}
-      {tab === 1 && <ConsensusPanel />}
-      {tab === 2 && <TransactionsPanel />}
-      {tab === 3 && <IdempotencyPanel />}
-      {tab === 4 && <AntiPatternsPanel />}
-      </TabTransition>
+      {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+      <div hidden={tab !== 0}><CAPPanel /></div>
+      <div hidden={tab !== 1}><ConsensusPanel /></div>
+      <div hidden={tab !== 2}><TransactionsPanel /></div>
+      <div hidden={tab !== 3}><IdempotencyPanel /></div>
+      <div hidden={tab !== 4}><AntiPatternsPanel /></div>
     </div>
   );
 }

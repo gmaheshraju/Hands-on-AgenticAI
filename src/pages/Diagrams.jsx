@@ -95,7 +95,7 @@ const S = {
            border: '1px solid var(--border)', color: 'var(--text-muted)', verticalAlign: 'middle' },
   altL2: { fontFamily: 'var(--font-mono)', fontSize: 10, padding: '1px 5px', marginLeft: 7, borderRadius: 3,
            border: '1px solid var(--text-accent)', color: 'var(--text-accent)', verticalAlign: 'middle' },
-  eyebrow: { fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: '0.08em', color: 'var(--text-accent)', marginBottom: 8 },
+  eyebrow: { fontFamily: 'var(--font-mono)', fontSize: 11, fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-accent)', marginBottom: 8 },
   h1: { fontFamily: 'var(--font-display)', fontSize: 'clamp(30px,4vw,44px)', fontWeight: 400, margin: '0 0 14px' },
   sub: { fontSize: 16, lineHeight: 1.65, color: 'var(--text-p)', maxWidth: 720, marginBottom: 26 },
   note: { background: 'var(--bg-card)', border: '1px solid var(--border)', borderLeft: '3px solid var(--bg-accent-strong)', borderRadius: 'var(--radius-md)', padding: '16px 20px', maxWidth: 720, marginBottom: 40 },

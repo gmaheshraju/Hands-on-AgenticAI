@@ -6,7 +6,9 @@ import App from './App.jsx'
 
 const saved = localStorage.getItem('theme');
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-document.documentElement.setAttribute('data-theme', saved || (prefersDark ? 'dark' : 'light'));
+const theme = saved || (prefersDark ? 'dark' : 'light');
+document.documentElement.setAttribute('data-theme', theme);
+document.querySelectorAll('meta[name="theme-color"]').forEach((m) => m.setAttribute('content', theme === 'dark' ? '#161618' : '#F6F5F0'));
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

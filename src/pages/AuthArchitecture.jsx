@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import TabNav from '../components/TabNav';
-import TabTransition from '../components/TabTransition';
 import Decision, { Pill } from '../components/Decision';
 import Insight from '../components/Insight';
 
@@ -23,14 +22,12 @@ export default function AuthArchitecture() {
 
       <TabNav tabs={TABS} active={tab} onChange={setTab} />
 
-      <TabTransition activeKey={tab}>
-
-      {tab === 0 && <AuthNvsAuthZPanel />}
-      {tab === 1 && <OAuthPanel />}
-      {tab === 2 && <TokenDesignPanel />}
-      {tab === 3 && <AccessControlPanel />}
-      {tab === 4 && <AntiPatternsPanel />}
-      </TabTransition>
+      {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+      <div hidden={tab !== 0}><AuthNvsAuthZPanel /></div>
+      <div hidden={tab !== 1}><OAuthPanel /></div>
+      <div hidden={tab !== 2}><TokenDesignPanel /></div>
+      <div hidden={tab !== 3}><AccessControlPanel /></div>
+      <div hidden={tab !== 4}><AntiPatternsPanel /></div>
     </div>
   );
 }

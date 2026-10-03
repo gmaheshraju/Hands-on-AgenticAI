@@ -4,6 +4,7 @@ import Nav from './Nav';
 import PostFooterCTA from './PostFooterCTA';
 import PostToc from './PostToc';
 import { AUTHOR_NAME, EMAIL, GITHUB, LINKEDIN, PROJECTS_REPO } from '../data/contact';
+import { ROUTES } from '../seo/routes';
 
 // Scroll progress for long posts. Written straight to the DOM once per frame
 // (transform, not width) so scrolling never re-renders React or triggers layout.
@@ -62,18 +63,21 @@ function useTabScrollReset(enabled) {
 
 export default function Layout({ children }) {
   const { pathname } = useLocation();
-  const isBlogPost = pathname.startsWith('/blog/');
+  // Long-form pages (blog posts and System Design frameworks) share one reading layout.
+  const isReading =
+    pathname.startsWith('/blog/') || ROUTES.find((r) => r.path === pathname)?.kind === 'framework';
   const isIndex = pathname === '/' || pathname === '/blog';
-  useTabScrollReset(isBlogPost);
+  useTabScrollReset(isReading);
 
   return (
     <>
-      {isBlogPost && <ReadingProgress />}
-      {isBlogPost && <PostToc />}
+      <a href="#main" className="skip-link">Skip to content</a>
+      {isReading && <ReadingProgress />}
+      {isReading && <PostToc />}
       <Nav />
-      <main className={`layout-main${isBlogPost ? ' layout-main--post' : ''}${isIndex ? ' layout-main--wide' : ''}`}>
+      <main id="main" className={`layout-main${isReading ? ' layout-main--post' : ''}${isIndex ? ' layout-main--wide' : ''}`}>
         {children}
-        {isBlogPost && <PostFooterCTA />}
+        {isReading && <PostFooterCTA />}
       </main>
       <Footer />
     </>

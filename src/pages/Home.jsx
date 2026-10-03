@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import FrameworkCard from '../components/FrameworkCard';
 import FadeIn from '../components/FadeIn';
 
@@ -14,7 +15,7 @@ const frameworks = [
     to: '/rate-limiter',
     number: '02',
     title: 'Rate Limiter Design',
-    subtitle: 'Token bucket vs sliding window vs leaky bucket — with burst handling, distributed coordination, and failure modes.',
+    subtitle: 'Token bucket vs sliding window vs leaky bucket, with burst handling, distributed coordination, and failure modes.',
     tags: ['Token bucket', 'Sliding window', 'Redis', 'Distributed'],
     ready: true,
   },
@@ -22,7 +23,7 @@ const frameworks = [
     to: '/caching',
     number: '03',
     title: 'Caching Strategies',
-    subtitle: 'Write-through, write-behind, cache-aside — when each pattern works, when it breaks, and the invalidation tradeoffs.',
+    subtitle: 'Write-through, write-behind, cache-aside: when each pattern works, when it breaks, and the invalidation tradeoffs.',
     tags: ['Cache-aside', 'Write-through', 'Invalidation', 'TTL', 'Thundering herd'],
     ready: true,
   },
@@ -30,7 +31,7 @@ const frameworks = [
     to: '/message-queues',
     number: '04',
     title: 'Message Queue Selection',
-    subtitle: 'Kafka vs SQS vs RabbitMQ — ordering guarantees, exactly-once semantics, backpressure, and when "just use Kafka" is wrong.',
+    subtitle: 'Kafka vs SQS vs RabbitMQ: ordering guarantees, exactly-once semantics, backpressure, and when "just use Kafka" is wrong.',
     tags: ['Kafka', 'SQS', 'RabbitMQ', 'Ordering', 'Exactly-once'],
     ready: true,
   },
@@ -62,7 +63,7 @@ const frameworks = [
     to: '/resilience',
     number: '08',
     title: 'Resilience Patterns',
-    subtitle: 'Circuit breakers, retries with backoff, bulkheads, graceful degradation — building systems that bend without breaking.',
+    subtitle: 'Circuit breakers, retries with backoff, bulkheads, graceful degradation. Systems that bend without breaking.',
     tags: ['Circuit breakers', 'Retries', 'Bulkheads', 'Load shedding'],
     ready: true,
   },
@@ -70,7 +71,7 @@ const frameworks = [
     to: '/observability',
     number: '09',
     title: 'Self-Healing & Observability',
-    subtitle: 'Health checks, auto-recovery, distributed tracing, SLOs — the infrastructure that lets you sleep at night.',
+    subtitle: 'Health checks, auto-recovery, distributed tracing, SLOs: the infrastructure that lets you sleep at night.',
     tags: ['Health checks', 'Tracing', 'SLOs', 'Auto-recovery'],
     ready: true,
   },
@@ -78,7 +79,7 @@ const frameworks = [
     to: '/api-design',
     number: '10',
     title: 'API Design',
-    subtitle: 'API-first development, REST vs gRPC vs GraphQL, versioning strategies, pagination — the contract that holds your system together.',
+    subtitle: 'API-first development, REST vs gRPC vs GraphQL, versioning strategies, pagination: the contract that holds your system together.',
     tags: ['REST', 'gRPC', 'GraphQL', 'Versioning', 'Pagination'],
     ready: true,
   },
@@ -86,7 +87,7 @@ const frameworks = [
     to: '/auth',
     number: '11',
     title: 'Auth Architecture',
-    subtitle: 'AuthN vs AuthZ, OAuth2/OIDC, JWT design, RBAC/ABAC/ReBAC — the security layer most engineers handwave past.',
+    subtitle: 'AuthN vs AuthZ, OAuth2/OIDC, JWT design, RBAC/ABAC/ReBAC: the security layer most engineers handwave past.',
     tags: ['OAuth2', 'JWT', 'RBAC', 'Zero trust', 'Zanzibar'],
     ready: true,
   },
@@ -94,7 +95,7 @@ const frameworks = [
     to: '/deployment',
     number: '12',
     title: 'Deployment Strategies',
-    subtitle: 'Blue-green, canary, feature flags, config-driven development, CI/CD pipeline design — shipping with confidence.',
+    subtitle: 'Blue-green, canary, feature flags, config-driven development, CI/CD pipeline design, so shipping stops being scary.',
     tags: ['Blue-green', 'Canary', 'Feature flags', 'GitOps'],
     ready: true,
   },
@@ -102,7 +103,7 @@ const frameworks = [
     to: '/concurrency',
     number: '13',
     title: 'Concurrency & Performance',
-    subtitle: 'Locks, connection pools, N+1 queries, load testing, profiling — where most production systems actually break.',
+    subtitle: 'Locks, connection pools, N+1 queries, load testing, profiling: where most production systems actually break.',
     tags: ['Locking', 'Connection pools', 'N+1', 'Load testing'],
     ready: true,
   },
@@ -110,7 +111,7 @@ const frameworks = [
     to: '/distributed-systems',
     number: '14',
     title: 'Distributed Systems',
-    subtitle: 'CAP theorem (what it actually says), consensus, distributed transactions, idempotency — the foundations everything else builds on.',
+    subtitle: 'CAP theorem (what it actually says), consensus, distributed transactions, idempotency: the foundations everything else builds on.',
     tags: ['CAP', 'Raft', 'Idempotency', 'Sagas', '2PC'],
     ready: true,
   },
@@ -120,22 +121,34 @@ export default function Home() {
   return (
     <div>
       <section className="home-hero">
-        <p className="home-hero__eyebrow">Mahesh Guntumadugu</p>
-        <h1 className="home-hero__title">
+        <p className="home-hero__eyebrow rise" style={{ '--i': 0 }}>System Design</p>
+        <h1 className="home-hero__title rise" style={{ '--i': 1 }}>
           System Design<br />
-          <em>Playbook</em>
+          <em className="swash">
+            Playbook
+            <svg className="swash__line" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M3 8.5 C 48 3, 118 2.5, 197 6.5" />
+            </svg>
+          </em>
         </h1>
-        <p className="home-hero__tagline">
-          Battle-tested decision frameworks and architectural patterns
-          for building production systems at scale.
+        <p className="home-hero__tagline rise" style={{ '--i': 2 }}>
+          {frameworks.length} decision frameworks for the backend questions that decide whether a system
+          holds up: storage, caching, queues, consistency, failure. Each one starts from the constraint,
+          not the technology.
         </p>
+        <div className="hero-actions rise" style={{ '--i': 3, marginBottom: 0 }}>
+          <Link to={frameworks[0].to} className="btn btn--primary">
+            Start with {frameworks[0].title} <span className="btn__arrow" aria-hidden="true">&rarr;</span>
+          </Link>
+          <Link to="/" className="btn btn--ghost">Agentic AI Playbook</Link>
+        </div>
       </section>
 
       <section style={{ marginBottom: '3.5rem' }}>
         <h2 className="home-section-title">Frameworks</h2>
-        <div className="home-grid">
+        <div className="post-grid">
           {frameworks.map((f, index) => (
-            <FadeIn key={f.number} delay={index * 60}>
+            <FadeIn key={f.number} delay={(index % 4) * 40} className="post-grid__cell">
               <FrameworkCard {...f} />
             </FadeIn>
           ))}
@@ -148,25 +161,16 @@ export default function Home() {
           <h2 className="home-philosophy__title">The meta-principle</h2>
           <p className="home-philosophy__text">
             Every weak system design answer starts with a technology name.
-            Every strong one starts with a constraint — the query shape, the scale,
+            Every strong one starts with a constraint: the query shape, the scale,
             the consistency requirement, the write pattern.
             The technology is the last word in the sentence, never the first.
           </p>
           <p className="home-philosophy__sub">
-            These frameworks train you to think constraint-first. That's what separates
-            a 30L offer from a 2Cr one — not more knowledge, but better judgment.
+            These frameworks train you to think constraint-first. That is what separates
+            a 30L offer from a 2Cr one: not more knowledge, but better judgment.
           </p>
         </div>
       </section>
-    </div>
-  );
-}
-
-function Stat({ number, label }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <span className="home-stat__num">{number}</span>
-      <span className="home-stat__label">{label}</span>
     </div>
   );
 }

@@ -16,16 +16,19 @@ export default function PostFooterCTA() {
         </p>
       </div>
 
-      <p style={styles.ask}>
-        Stuck between a demo that works and a system you can trust with real users?{' '}
+      <div style={styles.card}>
+        <p style={styles.ask}>
+          Stuck between a demo that works and a system you can trust with real users?
+          That is the work I take.
+        </p>
         <Link
           to="/work-with-me?from=post"
           onClick={() => window.clarity?.('event', 'post_footer_cta_click')}
-          style={styles.link}
+          className="btn btn--primary"
         >
-          That is the work I take &rarr;
+          Work with me <span className="btn__arrow" aria-hidden="true">&rarr;</span>
         </Link>
-      </p>
+      </div>
 
       <Subscribe />
     </aside>
@@ -33,9 +36,10 @@ export default function PostFooterCTA() {
 }
 
 const styles = {
+  // Width and horizontal position come from `.layout-main--post > aside` in global.css,
+  // so the byline lines up with the reading column at every breakpoint.
   wrap: {
-    maxWidth: 'var(--page-content-max)',
-    margin: '4rem auto 0',
+    marginTop: '4rem',
     padding: '28px 0 8px',
     borderTop: '1px solid var(--border)',
   },
@@ -53,13 +57,19 @@ const styles = {
     fontSize: 11,
     fontWeight: 500,
   },
-  bio: { fontSize: 13.5, color: 'var(--text-p)', lineHeight: 1.7 },
+  bio: { fontSize: 15, color: 'var(--text-p)', lineHeight: 1.7 },
   name: { color: 'var(--text-h)', fontWeight: 600 },
-  ask: { fontSize: 14, color: 'var(--text-p)', lineHeight: 1.7, marginTop: 16 },
-  link: {
-    color: 'var(--text-accent)',
-    textDecoration: 'underline',
-    textUnderlineOffset: '3px',
-    fontWeight: 500,
+  card: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 16,
+    marginTop: 22,
+    padding: '20px 22px',
+    background: 'var(--bg-accent)',
+    border: '1px solid var(--border)',
+    borderRadius: 'var(--radius-md)',
   },
+  ask: { fontSize: 15, color: 'var(--text-h)', lineHeight: 1.6, flex: '1 1 320px' },
 };

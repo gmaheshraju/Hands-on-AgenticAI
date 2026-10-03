@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import TabNav from '../components/TabNav';
-import TabTransition from '../components/TabTransition';
 import Decision, { Pill } from '../components/Decision';
 import Insight from '../components/Insight';
 
@@ -681,14 +680,12 @@ export default function Resilience() {
 
       <TabNav tabs={TABS} active={tab} onChange={setTab} />
 
-      <TabTransition activeKey={tab}>
-
-      {tab === 0 && <CircuitBreakersPanel />}
-      {tab === 1 && <RetriesPanel />}
-      {tab === 2 && <BulkheadsPanel />}
-      {tab === 3 && <DegradationPanel />}
-      {tab === 4 && <AntiPatternsPanel />}
-      </TabTransition>
+      {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+      <div hidden={tab !== 0}><CircuitBreakersPanel /></div>
+      <div hidden={tab !== 1}><RetriesPanel /></div>
+      <div hidden={tab !== 2}><BulkheadsPanel /></div>
+      <div hidden={tab !== 3}><DegradationPanel /></div>
+      <div hidden={tab !== 4}><AntiPatternsPanel /></div>
     </div>
   );
 }

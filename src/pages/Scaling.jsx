@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import TabNav from '../components/TabNav';
-import TabTransition from '../components/TabTransition';
 import Decision, { Pill } from '../components/Decision';
 import Insight from '../components/Insight';
 
@@ -21,15 +20,13 @@ export default function Scaling() {
 
       <TabNav tabs={TABS} active={tab} onChange={setTab} />
 
-      <TabTransition activeKey={tab}>
-
-      {tab === 0 && <WhenPanel />}
-      {tab === 1 && <ProgressionPanel />}
-      {tab === 2 && <ShardingPanel />}
-      {tab === 3 && <CqrsPanel />}
-      {tab === 4 && <NumbersPanel />}
-      {tab === 5 && <AntiPatternsPanel />}
-      </TabTransition>
+      {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+      <div hidden={tab !== 0}><WhenPanel /></div>
+      <div hidden={tab !== 1}><ProgressionPanel /></div>
+      <div hidden={tab !== 2}><ShardingPanel /></div>
+      <div hidden={tab !== 3}><CqrsPanel /></div>
+      <div hidden={tab !== 4}><NumbersPanel /></div>
+      <div hidden={tab !== 5}><AntiPatternsPanel /></div>
     </div>
   );
 }

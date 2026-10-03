@@ -14,6 +14,8 @@ export const OG_IMAGE = `${SITE_URL}/og/default.png`;
 
 const suffix = ` | ${AUTHOR}`;
 
+// `kind: 'framework'` marks the System Design framework pages; Layout gives them
+// the same reading layout as blog posts (column, sticky tabs, progress, outline).
 // `priority` and `changefreq` feed sitemap.xml. Blog posts rank highest
 // because they carry the agentic-AI positioning.
 export const ROUTES = [
@@ -163,84 +165,98 @@ export const ROUTES = [
   },
   {
     path: '/database-selection',
+    kind: 'framework',
     title: 'Database Selection',
     description:
       'The 6-question decision tree that reflects deep systems understanding. Each question narrows the field until one database is left standing.',
   },
   {
     path: '/rate-limiter',
+    kind: 'framework',
     title: 'Rate Limiter Design',
     description:
       'Before picking an algorithm, answer: what are you protecting, who are you limiting, and what happens when a request is rejected?',
   },
   {
     path: '/caching',
+    kind: 'framework',
     title: 'Caching Strategies',
     description:
       "Caching is easy to add and hard to get right. The question isn't whether to cache. It's what to cache, when to invalidate, and who wins on a miss.",
   },
   {
     path: '/message-queues',
+    kind: 'framework',
     title: 'Message Queue Selection',
     description:
       '"Just use Kafka" is the queue equivalent of "just use DynamoDB." Answer the ordering, durability, and replay questions first.',
   },
   {
     path: '/scaling',
+    kind: 'framework',
     title: 'Scaling Playbook',
     description:
       'Scaling is a progression, not a choice. Each step adds complexity and solves one specific bottleneck, in a specific order.',
   },
   {
     path: '/event-driven',
+    kind: 'framework',
     title: 'Event-Driven Architecture',
     description:
       "Events decouple producers from consumers, but they don't decouple you from thinking about ordering, idempotency, and delivery guarantees.",
   },
   {
     path: '/state-machines',
+    kind: 'framework',
     title: 'State Machines & Workflows',
     description:
       'Every production outage you remember involved state. A payment stuck in "processing," an order both "cancelled" and "shipped."',
   },
   {
     path: '/api-design',
+    kind: 'framework',
     title: 'API Design',
     description:
       'An API is a published promise. Once a client depends on it, every field name, status code, and error shape becomes a contract you own.',
   },
   {
     path: '/resilience',
+    kind: 'framework',
     title: 'Resilience Patterns',
     description:
       'Distributed systems fail constantly. The question is never "will it break?" but "when it breaks, does the user notice?"',
   },
   {
     path: '/observability',
+    kind: 'framework',
     title: 'Self-Healing & Observability',
     description:
       'Observability is not dashboards. It is the ability to ask arbitrary questions about production without shipping new code to answer them.',
   },
   {
     path: '/auth',
+    kind: 'framework',
     title: 'Auth Architecture',
     description:
       'Authentication and authorization are the two pillars every system rests on, yet most engineers conflate them until something breaks.',
   },
   {
     path: '/deployment',
+    kind: 'framework',
     title: 'Deployment Strategies',
     description:
       'Deployment is where engineering meets organizational maturity. The question is not "how do we push code" but "how do we push it safely."',
   },
   {
     path: '/concurrency',
+    kind: 'framework',
     title: 'Concurrency & Performance',
     description:
       'Performance work without concurrency control is just faster bugs. The hard problems are correctness under parallelism, not raw speed.',
   },
   {
     path: '/distributed-systems',
+    kind: 'framework',
     title: 'Distributed Systems',
     description:
       'Distributed systems fail in ways monoliths never will. The network is unreliable, clocks drift, and nodes crash mid-write.',

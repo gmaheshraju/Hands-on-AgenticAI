@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 function applyTheme(dark) {
   document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  // Both media-scoped theme-color tags follow the chosen theme, not the OS setting.
+  document.querySelectorAll('meta[name="theme-color"]').forEach((m) => m.setAttribute('content', dark ? '#161618' : '#F6F5F0'));
   try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch { /* private mode: theme just won't persist */ }
 }
 

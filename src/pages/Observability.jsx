@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import TabNav from '../components/TabNav';
-import TabTransition from '../components/TabTransition';
 import Decision, { Pill } from '../components/Decision';
 import Insight from '../components/Insight';
 
@@ -24,14 +23,12 @@ export default function Observability() {
 
       <TabNav tabs={TABS} active={tab} onChange={setTab} />
 
-      <TabTransition activeKey={tab}>
-
-      {tab === 0 && <HealthChecksPanel />}
-      {tab === 1 && <AutoRecoveryPanel />}
-      {tab === 2 && <DistributedTracingPanel />}
-      {tab === 3 && <SLOsPanel />}
-      {tab === 4 && <AntiPatternsPanel />}
-      </TabTransition>
+      {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+      <div hidden={tab !== 0}><HealthChecksPanel /></div>
+      <div hidden={tab !== 1}><AutoRecoveryPanel /></div>
+      <div hidden={tab !== 2}><DistributedTracingPanel /></div>
+      <div hidden={tab !== 3}><SLOsPanel /></div>
+      <div hidden={tab !== 4}><AntiPatternsPanel /></div>
     </div>
   );
 }

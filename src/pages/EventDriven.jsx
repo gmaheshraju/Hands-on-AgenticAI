@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import TabNav from '../components/TabNav';
-import TabTransition from '../components/TabTransition';
 import Decision, { Pill } from '../components/Decision';
 import Insight from '../components/Insight';
 
@@ -29,14 +28,12 @@ export default function EventDriven() {
 
       <TabNav tabs={TABS} active={tab} onChange={setTab} />
 
-      <TabTransition activeKey={tab}>
-
-      {tab === 0 && <PatternsPanel />}
-      {tab === 1 && <EventSourcingPanel />}
-      {tab === 2 && <SagasPanel />}
-      {tab === 3 && <CDCStreamingPanel />}
-      {tab === 4 && <AntiPatternsPanel />}
-      </TabTransition>
+      {/* All panels mounted (hidden when inactive) so every tab prerenders. */}
+      <div hidden={tab !== 0}><PatternsPanel /></div>
+      <div hidden={tab !== 1}><EventSourcingPanel /></div>
+      <div hidden={tab !== 2}><SagasPanel /></div>
+      <div hidden={tab !== 3}><CDCStreamingPanel /></div>
+      <div hidden={tab !== 4}><AntiPatternsPanel /></div>
     </div>
   );
 }

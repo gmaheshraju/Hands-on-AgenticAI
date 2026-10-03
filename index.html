@@ -4,7 +4,23 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#F97316" />
+    <!-- Set the theme before first paint: the prerendered page would otherwise flash light
+         for dark-mode readers until the app bundle loads. -->
+    <script>
+      try {
+        var t = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
+
+    <!-- Browser chrome matches the page paper in each theme (ThemeToggle keeps it in sync). -->
+    <meta name="theme-color" content="#F6F5F0" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#161618" media="(prefers-color-scheme: dark)" />
+
+    <!-- Fonts: preconnect + stylesheet link here, so the font CSS is fetched in parallel with the app CSS. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" />
 
     <!-- Microsoft Clarity — behavior analytics (session recordings, heatmaps) -->
     <script type="text/javascript">
