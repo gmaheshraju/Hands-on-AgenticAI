@@ -7,6 +7,7 @@ import FadeIn from '../../components/FadeIn';
 import PostMeta from '../../components/PostMeta';
 import Diagram, { ConceptNote } from '../../components/Diagram';
 import agentMemorySvg from '../../../docs/diagrams/agent_memory_v1/agent-memory.svg?raw';
+import { CLAUDE, CHECKED, SMALL_MODELS, usd } from '../../data/facts';
 
 const MEMORY_SYSTEM_CODE = `class AgentMemory {
   constructor() {
@@ -70,7 +71,7 @@ Episodes:
 Return JSON array of facts:\`;
 
   const facts = await callLLM(prompt, {
-    model: 'claude-haiku',  // cheap model: this is summarization
+    model: '${CLAUDE.haiku.id}',  // cheap model: this is summarization
     responseFormat: 'json',
   });
 
@@ -472,7 +473,7 @@ function RetrievalPanel() {
         <br /><br />
         <strong>Why it matters:</strong> Searching 10,000 raw episodes is slow and noisy. Searching 200 consolidated facts is fast and relevant. "That's why your ChatGPT memory stays short but somehow always up to date." The consolidation gate is running behind the scenes.
         <br /><br />
-        <strong>Implementation:</strong> Use a cheap model (Haiku 4.5, GPT-4o-mini) for consolidation. It's summarization, not reasoning. Run it asynchronously. Store consolidated facts with higher retrieval priority than raw episodes.
+        <strong>Implementation:</strong> Use a cheap model ({SMALL_MODELS}) for consolidation. It's summarization, not reasoning. Run it asynchronously. Store consolidated facts with higher retrieval priority than raw episodes.
       </Decision></FadeIn>
 
       <FadeIn><CodeBlock filename="consolidation-gate.js" code={CONSOLIDATION_GATE_CODE} output={CONSOLIDATION_OUTPUT} /></FadeIn>
@@ -565,7 +566,7 @@ function DeepDivePanel() {
 
       <div style={styles.anti}>
         <p style={styles.strike}>"We'd just store everything in the context window."</p>
-        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />Context windows have cost and latency implications. Input cost scales linearly with prompt size, on every turn: at a mid-tier price of ~$3 per million input tokens, a full 200K prompt is ~$0.60 per call, and a 1M prompt is several dollars. Selective retrieval of 5-10K relevant tokens is 20-100x cheaper. Prompt caching softens this for a stable prefix, but it can't help with memory that changes per query. Plus, more context = more noise = worse answers (the "lost in the middle" problem).</p>
+        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />Context windows have cost and latency implications. Input cost scales linearly with prompt size, on every turn: at {CLAUDE.sonnet.short}&apos;s {usd(CLAUDE.sonnet.input)} per million input tokens ({CHECKED}), a full 200K prompt is {usd(0.2 * CLAUDE.sonnet.input)} per call and a 1M prompt {usd(CLAUDE.sonnet.input)}, on every turn. Selective retrieval of 5-10K relevant tokens is 20-100x cheaper. Prompt caching softens this for a stable prefix, but it can't help with memory that changes per query. Plus, more context = more noise = worse answers (the "lost in the middle" problem).</p>
       </div>
 
       <div style={styles.anti}>

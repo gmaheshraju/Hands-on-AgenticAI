@@ -7,6 +7,7 @@ import FadeIn from '../../components/FadeIn';
 import PostMeta from '../../components/PostMeta';
 import Diagram, { ConceptNote } from '../../components/Diagram';
 import guardrailsSvg from '../../../docs/diagrams/guardrails_v1/guardrails.svg?raw';
+import { SMALL_MODELS } from '../../data/facts';
 
 const INJECTION_SANITIZER_CODE = `const INJECTION_PATTERNS = [
   /ignore\\s+(all\\s+)?previous\\s+instructions/i,
@@ -626,7 +627,7 @@ function ContentModerationPanel() {
         <br /><br />
         <strong>Layer 3: LLM judge (~500ms latency)</strong>
         <br />
-        For nuanced cases that need context: sarcasm, cultural idioms, context-dependent harm. Use a cheap, fast model (Claude 3 Haiku, GPT-4o-mini). The LLM can understand "you're killing it!" is positive and "I'll kill you" is a threat, something regex and classifiers struggle with.
+        For nuanced cases that need context: sarcasm, cultural idioms, context-dependent harm. Use a cheap, fast model ({SMALL_MODELS}). The LLM can understand "you're killing it!" is positive and "I'll kill you" is a threat, something regex and classifiers struggle with.
         <br /><br />
         <strong>The pipeline short-circuits:</strong> if Layer 1 blocks, skip Layer 2 and 3. If Layer 2 passes with high confidence, skip Layer 3. LLM judge only fires for ambiguous cases. This keeps average latency under 10ms while catching 99%+ of harmful content.
       </Decision></FadeIn>

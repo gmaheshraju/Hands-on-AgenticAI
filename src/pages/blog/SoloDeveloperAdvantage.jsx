@@ -188,9 +188,9 @@ function Playbook() {
         </p>
         <div style={styles.roleGrid}>
           {[
-            { role: 'AI Coding Assistant', does: 'Writes features, fixes bugs, refactors', human: 'Architecture decisions, what to build next' },
-            { role: 'AI Code Reviewer', does: 'Catches bugs, security issues, style', human: 'Whether the feature solves the right problem' },
-            { role: 'AI DevOps', does: 'CI/CD, Docker, deployment configs', human: 'Infrastructure cost decisions, scaling strategy' },
+            { role: 'AI Coding Assistant', does: 'Writes features, fixes bugs, refactors (Claude Code, Cursor)', human: 'Architecture decisions, what to build next' },
+            { role: 'AI Code Reviewer', does: 'Catches bugs, security issues, style (an agent run on every PR in CI)', human: 'Whether the feature solves the right problem' },
+            { role: 'AI DevOps', does: 'CI/CD, Docker, deployment configs, with your infra reachable through MCP servers', human: 'Infrastructure cost decisions, scaling strategy' },
             { role: 'AI QA', does: 'Generates tests, edge cases, load scenarios', human: 'What "working" means for your users' },
             { role: 'AI Writer', does: 'Docs, marketing copy, support responses', human: 'Brand voice, what resonates with your audience' },
           ].map(r => (
@@ -241,8 +241,8 @@ function Playbook() {
           revenue → add AI automation → grow more revenue → maybe hire one person if you want to.
         </p>
         <p style={styles.p}>
-          The metric to watch in 2026 is <strong>revenue per employee</strong>, more than ARR or team size. Midjourney reportedly
-          generates ~$200M in revenue with ~40 employees, roughly $5M per person. Compare that to traditional tech's $500K per
+          The metric to watch in 2026 is <strong>revenue per employee</strong>, more than ARR or team size. Midjourney was reported
+          in 2023 to make about $200M in revenue with roughly 40 employees, about $5M per person. Compare that to traditional tech's $500K per
           employee. The best solo developers are pushing this ratio even further.
         </p>
       </FadeIn>
@@ -585,7 +585,7 @@ function AppliedPatterns() {
             },
             {
               q: '"Where do you see the industry going?"',
-              a: '"Revenue per engineer is becoming the defining metric. Companies like Midjourney show that small teams with AI leverage can generate more revenue per person than traditional tech companies by 10x. I think every engineering org will look more like a collection of empowered solo developers with AI tools than like traditional hierarchical teams."',
+              a: '"Revenue per engineer is becoming the defining metric. Companies like Midjourney (reportedly ~$5M revenue per employee in 2023) show that small teams with AI leverage can out-earn traditional tech companies per person by an order of magnitude. I think every engineering org will look more like a collection of empowered solo developers with AI tools than like traditional hierarchical teams."',
             },
           ].map((item, i) => (
             <div key={i} style={styles.angleCard}>

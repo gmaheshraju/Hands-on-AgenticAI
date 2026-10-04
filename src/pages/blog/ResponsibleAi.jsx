@@ -7,6 +7,7 @@ import FadeIn from '../../components/FadeIn';
 import PostMeta from '../../components/PostMeta';
 import Diagram from '../../components/Diagram';
 import responsibleAiSvg from '../../../docs/diagrams/responsible_ai_v1/responsible-ai.svg?raw';
+import { CHECKED } from '../../data/facts';
 
 const FAIRNESS_AUDIT_CODE = `async function auditFairness(model, testSet, sensitiveAttribute) {
   const results = { groups: {}, overall: { tp: 0, fp: 0, tn: 0, fn: 0 } };
@@ -110,8 +111,8 @@ const MODEL_CARD_CODE = `function generateModelCard(config) {
 const MODEL_CARD_OUTPUT = `> generateModelCard({
     name: 'SupportBot v2.1',
     version: '2.1.0',
-    date: '2024-09-15',
-    architecture: 'Claude Sonnet fine-tuned with LoRA',
+    date: '2026-09-15',
+    architecture: 'Qwen3-8B (open weights) + LoRA adapter',
     primaryUse: 'Customer support for billing inquiries',
     outOfScope: ['Medical advice', 'Legal counsel', 'Financial planning'],
     metrics: {
@@ -365,7 +366,7 @@ function Tab3() {
       <Decision question="What goes in a model card?">
         <Pill type="green">Model details</Pill>
         <p>Architecture, training data summary, fine-tuning approach, intended use case. Not the weights,
-        the provenance. "Fine-tuned Claude Sonnet on 50K customer support conversations from 2022-2024,
+        the provenance. "LoRA fine-tune of an open-weights 8B model on 50K customer support conversations from 2024-2026,
         filtered for PII, balanced across 12 product categories." Engineers need this to understand failure
         modes; legal needs it for data provenance audits.</p>
 
@@ -423,8 +424,8 @@ function Tab4() {
 
       <Decision question="EU AI Act: what engineers need to know">
         <Pill type="red">Risk tiers determine your obligations</Pill>
-        <p>Unacceptable (banned): social scoring, real-time facial recognition in public spaces, emotion
-        detection in schools/workplaces. High Risk (heavily regulated): hiring/recruitment, credit scoring,
+        <p>Unacceptable (banned): social scoring, real-time remote biometric identification in public spaces
+        for law enforcement (narrow exceptions), emotion recognition in schools and workplaces. High Risk (heavily regulated): hiring/recruitment, credit scoring,
         law enforcement, medical devices, critical infrastructure. Limited Risk: chatbots, deepfakes
         (transparency required). Minimal Risk: spam filters, video games (no requirements).</p>
 
@@ -434,57 +435,65 @@ function Tab4() {
         users, human oversight mechanisms, accuracy/robustness/cybersecurity requirements. Compliance is
         continuous, with regular audits, not a one-time sign-off.</p>
 
-        <Pill type="amber">Timeline: 2024-2027 phase-in</Pill>
-        <p>Banned practices: Feb 2025. GPAI transparency: Aug 2025. High-risk in Annex III: Aug 2026.
-        High-risk in existing regulated products: Aug 2027. Start now: retrofitting compliance is
-        10x harder than building it in. Companies that waited for GDPR spent 3-5x more than those
-        that prepared early.</p>
+        <Pill type="amber">Timeline (as amended by the Digital Omnibus, checked {CHECKED})</Pill>
+        <p>Banned practices: Feb 2025. General-purpose AI model obligations: Aug 2025 (the voluntary GPAI Code of Practice, published July 2025, is the usual way providers show compliance). Transparency
+        duties (Article 50: tell people they are talking to AI, mark synthetic content): Aug 2026.
+        High-risk systems in Annex III (hiring, credit, education, law enforcement): moved from Aug 2026
+        to <strong>2 Dec 2027</strong>. High-risk AI inside regulated products (medical devices,
+        machinery): moved to <strong>2 Aug 2028</strong>. The omnibus was adopted on 29 June 2026 and
+        delays the obligations; it does not remove them. Build the documentation and logging now:
+        retrofitting them into a shipped system is far harder than designing them in.</p>
 
-        <Pill type="red">Fines: up to 7% of global annual revenue</Pill>
-        <p>Or EUR 35 million, whichever is higher. For banned practices, it's 7%. For high-risk violations,
-        3%. For incorrect information to regulators, 1.5%. These are not theoretical. The EU has already
-        hired 100+ enforcement staff and established the AI Office.</p>
+        <Pill type="red">Fines: up to 7% of global annual turnover</Pill>
+        <p>Or EUR 35 million, whichever is higher, for banned practices. Up to 3% (EUR 15 million) for
+        breaching other obligations, including the high-risk rules. Up to 1% (EUR 7.5 million) for
+        supplying incorrect information to regulators. The European AI Office supervises
+        general-purpose models; national authorities enforce the rest.</p>
       </Decision>
 
-      <Decision question="US regulatory landscape (as of mid-2025)">
+      <Decision question={`US regulatory landscape (checked ${CHECKED})`}>
         <Pill type="amber">No comprehensive federal law, but enforcement is happening</Pill>
-        <p>FTC: already enforcing against deceptive AI practices (Rite Aid banned from facial recognition
-        for 5 years in 2023, multiple enforcement actions against AI-washing). NIST AI RMF: voluntary but
-        becoming the de facto standard; enterprise customers ask for NIST alignment in procurement.
-        SEC: AI-washing enforcement. Claiming AI capabilities you don't have is securities fraud (Delphia
-        and Global Predictions fined in 2024).</p>
+        <p>FTC: enforces against deceptive AI practices (Rite Aid was banned from facial recognition for
+        5 years in 2023). SEC: &quot;AI-washing&quot; is securities fraud (Delphia and Global Predictions
+        were fined in 2024). NIST AI RMF: voluntary, but enterprise procurement asks for alignment with it.
+        A December 2025 executive order set up a DOJ task force to challenge state AI laws in court; until
+        a court or Congress acts, those state laws remain in force as written.</p>
 
         <Pill type="amber">State-level patchwork</Pill>
-        <p>Colorado AI Act (2024): automated decision-making in "consequential decisions" requires
-        impact assessments. Illinois BIPA: biometric data in AI requires informed consent. California:
-        multiple bills in progress on AI transparency and deepfakes. For any product serving US users,
-        track state laws; they're moving faster than federal.</p>
+        <p>Colorado rewrote its AI Act in May 2026: the duty-of-care and impact-assessment regime was
+        replaced by narrower disclosure rules for automated decision-making, effective 1 Jan 2027.
+        California&apos;s SB 53 requires frontier-model developers to publish safety frameworks and
+        report critical incidents. Illinois BIPA: biometric data requires informed consent. For any
+        product serving US users, track state laws; they move faster than federal ones.</p>
 
         <Pill type="green">Sector-specific regulations are strict and existing</Pill>
-        <p>FDA: AI medical devices need 510(k) or De Novo clearance. 600+ AI/ML devices approved as of
-        2024. Banking: OCC, Fed, FDIC joint guidance on AI in lending decisions. These aren't new and
-        they don't care if you call it "AI" or "algorithm." If it makes decisions about people, it's
-        regulated.</p>
+        <p>FDA: AI medical devices need 510(k), De Novo or PMA clearance, and the FDA publishes a growing
+        list of authorized AI-enabled devices. Banking: model-risk guidance from the OCC, Fed and FDIC
+        covers AI in lending decisions. These aren&apos;t new and they don&apos;t care if you call it
+        &quot;AI&quot; or &quot;algorithm.&quot; If it makes decisions about people, it&apos;s regulated.</p>
       </Decision>
 
-      <Decision question="India's approach">
-        <Pill type="amber">DPDPA 2023 is mandatory now</Pill>
-        <p>Digital Personal Data Protection Act: consent requirements for data processing, data localization
-        for sensitive personal data, significant penalties (up to INR 250 Cr / ~$30M). For any AI product
-        serving Indian users, DPDPA compliance is table stakes. Aadhaar, PAN, and other India-specific PII
-        need special handling: tokenization before any model processing.</p>
+      <Decision question={`India's approach (checked ${CHECKED})`}>
+        <Pill type="amber">DPDPA 2023 and the DPDP Rules 2025</Pill>
+        <p>The Rules were notified on 14 Nov 2025 and phase in over 18 months: the Data Protection Board
+        first, consent managers from Nov 2026, and most obligations (notice, consent, security, breach
+        reporting) by <strong>13 May 2027</strong>. Penalties reach INR 250 crore per breach. Cross-border
+        transfers are allowed except to countries the government restricts. Aadhaar, PAN and other
+        India-specific identifiers still need special handling: tokenize them before any model sees them.</p>
 
-        <Pill type="amber">AI-specific regulation coming</Pill>
-        <p>MEITY is actively developing AI governance guidelines. No specific AI law yet (as of mid-2025),
-        but the direction is clear: India will regulate high-risk AI applications. The advisory on AI
-        labeling and deepfakes (2024) signals the regulatory intent. Build the infrastructure now.</p>
+        <Pill type="amber">AI rules arrive through existing law, not a new AI act</Pill>
+        <p>MeitY&apos;s India AI Governance Guidelines (Nov 2025) explicitly avoid a standalone AI statute
+        in favour of targeted amendments and voluntary frameworks. The first such amendment is binding:
+        since Feb 2026 the IT Rules require AI-generated (&quot;synthetically generated&quot;) content to
+        carry a visible label and provenance metadata, and large platforms must collect a user declaration
+        and verify it. If your product generates images, audio or video for Indian users, labelling is
+        already a launch requirement.</p>
       </Decision>
 
       <Insight tag="Key insight">
         The senior engineering perspective on regulation: "I wouldn't wait for laws to tell me what to do. I'd
         build the monitoring, documentation, and fairness measurement infrastructure now because (a) it's
-        the right thing to do, (b) it's cheaper to build proactively than retrofit reactively (GDPR
-        early adopters spent 40% less than late scramblers), and (c) regulations are converging across
+        the right thing to do, (b) it's cheaper to build proactively than retrofit reactively, and (c) regulations are converging across
         EU, US states, and India. The companies that prepared early will have a competitive advantage
         over those scrambling to comply."
       </Insight>

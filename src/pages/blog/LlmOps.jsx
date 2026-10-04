@@ -7,30 +7,31 @@ import FadeIn from '../../components/FadeIn';
 import PostMeta from '../../components/PostMeta';
 import Diagram, { ConceptNote } from '../../components/Diagram';
 import llmopsSvg from '../../../docs/diagrams/llmops_v1/llmops.svg?raw';
+import { CLAUDE, CHECKED, usd, cacheWrite } from '../../data/facts';
 
 const MODEL_ROUTER_CODE = `async function routeToModel(query, { costCap = 0.01 } = {}) {
   // Classify complexity: simple queries go to fast/cheap model
   const complexity = await classifyComplexity(query);
 
   if (complexity === 'simple') {
-    // Haiku 4.5: ~$1/1M input tokens
-    return callModel('claude-haiku-4-5', query);
+    // ${CLAUDE.haiku.short}: ~$${CLAUDE.haiku.input}/1M input tokens
+    return callModel('${CLAUDE.haiku.id}', query);
   }
 
   if (complexity === 'medium') {
-    // Sonnet 5: ~$3/1M input tokens
-    return callModel('claude-sonnet-5', query);
+    // ${CLAUDE.sonnet.short}: ~$${CLAUDE.sonnet.input}/1M input tokens
+    return callModel('${CLAUDE.sonnet.id}', query);
   }
 
-  // Complex: Opus 5: ~$5/1M input tokens
+  // Complex: ${CLAUDE.opus.short}: ~$${CLAUDE.opus.input}/1M input tokens
   // But verify the response: expensive model isn't always right
-  const response = await callModel('claude-opus-5', query);
+  const response = await callModel('${CLAUDE.opus.id}', query);
   return response;
 }
 
 async function classifyComplexity(query) {
   // Use the cheap model to classify (meta-routing)
-  const result = await callModel('claude-haiku',
+  const result = await callModel('${CLAUDE.haiku.id}',
     \`Classify this query complexity as simple/medium/complex.
      Simple: factual lookup, short answer.
      Medium: analysis, comparison, moderate reasoning.
@@ -42,14 +43,14 @@ async function classifyComplexity(query) {
 }`;
 
 const MODEL_ROUTER_OUTPUT = `> routeToModel("What's the capital of France?")
-  -> Routed to claude-haiku (simple)  0.3ms classify, 180ms generate
-  -> Cost: $0.000003 | "The capital of France is Paris."
+  -> Routed to ${CLAUDE.haiku.id} (simple)  0.3ms classify, 180ms generate
+  -> Cost: $0.00005 | "The capital of France is Paris."
 
 > routeToModel("Design a rate limiter for a distributed system")
-  -> Routed to claude-opus (complex)  0.4ms classify, 2100ms generate
-  -> Cost: $0.0018 | [detailed system design response...]
+  -> Routed to ${CLAUDE.opus.id} (complex)  0.4ms classify, 2100ms generate
+  -> Cost: $0.031 | [detailed system design response...]
 
-Cost savings: 94% on simple queries vs always using Opus`;
+Simple queries cost 75% less on Haiku than the same tokens on Opus`;
 
 const TOKEN_BUDGET_CODE = `class TokenBudgetManager {
   constructor({ dailyBudgetUsd = 500, perRequestMax = 4096 }) {
@@ -68,9 +69,9 @@ const TOKEN_BUDGET_CODE = `class TokenBudgetManager {
 
     if (this.todaySpend + estimatedCost > this.dailyBudgetUsd) {
       // Budget exceeded: try a cheaper model or reject
-      if (model !== 'claude-haiku') {
+      if (model !== '${CLAUDE.haiku.id}') {
         console.warn(\`Budget guard: downgrading \${model} -> haiku\`);
-        return this.call('claude-haiku', messages, opts);
+        return this.call('${CLAUDE.haiku.id}', messages, opts);
       }
       throw new Error(\`Daily budget exhausted: $\${this.todaySpend.toFixed(2)}/$\${this.dailyBudgetUsd}\`);
     }
@@ -91,16 +92,16 @@ const TOKEN_BUDGET_CODE = `class TokenBudgetManager {
 
   _estimateCost(model, inputTokens, outputTokens) {
     const rates = {
-      'claude-haiku':  { input: 1.00, output: 5.00 },   // per 1M tokens (2026)
-      'claude-sonnet': { input: 3.00, output: 15.00 },
-      'claude-opus':   { input: 5.00, output: 25.00 },
+      '${CLAUDE.haiku.id}':  { input: ${CLAUDE.haiku.input.toFixed(2)}, output: ${CLAUDE.haiku.output.toFixed(2)} },   // per 1M tokens (${CHECKED})
+      '${CLAUDE.sonnet.id}': { input: ${CLAUDE.sonnet.input.toFixed(2)}, output: ${CLAUDE.sonnet.output.toFixed(2)} },
+      '${CLAUDE.opus.id}':   { input: ${CLAUDE.opus.input.toFixed(2)}, output: ${CLAUDE.opus.output.toFixed(2)} },
     };
-    const r = rates[model] || rates['claude-sonnet'];
+    const r = rates[model] || rates['${CLAUDE.sonnet.id}'];
     return (inputTokens * r.input + outputTokens * r.output) / 1_000_000;
   }
 
   _truncateToFit(messages, model) {
-    const limits = { 'claude-haiku': 200000, 'claude-sonnet': 200000, 'claude-opus': 200000 };
+    const limits = { '${CLAUDE.haiku.id}': ${CLAUDE.haiku.contextTokens}, '${CLAUDE.sonnet.id}': ${CLAUDE.sonnet.contextTokens}, '${CLAUDE.opus.id}': ${CLAUDE.opus.contextTokens} };
     const maxInput = (limits[model] || 128000) * 0.85; // 85% of window for input
     let total = this._estimateTokens(messages);
     if (total <= maxInput) return messages;
@@ -132,20 +133,20 @@ const TOKEN_BUDGET_CODE = `class TokenBudgetManager {
 
 const TOKEN_BUDGET_OUTPUT = `> const budget = new TokenBudgetManager({ dailyBudgetUsd: 500, perRequestMax: 4096 })
 
-> await budget.call('claude-opus', longConversation)
+> await budget.call('${CLAUDE.opus.id}', longConversation)
   Input: 12,400 tokens | Output: 1,820 tokens
   Cost: $0.1075 | Budget remaining: $499.89
 
 > // 15,000 requests later...
-> await budget.call('claude-opus', messages)
-  Budget guard: downgrading claude-opus -> haiku
+> await budget.call('${CLAUDE.opus.id}', messages)
+  Budget guard: downgrading ${CLAUDE.opus.id} -> haiku
   Cost: $0.00036 | Budget remaining: $2.14
 
-> await budget.call('claude-haiku', messages)
+> await budget.call('${CLAUDE.haiku.id}', messages)
   Error: Daily budget exhausted: $500.00/$500`;
 
 const RESILIENT_CLIENT_CODE = `class ResilientLLMClient {
-  constructor(models = ['claude-sonnet', 'claude-haiku']) {
+  constructor(models = ['${CLAUDE.sonnet.id}', '${CLAUDE.haiku.id}']) {
     this.models = models;
     this.circuitBreakers = new Map();
     models.forEach(m => this.circuitBreakers.set(m, { failures: 0, openUntil: 0 }));
@@ -216,25 +217,25 @@ const RESILIENT_CLIENT_CODE = `class ResilientLLMClient {
   }
 }`;
 
-const RESILIENT_CLIENT_OUTPUT = `> const client = new ResilientLLMClient(['claude-sonnet', 'claude-haiku'])
+const RESILIENT_CLIENT_OUTPUT = `> const client = new ResilientLLMClient(['${CLAUDE.sonnet.id}', '${CLAUDE.haiku.id}'])
 
 > await client.call(messages, { timeout: 10000, stream: true })
-  -> claude-sonnet: 200 OK (attempt 0, 1847ms)
-  { model: 'claude-sonnet', attempt: 0, text: '...' }
+  -> ${CLAUDE.sonnet.id}: 200 OK (attempt 0, 1847ms)
+  { model: '${CLAUDE.sonnet.id}', attempt: 0, text: '...' }
 
 > // Sonnet is rate-limited...
 > await client.call(messages)
-  -> claude-sonnet attempt 1 failed: 429 Too Many Requests. Waiting 5s...
-  -> claude-sonnet attempt 2 failed: 429. Waiting 5s...
-  -> claude-sonnet attempt 3 failed: 429. Circuit breaker OPEN (60s)
-  -> claude-haiku: 200 OK (attempt 0, 340ms)
-  { model: 'claude-haiku', attempt: 0, text: '...' }
+  -> ${CLAUDE.sonnet.id} attempt 1 failed: 429 Too Many Requests. Waiting 5s...
+  -> ${CLAUDE.sonnet.id} attempt 2 failed: 429. Waiting 5s...
+  -> ${CLAUDE.sonnet.id} attempt 3 failed: 429. Circuit breaker OPEN (60s)
+  -> ${CLAUDE.haiku.id}: 200 OK (attempt 0, 340ms)
+  { model: '${CLAUDE.haiku.id}', attempt: 0, text: '...' }
 
 > // All models down...
 > await client.call(messages)
-  -> claude-sonnet: circuit open, skipping
-  -> claude-haiku attempt 1 failed: 503. Retrying in 1000ms...
-  -> claude-haiku attempt 2 failed: 503. Retrying in 2000ms...
+  -> ${CLAUDE.sonnet.id}: circuit open, skipping
+  -> ${CLAUDE.haiku.id} attempt 1 failed: 503. Retrying in 1000ms...
+  -> ${CLAUDE.haiku.id} attempt 2 failed: 503. Retrying in 2000ms...
   { fromCache: true, stale: true, text: '...' }`;
 
 const OBSERVABILITY_CODE = `function createLLMTracer(config = {}) {
@@ -316,8 +317,8 @@ function setupAlerts(metrics) {
 
 const OBSERVABILITY_OUTPUT = `> const tracedCall = createLLMTracer({ serviceName: 'chat-api' })
 
-> await tracedCall('claude-sonnet', messages)
-  Trace d4f8a2b1: model=claude-sonnet input=1847tok output=423tok
+> await tracedCall('${CLAUDE.sonnet.id}', messages)
+  Trace d4f8a2b1: model=${CLAUDE.sonnet.id} input=1847tok output=423tok
     latency=1204ms ttft=287ms cost=$0.0119 cache=hit(1200tok)
     stop=end_turn
 
@@ -334,9 +335,9 @@ const OBSERVABILITY_OUTPUT = `> const tracedCall = createLLMTracer({ serviceName
   GROUP BY model
 
   model          | p50    | p95    | p99     | cost    | requests
-  claude-haiku   | 340ms  | 890ms  | 1.8s    | $12.40  | 142,000
-  claude-sonnet  | 1.2s   | 3.4s   | 8.1s    | $487.20 | 48,000
-  claude-opus    | 2.8s   | 7.2s   | 14.3s   | $142.80 | 2,100`;
+  ${CLAUDE.haiku.id}   | 340ms  | 890ms  | 1.8s    | $12.40  | 142,000
+  ${CLAUDE.sonnet.id}  | 1.2s   | 3.4s   | 8.1s    | $487.20 | 48,000
+  ${CLAUDE.opus.id}    | 2.8s   | 7.2s   | 14.3s   | $142.80 | 2,100`;
 
 const TABS = ['Model Serving', 'Cost Engineering', 'Latency & Reliability', 'Monitoring & Debugging', 'Anti-patterns'];
 
@@ -437,15 +438,15 @@ function LLMOpsArchDiagram() {
         {/* Model Pool - 3 boxes stacked on the right */}
         <rect x="620" y="15" width="100" height="36" rx="6" fill="#3F8624" fillOpacity="0.12" stroke="#3F8624" strokeWidth="1.2" />
         <text x="670" y="31" textAnchor="middle" fontSize="9" fontWeight="600" fill="var(--text-h)" fontFamily={f}>Haiku</text>
-        <text x="670" y="44" textAnchor="middle" fontSize="7" fill="var(--text-muted)" fontFamily={fm}>$1/1M in</text>
+        <text x="670" y="44" textAnchor="middle" fontSize="7" fill="var(--text-muted)" fontFamily={fm}>{usd(CLAUDE.haiku.input)}/1M in</text>
 
         <rect x="620" y="59" width="100" height="36" rx="6" fill="#ED7100" fillOpacity="0.12" stroke="#ED7100" strokeWidth="1.2" />
         <text x="670" y="75" textAnchor="middle" fontSize="9" fontWeight="600" fill="var(--text-h)" fontFamily={f}>Sonnet</text>
-        <text x="670" y="88" textAnchor="middle" fontSize="7" fill="var(--text-muted)" fontFamily={fm}>$3/1M in</text>
+        <text x="670" y="88" textAnchor="middle" fontSize="7" fill="var(--text-muted)" fontFamily={fm}>{usd(CLAUDE.sonnet.input)}/1M in</text>
 
         <rect x="620" y="103" width="100" height="36" rx="6" fill="#C925D1" fillOpacity="0.12" stroke="#C925D1" strokeWidth="1.2" />
         <text x="670" y="119" textAnchor="middle" fontSize="9" fontWeight="600" fill="var(--text-h)" fontFamily={f}>Opus</text>
-        <text x="670" y="132" textAnchor="middle" fontSize="7" fill="var(--text-muted)" fontFamily={fm}>$5/1M in</text>
+        <text x="670" y="132" textAnchor="middle" fontSize="7" fill="var(--text-muted)" fontFamily={fm}>{usd(CLAUDE.opus.input)}/1M in</text>
 
         {/* Arrows: Router -> Model Pool */}
         <line x1="585" y1="63" x2="620" y2="33" stroke="var(--text-muted)" strokeWidth="1" markerEnd="url(#arrowGray)" />
@@ -517,11 +518,11 @@ function ModelServingPanel() {
       <FadeIn><Decision question="Self-host (vLLM/TGI) vs API (Claude/GPT)?">
         <Pill type="green">API-first (Claude, GPT)</Pill> Use managed APIs until you hit at least one of: (1) &gt;$50K/month in API costs where self-hosting is cheaper, (2) strict data residency requirements (healthcare, finance, government), (3) need for fine-tuned open models that APIs don't offer. At $50K/mo on Sonnet you're doing ~16M requests/month. Most companies never reach this.
         <br /><br />
-        <Pill type="amber">Self-host with vLLM</Pill> When you exceed the cost threshold OR need data residency. vLLM with PagedAttention gives you continuous batching and near-optimal GPU utilization. On a single A100 (80GB), Llama 70B serves ~40 tokens/sec per request, batched to ~800 tokens/sec aggregate. That's roughly 2.8M tokens/hour per GPU. At 8 A100s (~$25K/mo on cloud), you can serve what would cost $200K/mo on APIs.
+        <Pill type="amber">Self-host with vLLM</Pill> When you exceed the cost threshold OR need data residency. vLLM with PagedAttention gives you continuous batching and high GPU utilization. Size the hardware to the model first: a 70B model in 16-bit weights needs about 140 GB for the weights alone, so it spans two or more 80 GB GPUs (or fits one when quantized to 8-bit or lower), plus headroom for the KV cache. Throughput depends on batch size, sequence length and quantization, so benchmark your own traffic before you sign a GPU reservation.
         <br /><br />
         <Pill type="red">Self-host before $50K/mo API spend</Pill> A GPU cluster needs MLOps engineers, monitoring, failover, model updates. You're building infrastructure instead of product. The breakeven includes engineer salaries.
         <br /><br />
-        <strong>Real cost math:</strong> 8x A100 80GB on AWS = ~$25K/mo (reserved). Running Llama 70B, that serves ~22M tokens/hour. Claude Sonnet at $3/$15 per 1M tokens would cost $66K-$330K/mo for the same volume. Breakeven is around 5-8M req/month depending on prompt length.
+        <strong>Cost math, as a method:</strong> self-hosted cost per 1M tokens = node cost per hour divided by sustained millions of tokens per hour. With stated assumptions (a GPU node billed at $60/hour that sustains 20M tokens/hour) that is $3 per 1M tokens: above {CLAUDE.sonnet.short}&apos;s {usd(CLAUDE.sonnet.input)} input price and below its {usd(CLAUDE.sonnet.output)} output price. Self-hosting wins when utilization stays high around the clock or residency rules out an API; at low or spiky utilization the API is cheaper. Quote your own measured numbers in a design review, not a blog&apos;s.
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="vLLM vs TGI vs Triton for self-hosting?">
@@ -533,7 +534,7 @@ function ModelServingPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={160}><Decision question="Single model vs model routing?">
-        <Pill type="green">Model routing (recommended)</Pill> Route by query complexity. Use a cheap classifier (Haiku 4.5 at $1/1M) to categorize incoming queries, then route to the appropriate model tier. In practice, 60-70% of queries are simple enough for Haiku, 25-30% need Sonnet, and &lt;5% need Opus. This cuts average cost per query by 80-90%.
+        <Pill type="green">Model routing (recommended)</Pill> Route by query complexity. Use a cheap classifier ({CLAUDE.haiku.short} at {usd(CLAUDE.haiku.input)}/1M) to categorize incoming queries, then route to the appropriate model tier. In practice, 60-70% of queries are simple enough for Haiku, 25-30% need Sonnet, and &lt;5% need Opus. At {CHECKED} prices that cuts average cost per query by roughly 60-65% against sending everything to Opus, and by about 30% against all-Sonnet. The tiers have compressed, so the savings are smaller than the 80-90% teams quoted when the frontier tier cost 15x the small one.
         <br /><br />
         <Pill type="red">Always use the best model</Pill> Using a frontier model for classification tasks, FAQ lookups, or simple extraction is lighting money on fire. A "what's my order status?" query doesn't need a frontier-tier model.
       </Decision></FadeIn>
@@ -553,15 +554,15 @@ function CostEngineeringPanel() {
     <div>
       <SectionHead
         title="Cost engineering for LLM systems"
-        desc="LLM costs scale linearly with usage unless you actively engineer against it. At 10M requests/day, a 10% cost reduction saves $30K-$100K/year. This is the difference between a sustainable product and a money pit."
+        desc="LLM costs scale linearly with usage unless you actively engineer against it. At 10M requests/day and $0.002 per request, a 10% cost reduction saves about $730K a year. This is the difference between a sustainable product and a money pit."
       />
 
       <FadeIn><Decision question="Prompt caching: the single biggest cost lever">
-        <Pill type="green">System prompt caching (mandatory)</Pill> If your system prompt is &gt;1024 tokens and repeated across requests, caching gives you 90% discount on those tokens. Claude caches automatically for identical prefixes. A 2000-token system prompt across 1M requests/day: without caching = $6/day on input alone (Sonnet). With caching = $0.60/day. At scale this is the difference between viable and bankrupt.
+        <Pill type="green">System prompt caching (mandatory)</Pill> If your system prompt is &gt;1024 tokens and repeated across requests, caching gives you 90% discount on those tokens. Claude caches automatically for identical prefixes. A 2000-token system prompt across 1M requests/day is 2B input tokens: without caching = {usd(CLAUDE.sonnet.input * 2000)}/day on input alone ({CLAUDE.sonnet.short}). With caching = {usd(CLAUDE.sonnet.cacheRead * 2000)}/day. At scale this is the difference between viable and bankrupt.
         <br /><br />
         <Pill type="amber">Semantic caching (high-volume patterns)</Pill> Cache entire responses for semantically similar queries. Hash the prompt, check Redis before calling the API. Hit rate depends on query distribution. FAQ-style products see 30-50% cache hit rates. Conversational products see &lt;5%. Only worth building if you measure first.
         <br /><br />
-        <strong>Real pricing (Anthropic first-party API, mid-2026):</strong>
+        <strong>Pricing (Anthropic first-party API, checked {CHECKED}):</strong>
         <br /><br />
         <div style={{ overflowX: 'auto' }}>
         <table style={{ fontSize: 12, borderCollapse: 'collapse', width: '100%' }}>
@@ -575,34 +576,22 @@ function CostEngineeringPanel() {
             </tr>
           </thead>
           <tbody>
-            <tr style={{ borderBottom: '1px solid var(--border)' }}>
-              <td style={{ padding: '6px 12px', color: 'var(--text-p)', fontFamily: 'var(--font-mono)', fontSize: 11 }}>Claude Haiku 4.5</td>
-              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$1.00</td>
-              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$5.00</td>
-              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$1.25</td>
-              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$0.10</td>
-            </tr>
-            <tr style={{ borderBottom: '1px solid var(--border)' }}>
-              <td style={{ padding: '6px 12px', color: 'var(--text-p)', fontFamily: 'var(--font-mono)', fontSize: 11 }}>Claude Sonnet 5</td>
-              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$3.00</td>
-              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$15.00</td>
-              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$3.75</td>
-              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$0.30</td>
-            </tr>
-            <tr>
-              <td style={{ padding: '6px 12px', color: 'var(--text-p)', fontFamily: 'var(--font-mono)', fontSize: 11 }}>Claude Opus 5</td>
-              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$5.00</td>
-              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$25.00</td>
-              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$6.25</td>
-              <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>$0.50</td>
-            </tr>
+            {[CLAUDE.haiku, CLAUDE.sonnet, CLAUDE.opus].map((m, i, all) => (
+              <tr key={m.id} style={i < all.length - 1 ? { borderBottom: '1px solid var(--border)' } : undefined}>
+                <td style={{ padding: '6px 12px', color: 'var(--text-p)', fontFamily: 'var(--font-mono)', fontSize: 11 }}>{m.name}</td>
+                <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>{usd(m.input)}</td>
+                <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>{usd(m.output)}</td>
+                <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>{usd(cacheWrite(m))}</td>
+                <td style={{ textAlign: 'right', padding: '6px 12px', color: 'var(--text-p)' }}>{usd(m.cacheRead)}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
         </div>
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="Token budgeting: preventing runaway costs">
-        <Pill type="green">Per-request + daily budget caps (mandatory)</Pill> Set max_tokens on every call. Enforce a daily spend limit with automatic model downgrade. A single agentic loop without a cost cap can burn $500+ in an hour. Real incident: a recursive summarization pipeline hit an edge case and made 4,000 Opus calls in 40 minutes. Cost: $12,000. A $200 daily cap would have caught it at call #50.
+        <Pill type="green">Per-request + daily budget caps (mandatory)</Pill> Set max_tokens on every call. Enforce a daily spend limit with automatic model downgrade. A single agentic loop without a cost cap can burn hundreds of dollars in an hour. Worked example: a recursive summarization pipeline hits an edge case and makes 4,000 Opus calls in 40 minutes with 150K-token prompts; at {CLAUDE.opus.short} prices that is about {usd(Math.round(4000 * (150000 * CLAUDE.opus.input + 2000 * CLAUDE.opus.output) / 1e6))}. A $200 daily cap would have caught it at call #50.
         <br /><br />
         <Pill type="amber">Context window management</Pill> Long conversations accumulate tokens. A 50-message conversation with a 2000-token system prompt easily hits 30K tokens per call. Solutions: (1) sliding window: keep last N messages, (2) summarize older messages into a compressed context, (3) hybrid: keep last 5 messages verbatim + summarize the rest. Option 3 preserves recent detail while capping costs.
         <br /><br />
@@ -687,7 +676,7 @@ function LatencyReliabilityPanel() {
       </Insight></FadeIn>
 
       <FadeIn delay={160}><Decision question="Model deprecation: do you pin a version or float on an alias?">
-        This is the reliability question nobody asks until it bites them. Every provider ships two kinds of identifier: a floating alias that always resolves to the newest revision of a model line, and a dated snapshot pinned to one specific set of weights. Choosing between them is a real tradeoff, not a best practice you can copy.
+        This is the reliability question nobody asks until it bites them. Providers expose two kinds of identifier: a floating alias that resolves to the newest revision of a model line, and a versioned ID pinned to one model (a dated snapshot, or the version in the name itself, as with Anthropic&apos;s current <code>claude-sonnet-5-5</code>). Choosing between them is a real tradeoff, not a best practice you can copy.
         <br /><br />
         <Pill type="green">Pin snapshots for anything you've evaluated</Pill> If you tuned prompts against a model, ran an eval suite, and calibrated a judge threshold, that work is bound to those weights. A floating alias can move under you between deploys, and the failure is silent: no error, no version bump, just your extraction accuracy drifting three points because the new revision is more literal about instructions. Pin the snapshot, treat it as a dependency, and upgrade deliberately.
         <br /><br />
@@ -813,7 +802,7 @@ function AntiPatternsPanel() {
       <FadeIn delay={120}>
         <div style={styles.anti}>
           <p style={styles.strike}>
-            "We should use GPT-4/Opus for everything. Quality matters."
+            "We should use the biggest model for everything. Quality matters."
           </p>
           <p style={styles.better}>
             <span style={{ ...styles.dot, background: '#C925D1' }} />

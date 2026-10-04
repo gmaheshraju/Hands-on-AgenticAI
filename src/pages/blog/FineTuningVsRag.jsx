@@ -7,6 +7,7 @@ import FadeIn from '../../components/FadeIn';
 import PostMeta from '../../components/PostMeta';
 import Diagram from '../../components/Diagram';
 import finetuneVsRagSvg from '../../../docs/diagrams/finetune_vs_rag_v1/finetune-vs-rag.svg?raw';
+import { CLAUDE, usd } from '../../data/facts';
 
 const PROMPT_TEMPLATE_CODE = `function buildPrompt(template, variables, examples = []) {
   let prompt = template;
@@ -174,7 +175,7 @@ Top rejection reasons:
   "Duplicate of existing example"             35 examples
 
 Ready for upload: train.jsonl (550 examples, 1.2M tokens)
-Estimated cost: $9.60 (GPT-4o-mini fine-tuning)`;
+Training tokens: 1.2M x 3 epochs = 3.6M (multiply by your provider's training price)`;
 
 const TABS = ['The Decision Tree', 'Prompt Engineering', 'RAG', 'Fine-tuning', 'Combining Techniques'];
 
@@ -418,19 +419,20 @@ function PromptEngineeringPanel() {
       <Decision question="Zero-shot vs few-shot vs chain-of-thought?">
         <p><Pill type="green">Zero-shot</Pill> Just the instruction, no examples.
           Works for simple classification, extraction, and reformatting.
-          &quot;Classify this email as spam or not-spam.&quot; GPT-4-class models hit 85-90% accuracy on most
-          zero-shot classification tasks.</p>
+          &quot;Classify this email as spam or not-spam.&quot; Current frontier models handle most simple
+          zero-shot classification well; measure on a labelled sample before you add examples.</p>
         <p><Pill type="amber">Few-shot</Pill> 3-5 examples in the prompt. Works when the task is clear
-          but the output format is specific. Each example costs ~50-100 tokens. At $3/1M input tokens (Claude Sonnet),
-          5 examples add $0.0015 per request, which is negligible at any scale.</p>
-        <p><Pill type="green">Chain-of-thought</Pill> &quot;Think step by step.&quot; Adds ~30% latency
-          and ~2x output tokens, but improves accuracy on math, logic, and multi-step reasoning from
-          ~60% to ~85%+. The cost/accuracy tradeoff is almost always worth it for reasoning tasks.</p>
+          but the output format is specific. Each example costs ~50-100 tokens. At {usd(CLAUDE.sonnet.input)}/1M input tokens ({CLAUDE.sonnet.short}),
+          5 examples add about $0.001 per request, which is negligible at any scale (and less with prompt caching).</p>
+        <p><Pill type="green">Reasoning effort</Pill> Current frontier models reason before they answer
+          (adaptive thinking), so &quot;think step by step&quot; adds little there: set the provider&apos;s effort
+          level instead, low for chat and extraction, high for math, code and multi-step planning. Explicit
+          step-by-step prompting still helps small models that do not reason on their own.</p>
       </Decision>
 
       <Decision question="System prompt vs user prompt?">
         <p><Pill type="green">System prompt</Pill> Persistent behavior instructions: tone, format constraints,
-          persona, output schema, safety rules. This is your &quot;base model config&quot;. It stays the same across requests. Cached system prompts on Claude/GPT-4 reduce input costs by 90%.</p>
+          persona, output schema, safety rules. This is your &quot;base model config&quot;. It stays the same across requests. Prompt caching bills the cached prefix at about 10% of the input price on Claude, so a long, stable system prompt is close to free after the first call.</p>
         <p><Pill type="amber">User prompt</Pill> Per-request context and instructions. The variable input
           that changes every call. Keep task-specific data here: the document to summarize, the ticket
           to classify, the code to review.</p>
@@ -453,7 +455,7 @@ function PromptEngineeringPanel() {
           thousands of edge cases. Prompts degrade on the long tail, the 95th percentile input
           that your 5 examples don't cover.</p>
         <p><Pill type="red">Missing domain knowledge</Pill> The task requires domain-specific reasoning
-          the base model genuinely doesn't have. Rare with GPT-4/Claude, but real for niche domains
+          the base model genuinely doesn't have. Rare with frontier models, but real for niche domains
           like semiconductor yield analysis or exotic derivatives pricing.</p>
         <p><Pill type="red">Prompt cost at scale</Pill> Repeating 50 few-shot examples on every request
           becomes a real cost problem at 1M+ requests/day. Fine-tuning bakes those examples into weights,

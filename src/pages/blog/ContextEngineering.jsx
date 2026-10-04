@@ -7,6 +7,7 @@ import FadeIn from '../../components/FadeIn';
 import PostMeta from '../../components/PostMeta';
 import Diagram, { ConceptNote } from '../../components/Diagram';
 import contextEngineeringSvg from '../../../docs/diagrams/context_eng_v1/context-engineering.svg?raw';
+import { SMALL_MODELS } from '../../data/facts';
 
 const BUDGET_CODE = `function allocateTokenBudget(maxTokens, options = {}) {
   const outputBuffer = Math.floor(maxTokens * 0.15);  // reserve for generation
@@ -35,23 +36,24 @@ const BUDGET_CODE = `function allocateTokenBudget(maxTokens, options = {}) {
   };
 }`;
 
-const BUDGET_OUTPUT = `> allocateTokenBudget(128000, { systemPromptTokens: 3000 })
+const BUDGET_OUTPUT = `> allocateTokenBudget(200000, { systemPromptTokens: 3000 })
 
-maxTokens:       128,000
-outputBuffer:     19,200  (15%)
+maxTokens:       200,000
+outputBuffer:     30,000  (15%)
 safetyMargin:        512
-effectiveWindow: 108,288
+effectiveWindow: 169,488
 
 allocations:
   systemPrompt:        3,000   (fixed, never dropped)
-  conversationHistory: 31,586  (30% of remaining)
-  ragChunks:           36,850  (35% of remaining)
-  toolResults:         21,057  (20% of remaining)
-  fewShotExamples:     10,528  (10%, dropped first)
-  reserved:             5,264  (5%)
+  conversationHistory: 49,946  (30% of remaining)
+  ragChunks:           58,270  (35% of remaining)
+  toolResults:         33,297  (20% of remaining)
+  fewShotExamples:     16,648  (10%, dropped first)
+  reserved:             8,324  (5%)
 
 dropOrder: examples → tools → RAG → conversation
-  128K window ≠ 128K usable. Effective budget: ~108K tokens.`;
+  200K window ≠ 200K usable. Effective budget: ~169K tokens.
+  (Same function on a 1M window: ~849K effective. The ratio holds; the bill does not.)`;
 
 const PRIORITY_CODE = `function prioritizeSources(sources, budgetByType) {
   // Tier 1: Fixed, never dropped
@@ -409,7 +411,7 @@ function ContextPipelineDiagram() {
         {/* LLM */}
         <rect x="574" y="274" width="122" height="52" rx="8" fill="var(--bg-card)" stroke="var(--border-strong)" strokeWidth="1.2" />
         <text x="635" y="298" textAnchor="middle" fontSize="11" fontWeight="600" fill="var(--text-h)" fontFamily={f}>LLM</text>
-        <text x="635" y="314" textAnchor="middle" fontSize="8" fill="var(--text-muted)" fontFamily={fm}>Claude / GPT-4 / Gemini</text>
+        <text x="635" y="314" textAnchor="middle" fontSize="8" fill="var(--text-muted)" fontFamily={fm}>Claude / GPT / Gemini</text>
 
         {/* Arrows: context → cache → LLM */}
         <line x1="635" y1="196" x2="635" y2="210" stroke="var(--text-muted)" strokeWidth="1" fill="none" markerEnd="url(#ceh)" />
@@ -430,7 +432,7 @@ function ContextPipelineDiagram() {
         <rect x="18" y="374" width="704" height="36" rx="6" fill="var(--bg-card)" stroke="var(--border)" strokeWidth="0.6" />
         <text x="30" y="392" fontSize="8" fontWeight="700" fill="var(--text-accent)" fontFamily={fm}>FLOW</text>
         <text x="70" y="392" fontSize="8" fill="var(--text-p)" fontFamily={f}>6 Sources → Token Budget → Priority Queue → Dedup + Compress + Order → Cached Context → LLM</text>
-        <text x="30" y="404" fontSize="7" fill="var(--text-muted)" fontFamily={fm}>128K window ≠ 128K usable · Effective window ~60-80% of max · Signal density {'>'} raw volume</text>
+        <text x="30" y="404" fontSize="7" fill="var(--text-muted)" fontFamily={fm}>200K window ≠ 200K usable · Effective window ~60-80% of max · Signal density {'>'} raw volume</text>
       </svg>
     </div>
   );
@@ -441,14 +443,14 @@ function ContextBudgetPanel() {
     <div>
       <SectionHead
         title="Token budgets: the constraint that shapes everything"
-        desc="A 128K context window doesn't mean 128K usable tokens. Output buffer, safety margins, and the model's effective attention window all shrink the real budget. Context engineering starts with understanding the constraint."
+        desc="A 200K context window doesn't mean 200K usable tokens. Output buffer, safety margins, and the model's effective attention window all shrink the real budget. Context engineering starts with understanding the constraint."
       />
 
       <ContextPipelineDiagram />
       <ConceptNote />
 
       <FadeIn><Decision question="How to partition a context window">
-        Every context window has competing consumers. A practical partition for a 128K model:
+        Every context window has competing consumers. A practical partition for a 200K model:
         <br /><br />
         <Pill type="green">System Prompt</Pill> Fixed reserve (2-4K tokens). Never dropped, never truncated. Your agent's identity and instructions.
         <br /><br />
@@ -460,7 +462,7 @@ function ContextBudgetPanel() {
         <br /><br />
         <Pill type="amber">Few-shot Examples</Pill> Optional (~10% of remaining). First to be dropped when budget is tight.
         <br /><br />
-        Real math: 128K - 19.2K output buffer - 512 safety margin = ~108K effective. That 128K headline number is marketing, not engineering.
+        Real math: 200K - 30K output buffer - 512 safety margin = ~169K effective. That headline number is marketing, not engineering, and on a 1M window the same rule leaves ~849K you would rarely want to fill.
       </Decision></FadeIn>
 
       <FadeIn delay={80}><Decision question="Fixed vs dynamic allocation">
@@ -489,7 +491,7 @@ function ContextBudgetPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={400}><Insight type="warn">
-        The #1 mistake: treating the context window as unlimited. GPT-4 has 128K tokens but performance degrades significantly after 32K. Claude handles long context better but still: relevant content in the first 20K outperforms a dump of 100K. Budget to the model's effective window, not its maximum.
+        The #1 mistake: treating the context window as unlimited. Frontier windows now reach 1M tokens, but answer quality still drops as the prompt grows and as the fact you need sits further from the start or end (the &quot;lost in the middle&quot; effect, Liu et al., 2023). A focused 20K-token context usually beats a 200K dump, and it is ten times cheaper on every turn. Budget to the model&apos;s effective window, measured on your own eval, not its maximum.
       </Insight></FadeIn>
     </div>
   );
@@ -540,7 +542,7 @@ function SourcePriorityPanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={240}><Insight tag="Key insight">
-        The key insight: context engineering is about signal-to-noise ratio. A 4K context window with perfectly relevant content outperforms a 128K window stuffed with everything. Your job is to maximize the information density of every token in the window.
+        The key insight: context engineering is about signal-to-noise ratio. A 4K context with perfectly relevant content outperforms a 200K window stuffed with everything. Your job is to maximize the information density of every token in the window.
       </Insight></FadeIn>
 
       <FadeIn delay={320}><CodeBlock filename="source-prioritizer.js" code={PRIORITY_CODE} output={PRIORITY_OUTPUT} /></FadeIn>
@@ -589,7 +591,7 @@ function AssemblyPatternsPanel() {
       <FadeIn delay={240}><Decision question="Compression techniques">
         <Pill type="green">Truncation</Pill> Drop from the middle, keep start and end. Zero-cost, no extra LLM call. Works for conversation history and long documents where the key info is at the boundaries.
         <br /><br />
-        <Pill type="amber">Summarization</Pill> LLM-powered compression. Feed the source to a fast model (Haiku/GPT-4o-mini) with "summarize the key facts in under 500 tokens." Costs one API call (~$0.001) but can compress 10:1.
+        <Pill type="amber">Summarization</Pill> LLM-powered compression. Feed the source to a fast model ({SMALL_MODELS}) with "summarize the key facts in under 500 tokens." Costs one cheap API call (under a cent for a few thousand tokens) but can compress 10:1.
         <br /><br />
         <Pill type="blue">Extraction</Pill> Pull only the relevant sentences from a document. Use the user's query as a filter: "extract sentences relevant to: {'{query}'}." More targeted than summarization.
         <br /><br />
@@ -703,7 +705,7 @@ function DeepDivePanel() {
         <br /><br />
         As agents get more complex (RAG + tools + memory + multi-turn), the system prompt is less than 5% of what's in the context window. The other 95% (retrieved documents, tool results, conversation history, examples) needs engineering too.
         <br /><br />
-        <strong>The shift:</strong> "Write a better prompt" was 2024 advice. "Design a context pipeline that maximizes signal-to-noise ratio across 6 source types under a hard token budget" is 2027 advice.
+        <strong>The shift:</strong> "Write a better prompt" was 2024 advice. "Design a context pipeline that maximizes signal-to-noise ratio across 6 source types under a hard token budget" is the 2026 job.
         <br /><br />
         Prompt engineering is a subset of context engineering. The system prompt is one source among many.
       </Decision></FadeIn>
@@ -711,7 +713,7 @@ function DeepDivePanel() {
       <FadeIn delay={80}><Decision question="The big one: 'Walk me through the context pipeline for an agent with RAG, tools, memory, and multi-turn conversation'">
         This is THE context engineering design question. Walk through the full pipeline:
         <br /><br />
-        <strong>1. Budget allocation:</strong> 128K window → 108K effective. Fixed reserves for system prompt (3K). Dynamic allocation across conversation (30%), RAG (35%), tools (20%), examples (10%), reserve (5%).
+        <strong>1. Budget allocation:</strong> 200K window → ~169K effective. Fixed reserves for system prompt (3K). Dynamic allocation across conversation (30%), RAG (35%), tools (20%), examples (10%), reserve (5%).
         <br /><br />
         <strong>2. Source priority:</strong> System prompt (never dropped) → recent conversation (sliding window) → RAG (relevance-scored) → memory (recency-weighted) → tool results (freshness-ranked) → examples (expendable).
         <br /><br />
@@ -725,11 +727,11 @@ function DeepDivePanel() {
       </Decision></FadeIn>
 
       <FadeIn delay={160}><Insight>
-        Context engineering is to 2027 what prompt engineering was to 2024. Prompt engineering got you a junior role. Context engineering (token budgets, source prioritization, assembly strategies, caching, and compression) is the senior-level skill. It's the difference between "I can write a good prompt" and "I can architect an information pipeline that makes an agent reliably intelligent."
+        Context engineering is to 2026 what prompt engineering was to 2023. Prompt engineering got you a junior role. Context engineering (token budgets, source prioritization, assembly strategies, caching, and compression) is the senior-level skill. It's the difference between "I can write a good prompt" and "I can architect an information pipeline that makes an agent reliably intelligent."
       </Insight></FadeIn>
 
       <FadeIn delay={240}><Decision question="Common pitfalls in context pipeline design">
-        <Pill type="amber">1. Treating context window as unlimited</Pill> "Just dump everything in the 128K window." This reveals shallow thinking: you've never built a production system. Performance degrades long before you hit the token limit.
+        <Pill type="amber">1. Treating context window as unlimited</Pill> "Just dump everything in the 1M window." This reveals shallow thinking: you've never built a production system. Performance degrades long before you hit the token limit.
         <br /><br />
         <Pill type="amber">2. Not knowing about "lost in the middle"</Pill> If you can't explain why position in the context matters, you haven't read the research. This is foundational.
         <br /><br />

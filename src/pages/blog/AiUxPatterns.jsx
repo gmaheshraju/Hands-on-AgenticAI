@@ -374,7 +374,7 @@ function timeoutFor(model, request) {
 
 const recovery = new AIErrorRecovery({
   models: [
-    { name: 'claude-sonnet-5',  tier: 'frontier' },
+    { name: 'claude-sonnet-5-5', tier: 'frontier' },
     { name: 'claude-haiku-4-5', tier: 'fast' },
     { name: 'cached-responses', tier: 'cache' },
   ],
@@ -640,7 +640,7 @@ function StreamingPanel() {
 
 
       <FadeIn delay={80}><Insight>
-        The single most impactful UX improvement for AI products is not a better model. It is streaming. Early GPT-4 shipped with buffered 15-second responses; once streaming was added, the perceived experience transformed overnight despite identical generation speed. The engineering cost is 1-2 days: swap your fetch call for an SSE reader, add a state machine, and render tokens incrementally. Do this before you spend a single dollar on model latency optimization. TTFT under 500ms plus streaming equals &quot;instant&quot; in user perception, regardless of total generation time.
+        The single most impactful UX improvement for AI products is not a better model. It is streaming. Users judge speed by when the first words appear, not when the last one does: a 15-second answer delivered all at once feels broken, while the same 15 seconds streamed from the first half-second feels fast, with identical generation speed. The engineering cost is 1-2 days: swap your fetch call for an SSE reader, add a state machine, and render tokens incrementally. Do this before you spend a single dollar on model latency optimization. TTFT under 500ms plus streaming equals &quot;instant&quot; in user perception, regardless of total generation time.
       </Insight></FadeIn>
     </div>
   );

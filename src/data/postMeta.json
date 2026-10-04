@@ -20,7 +20,7 @@
     "updated": "2026-09-26"
   },
   "llm-ops": {
-    "minutes": 16,
+    "minutes": 17,
     "updated": "2026-09-26"
   },
   "ai-guardrails": {
@@ -40,7 +40,7 @@
     "updated": "2026-09-26"
   },
   "cost-latency-engineering": {
-    "minutes": 13,
+    "minutes": 14,
     "updated": "2026-09-26"
   },
   "ai-ux-patterns": {
@@ -48,7 +48,7 @@
     "updated": "2026-09-26"
   },
   "responsible-ai": {
-    "minutes": 12,
+    "minutes": 13,
     "updated": "2026-10-04"
   },
   "forward-deployed-engineering": {

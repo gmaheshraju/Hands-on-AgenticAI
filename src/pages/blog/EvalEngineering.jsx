@@ -7,6 +7,7 @@ import FadeIn from '../../components/FadeIn';
 import PostMeta from '../../components/PostMeta';
 import Diagram, { ConceptNote } from '../../components/Diagram';
 import evalEngineeringSvg from '../../../docs/diagrams/eval_engineering_v1/eval-engineering.svg?raw';
+import { SMALL_MODELS, CLAUDE } from '../../data/facts';
 
 const EVAL_HARNESS_CODE = `async function runEvals(testCases, agent, judges) {
   const results = [];
@@ -59,7 +60,7 @@ Scores by dimension:
   #103 relevance:    0.21  "Answered a different question entirely"
   ...`;
 
-const LLM_JUDGE_CODE = `async function llmJudge(question, answer, context, { rubric, model = 'claude-sonnet' } = {}) {
+const LLM_JUDGE_CODE = `async function llmJudge(question, answer, context, { rubric, model = '${CLAUDE.sonnet.id}' } = {}) {
   const prompt = \`You are an expert evaluator. Score the following answer on a scale of 1-5.
 
 RUBRIC:
@@ -695,7 +696,7 @@ function JudgePanel() {
 
       <FadeIn delay={250}><Decision question="How do you handle position bias?">
         <p style={{ fontSize: 13, lineHeight: 1.7, color: 'var(--text-p)' }}>
-          LLMs prefer the first option in A/B comparisons. This is well-documented: GPT-4 shows 60-65% first-position preference, Claude shows 55-60%. If you're using an LLM judge to compare two model outputs, a naive comparison is unreliable.
+          LLM judges favor whichever answer they see first. The effect is well documented (Zheng et al., 2023, &quot;Judging LLM-as-a-Judge&quot;), and its size varies by model, prompt and task, so measure it on your own judge: run a sample both ways and count how often the winner flips. If you&apos;re using an LLM judge to compare two model outputs, a naive single-order comparison is unreliable.
         </p>
         <br />
         <Pill type="green">Run twice, swap positions</Pill> Present A-then-B, then B-then-A. Average the scores. This cancels out position preference. If the two runs disagree on the winner, flag it as "position bias detected" and send to human review.
@@ -739,7 +740,7 @@ function RegressionPanel() {
       <FadeIn delay={150}><Decision question="When to run regression tests">
         <Pill type="green">Every prompt change</Pill> Prompt changes are the #1 source of silent regressions. A well-intentioned edit to "be more concise" can make the model skip important caveats. Run the full golden dataset before merging any prompt change.
         <br /><br />
-        <Pill type="green">Every model version change</Pill> Claude Sonnet 3.5 to 4 changed tool-use behavior significantly. GPT-4 to GPT-4-turbo changed output length distributions. Always re-evaluate on your golden dataset when you change the underlying model.
+        <Pill type="green">Every model version change</Pill> Upgrades change behavior even inside one model family: how often the model calls tools, how long its answers run, and what it refuses all shift between versions. Always re-evaluate on your golden dataset when you change the underlying model, point releases included.
         <br /><br />
         <Pill type="green">Every RAG index update</Pill> New documents, re-chunked documents, or updated embeddings can all change retrieval quality. A document update that fixes one answer might break three others that depended on the old chunk boundaries.
         <br /><br />
@@ -845,7 +846,7 @@ function MetricsPanel() {
         <br /><br />
         <Pill type="amber">p95 latency &lt; 3s for user-facing</Pill> Users start abandoning after 3 seconds. For streaming responses, time-to-first-token matters more than total latency; set the TTFT SLO at 500ms.
         <br /><br />
-        <Pill type="amber">Cost per query &lt; $0.01 for tier-1 traffic</Pill> Tier-1 is your high-volume, low-complexity traffic (FAQ, simple lookups). Use cheaper models (Haiku, GPT-4o-mini) with prompt caching. Tier-2 (complex reasoning, multi-step) can be $0.05-0.10 per query.
+        <Pill type="amber">Cost per query &lt; $0.01 for tier-1 traffic</Pill> Tier-1 is your high-volume, low-complexity traffic (FAQ, simple lookups). Use cheaper models ({SMALL_MODELS}) with prompt caching. Tier-2 (complex reasoning, multi-step) can be $0.05-0.10 per query.
       </Decision></FadeIn>
 
       <FadeIn delay={150}><Insight type="warn">

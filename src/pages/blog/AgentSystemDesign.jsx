@@ -7,6 +7,7 @@ import FadeIn from '../../components/FadeIn';
 import PostMeta from '../../components/PostMeta';
 import Diagram, { ConceptNote } from '../../components/Diagram';
 import systemDesignSvg from '../../../docs/diagrams/system_design_v1/system-design.svg?raw';
+import { FRONTIER_MODELS } from '../../data/facts';
 
 const REACT_LOOP_CODE = `async function agentLoop(userMessage, tools, maxIterations = 5) {
   const messages = [{ role: 'user', content: userMessage }];
@@ -298,7 +299,7 @@ function AgentArchDiagram() {
         <rect x="200" y="380" width="140" height="52" rx="8" fill="var(--text-accent)" opacity="0.08" stroke="var(--text-accent)" strokeWidth="1.2" />
         <rect x="206" y="386" width="14" height="14" rx="3" fill="var(--text-accent)" opacity="0.9" />
         <text x="270" y="402" textAnchor="middle" fontSize="11" fontWeight="600" fill="var(--text-h)" fontFamily={f}>LLM</text>
-        <text x="270" y="418" textAnchor="middle" fontSize="8" fill="var(--text-muted)" fontFamily={fm}>Claude · GPT-4 · Gemini</text>
+        <text x="270" y="418" textAnchor="middle" fontSize="8" fill="var(--text-muted)" fontFamily={fm}>Claude · GPT · Gemini</text>
 
         {/* Output Guard */}
         <rect x="400" y="380" width="110" height="52" rx="8" fill="#3949AB" opacity="0.08" stroke="#3949AB" strokeWidth="1.2" />
@@ -440,7 +441,7 @@ function RagPipelineDiagram() {
         <text x="36" y="312" fontSize="8" fill="var(--text-p)" fontFamily={f}>Retrieve 20, rerank to 5. Reranking improves relevance 15-30% over vector-only.</text>
 
         <text x="380" y="264" fontSize="8" fontWeight="600" fill="var(--text-h)" fontFamily={f}>Embedding model</text>
-        <text x="380" y="278" fontSize="8" fill="var(--text-p)" fontFamily={f}>text-embedding-3-large (3072d) or Cohere embed-v3. Don't mix models.</text>
+        <text x="380" y="278" fontSize="8" fill="var(--text-p)" fontFamily={f}>text-embedding-3-large (3072d) or Cohere embed-v4. Don't mix models.</text>
 
         <text x="380" y="298" fontSize="8" fontWeight="600" fill="var(--text-h)" fontFamily={f}>Latency budget</text>
         <text x="380" y="312" fontSize="8" fill="var(--text-p)" fontFamily={f}>Embed: 20ms · Search: 50ms · Rerank: 100ms · Total retrieval: &lt;200ms.</text>
@@ -633,7 +634,7 @@ function FunctionCallingPanel() {
         <br /><br />
         <Pill type="amber">Sequential</Pill> When tool B depends on tool A's result. "Search for user → Get their orders → Calculate total." Must be serial.
         <br /><br />
-        Claude and GPT-4 both support parallel tool calling natively. Prefer parallel when dependencies allow; users notice the latency difference.
+        Claude and OpenAI&apos;s GPT models both support parallel tool calling natively. Prefer parallel when dependencies allow; users notice the latency difference.
       </Decision></FadeIn>
 
       <FadeIn delay={160}><Decision question="Error handling in tool calls?">
@@ -832,8 +833,8 @@ function AntiPatternsPanel() {
       </div>
 
       <div style={styles.anti}>
-        <p style={styles.strike}>"We'll use GPT-4 for everything."</p>
-        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />Use the right model for each component. Input classification → small fast model (Haiku). RAG retrieval → embedding model. Main reasoning → large model (Opus/GPT-4). Output validation → medium model (Sonnet). A single-model architecture wastes money on simple tasks and bottlenecks on complex ones.</p>
+        <p style={styles.strike}>"We'll use the biggest model for everything."</p>
+        <p style={styles.better}><span style={{...styles.dot, background: 'var(--text-success)'}} />Use the right model for each component. Input classification → small fast model (Haiku). RAG retrieval → embedding model. Main reasoning → frontier model ({FRONTIER_MODELS}). Output validation → medium model (Sonnet). A single-model architecture wastes money on simple tasks and bottlenecks on complex ones.</p>
       </div>
 
       <FadeIn><Insight>

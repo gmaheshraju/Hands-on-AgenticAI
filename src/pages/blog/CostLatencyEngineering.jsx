@@ -7,11 +7,12 @@ import FadeIn from '../../components/FadeIn';
 import PostMeta from '../../components/PostMeta';
 import Diagram from '../../components/Diagram';
 import costLatencySvg from '../../../docs/diagrams/cost_latency_v1/cost-latency.svg?raw';
+import { CLAUDE, CHECKED, RERANK_PER_1K_SEARCHES, usd } from '../../data/facts';
 
 const MODEL_ROUTER_CODE = `const MODEL_TIERS = {
-  simple:  { model: 'claude-haiku-4-5',  costPer1M: 1.0,  maxTokens: 1024 },
-  medium:  { model: 'claude-sonnet-5',   costPer1M: 3.0,   maxTokens: 4096 },
-  complex: { model: 'claude-opus-5',     costPer1M: 5.0,  maxTokens: 8192 },
+  simple:  { model: '${CLAUDE.haiku.id}',  costPer1M: ${CLAUDE.haiku.input.toFixed(1)}, maxTokens: 1024 },
+  medium:  { model: '${CLAUDE.sonnet.id}', costPer1M: ${CLAUDE.sonnet.input.toFixed(1)}, maxTokens: 4096 },
+  complex: { model: '${CLAUDE.opus.id}',   costPer1M: ${CLAUDE.opus.input.toFixed(1)}, maxTokens: 8192 },
 };
 
 async function routeRequest(messages, tools, tierOverride) {
@@ -52,9 +53,10 @@ const MODEL_ROUTER_OUTPUT = `> routeRequest([{ role: 'user', content: 'What time
 
 > routeRequest([{ role: 'user', content: 'Compare our Q3 revenue across all
   regions and identify the underperforming segments with recommendations' }])
-{ model: 'claude-opus-5', cost: $0.0030, latency: 2400ms }
+{ model: '${CLAUDE.opus.id}', cost: $0.0024, latency: 2400ms }
 
-Monthly savings at 100K requests: $12,400 → $2,100 (83% reduction)`;
+Monthly spend at 100K requests, all-Opus vs routed (71/24/5):
+  $12,400 → $4,310 (65% reduction)`;
 
 const SEMANTIC_CACHE_CODE = `class SemanticCache {
   constructor(vectorDB, { threshold = 0.93, ttlSeconds = 3600 } = {}) {
@@ -144,8 +146,8 @@ const COST_TRACKER_CODE = `function costTracker(config = {}) {
 }`;
 
 const COST_TRACKER_OUTPUT = `> tracker.track(request, response)
-{ model: "claude-sonnet-5",
-  cost: 0.0034,
+{ model: "${CLAUDE.sonnet.id}",
+  cost: 0.0041,
   dailySpend: 127.45,
   inputTokens: 890,
   outputTokens: 234,
@@ -171,11 +173,12 @@ function SectionHead({ title, desc }) {
 
 function CostWaterfall() {
   const items = [
-    { label: 'Output Tokens', cost: 0.0225, color: 'var(--text-accent)' },
-    { label: 'Input History', cost: 0.006, color: 'var(--text-h)' },
-    { label: 'RAG Chunks', cost: 0.0045, color: 'var(--text-p)' },
-    { label: 'System Prompt', cost: 0.0024, color: 'var(--text-muted)' },
-    { label: 'Tool Calls', cost: 0.001, color: 'var(--border-strong)' },
+    // A 5-turn support conversation at Sonnet 5.5 prices ($2 in / $10 out per 1M).
+    { label: 'Output Tokens', cost: 0.015, color: 'var(--text-accent)' },
+    { label: 'Input History', cost: 0.004, color: 'var(--text-h)' },
+    { label: 'RAG Chunks', cost: 0.003, color: 'var(--text-p)' },
+    { label: 'System Prompt', cost: 0.0016, color: 'var(--text-muted)' },
+    { label: 'Tool Calls', cost: 0.0007, color: 'var(--border-strong)' },
   ];
   const maxCost = Math.max(...items.map(i => i.cost));
 
@@ -185,7 +188,7 @@ function CostWaterfall() {
         Cost per Conversation Breakdown
       </text>
       <text x="350" y="42" textAnchor="middle" fill="var(--text-muted)" fontSize="11" fontFamily="var(--font-mono)">
-        Total: ~$0.036 per conversation (GPT-4o / Sonnet-class model)
+        Total: ~$0.024 per conversation ({CLAUDE.sonnet.short}-class pricing)
       </text>
       {items.map((item, i) => {
         const y = 65 + i * 42;
@@ -219,7 +222,7 @@ function Tab1() {
       />
 
       <Decision question="Where does the money go in a typical AI system?">
-        <p><Pill type="red">Output tokens (40-60% of total)</Pill> The biggest line item. Output tokens cost 3-5x more than input tokens on every major provider. A verbose 500-token response at $15/1M output tokens = $0.0075. A concise 150-token response = $0.00225. Same answer, 70% cheaper. Control this with explicit length instructions and max_tokens.</p>
+        <p><Pill type="red">Output tokens (40-60% of total)</Pill> The biggest line item. Output tokens cost about 5x more than input tokens on every major provider ({CHECKED}). A verbose 500-token response at {usd(CLAUDE.sonnet.output)}/1M output tokens = $0.005. A concise 150-token response = $0.0015. Same answer, 70% cheaper. Control this with explicit length instructions and max_tokens.</p>
         <p><Pill type="amber">Input tokens (25-35%)</Pill> System prompts, conversation history, retrieved documents. This is where you have the most architectural control. An 800-token system prompt that fires on every request costs $0.0024/req. At 100K requests/day, that is $240/day just for the system prompt.</p>
         <p><Pill type="amber">RAG retrieval (10-15%)</Pill> Embedding cost ($0.02/1M tokens for text-embedding-3-small) is cheap per-call but adds up. Most of the cost comes from the retrieved chunks hitting the LLM context. Retrieve 10 chunks, re-rank to 3 -- you pay embedding for 10 but LLM cost for only 3.</p>
         <p><Pill type="green">Vector DB + Tools (5-10%)</Pill> Pinecone: $70/month for 1M vectors. pgvector: $0 if you already have Postgres. Tool execution is usually negligible unless you are running expensive external APIs.</p>
@@ -253,10 +256,10 @@ function Tab2() {
       />
 
       <Decision question="How to tier your model routing?">
-        <p><Pill type="green">Tier 1 -- Haiku 4.5 / small models ($1/1M input)</Pill> Classification, entity extraction, simple Q&A, formatting, summarization under 200 words. Handles 70% of real-world requests. Latency: 150-300ms TTFT. These models are shockingly good at structured tasks -- most teams underestimate them.</p>
-        <p><Pill type="amber">Tier 2 -- Sonnet 5 ($3/1M input)</Pill> Multi-step reasoning, content synthesis, complex queries with nuance, code generation for known patterns. Handles 25% of requests. Latency: 400-800ms TTFT. The workhorse tier.</p>
-        <p><Pill type="red">Tier 3 -- Opus 5 ($5/1M input)</Pill> Novel reasoning, ambiguous edge cases, complex multi-file code generation, tasks where correctness matters more than cost. 5% of requests. Latency: 1-3s TTFT. Reserve for high-stakes outputs.</p>
-        <p><strong>Blended math (2026 prices):</strong> 70% x $1 + 25% x $3 + 5% x $5 = $1.70/1M vs $5/1M all-Opus = 66% savings. Note the direction of travel: this argument was worth ~89% when the frontier tier cost $15/1M and the cheap tier $0.25/1M. The tiers have compressed, so routing still pays -- but the savings now come mostly from the Haiku-vs-Sonnet split, not from avoiding Opus. Quote the current spread in an interview, not the number you memorized two years ago.</p>
+        <p><Pill type="green">Tier 1 -- {CLAUDE.haiku.short} / small models ({usd(CLAUDE.haiku.input)}/1M input)</Pill> Classification, entity extraction, simple Q&A, formatting, summarization under 200 words. Handles 70% of real-world requests. Latency: 150-300ms TTFT. These models are shockingly good at structured tasks -- most teams underestimate them.</p>
+        <p><Pill type="amber">Tier 2 -- {CLAUDE.sonnet.short} ({usd(CLAUDE.sonnet.input)}/1M input)</Pill> Multi-step reasoning, content synthesis, complex queries with nuance, code generation for known patterns. Handles 25% of requests. Latency: 400-800ms TTFT. The workhorse tier.</p>
+        <p><Pill type="red">Tier 3 -- {CLAUDE.opus.short} ({usd(CLAUDE.opus.input)}/1M input)</Pill> Novel reasoning, ambiguous edge cases, complex multi-file code generation, tasks where correctness matters more than cost. 5% of requests. Latency: 1-3s TTFT. Reserve for high-stakes outputs.</p>
+        <p><strong>Blended math ({CHECKED} prices):</strong> 70% x {usd(CLAUDE.haiku.input)} + 25% x {usd(CLAUDE.sonnet.input)} + 5% x {usd(CLAUDE.opus.input)} = {usd(0.7 * CLAUDE.haiku.input + 0.25 * CLAUDE.sonnet.input + 0.05 * CLAUDE.opus.input)}/1M vs {usd(CLAUDE.opus.input)}/1M all-Opus = {Math.round((1 - (0.7 * CLAUDE.haiku.input + 0.25 * CLAUDE.sonnet.input + 0.05 * CLAUDE.opus.input) / CLAUDE.opus.input) * 100)}% savings. Note the direction of travel: this argument was worth ~89% when the frontier tier cost $15/1M and the cheap tier $0.25/1M. The tiers have compressed to a 1 : 2 : 4 ratio, so routing still pays, but against an all-Sonnet baseline the saving is about {Math.round((1 - (0.7 * CLAUDE.haiku.input + 0.25 * CLAUDE.sonnet.input + 0.05 * CLAUDE.opus.input) / CLAUDE.sonnet.input) * 100)}%, not a multiple. Quote the current spread in an interview, not the number you memorized two years ago.</p>
       </Decision>
 
       <Decision question="How to classify request complexity automatically?">
@@ -303,8 +306,8 @@ function Tab3() {
 
       <Decision question="Prompt compression techniques?">
         <p><Pill type="green">History summarization</Pill> Instead of sending full 20-turn conversation, summarize older turns into a single paragraph: &quot;Earlier, we discussed the user&apos;s billing issue and confirmed their account ID is #4521.&quot; Saves 60-80% of history tokens. Summarize after every 5 turns.</p>
-        <p><Pill type="green">Provider prompt caching</Pill> Anthropic&apos;s prompt caching reduces repeated system prompt cost to 10% ($0.30/1M instead of $3/1M). A 2000-token system prompt costs $0.006 first time, then $0.0006 for subsequent uses within the TTL. Mark your system prompt and tool definitions as cacheable.</p>
-        <p><Pill type="amber">RAG chunk pruning</Pill> Retrieve 10 chunks from your vector store, re-rank with a cross-encoder, keep top 3. You pay embedding cost for 10 but LLM input cost for only 3. The re-ranker (Cohere Rerank, cross-encoder) costs $0.002/1K queries -- trivial compared to the LLM savings.</p>
+        <p><Pill type="green">Provider prompt caching</Pill> Anthropic&apos;s prompt caching bills repeated prefix tokens at 10% of the input price ({usd(CLAUDE.sonnet.cacheRead)}/1M instead of {usd(CLAUDE.sonnet.input)}/1M on {CLAUDE.sonnet.short}). A 2000-token system prompt costs $0.005 the first time (the cache write carries a 25% premium), then $0.0004 for each reuse within the TTL. Mark your system prompt and tool definitions as cacheable.</p>
+        <p><Pill type="amber">RAG chunk pruning</Pill> Retrieve 10 chunks from your vector store, re-rank with a cross-encoder, keep top 3. You pay embedding cost for 10 but LLM input cost for only 3. A hosted re-ranker (Cohere Rerank) lists at about {usd(RERANK_PER_1K_SEARCHES)} per 1,000 searches, a fifth of a cent per query; a self-hosted cross-encoder costs only GPU time. Either is small next to the LLM tokens it saves.</p>
         <p><Pill type="amber">Output length control</Pill> &quot;Answer in 2-3 sentences&quot; vs letting the model write paragraphs. Output tokens cost 3-5x more than input. A 50-word instruction that saves 200 output tokens pays for itself 10x over.</p>
       </Decision>
 
