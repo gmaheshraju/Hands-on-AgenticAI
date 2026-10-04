@@ -322,7 +322,7 @@ function LoopPanel() {
       <div style={{ background: 'var(--bg-code)', borderTopWidth: 1, borderTopStyle: 'solid', borderTopColor: 'var(--border)', borderRightWidth: 1, borderRightStyle: 'solid', borderRightColor: 'var(--border)', borderBottomWidth: 1, borderBottomStyle: 'solid', borderBottomColor: 'var(--border)', borderLeftWidth: 3, borderLeftStyle: 'solid', borderLeftColor: 'var(--bg-accent-strong)', borderRadius: 'var(--radius-md)', padding: '14px 16px', marginBottom: 16 }}>
         <p style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-accent)', marginBottom: 6, fontFamily: 'var(--font-mono)', letterSpacing: '0.05em' }}>MAHESH'S HARNESS COMPONENTS</p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 6 }}>
-          The harness isn't just a loop. It's the complete runtime that wraps the LLM. I break it into layers:
+          The harness is the complete runtime that wraps the LLM, of which the loop is one part. I break it into layers:
         </p>
         <p style={{ fontSize: 13, color: 'var(--text-p)', lineHeight: 1.65, marginBottom: 4 }}>
           <strong>1. Memory System.</strong> Procedural (SKILL.md), Semantic (vector DB), Episodic (conversation log). Injected into context at the Observe step.
@@ -378,7 +378,7 @@ function LoopPanel() {
         <br /><br />
         <strong>Convergence detection:</strong> If the last 3 iterations produced the same tool call with the same args, the agent is stuck. Break the loop and escalate.
         <br /><br />
-        <strong>My "gate" pattern:</strong> "Ship the fix or fix the bug." The evaluation step isn't just "are we done?". It's "did this iteration actually help?" Track a progress signal: did the test pass? Did the error count decrease? Did the user's question get closer to answered? If 3 iterations show no progress, the gate triggers escalation.
+        <strong>My "gate" pattern:</strong> "Ship the fix or fix the bug." The evaluation step asks two questions: "are we done?" and "did this iteration actually help?" Track a progress signal: did the test pass? Did the error count decrease? Did the user's question get closer to answered? If 3 iterations show no progress, the gate triggers escalation.
       </Decision></FadeIn>
 
       <FadeIn><Insight>
@@ -448,7 +448,7 @@ function TracingPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "Observability is the answer to 'how do you maintain this in production?' Every design review surfaces it. The answer isn't 'we monitor it'. It's specific: 'We trace every iteration with token counts and latency breakdown. We alert on cost per query exceeding $0.50 and iterations exceeding 8. We review the p95 latency weekly and optimize the slowest tool calls.' Specificity is credibility."
+        "Observability is the answer to 'how do you maintain this in production?' Every design review surfaces it. 'We monitor it' is not an answer. A good one is specific: 'We trace every iteration with token counts and latency breakdown. We alert on cost per query exceeding $0.50 and iterations exceeding 8. We review the p95 latency weekly and optimize the slowest tool calls.' Specificity is credibility."
       </Insight></FadeIn>
     </div>
   );
@@ -511,7 +511,7 @@ function ErrorPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "Error recovery is where the 'systems engineer building AI' beats the 'ML engineer building a product.' The patterns are identical to what you'd use in a distributed system: retries with backoff, fallback chains, circuit breakers, graceful degradation. What matters here isn't AI knowledge. It's whether you build resilient systems."
+        "Error recovery is where the 'systems engineer building AI' beats the 'ML engineer building a product.' The patterns are identical to what you'd use in a distributed system: retries with backoff, fallback chains, circuit breakers, graceful degradation. Resilience engineering carries over directly; AI knowledge adds little here."
       </Insight></FadeIn>
     </div>
   );
@@ -532,7 +532,7 @@ function SelfImprovePanel() {
         <br /><br />
         <strong>Fix:</strong> Update the system prompt with explicit instructions addressing the pattern. "When the user's codebase is JavaScript, always provide code examples in JavaScript, not Python."
         <br /><br />
-        This isn't ML. It's product iteration powered by data. And it works better than fine-tuning for most use cases.
+        No ML is involved: this is product iteration driven by data. And it works better than fine-tuning for most use cases.
         <br /><br />
         <strong>My real-world example, Claude Code hooks:</strong> Claude Code lets you define hooks: shell commands that run before or after tool calls. A pre-commit hook that runs linting, a post-edit hook that runs tests. This is harness-level self-improvement: the agent's behavior adapts not through prompt changes but through environmental feedback. The harness constrains the horse; hooks are the guardrails on the track.
       </Decision></FadeIn>
@@ -620,7 +620,7 @@ function SelfImprovePanel() {
       </Insight></FadeIn>
 
       <FadeIn><Insight>
-        "Self-improvement without retraining is an underrated topic in agent engineering. Fine-tuning is expensive, slow, and often unnecessary. Prompt optimization + few-shot curation + eval regression testing gets you 80% of the benefit at 5% of the cost. In practice, this demonstrates depth across the full lifecycle: not just building the agent, but operating and improving it."
+        "Self-improvement without retraining is an underrated topic in agent engineering. Fine-tuning is expensive, slow, and often unnecessary. Prompt optimization + few-shot curation + eval regression testing gets you 80% of the benefit at 5% of the cost. In practice, this covers the full lifecycle: building the agent, then operating and improving it."
       </Insight></FadeIn>
     </div>
   );

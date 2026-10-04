@@ -618,7 +618,7 @@ function ArchPanel() {
       </div>
 
       <FadeIn><Insight>
-        "The production insight is context isolation. Multi-agent isn't primarily about parallelism. It's about giving each agent a focused context window with only the information it needs. A search agent with 10 files in context outperforms a generalist with 100 files. Specialization reduces noise, which improves accuracy."
+        "The production insight is context isolation. The main win of multi-agent is a focused context window per agent, holding only the information that agent needs. Parallelism comes second. A search agent with 10 files in context outperforms a generalist with 100 files. Specialization reduces noise, which improves accuracy."
       </Insight></FadeIn>
     </div>
   );

@@ -104,7 +104,7 @@ function AccessPanel() {
       <Decision question="Location / proximity search?">PostGIS, geospatial indexes, or a dedicated geospatial service. Mention the query shape: "find all within radius" vs. "nearest K."</Decision>
       <Decision question="Large blobs: files, images, video?">Object storage (S3). Store the metadata pointer in your primary DB. Never store blobs in your transactional database.</Decision>
       <Decision question="Graph traversal: friends-of-friends, recommendations?">Neo4j or a graph layer. Recursive SQL joins degrade past 2–3 hops. Mention when relational is good enough and when it breaks.</Decision>
-      <Insight>"Real systems are polyglot: Uber uses Postgres + Redis + Kafka + S3 + Elasticsearch together. The question isn't which DB. It's which store for which access pattern."</Insight>
+      <Insight>"Real systems are polyglot: Uber uses Postgres + Redis + Kafka + S3 + Elasticsearch together. Each access pattern gets the store that serves it best."</Insight>
     </div>
   );
 }

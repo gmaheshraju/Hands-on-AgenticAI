@@ -346,8 +346,8 @@ function Tab2() {
       </Decision>
 
       <Insight type="warn" tag="Key distinction">
-        The biggest red-teaming mistake: only testing for harmful outputs. The real risk for most companies
-        isn't that the AI says something offensive. It's that it confidently gives wrong medical advice,
+        The biggest red-teaming mistake: only testing for harmful outputs. For most companies the bigger risk
+        is an AI that confidently gives wrong medical advice,
         makes up legal precedents, or fabricates financial data. A wrong fact that sounds authoritative
         is more dangerous than an obviously inappropriate response. Test for factual accuracy as hard as
         you test for safety. Budget 60% of red-teaming effort on factual correctness, 40% on safety.
@@ -370,8 +370,8 @@ function Tab3() {
         modes; legal needs it for data provenance audits.</p>
 
         <Pill type="green">Performance metrics by group</Pill>
-        <p>Accuracy, latency, cost, broken down by demographic group, language, and use case. Not just
-        "91% accuracy" but "93% en-US, 88% en-IN, 79% hi-IN." The disaggregated numbers are the ones
+        <p>Accuracy, latency, cost, broken down by demographic group, language, and use case. Report
+        "93% en-US, 88% en-IN, 79% hi-IN", never a bare "91% accuracy". The disaggregated numbers are the ones
         regulators and auditors care about. Aggregate numbers hide problems.</p>
 
         <Pill type="green">Limitations and failure modes</Pill>
@@ -405,7 +405,7 @@ function Tab3() {
       <CodeBlock code={MODEL_CARD_CODE} filename="model-card-generator.js" output={MODEL_CARD_OUTPUT} />
 
       <Insight tag="Key insight">
-        Model cards aren't bureaucracy. They're insurance. When a user complains about a biased output,
+        A model card works like insurance. When a user complains about a biased output,
         or a regulator asks about your AI system, the model card is your evidence that you knew the
         limitations, measured the risks, and implemented mitigations. Without it, you're liable. With it,
         you're responsible. The difference between "we didn't know" (negligence) and "we knew, measured,
@@ -431,8 +431,8 @@ function Tab4() {
         <Pill type="red">High-risk = conformity assessment</Pill>
         <p>If your AI touches hiring, credit, medical, or law enforcement: mandatory risk management system,
         data governance documentation, technical documentation (model cards), record-keeping, transparency to
-        users, human oversight mechanisms, accuracy/robustness/cybersecurity requirements. This isn't a
-        checkbox. It's a continuous obligation with regular audits.</p>
+        users, human oversight mechanisms, accuracy/robustness/cybersecurity requirements. Compliance is
+        continuous, with regular audits, not a one-time sign-off.</p>
 
         <Pill type="amber">Timeline: 2024-2027 phase-in</Pill>
         <p>Banned practices: Feb 2025. GPAI transparency: Aug 2025. High-risk in Annex III: Aug 2026.

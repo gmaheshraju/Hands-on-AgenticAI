@@ -83,7 +83,7 @@ function ConcurrencyControlPanel() {
         under clock drift and GC pauses. For true distributed mutual
         exclusion, use a CP system: ZooKeeper (ephemeral znodes with session
         semantics), etcd (lease-based locks with linearizable reads), or
-        Consul (session-based). The real answer: if correctness matters, don't
+        Consul (session-based). Rule of thumb: if correctness matters, don't
         use Redis. If availability matters more than strict exclusion, Redis
         SETNX is fine.
       </Decision>

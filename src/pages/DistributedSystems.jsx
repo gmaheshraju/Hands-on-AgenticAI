@@ -15,7 +15,7 @@ export default function DistributedSystems() {
       <p className="page-subtitle">
         Distributed systems fail in ways that monoliths never will. The network is unreliable,
         clocks drift, nodes crash mid-operation, and messages arrive out of order, or not at all.
-        The job isn't to prevent failure. It's to design systems that remain correct when failure
+        You will not prevent failure, so design systems that stay correct when failure
         is the norm. Every choice here is a tradeoff, and staff+ engineers are expected to
         articulate exactly what they're trading away.
       </p>
@@ -41,8 +41,8 @@ function CAPPanel() {
       <p className="page-body">
         CAP is the most misunderstood theorem in distributed systems. It does not say
         "pick two out of three." It says: during a network partition, you must choose between
-        consistency and availability. When there's no partition, you can have both. The real
-        question is what happens during the (rare but inevitable) partition event.
+        consistency and availability. When there's no partition, you can have both. So design for the
+        (rare but inevitable) partition event: that is where the choice is made.
       </p>
 
       <Decision question="What does CAP actually guarantee?">
@@ -207,8 +207,8 @@ function TransactionsPanel() {
         in theory. In practice, 3PC is rarely used because: (1) it requires three round-trips
         instead of two, (2) it doesn't work correctly with network partitions (a partitioned
         participant might abort while others commit), and (3) the failure modes it solves are
-        rare enough that the performance cost isn't worth it. It's good to understand conceptually but
-        not a practical recommendation.
+        rare enough that the extra round trip costs more than it saves. Know how it works; don't
+        recommend it.
       </Decision>
 
       <Decision question="When should you use the Saga pattern instead of 2PC?">

@@ -221,7 +221,7 @@ function Tab1() {
       <Decision question="Where does the money go in a typical AI system?">
         <p><Pill type="red">Output tokens (40-60% of total)</Pill> The biggest line item. Output tokens cost 3-5x more than input tokens on every major provider. A verbose 500-token response at $15/1M output tokens = $0.0075. A concise 150-token response = $0.00225. Same answer, 70% cheaper. Control this with explicit length instructions and max_tokens.</p>
         <p><Pill type="amber">Input tokens (25-35%)</Pill> System prompts, conversation history, retrieved documents. This is where you have the most architectural control. An 800-token system prompt that fires on every request costs $0.0024/req. At 100K requests/day, that is $240/day just for the system prompt.</p>
-        <p><Pill type="amber">RAG retrieval (10-15%)</Pill> Embedding cost ($0.02/1M tokens for text-embedding-3-small) is cheap per-call but adds up. The real cost is the retrieved chunks hitting the LLM context. Retrieve 10 chunks, re-rank to 3 -- you pay embedding for 10 but LLM cost for only 3.</p>
+        <p><Pill type="amber">RAG retrieval (10-15%)</Pill> Embedding cost ($0.02/1M tokens for text-embedding-3-small) is cheap per-call but adds up. Most of the cost comes from the retrieved chunks hitting the LLM context. Retrieve 10 chunks, re-rank to 3 -- you pay embedding for 10 but LLM cost for only 3.</p>
         <p><Pill type="green">Vector DB + Tools (5-10%)</Pill> Pinecone: $70/month for 1M vectors. pgvector: $0 if you already have Postgres. Tool execution is usually negligible unless you are running expensive external APIs.</p>
       </Decision>
 

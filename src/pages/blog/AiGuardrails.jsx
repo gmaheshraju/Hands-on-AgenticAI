@@ -538,7 +538,7 @@ function PIIPanel() {
     <div>
       <SectionHead
         title="PII detection and data safety"
-        desc="Every LLM API call is a data exfiltration risk. User data in prompts goes to a third-party API, gets logged, potentially used for training. PII filtering isn't optional. It's a legal requirement under GDPR, India's DPDPA, and HIPAA."
+        desc="Every LLM API call is a data exfiltration risk. User data in prompts goes to a third-party API, gets logged, potentially used for training. PII filtering is a legal requirement under GDPR, India's DPDPA, and HIPAA."
       />
 
       <FadeIn><Decision question="Where do you filter PII: pre-LLM, post-LLM, or both?">
@@ -819,7 +819,7 @@ function DefenseInDepthPanel() {
       </Insight></FadeIn>
 
       <FadeIn delay={200}><Insight type="warn" tag="The hard truth">
-        Prompt injection is fundamentally unsolvable with current LLM architectures. LLMs process instructions and data in the same channel. There is no hardware-level separation like kernel mode vs user mode in operating systems. Every defense is a heuristic, not a guarantee. The engineering goal isn't "prevent all attacks". It's "make attacks expensive, detect them quickly, limit blast radius, and have an audit trail." When someone asks "how do you prevent prompt injection?" the honest senior engineering perspective starts with "you can't prevent it completely, but here's how you make it impractical..."
+        Prompt injection is fundamentally unsolvable with current LLM architectures. LLMs process instructions and data in the same channel. There is no hardware-level separation like kernel mode vs user mode in operating systems. Every defense is a heuristic, not a guarantee. So set a reachable engineering goal: "make attacks expensive, detect them quickly, limit blast radius, and have an audit trail." When someone asks "how do you prevent prompt injection?" the honest senior engineering perspective starts with "you can't prevent it completely, but here's how you make it impractical..."
       </Insight></FadeIn>
 
       {/* ── Sandboxing Masterclass ── */}

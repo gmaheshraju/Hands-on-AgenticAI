@@ -382,8 +382,8 @@ function AntiPatternsPanel() {
       <h2 className="page-section-title">Common auth mistakes that reveal junior thinking</h2>
       <p className="page-body">
         Auth anti-patterns are dangerous because they often work in development and staging,
-        then fail silently in production: until a breach. The real test is whether you've
-        been burned by these mistakes or are about to be.
+        then fail silently in production until a breach. Most teams find out which ones they have
+        the hard way.
       </p>
 
       {/* Anti-pattern 1 */}
@@ -454,7 +454,7 @@ function AntiPatternsPanel() {
           "Zero trust: every service-to-service call is authenticated, even internal ones.
           Use mTLS or service tokens with the client credentials grant. An attacker who
           compromises one service should not get free access to every other service. The
-          network boundary is not a trust boundary. This is how every major breach scales
+          network boundary is not a trust boundary. Treating it as one is how every major breach scales
           from one compromised host to full lateral movement."
         </p>
       </div>

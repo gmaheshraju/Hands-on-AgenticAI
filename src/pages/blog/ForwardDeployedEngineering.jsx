@@ -459,7 +459,7 @@ function AIPlaybookPanel() {
       <FadeIn><Decision question="Why can't AI startups just ship a product and iterate?">
         <Pill type="green">AI is context-dependent</Pill> A chatbot trained on general data hallucinates on your customer&rsquo;s domain. A document extraction model tuned for legal contracts fails on medical records. AI products need domain adaptation, and that requires someone inside the customer&rsquo;s environment understanding their data.
         <br /><br />
-        <Pill type="amber">Integration is the hard part</Pill> The AI model is the easy part. The real work: connecting to legacy systems, handling dirty data, building trust with end users, navigating compliance requirements. This is FDE work. It can&rsquo;t be done from HQ.
+        <Pill type="amber">Integration is the hard part</Pill> The AI model is the easy part. Most of the effort goes into connecting to legacy systems, handling dirty data, building trust with end users, navigating compliance requirements. This is FDE work. It can&rsquo;t be done from HQ.
         <br /><br />
         <Pill type="red">The demo-to-production gap</Pill> Every AI startup can build a compelling demo. Very few can make it work in production with real customer data, real edge cases, and real regulatory constraints. FDEs close this gap by being physically present and technically capable.
       </Decision></FadeIn>

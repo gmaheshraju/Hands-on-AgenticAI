@@ -649,7 +649,7 @@ function FineTuningPanel() {
       />
 
       <Insight type="warn">
-        Fine-tuning is NOT a shortcut. It's the most expensive option in engineering time:
+        Fine-tuning is the most expensive option in engineering time:
         you need data collection, cleaning, training, evaluation, and ongoing monitoring for drift.
         Most teams that jump to fine-tuning could have solved their problem with better prompts or
         RAG. Fine-tune only when you've proven prompt engineering hits a ceiling and you can point

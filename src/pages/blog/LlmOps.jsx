@@ -542,7 +542,7 @@ function ModelServingPanel() {
 
 
       <FadeIn><Insight>
-        The maturity signal isn't knowing that model routing exists. It's knowing the exact cost crossover points and being able to do the math live: "We're at 200K requests/day, average 1500 tokens in + 400 tokens out. On Sonnet that's $900/day. With routing, 65% go to Haiku, that drops to $180/day. The classifier cost is $12/day. Net savings: 80%." In a design review, pull out real numbers, not "it depends on the use case."
+        Everyone knows model routing exists. The maturity signal is knowing the exact cost crossover points and doing the math live: "We're at 200K requests/day, average 1500 tokens in + 400 tokens out. On Sonnet that's $900/day. With routing, 65% go to Haiku, that drops to $180/day. The classifier cost is $12/day. Net savings: 80%." In a design review, pull out real numbers, not "it depends on the use case."
       </Insight></FadeIn>
     </div>
   );

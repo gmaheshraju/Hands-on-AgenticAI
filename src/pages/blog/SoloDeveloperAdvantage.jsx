@@ -156,7 +156,7 @@ function Playbook() {
       <FadeIn delay={0}>
         <h2 style={styles.h2}>The Solo Developer Playbook</h2>
         <p style={styles.p}>
-          This isn't about working harder. It's about using AI to collapse the time between insight and shipped product.
+          The edge comes from using AI to collapse the time between insight and shipped product, not from longer hours.
           Here's the playbook that's working for developers around the world in 2026.
         </p>
       </FadeIn>
@@ -207,7 +207,7 @@ function Playbook() {
 
       <FadeIn delay={180}>
         <Insight tag="the leverage ratio">
-          The best solo developers aren't the best <em>coders</em>. They're the best <em>directors</em>. They write clear
+          The best solo developers are strong <em>directors</em> first and coders second. They write clear
           specifications, review AI output with domain expertise, and make judgment calls that no AI can make: "will my users
           actually want this?" That's the skill that scales. If you're spending more than 30% of your time writing code by hand,
           you're not using AI enough.
@@ -217,7 +217,7 @@ function Playbook() {
       <FadeIn delay={240}>
         <h3 style={styles.h3}>Phase 3: Ship Fast, Listen Faster</h3>
         <p style={styles.p}>
-          The solo developer's superpower isn't just speed. It's <strong>feedback loop compression</strong>. A feature goes
+          The solo developer's edge is <strong>feedback loop compression</strong>. A feature goes
           from idea to production in hours, not weeks. But the real advantage is what happens after: you talk directly to users,
           see exactly how they use it, and iterate the same day. No product managers translating. No sprint ceremonies delaying.
           No committee diluting the insight.
@@ -241,7 +241,7 @@ function Playbook() {
           revenue → add AI automation → grow more revenue → maybe hire one person if you want to.
         </p>
         <p style={styles.p}>
-          The metric that matters in 2026 isn't ARR or team size. It's <strong>revenue per employee</strong>. Midjourney reportedly
+          The metric to watch in 2026 is <strong>revenue per employee</strong>, more than ARR or team size. Midjourney reportedly
           generates ~$200M in revenue with ~40 employees, roughly $5M per person. Compare that to traditional tech's $500K per
           employee. The best solo developers are pushing this ratio even further.
         </p>
@@ -390,7 +390,7 @@ function Patterns() {
           real conversations, not market research decks.
         </p>
         <Insight tag="distribution secret">
-          The biggest challenge for any product isn't building. It's distribution. Solo developers who build in communities
+          For most products, distribution is harder than building. Solo developers who build in communities
           they're already part of have solved distribution before writing a line of code. A developer who's been active in
           an Indian stock trading Telegram group for 3 years doesn't need a marketing strategy. They need to say "I built
           a thing" and 50 people try it that day. That's a customer acquisition cost of $0.
@@ -554,7 +554,7 @@ function AppliedPatterns() {
       <FadeIn delay={0}>
         <h2 style={styles.h2}>Applied Patterns</h2>
         <p style={styles.p}>
-          This isn't just a trend piece. It's a <strong>career strategy</strong>. Here's how to apply the solo developer
+          Read this as a <strong>career strategy</strong>. Below is how to apply the solo developer
           thesis in practice as a senior engineer.
         </p>
       </FadeIn>
@@ -622,8 +622,8 @@ function AppliedPatterns() {
           are durable: lower cost structure, faster iteration, deeper domain knowledge, direct customer relationships, ability
           to serve niches that are too small for venture-backed companies.
           <br /><br />
-          The question isn't whether big companies will catch up in AI usage. It's whether they can match the
-          <strong> speed × domain depth × cost structure</strong> combination that solo developers have. History suggests they
+          Big companies will catch up on AI usage. Whether they can match the
+          <strong> speed × domain depth × cost structure</strong> combination that solo developers have is a separate question. History suggests they
           can't, because big companies are optimized for scale, not speed. And in the AI era, speed compounds faster than scale.
         </Decision>
       </FadeIn>

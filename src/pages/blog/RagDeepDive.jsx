@@ -380,7 +380,7 @@ function EmbeddingsPanel() {
       </Decision></FadeIn>
 
       <FadeIn><Insight>
-        "The common pitfall is fixating on the embedding model choice. My vertical-first rule applies here. Don't build a 'universal RAG platform.' Build one that works perfectly for your specific document type. An e-Commerce product catalog needs different chunking, metadata, and retrieval strategies than a legal document corpus. The harder engineering is the pipeline: batch ingestion, incremental updates, model versioning. Mention the migration cost explicitly: 'choosing an embedding model is a one-way door because migration means re-embedding our entire corpus' — and senior engineers know you've done this for real."
+        "The common pitfall is fixating on the embedding model choice. My vertical-first rule applies here. Don't build a 'universal RAG platform.' Build one that works perfectly for your specific document type. An e-Commerce product catalog needs different chunking, metadata, and retrieval strategies than a legal document corpus. The harder engineering is the pipeline: batch ingestion, incremental updates, model versioning. Mention the migration cost explicitly: 'choosing an embedding model is a one-way door because migration means re-embedding our entire corpus'. Senior engineers know you've done this for real."
       </Insight></FadeIn>
     </div>
   );

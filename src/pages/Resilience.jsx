@@ -390,9 +390,8 @@ function DegradationPanel() {
       <h2 className="page-section-title">Failing Gracefully Is a Feature, Not a Bug</h2>
       <p className="page-body">
         Graceful degradation means your system deliberately sheds non-critical
-        work to protect core functionality under stress. It's not something
-        that happens automatically -- it's a set of explicit decisions about
-        what to sacrifice and when.
+        work to protect core functionality under stress. You decide in advance
+        what to sacrifice and when, and write it down.
       </p>
 
       <Decision question="How do you use feature flags for planned degradation?">

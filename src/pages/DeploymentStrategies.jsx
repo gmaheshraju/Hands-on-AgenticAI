@@ -147,7 +147,7 @@ function FeatureFlagsPanel() {
       </Decision>
 
       <Decision question="How do you prevent stale flag accumulation?">
-        <Pill type="red">critical</Pill> This is the real problem. Every flag added
+        <Pill type="red">critical</Pill> This is where flag systems rot. Every flag added
         without a removal plan becomes permanent. Solutions: (1) Every release flag
         gets a Jira ticket for removal, created at flag creation time, due 14 days
         after full rollout. (2) CI lint that fails if a release flag is older than

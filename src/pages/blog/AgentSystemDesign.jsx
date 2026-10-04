@@ -475,7 +475,7 @@ function ArchitecturePanel() {
           <strong>3. Planner Agent.</strong> Decomposes complex multi-step tasks (returns, exchanges, account changes) into executable action sequences with function calls.
         </p>
         <p style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.6, marginTop: 8, fontStyle: 'italic' }}>
-          This isn't three models. It's three system prompts with different tool sets, potentially running on the same LLM. The architecture decision is about context isolation and tool scoping, not model count.
+          These are three system prompts with different tool sets, potentially running on the same LLM, not three models. The architecture decision is about context isolation and tool scoping, not model count.
         </p>
       </div>
 
@@ -740,7 +740,7 @@ function RealSystemsPanel() {
         </div>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>Key insight</span>
-          <span style={styles.sysVal}>The Router isn't an LLM call. It's a lightweight classifier that runs in &lt;50ms. Only the Q&A and Planner agents use full LLM inference. This keeps 60% of queries fast (simple product questions) while reserving expensive reasoning for complex operations.</span>
+          <span style={styles.sysVal}>The Router is a lightweight classifier that runs in &lt;50ms, with no LLM call. Only the Q&A and Planner agents use full LLM inference. This keeps 60% of queries fast (simple product questions) while reserving expensive reasoning for complex operations.</span>
         </div>
         <div style={styles.systemDetail}>
           <span style={styles.sysLabel}>From my build</span>

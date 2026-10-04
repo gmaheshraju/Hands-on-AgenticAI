@@ -823,7 +823,7 @@ function MetricsPanel() {
       />
 
       <FadeIn><Decision question="What to track on your eval dashboard">
-        <Pill type="green">Accuracy / pass rate (trending over time)</Pill> Not just the current number, but the trend. A pass rate that drops from 88% to 84% over two weeks is a slow leak that no single alert catches. Plot it daily, set a 7-day moving average, alert on sustained decline.
+        <Pill type="green">Accuracy / pass rate (trending over time)</Pill> Watch the trend, not the latest number. A pass rate that drops from 88% to 84% over two weeks is a slow leak that no single alert catches. Plot it daily, set a 7-day moving average, alert on sustained decline.
         <br /><br />
         <Pill type="green">Faithfulness score (per RAG index version)</Pill> Track faithfulness separately from correctness. When you update your RAG index, faithfulness can drop even if correctness stays flat, because the model starts hallucinating from poorly chunked new documents. Tag each eval with the index version.
         <br /><br />

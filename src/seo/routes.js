@@ -21,7 +21,7 @@ const suffix = ` | ${AUTHOR}`;
 export const ROUTES = [
   {
     path: '/',
-    title: 'Agentic AI Playbook — Production Architecture for AI Agents',
+    title: 'Agentic AI Playbook: Production Architecture for AI Agents',
     description:
       'Production architecture patterns for AI agents, RAG pipelines, and LLM systems, with real-world architecture diagrams and decision frameworks.',
     priority: '1.0',
@@ -29,7 +29,7 @@ export const ROUTES = [
   },
   {
     path: '/blog',
-    title: 'Agentic AI Playbook — All Posts',
+    title: 'Agentic AI Playbook: All Posts',
     description:
       'Sixteen deep-dive posts on production AI engineering: agent design, memory, RAG, LLMOps, guardrails, evaluation, and cost engineering.',
     priority: '0.9',
@@ -38,7 +38,7 @@ export const ROUTES = [
 
   {
     path: '/diagrams',
-    title: `Architecture Diagrams — ${TOTALS.projects} Systems Drawn From Source`,
+    title: `Architecture Diagrams: ${TOTALS.projects} Systems Drawn From Source`,
     description:
       `${TOTALS.projects} production AI systems diagrammed from their source code, at three altitudes: ` +
       `where things live, which state transitions are legal, and what happens in what order. ` +
@@ -50,7 +50,7 @@ export const ROUTES = [
 
   {
     path: '/work-with-me',
-    title: 'Work With Me — AI Engineering Consulting',
+    title: 'Work With Me: AI Engineering Consulting',
     description:
       'Consulting and hands-on engineering for production AI systems: agent architecture, RAG pipelines, LLM system reviews, cost & latency optimization, and team enablement.',
     priority: '0.9',
@@ -267,7 +267,7 @@ export const ROUTES = [
 // every SERP entry still carries the name being searched for.
 export function fullTitle(route) {
   return route.path === '/'
-    ? `${AUTHOR} — Agentic AI Engineer | 31 Open-Source LLM & Agent Projects`
+    ? `${AUTHOR}, Agentic AI Engineer | 31 Open-Source LLM & Agent Projects`
     : `${route.title}${suffix}`;
 }
 
