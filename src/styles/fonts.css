@@ -1,8 +1,11 @@
 /* Self-hosted fonts (SIL Open Font License): Instrument Serif, DM Sans, JetBrains Mono.
    Latin + Latin Extended subsets only, with Google's unicode-ranges, so a page downloads
    just the files whose glyphs it uses. Self-hosting removed two third-party connections
-   (fonts.googleapis.com + fonts.gstatic.com) and a render-blocking stylesheet from the
-   critical path: Lighthouse estimated ~1.2s of first-paint savings on mobile. */
+   (fonts.googleapis.com + fonts.gstatic.com) and a render-blocking stylesheet.
+   Measured (Lighthouse mobile simulation, 5 runs each, medians, 2026-10-04) against the
+   old Google Fonts setup: LCP 4.67s -> 3.66s on / and 5.12s -> 4.69s on a post; perf score
+   77 -> 84 and 75 -> 76. First paint moved within run-to-run noise (+/-0.5s). Preloading
+   both first-paint files beat preloading only the serif or neither. */
 
 @font-face {
   font-family: 'DM Sans';

@@ -41,12 +41,13 @@ export default function FadeIn({ children, delay = 0, className }) {
 
   const style =
     phase === 'static' ? undefined
-    // Never fully invisible: a scroll jump that outruns the observer lands on faint text, not a blank page.
-    : phase === 'hidden' ? { opacity: 0.3, transform: 'translateY(10px)' }
+    // Motion only, never a fade: text stays at full contrast in every phase. A dimmed
+    // pre-reveal state (opacity 0.3) measured 1.5-1.9:1 in Lighthouse's accessibility
+    // audit and left anchor or search jumps landing on faint text.
+    : phase === 'hidden' ? { transform: 'translateY(14px)' }
     : {
-        opacity: 1,
         transform: 'none',
-        transition: `opacity 0.35s var(--ease) ${Math.min(delay, 120)}ms, transform 0.35s var(--ease) ${Math.min(delay, 120)}ms`,
+        transition: `transform 0.45s var(--ease) ${Math.min(delay, 120)}ms`,
       };
 
   return (
