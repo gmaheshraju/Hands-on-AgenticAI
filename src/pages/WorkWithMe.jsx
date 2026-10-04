@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import FadeIn from '../components/FadeIn';
 import { TOTALS } from '../data/diagrams';
 import { EMAIL, LINKEDIN, PROJECTS_REPO } from '../data/contact';
+import guardrailsSvg from '../../docs/diagrams/guardrails_v1/guardrails.svg?raw';
 
 // Clarity custom events feed the consulting funnel (homepage → this page →
 // contact click). Optional-chained: no-op locally and during prerender.
@@ -129,40 +130,76 @@ export default function WorkWithMe() {
 
   return (
     <div>
-      <section style={styles.hero}>
-        <p className="rise" style={{ ...styles.eyebrow, '--i': 0 }}>Work With Me</p>
-        <h1 className="rise" style={{ ...styles.h1, '--i': 1 }}>
-          Ship AI systems that<br />
-          <em className="swash" style={styles.h1em}>
-            survive production
-            <svg className="swash__line" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M3 8.5 C 48 3, 118 2.5, 197 6.5" />
-            </svg>
-          </em>
-        </h1>
-        <p className="rise" style={{ ...styles.tagline, '--i': 2 }}>
-          I design, build, and harden agentic AI systems (agents, RAG pipelines,
-          LLMOps) for teams that need them to work when real users show up.
-          Everything I recommend, I&rsquo;ve run in production myself.
-        </p>
-        <div className="rise" style={{ ...styles.ctaRow, '--i': 3 }}>
-          <a
-            href={`mailto:${EMAIL}?subject=${encodeURIComponent(subject)}`}
-            onClick={() => track('email_cta_click')}
-            className="btn btn--primary"
-          >
-            Email me <span className="btn__arrow" aria-hidden="true">&rarr;</span>
-          </a>
-          <a
-            href={LINKEDIN}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => track('linkedin_cta_click')}
-            className="btn btn--ghost"
-          >
-            Message on LinkedIn
-          </a>
+      <section className="wwm-hero" style={styles.hero}>
+        <div className="wwm-hero__text">
+          <p className="rise" style={{ ...styles.eyebrow, '--i': 0 }}>Work With Me</p>
+          <h1 className="rise" style={{ ...styles.h1, '--i': 1 }}>
+            Ship AI systems that<br />
+            <em className="swash" style={styles.h1em}>
+              survive production
+              <svg className="swash__line" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M3 8.5 C 48 3, 118 2.5, 197 6.5" />
+              </svg>
+            </em>
+          </h1>
+          <p className="rise" style={{ ...styles.tagline, '--i': 2 }}>
+            I design, build, and harden agentic AI systems (agents, RAG pipelines,
+            LLMOps) for teams that need them to work when real users show up.
+            Everything I recommend, I&rsquo;ve run in production myself.
+          </p>
+          <div className="rise" style={{ ...styles.ctaRow, '--i': 3 }}>
+            <a
+              href={`mailto:${EMAIL}?subject=${encodeURIComponent(subject)}`}
+              onClick={() => track('email_cta_click')}
+              className="btn btn--primary"
+            >
+              Email me <span className="btn__arrow" aria-hidden="true">&rarr;</span>
+            </a>
+            <a
+              href={LINKEDIN}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track('linkedin_cta_click')}
+              className="btn btn--ghost"
+            >
+              Message on LinkedIn
+            </a>
+          </div>
+          <p className="wwm-hero__reply rise" style={{ '--i': 4 }}>
+            <span className="hero-pill__dot" aria-hidden="true" />
+            Free 30-minute intro call. I reply within two working days.
+          </p>
         </div>
+
+        <aside className="wwm-proof rise" style={{ '--i': 3 }} aria-label="Evidence you can check">
+          <p className="wwm-proof__label">Check the work first</p>
+          <ul className="wwm-proof__list">
+            {proof.map((p) => {
+              const inner = (
+                <>
+                  <span className="wwm-proof__stat">{p.stat}</span>
+                  <span className="wwm-proof__text">{p.label}</span>
+                  {p.href && <span className="wwm-proof__arrow" aria-hidden="true">&rarr;</span>}
+                </>
+              );
+              return (
+                <li key={p.label}>
+                  {!p.href ? (
+                    <div className="wwm-proof__row">{inner}</div>
+                  ) : p.href.startsWith('http') ? (
+                    <a className="wwm-proof__row" href={p.href} target="_blank" rel="noopener noreferrer">{inner}</a>
+                  ) : (
+                    <Link className="wwm-proof__row" to={p.href}>{inner}</Link>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+          <p className="wwm-proof__foot">
+            The code and the diagrams are public. Read them before we talk, so the
+            first call starts from your problem, not my pitch.
+          </p>
+        </aside>
       </section>
 
       <section style={styles.section}>
@@ -180,7 +217,7 @@ export default function WorkWithMe() {
                   <p style={styles.subtitle}>{s.subtitle}</p>
                   <div style={styles.tags}>
                     {s.tags.map(t => (
-                      <span key={t} style={styles.tag}>{t}</span>
+                      <span key={t} className="post-card__tag">{t}</span>
                     ))}
                   </div>
                 </div>
@@ -192,46 +229,13 @@ export default function WorkWithMe() {
 
       <section style={styles.section}>
         <h2 style={styles.sectionTitle}>Why Me</h2>
-        <div style={styles.proofRow}>
-          {proof.map((p, i) => (
-            <FadeIn key={p.label} delay={i * 60} className="grid-cell">
-              {p.href ? (
-                <a
-                  href={p.href}
-                  {...(p.href.startsWith('http')
-                    ? { target: '_blank', rel: 'noopener noreferrer' }
-                    : {})}
-                  className="lift"
-                  style={{ ...styles.proofCard, textDecoration: 'none' }}
-                >
-                  <span style={styles.proofStat}>{p.stat}</span>
-                  <span style={styles.proofLabel}>{p.label} &rarr;</span>
-                </a>
-              ) : (
-                <div style={styles.proofCard}>
-                  <span style={styles.proofStat}>{p.stat}</span>
-                  <span style={styles.proofLabel}>{p.label}</span>
-                </div>
-              )}
-            </FadeIn>
-          ))}
-        </div>
-
-        <FadeIn delay={200}>
-          <figure style={styles.specimen}>
-            <Link to="/diagrams" style={{ display: 'block' }}>
-              <img
-                src="/diagrams/guardrails.svg"
-                alt="Architecture of a prompt-injection defence pipeline, drawn from source: nine input checks, three defence layers, and the held-out grading path."
-                loading="lazy"
-                style={styles.specimenImg}
-              />
-            </Link>
-            <figcaption style={styles.specimenCap}>
-              Every box cites the line of code it came from.{' '}
-              <Link to="/diagrams" style={styles.specimenLink}>
-                See all {TOTALS.count} &rarr;
-              </Link>
+        <FadeIn>
+          <figure className="wwm-specimen">
+            <div className="wwm-specimen__frame" dangerouslySetInnerHTML={{ __html: guardrailsSvg }} role="img"
+              aria-label="Architecture of a prompt-injection defence pipeline, drawn from source: nine input checks, three defence layers, and the held-out grading path." />
+            <figcaption className="wwm-specimen__cap">
+              <span>The prompt-injection defence from post 07. Every box cites the line of code it came from.</span>
+              <Link to="/diagrams" className="link-draw">See all {TOTALS.count} diagrams &rarr;</Link>
             </figcaption>
           </figure>
         </FadeIn>
@@ -244,11 +248,11 @@ export default function WorkWithMe() {
 
       <section style={styles.section}>
         <h2 style={styles.sectionTitle}>How It Works</h2>
-        <div style={styles.stepsGrid}>
+        <div className="wwm-steps" style={styles.stepsGrid}>
           {steps.map((s, i) => (
             <FadeIn key={s.number} delay={i * 60} className="grid-cell">
               <div className="lift" style={styles.stepCard}>
-                <span style={styles.stepNumber}>{s.number}</span>
+                <span className="wwm-step__num">{s.number}</span>
                 <div>
                   <h3 style={styles.stepTitle}>{s.title}</h3>
                   <p style={styles.stepText}>{s.text}</p>
@@ -259,7 +263,7 @@ export default function WorkWithMe() {
         </div>
       </section>
 
-      <section style={styles.closer}>
+      <section className="wwm-closer">
         <h2 style={styles.closerTitle}>
           Building something with <em style={styles.h1em}>AI agents?</em>
         </h2>
@@ -292,25 +296,6 @@ export default function WorkWithMe() {
 }
 
 const styles = {
-  specimen: {
-    margin: '36px 0 0',
-    background: 'var(--bg-card)',
-    border: '1px solid var(--border)',
-    borderRadius: 'var(--radius-md)',
-    padding: 14,
-    overflow: 'hidden',
-  },
-  specimenImg: { width: '100%', height: 'auto', display: 'block' },
-  specimenCap: {
-    marginTop: 10,
-    fontSize: 13,
-    color: 'var(--text-muted)',
-    display: 'flex',
-    justifyContent: 'space-between',
-    gap: 12,
-    flexWrap: 'wrap',
-  },
-  specimenLink: { color: 'var(--bg-accent-strong)', textDecoration: 'none', whiteSpace: 'nowrap' },
   hero: {
     marginBottom: '3.5rem',
     paddingBottom: '2.5rem',
@@ -427,44 +412,6 @@ const styles = {
     flexWrap: 'wrap',
     gap: 5,
   },
-  tag: {
-    fontSize: 10,
-    fontWeight: 500,
-    color: 'var(--text-muted)',
-    background: 'var(--bg-code)',
-    padding: '3px 8px',
-    borderRadius: 'var(--radius-full)',
-    fontFamily: 'var(--font-mono)',
-    letterSpacing: '0.01em',
-  },
-  proofRow: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-    gap: 10,
-    marginBottom: 16,
-  },
-  proofCard: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 6,
-    background: 'var(--bg-card)',
-    border: '1px solid var(--border)',
-    borderRadius: 'var(--radius-md)',
-    padding: '22px 24px',
-    flex: 1,
-  },
-  proofStat: {
-    fontSize: 40,
-    fontWeight: 400,
-    color: 'var(--text-accent)',
-    fontFamily: 'var(--font-display)',
-    lineHeight: 1,
-  },
-  proofLabel: {
-    fontSize: 14,
-    color: 'var(--text-p)',
-    lineHeight: 1.5,
-  },
   proofNote: {
     fontSize: 15,
     color: 'var(--text-p)',
@@ -486,14 +433,6 @@ const styles = {
     padding: '22px 24px',
     flex: 1,
   },
-  stepNumber: {
-    fontSize: 32,
-    fontWeight: 400,
-    color: 'var(--text-accent)',
-    fontFamily: 'var(--font-display)',
-    lineHeight: 1.2,
-    flexShrink: 0,
-  },
   stepTitle: {
     fontSize: 20,
     fontWeight: 400,
@@ -505,12 +444,6 @@ const styles = {
     fontSize: 14.5,
     color: 'var(--text-p)',
     lineHeight: 1.65,
-  },
-  closer: {
-    background: 'var(--bg-accent)',
-    border: '1px solid var(--border)',
-    borderRadius: 'var(--radius-lg)',
-    padding: 'clamp(28px, 4vw, 48px)',
   },
   closerTitle: {
     fontSize: 'clamp(28px, 3vw, 40px)',

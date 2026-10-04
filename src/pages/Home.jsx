@@ -2,31 +2,37 @@ import { Link } from 'react-router-dom';
 import FrameworkCard from '../components/FrameworkCard';
 import FadeIn from '../components/FadeIn';
 import { frameworks } from '../data/frameworks';
+import ConstraintChain from '../components/ConstraintChain';
 
 export default function Home() {
   return (
     <div>
-      <section className="home-hero">
-        <p className="home-hero__eyebrow rise" style={{ '--i': 0 }}>System Design</p>
-        <h1 className="home-hero__title rise" style={{ '--i': 1 }}>
-          System Design<br />
-          <em className="swash">
-            Playbook
-            <svg className="swash__line" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M3 8.5 C 48 3, 118 2.5, 197 6.5" />
-            </svg>
-          </em>
-        </h1>
-        <p className="home-hero__tagline rise" style={{ '--i': 2 }}>
-          {frameworks.length} decision frameworks for the backend questions that decide whether a system
-          holds up: storage, caching, queues, consistency, failure. Each one starts from the constraint,
-          not the technology.
-        </p>
-        <div className="hero-actions rise" style={{ '--i': 3, marginBottom: 0 }}>
-          <Link to={frameworks[0].to} className="btn btn--primary">
-            Start with {frameworks[0].title} <span className="btn__arrow" aria-hidden="true">&rarr;</span>
-          </Link>
-          <Link to="/" className="btn btn--ghost">Agentic AI Playbook</Link>
+      <section className="home-hero hero-split">
+        <div className="hero-split__text">
+          <p className="home-hero__eyebrow rise" style={{ '--i': 0 }}>System Design</p>
+          <h1 className="home-hero__title rise" style={{ '--i': 1 }}>
+            System Design<br />
+            <em className="swash">
+              Playbook
+              <svg className="swash__line" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M3 8.5 C 48 3, 118 2.5, 197 6.5" />
+              </svg>
+            </em>
+          </h1>
+          <p className="home-hero__tagline rise" style={{ '--i': 2 }}>
+            {frameworks.length} decision frameworks for the backend questions that decide whether a system
+            holds up: storage, caching, queues, consistency, failure. Each one starts from the constraint,
+            not the technology.
+          </p>
+          <div className="hero-actions rise" style={{ '--i': 3, marginBottom: 0 }}>
+            <Link to={frameworks[0].to} className="btn btn--primary">
+              Start with {frameworks[0].title} <span className="btn__arrow" aria-hidden="true">&rarr;</span>
+            </Link>
+            <Link to="/" className="btn btn--ghost">Agentic AI Playbook</Link>
+          </div>
+        </div>
+        <div className="hero-split__art rise" style={{ '--i': 2 }}>
+          <ConstraintChain />
         </div>
       </section>
 
