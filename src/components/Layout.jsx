@@ -61,6 +61,23 @@ function useTabScrollReset(enabled) {
   }, [enabled]);
 }
 
+// Card spotlight: one delegated listener writes the pointer position into the
+// hovered card's --mx/--my (see CARD SPOTLIGHT in global.css). Mouse only.
+function useCardSpotlight() {
+  useEffect(() => {
+    const onMove = (e) => {
+      if (e.pointerType !== 'mouse') return;
+      const card = e.target.closest?.('.post-card, .fc');
+      if (!card) return;
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      card.style.setProperty('--my', `${e.clientY - r.top}px`);
+    };
+    document.addEventListener('pointermove', onMove, { passive: true });
+    return () => document.removeEventListener('pointermove', onMove);
+  }, []);
+}
+
 export default function Layout({ children }) {
   const { pathname } = useLocation();
   // Long-form pages (blog posts and System Design frameworks) share one reading layout.
@@ -68,6 +85,7 @@ export default function Layout({ children }) {
     pathname.startsWith('/blog/') || ROUTES.find((r) => r.path === pathname)?.kind === 'framework';
   const isIndex = pathname === '/' || pathname === '/blog';
   useTabScrollReset(isReading);
+  useCardSpotlight();
 
   return (
     <>

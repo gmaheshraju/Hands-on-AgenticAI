@@ -1503,3 +1503,143 @@ main:focus { outline: none; }
   color: var(--text-muted);
   margin-bottom: 14px;
 }
+
+/* ═══════════════════════════════════════════
+   FRONT PAGE: 3D AGENT ORBIT
+   The links are prerendered at their first-frame positions (AgentOrbit.jsx);
+   the WebGL canvas fades in underneath once three.js has loaded.
+   ═══════════════════════════════════════════ */
+
+.hero-split { display: grid; gap: 8px; align-items: center; }
+.hero-split__text { min-width: 0; }
+.hero-split__art { min-width: 0; display: flex; justify-content: center; }
+@media (min-width: 1024px) {
+  .hero-split { grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); gap: clamp(24px, 4vw, 64px); }
+  .hero-split__art { margin-right: calc(var(--page-gutter) * -0.5); }
+}
+
+.orbit {
+  position: relative;
+  width: min(100%, 560px);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  isolation: isolate;
+  touch-action: pan-y;
+}
+@media (max-width: 1023px) {
+  .orbit { width: min(100%, 440px); margin-top: 8px; }
+}
+
+.orbit__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0;
+  transition: opacity 1.1s var(--ease);
+}
+.orbit.is-live .orbit__canvas { opacity: 1; }
+
+/* No WebGL (or before it loads): a quiet ring and core so the links still read as a system. */
+.orbit__fallback {
+  position: absolute;
+  inset: 22%;
+  border-radius: 50%;
+  border: 1px dashed var(--border-strong);
+  transition: opacity 0.8s var(--ease);
+}
+.orbit__fallback::after {
+  content: '';
+  position: absolute;
+  inset: 38%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+}
+.orbit.is-live .orbit__fallback { opacity: 0; }
+
+.orbit__label,
+.orbit__core {
+  position: absolute;
+  white-space: nowrap;
+  font: 500 11.5px/1 var(--font-mono);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  color: var(--text-h);
+  border-radius: var(--radius-full);
+  transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.orbit__label {
+  /* Centred above its node. --near (1 near, 0 far) dims labels on the far side. */
+  transform: translate(-50%, calc(-100% - 14px));
+  padding: 6px 10px;
+  background: var(--bg-nav);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: calc(0.5 + var(--near, 1) * 0.5);
+  box-shadow: var(--shadow-sm);
+}
+.orbit__label:hover,
+.orbit__label:focus-visible {
+  opacity: 1;
+  color: var(--text-accent);
+  border-color: var(--border-accent);
+  box-shadow: 0 6px 20px var(--accent-glow);
+}
+.orbit__dot {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 11px);
+  width: 7px;
+  height: 7px;
+  margin-left: -3.5px;
+  border-radius: 50%;
+  background: var(--text-h);
+  transition: opacity 0.8s var(--ease);
+}
+.orbit.is-live .orbit__dot { opacity: 0; }
+
+.orbit__core {
+  transform: translate(-50%, 0);
+  margin-top: 10px;
+  padding: 6px 12px;
+  color: var(--text-on-accent);
+  background: var(--bg-accent-strong);
+  box-shadow: 0 6px 22px var(--accent-glow);
+}
+.orbit__core:hover,
+.orbit__core:focus-visible { background: var(--accent-hover); color: var(--text-on-accent); }
+
+@media (max-width: 559px) {
+  .orbit__label, .orbit__core { font-size: 10.5px; }
+  .orbit__label { padding: 5px 8px; }
+  /* Less room between nodes: let the far side recede so near labels stay legible. */
+  .orbit.is-live .orbit__label { opacity: calc(0.12 + var(--near, 1) * 0.88); }
+}
+
+/* ═══════════════════════════════════════════
+   CARD SPOTLIGHT
+   A soft accent light follows the pointer across cards. Position is written
+   by one delegated listener (Layout.jsx), so cards stay plain links.
+   ═══════════════════════════════════════════ */
+
+.post-card, .fc { --mx: 50%; --my: 0%; }
+.post-card::before,
+.fc::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(520px circle at var(--mx) var(--my), var(--bg-accent), transparent 42%);
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+}
+.post-card > *, .fc > * { position: relative; z-index: 1; }
+.post-card > .post-card__arrow, .fc > .fc__arrow { position: absolute; }
+@media (hover: hover) and (pointer: fine) {
+  .post-card:hover::before, .fc:hover::before { opacity: 1; }
+}

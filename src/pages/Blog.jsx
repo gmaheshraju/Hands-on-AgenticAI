@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import FadeIn from '../components/FadeIn';
 import HeroDiagram from '../components/HeroDiagram';
+import AgentOrbit from '../components/orbit/AgentOrbit';
 import { metaText } from '../components/PostMeta';
 import { ROUTES } from '../seo/routes';
 import { TOTALS } from '../data/diagrams';
@@ -131,62 +132,67 @@ const posts = [
 export default function Blog() {
   return (
     <div>
-      <section style={styles.hero}>
-        <Link
-          to="/work-with-me"
-          className="hero-pill rise"
-          style={{ '--i': 0 }}
-          onClick={() => track('home_pill_workwithme_click')}
-        >
-          <span className="hero-pill__dot" aria-hidden="true" />
-          Consulting on production agent systems
-          <span className="btn__arrow" aria-hidden="true">&rarr;</span>
-        </Link>
-        <h1 className="rise" style={{ ...styles.h1, '--i': 1 }}>
-          Agentic AI<br />
-          <em className="swash" style={styles.h1em}>
-            Playbook
-            <svg className="swash__line" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M3 8.5 C 48 3, 118 2.5, 197 6.5" />
-            </svg>
-          </em>
-        </h1>
-        <p className="rise" style={{ ...styles.tagline, '--i': 2 }}>
-          Production architecture patterns for AI agents, RAG pipelines, and LLM systems, with real-world architecture diagrams and decision frameworks.
-        </p>
-        <p className="hero-by rise" style={{ '--i': 3 }}>
-          <span className="nav__monogram" aria-hidden="true">M</span>
-          <span>By <strong>{AUTHOR_NAME}</strong>, who builds AI agent systems that run in production unattended.</span>
-        </p>
-        <div className="hero-actions rise" style={{ '--i': 4 }}>
-          <Link
-            to="/blog/ai-agent-system-design"
-            className="btn btn--primary"
-            onClick={() => track('home_start_reading_click')}
-          >
-            Start reading <span className="btn__arrow" aria-hidden="true">&rarr;</span>
-          </Link>
+      <section className="hero-split" style={styles.hero}>
+        <div className="hero-split__text">
           <Link
             to="/work-with-me"
-            className="btn btn--ghost"
-            onClick={() => track('home_hero_workwithme_click')}
+            className="hero-pill rise"
+            style={{ '--i': 0 }}
+            onClick={() => track('home_pill_workwithme_click')}
           >
-            Work with me
+            <span className="hero-pill__dot" aria-hidden="true" />
+            Consulting on production agent systems
+            <span className="btn__arrow" aria-hidden="true">&rarr;</span>
           </Link>
+          <h1 className="rise" style={{ ...styles.h1, '--i': 1 }}>
+            Agentic AI<br />
+            <em className="swash" style={styles.h1em}>
+              Playbook
+              <svg className="swash__line" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M3 8.5 C 48 3, 118 2.5, 197 6.5" />
+              </svg>
+            </em>
+          </h1>
+          <p className="rise" style={{ ...styles.tagline, '--i': 2 }}>
+            Production architecture patterns for AI agents, RAG pipelines, and LLM systems, with real-world architecture diagrams and decision frameworks.
+          </p>
+          <p className="hero-by rise" style={{ '--i': 3 }}>
+            <span className="nav__monogram" aria-hidden="true">M</span>
+            <span>By <strong>{AUTHOR_NAME}</strong>, who builds AI agent systems that run in production unattended.</span>
+          </p>
+          <div className="hero-actions rise" style={{ '--i': 4 }}>
+            <Link
+              to="/blog/ai-agent-system-design"
+              className="btn btn--primary"
+              onClick={() => track('home_start_reading_click')}
+            >
+              Start reading <span className="btn__arrow" aria-hidden="true">&rarr;</span>
+            </Link>
+            <Link
+              to="/work-with-me"
+              className="btn btn--ghost"
+              onClick={() => track('home_hero_workwithme_click')}
+            >
+              Work with me
+            </Link>
+          </div>
+          <div className="proof-strip rise" style={{ '--i': 5 }}>
+            <a href="#posts" className="proof-strip__item">
+              <span className="proof-strip__num">{posts.length}</span>
+              <span className="proof-strip__label">in-depth guides, each one a full system</span>
+            </a>
+            <a href={PROJECTS_REPO} target="_blank" rel="noopener noreferrer" className="proof-strip__item">
+              <span className="proof-strip__num">31</span>
+              <span className="proof-strip__label">open-source agent projects on GitHub</span>
+            </a>
+            <Link to="/diagrams" className="proof-strip__item">
+              <span className="proof-strip__num">{TOTALS.count}</span>
+              <span className="proof-strip__label">diagrams where every box cites its source line</span>
+            </Link>
+          </div>
         </div>
-        <div className="proof-strip rise" style={{ '--i': 5 }}>
-          <a href="#posts" className="proof-strip__item">
-            <span className="proof-strip__num">{posts.length}</span>
-            <span className="proof-strip__label">in-depth guides, each one a full system</span>
-          </a>
-          <a href={PROJECTS_REPO} target="_blank" rel="noopener noreferrer" className="proof-strip__item">
-            <span className="proof-strip__num">31</span>
-            <span className="proof-strip__label">open-source agent projects on GitHub</span>
-          </a>
-          <Link to="/diagrams" className="proof-strip__item">
-            <span className="proof-strip__num">{TOTALS.count}</span>
-            <span className="proof-strip__label">diagrams where every box cites its source line</span>
-          </Link>
+        <div className="hero-split__art rise" style={{ '--i': 2 }}>
+          <AgentOrbit />
         </div>
       </section>
 
