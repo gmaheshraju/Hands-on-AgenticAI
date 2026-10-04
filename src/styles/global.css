@@ -1,5 +1,5 @@
-/* Fonts load from <link> tags in index.html (preconnected), not @import: an import here
-   is only discovered after this file downloads, adding a round trip before any text renders. */
+/* Fonts are self-hosted: @font-face rules live in fonts.css (imported before this file in
+   main.jsx, so both ship in one stylesheet) and index.html preloads the two first-paint files. */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -43,6 +43,11 @@
   --text-warning: #B84000; /* was #E65100: 3.5:1 on --bg-warning */
   --text-danger: #C62828;
   --text-on-accent: #FFFFFF;
+  /* Fill for controls that carry text (buttons, pills, monogram). The brand orange
+     (--bg-accent-strong) is only 3.7:1 under white text, so text-bearing fills use
+     this deeper tone (5.0:1, WCAG AA); decorative accents keep the brand orange. */
+  --bg-accent-fill: #C2461C;
+  --accent-fill-hover: #A93C17;
 
   --border: #E2E1DB;
   --border-strong: #D0CFC8;
@@ -115,6 +120,8 @@
   --text-danger: #EF9A9A;
   /* White on #FF7A4D is ~2.6:1 (fails WCAG AA); near-black on it is ~7:1. */
   --text-on-accent: #161618;
+  --bg-accent-fill: #FF7A4D; /* dark text on it: ~7:1 */
+  --accent-fill-hover: #FF916A;
 
   --border: #2A2A2E;
   --border-strong: #3A3A3F;
@@ -226,7 +233,7 @@ img { max-width: 100%; display: block; }
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--bg-accent-strong);
+  background: var(--bg-accent-fill);
   color: var(--text-on-accent);
   display: flex;
   align-items: center;
@@ -1011,7 +1018,7 @@ html { scroll-behavior: smooth; }
   margin-top: .6rem; font-size: .85rem; color: var(--text-muted, #6b7280);
 }
 .diagram__links { display: flex; gap: 1rem; white-space: nowrap; }
-.diagram__links a { color: var(--bg-accent-strong, #E05A2B); text-decoration: none; }
+.diagram__links a { color: var(--text-accent); text-decoration: none; }
 .diagram__links a:hover { text-decoration: underline; }
 
 .diagram__concept-note {
@@ -1214,12 +1221,12 @@ html { scroll-behavior: smooth; }
 .btn:active { transform: translateY(0) scale(0.98); transition-duration: 0.08s; }
 
 .btn--primary {
-  background: var(--bg-accent-strong);
+  background: var(--bg-accent-fill);
   color: var(--text-on-accent);
   box-shadow: 0 1px 2px rgba(27, 27, 30, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 .btn--primary:hover {
-  background: var(--accent-hover);
+  background: var(--accent-fill-hover);
   color: var(--text-on-accent);
   transform: translateY(-1px);
   box-shadow: 0 8px 22px -8px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.16);
@@ -1455,7 +1462,7 @@ main:focus { outline: none; }
 /* Code block header buttons (inline-styled, so hover needs !important). */
 .code-btn { transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease), background-color var(--dur) var(--ease), transform 0.15s var(--ease); }
 .code-btn:hover { color: var(--text-h) !important; border-color: var(--border-strong) !important; }
-.code-btn--run:hover { color: var(--text-on-accent) !important; background: var(--accent-hover) !important; }
+.code-btn--run:hover { color: var(--text-on-accent) !important; background: var(--accent-fill-hover) !important; }
 .code-btn:active { transform: scale(0.96); }
 
 /* ═══════════════════════════════════════════
@@ -1623,11 +1630,11 @@ main:focus { outline: none; }
   margin-top: 0.87em;
   padding: 0.52em 1.04em;
   color: var(--text-on-accent);
-  background: var(--bg-accent-strong);
+  background: var(--bg-accent-fill);
   box-shadow: 0 6px 22px var(--accent-glow);
 }
 .orbit__core:hover,
-.orbit__core:focus-visible { background: var(--accent-hover); color: var(--text-on-accent); }
+.orbit__core:focus-visible { background: var(--accent-fill-hover); color: var(--text-on-accent); }
 
 @media (max-width: 559px) {
   /* Less room between nodes: let the far side recede so near labels stay legible. */
@@ -2025,7 +2032,7 @@ a.wwm-proof__row:hover .wwm-proof__arrow { transform: translateX(4px); }
   display: block;
   margin-top: 4px;
   font: 400 11px var(--font-mono);
-  color: var(--text-muted);
+  color: var(--text-p);
   letter-spacing: 0.01em;
 }
 .chain__link { display: inline-block; margin-top: 16px; font-size: 14px; }

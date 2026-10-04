@@ -51,7 +51,7 @@ const styles = {
     display: 'grid',
     placeItems: 'center',
     borderRadius: 'var(--radius-full)',
-    background: 'var(--bg-accent-strong)',
+    background: 'var(--bg-accent-fill)',
     color: 'var(--text-on-accent)',
     fontFamily: 'var(--font-mono)',
     fontSize: 11,

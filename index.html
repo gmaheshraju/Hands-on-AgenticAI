@@ -17,10 +17,10 @@
     <meta name="theme-color" content="#F6F5F0" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#161618" media="(prefers-color-scheme: dark)" />
 
-    <!-- Fonts: preconnect + stylesheet link here, so the font CSS is fetched in parallel with the app CSS. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" />
+    <!-- Fonts are self-hosted (src/styles/fonts.css, bundled into the app CSS). Preload the two
+         files every page paints with first: body (DM Sans) and display (Instrument Serif). -->
+    <link rel="preload" href="/fonts/dm-sans-normal-latin-fc88c2.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/instrument-serif-normal-latin-03435c.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- Microsoft Clarity — behavior analytics (session recordings, heatmaps) -->
     <script type="text/javascript">

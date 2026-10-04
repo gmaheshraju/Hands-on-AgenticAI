@@ -315,7 +315,7 @@ const styles = {
     fontSize: 10,
     fontWeight: 600,
     color: 'var(--text-on-accent)', // #fff on the dark-theme accent was ~2.6:1
-    background: 'var(--bg-accent-strong)',
+    background: 'var(--bg-accent-fill)',
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: 'transparent',
@@ -362,7 +362,8 @@ const styles = {
     lineHeight: '20px',
     fontFamily: 'var(--font-mono)',
     color: 'var(--text-muted)',
-    opacity: 0.4,
+    // Decorative (aria-hidden, unselectable), but at opacity 0.4 it measured 1.7:1 and was
+    // hard to read. --text-muted at full strength passes AA on --bg-code in both themes.
     minWidth: 32,
     flexShrink: 0,
   },

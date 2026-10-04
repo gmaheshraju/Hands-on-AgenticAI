@@ -1,9 +1,23 @@
 import { StrictMode } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
+import './styles/fonts.css'
 import './styles/global.css'
 import App from './App.jsx'
 import { loadPage, pageForPath, NOT_FOUND_PAGE } from './routes/pages'
+
+// Canonical URLs have no trailing slash (see <link rel="canonical"> and the sitemap),
+// and every page was prerendered under that form. The host also serves /path/ for
+// /path, so a shared or typed "/blog/x/" used to hydrate with pathname "/blog/x/":
+// every lookup keyed by path (post meta, framework detection, reading memory) missed,
+// the client tree diverged from the prerendered HTML, and React threw #418 and
+// re-rendered the page from scratch. Normalise once, here, before anything reads it.
+{
+  const { pathname, search, hash } = window.location;
+  if (pathname.length > 1 && pathname.endsWith('/')) {
+    window.history.replaceState(window.history.state, '', pathname.replace(/\/+$/, '') + search + hash);
+  }
+}
 
 let saved = null;
 try { saved = localStorage.getItem('theme'); } catch { /* storage blocked: fall back to the OS setting */ }

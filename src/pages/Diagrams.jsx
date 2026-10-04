@@ -76,7 +76,7 @@ export default function Diagrams() {
 
       <p style={S.foot}>
         I do this as consulting work: architecture recovered from code, for systems that outgrew their
-        documentation. If yours needs it, <a href="/work-with-me" style={S.a}>the details are here</a>.
+        documentation. If yours needs it, <a href="/work-with-me" style={S.aInline}>the details are here</a>.
       </p>
     </div>
   );
@@ -108,6 +108,8 @@ const S = {
   num: { fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-muted)', marginRight: 6 },
   stats: { fontSize: 12.5, color: 'var(--text-muted)', fontVariantNumeric: 'tabular-nums' },
   links: { display: 'flex', gap: 14, marginTop: 4, fontSize: 12.5 },
-  a: { color: 'var(--bg-accent-strong)', textDecoration: 'none' },
+  a: { color: 'var(--text-accent)', textDecoration: 'none' },
+  // Links inside running text need more than colour to stand out (WCAG 1.4.1).
+  aInline: { color: 'var(--text-accent)', textDecoration: 'underline', textUnderlineOffset: 3 },
   foot: { marginTop: 48, paddingTop: 20, borderTop: '1px solid var(--border)', fontSize: 14, color: 'var(--text-muted)', maxWidth: 720, lineHeight: 1.7 },
 };

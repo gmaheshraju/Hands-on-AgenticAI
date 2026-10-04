@@ -104,7 +104,7 @@ const styles = {
     fontWeight: 600,
     fontFamily: 'var(--font-body)',
     color: 'var(--text-on-accent)',
-    background: 'var(--bg-accent-strong)',
+    background: 'var(--bg-accent-fill)',
     border: 'none',
     borderRadius: 'var(--radius-full)',
     cursor: 'pointer',
