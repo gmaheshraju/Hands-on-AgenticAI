@@ -7,6 +7,7 @@ import { ROUTES } from '../seo/routes';
 import { TOTALS } from '../data/diagrams';
 import { AUTHOR_NAME, PROJECTS_REPO } from '../data/contact';
 import { posts } from '../data/posts';
+import { ReadMark } from '../components/ReadingMemory';
 
 const track = (name) => window.clarity?.('event', name);
 
@@ -109,6 +110,7 @@ function PostCard({ slug, number, title, tags, ready, start }) {
           <span style={styles.numberRow}>
             <span style={styles.number}>{number}</span>
             {start && <span className="post-card__start">Start here</span>}
+            <ReadMark path={`/blog/${slug}`} />
           </span>
           <h3 style={styles.title}>{title}</h3>
           {!ready && <span style={styles.soon}>Coming</span>}

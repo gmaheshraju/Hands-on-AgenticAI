@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { posts } from '../data/posts';
 import { frameworks } from '../data/frameworks';
 import { metaText } from './PostMeta';
+import { useReadCount } from './ReadingMemory';
 
 // Previous / next at the end of every post and framework page, in the same order
 // as the index pages. Before this, finishing a post meant scrolling back up to the
@@ -46,6 +47,11 @@ function PagerCard({ item, dir, series }) {
   );
 }
 
+function ReadCount({ paths }) {
+  const n = useReadCount(paths);
+  return n ? <span className="pager__read">{n} read &middot; </span> : null;
+}
+
 export default function PostPager() {
   const { pathname } = useLocation();
   const hit = find(pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname);
@@ -58,7 +64,10 @@ export default function PostPager() {
     <nav className="pager" aria-label={`${series.name}: previous and next`}>
       <p className="pager__progress">
         <span>{series.name}</span>
-        <span className="pager__count">{String(i + 1).padStart(2, '0')} / {String(series.items.length).padStart(2, '0')}</span>
+        <span className="pager__count">
+          <ReadCount paths={series.items.map((it) => it.to)} />
+          {String(i + 1).padStart(2, '0')} / {String(series.items.length).padStart(2, '0')}
+        </span>
       </p>
       <div className="pager__track" aria-hidden="true">
         <span className="pager__fill" style={{ width: `${((i + 1) / series.items.length) * 100}%` }} />

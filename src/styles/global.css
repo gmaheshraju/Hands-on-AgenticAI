@@ -2049,3 +2049,84 @@ a.wwm-proof__row:hover .wwm-proof__arrow { transform: translateX(4px); }
 /* Reply line under the work-with-me CTAs: dot sits on the first line when it wraps. */
 .wwm-hero__reply { align-items: flex-start; }
 .wwm-hero__reply .hero-pill__dot { margin-top: 7px; flex-shrink: 0; }
+
+/* ═══════════════════════════════════════════
+   READING MEMORY
+   Progress marks on index cards and a "continue" card for returning readers.
+   State is per-browser (src/lib/reading.js); first-time visitors see none of it.
+   ═══════════════════════════════════════════ */
+
+.fc__numrow { display: flex; align-items: center; gap: 10px; }
+
+.readmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 500 10.5px var(--font-mono);
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.readmark--done {
+  color: var(--text-success);
+  padding: 1px 7px;
+  border-radius: var(--radius-full);
+  background: var(--bg-success);
+}
+.readmark__bar {
+  display: inline-block;
+  width: 34px;
+  height: 3px;
+  border-radius: var(--radius-full);
+  background: var(--border);
+  overflow: hidden;
+}
+.readmark__bar > span { display: block; height: 100%; background: var(--bg-accent-strong); border-radius: inherit; }
+
+.resume {
+  position: fixed;
+  left: max(16px, var(--page-gutter));
+  bottom: 20px;
+  z-index: 120;
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+  width: min(360px, calc(100vw - 32px));
+  padding: 14px 10px 14px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg), 0 0 0 4px var(--bg-accent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .resume { animation: resume-in 0.5s var(--ease) both; }
+}
+@keyframes resume-in { from { opacity: 0; transform: translateY(16px) scale(0.98); } to { opacity: 1; transform: none; } }
+.resume__link { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; text-decoration: none; }
+.resume__kicker { font: 500 10.5px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-accent); }
+.resume__title {
+  font-family: var(--font-display);
+  font-size: 19px;
+  line-height: 1.25;
+  color: var(--text-h);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.resume__link:hover .resume__title { color: var(--text-accent); }
+.resume__meta { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--text-muted); }
+.resume__close {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+.resume__close:hover { color: var(--text-h); background: var(--bg-accent); }
+.pager__read { color: var(--text-success); }

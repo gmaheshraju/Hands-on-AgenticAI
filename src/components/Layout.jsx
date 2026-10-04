@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Nav from './Nav';
 import PostFooterCTA from './PostFooterCTA';
 import PostPager from './PostPager';
+import { ContinueCard, useReadingTracker } from './ReadingMemory';
 import PostToc from './PostToc';
 import { AUTHOR_NAME, EMAIL, GITHUB, LINKEDIN, PROJECTS_REPO } from '../data/contact';
 import { ROUTES } from '../seo/routes';
@@ -87,6 +88,7 @@ export default function Layout({ children }) {
   const isIndex = pathname === '/' || pathname === '/blog';
   useTabScrollReset(isReading);
   useCardSpotlight();
+  useReadingTracker(isReading);
 
   return (
     <>
@@ -99,6 +101,7 @@ export default function Layout({ children }) {
         {isReading && <PostPager />}
         {isReading && <PostFooterCTA />}
       </main>
+      {(isIndex || pathname === '/home') && <ContinueCard />}
       <Footer />
     </>
   );
