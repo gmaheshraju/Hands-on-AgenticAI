@@ -1,11 +1,11 @@
 {
   "ai-agent-system-design": {
     "minutes": 16,
-    "updated": "2026-10-03"
+    "updated": "2026-10-04"
   },
   "agent-memory-architecture": {
     "minutes": 18,
-    "updated": "2026-09-26"
+    "updated": "2026-10-04"
   },
   "agent-harness-loop-engineering": {
     "minutes": 16,
@@ -21,7 +21,7 @@
   },
   "llm-ops": {
     "minutes": 17,
-    "updated": "2026-09-26"
+    "updated": "2026-10-04"
   },
   "ai-guardrails": {
     "minutes": 17,
@@ -29,11 +29,11 @@
   },
   "evaluation-engineering": {
     "minutes": 16,
-    "updated": "2026-09-26"
+    "updated": "2026-10-04"
   },
   "fine-tuning-vs-rag": {
     "minutes": 15,
-    "updated": "2026-09-26"
+    "updated": "2026-10-04"
   },
   "tool-use-function-calling": {
     "minutes": 16,
@@ -41,7 +41,7 @@
   },
   "cost-latency-engineering": {
     "minutes": 14,
-    "updated": "2026-09-26"
+    "updated": "2026-10-04"
   },
   "ai-ux-patterns": {
     "minutes": 18,
@@ -57,7 +57,7 @@
   },
   "context-engineering": {
     "minutes": 16,
-    "updated": "2026-09-26"
+    "updated": "2026-10-04"
   },
   "solo-developer-advantage": {
     "minutes": 14,
