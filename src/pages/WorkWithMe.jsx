@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import FadeIn from '../components/FadeIn';
 import { TOTALS } from '../data/diagrams';
 import { EMAIL, LINKEDIN, PROJECTS_REPO } from '../data/contact';
+import { posts } from '../data/posts';
 import guardrailsSvg from '../../docs/diagrams/guardrails_v1/guardrails.svg?raw';
 
 // Clarity custom events feed the consulting funnel (homepage → this page →
@@ -30,30 +31,36 @@ const services = [
     title: 'AI Agent & RAG System Design',
     subtitle:
       'Architecture and hands-on build of production agent systems: retrieval pipelines, tool use, memory, evaluation loops. From blank page to a system your team can run and extend.',
-    tags: ['Agents', 'RAG', 'Tool Use', 'Memory', 'Evals'],
+    // The card opens the first post; the rest are listed underneath.
+    reads: ['ai-agent-system-design', 'rag-pipeline-deep-dive', 'tool-use-function-calling'],
   },
   {
     number: '02',
     title: 'LLM System Review & Hardening',
     subtitle:
       'Your prototype works in the demo and breaks in production. I audit the full stack (evals, guardrails, cost, latency, failure modes) and hand you a prioritized, concrete fix list.',
-    tags: ['Architecture Review', 'Guardrails', 'Evaluation', 'Failure Modes'],
+    // The card opens the first post; the rest are listed underneath.
+    reads: ['ai-guardrails', 'evaluation-engineering', 'llm-ops'],
   },
   {
     number: '03',
     title: 'Cost & Latency Engineering',
     subtitle:
       'Model routing, semantic caching, prompt compression, token budgeting. The same conversation at a fraction of the cost, with the metrics to prove it held.',
-    tags: ['Model Routing', 'Caching', 'Token Budgets', 'Monitoring'],
+    // The card opens the first post; the rest are listed underneath.
+    reads: ['cost-latency-engineering', 'fine-tuning-vs-rag', 'context-engineering'],
   },
   {
     number: '04',
     title: 'Team Enablement',
     subtitle:
       'Working sessions that move your engineers from prompt-and-pray to production discipline (context engineering, eval harnesses, agent loops), built on your codebase, not toy examples.',
-    tags: ['Workshops', 'Context Engineering', 'Eval Harnesses', 'Pairing'],
+    // The card opens the first post; the rest are listed underneath.
+    reads: ['context-engineering', 'agent-harness-loop-engineering', 'evaluation-engineering'],
   },
 ];
+
+const POST = Object.fromEntries(posts.map((p) => [p.slug, p]));
 
 const steps = [
   {
@@ -207,21 +214,40 @@ export default function WorkWithMe() {
         <div style={styles.grid}>
           {services.map((s, i) => (
             <FadeIn key={s.number} delay={i * 60} className="grid-cell">
-              <div className="lift" style={styles.card}>
+              <article className="lift svc" style={styles.card}>
                 <div style={styles.accent} />
                 <div style={styles.content}>
                   <div style={styles.header}>
                     <span style={styles.number}>{s.number}</span>
-                    <h3 style={styles.title}>{s.title}</h3>
+                    <h3 style={styles.title}>
+                      {/* Stretched link: its ::after covers the card, so the whole card opens
+                          the main post while the reading links below stay separately clickable. */}
+                      <Link
+                        to={`/blog/${s.reads[0]}`}
+                        className="svc__link"
+                        onClick={() => track('workwithme_service_click')}
+                      >
+                        {s.title}
+                      </Link>
+                    </h3>
                   </div>
                   <p style={styles.subtitle}>{s.subtitle}</p>
-                  <div style={styles.tags}>
-                    {s.tags.map(t => (
-                      <span key={t} className="post-card__tag">{t}</span>
-                    ))}
+                  <div className="svc__reads">
+                    <span className="svc__reads-label">How I approach it</span>
+                    <ul>
+                      {s.reads.map((slug) => (
+                        <li key={slug}>
+                          <Link to={`/blog/${slug}`} onClick={() => track('workwithme_service_read_click')}>
+                            <span className="svc__num">{POST[slug].number}</span>
+                            {POST[slug].title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
-              </div>
+                <span className="svc__arrow" aria-hidden="true">&rarr;</span>
+              </article>
             </FadeIn>
           ))}
         </div>
@@ -405,12 +431,6 @@ const styles = {
     color: 'var(--text-p)',
     lineHeight: 1.65,
     marginBottom: 18,
-  },
-  tags: {
-    marginTop: 'auto',
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: 5,
   },
   proofNote: {
     fontSize: 15,
