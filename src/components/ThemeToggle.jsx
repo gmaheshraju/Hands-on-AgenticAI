@@ -22,8 +22,17 @@ function applyTheme(dark) {
 export default function ThemeToggle() {
   const dark = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
-  const toggle = () => {
+  const toggle = (e) => {
     const next = !dark;
+    // The new theme grows out of the button as a circle (see THEME REVEAL in global.css).
+    // Origin = the button's centre; radius = distance to the farthest viewport corner.
+    const r = e.currentTarget.getBoundingClientRect();
+    const x = r.left + r.width / 2;
+    const y = r.top + r.height / 2;
+    const root = document.documentElement.style;
+    root.setProperty('--reveal-x', `${x}px`);
+    root.setProperty('--reveal-y', `${y}px`);
+    root.setProperty('--reveal-r', `${Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y))}px`);
     // The attribute flips inside the transition callback, so the browser can
     // snapshot both themes and crossfade between them instead of snapping.
     const swap = () => applyTheme(next); // the attribute change re-renders this via the store

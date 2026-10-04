@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Nav from './Nav';
 import PostFooterCTA from './PostFooterCTA';
+import PostPager from './PostPager';
 import PostToc from './PostToc';
 import { AUTHOR_NAME, EMAIL, GITHUB, LINKEDIN, PROJECTS_REPO } from '../data/contact';
 import { ROUTES } from '../seo/routes';
@@ -95,6 +96,7 @@ export default function Layout({ children }) {
       <Nav />
       <main id="main" className={`layout-main${isReading ? ' layout-main--post' : ''}${isIndex ? ' layout-main--wide' : ''}`}>
         {children}
+        {isReading && <PostPager />}
         {isReading && <PostFooterCTA />}
       </main>
       <Footer />

@@ -6,128 +6,13 @@ import { metaText } from '../components/PostMeta';
 import { ROUTES } from '../seo/routes';
 import { TOTALS } from '../data/diagrams';
 import { AUTHOR_NAME, PROJECTS_REPO } from '../data/contact';
+import { posts } from '../data/posts';
 
 const track = (name) => window.clarity?.('event', name);
 
 // Card descriptions come from the same place as each post's meta description,
 // so the index can never drift from what search results and link previews say.
 const descriptionFor = (slug) => ROUTES.find((r) => r.path === `/blog/${slug}`)?.description;
-
-const posts = [
-  {
-    slug: 'ai-agent-system-design',
-    number: '01',
-    title: 'AI Agent System Design',
-    tags: ['RAG', 'Vector DB', 'Function Calling', 'Evals', 'LLM Ops'],
-    ready: true,
-    start: true,
-  },
-  {
-    slug: 'agent-memory-architecture',
-    number: '02',
-    title: 'Agent Memory Architecture',
-    tags: ['Semantic Memory', 'Episodic', 'Context Window', 'Retrieval'],
-    ready: true,
-  },
-  {
-    slug: 'agent-harness-loop-engineering',
-    number: '03',
-    title: 'Agent Harness & Loop Engineering',
-    tags: ['LLM Ops', 'Eval', 'Tracing', 'Loop Engineering'],
-    ready: true,
-  },
-  {
-    slug: 'multi-agent-systems',
-    number: '04',
-    title: 'Multi-Agent Systems',
-    tags: ['Agent Teams', 'Swarms', 'Delegation', 'Coordination'],
-    ready: true,
-  },
-  {
-    slug: 'rag-pipeline-deep-dive',
-    number: '05',
-    title: 'RAG Pipeline Deep Dive',
-    tags: ['Chunking', 'Embeddings', 'Hybrid Search', 'Reranking'],
-    ready: true,
-  },
-  {
-    slug: 'llm-ops',
-    number: '06',
-    title: 'LLMOps: Production LLM Infrastructure',
-    tags: ['Model Serving', 'Cost Routing', 'Latency', 'Caching', 'Monitoring'],
-    ready: true,
-  },
-  {
-    slug: 'ai-guardrails',
-    number: '07',
-    title: 'AI Guardrails & Safety',
-    tags: ['Prompt Injection', 'PII', 'Content Moderation', 'Defense in Depth'],
-    ready: true,
-  },
-  {
-    slug: 'evaluation-engineering',
-    number: '08',
-    title: 'Evaluation Engineering',
-    tags: ['LLM-as-Judge', 'Golden Datasets', 'Regression', 'SLOs', 'HITL'],
-    ready: true,
-  },
-  {
-    slug: 'fine-tuning-vs-rag',
-    number: '09',
-    title: 'Fine-tuning vs Prompting vs RAG',
-    tags: ['Fine-tuning', 'RAG', 'Prompt Engineering', 'LoRA', 'Cost Routing'],
-    ready: true,
-  },
-  {
-    slug: 'tool-use-function-calling',
-    number: '10',
-    title: 'Tool Use & Function Calling Patterns',
-    tags: ['Tool Use', 'Function Calling', 'Sandboxing', 'Permissions', 'Error Recovery'],
-    ready: true,
-  },
-  {
-    slug: 'cost-latency-engineering',
-    number: '11',
-    title: 'Cost & Latency Engineering',
-    tags: ['Model Routing', 'Caching', 'Token Budgets', 'Latency', 'Cost Optimization'],
-    ready: true,
-  },
-  {
-    slug: 'ai-ux-patterns',
-    number: '12',
-    title: 'AI UX Patterns',
-    tags: ['Streaming', 'Confidence', 'HITL', 'Trust', 'Error Recovery'],
-    ready: true,
-  },
-  {
-    slug: 'responsible-ai',
-    number: '13',
-    title: 'Responsible AI & Governance',
-    tags: ['Bias', 'Fairness', 'Red-teaming', 'EU AI Act', 'Governance'],
-    ready: true,
-  },
-  {
-    slug: 'forward-deployed-engineering',
-    number: '14',
-    title: 'Forward Deployed Engineering',
-    tags: ['FDE', 'Palantir', 'AI Delivery', 'Two-Team Model', 'Go-to-Market'],
-    ready: true,
-  },
-  {
-    slug: 'context-engineering',
-    number: '15',
-    title: 'Context Engineering',
-    tags: ['Token Budget', 'Source Priority', 'Assembly', 'Caching', 'Lost in the Middle'],
-    ready: true,
-  },
-  {
-    slug: 'solo-developer-advantage',
-    number: '16',
-    title: 'The Solo Developer Advantage',
-    tags: ['Solo Dev', 'AI Leverage', 'New Moats', 'Revenue/Employee', 'Career Strategy'],
-    ready: true,
-  },
-];
 
 export default function Blog() {
   return (
@@ -234,7 +119,7 @@ function PostCard({ slug, number, title, tags, ready, start }) {
           {tags && (
             <div style={styles.tags}>
               {tags.map(t => (
-                <span key={t} style={styles.tag}>{t}</span>
+                <span key={t} className="post-card__tag">{t}</span>
               ))}
             </div>
           )}
@@ -365,16 +250,6 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     gap: 5,
-  },
-  tag: {
-    fontSize: 10,
-    fontWeight: 500,
-    color: 'var(--text-muted)',
-    background: 'var(--bg-code)',
-    padding: '3px 8px',
-    borderRadius: 'var(--radius-full)',
-    fontFamily: 'var(--font-mono)',
-    letterSpacing: '0.01em',
   },
   arrow: {
     position: 'absolute',

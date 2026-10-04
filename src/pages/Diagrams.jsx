@@ -99,7 +99,7 @@ const S = {
   sub: { fontSize: 16, lineHeight: 1.65, color: 'var(--text-p)', maxWidth: 720, marginBottom: 26 },
   note: { background: 'var(--bg-card)', border: '1px solid var(--border)', borderLeft: '3px solid var(--bg-accent-strong)', borderRadius: 'var(--radius-md)', padding: '16px 20px', maxWidth: 720, marginBottom: 40 },
   noteP: { fontSize: 14, lineHeight: 1.7, color: 'var(--text-p)', margin: '0 0 8px' },
-  grid: { display: 'grid', gap: 26, gridTemplateColumns: 'repeat(auto-fill,minmax(420px,1fr))' },
+  grid: { display: 'grid', gap: 26, gridTemplateColumns: 'repeat(auto-fill,minmax(min(100%,420px),1fr))' },
   card: { margin: 0, background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', overflow: 'hidden' },
   frame: { display: 'block', padding: 10, background: 'var(--bg-card)' },
   img: { width: '100%', height: 'auto', display: 'block' },
