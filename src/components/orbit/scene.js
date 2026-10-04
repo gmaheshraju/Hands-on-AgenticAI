@@ -185,22 +185,64 @@ export function createOrbitScene({ canvas, container, labels, coreLabel, reduced
   let introStart = -1;
   const tmp = new Vector3();
 
+  // Label boxes are measured on resize (never per frame: reading layout right after
+  // writing styles would force a reflow every frame). Positions are computed, not read.
+  let boxes = [];
+  let gap = 14;
+  function measureLabels() {
+    boxes = labels.map((el) => (el ? { w: el.offsetWidth, h: el.offsetHeight } : { w: 0, h: 0 }));
+    if (coreLabel) boxes.core = { w: coreLabel.offsetWidth, h: coreLabel.offsetHeight };
+    const fs = labels[0] ? parseFloat(getComputedStyle(labels[0]).fontSize) : 11.5;
+    gap = fs * 1.2; // matches the label's translate(-50%, calc(-100% - 1.2em))
+  }
+
+  // Map-style declutter: walk labels nearest-first and fade any that would cover a
+  // label already placed (or the Model pill). The hovered/focused label always wins.
+  const order = NODES.map((_, i) => i);
+  const placed = [];
+  const occluded = new Array(NODES.length).fill(false);
+  const pos = NODES.map(() => ({ x: 0, y: 0, near: 0 }));
+  const overlaps = (a, b) => a.l < b.r && b.l < a.r && a.t < b.b && b.t < a.b;
+
   function layoutLabels(rx, ry, s) {
     for (let i = 0; i < labels.length; i++) {
-      const el = labels[i];
-      if (!el) continue;
       const p = NODES[i].p;
       const pr = project([p[0] * s, p[1] * s, p[2] * s], rx, ry);
-      const near = nearness(pr.depth);
+      pos[i].x = (pr.left / 100) * size;
+      pos[i].y = (pr.top / 100) * size;
+      pos[i].near = nearness(pr.depth);
+      const el = labels[i];
+      if (!el) continue;
       el.style.left = `${pr.left.toFixed(2)}%`;
       el.style.top = `${pr.top.toFixed(2)}%`;
-      el.style.zIndex = String(10 + Math.round(near * 50));
-      el.style.setProperty('--near', near.toFixed(3));
+      el.style.zIndex = String(10 + Math.round(pos[i].near * 50));
+      el.style.setProperty('--near', pos[i].near.toFixed(3));
     }
+    placed.length = 0;
     if (coreLabel) {
       const pr = project([0, -0.98 * s, 0], rx, ry);
-      coreLabel.style.left = `${pr.left}%`;
-      coreLabel.style.top = `${pr.top}%`;
+      coreLabel.style.left = `${pr.left.toFixed(2)}%`;
+      coreLabel.style.top = `${pr.top.toFixed(2)}%`;
+      const c = boxes.core;
+      if (c) {
+        const x = (pr.left / 100) * size, y = (pr.top / 100) * size + gap * 0.72;
+        placed.push({ l: x - c.w / 2 - 3, r: x + c.w / 2 + 3, t: y - 3, b: y + c.h + 3 });
+      }
+    }
+    if (!boxes.length) return;
+    order.sort((a, b) => (b === active) - (a === active) || pos[b].near - pos[a].near);
+    for (const i of order) {
+      const { w, h } = boxes[i];
+      const { x, y } = pos[i];
+      const box = { l: x - w / 2 - 3, r: x + w / 2 + 3, t: y - gap - h - 3, b: y - gap + 3 };
+      const dot = { l: x - 6, r: x + 6, t: y - 6, b: y + 6 };
+      let hidden = false;
+      if (i !== active) for (const q of placed) if (overlaps(box, q)) { hidden = true; break; }
+      if (!hidden) placed.push(box, dot);
+      if (hidden !== occluded[i]) {
+        occluded[i] = hidden;
+        labels[i]?.classList.toggle('is-occluded', hidden);
+      }
     }
   }
 
@@ -264,6 +306,7 @@ export function createOrbitScene({ canvas, container, labels, coreLabel, reduced
     if (!w || w === size) return;
     size = w;
     renderer.setSize(w, w, false);
+    measureLabels();
     if (!running) frame(0);
   }
   const ro = new ResizeObserver(resize);
@@ -300,6 +343,8 @@ export function createOrbitScene({ canvas, container, labels, coreLabel, reduced
   themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
   resize();
+  measureLabels();
+  document.fonts?.ready.then(() => { measureLabels(); if (!running) frame(0); });
   frame(0);
   sync();
 

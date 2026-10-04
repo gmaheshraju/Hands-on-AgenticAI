@@ -7,17 +7,19 @@
 
 export const CORE = { label: 'Model', to: '/blog/ai-agent-system-design' };
 
-// Local positions (scene units) around the core. Searched, not hand-placed: at 720
-// sampled yaw angles no label overlaps another label or another node, and at rest
-// nothing covers the core or its Model pill (560px canvas, 11.5px mono labels).
+// Local positions (scene units) around the core, found by search rather than placed
+// by hand. At rest (the prerendered layout, and what reduced-motion readers see) no
+// label overlaps another label, another node, the core or the Model pill at canvas
+// widths 350-560px. While spinning, some overlap is unavoidable in a small canvas;
+// scene.js declutters each frame (nearer label wins, the covered one fades).
 export const NODES = [
-  { label: 'Planner loop', to: '/blog/agent-harness-loop-engineering', p: [-1.5, 1.32, 0.96] },
-  { label: 'Tools', to: '/blog/tool-use-function-calling', p: [1.51, 1.35, 0.23] },
-  { label: 'Memory', to: '/blog/agent-memory-architecture', p: [-1.59, -0.82, -1.47] },
-  { label: 'Retrieval', to: '/blog/rag-pipeline-deep-dive', p: [0.9, -1.8, 0.52] },
-  { label: 'Context', to: '/blog/context-engineering', p: [-0.59, 1.37, -1.77] },
-  { label: 'Evals', to: '/blog/evaluation-engineering', p: [1.92, -0.48, -0.48] },
-  { label: 'Guardrails', to: '/blog/ai-guardrails', p: [0.25, -0.31, 1.96] },
+  { label: 'Planner loop', to: '/blog/agent-harness-loop-engineering', p: [-0.84, 1.21, 1.81] },
+  { label: 'Tools', to: '/blog/tool-use-function-calling', p: [2.06, 1.22, 0.1] },
+  { label: 'Memory', to: '/blog/agent-memory-architecture', p: [-0.69, -1.61, -1.57] },
+  { label: 'Retrieval', to: '/blog/rag-pipeline-deep-dive', p: [0.26, -1.62, 1.78] },
+  { label: 'Context', to: '/blog/context-engineering', p: [-0.99, 1.23, -1.6] },
+  { label: 'Evals', to: '/blog/evaluation-engineering', p: [1.77, -1.29, -0.73] },
+  { label: 'Guardrails', to: '/blog/ai-guardrails', p: [0.4, -0.69, 2.12] },
 ];
 
 // Subsystem-to-subsystem links, by index into NODES: the data paths that matter.

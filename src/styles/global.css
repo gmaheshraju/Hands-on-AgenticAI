@@ -1540,6 +1540,7 @@ main:focus { outline: none; }
   margin: 0 auto;
   isolation: isolate;
   touch-action: pan-y;
+  container-type: inline-size; /* labels size with the orbit, not the viewport */
 }
 @media (max-width: 1023px) {
   .orbit { width: min(100%, 440px); margin-top: 8px; }
@@ -1577,18 +1578,19 @@ main:focus { outline: none; }
 .orbit__core {
   position: absolute;
   white-space: nowrap;
-  font: 500 11.5px/1 var(--font-mono);
+  /* 11.5px at the full 560px orbit, scaling down with it; scene.js measures the result. */
+  font: 500 clamp(9.5px, 2.05cqi, 11.5px)/1 var(--font-mono);
   letter-spacing: 0.01em;
   text-decoration: none;
   color: var(--text-h);
   border-radius: var(--radius-full);
   transition: color var(--dur) var(--ease), background-color var(--dur) var(--ease),
-    border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+    border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), opacity 0.25s var(--ease);
 }
 .orbit__label {
   /* Centred above its node. --near (1 near, 0 far) dims labels on the far side. */
-  transform: translate(-50%, calc(-100% - 14px));
-  padding: 6px 10px;
+  transform: translate(-50%, calc(-100% - 1.2em));
+  padding: 0.52em 0.87em;
   background: var(--bg-nav);
   border: 1px solid var(--border);
   backdrop-filter: blur(6px);
@@ -1618,8 +1620,8 @@ main:focus { outline: none; }
 
 .orbit__core {
   transform: translate(-50%, 0);
-  margin-top: 10px;
-  padding: 6px 12px;
+  margin-top: 0.87em;
+  padding: 0.52em 1.04em;
   color: var(--text-on-accent);
   background: var(--bg-accent-strong);
   box-shadow: 0 6px 22px var(--accent-glow);
@@ -1628,11 +1630,12 @@ main:focus { outline: none; }
 .orbit__core:focus-visible { background: var(--accent-hover); color: var(--text-on-accent); }
 
 @media (max-width: 559px) {
-  .orbit__label, .orbit__core { font-size: 10.5px; }
-  .orbit__label { padding: 5px 8px; }
   /* Less room between nodes: let the far side recede so near labels stay legible. */
   .orbit.is-live .orbit__label { opacity: calc(0.12 + var(--near, 1) * 0.88); }
 }
+/* Covered by a nearer label this frame (scene.js declutter). Still focusable: focus wins. */
+.orbit.is-live .orbit__label.is-occluded { opacity: 0.06; pointer-events: none; }
+.orbit.is-live .orbit__label.is-occluded:focus-visible { opacity: 1; }
 
 /* ═══════════════════════════════════════════
    CARD SPOTLIGHT
