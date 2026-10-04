@@ -4,6 +4,7 @@ import Nav from './Nav';
 import PostFooterCTA from './PostFooterCTA';
 import PostPager from './PostPager';
 import { ContinueCard, useReadingTracker } from './ReadingMemory';
+import SearchPalette, { useJumpToSection } from './SearchPalette';
 import PostToc from './PostToc';
 import { AUTHOR_NAME, EMAIL, GITHUB, LINKEDIN, PROJECTS_REPO } from '../data/contact';
 import { ROUTES } from '../seo/routes';
@@ -44,6 +45,9 @@ function useTabScrollReset(enabled) {
       const tabs = e.target.closest?.('.post-tabs');
       const btn = e.target.closest?.('button');
       if (!tabs || !btn) return;
+      // Resume / search-jump switch tabs and then scroll to an exact spot themselves;
+      // scrolling to the panel start here would race them (see clickTabQuietly).
+      if (btn.dataset.quiet) return;
       // On phones the tab row scrolls sideways: keep the chosen tab fully in view.
       if (tabs.scrollWidth > tabs.clientWidth) {
         tabs.scrollTo({ left: btn.offsetLeft - tabs.clientWidth / 2 + btn.offsetWidth / 2, behavior: 'smooth' });
@@ -89,6 +93,7 @@ export default function Layout({ children }) {
   useTabScrollReset(isReading);
   useCardSpotlight();
   useReadingTracker(isReading);
+  useJumpToSection();
 
   return (
     <>
@@ -102,6 +107,7 @@ export default function Layout({ children }) {
         {isReading && <PostFooterCTA />}
       </main>
       {(isIndex || pathname === '/home') && <ContinueCard />}
+      <SearchPalette />
       <Footer />
     </>
   );

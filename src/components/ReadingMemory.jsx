@@ -14,6 +14,15 @@ const TITLES = Object.fromEntries([
 ]);
 const PATHS = Object.keys(TITLES);
 
+const squash = (t) => (t || '').replace(/\s+/g, ' ').trim().toLowerCase();
+export const onPage = (title) => squash(document.querySelector('main h1')?.textContent).replace(/\s/g, '') === squash(title).replace(/\s/g, '');
+// Switch tabs without Layout's "scroll to the new panel" reaction, for callers that
+// position the page themselves. The marker is read synchronously in the click handler.
+export function clickTabQuietly(btn) {
+  btn.dataset.quiet = '1';
+  btn.click();
+  delete btn.dataset.quiet;
+}
 const tabButtons = () => [...document.querySelectorAll('.layout-main--post .post-tabs button')];
 const activeTab = (tabs) => Math.max(0, tabs.findIndex((b) => b.getAttribute('aria-selected') === 'true' || b.classList.contains('tab-nav__btn--active')));
 
@@ -55,10 +64,20 @@ export function useReadingTracker(enabled) {
     // Drop the flag so back/forward or a reload does not jump again.
     navigate(pathname, { replace: true, state: null });
     if (!entry) return undefined;
-    const tabs = tabButtons();
-    if (entry.tab > 0 && tabs[entry.tab]) tabs[entry.tab].click();
-    // Let the tab panel render and the tab-click scroll settle, then jump to the saved spot.
-    const t = window.setTimeout(() => window.scrollTo({ top: entry.y || 0, behavior: 'instant' }), 120);
+    // The page chunk may still be loading: wait for its tab row (or content) first.
+    const started = Date.now();
+    let t = 0;
+    const attempt = () => {
+      // Ready = the NEW page is on screen (a transition can keep the old one up while
+      // the chunk loads), recognised by its h1.
+      const tabs = tabButtons();
+      const ready = onPage(TITLES[pathname]);
+      if (!ready) { if (Date.now() - started < 4000) t = window.setTimeout(attempt, 100); return; }
+      if (entry.tab > 0 && tabs[entry.tab]) clickTabQuietly(tabs[entry.tab]);
+      // Let the tab panel render, then jump to the saved spot.
+      t = window.setTimeout(() => window.scrollTo({ top: entry.y || 0, behavior: 'instant' }), 120);
+    };
+    t = window.setTimeout(attempt, 0);
     return () => window.clearTimeout(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [enabled, pathname]);

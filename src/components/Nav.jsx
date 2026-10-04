@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
+import { openSearch } from './SearchPalette';
 import { AUTHOR_NAME } from '../data/contact';
 import { ROUTES } from '../seo/routes';
 
@@ -59,6 +60,10 @@ export default function Nav() {
             Work with me
           </Link>
           <div className="nav__divider" />
+          <button type="button" className="nav__search" onClick={openSearch} aria-label="Search (Command K)" aria-keyshortcuts="Meta+K Control+K /">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+            <kbd className="nav__kbd" aria-hidden="true">&#8984;K</kbd>
+          </button>
           <ThemeToggle />
         </div>
       </div>
