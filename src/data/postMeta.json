@@ -9,7 +9,7 @@
   },
   "agent-harness-loop-engineering": {
     "minutes": 16,
-    "updated": "2026-09-26"
+    "updated": "2026-10-04"
   },
   "multi-agent-systems": {
     "minutes": 17,
@@ -49,7 +49,7 @@
   },
   "responsible-ai": {
     "minutes": 12,
-    "updated": "2026-09-26"
+    "updated": "2026-10-04"
   },
   "forward-deployed-engineering": {
     "minutes": 14,
@@ -61,6 +61,6 @@
   },
   "solo-developer-advantage": {
     "minutes": 14,
-    "updated": "2026-09-26"
+    "updated": "2026-10-04"
   }
 }
